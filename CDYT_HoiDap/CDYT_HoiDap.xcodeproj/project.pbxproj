@@ -160,6 +160,7 @@
 		8B3A13401E10F454005DBC6E /* RAMItemAnimationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMItemAnimationProtocol.swift; sourceTree = "<group>"; };
 		8B3A13801E10F46B005DBC6E /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		8B3A13821E10F484005DBC6E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		A6E4C2F51E10FC9200C2C871 /* HoiDap_Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HoiDap_Header.h; sourceTree = "<group>"; };
 		FDD88BA19051C23DD96B53FB /* Pods-CDYT_HoiDap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYT_HoiDap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -186,6 +187,7 @@
 		8B3A12D21E10F399005DBC6E = {
 			isa = PBXGroup;
 			children = (
+				A6E4C2F51E10FC9200C2C871 /* HoiDap_Header.h */,
 				8B3A13821E10F484005DBC6E /* Podfile */,
 				8B3A12DD1E10F399005DBC6E /* CDYT_HoiDap */,
 				8B3A12DC1E10F399005DBC6E /* Products */,
@@ -753,6 +755,7 @@
 				8B3A12EF1E10F399005DBC6E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
