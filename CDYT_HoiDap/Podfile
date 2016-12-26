@@ -1,6 +1,6 @@
 platform :ios, ‘8.0’
 use_frameworks!
-target “HoiDap” do
+target “CDYT_HoiDap” do
 
 pod 'Alamofire', '~> 4.0’
 pod 'RealmSwift'

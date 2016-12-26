@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		792444BAFCB405C2DBAC9872 /* Pods_CDYT_HoiDap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */; };
 		8B3A12DF1E10F399005DBC6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A12DE1E10F399005DBC6E /* AppDelegate.swift */; };
 		8B3A12E11E10F399005DBC6E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A12E01E10F399005DBC6E /* ViewController.swift */; };
 		8B3A12E41E10F399005DBC6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B3A12E21E10F399005DBC6E /* Main.storyboard */; };
@@ -79,6 +80,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CDYT_HoiDap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		54350AF3B96C58CE38450098 /* Pods-CDYT_HoiDap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYT_HoiDap.release.xcconfig"; path = "Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap.release.xcconfig"; sourceTree = "<group>"; };
 		8B3A12DB1E10F399005DBC6E /* CDYT_HoiDap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CDYT_HoiDap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B3A12DE1E10F399005DBC6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B3A12E01E10F399005DBC6E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +160,7 @@
 		8B3A13401E10F454005DBC6E /* RAMItemAnimationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMItemAnimationProtocol.swift; sourceTree = "<group>"; };
 		8B3A13801E10F46B005DBC6E /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		8B3A13821E10F484005DBC6E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		FDD88BA19051C23DD96B53FB /* Pods-CDYT_HoiDap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYT_HoiDap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,18 +168,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				792444BAFCB405C2DBAC9872 /* Pods_CDYT_HoiDap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E6EC2FF9E2B31F4C0E029F7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8B3A12D21E10F399005DBC6E = {
 			isa = PBXGroup;
 			children = (
 				8B3A13821E10F484005DBC6E /* Podfile */,
 				8B3A12DD1E10F399005DBC6E /* CDYT_HoiDap */,
 				8B3A12DC1E10F399005DBC6E /* Products */,
+				9709AA8D06A12926790E0992 /* Pods */,
+				2E6EC2FF9E2B31F4C0E029F7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -374,6 +389,15 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		9709AA8D06A12926790E0992 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FDD88BA19051C23DD96B53FB /* Pods-CDYT_HoiDap.debug.xcconfig */,
+				54350AF3B96C58CE38450098 /* Pods-CDYT_HoiDap.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -381,9 +405,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B3A12ED1E10F399005DBC6E /* Build configuration list for PBXNativeTarget "CDYT_HoiDap" */;
 			buildPhases = (
+				88F0706B80FEFD5088987714 /* [CP] Check Pods Manifest.lock */,
 				8B3A12D71E10F399005DBC6E /* Sources */,
 				8B3A12D81E10F399005DBC6E /* Frameworks */,
 				8B3A12D91E10F399005DBC6E /* Resources */,
+				5EAA3DB2E2AF164460536099 /* [CP] Embed Pods Frameworks */,
+				9359421395374DDFA61FDFD1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -487,6 +514,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5EAA3DB2E2AF164460536099 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		88F0706B80FEFD5088987714 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9359421395374DDFA61FDFD1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8B3A12D71E10F399005DBC6E /* Sources */ = {
@@ -631,6 +706,7 @@
 		};
 		8B3A12EE1E10F399005DBC6E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FDD88BA19051C23DD96B53FB /* Pods-CDYT_HoiDap.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = BY2N2SG836;
@@ -645,6 +721,7 @@
 		};
 		8B3A12EF1E10F399005DBC6E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54350AF3B96C58CE38450098 /* Pods-CDYT_HoiDap.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = BY2N2SG836;
