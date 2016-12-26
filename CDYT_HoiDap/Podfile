@@ -1,0 +1,14 @@
+platform :ios, ‘8.0’
+use_frameworks!
+target “HoiDap” do
+
+pod 'Alamofire', '~> 4.0’
+pod 'RealmSwift'
+pod 'SwiftyJSON'
+pod 'SDWebImage'
+pod 'SKPhotoBrowser', :git => 'https://github.com/suzuki-0000/SKPhotoBrowser.git', :branch => 'swift3'
+pod 'DKImagePickerController'
+pod 'ALTextInputBar'
+pod 'TTTAttributedLabel'
+
+end
