@@ -77,6 +77,9 @@
 		8B3A137E1E10F454005DBC6E /* RAMItemAnimationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A13401E10F454005DBC6E /* RAMItemAnimationProtocol.swift */; };
 		8B3A13811E10F46B005DBC6E /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A13801E10F46B005DBC6E /* Global.swift */; };
 		8B3A13831E10F484005DBC6E /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8B3A13821E10F484005DBC6E /* Podfile */; };
+		8B3A13861E10FD1B005DBC6E /* TagListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A13851E10FD1B005DBC6E /* TagListViewController.swift */; };
+		8B3A13881E10FD2A005DBC6E /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A13871E10FD2A005DBC6E /* UserViewController.swift */; };
+		8B3A138A1E10FD58005DBC6E /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A13891E10FD58005DBC6E /* QuestionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -161,6 +164,9 @@
 		8B3A13801E10F46B005DBC6E /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		8B3A13821E10F484005DBC6E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		A6E4C2F51E10FC9200C2C871 /* HoiDap_Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HoiDap_Header.h; sourceTree = "<group>"; };
+		8B3A13851E10FD1B005DBC6E /* TagListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListViewController.swift; sourceTree = "<group>"; };
+		8B3A13871E10FD2A005DBC6E /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		8B3A13891E10FD58005DBC6E /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		FDD88BA19051C23DD96B53FB /* Pods-CDYT_HoiDap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYT_HoiDap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -207,6 +213,7 @@
 		8B3A12DD1E10F399005DBC6E /* CDYT_HoiDap */ = {
 			isa = PBXGroup;
 			children = (
+				8B3A13841E10FCB6005DBC6E /* ViewController */,
 				8B3A137F1E10F46B005DBC6E /* Helper */,
 				8B3A12F01E10F454005DBC6E /* Images */,
 				8B3A131E1E10F454005DBC6E /* Libaries */,
@@ -391,6 +398,16 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		8B3A13841E10FCB6005DBC6E /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8B3A13851E10FD1B005DBC6E /* TagListViewController.swift */,
+				8B3A13871E10FD2A005DBC6E /* UserViewController.swift */,
+				8B3A13891E10FD58005DBC6E /* QuestionViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		9709AA8D06A12926790E0992 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -573,8 +590,10 @@
 				8B3A13701E10F454005DBC6E /* DataEncryption.m in Sources */,
 				8B3A13751E10F454005DBC6E /* TPKeyboardAvoidingTableView.m in Sources */,
 				8B3A12E11E10F399005DBC6E /* ViewController.swift in Sources */,
+				8B3A13881E10FD2A005DBC6E /* UserViewController.swift in Sources */,
 				8B3A13771E10F454005DBC6E /* RAMBounceAnimation.swift in Sources */,
 				8B3A137D1E10F454005DBC6E /* RAMBadge.swift in Sources */,
+				8B3A138A1E10FD58005DBC6E /* QuestionViewController.swift in Sources */,
 				8B3A13731E10F454005DBC6E /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				8B3A13781E10F454005DBC6E /* RAMFrameItemAnimation.swift in Sources */,
 				8B3A136F1E10F454005DBC6E /* DatePickerDialog.swift in Sources */,
@@ -582,6 +601,7 @@
 				8B3A137C1E10F454005DBC6E /* RAMAnimatedTabBarController.swift in Sources */,
 				8B3A13761E10F454005DBC6E /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				8B3A13791E10F454005DBC6E /* RAMFumeAnimation.swift in Sources */,
+				8B3A13861E10FD1B005DBC6E /* TagListViewController.swift in Sources */,
 				8B3A13721E10F454005DBC6E /* NSString+URLEncode.m in Sources */,
 				8B3A12DF1E10F399005DBC6E /* AppDelegate.swift in Sources */,
 				8B3A137B1E10F454005DBC6E /* RAMTransitionItemAnimations.swift in Sources */,
