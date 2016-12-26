@@ -162,7 +162,7 @@
 		8B3A133F1E10F454005DBC6E /* RAMBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMBadge.swift; sourceTree = "<group>"; };
 		8B3A13401E10F454005DBC6E /* RAMItemAnimationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMItemAnimationProtocol.swift; sourceTree = "<group>"; };
 		8B3A13801E10F46B005DBC6E /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
-		8B3A13821E10F484005DBC6E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		8B3A13821E10F484005DBC6E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8B3A13851E10FD1B005DBC6E /* TagListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListViewController.swift; sourceTree = "<group>"; };
 		8B3A13871E10FD2A005DBC6E /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		8B3A13891E10FD58005DBC6E /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
@@ -399,11 +399,19 @@
 		8B3A13841E10FCB6005DBC6E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8B3A138D1E111FA5005DBC6E /* Cell */,
 				8B3A13851E10FD1B005DBC6E /* TagListViewController.swift */,
 				8B3A13871E10FD2A005DBC6E /* UserViewController.swift */,
 				8B3A13891E10FD58005DBC6E /* QuestionViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8B3A138D1E111FA5005DBC6E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		9709AA8D06A12926790E0992 /* Pods */ = {
