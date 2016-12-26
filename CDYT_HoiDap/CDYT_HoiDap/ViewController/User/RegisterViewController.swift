@@ -59,11 +59,19 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func registerBtnAction(_ sender: Any) {
-        
+        if validateData() == "" {
+            errLbl.isHidden = true
+            UIAlertController().showAlertWith(title: "Ok", message: "dang ki thanh cong", cancelBtnTitle: "OK")
+        }else{
+            errLbl.isHidden = false
+            errLbl.text = validateData()
+        }
     }
     
     @IBAction func loginBtnAction(_ sender: Any) {
-        
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        self.navigationController?.pushViewController(viewController, animated: true)
+
     }
     
     func validateData() -> String{
@@ -72,18 +80,22 @@ class RegisterViewController: UIViewController {
         let passString = passTxt.text
         let rePassString = repassTxt.text
         
-        var errMess = ""
         if nickString == "" {
-            errMess = "Vui lòng điền Tên đăng nhập"
+            nicknameTxt.becomeFirstResponder()
+            return "Vui lòng điền Tên đăng nhập,"
         }else if emailString == "" {
-            errMess = "Vui lòng điền email."
+            emailTxt.becomeFirstResponder()
+            return "Vui lòng điền email."
         }else if !isValidEmail(email: emailString!){
-            errMess = "Định dạng email không đúng"
+            emailTxt.becomeFirstResponder()
+            return "Định dạng email không đúng."
         }else if passString == "" || rePassString == "" {
-            errMess = "Vui lòng nhập đầy đủ thông tin mật khẩu."
+            return "Vui lòng nhập đầy đủ thông tin mật khẩu."
+        }else if passString != rePassString {
+            return "Mật khẩu và xác nhận mật khẩu phải trùng nhau."
+        }else{
+            return ""
         }
-        
-        return errMess
     }
     
     override func didReceiveMemoryWarning() {
