@@ -80,6 +80,11 @@
 		8B3A13861E10FD1B005DBC6E /* TagListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A13851E10FD1B005DBC6E /* TagListViewController.swift */; };
 		8B3A13881E10FD2A005DBC6E /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A13871E10FD2A005DBC6E /* UserViewController.swift */; };
 		8B3A138A1E10FD58005DBC6E /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A13891E10FD58005DBC6E /* QuestionViewController.swift */; };
+		A6E4C2F81E1102A500C2C871 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E4C2F71E1102A500C2C871 /* RegisterViewController.swift */; };
+		A6E4C2FA1E1102BA00C2C871 /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6E4C2F91E1102BA00C2C871 /* User.storyboard */; };
+		A6E9D88F1E1110CF00E31886 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E9D88E1E1110CF00E31886 /* LoginViewController.swift */; };
+		A6E9D8911E11169600E31886 /* UpdateInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E9D8901E11169600E31886 /* UpdateInfoViewController.swift */; };
+		A6E9D8931E111F3100E31886 /* Until.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E9D8921E111F3100E31886 /* Until.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -163,10 +168,15 @@
 		8B3A13401E10F454005DBC6E /* RAMItemAnimationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMItemAnimationProtocol.swift; sourceTree = "<group>"; };
 		8B3A13801E10F46B005DBC6E /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		8B3A13821E10F484005DBC6E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
-		A6E4C2F51E10FC9200C2C871 /* HoiDap_Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HoiDap_Header.h; sourceTree = "<group>"; };
 		8B3A13851E10FD1B005DBC6E /* TagListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListViewController.swift; sourceTree = "<group>"; };
 		8B3A13871E10FD2A005DBC6E /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		8B3A13891E10FD58005DBC6E /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		A6E4C2F51E10FC9200C2C871 /* HoiDap_Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HoiDap_Header.h; sourceTree = "<group>"; };
+		A6E4C2F71E1102A500C2C871 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		A6E4C2F91E1102BA00C2C871 /* User.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = User.storyboard; sourceTree = "<group>"; };
+		A6E9D88E1E1110CF00E31886 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A6E9D8901E11169600E31886 /* UpdateInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateInfoViewController.swift; sourceTree = "<group>"; };
+		A6E9D8921E111F3100E31886 /* Until.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Until.swift; sourceTree = "<group>"; };
 		FDD88BA19051C23DD96B53FB /* Pods-CDYT_HoiDap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYT_HoiDap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -393,6 +403,7 @@
 		8B3A137F1E10F46B005DBC6E /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				A6E9D8921E111F3100E31886 /* Until.swift */,
 				8B3A13801E10F46B005DBC6E /* Global.swift */,
 			);
 			path = Helper;
@@ -401,6 +412,7 @@
 		8B3A13841E10FCB6005DBC6E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				A6E4C2F61E11022B00C2C871 /* User */,
 				8B3A13851E10FD1B005DBC6E /* TagListViewController.swift */,
 				8B3A13871E10FD2A005DBC6E /* UserViewController.swift */,
 				8B3A13891E10FD58005DBC6E /* QuestionViewController.swift */,
@@ -415,6 +427,17 @@
 				54350AF3B96C58CE38450098 /* Pods-CDYT_HoiDap.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		A6E4C2F61E11022B00C2C871 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				A6E4C2F71E1102A500C2C871 /* RegisterViewController.swift */,
+				A6E9D88E1E1110CF00E31886 /* LoginViewController.swift */,
+				A6E9D8901E11169600E31886 /* UpdateInfoViewController.swift */,
+				A6E4C2F91E1102BA00C2C871 /* User.storyboard */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -511,6 +534,7 @@
 				8B3A13651E10F454005DBC6E /* tag_mark.png in Resources */,
 				8B3A13601E10F454005DBC6E /* Splash@2x.png in Resources */,
 				8B3A13471E10F454005DBC6E /* caidat_button0.png in Resources */,
+				A6E4C2FA1E1102BA00C2C871 /* User.storyboard in Resources */,
 				8B3A135B1E10F454005DBC6E /* Like1@3x.png in Resources */,
 				8B3A13531E10F454005DBC6E /* Grey_mark.png in Resources */,
 				8B3A13511E10F454005DBC6E /* Green_Mark@2x.png in Resources */,
@@ -590,15 +614,19 @@
 				8B3A13701E10F454005DBC6E /* DataEncryption.m in Sources */,
 				8B3A13751E10F454005DBC6E /* TPKeyboardAvoidingTableView.m in Sources */,
 				8B3A12E11E10F399005DBC6E /* ViewController.swift in Sources */,
+				A6E4C2F81E1102A500C2C871 /* RegisterViewController.swift in Sources */,
 				8B3A13881E10FD2A005DBC6E /* UserViewController.swift in Sources */,
 				8B3A13771E10F454005DBC6E /* RAMBounceAnimation.swift in Sources */,
+				A6E9D8931E111F3100E31886 /* Until.swift in Sources */,
 				8B3A137D1E10F454005DBC6E /* RAMBadge.swift in Sources */,
 				8B3A138A1E10FD58005DBC6E /* QuestionViewController.swift in Sources */,
 				8B3A13731E10F454005DBC6E /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				8B3A13781E10F454005DBC6E /* RAMFrameItemAnimation.swift in Sources */,
 				8B3A136F1E10F454005DBC6E /* DatePickerDialog.swift in Sources */,
+				A6E9D8911E11169600E31886 /* UpdateInfoViewController.swift in Sources */,
 				8B3A13811E10F46B005DBC6E /* Global.swift in Sources */,
 				8B3A137C1E10F454005DBC6E /* RAMAnimatedTabBarController.swift in Sources */,
+				A6E9D88F1E1110CF00E31886 /* LoginViewController.swift in Sources */,
 				8B3A13761E10F454005DBC6E /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				8B3A13791E10F454005DBC6E /* RAMFumeAnimation.swift in Sources */,
 				8B3A13861E10FD1B005DBC6E /* TagListViewController.swift in Sources */,
@@ -737,6 +765,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.isorasoft.CDYT-HoiDap";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -752,6 +781,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.isorasoft.CDYT-HoiDap";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
