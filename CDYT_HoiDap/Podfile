@@ -10,5 +10,5 @@ pod 'SKPhotoBrowser', :git => 'https://github.com/suzuki-0000/SKPhotoBrowser.git
 pod 'DKImagePickerController'
 pod 'ALTextInputBar'
 pod 'TTTAttributedLabel'
-
+pod 'UICollectionViewLeftAlignedLayout'
 end
