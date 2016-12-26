@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>HoiDap.xcscheme</key>
+		<key>CDYT_HoiDap.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>A6E90FDD1E10D79900F1115E</key>
+		<key>8B3A12DA1E10F399005DBC6E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

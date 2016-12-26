@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:HoiDap.xcodeproj">
+      location = "self:CDYT_HoiDap.xcodeproj">
    </FileRef>
 </Workspace>

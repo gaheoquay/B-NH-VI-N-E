@@ -7,25 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A6E90FE21E10D79900F1115E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E90FE11E10D79900F1115E /* AppDelegate.swift */; };
-		A6E90FE41E10D79900F1115E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E90FE31E10D79900F1115E /* ViewController.swift */; };
-		A6E90FE71E10D79900F1115E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6E90FE51E10D79900F1115E /* Main.storyboard */; };
-		A6E90FE91E10D79900F1115E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E90FE81E10D79900F1115E /* Assets.xcassets */; };
-		A6E90FEC1E10D79900F1115E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6E90FEA1E10D79900F1115E /* LaunchScreen.storyboard */; };
+		8B3A12DF1E10F399005DBC6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A12DE1E10F399005DBC6E /* AppDelegate.swift */; };
+		8B3A12E11E10F399005DBC6E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A12E01E10F399005DBC6E /* ViewController.swift */; };
+		8B3A12E41E10F399005DBC6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B3A12E21E10F399005DBC6E /* Main.storyboard */; };
+		8B3A12E61E10F399005DBC6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B3A12E51E10F399005DBC6E /* Assets.xcassets */; };
+		8B3A12E91E10F399005DBC6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B3A12E71E10F399005DBC6E /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A6E90FDE1E10D79900F1115E /* HoiDap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoiDap.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A6E90FE11E10D79900F1115E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A6E90FE31E10D79900F1115E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A6E90FE61E10D79900F1115E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A6E90FE81E10D79900F1115E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A6E90FEB1E10D79900F1115E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A6E90FED1E10D79900F1115E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B3A12DB1E10F399005DBC6E /* CDYT_HoiDap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CDYT_HoiDap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B3A12DE1E10F399005DBC6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8B3A12E01E10F399005DBC6E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8B3A12E31E10F399005DBC6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8B3A12E51E10F399005DBC6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8B3A12E81E10F399005DBC6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8B3A12EA1E10F399005DBC6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A6E90FDB1E10D79900F1115E /* Frameworks */ = {
+		8B3A12D81E10F399005DBC6E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -35,72 +35,73 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A6E90FD51E10D79900F1115E = {
+		8B3A12D21E10F399005DBC6E = {
 			isa = PBXGroup;
 			children = (
-				A6E90FE01E10D79900F1115E /* HoiDap */,
-				A6E90FDF1E10D79900F1115E /* Products */,
+				8B3A12DD1E10F399005DBC6E /* CDYT_HoiDap */,
+				8B3A12DC1E10F399005DBC6E /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		A6E90FDF1E10D79900F1115E /* Products */ = {
+		8B3A12DC1E10F399005DBC6E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A6E90FDE1E10D79900F1115E /* HoiDap.app */,
+				8B3A12DB1E10F399005DBC6E /* CDYT_HoiDap.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A6E90FE01E10D79900F1115E /* HoiDap */ = {
+		8B3A12DD1E10F399005DBC6E /* CDYT_HoiDap */ = {
 			isa = PBXGroup;
 			children = (
-				A6E90FE11E10D79900F1115E /* AppDelegate.swift */,
-				A6E90FE31E10D79900F1115E /* ViewController.swift */,
-				A6E90FE51E10D79900F1115E /* Main.storyboard */,
-				A6E90FE81E10D79900F1115E /* Assets.xcassets */,
-				A6E90FEA1E10D79900F1115E /* LaunchScreen.storyboard */,
-				A6E90FED1E10D79900F1115E /* Info.plist */,
+				8B3A12DE1E10F399005DBC6E /* AppDelegate.swift */,
+				8B3A12E01E10F399005DBC6E /* ViewController.swift */,
+				8B3A12E21E10F399005DBC6E /* Main.storyboard */,
+				8B3A12E51E10F399005DBC6E /* Assets.xcassets */,
+				8B3A12E71E10F399005DBC6E /* LaunchScreen.storyboard */,
+				8B3A12EA1E10F399005DBC6E /* Info.plist */,
 			);
-			path = HoiDap;
+			path = CDYT_HoiDap;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A6E90FDD1E10D79900F1115E /* HoiDap */ = {
+		8B3A12DA1E10F399005DBC6E /* CDYT_HoiDap */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A6E90FF01E10D79900F1115E /* Build configuration list for PBXNativeTarget "HoiDap" */;
+			buildConfigurationList = 8B3A12ED1E10F399005DBC6E /* Build configuration list for PBXNativeTarget "CDYT_HoiDap" */;
 			buildPhases = (
-				A6E90FDA1E10D79900F1115E /* Sources */,
-				A6E90FDB1E10D79900F1115E /* Frameworks */,
-				A6E90FDC1E10D79900F1115E /* Resources */,
+				8B3A12D71E10F399005DBC6E /* Sources */,
+				8B3A12D81E10F399005DBC6E /* Frameworks */,
+				8B3A12D91E10F399005DBC6E /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = HoiDap;
-			productName = HoiDap;
-			productReference = A6E90FDE1E10D79900F1115E /* HoiDap.app */;
+			name = CDYT_HoiDap;
+			productName = CDYT_HoiDap;
+			productReference = 8B3A12DB1E10F399005DBC6E /* CDYT_HoiDap.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		A6E90FD61E10D79900F1115E /* Project object */ = {
+		8B3A12D31E10F399005DBC6E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
-				ORGANIZATIONNAME = ISORA;
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = CDYT;
 				TargetAttributes = {
-					A6E90FDD1E10D79900F1115E = {
-						CreatedOnToolsVersion = 8.2;
+					8B3A12DA1E10F399005DBC6E = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = BY2N2SG836;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = A6E90FD91E10D79900F1115E /* Build configuration list for PBXProject "HoiDap" */;
+			buildConfigurationList = 8B3A12D61E10F399005DBC6E /* Build configuration list for PBXProject "CDYT_HoiDap" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -108,54 +109,54 @@
 				en,
 				Base,
 			);
-			mainGroup = A6E90FD51E10D79900F1115E;
-			productRefGroup = A6E90FDF1E10D79900F1115E /* Products */;
+			mainGroup = 8B3A12D21E10F399005DBC6E;
+			productRefGroup = 8B3A12DC1E10F399005DBC6E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A6E90FDD1E10D79900F1115E /* HoiDap */,
+				8B3A12DA1E10F399005DBC6E /* CDYT_HoiDap */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A6E90FDC1E10D79900F1115E /* Resources */ = {
+		8B3A12D91E10F399005DBC6E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6E90FEC1E10D79900F1115E /* LaunchScreen.storyboard in Resources */,
-				A6E90FE91E10D79900F1115E /* Assets.xcassets in Resources */,
-				A6E90FE71E10D79900F1115E /* Main.storyboard in Resources */,
+				8B3A12E91E10F399005DBC6E /* LaunchScreen.storyboard in Resources */,
+				8B3A12E61E10F399005DBC6E /* Assets.xcassets in Resources */,
+				8B3A12E41E10F399005DBC6E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A6E90FDA1E10D79900F1115E /* Sources */ = {
+		8B3A12D71E10F399005DBC6E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6E90FE41E10D79900F1115E /* ViewController.swift in Sources */,
-				A6E90FE21E10D79900F1115E /* AppDelegate.swift in Sources */,
+				8B3A12E11E10F399005DBC6E /* ViewController.swift in Sources */,
+				8B3A12DF1E10F399005DBC6E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A6E90FE51E10D79900F1115E /* Main.storyboard */ = {
+		8B3A12E21E10F399005DBC6E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A6E90FE61E10D79900F1115E /* Base */,
+				8B3A12E31E10F399005DBC6E /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		A6E90FEA1E10D79900F1115E /* LaunchScreen.storyboard */ = {
+		8B3A12E71E10F399005DBC6E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A6E90FEB1E10D79900F1115E /* Base */,
+				8B3A12E81E10F399005DBC6E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -163,7 +164,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A6E90FEE1E10D79900F1115E /* Debug */ = {
+		8B3A12EB1E10F399005DBC6E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -181,7 +182,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -203,7 +204,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -212,7 +213,7 @@
 			};
 			name = Debug;
 		};
-		A6E90FEF1E10D79900F1115E /* Release */ = {
+		8B3A12EC1E10F399005DBC6E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -230,7 +231,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -246,7 +247,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -254,25 +255,27 @@
 			};
 			name = Release;
 		};
-		A6E90FF11E10D79900F1115E /* Debug */ = {
+		8B3A12EE1E10F399005DBC6E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = HoiDap/Info.plist;
+				DEVELOPMENT_TEAM = BY2N2SG836;
+				INFOPLIST_FILE = CDYT_HoiDap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.HoiDap;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.isorasoft.CDYT-HoiDap";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
-		A6E90FF21E10D79900F1115E /* Release */ = {
+		8B3A12EF1E10F399005DBC6E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = HoiDap/Info.plist;
+				DEVELOPMENT_TEAM = BY2N2SG836;
+				INFOPLIST_FILE = CDYT_HoiDap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.HoiDap;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.isorasoft.CDYT-HoiDap";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -281,24 +284,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A6E90FD91E10D79900F1115E /* Build configuration list for PBXProject "HoiDap" */ = {
+		8B3A12D61E10F399005DBC6E /* Build configuration list for PBXProject "CDYT_HoiDap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A6E90FEE1E10D79900F1115E /* Debug */,
-				A6E90FEF1E10D79900F1115E /* Release */,
+				8B3A12EB1E10F399005DBC6E /* Debug */,
+				8B3A12EC1E10F399005DBC6E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A6E90FF01E10D79900F1115E /* Build configuration list for PBXNativeTarget "HoiDap" */ = {
+		8B3A12ED1E10F399005DBC6E /* Build configuration list for PBXNativeTarget "CDYT_HoiDap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A6E90FF11E10D79900F1115E /* Debug */,
-				A6E90FF21E10D79900F1115E /* Release */,
+				8B3A12EE1E10F399005DBC6E /* Debug */,
+				8B3A12EF1E10F399005DBC6E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = A6E90FD61E10D79900F1115E /* Project object */;
+	rootObject = 8B3A12D31E10F399005DBC6E /* Project object */;
 }
