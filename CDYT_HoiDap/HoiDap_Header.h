@@ -18,6 +18,8 @@
 @import SwiftyJSON;
 @import TTTAttributedLabel;
 #import "TPKeyboardAvoidingScrollView.h"
-
+#import "DataEncryption.h"
+#import "TPKeyboardAvoidingTableView.h"
+@import NVActivityIndicatorView;
 
 #endif /* HoiDap_Header_h */

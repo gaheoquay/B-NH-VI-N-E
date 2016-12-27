@@ -71,10 +71,35 @@ extension UIAlertController {
     }
 }
 
-func isValidEmail(email:String) -> Bool {
-    // println("validate calendar: \(testStr)")
-    let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+class Until{
+    class func isValidEmail(email:String) -> Bool {
+        // println("validate calendar: \(testStr)")
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: email)
+    }
     
-    let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-    return emailTest.evaluate(with: email)
+    class func getAuthKey() -> NSDictionary{
+        let keyString = String(format: "%.0f", NSDate().timeIntervalSince1970)
+        let tokenString = DataEncryption.getMD5(from: "\(keyString)\(KEY_AUTH_DEFAULT)")
+        
+        let auth = [
+            "Key" : keyString,
+            "Token" : tokenString
+        ]
+        
+        return auth as NSDictionary
+    }
+    
+    class func showLoading(){
+        let activityData = ActivityData.init(size: CGSize(width: 40, height:40), message: "", messageFont: UIFont.systemFont(ofSize: 12), type: NVActivityIndicatorType.ballTrianglePath, color: UIColor.white, padding: 0, displayTimeThreshold: 0, minimumDisplayTime: 0)
+        
+        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+
+    }
+    
+    class func hideLoading(){
+        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+    }
 }
