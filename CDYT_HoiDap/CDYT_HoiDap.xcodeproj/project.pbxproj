@@ -82,6 +82,8 @@
 		8B3A138A1E10FD58005DBC6E /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A13891E10FD58005DBC6E /* QuestionViewController.swift */; };
 		8B3A13901E112129005DBC6E /* KeyWordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A138E1E112129005DBC6E /* KeyWordTableViewCell.swift */; };
 		8B3A13911E112129005DBC6E /* KeyWordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B3A138F1E112129005DBC6E /* KeyWordTableViewCell.xib */; };
+		8B7AB6BE1E1211E20015DFBE /* KeywordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7AB6BC1E1211E20015DFBE /* KeywordCollectionViewCell.swift */; };
+		8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B7AB6BD1E1211E20015DFBE /* KeywordCollectionViewCell.xib */; };
 		A63C38D91E120A7E00DAB016 /* DangKi1.png in Resources */ = {isa = PBXBuildFile; fileRef = A63C38CD1E120A7E00DAB016 /* DangKi1.png */; };
 		A63C38DA1E120A7E00DAB016 /* DangKi1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A63C38CE1E120A7E00DAB016 /* DangKi1@2x.png */; };
 		A63C38DB1E120A7E00DAB016 /* DangKi1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A63C38CF1E120A7E00DAB016 /* DangKi1@3x.png */; };
@@ -192,6 +194,8 @@
 		8B3A13891E10FD58005DBC6E /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		8B3A138E1E112129005DBC6E /* KeyWordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyWordTableViewCell.swift; sourceTree = "<group>"; };
 		8B3A138F1E112129005DBC6E /* KeyWordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyWordTableViewCell.xib; sourceTree = "<group>"; };
+		8B7AB6BC1E1211E20015DFBE /* KeywordCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordCollectionViewCell.swift; sourceTree = "<group>"; };
+		8B7AB6BD1E1211E20015DFBE /* KeywordCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeywordCollectionViewCell.xib; sourceTree = "<group>"; };
 		A63C38CD1E120A7E00DAB016 /* DangKi1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DangKi1.png; sourceTree = "<group>"; };
 		A63C38CE1E120A7E00DAB016 /* DangKi1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DangKi1@2x.png"; sourceTree = "<group>"; };
 		A63C38CF1E120A7E00DAB016 /* DangKi1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DangKi1@3x.png"; sourceTree = "<group>"; };
@@ -479,6 +483,8 @@
 				8B3A138F1E112129005DBC6E /* KeyWordTableViewCell.xib */,
 				A6D083C41E12747D007EA4D9 /* QuestionTagTableViewCell.swift */,
 				A6D083C51E12747D007EA4D9 /* QuestionTagTableViewCell.xib */,
+				8B7AB6BC1E1211E20015DFBE /* KeywordCollectionViewCell.swift */,
+				8B7AB6BD1E1211E20015DFBE /* KeywordCollectionViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -609,6 +615,7 @@
 				8B3A13681E10F454005DBC6E /* Tinnhan_button01 Copy.png in Resources */,
 				A63C38E11E120A7E00DAB016 /* DangKi3@3x.png in Resources */,
 				8B3A13411E10F454005DBC6E /* AvaDefaut.png in Resources */,
+				8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */,
 				8B3A136C1E10F454005DBC6E /* Tinnhan_button01@2x.png in Resources */,
 				8B3A13631E10F454005DBC6E /* star1@2x.png in Resources */,
 				A63C38E41E120A7E00DAB016 /* DangNhap@3x.png in Resources */,
@@ -717,6 +724,7 @@
 				A6E9D8911E11169600E31886 /* UpdateInfoViewController.swift in Sources */,
 				A6D083CB1E12803C007EA4D9 /* HotTagEntity.swift in Sources */,
 				8B3A13811E10F46B005DBC6E /* Global.swift in Sources */,
+				8B7AB6BE1E1211E20015DFBE /* KeywordCollectionViewCell.swift in Sources */,
 				8B3A137C1E10F454005DBC6E /* RAMAnimatedTabBarController.swift in Sources */,
 				A6E9D88F1E1110CF00E31886 /* LoginViewController.swift in Sources */,
 				8B3A13761E10F454005DBC6E /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
