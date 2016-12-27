@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
   var window: UIWindow?
 
@@ -41,6 +42,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
   }
 
+    func registerNotification(application: UIApplication){
+        if #available(iOS 10.0, *) {
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+                // Enable or disable features based on authorization.
+                if granted == true
+                {
+                    print("Allow")
+                }
+                else
+                {
+                    print("Don't Allow")
+                }
+            }
+        } else {
+            let version = UIDevice.current.systemVersion
+            let ver:Double = (version as NSString).doubleValue
+            if ver >= 8 && ver < 9 {
+                if UIApplication.shared.responds(to: #selector(UIApplication.registerUserNotificationSettings(_:))){
+                    let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+                    UIApplication.shared.registerUserNotificationSettings(settings)
+                }
+            }
+            else if ver >= 9 {
+                UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
+            }
+        }
+        application.applicationIconBadgeNumber = 0
+        application.registerForRemoteNotifications()
+    }
 
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        print(deviceTokenString)
+        UserDefaults.standard.setValue(deviceTokenString, forKey: NOTIFICATION_TOKEN)
+    }
 }
 

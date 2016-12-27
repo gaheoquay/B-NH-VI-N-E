@@ -11,4 +11,6 @@ pod 'DKImagePickerController'
 pod 'ALTextInputBar'
 pod 'TTTAttributedLabel'
 pod 'UICollectionViewLeftAlignedLayout'
+pod 'NVActivityIndicatorView'
+
 end

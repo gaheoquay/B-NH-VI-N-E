@@ -19,5 +19,8 @@
 @import TTTAttributedLabel;
 #import "TPKeyboardAvoidingScrollView.h"
 @import UICollectionViewLeftAlignedLayout;
+#import "DataEncryption.h"
+#import "TPKeyboardAvoidingTableView.h"
+@import NVActivityIndicatorView;
 
 #endif /* HoiDap_Header_h */
