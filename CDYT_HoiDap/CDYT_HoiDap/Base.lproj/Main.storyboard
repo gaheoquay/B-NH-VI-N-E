@@ -94,6 +94,9 @@
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="fje-mT-HHZ"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="tbQuestion" destination="w2Q-QV-C5Z" id="EU1-V7-Wab"/>
+                    </connections>
                 </viewController>
                 <customObject id="Md1-fB-bMK" customClass="RAMFumeAnimation" customModule="CDYT_HoiDap" customModuleProvider="target">
                     <userDefinedRuntimeAttributes>

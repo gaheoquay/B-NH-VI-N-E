@@ -18,6 +18,6 @@
 @import SwiftyJSON;
 @import TTTAttributedLabel;
 #import "TPKeyboardAvoidingScrollView.h"
-
+@import UICollectionViewLeftAlignedLayout;
 
 #endif /* HoiDap_Header_h */
