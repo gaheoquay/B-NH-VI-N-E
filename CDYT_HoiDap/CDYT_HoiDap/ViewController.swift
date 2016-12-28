@@ -139,7 +139,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
       return cell
     }else{
       let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
-      cell.setData(feedEntity: listFedds[indexPath.row])
+      cell.feedEntity = listFedds[indexPath.row]
+      cell.setData()
       return cell
 
     }

@@ -23,10 +23,7 @@ class KeyWordTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollect
     
     // Configure the view for the selected state
   }
-  
-  func reloadTags(){
-    
-  }
+
 //  MARK:UICollectionViewDataSource
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return listTag.count
