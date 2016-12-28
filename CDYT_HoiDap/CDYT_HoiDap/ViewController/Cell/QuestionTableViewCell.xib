@@ -145,8 +145,13 @@
                     <constraint firstItem="0jK-ch-8DS" firstAttribute="leading" secondItem="uCP-LL-z3m" secondAttribute="leading" id="x4Y-8m-Xrr"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="clvTags" destination="7zH-W1-Sf3" id="Mgw-mH-g1h"/>
+                <outlet property="imgTag" destination="vYs-HL-gKd" id="UjX-8a-h0x"/>
+                <outlet property="layoutBottomTag" destination="i6Y-CH-EDu" id="7H0-MA-EHr"/>
+                <outlet property="layoutHeighTag" destination="JXV-xK-Ryd" id="Ex3-0E-2rx"/>
+                <outlet property="layoutTopTag" destination="C1f-Qa-xBb" id="sbO-Ns-aHM"/>
                 <outlet property="lbAuthor" destination="0lh-kl-auD" id="6NE-H8-3iX"/>
                 <outlet property="lbCommentCount" destination="Jtb-fH-FlB" id="3Vy-Ys-5NK"/>
                 <outlet property="lbContent" destination="0jK-ch-8DS" id="CGj-JE-0Ic"/>

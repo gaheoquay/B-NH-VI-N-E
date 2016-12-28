@@ -36,6 +36,20 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
     myAttrString.append(NSAttributedString(string: feedEntity.authorEntity.fullname, attributes: fontWithColor))
     lbAuthor.attributedText = myAttrString
     lbCreateDate.text = String().convertTimeStampWithDateFormat(timeStamp: feedEntity.postEntity.createdDate, dateFormat: "dd/MM/yy HH:mm")
+    if feedEntity.tags.count == 0 {
+      layoutHeighTag.constant = 0
+      layoutTopTag.constant = 0
+      layoutBottomTag.constant = 0
+      clvTags.isHidden = true
+      imgTag.isHidden = true
+    }else{
+      layoutHeighTag.constant = 24
+      layoutBottomTag.constant = 6
+      layoutTopTag.constant = 6
+      clvTags.isHidden = false
+      imgTag.isHidden = false
+    }
+    self.contentView.layoutIfNeeded()
     clvTags.reloadData()
   }
   //  MARK:UICollectionViewDataSource
@@ -76,4 +90,8 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
   @IBOutlet weak var lbAuthor: UILabel!
   @IBOutlet weak var lbCreateDate: UILabel!
   var feedEntity = FeedsEntity()
+  @IBOutlet weak var imgTag: UIImageView!
+  @IBOutlet weak var layoutHeighTag: NSLayoutConstraint!
+  @IBOutlet weak var layoutTopTag: NSLayoutConstraint!
+  @IBOutlet weak var layoutBottomTag: NSLayoutConstraint!
 }

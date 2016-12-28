@@ -12,7 +12,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
   override func viewDidLoad() {
     super.viewDidLoad()
-  initView()
+  initTableView()
     getFeeds()
     getHotTagFromServer()
     // Do any additional setup after loading the view, typically from a nib.
@@ -26,8 +26,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     super.viewWillAppear(animated)
     self.navigationController?.setNavigationBarHidden(true, animated: true)
   }
-  //MARK: init view
-  func initView(){
+  //MARK: init table view
+  func initTableView(){
     tbQuestion.dataSource = self
     tbQuestion.delegate = self
     tbQuestion.estimatedRowHeight = 999
@@ -94,7 +94,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
       "Size": 10,
       "RequestedUserId" : requestedUserId
     ]
-    print(JSON.init(hotParam))
     Until.showLoading()
     Alamofire.request(GET_FEEDS, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
