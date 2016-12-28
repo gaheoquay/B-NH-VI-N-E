@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EO5-XF-yzr">
-                        <rect key="frame" x="8" y="5" width="304" height="30"/>
+                        <rect key="frame" x="8" y="3" width="304" height="33.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="LabelLabel " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3d-HL-t2B">
@@ -47,14 +47,14 @@
                     <constraint firstItem="EO5-XF-yzr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="4B1-ev-hgV"/>
                     <constraint firstAttribute="trailing" secondItem="C6n-y8-siM" secondAttribute="trailing" constant="15" id="5v4-3U-UTV"/>
                     <constraint firstAttribute="trailing" secondItem="EO5-XF-yzr" secondAttribute="trailing" constant="8" id="8fK-g6-U49"/>
-                    <constraint firstAttribute="bottom" secondItem="EO5-XF-yzr" secondAttribute="bottom" constant="5" id="GHf-Kk-FHE"/>
+                    <constraint firstAttribute="bottom" secondItem="EO5-XF-yzr" secondAttribute="bottom" constant="3" id="GHf-Kk-FHE"/>
                     <constraint firstItem="C6n-y8-siM" firstAttribute="leading" secondItem="M3d-HL-t2B" secondAttribute="trailing" constant="8" id="HlH-GU-sbX"/>
                     <constraint firstItem="C6n-y8-siM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="NxZ-jK-dXm"/>
                     <constraint firstAttribute="bottom" secondItem="C6n-y8-siM" secondAttribute="bottom" constant="8" id="bL6-uB-PP9"/>
                     <constraint firstItem="M3d-HL-t2B" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="g41-zN-60X"/>
                     <constraint firstItem="C6n-y8-siM" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ixT-Vl-qA1"/>
                     <constraint firstItem="M3d-HL-t2B" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mCJ-oJ-0CI"/>
-                    <constraint firstItem="EO5-XF-yzr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="xRX-Py-9VF"/>
+                    <constraint firstItem="EO5-XF-yzr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="xRX-Py-9VF"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

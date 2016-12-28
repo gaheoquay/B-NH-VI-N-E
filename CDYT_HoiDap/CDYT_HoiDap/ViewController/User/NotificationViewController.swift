@@ -38,6 +38,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func backTapAction(_ sender: Any) {
+        _ = self.navigationController?.popViewController(animated: true)
+    }
 
     /*
     // MARK: - Navigation

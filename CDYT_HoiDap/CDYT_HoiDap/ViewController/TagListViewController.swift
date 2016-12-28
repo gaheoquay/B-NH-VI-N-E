@@ -22,7 +22,8 @@ class TagListViewController: UIViewController, UITableViewDataSource, UITableVie
         tagTableView.estimatedRowHeight = 200
         tagTableView.rowHeight = UITableViewAutomaticDimension
         tagTableView.register(UINib.init(nibName: "QuestionTagTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTagTableViewCell")
-        
+        tagTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+
         getHotTagFromServer()
     }
 

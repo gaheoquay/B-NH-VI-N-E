@@ -309,6 +309,13 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xy2-7X-oZI">
+                                        <rect key="frame" x="10" y="11" width="30" height="22"/>
+                                        <state key="normal" title=" " image="Back.png"/>
+                                        <connections>
+                                            <action selector="backTapAction:" destination="cd1-Yh-jzI" eventType="touchUpInside" id="AxP-7L-oII"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -318,6 +325,8 @@
                                     <constraint firstAttribute="height" constant="44" id="BrT-5e-od5"/>
                                     <constraint firstItem="vUY-xI-WSp" firstAttribute="centerX" secondItem="P41-Mn-8ea" secondAttribute="centerX" id="Ckn-GW-sfw"/>
                                     <constraint firstAttribute="trailing" secondItem="DN7-xA-WgT" secondAttribute="trailing" id="JhL-Kf-cu7"/>
+                                    <constraint firstItem="Xy2-7X-oZI" firstAttribute="leading" secondItem="P41-Mn-8ea" secondAttribute="leading" constant="10" id="aBj-ej-VpA"/>
+                                    <constraint firstItem="Xy2-7X-oZI" firstAttribute="centerY" secondItem="P41-Mn-8ea" secondAttribute="centerY" id="oNw-0J-3gu"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="8" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dhR-BN-ocN">
@@ -582,7 +591,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cập nhật tài khoản" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADp-x5-qft">
-                                        <rect key="frame" x="123" y="13.5" width="129" height="17"/>
+                                        <rect key="frame" x="123" y="14" width="129" height="17"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <color key="textColor" red="0.38039215686274508" green="0.6705882352941176" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -596,6 +605,16 @@
                                             <action selector="doneBtnAction:" destination="qx6-gg-DfS" eventType="touchUpInside" id="kdG-RV-9aa"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Npm-w5-IRt">
+                                        <rect key="frame" x="0.0" y="43" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="Gz7-zK-qgS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -603,8 +622,11 @@
                                     <constraint firstItem="FBO-c6-i9S" firstAttribute="leading" secondItem="Hw0-ur-OtS" secondAttribute="leading" constant="10" id="CLb-SK-Nt9"/>
                                     <constraint firstAttribute="height" constant="44" id="HNf-Nl-PhE"/>
                                     <constraint firstItem="ADp-x5-qft" firstAttribute="centerX" secondItem="Hw0-ur-OtS" secondAttribute="centerX" id="PAj-ia-Eci"/>
+                                    <constraint firstItem="IX5-xh-V83" firstAttribute="top" secondItem="Npm-w5-IRt" secondAttribute="bottom" id="PD7-yQ-J1t"/>
                                     <constraint firstAttribute="bottom" secondItem="IX5-xh-V83" secondAttribute="bottom" id="Qbp-Os-Aw9"/>
+                                    <constraint firstItem="Npm-w5-IRt" firstAttribute="leading" secondItem="Hw0-ur-OtS" secondAttribute="leading" id="V5R-Kc-z1F"/>
                                     <constraint firstItem="FBO-c6-i9S" firstAttribute="centerY" secondItem="Hw0-ur-OtS" secondAttribute="centerY" id="dIL-xd-o6M"/>
+                                    <constraint firstAttribute="trailing" secondItem="Npm-w5-IRt" secondAttribute="trailing" id="hwk-j3-Ihe"/>
                                     <constraint firstItem="ADp-x5-qft" firstAttribute="centerY" secondItem="Hw0-ur-OtS" secondAttribute="centerY" id="jJj-ge-UHH"/>
                                     <constraint firstAttribute="trailing" secondItem="qnn-sk-Oty" secondAttribute="trailing" constant="15" id="r4e-4Q-Thl"/>
                                     <constraint firstItem="IX5-xh-V83" firstAttribute="leading" secondItem="Hw0-ur-OtS" secondAttribute="leading" id="rIt-6v-OiE"/>
