@@ -12,5 +12,6 @@ pod 'ALTextInputBar'
 pod 'TTTAttributedLabel'
 pod 'UICollectionViewLeftAlignedLayout'
 pod 'NVActivityIndicatorView'
+pod 'UITextView+Placeholder'
 
 end

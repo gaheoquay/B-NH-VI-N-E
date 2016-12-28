@@ -22,5 +22,6 @@
 #import "DataEncryption.h"
 #import "TPKeyboardAvoidingTableView.h"
 @import NVActivityIndicatorView;
+@import UITextView_Placeholder;
 
 #endif /* HoiDap_Header_h */

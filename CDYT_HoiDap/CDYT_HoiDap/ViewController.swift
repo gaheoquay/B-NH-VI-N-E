@@ -144,6 +144,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
     }
   }
+    @IBAction func addQuestionTapAction(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddQuestionViewController") as! AddQuestionViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 //MARK: Outlet
   @IBOutlet weak var tbQuestion: UITableView!
   var listFedds = [FeedsEntity]()

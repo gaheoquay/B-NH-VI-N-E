@@ -15,6 +15,8 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var questionTableView: UITableView!
     var page = 1
     var listMyFeed = [FeedsEntity]()
+    var userID = ""
+    var userEntity = UserEntity()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,24 +31,30 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
         questionTableView.rowHeight = UITableViewAutomaticDimension
         questionTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
 
-        getFeeds()
-        
-    }
-
-    func getFeeds(){
-        var requestedUserId = ""
         let realm = try! Realm()
         let users = realm.objects(UserEntity.self)
         if users.count > 0 {
-            requestedUserId = users.first!.id
-            
+            userEntity = users.first!
         }
+        
+        getFeeds()
+        
+    }
+    
+    func setupUserInfo(){
+        avaImg.sd_setImage(with: URL.init(string: userEntity.avatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut"))
+        nicknameLbl.text = userEntity.nickname
+    }
+
+    func getFeeds(){
+        
+        
         let hotParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
             "Page": page,
             "Size": 10,
-            "UserId": "002519194651573865676-9858cb4b1899463988d9d222e073a20e",
-            "RequestedUserId" : "002519194651573865676-9858cb4b1899463988d9d222e073a20e"
+            "UserId": userID == "" ? "" : userEntity.id,
+            "RequestedUserId" : userEntity.id
         ]
         
         print(JSON.init(hotParam))
@@ -100,6 +108,9 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @IBAction func settingTapAction(_ sender: Any) {
+        let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
