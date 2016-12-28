@@ -18,6 +18,8 @@ let UPDATE_PROFILE = BASE_URL + "/User/UpdateProfile"
 
 let HOTEST_TAG = BASE_URL + "/Post/GetHotestTags"
 let GET_FEEDS = BASE_URL + "/Post/GetFeed"
+let GET_UNANSWER = BASE_URL + "/Post/GetUnansweredList"
+let GET_QUESTION = BASE_URL + "/Post/GetQuestionByTag"
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
 let NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"
