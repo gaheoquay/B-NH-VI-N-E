@@ -35,6 +35,47 @@ class QuestionTagTableViewCell: UITableViewCell {
     }
     
     @IBAction func followBtnAction(_ sender: Any) {
+        followTag()
+    }
+    
+    func followTag(){
+        let realm = try! Realm()
+        let users = realm.objects(UserEntity.self)
+        var userEntity = UserEntity()
+        if users.count > 0 {
+            userEntity = users.first!
+            
+        }
+        
+        let followParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId": userEntity.id,
+            "Tag": hotTag.tag.id
+        ]
+        
+        print(JSON.init(followParam))
+        
+        Until.showLoading()
+        Alamofire.request(FOLLOW_TAG, method: .post, parameters: followParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! NSDictionary
+                        let isFollowed = jsonData["IsFollowed"] as! Bool
+                        
+                        self.hotTag.isFollowed = isFollowed
+                        
+                        self.setData()
+                        
+                    }
+                }else{
+//                    UIAlertController().showAlertWith(title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+//                UIAlertController().showAlertWith(title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+            Until.hideLoading()
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
