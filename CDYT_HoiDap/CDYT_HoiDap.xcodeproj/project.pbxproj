@@ -84,6 +84,8 @@
 		8B3A13911E112129005DBC6E /* KeyWordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B3A138F1E112129005DBC6E /* KeyWordTableViewCell.xib */; };
 		8B7AB6BE1E1211E20015DFBE /* KeywordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7AB6BC1E1211E20015DFBE /* KeywordCollectionViewCell.swift */; };
 		8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B7AB6BD1E1211E20015DFBE /* KeywordCollectionViewCell.xib */; };
+		A6005BCF1E13722B00095FB7 /* NotifyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6005BCD1E13722B00095FB7 /* NotifyTableViewCell.swift */; };
+		A6005BD01E13722B00095FB7 /* NotifyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6005BCE1E13722B00095FB7 /* NotifyTableViewCell.xib */; };
 		A63C38D91E120A7E00DAB016 /* DangKi1.png in Resources */ = {isa = PBXBuildFile; fileRef = A63C38CD1E120A7E00DAB016 /* DangKi1.png */; };
 		A63C38DA1E120A7E00DAB016 /* DangKi1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A63C38CE1E120A7E00DAB016 /* DangKi1@2x.png */; };
 		A63C38DB1E120A7E00DAB016 /* DangKi1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A63C38CF1E120A7E00DAB016 /* DangKi1@3x.png */; };
@@ -96,6 +98,7 @@
 		A63C38E21E120A7E00DAB016 /* DangNhap.png in Resources */ = {isa = PBXBuildFile; fileRef = A63C38D61E120A7E00DAB016 /* DangNhap.png */; };
 		A63C38E31E120A7E00DAB016 /* DangNhap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A63C38D71E120A7E00DAB016 /* DangNhap@2x.png */; };
 		A63C38E41E120A7E00DAB016 /* DangNhap@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A63C38D81E120A7E00DAB016 /* DangNhap@3x.png */; };
+		A65FF1C91E13782C00A63C02 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65FF1C81E13782C00A63C02 /* NotificationViewController.swift */; };
 		A6D083C31E121A2E007EA4D9 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D083C21E121A2E007EA4D9 /* UserEntity.swift */; };
 		A6D083C61E12747D007EA4D9 /* QuestionTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D083C41E12747D007EA4D9 /* QuestionTagTableViewCell.swift */; };
 		A6D083C71E12747D007EA4D9 /* QuestionTagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6D083C51E12747D007EA4D9 /* QuestionTagTableViewCell.xib */; };
@@ -196,6 +199,8 @@
 		8B3A138F1E112129005DBC6E /* KeyWordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyWordTableViewCell.xib; sourceTree = "<group>"; };
 		8B7AB6BC1E1211E20015DFBE /* KeywordCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordCollectionViewCell.swift; sourceTree = "<group>"; };
 		8B7AB6BD1E1211E20015DFBE /* KeywordCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeywordCollectionViewCell.xib; sourceTree = "<group>"; };
+		A6005BCD1E13722B00095FB7 /* NotifyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyTableViewCell.swift; sourceTree = "<group>"; };
+		A6005BCE1E13722B00095FB7 /* NotifyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotifyTableViewCell.xib; sourceTree = "<group>"; };
 		A63C38CD1E120A7E00DAB016 /* DangKi1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DangKi1.png; sourceTree = "<group>"; };
 		A63C38CE1E120A7E00DAB016 /* DangKi1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DangKi1@2x.png"; sourceTree = "<group>"; };
 		A63C38CF1E120A7E00DAB016 /* DangKi1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DangKi1@3x.png"; sourceTree = "<group>"; };
@@ -208,6 +213,7 @@
 		A63C38D61E120A7E00DAB016 /* DangNhap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DangNhap.png; sourceTree = "<group>"; };
 		A63C38D71E120A7E00DAB016 /* DangNhap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DangNhap@2x.png"; sourceTree = "<group>"; };
 		A63C38D81E120A7E00DAB016 /* DangNhap@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DangNhap@3x.png"; sourceTree = "<group>"; };
+		A65FF1C81E13782C00A63C02 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		A6D083C21E121A2E007EA4D9 /* UserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 		A6D083C41E12747D007EA4D9 /* QuestionTagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTagTableViewCell.swift; sourceTree = "<group>"; };
 		A6D083C51E12747D007EA4D9 /* QuestionTagTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionTagTableViewCell.xib; sourceTree = "<group>"; };
@@ -479,6 +485,7 @@
 		8B3A138D1E111FA5005DBC6E /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				A6005BCC1E13721200095FB7 /* User Cell */,
 				8B3A138E1E112129005DBC6E /* KeyWordTableViewCell.swift */,
 				8B3A138F1E112129005DBC6E /* KeyWordTableViewCell.xib */,
 				A6D083C41E12747D007EA4D9 /* QuestionTagTableViewCell.swift */,
@@ -498,6 +505,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A6005BCC1E13721200095FB7 /* User Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A6005BCD1E13722B00095FB7 /* NotifyTableViewCell.swift */,
+				A6005BCE1E13722B00095FB7 /* NotifyTableViewCell.xib */,
+			);
+			path = "User Cell";
+			sourceTree = "<group>";
+		};
 		A6D083C11E121A1C007EA4D9 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -511,6 +527,7 @@
 		A6E4C2F61E11022B00C2C871 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				A65FF1C81E13782C00A63C02 /* NotificationViewController.swift */,
 				A6E4C2F71E1102A500C2C871 /* RegisterViewController.swift */,
 				A6E9D88E1E1110CF00E31886 /* LoginViewController.swift */,
 				A6E9D8901E11169600E31886 /* UpdateInfoViewController.swift */,
@@ -622,6 +639,7 @@
 				8B3A135D1E10F454005DBC6E /* photo-camera@2x.png in Resources */,
 				8B3A13651E10F454005DBC6E /* tag_mark.png in Resources */,
 				A63C38E01E120A7E00DAB016 /* DangKi3@2x.png in Resources */,
+				A6005BD01E13722B00095FB7 /* NotifyTableViewCell.xib in Resources */,
 				8B3A13601E10F454005DBC6E /* Splash@2x.png in Resources */,
 				8B3A13471E10F454005DBC6E /* caidat_button0.png in Resources */,
 				A63C38E21E120A7E00DAB016 /* DangNhap.png in Resources */,
@@ -715,6 +733,8 @@
 				A6D083C61E12747D007EA4D9 /* QuestionTagTableViewCell.swift in Sources */,
 				8B3A13771E10F454005DBC6E /* RAMBounceAnimation.swift in Sources */,
 				A6E9D8931E111F3100E31886 /* Until.swift in Sources */,
+				A65FF1C91E13782C00A63C02 /* NotificationViewController.swift in Sources */,
+				A6005BCF1E13722B00095FB7 /* NotifyTableViewCell.swift in Sources */,
 				8B3A137D1E10F454005DBC6E /* RAMBadge.swift in Sources */,
 				8B3A138A1E10FD58005DBC6E /* QuestionViewController.swift in Sources */,
 				8B3A13731E10F454005DBC6E /* TPKeyboardAvoidingCollectionView.m in Sources */,

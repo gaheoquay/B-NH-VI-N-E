@@ -85,11 +85,11 @@ extension String {
 }
 
 extension UIAlertController {
-    func showAlertWith(title: String, message: String, cancelBtnTitle: String){
+    func showAlertWith(vc: UIViewController, title: String, message: String, cancelBtnTitle: String){
         let alert = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         let actionOk = UIAlertAction.init(title: cancelBtnTitle, style: UIAlertActionStyle.default, handler: nil)
         alert.addAction(actionOk)
-        self.present(alert, animated: true, completion: nil)
+        vc.present(alert, animated: true, completion: nil)
     }
 }
 

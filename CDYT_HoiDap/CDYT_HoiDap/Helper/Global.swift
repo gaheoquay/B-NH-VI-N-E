@@ -15,6 +15,7 @@ let REGISTER_USER = BASE_URL + "/User/Register"
 let UPLOAD_IMAGE = BASE_URL + "/Image/UploadImage"
 let LOGIN_EMAIL_NICKNAME = BASE_URL + "/User/LoginWithEmailOrNickName"
 let UPDATE_PROFILE = BASE_URL + "/User/UpdateProfile"
+let FOLLOW_TAG = BASE_URL + "/User/FollowTag"
 
 let HOTEST_TAG = BASE_URL + "/Post/GetHotestTags"
 

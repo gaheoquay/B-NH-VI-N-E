@@ -153,11 +153,11 @@ class UpdateInfoViewController: UIViewController {
         
         let updateParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
-            "IdUser": userEntity.id,
+            "RequestedUserId": userEntity.id,
             "OldPassword": oldPass == "" ? "" : DataEncryption.getMD5(from: oldPass)!,
             "NewPassword": newPass == "" ? "" : DataEncryption.getMD5(from: newPass)!,
             "AvatarUrl": imageUrl,
-            "Thumbnail": thumbnailUrl,
+            "ThumbnailAvatarUrl": thumbnailUrl,
             "FullName": fullname!
         ]
         
@@ -177,12 +177,12 @@ class UpdateInfoViewController: UIViewController {
                         }
                     }
                 }else if status == 400 {
-                    UIAlertController().showAlertWith(title: "Thông báo", message: "Email hoặc tên đăng nhập đã tồn tại, vui lòng thử lại.", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Email hoặc tên đăng nhập đã tồn tại, vui lòng thử lại.", cancelBtnTitle: "Đóng")
                 }else{
-                    UIAlertController().showAlertWith(title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
             }else{
-                UIAlertController().showAlertWith(title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
             }
             Until.hideLoading()
         }

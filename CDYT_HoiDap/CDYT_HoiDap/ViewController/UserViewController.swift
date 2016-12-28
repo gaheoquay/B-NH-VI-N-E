@@ -10,10 +10,15 @@ import UIKit
 
 class UserViewController: UIViewController {
 
+    @IBOutlet weak var avaImg: UIImageView!
+    @IBOutlet weak var nicknameLbl: UILabel!
+    @IBOutlet weak var questionTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        avaImg.layer.cornerRadius = 10
+        self.navigationController?.isNavigationBarHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,15 +26,19 @@ class UserViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func notificationTapAction(_ sender: Any) {
+        let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NotificationViewController") as! NotificationViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
-    */
+
+    @IBAction func messageTapAction(_ sender: Any) {
+    }
+    
+    @IBAction func accountTapAction(_ sender: Any) {
+    }
+    
+    @IBAction func settingTapAction(_ sender: Any) {
+    }
 
 }
