@@ -12,7 +12,13 @@ class KeywordCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+      lbKeyword.layer.borderWidth = 0.5
+      lbKeyword.layer.borderColor = UIColor.init(netHex: 0x87baf0).cgColor
+      lbKeyword.layer.cornerRadius = lbKeyword.frame.height/2
         // Initialization code
     }
-
+  func setData(tagName:String){
+    lbKeyword.text = "  " + tagName + "  "
+  }
+  @IBOutlet weak var lbKeyword: UILabel!
 }
