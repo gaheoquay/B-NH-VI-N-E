@@ -84,8 +84,14 @@
 		8B3A13911E112129005DBC6E /* KeyWordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B3A138F1E112129005DBC6E /* KeyWordTableViewCell.xib */; };
 		8B7AB6BE1E1211E20015DFBE /* KeywordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7AB6BC1E1211E20015DFBE /* KeywordCollectionViewCell.swift */; };
 		8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B7AB6BD1E1211E20015DFBE /* KeywordCollectionViewCell.xib */; };
+
 		A6005BCF1E13722B00095FB7 /* NotifyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6005BCD1E13722B00095FB7 /* NotifyTableViewCell.swift */; };
 		A6005BD01E13722B00095FB7 /* NotifyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6005BCE1E13722B00095FB7 /* NotifyTableViewCell.xib */; };
+		8B87CD291E135C7A00DA8A33 /* QuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87CD271E135C7A00DA8A33 /* QuestionTableViewCell.swift */; };
+		8B87CD2A1E135C7A00DA8A33 /* QuestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B87CD281E135C7A00DA8A33 /* QuestionTableViewCell.xib */; };
+		8B87CD2C1E1365A400DA8A33 /* AuthorEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87CD2B1E1365A400DA8A33 /* AuthorEntity.swift */; };
+		8B87CD2E1E13665500DA8A33 /* PostEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87CD2D1E13665500DA8A33 /* PostEntity.swift */; };
+		8B87CD301E13681200DA8A33 /* FeedsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87CD2F1E13681200DA8A33 /* FeedsEntity.swift */; };
 		A63C38D91E120A7E00DAB016 /* DangKi1.png in Resources */ = {isa = PBXBuildFile; fileRef = A63C38CD1E120A7E00DAB016 /* DangKi1.png */; };
 		A63C38DA1E120A7E00DAB016 /* DangKi1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A63C38CE1E120A7E00DAB016 /* DangKi1@2x.png */; };
 		A63C38DB1E120A7E00DAB016 /* DangKi1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A63C38CF1E120A7E00DAB016 /* DangKi1@3x.png */; };
@@ -201,6 +207,11 @@
 		8B7AB6BD1E1211E20015DFBE /* KeywordCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeywordCollectionViewCell.xib; sourceTree = "<group>"; };
 		A6005BCD1E13722B00095FB7 /* NotifyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyTableViewCell.swift; sourceTree = "<group>"; };
 		A6005BCE1E13722B00095FB7 /* NotifyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotifyTableViewCell.xib; sourceTree = "<group>"; };
+		8B87CD271E135C7A00DA8A33 /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
+		8B87CD281E135C7A00DA8A33 /* QuestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionTableViewCell.xib; sourceTree = "<group>"; };
+		8B87CD2B1E1365A400DA8A33 /* AuthorEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorEntity.swift; sourceTree = "<group>"; };
+		8B87CD2D1E13665500DA8A33 /* PostEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostEntity.swift; sourceTree = "<group>"; };
+		8B87CD2F1E13681200DA8A33 /* FeedsEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedsEntity.swift; sourceTree = "<group>"; };
 		A63C38CD1E120A7E00DAB016 /* DangKi1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DangKi1.png; sourceTree = "<group>"; };
 		A63C38CE1E120A7E00DAB016 /* DangKi1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DangKi1@2x.png"; sourceTree = "<group>"; };
 		A63C38CF1E120A7E00DAB016 /* DangKi1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DangKi1@3x.png"; sourceTree = "<group>"; };
@@ -492,6 +503,8 @@
 				A6D083C51E12747D007EA4D9 /* QuestionTagTableViewCell.xib */,
 				8B7AB6BC1E1211E20015DFBE /* KeywordCollectionViewCell.swift */,
 				8B7AB6BD1E1211E20015DFBE /* KeywordCollectionViewCell.xib */,
+				8B87CD271E135C7A00DA8A33 /* QuestionTableViewCell.swift */,
+				8B87CD281E135C7A00DA8A33 /* QuestionTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -520,6 +533,9 @@
 				A6D083C21E121A2E007EA4D9 /* UserEntity.swift */,
 				A6D083C81E127F9F007EA4D9 /* TagEntity.swift */,
 				A6D083CA1E12803C007EA4D9 /* HotTagEntity.swift */,
+				8B87CD2B1E1365A400DA8A33 /* AuthorEntity.swift */,
+				8B87CD2D1E13665500DA8A33 /* PostEntity.swift */,
+				8B87CD2F1E13681200DA8A33 /* FeedsEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -651,6 +667,7 @@
 				A63C38D91E120A7E00DAB016 /* DangKi1.png in Resources */,
 				8B3A135A1E10F454005DBC6E /* Like1@2x.png in Resources */,
 				8B3A13541E10F454005DBC6E /* Grey_mark@2x.png in Resources */,
+				8B87CD2A1E135C7A00DA8A33 /* QuestionTableViewCell.xib in Resources */,
 				8B3A13661E10F454005DBC6E /* tag_mark@2x.png in Resources */,
 				8B3A13491E10F454005DBC6E /* caidat_button0@3x.png in Resources */,
 				A63C38DC1E120A7E00DAB016 /* DangKi2.png in Resources */,
@@ -723,8 +740,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B87CD2C1E1365A400DA8A33 /* AuthorEntity.swift in Sources */,
 				8B3A13701E10F454005DBC6E /* DataEncryption.m in Sources */,
 				8B3A13751E10F454005DBC6E /* TPKeyboardAvoidingTableView.m in Sources */,
+				8B87CD301E13681200DA8A33 /* FeedsEntity.swift in Sources */,
 				8B3A12E11E10F399005DBC6E /* ViewController.swift in Sources */,
 				A6D083C91E127F9F007EA4D9 /* TagEntity.swift in Sources */,
 				A6E4C2F81E1102A500C2C871 /* RegisterViewController.swift in Sources */,
@@ -732,6 +751,7 @@
 				8B3A13901E112129005DBC6E /* KeyWordTableViewCell.swift in Sources */,
 				A6D083C61E12747D007EA4D9 /* QuestionTagTableViewCell.swift in Sources */,
 				8B3A13771E10F454005DBC6E /* RAMBounceAnimation.swift in Sources */,
+				8B87CD291E135C7A00DA8A33 /* QuestionTableViewCell.swift in Sources */,
 				A6E9D8931E111F3100E31886 /* Until.swift in Sources */,
 				A65FF1C91E13782C00A63C02 /* NotificationViewController.swift in Sources */,
 				A6005BCF1E13722B00095FB7 /* NotifyTableViewCell.swift in Sources */,
@@ -757,6 +777,7 @@
 				8B3A136E1E10F454005DBC6E /* CAPSPageMenu.swift in Sources */,
 				8B3A13711E10F454005DBC6E /* NSData+Base64.m in Sources */,
 				8B3A137A1E10F454005DBC6E /* RAMRotationAnimation.swift in Sources */,
+				8B87CD2E1E13665500DA8A33 /* PostEntity.swift in Sources */,
 				8B3A137E1E10F454005DBC6E /* RAMItemAnimationProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -45,6 +45,20 @@ extension UIColor {
 }
 
 extension String {
+  func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
+    let constraintRect = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+    
+    let boundingBox = self.boundingRect(with: constraintRect, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+    
+    return boundingBox.height
+  }
+  func widthWithConstrainedHeight(height: CGFloat, font: UIFont) -> CGFloat {
+    let constraintRect = CGSize(width: CGFloat.greatestFiniteMagnitude, height: height)
+    
+    let boundingBox = self.boundingRect(with: constraintRect, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+    
+    return boundingBox.width
+  }
 
     func convertTimeStampWithDateFormat(timeStamp: Double, dateFormat: String) -> String{
         let date = Date(timeIntervalSince1970: timeStamp)
