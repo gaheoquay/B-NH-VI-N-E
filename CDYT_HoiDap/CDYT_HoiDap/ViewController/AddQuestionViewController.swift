@@ -10,26 +10,49 @@ import UIKit
 
 class AddQuestionViewController: UIViewController {
 
+    @IBOutlet weak var titleTxt: UITextField!
+    @IBOutlet weak var contentTxt: UITextView!
+    @IBOutlet weak var tagTxt: UITextView!
+    @IBOutlet weak var imgClv: UICollectionView!
+    @IBOutlet weak var imgClvheight: NSLayoutConstraint!
+    
+    @IBOutlet weak var titleTxtBorderView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        configUI()
     }
 
+    func configUI(){
+        titleTxtBorderView.layer.cornerRadius = 2
+        titleTxtBorderView.layer.borderWidth = 1
+        titleTxtBorderView.layer.borderColor = UIColor().hexStringToUIColor(hex: "D8D8D8").cgColor
+        
+        contentTxt.layer.cornerRadius = 2
+        contentTxt.layer.borderWidth = 1
+        contentTxt.layer.borderColor = UIColor().hexStringToUIColor(hex: "D8D8D8").cgColor
+        
+        tagTxt.layer.cornerRadius = 2
+        tagTxt.layer.borderWidth = 1
+        tagTxt.layer.borderColor = UIColor().hexStringToUIColor(hex: "D8D8D8").cgColor
+        
+        
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func backTapAction(_ sender: Any) {
     }
-    */
+
+    @IBAction func postTapAction(_ sender: Any) {
+    }
+    
+    @IBAction func addImageTapAction(_ sender: Any) {
+    
+    }
 
 }

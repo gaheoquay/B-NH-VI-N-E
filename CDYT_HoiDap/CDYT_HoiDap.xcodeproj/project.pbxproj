@@ -113,6 +113,8 @@
 		A6D083C71E12747D007EA4D9 /* QuestionTagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6D083C51E12747D007EA4D9 /* QuestionTagTableViewCell.xib */; };
 		A6D083C91E127F9F007EA4D9 /* TagEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D083C81E127F9F007EA4D9 /* TagEntity.swift */; };
 		A6D083CB1E12803C007EA4D9 /* HotTagEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D083CA1E12803C007EA4D9 /* HotTagEntity.swift */; };
+		A6E431F31E14A6510092EF85 /* AddImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E431F11E14A6510092EF85 /* AddImageCollectionViewCell.swift */; };
+		A6E431F41E14A6510092EF85 /* AddImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6E431F21E14A6510092EF85 /* AddImageCollectionViewCell.xib */; };
 		A6E4C2F81E1102A500C2C871 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E4C2F71E1102A500C2C871 /* RegisterViewController.swift */; };
 		A6E4C2FA1E1102BA00C2C871 /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6E4C2F91E1102BA00C2C871 /* User.storyboard */; };
 		A6E9D88F1E1110CF00E31886 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E9D88E1E1110CF00E31886 /* LoginViewController.swift */; };
@@ -237,6 +239,8 @@
 		A6D083C51E12747D007EA4D9 /* QuestionTagTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionTagTableViewCell.xib; sourceTree = "<group>"; };
 		A6D083C81E127F9F007EA4D9 /* TagEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagEntity.swift; sourceTree = "<group>"; };
 		A6D083CA1E12803C007EA4D9 /* HotTagEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotTagEntity.swift; sourceTree = "<group>"; };
+		A6E431F11E14A6510092EF85 /* AddImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		A6E431F21E14A6510092EF85 /* AddImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		A6E4C2F51E10FC9200C2C871 /* HoiDap_Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HoiDap_Header.h; sourceTree = "<group>"; };
 		A6E4C2F71E1102A500C2C871 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A6E4C2F91E1102BA00C2C871 /* User.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = User.storyboard; sourceTree = "<group>"; };
@@ -513,6 +517,8 @@
 				8B7AB6BD1E1211E20015DFBE /* KeywordCollectionViewCell.xib */,
 				8B87CD271E135C7A00DA8A33 /* QuestionTableViewCell.swift */,
 				8B87CD281E135C7A00DA8A33 /* QuestionTableViewCell.xib */,
+				A6E431F11E14A6510092EF85 /* AddImageCollectionViewCell.swift */,
+				A6E431F21E14A6510092EF85 /* AddImageCollectionViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -694,6 +700,7 @@
 				8B3A134F1E10F454005DBC6E /* DaHoi_Button0@3x.png in Resources */,
 				8B3A12E41E10F399005DBC6E /* Main.storyboard in Resources */,
 				8B3A13551E10F454005DBC6E /* Grey_mark@3x.png in Resources */,
+				A6E431F41E14A6510092EF85 /* AddImageCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,6 +771,7 @@
 				A6D083C61E12747D007EA4D9 /* QuestionTagTableViewCell.swift in Sources */,
 				8B3A13771E10F454005DBC6E /* RAMBounceAnimation.swift in Sources */,
 				8B87CD291E135C7A00DA8A33 /* QuestionTableViewCell.swift in Sources */,
+				A6E431F31E14A6510092EF85 /* AddImageCollectionViewCell.swift in Sources */,
 				A6E9D8931E111F3100E31886 /* Until.swift in Sources */,
 				A65FF1C91E13782C00A63C02 /* NotificationViewController.swift in Sources */,
 				A6005BCF1E13722B00095FB7 /* NotifyTableViewCell.swift in Sources */,
