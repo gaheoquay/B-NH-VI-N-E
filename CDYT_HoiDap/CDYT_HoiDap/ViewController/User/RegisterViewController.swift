@@ -55,7 +55,7 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable {
                 })
                 
             }else{
-                self.avatarImg.image = UIImage.init(named: "AvaDefaut")
+                self.avatarImg.image = UIImage.init(named: "AvaDefaut.png")
             }
         }
         

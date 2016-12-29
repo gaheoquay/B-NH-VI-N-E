@@ -86,6 +86,8 @@
 		A6417E231E13B68D00BD2D75 /* SettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6417E211E13B68D00BD2D75 /* SettingTableViewCell.xib */; };
 		A6417E251E13C78D00BD2D75 /* AddQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6417E241E13C78D00BD2D75 /* AddQuestionViewController.swift */; };
 		A65FF1C91E13782C00A63C02 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65FF1C81E13782C00A63C02 /* NotificationViewController.swift */; };
+		A68A94FC1E14CA240067736E /* DangKi_Right.png in Resources */ = {isa = PBXBuildFile; fileRef = A68A94FB1E14CA240067736E /* DangKi_Right.png */; };
+		A68A94FE1E14CA480067736E /* DangKi_Left.png in Resources */ = {isa = PBXBuildFile; fileRef = A68A94FD1E14CA480067736E /* DangKi_Left.png */; };
 		A6D083C31E121A2E007EA4D9 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D083C21E121A2E007EA4D9 /* UserEntity.swift */; };
 		A6D083C61E12747D007EA4D9 /* QuestionTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D083C41E12747D007EA4D9 /* QuestionTagTableViewCell.swift */; };
 		A6D083C71E12747D007EA4D9 /* QuestionTagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6D083C51E12747D007EA4D9 /* QuestionTagTableViewCell.xib */; };
@@ -190,6 +192,8 @@
 		A6417E211E13B68D00BD2D75 /* SettingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingTableViewCell.xib; sourceTree = "<group>"; };
 		A6417E241E13C78D00BD2D75 /* AddQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuestionViewController.swift; sourceTree = "<group>"; };
 		A65FF1C81E13782C00A63C02 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		A68A94FB1E14CA240067736E /* DangKi_Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DangKi_Right.png; sourceTree = "<group>"; };
+		A68A94FD1E14CA480067736E /* DangKi_Left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DangKi_Left.png; sourceTree = "<group>"; };
 		A6D083C21E121A2E007EA4D9 /* UserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 		A6D083C41E12747D007EA4D9 /* QuestionTagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTagTableViewCell.swift; sourceTree = "<group>"; };
 		A6D083C51E12747D007EA4D9 /* QuestionTagTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionTagTableViewCell.xib; sourceTree = "<group>"; };
@@ -267,6 +271,8 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A68A94FD1E14CA480067736E /* DangKi_Left.png */,
+				A68A94FB1E14CA240067736E /* DangKi_Right.png */,
 				8BF149591E14BF9C00766F8F /* Answer0.png */,
 				8BF1495A1E14BF9C00766F8F /* Answer1.png */,
 				8BF1495B1E14BF9C00766F8F /* Ask.png */,
@@ -580,6 +586,7 @@
 				8BF1497C1E14BF9C00766F8F /* TaiKhoan.png in Resources */,
 				8B3A13501E10F454005DBC6E /* Green_Mark.png in Resources */,
 				8BF149721E14BF9C00766F8F /* GiaiPhap_Mark_hide.png in Resources */,
+				A68A94FC1E14CA240067736E /* DangKi_Right.png in Resources */,
 				8B3A136B1E10F454005DBC6E /* Tinnhan_button01.png in Resources */,
 				8B3A135C1E10F454005DBC6E /* photo-camera.png in Resources */,
 				8B3A13561E10F454005DBC6E /* Like0.png in Resources */,
@@ -612,6 +619,7 @@
 				8BF149761E14BF9C00766F8F /* Profile0.png in Resources */,
 				8B3A12E61E10F399005DBC6E /* Assets.xcassets in Resources */,
 				8B3A12E41E10F399005DBC6E /* Main.storyboard in Resources */,
+				A68A94FE1E14CA480067736E /* DangKi_Left.png in Resources */,
 				A6E431F41E14A6510092EF85 /* AddImageCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

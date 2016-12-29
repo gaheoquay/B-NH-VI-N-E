@@ -37,8 +37,8 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
             userEntity = users.first!
         }
         
+        setupUserInfo()
         getFeeds()
-        
     }
     
     func setupUserInfo(){

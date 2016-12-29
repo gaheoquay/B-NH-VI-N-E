@@ -43,7 +43,7 @@ class UpdateInfoViewController: UIViewController {
         avaImg.clipsToBounds = true
         
         fullnameTxt.text = userEntity.fullname
-        avaImg.sd_setImage(with: URL.init(string: userEntity.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut"))
+        avaImg.sd_setImage(with: URL.init(string: userEntity.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
     }
     
     @IBAction func selectAvaImgAction(_ sender: Any) {
@@ -63,7 +63,7 @@ class UpdateInfoViewController: UIViewController {
                 })
                 
             }else{
-                self.avaImg.image = UIImage.init(named: "AvaDefaut")
+                self.avaImg.image = UIImage.init(named: "AvaDefaut.png")
             }
         }
         
