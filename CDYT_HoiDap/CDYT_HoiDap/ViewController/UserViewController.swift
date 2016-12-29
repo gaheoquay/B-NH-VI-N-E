@@ -53,7 +53,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
             "Auth": Until.getAuthKey(),
             "Page": page,
             "Size": 10,
-            "UserId": userID == "" ? "" : userEntity.id,
+            "UserId": userID == "" ? userEntity.id : userID,
             "RequestedUserId" : userEntity.id
         ]
         
