@@ -144,6 +144,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
     }
   }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
+        vc.feed = listFedds[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @IBAction func addQuestionTapAction(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddQuestionViewController") as! AddQuestionViewController
         self.navigationController?.pushViewController(vc, animated: true)

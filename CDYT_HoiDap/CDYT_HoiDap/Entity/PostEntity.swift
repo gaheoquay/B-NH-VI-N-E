@@ -14,7 +14,7 @@ class PostEntity: NSObject {
   var content = ""
   var imageUrls = [String]()
   var thumbnailImageUrls = [String]()
-  var status = 0
+  var status = 0 //0: Not resolve - 1 : Resolved
   var rating:Double = 0
   var updatedDate:Double = 0
   var createdDate:Double = 0
