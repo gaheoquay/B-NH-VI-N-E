@@ -8,7 +8,11 @@
 
 import UIKit
 
-class KeyWordTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDelegateLeftAlignedLayout {
+protocol KeyWordTableViewCellDelegate {
+  func gotoListQuestionByTag(indexpath:IndexPath)
+}
+
+class KeyWordTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDelegateLeftAlignedLayout,UICollectionViewDelegate {
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -33,7 +37,9 @@ class KeyWordTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollect
     cell.setData(tagName: listTag[indexPath.row].tag.id)
     return cell
   }
-  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    delegate?.gotoListQuestionByTag(indexpath: indexPath)
+  }
 // MARK: UICollectionViewDelegateLeftAlignedLayout
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     if listTag.count > 0 {
@@ -53,4 +59,5 @@ class KeyWordTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollect
   //MARK: Outlet
   @IBOutlet weak var clvKeyword: UICollectionView!
   var listTag = [HotTagEntity]()
+  var delegate : KeyWordTableViewCellDelegate?
 }

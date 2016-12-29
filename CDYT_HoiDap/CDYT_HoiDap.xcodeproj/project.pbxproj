@@ -54,27 +54,25 @@
 		8B3A13911E112129005DBC6E /* KeyWordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B3A138F1E112129005DBC6E /* KeyWordTableViewCell.xib */; };
 		8B7AB6BE1E1211E20015DFBE /* KeywordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7AB6BC1E1211E20015DFBE /* KeywordCollectionViewCell.swift */; };
 		8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B7AB6BD1E1211E20015DFBE /* KeywordCollectionViewCell.xib */; };
+		8B813CB31E15052E0043F7EF /* Home.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B813CB01E15052E0043F7EF /* Home.png */; };
+		8B813CB41E15052E0043F7EF /* Profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B813CB11E15052E0043F7EF /* Profile.png */; };
+		8B813CB51E15052E0043F7EF /* Tag.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B813CB21E15052E0043F7EF /* Tag.png */; };
+		8B813CB71E1510500043F7EF /* QuestionByTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B813CB61E1510500043F7EF /* QuestionByTagViewController.swift */; };
+		8B813CB91E1519150043F7EF /* SearchGrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B813CB81E1519150043F7EF /* SearchGrey.png */; };
 		8B87CD291E135C7A00DA8A33 /* QuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87CD271E135C7A00DA8A33 /* QuestionTableViewCell.swift */; };
 		8B87CD2A1E135C7A00DA8A33 /* QuestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B87CD281E135C7A00DA8A33 /* QuestionTableViewCell.xib */; };
 		8B87CD2C1E1365A400DA8A33 /* AuthorEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87CD2B1E1365A400DA8A33 /* AuthorEntity.swift */; };
 		8B87CD2E1E13665500DA8A33 /* PostEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87CD2D1E13665500DA8A33 /* PostEntity.swift */; };
 		8B87CD301E13681200DA8A33 /* FeedsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87CD2F1E13681200DA8A33 /* FeedsEntity.swift */; };
 		8BF1496C1E14BF9C00766F8F /* Answer0.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF149591E14BF9C00766F8F /* Answer0.png */; };
-		8BF1496D1E14BF9C00766F8F /* Answer1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1495A1E14BF9C00766F8F /* Answer1.png */; };
 		8BF1496E1E14BF9C00766F8F /* Ask.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1495B1E14BF9C00766F8F /* Ask.png */; };
 		8BF1496F1E14BF9C00766F8F /* CaiDat.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1495C1E14BF9C00766F8F /* CaiDat.png */; };
 		8BF149701E14BF9C00766F8F /* Camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1495D1E14BF9C00766F8F /* Camera.png */; };
 		8BF149711E14BF9C00766F8F /* DangNhap_BG.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1495E1E14BF9C00766F8F /* DangNhap_BG.png */; };
 		8BF149721E14BF9C00766F8F /* GiaiPhap_Mark_hide.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1495F1E14BF9C00766F8F /* GiaiPhap_Mark_hide.png */; };
 		8BF149731E14BF9C00766F8F /* GiaiPhap_Mark.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF149601E14BF9C00766F8F /* GiaiPhap_Mark.png */; };
-		8BF149741E14BF9C00766F8F /* Home0 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF149611E14BF9C00766F8F /* Home0 copy.png */; };
-		8BF149751E14BF9C00766F8F /* Home0.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF149621E14BF9C00766F8F /* Home0.png */; };
-		8BF149761E14BF9C00766F8F /* Profile0.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF149631E14BF9C00766F8F /* Profile0.png */; };
-		8BF149771E14BF9C00766F8F /* Profile1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF149641E14BF9C00766F8F /* Profile1.png */; };
 		8BF149781E14BF9C00766F8F /* Search_Inbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF149651E14BF9C00766F8F /* Search_Inbox.png */; };
 		8BF149791E14BF9C00766F8F /* Tab.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF149661E14BF9C00766F8F /* Tab.png */; };
-		8BF1497A1E14BF9C00766F8F /* Tag0.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF149671E14BF9C00766F8F /* Tag0.png */; };
-		8BF1497B1E14BF9C00766F8F /* Tag1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF149681E14BF9C00766F8F /* Tag1.png */; };
 		8BF1497C1E14BF9C00766F8F /* TaiKhoan.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF149691E14BF9C00766F8F /* TaiKhoan.png */; };
 		8BF1497D1E14BF9C00766F8F /* Thongbao.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1496A1E14BF9C00766F8F /* Thongbao.png */; };
 		8BF1497E1E14BF9C00766F8F /* TinNhan.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1496B1E14BF9C00766F8F /* TinNhan.png */; };
@@ -160,27 +158,25 @@
 		8B3A138F1E112129005DBC6E /* KeyWordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyWordTableViewCell.xib; sourceTree = "<group>"; };
 		8B7AB6BC1E1211E20015DFBE /* KeywordCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordCollectionViewCell.swift; sourceTree = "<group>"; };
 		8B7AB6BD1E1211E20015DFBE /* KeywordCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeywordCollectionViewCell.xib; sourceTree = "<group>"; };
+		8B813CB01E15052E0043F7EF /* Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home.png; sourceTree = "<group>"; };
+		8B813CB11E15052E0043F7EF /* Profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Profile.png; sourceTree = "<group>"; };
+		8B813CB21E15052E0043F7EF /* Tag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tag.png; sourceTree = "<group>"; };
+		8B813CB61E1510500043F7EF /* QuestionByTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionByTagViewController.swift; sourceTree = "<group>"; };
+		8B813CB81E1519150043F7EF /* SearchGrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchGrey.png; sourceTree = "<group>"; };
 		8B87CD271E135C7A00DA8A33 /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
 		8B87CD281E135C7A00DA8A33 /* QuestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionTableViewCell.xib; sourceTree = "<group>"; };
 		8B87CD2B1E1365A400DA8A33 /* AuthorEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorEntity.swift; sourceTree = "<group>"; };
 		8B87CD2D1E13665500DA8A33 /* PostEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostEntity.swift; sourceTree = "<group>"; };
 		8B87CD2F1E13681200DA8A33 /* FeedsEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedsEntity.swift; sourceTree = "<group>"; };
 		8BF149591E14BF9C00766F8F /* Answer0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Answer0.png; sourceTree = "<group>"; };
-		8BF1495A1E14BF9C00766F8F /* Answer1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Answer1.png; sourceTree = "<group>"; };
 		8BF1495B1E14BF9C00766F8F /* Ask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ask.png; sourceTree = "<group>"; };
 		8BF1495C1E14BF9C00766F8F /* CaiDat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CaiDat.png; sourceTree = "<group>"; };
 		8BF1495D1E14BF9C00766F8F /* Camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera.png; sourceTree = "<group>"; };
 		8BF1495E1E14BF9C00766F8F /* DangNhap_BG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DangNhap_BG.png; sourceTree = "<group>"; };
 		8BF1495F1E14BF9C00766F8F /* GiaiPhap_Mark_hide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GiaiPhap_Mark_hide.png; sourceTree = "<group>"; };
 		8BF149601E14BF9C00766F8F /* GiaiPhap_Mark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GiaiPhap_Mark.png; sourceTree = "<group>"; };
-		8BF149611E14BF9C00766F8F /* Home0 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Home0 copy.png"; sourceTree = "<group>"; };
-		8BF149621E14BF9C00766F8F /* Home0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home0.png; sourceTree = "<group>"; };
-		8BF149631E14BF9C00766F8F /* Profile0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Profile0.png; sourceTree = "<group>"; };
-		8BF149641E14BF9C00766F8F /* Profile1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Profile1.png; sourceTree = "<group>"; };
 		8BF149651E14BF9C00766F8F /* Search_Inbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Search_Inbox.png; sourceTree = "<group>"; };
 		8BF149661E14BF9C00766F8F /* Tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tab.png; sourceTree = "<group>"; };
-		8BF149671E14BF9C00766F8F /* Tag0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tag0.png; sourceTree = "<group>"; };
-		8BF149681E14BF9C00766F8F /* Tag1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tag1.png; sourceTree = "<group>"; };
 		8BF149691E14BF9C00766F8F /* TaiKhoan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TaiKhoan.png; sourceTree = "<group>"; };
 		8BF1496A1E14BF9C00766F8F /* Thongbao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thongbao.png; sourceTree = "<group>"; };
 		8BF1496B1E14BF9C00766F8F /* TinNhan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TinNhan.png; sourceTree = "<group>"; };
@@ -271,24 +267,21 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8B813CB81E1519150043F7EF /* SearchGrey.png */,
+				8B813CB01E15052E0043F7EF /* Home.png */,
+				8B813CB11E15052E0043F7EF /* Profile.png */,
+				8B813CB21E15052E0043F7EF /* Tag.png */,
 				A68A94FD1E14CA480067736E /* DangKi_Left.png */,
 				A68A94FB1E14CA240067736E /* DangKi_Right.png */,
 				8BF149591E14BF9C00766F8F /* Answer0.png */,
-				8BF1495A1E14BF9C00766F8F /* Answer1.png */,
 				8BF1495B1E14BF9C00766F8F /* Ask.png */,
 				8BF1495C1E14BF9C00766F8F /* CaiDat.png */,
 				8BF1495D1E14BF9C00766F8F /* Camera.png */,
 				8BF1495E1E14BF9C00766F8F /* DangNhap_BG.png */,
 				8BF1495F1E14BF9C00766F8F /* GiaiPhap_Mark_hide.png */,
 				8BF149601E14BF9C00766F8F /* GiaiPhap_Mark.png */,
-				8BF149611E14BF9C00766F8F /* Home0 copy.png */,
-				8BF149621E14BF9C00766F8F /* Home0.png */,
-				8BF149631E14BF9C00766F8F /* Profile0.png */,
-				8BF149641E14BF9C00766F8F /* Profile1.png */,
 				8BF149651E14BF9C00766F8F /* Search_Inbox.png */,
 				8BF149661E14BF9C00766F8F /* Tab.png */,
-				8BF149671E14BF9C00766F8F /* Tag0.png */,
-				8BF149681E14BF9C00766F8F /* Tag1.png */,
 				8BF149691E14BF9C00766F8F /* TaiKhoan.png */,
 				8BF1496A1E14BF9C00766F8F /* Thongbao.png */,
 				8BF1496B1E14BF9C00766F8F /* TinNhan.png */,
@@ -441,6 +434,7 @@
 				8B3A13871E10FD2A005DBC6E /* UserViewController.swift */,
 				8B3A13891E10FD58005DBC6E /* QuestionViewController.swift */,
 				A6417E241E13C78D00BD2D75 /* AddQuestionViewController.swift */,
+				8B813CB61E1510500043F7EF /* QuestionByTagViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -577,9 +571,7 @@
 				8B3A13911E112129005DBC6E /* KeyWordTableViewCell.xib in Resources */,
 				8B3A134A1E10F454005DBC6E /* copyright.png in Resources */,
 				8BF1496F1E14BF9C00766F8F /* CaiDat.png in Resources */,
-				8BF149751E14BF9C00766F8F /* Home0.png in Resources */,
 				8BF149731E14BF9C00766F8F /* GiaiPhap_Mark.png in Resources */,
-				8BF1497A1E14BF9C00766F8F /* Tag0.png in Resources */,
 				A6D083C71E12747D007EA4D9 /* QuestionTagTableViewCell.xib in Resources */,
 				8B3A134D1E10F454005DBC6E /* DaHoi_Button0.png in Resources */,
 				8BF149781E14BF9C00766F8F /* Search_Inbox.png in Resources */,
@@ -593,22 +585,22 @@
 				8BF1497D1E14BF9C00766F8F /* Thongbao.png in Resources */,
 				A6417E231E13B68D00BD2D75 /* SettingTableViewCell.xib in Resources */,
 				8B3A13441E10F454005DBC6E /* Back.png in Resources */,
-				8BF149741E14BF9C00766F8F /* Home0 copy.png in Resources */,
-				8BF149771E14BF9C00766F8F /* Profile1.png in Resources */,
+				8B813CB41E15052E0043F7EF /* Profile.png in Resources */,
 				8B3A13831E10F484005DBC6E /* Podfile in Resources */,
 				8B3A12E91E10F399005DBC6E /* LaunchScreen.storyboard in Resources */,
 				8B3A135F1E10F454005DBC6E /* Splash.png in Resources */,
 				8B3A13681E10F454005DBC6E /* Tinnhan_button01 Copy.png in Resources */,
-				8BF1497B1E14BF9C00766F8F /* Tag1.png in Resources */,
 				8B3A13411E10F454005DBC6E /* AvaDefaut.png in Resources */,
-				8BF1496D1E14BF9C00766F8F /* Answer1.png in Resources */,
 				8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */,
 				8B3A13651E10F454005DBC6E /* tag_mark.png in Resources */,
 				8BF149791E14BF9C00766F8F /* Tab.png in Resources */,
+				8B813CB31E15052E0043F7EF /* Home.png in Resources */,
 				A6005BD01E13722B00095FB7 /* NotifyTableViewCell.xib in Resources */,
 				8B3A13471E10F454005DBC6E /* caidat_button0.png in Resources */,
 				8BF1496C1E14BF9C00766F8F /* Answer0.png in Resources */,
 				A6E4C2FA1E1102BA00C2C871 /* User.storyboard in Resources */,
+				8B813CB51E15052E0043F7EF /* Tag.png in Resources */,
+				8B813CB91E1519150043F7EF /* SearchGrey.png in Resources */,
 				8BF149711E14BF9C00766F8F /* DangNhap_BG.png in Resources */,
 				8B3A13531E10F454005DBC6E /* Grey_mark.png in Resources */,
 				8B3A13591E10F454005DBC6E /* Like1.png in Resources */,
@@ -616,7 +608,6 @@
 				8B87CD2A1E135C7A00DA8A33 /* QuestionTableViewCell.xib in Resources */,
 				8B3A13621E10F454005DBC6E /* star1.png in Resources */,
 				A63C38DF1E120A7E00DAB016 /* DangKi3.png in Resources */,
-				8BF149761E14BF9C00766F8F /* Profile0.png in Resources */,
 				8B3A12E61E10F399005DBC6E /* Assets.xcassets in Resources */,
 				8B3A12E41E10F399005DBC6E /* Main.storyboard in Resources */,
 				A68A94FE1E14CA480067736E /* DangKi_Left.png in Resources */,
@@ -717,6 +708,7 @@
 				8B3A137B1E10F454005DBC6E /* RAMTransitionItemAnimations.swift in Sources */,
 				8B3A13741E10F454005DBC6E /* TPKeyboardAvoidingScrollView.m in Sources */,
 				8B3A136E1E10F454005DBC6E /* CAPSPageMenu.swift in Sources */,
+				8B813CB71E1510500043F7EF /* QuestionByTagViewController.swift in Sources */,
 				A6417E1F1E13B56C00BD2D75 /* SettingViewController.swift in Sources */,
 				8B3A13711E10F454005DBC6E /* NSData+Base64.m in Sources */,
 				8B3A137A1E10F454005DBC6E /* RAMRotationAnimation.swift in Sources */,

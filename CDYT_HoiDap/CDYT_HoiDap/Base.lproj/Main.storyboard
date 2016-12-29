@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,7 +27,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.72999999999999998" colorSpace="calibratedRGB"/>
                             </view>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hzb-dK-Pro">
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ask.png" translatesAutoresizingMaskIntoConstraints="NO" id="hzb-dK-Pro">
                                 <rect key="frame" x="315" y="37" width="43" height="43"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -41,7 +41,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cna-vZ-RgD">
                                 <rect key="frame" x="8" y="37" width="295" height="46"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ze9-qW-ULo">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SearchGrey.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ze9-qW-ULo">
                                         <rect key="frame" x="8" y="8" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Ze9-qW-ULo" secondAttribute="height" id="W7O-Is-Gp6"/>
@@ -100,7 +100,12 @@
                             <constraint firstAttribute="trailing" secondItem="w2Q-QV-C5Z" secondAttribute="trailing" id="zhh-o8-nxR"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="caidat_button0.png" id="chO-Wp-2Jh" customClass="RAMAnimatedTabBarItem" customModule="CDYT_HoiDap" customModuleProvider="target">
+                    <tabBarItem key="tabBarItem" title="" image="Home.png" id="chO-Wp-2Jh" customClass="RAMAnimatedTabBarItem" customModule="CDYT_HoiDap" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="yOffSet">
+                                <real key="value" value="-5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                         <connections>
                             <outlet property="animation" destination="Md1-fB-bMK" id="0dy-kO-zzm"/>
                         </connections>
@@ -111,7 +116,7 @@
                         <outlet property="tbQuestion" destination="w2Q-QV-C5Z" id="EU1-V7-Wab"/>
                     </connections>
                 </viewController>
-                <customObject id="Md1-fB-bMK" customClass="RAMFumeAnimation" customModule="CDYT_HoiDap" customModuleProvider="target">
+                <customObject id="Md1-fB-bMK" customClass="RAMBounceAnimation" customModule="CDYT_HoiDap" customModuleProvider="target">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="duration">
                             <real key="value" value="0.40000000000000002"/>
@@ -459,7 +464,12 @@
                             <constraint firstItem="l22-uZ-eOz" firstAttribute="top" secondItem="abO-BK-s6b" secondAttribute="bottom" id="lgw-xk-R30"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="caidat_button0.png" id="GuU-Jm-5zW" customClass="RAMAnimatedTabBarItem" customModule="CDYT_HoiDap" customModuleProvider="target">
+                    <tabBarItem key="tabBarItem" title="" image="Answer0.png" id="GuU-Jm-5zW" customClass="RAMAnimatedTabBarItem" customModule="CDYT_HoiDap" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="yOffSet">
+                                <real key="value" value="-8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                         <connections>
                             <outlet property="animation" destination="ofi-4V-rGC" id="fE1-jI-A62"/>
                         </connections>
@@ -469,7 +479,7 @@
                         <outlet property="tbQuestion" destination="abO-BK-s6b" id="1l0-wI-fhs"/>
                     </connections>
                 </viewController>
-                <customObject id="ofi-4V-rGC" customClass="RAMFumeAnimation" customModule="CDYT_HoiDap" customModuleProvider="target">
+                <customObject id="ofi-4V-rGC" customClass="RAMBounceAnimation" customModule="CDYT_HoiDap" customModuleProvider="target">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="duration">
                             <real key="value" value="0.40000000000000002"/>
@@ -480,10 +490,10 @@
             </objects>
             <point key="canvasLocation" x="216.80000000000001" y="688.60569715142435"/>
         </scene>
-        <!--View Controller-->
+        <!--Question By Tag View Controller-->
         <scene sceneID="MM9-fE-yE4">
             <objects>
-                <viewController id="XSg-nc-tYD" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QuestionByTagViewController" id="XSg-nc-tYD" customClass="QuestionByTagViewController" customModule="CDYT_HoiDap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Nkn-f5-TpL"/>
                         <viewControllerLayoutGuide type="bottom" id="lnu-I8-UDX"/>
@@ -491,8 +501,80 @@
                     <view key="view" contentMode="scaleToFill" id="2g2-QQ-pnE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cpg-NQ-FJi">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Từ khoá phổ biến" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9NR-xv-g18">
+                                        <rect key="frame" x="120.5" y="13" width="133.5" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <color key="textColor" red="0.3803921569" green="0.6705882353" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMi-4d-YGo">
+                                        <rect key="frame" x="0.0" y="43" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="ppi-NX-des"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKD-sf-9ZR">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                        <state key="normal" title=" " image="Back.png"/>
+                                        <connections>
+                                            <action selector="actionBack:" destination="XSg-nc-tYD" eventType="touchUpInside" id="rVh-re-rhY"/>
+                                            <action selector="backTapAction:" destination="hfO-oq-tkM" eventType="touchUpInside" id="rIp-w6-B9f"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="9NR-xv-g18" firstAttribute="centerX" secondItem="cpg-NQ-FJi" secondAttribute="centerX" id="4Dd-XP-lPN"/>
+                                    <constraint firstItem="9NR-xv-g18" firstAttribute="centerY" secondItem="cpg-NQ-FJi" secondAttribute="centerY" id="AuE-nP-qdW"/>
+                                    <constraint firstItem="vKD-sf-9ZR" firstAttribute="leading" secondItem="cpg-NQ-FJi" secondAttribute="leading" id="PuN-en-Moh"/>
+                                    <constraint firstItem="SMi-4d-YGo" firstAttribute="leading" secondItem="cpg-NQ-FJi" secondAttribute="leading" id="RmB-WI-UZ7"/>
+                                    <constraint firstAttribute="trailing" secondItem="SMi-4d-YGo" secondAttribute="trailing" id="VJ8-Mi-rfK"/>
+                                    <constraint firstAttribute="height" constant="44" id="bc6-os-FHJ"/>
+                                    <constraint firstItem="vKD-sf-9ZR" firstAttribute="width" secondItem="vKD-sf-9ZR" secondAttribute="height" multiplier="1/1" id="l6V-yy-zUh"/>
+                                    <constraint firstAttribute="bottom" secondItem="vKD-sf-9ZR" secondAttribute="bottom" id="mT8-hk-Vb0"/>
+                                    <constraint firstAttribute="bottom" secondItem="SMi-4d-YGo" secondAttribute="bottom" id="sbl-k7-4zw"/>
+                                    <constraint firstItem="vKD-sf-9ZR" firstAttribute="top" secondItem="cpg-NQ-FJi" secondAttribute="top" id="wkh-Fq-tNd"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lw9-mk-gQd">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8nW-Cz-cpm">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="VYU-Yt-wwU"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="cpg-NQ-FJi" firstAttribute="leading" secondItem="2g2-QQ-pnE" secondAttribute="leading" id="17D-w2-CL8"/>
+                            <constraint firstItem="lw9-mk-gQd" firstAttribute="top" secondItem="cpg-NQ-FJi" secondAttribute="bottom" id="8L8-cY-g4R"/>
+                            <constraint firstItem="8nW-Cz-cpm" firstAttribute="top" secondItem="2g2-QQ-pnE" secondAttribute="top" id="QqF-7N-fwx"/>
+                            <constraint firstItem="lw9-mk-gQd" firstAttribute="leading" secondItem="2g2-QQ-pnE" secondAttribute="leading" id="RCP-fl-6ZZ"/>
+                            <constraint firstAttribute="trailing" secondItem="lw9-mk-gQd" secondAttribute="trailing" id="Wqd-fa-f4s"/>
+                            <constraint firstAttribute="trailing" secondItem="8nW-Cz-cpm" secondAttribute="trailing" id="WyI-yf-Wgn"/>
+                            <constraint firstAttribute="trailing" secondItem="cpg-NQ-FJi" secondAttribute="trailing" id="Zti-z3-5gR"/>
+                            <constraint firstItem="8nW-Cz-cpm" firstAttribute="leading" secondItem="2g2-QQ-pnE" secondAttribute="leading" id="eAO-kE-rOe"/>
+                            <constraint firstItem="lnu-I8-UDX" firstAttribute="top" secondItem="lw9-mk-gQd" secondAttribute="bottom" id="q2S-3x-Ghk"/>
+                            <constraint firstItem="cpg-NQ-FJi" firstAttribute="top" secondItem="Nkn-f5-TpL" secondAttribute="bottom" id="zUC-wV-IDi"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="lbTitle" destination="9NR-xv-g18" id="qTQ-lA-tZz"/>
+                        <outlet property="tbQuestion" destination="lw9-mk-gQd" id="Yrt-Ap-kfB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rOS-wG-0LO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -566,13 +648,10 @@
                             <constraint firstItem="7kN-wK-4LY" firstAttribute="top" secondItem="624-GY-UJi" secondAttribute="bottom" id="wPg-r4-I9q"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="caidat_button0.png" id="RMT-vK-9hJ" customClass="RAMAnimatedTabBarItem" customModule="CDYT_HoiDap" customModuleProvider="target">
+                    <tabBarItem key="tabBarItem" title="" image="Tag.png" id="RMT-vK-9hJ" customClass="RAMAnimatedTabBarItem" customModule="CDYT_HoiDap" customModuleProvider="target">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="yOffSet">
-                                <real key="value" value="0.0"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
-                                <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <real key="value" value="-5"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
@@ -584,7 +663,7 @@
                         <outlet property="tagTableView" destination="3Fn-tS-CcD" id="RtL-7O-KZI"/>
                     </connections>
                 </viewController>
-                <customObject id="wd5-Bp-meg" customClass="RAMFumeAnimation" customModule="CDYT_HoiDap" customModuleProvider="target">
+                <customObject id="wd5-Bp-meg" customClass="RAMBounceAnimation" customModule="CDYT_HoiDap" customModuleProvider="target">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="duration">
                             <real key="value" value="0.40000000000000002"/>
@@ -814,7 +893,12 @@
                             <constraint firstItem="LTl-aA-3Pz" firstAttribute="leading" secondItem="TRb-Az-Gre" secondAttribute="leading" id="znO-fJ-Lg8"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="caidat_button0.png" id="WFz-eA-Uk9" customClass="RAMAnimatedTabBarItem" customModule="CDYT_HoiDap" customModuleProvider="target">
+                    <tabBarItem key="tabBarItem" title="" image="Profile.png" id="WFz-eA-Uk9" customClass="RAMAnimatedTabBarItem" customModule="CDYT_HoiDap" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="yOffSet">
+                                <real key="value" value="-5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                         <connections>
                             <outlet property="animation" destination="k4E-hX-S4l" id="5x1-ET-4aT"/>
                         </connections>
@@ -826,7 +910,7 @@
                         <outlet property="questionTableView" destination="LTl-aA-3Pz" id="p3U-Ae-cYp"/>
                     </connections>
                 </viewController>
-                <customObject id="k4E-hX-S4l" customClass="RAMFumeAnimation" customModule="CDYT_HoiDap" customModuleProvider="target">
+                <customObject id="k4E-hX-S4l" customClass="RAMBounceAnimation" customModule="CDYT_HoiDap" customModuleProvider="target">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="duration">
                             <real key="value" value="0.40000000000000002"/>
@@ -899,13 +983,18 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Answer0.png" width="30" height="30"/>
+        <image name="Ask.png" width="100" height="100"/>
         <image name="AvaDefaut.png" width="294" height="294"/>
         <image name="Back.png" width="100" height="100"/>
         <image name="CaiDat.png" width="100" height="100"/>
         <image name="Camera.png" width="100" height="100"/>
+        <image name="Home.png" width="30" height="29"/>
+        <image name="Profile.png" width="30" height="29"/>
+        <image name="SearchGrey.png" width="100" height="100"/>
+        <image name="Tag.png" width="30" height="29"/>
         <image name="TaiKhoan.png" width="100" height="100"/>
         <image name="Thongbao.png" width="100" height="100"/>
         <image name="TinNhan.png" width="100" height="100"/>
-        <image name="caidat_button0.png" width="60" height="60"/>
     </resources>
 </document>

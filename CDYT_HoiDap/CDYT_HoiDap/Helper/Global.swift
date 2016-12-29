@@ -25,7 +25,7 @@ let GET_QUESTION_BY_ID = BASE_URL + "/Post/GetQuestionCreatedByUserId"
 let GET_UNANSWER = BASE_URL + "/Post/GetUnansweredList"
 let GET_QUESTION = BASE_URL + "/Post/GetQuestionByTag"
 let POST_QUESTION = BASE_URL + "/Post/Insert"
-
+let GET_QUESTION_BY_TAG = BASE_URL + "/Post/GetQuestionByTag"
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
 let NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"

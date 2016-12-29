@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,KeyWordTableViewCellDelegate {
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -35,6 +35,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     tbQuestion.register(UINib.init(nibName: "KeyWordTableViewCell", bundle: nil), forCellReuseIdentifier: "KeyWordTableViewCell")
     tbQuestion.register(UINib.init(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
 
+  }
+//  MARK: KeyWordTableViewCellDelegate
+  func gotoListQuestionByTag(indexpath: IndexPath) {
+    let entity = listHotTag[indexpath.row]
+    let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
+    viewController.hotTagEntity = entity
+    self.navigationController?.pushViewController(viewController, animated: true)
   }
 //  MARK: request server
   func getHotTagFromServer(){
@@ -134,6 +141,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     if indexPath.section == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "KeyWordTableViewCell") as! KeyWordTableViewCell
       cell.listTag = listHotTag
+      cell.delegate = self
       cell.clvKeyword.reloadData()
       return cell
     }else{

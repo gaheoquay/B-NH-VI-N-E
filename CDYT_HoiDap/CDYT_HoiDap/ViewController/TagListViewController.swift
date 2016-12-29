@@ -41,7 +41,14 @@ class TagListViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
-    
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let entity = listHotTag[indexPath.row]
+    let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
+    viewController.hotTagEntity = entity
+    self.navigationController?.pushViewController(viewController, animated: true)
+  }
+  
     func getHotTagFromServer(){
         let realm = try! Realm()
         let users = realm.objects(UserEntity.self)
@@ -89,14 +96,6 @@ class TagListViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+  
 
 }
