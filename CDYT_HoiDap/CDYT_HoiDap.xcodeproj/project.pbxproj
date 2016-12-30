@@ -84,6 +84,10 @@
 		A6417E231E13B68D00BD2D75 /* SettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6417E211E13B68D00BD2D75 /* SettingTableViewCell.xib */; };
 		A6417E251E13C78D00BD2D75 /* AddQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6417E241E13C78D00BD2D75 /* AddQuestionViewController.swift */; };
 		A65FF1C91E13782C00A63C02 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65FF1C81E13782C00A63C02 /* NotificationViewController.swift */; };
+		A67311CF1E1601DB00BCE308 /* comment_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A67311CE1E1601DB00BCE308 /* comment_icon.png */; };
+		A67311D11E160F3400BCE308 /* placeholder_wide.png in Resources */ = {isa = PBXBuildFile; fileRef = A67311D01E160F3400BCE308 /* placeholder_wide.png */; };
+		A67311D41E164FC400BCE308 /* MoreCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67311D21E164FC400BCE308 /* MoreCommentTableViewCell.swift */; };
+		A67311D51E164FC400BCE308 /* MoreCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A67311D31E164FC400BCE308 /* MoreCommentTableViewCell.xib */; };
 		A68A94FC1E14CA240067736E /* DangKi_Right.png in Resources */ = {isa = PBXBuildFile; fileRef = A68A94FB1E14CA240067736E /* DangKi_Right.png */; };
 		A68A94FE1E14CA480067736E /* DangKi_Left.png in Resources */ = {isa = PBXBuildFile; fileRef = A68A94FD1E14CA480067736E /* DangKi_Left.png */; };
 		A68A95001E14EB540067736E /* QuestionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A94FF1E14EB540067736E /* QuestionDetailViewController.swift */; };
@@ -91,7 +95,6 @@
 		A68A95051E14ECFB0067736E /* DetailQuestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68A95031E14ECFB0067736E /* DetailQuestionTableViewCell.xib */; };
 		A68A95081E14ED1C0067736E /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A95061E14ED1C0067736E /* CommentTableViewCell.swift */; };
 		A68A95091E14ED1C0067736E /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A68A95071E14ED1C0067736E /* CommentTableViewCell.xib */; };
-		A68A950B1E1505170067736E /* Clover0 copy.png in Resources */ = {isa = PBXBuildFile; fileRef = A68A950A1E1505170067736E /* Clover0 copy.png */; };
 		A68A950E1E150CF80067736E /* Clover0.png in Resources */ = {isa = PBXBuildFile; fileRef = A68A950C1E150CF80067736E /* Clover0.png */; };
 		A68A950F1E150CF80067736E /* Clover1.png in Resources */ = {isa = PBXBuildFile; fileRef = A68A950D1E150CF80067736E /* Clover1.png */; };
 		A68A95111E1517230067736E /* CommentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A95101E1517230067736E /* CommentEntity.swift */; };
@@ -199,6 +202,10 @@
 		A6417E211E13B68D00BD2D75 /* SettingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingTableViewCell.xib; sourceTree = "<group>"; };
 		A6417E241E13C78D00BD2D75 /* AddQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuestionViewController.swift; sourceTree = "<group>"; };
 		A65FF1C81E13782C00A63C02 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		A67311CE1E1601DB00BCE308 /* comment_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment_icon.png; sourceTree = "<group>"; };
+		A67311D01E160F3400BCE308 /* placeholder_wide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder_wide.png; sourceTree = "<group>"; };
+		A67311D21E164FC400BCE308 /* MoreCommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreCommentTableViewCell.swift; sourceTree = "<group>"; };
+		A67311D31E164FC400BCE308 /* MoreCommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreCommentTableViewCell.xib; sourceTree = "<group>"; };
 		A68A94FB1E14CA240067736E /* DangKi_Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DangKi_Right.png; sourceTree = "<group>"; };
 		A68A94FD1E14CA480067736E /* DangKi_Left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DangKi_Left.png; sourceTree = "<group>"; };
 		A68A94FF1E14EB540067736E /* QuestionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionDetailViewController.swift; sourceTree = "<group>"; };
@@ -206,7 +213,6 @@
 		A68A95031E14ECFB0067736E /* DetailQuestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailQuestionTableViewCell.xib; sourceTree = "<group>"; };
 		A68A95061E14ED1C0067736E /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		A68A95071E14ED1C0067736E /* CommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
-		A68A950A1E1505170067736E /* Clover0 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Clover0 copy.png"; sourceTree = "<group>"; };
 		A68A950C1E150CF80067736E /* Clover0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Clover0.png; sourceTree = "<group>"; };
 		A68A950D1E150CF80067736E /* Clover1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Clover1.png; sourceTree = "<group>"; };
 		A68A95101E1517230067736E /* CommentEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentEntity.swift; sourceTree = "<group>"; };
@@ -289,9 +295,10 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A67311D01E160F3400BCE308 /* placeholder_wide.png */,
+				A67311CE1E1601DB00BCE308 /* comment_icon.png */,
 				A68A950C1E150CF80067736E /* Clover0.png */,
 				A68A950D1E150CF80067736E /* Clover1.png */,
-				A68A950A1E1505170067736E /* Clover0 copy.png */,
 				8B813CB81E1519150043F7EF /* SearchGrey.png */,
 				8B813CB01E15052E0043F7EF /* Home.png */,
 				8B813CB11E15052E0043F7EF /* Profile.png */,
@@ -511,6 +518,8 @@
 				A68A95031E14ECFB0067736E /* DetailQuestionTableViewCell.xib */,
 				A68A95061E14ED1C0067736E /* CommentTableViewCell.swift */,
 				A68A95071E14ED1C0067736E /* CommentTableViewCell.xib */,
+				A67311D21E164FC400BCE308 /* MoreCommentTableViewCell.swift */,
+				A67311D31E164FC400BCE308 /* MoreCommentTableViewCell.xib */,
 			);
 			path = "Question Cell";
 			sourceTree = "<group>";
@@ -625,8 +634,10 @@
 				8B3A135C1E10F454005DBC6E /* photo-camera.png in Resources */,
 				8B3A13561E10F454005DBC6E /* Like0.png in Resources */,
 				A68A950E1E150CF80067736E /* Clover0.png in Resources */,
+				A67311D11E160F3400BCE308 /* placeholder_wide.png in Resources */,
 				8BF1497D1E14BF9C00766F8F /* Thongbao.png in Resources */,
 				A6417E231E13B68D00BD2D75 /* SettingTableViewCell.xib in Resources */,
+				A67311D51E164FC400BCE308 /* MoreCommentTableViewCell.xib in Resources */,
 				8B3A13441E10F454005DBC6E /* Back.png in Resources */,
 				8B813CB41E15052E0043F7EF /* Profile.png in Resources */,
 				8B3A13831E10F484005DBC6E /* Podfile in Resources */,
@@ -634,7 +645,6 @@
 				8B3A135F1E10F454005DBC6E /* Splash.png in Resources */,
 				8B3A13681E10F454005DBC6E /* Tinnhan_button01 Copy.png in Resources */,
 				A68A95091E14ED1C0067736E /* CommentTableViewCell.xib in Resources */,
-				8BF1497B1E14BF9C00766F8F /* Tag1.png in Resources */,
 				8B3A13411E10F454005DBC6E /* AvaDefaut.png in Resources */,
 				8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */,
 				8B3A13651E10F454005DBC6E /* tag_mark.png in Resources */,
@@ -651,11 +661,11 @@
 				8B3A13591E10F454005DBC6E /* Like1.png in Resources */,
 				8BF1497E1E14BF9C00766F8F /* TinNhan.png in Resources */,
 				8B87CD2A1E135C7A00DA8A33 /* QuestionTableViewCell.xib in Resources */,
+				A67311CF1E1601DB00BCE308 /* comment_icon.png in Resources */,
 				8B3A13621E10F454005DBC6E /* star1.png in Resources */,
 				A63C38DF1E120A7E00DAB016 /* DangKi3.png in Resources */,
 				8B3A12E61E10F399005DBC6E /* Assets.xcassets in Resources */,
 				8B3A12E41E10F399005DBC6E /* Main.storyboard in Resources */,
-				A68A950B1E1505170067736E /* Clover0 copy.png in Resources */,
 				A68A94FE1E14CA480067736E /* DangKi_Left.png in Resources */,
 				A68A950F1E150CF80067736E /* Clover1.png in Resources */,
 				A6E431F41E14A6510092EF85 /* AddImageCollectionViewCell.xib in Resources */,
@@ -767,6 +777,7 @@
 				8B3A137A1E10F454005DBC6E /* RAMRotationAnimation.swift in Sources */,
 				8B87CD2E1E13665500DA8A33 /* PostEntity.swift in Sources */,
 				8B3A137E1E10F454005DBC6E /* RAMItemAnimationProtocol.swift in Sources */,
+				A67311D41E164FC400BCE308 /* MoreCommentTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

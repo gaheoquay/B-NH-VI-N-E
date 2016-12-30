@@ -101,6 +101,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
       "Size": 10,
       "RequestedUserId" : requestedUserId
     ]
+    print(JSON.init(hotParam))
     Until.showLoading()
     Alamofire.request(GET_FEEDS, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {

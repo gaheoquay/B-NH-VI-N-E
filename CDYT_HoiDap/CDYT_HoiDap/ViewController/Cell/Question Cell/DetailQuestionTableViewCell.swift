@@ -32,7 +32,7 @@ class DetailQuestionTableViewCell: UITableViewCell {
     var feed = FeedsEntity()
     override func awakeFromNib() {
         super.awakeFromNib()
-        avaImg.layer.cornerRadius = 5
+        avaImg.layer.cornerRadius = 8
         
     }
 
