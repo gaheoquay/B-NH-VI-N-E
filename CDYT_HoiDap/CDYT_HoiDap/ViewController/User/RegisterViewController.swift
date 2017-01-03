@@ -167,6 +167,7 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable {
                         
                         try! reaml.write {
                             reaml.add(entity, update: true)
+                          _ = self.navigationController?.popToRootViewController(animated: true)
                         }
                     }
                 }else if status == 400 {
@@ -210,6 +211,9 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable {
             return ""
         }
     }
+  @IBAction func actionBack(_ sender: Any) {
+    _ = self.navigationController?.popViewController(animated: true)
+  }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -90,6 +90,7 @@ class LoginViewController: UIViewController {
                         
                         try! reaml.write {
                             reaml.add(entity, update: true)
+                          _ = self.navigationController?.popToRootViewController(animated: true)
                         }
                     }
                 }else if status == 400 {
@@ -104,16 +105,19 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func forgotPassBtnAction(_ sender: Any) {
-        
+    @IBAction func forgotPassBtnAction(_ sender: Any) {        
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "UpdateInfoViewController") as! UpdateInfoViewController
         self.navigationController?.pushViewController(viewController, animated: true)
-
     }
 
     @IBAction func registerBtnAction(_ sender: Any) {
+      let viewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterViewController") as! RegisterViewController
+      self.navigationController?.pushViewController(viewController, animated: true)
     }
-    
+  @IBAction func actionBack(_ sender: Any) {
+    _ = self.navigationController?.popViewController(animated: true)
+  }
+  
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
