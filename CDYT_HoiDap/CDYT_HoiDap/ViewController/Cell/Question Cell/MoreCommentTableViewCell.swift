@@ -7,34 +7,41 @@
 //
 
 import UIKit
-
+protocol MoreCommentTableViewCellDelegate {
+    func showMoreSubcomment()
+}
 class MoreCommentTableViewCell: UITableViewCell {
 
     @IBOutlet weak var avaImg: UIImageView!
     @IBOutlet weak var nameLbl: UILabel!
-    @IBOutlet weak var countCommentLbl: UILabel!
     
+    var delegate : MoreCommentTableViewCellDelegate?
     var commentEntity = MainCommentEntity()
+    lazy var indexPath = IndexPath()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         avaImg.layer.cornerRadius = 8
+        self.contentView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(tapMoreAction)))
+        
     }
 
     func setData(){
-        let fontName = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor().hexStringToUIColor(hex: "4A4A4A")]
+        avaImg.sd_setImage(with: URL.init(string: commentEntity.subComment[0].author.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
+        let fontName = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor().hexStringToUIColor(hex: "4A4A4A")]
         let fontAnswer = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor.lightGray]
+        let fontCount = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor().hexStringToUIColor(hex: "61abfa")]
         
         let myAttrString = NSMutableAttributedString(string: commentEntity.subComment[0].author.nickname, attributes: fontName)
-        myAttrString.append(NSAttributedString(string: "đã trả lời", attributes: fontAnswer))
+        myAttrString.append(NSAttributedString(string: " đã trả lời ", attributes: fontAnswer))
+        myAttrString.append(NSAttributedString.init(string: "+\(commentEntity.subComment.count)", attributes: fontCount))
         nameLbl.attributedText = myAttrString
-        
-        countCommentLbl.text = "\(commentEntity.subComment.count)"
         
     }
     
-    @IBAction func tapMoreAction(_ sender: Any) {
-        print("tap more comment")
+    func tapMoreAction(){
+        commentEntity.isShowMore = true
+        delegate?.showMoreSubcomment()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

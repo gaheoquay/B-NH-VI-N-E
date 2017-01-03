@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailQuestionTableViewCell" rowHeight="430" id="KGk-i7-Jjw" customClass="DetailQuestionTableViewCell" customModule="CDYT_HoiDap" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DetailQuestionTableViewCell" rowHeight="430" id="KGk-i7-Jjw" customClass="DetailQuestionTableViewCell" customModule="CDYT_HoiDap" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="429"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -65,13 +65,13 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTd-mL-IOi">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTd-mL-IOi">
                         <rect key="frame" x="18" y="100.5" width="287" height="33.5"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                         <color key="textColor" red="0.0039215686274509803" green="0.65490196078431373" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DtO-gO-DLQ">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DtO-gO-DLQ">
                         <rect key="frame" x="18" y="136" width="287" height="67"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
@@ -83,11 +83,11 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="170" id="BcW-97-9DT"/>
                         </constraints>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jUy-Te-rMb">
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jUy-Te-rMb">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clover0.png" translatesAutoresizingMaskIntoConstraints="NO" id="ckb-qA-9Jp">
@@ -159,7 +159,6 @@
                     <constraint firstAttribute="trailing" secondItem="4V0-3O-8Ol" secondAttribute="trailing" constant="15" id="ob3-ie-TLe"/>
                     <constraint firstItem="1oc-Gv-Zec" firstAttribute="leading" secondItem="opY-r5-iuo" secondAttribute="trailing" constant="10" id="opC-hB-tFn"/>
                     <constraint firstItem="9xc-21-s5n" firstAttribute="leading" secondItem="kmw-qG-l8e" secondAttribute="leading" id="pfK-Xt-T1A"/>
-                    <constraint firstItem="bTd-mL-IOi" firstAttribute="top" secondItem="4V0-3O-8Ol" secondAttribute="bottom" constant="7" id="q6U-6H-bTg"/>
                     <constraint firstItem="7I1-xM-uzv" firstAttribute="leading" secondItem="YVg-xa-T6b" secondAttribute="trailing" constant="5" id="s2v-Kw-dsu"/>
                     <constraint firstAttribute="trailing" secondItem="bTd-mL-IOi" secondAttribute="trailing" constant="15" id="vB8-u2-yqb"/>
                     <constraint firstItem="kmw-qG-l8e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="xYh-6V-qH2"/>
@@ -175,6 +174,7 @@
                 <outlet property="contentLbl" destination="DtO-gO-DLQ" id="MDQ-uk-IEs"/>
                 <outlet property="imgCollectionView" destination="Guy-HM-CWX" id="9Fe-VX-X5H"/>
                 <outlet property="imgCollectionViewHeight" destination="BcW-97-9DT" id="LEk-Kt-Vqz"/>
+                <outlet property="imgTag" destination="9xc-21-s5n" id="NNb-aY-yVU"/>
                 <outlet property="likeCountIcon" destination="ckb-qA-9Jp" id="pNf-Vr-Q24"/>
                 <outlet property="likeCountLbl" destination="caG-oV-B50" id="MLt-WT-gBs"/>
                 <outlet property="nameLbl" destination="opY-r5-iuo" id="QCq-dZ-tHi"/>

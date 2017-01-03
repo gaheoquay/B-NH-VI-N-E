@@ -27,6 +27,7 @@ let GET_QUESTION = BASE_URL + "/Post/GetQuestionByTag"
 let POST_QUESTION = BASE_URL + "/Post/Insert"
 let GET_QUESTION_BY_TAG = BASE_URL + "/Post/GetQuestionByTag"
 let GET_LIST_COMMENT_BY_POSTID = BASE_URL + "/Post/GetListCommentByPostId"
+let POST_COMMENT = BASE_URL + "/Post/Comment"
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
 let NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"

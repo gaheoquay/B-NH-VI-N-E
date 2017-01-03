@@ -14,7 +14,8 @@ class MainCommentEntity: NSObject {
     var isLike = false
     var likeCount = 0
     var subComment = [SubCommentEntity]()
-
+    var isShowMore = false
+    
     override init (){
         super.init()
     }

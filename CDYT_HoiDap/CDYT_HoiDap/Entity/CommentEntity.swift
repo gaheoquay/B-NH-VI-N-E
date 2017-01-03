@@ -21,6 +21,18 @@ class CommentEntity: NSObject {
         super.init()
     }
     
+    func toDictionary(entity: CommentEntity) -> [String : Any] {
+        var comment : [String : Any] = [:]
+        comment["Id"] = entity.id
+        comment["Content"] = entity.content
+        comment["ImageUrls"] = entity.imageUrls
+        comment["ThumbnailImageUrls"] = entity.thumbnailImageUrls
+        comment["IsSolution"] = entity.isSolution
+        comment["UpdatedDate"] = entity.createdDate
+        comment["CreatedDate"] = entity.createdDate
+        return comment
+    }
+    
     init(dictionary:NSDictionary) {
         if let value = dictionary["Id"] as? String {
             id = value

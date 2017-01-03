@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailQuestionTableViewCell: UITableViewCell {
+class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var avaImg: UIImageView!
     @IBOutlet weak var nameLbl: UILabel!
@@ -29,11 +29,18 @@ class DetailQuestionTableViewCell: UITableViewCell {
     @IBOutlet weak var commentCountLbl: UILabel!
     @IBOutlet weak var commentCountIcon: UIImageView!
     
+    @IBOutlet weak var imgTag: UIImageView!
     var feed = FeedsEntity()
     override func awakeFromNib() {
         super.awakeFromNib()
         avaImg.layer.cornerRadius = 8
+        imgCollectionView.delegate = self
+        imgCollectionView.dataSource = self
+        imgCollectionView.register(UINib.init(nibName: "AddImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AddImageCollectionViewCell")
         
+        tagCollectionView.delegate = self
+        tagCollectionView.dataSource = self
+        tagCollectionView.register(UINib.init(nibName: "KeywordCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeywordCollectionViewCell")
     }
 
     func setData(){
@@ -50,9 +57,11 @@ class DetailQuestionTableViewCell: UITableViewCell {
         if feed.tags.count > 0 {
             tagCollectionView.isHidden = false
             tagCollectionViewHeight.constant = 24
+            imgTag.isHidden = false
         }else{
             tagCollectionView.isHidden = true
             tagCollectionViewHeight.constant = 0
+            imgTag.isHidden = true
         }
         
         titleLbl.text = feed.postEntity.title
@@ -75,6 +84,39 @@ class DetailQuestionTableViewCell: UITableViewCell {
             likeCountIcon.image = UIImage.init(named: "Clover0.png")
         }
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == tagCollectionView {
+            return feed.tags.count
+        }else{
+            return feed.postEntity.imageUrls.count
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == tagCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "KeywordCollectionViewCell", for: indexPath) as! KeywordCollectionViewCell
+            if feed.tags.count > 0 {
+                cell.setData(tagName: feed.tags[indexPath.row].id)
+            }
+            return cell
+        }else{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddImageCollectionViewCell", for: indexPath) as! AddImageCollectionViewCell
+                cell.imageView.sd_setImage(with: URL.init(string: feed.postEntity.thumbnailImageUrls[indexPath.row]), placeholderImage: UIImage.init(named: "placeholder_wide.png"))
+            return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == tagCollectionView {
+            let entity = feed.tags[indexPath.row]
+            let tagName = "  " + entity.id + "  "
+            let width = tagName.widthWithConstrainedHeight(height: 24, font: UIFont.systemFont(ofSize: 14))
+            return CGSize.init(width: width, height: 24)
+        }else{
+            return CGSize.init(width: 230, height: 170)
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
