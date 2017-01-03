@@ -29,19 +29,86 @@ class CommentTableViewCell: UITableViewCell {
     
     var delegate : CommentTableViewCellDelegate?
     var mainComment = MainCommentEntity()
+    var subComment = SubCommentEntity()
     
+    var isSubcomment = false
     override func awakeFromNib() {
         super.awakeFromNib()
         avaImg.layer.cornerRadius = 8
         
         replyLbl.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(replyTapAction)))
+        
+        likeIcon.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(likeCommentAction)))
     }
 
     func replyTapAction(){
         delegate?.replyCommentAction(mainComment: mainComment)
     }
     
+    func likeCommentAction(){
+        let realm = try! Realm()
+        let users = realm.objects(UserEntity.self)
+        var userEntity = UserEntity()
+        if users.count > 0 {
+            userEntity = users.first!
+        }
+        
+        var commentID = ""
+        var param = ""
+        if isSubcomment {
+            commentID = subComment.comment.id
+            param = LIKE_COMMENT_ON_COMMENT
+        }else{
+            commentID = mainComment.comment.id
+            param = LIKE_COMMENT
+        }
+        
+        let likeParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId": userEntity.id,
+            "CommentId": commentID
+        ]
+        
+        print(JSON.init(likeParam))
+        
+        Until.showLoading()
+        Alamofire.request(param, method: .post, parameters: likeParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! NSDictionary
+                        let isLike = jsonData["IsLiked"] as! Bool
+                        
+                        if self.isSubcomment {
+                            self.subComment.isLike = isLike
+                            if isLike {
+                                self.subComment.likeCount += 1
+                            }else{
+                                self.subComment.likeCount -= 1
+                            }
+                            self.setDataForSubComment()
+                        }else{
+                            self.mainComment.isLike = isLike
+                            if isLike {
+                                self.mainComment.likeCount += 1
+                            }else{
+                                self.mainComment.likeCount -= 1
+                            }
+                            self.setDataForMainComment()
+                        }
+                    }
+                }else{
+                    //                    UIAlertController().showAlertWith(title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                //                UIAlertController().showAlertWith(title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+            Until.hideLoading()
+        }
+    }
+    
     func setDataForMainComment() {
+        isSubcomment = false
         if mainComment.comment.isSolution {
             solutionLbl.isHidden = false
             self.contentView.backgroundColor = UIColor().hexStringToUIColor(hex: "F1FDEA")
@@ -84,36 +151,37 @@ class CommentTableViewCell: UITableViewCell {
         }
     }
     
-    func setDataForSubComment(commentEntity: SubCommentEntity) {
-        if commentEntity.comment.isSolution {
+    func setDataForSubComment() {
+        isSubcomment = true
+        if subComment.comment.isSolution {
             solutionLbl.isHidden = false
         }else{
             solutionLbl.isHidden = true
             solutionLbl.text = ""
         }
         
-        avaImg.sd_setImage(with: URL.init(string: commentEntity.author.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
-        nameLbl.text = commentEntity.author.nickname
-        timeLbl.text = String().convertTimeStampWithDateFormat(timeStamp: commentEntity.comment.createdDate, dateFormat: "dd/MM/yy HH:mm")
+        avaImg.sd_setImage(with: URL.init(string: subComment.author.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
+        nameLbl.text = subComment.author.nickname
+        timeLbl.text = String().convertTimeStampWithDateFormat(timeStamp: subComment.comment.createdDate, dateFormat: "dd/MM/yy HH:mm")
         
-        if commentEntity.comment.imageUrls.count > 0 {
+        if subComment.comment.imageUrls.count > 0 {
             imgComment.isHidden = false
             imgHeight.constant = 130
-            imgComment.sd_setImage(with: URL.init(string: commentEntity.comment.thumbnailImageUrls[0]), placeholderImage: UIImage.init(named: "placeholder_wide.png"))
+            imgComment.sd_setImage(with: URL.init(string: subComment.comment.thumbnailImageUrls[0]), placeholderImage: UIImage.init(named: "placeholder_wide.png"))
         }else{
             imgComment.isHidden = true
             imgHeight.constant = 0
         }
         
-        contentLbl.text = commentEntity.comment.content
+        contentLbl.text = subComment.comment.content
         
-        if commentEntity.isLike {
+        if subComment.isLike {
             likeIcon.image = UIImage.init(named: "Clover1.png")
         }else{
             likeIcon.image = UIImage.init(named: "Clover0.png")
         }
         
-        likeCountLbl.text = "\(commentEntity.likeCount)"
+        likeCountLbl.text = "\(subComment.likeCount)"
         
         leftViewWidth.constant = 60
         avaImgHeight.constant = 30

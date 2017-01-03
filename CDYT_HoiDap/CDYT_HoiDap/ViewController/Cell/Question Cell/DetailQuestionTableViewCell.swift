@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+protocol DetailQuestionTableViewCellDelegate {
+    func replyToPost(feedEntity : FeedsEntity)
+}
 class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var avaImg: UIImageView!
@@ -31,6 +33,7 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
     
     @IBOutlet weak var imgTag: UIImageView!
     var feed = FeedsEntity()
+    var delegate : DetailQuestionTableViewCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         avaImg.layer.cornerRadius = 8
@@ -41,8 +44,62 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
         tagCollectionView.register(UINib.init(nibName: "KeywordCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeywordCollectionViewCell")
+        
+        commentCountLbl.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(replyToPost)))
+        commentCountIcon.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(replyToPost)))
+        
+        likeCountIcon.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(likePostAction)))
     }
 
+    func replyToPost(){
+        delegate?.replyToPost(feedEntity: feed)
+    }
+    
+    func likePostAction(){
+        let realm = try! Realm()
+        let users = realm.objects(UserEntity.self)
+        var userEntity = UserEntity()
+        if users.count > 0 {
+            userEntity = users.first!
+        }
+        
+        let followParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId": userEntity.id,
+            "PostId": feed.postEntity.id
+        ]
+        
+        print(JSON.init(followParam))
+        
+        Until.showLoading()
+        Alamofire.request(LIKE_POST, method: .post, parameters: followParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! NSDictionary
+                        let isLike = jsonData["IsLiked"] as! Bool
+                        
+                        self.feed.isLiked = isLike
+                     
+                        if isLike {
+                            self.feed.likeCount += 1
+                        }else{
+                            self.feed.likeCount -= 1
+                        }
+                        self.setData()
+                        
+                    }
+                }else{
+                    //                    UIAlertController().showAlertWith(title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                //                UIAlertController().showAlertWith(title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+            Until.hideLoading()
+        }
+        
+    }
+    
     func setData(){
         avaImg.sd_setImage(with: URL.init(string: feed.authorEntity.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
         nameLbl.text = feed.authorEntity.nickname

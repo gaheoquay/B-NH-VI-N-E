@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MoreCommentTableViewCellDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CommentTableViewCellDelegate {
+class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MoreCommentTableViewCellDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CommentTableViewCellDelegate, DetailQuestionTableViewCellDelegate {
 
     @IBOutlet weak var detailTbl: UITableView!
     @IBOutlet weak var imgCollectionView: UICollectionView!
@@ -27,6 +27,10 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
 
     var imgCommentDic = [String]()
     var thumImgCommentDic = [String]()
+    var isCommentOnComment = false
+    
+    var currComment = MainCommentEntity()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -88,7 +92,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         
     }
     
-    //MARK: Text input bar action
+    //MARK: Post comment tap action
     func postCommentAction(){
         let stringComent = textInputBar.text!
         if stringComent == "" {
@@ -102,7 +106,11 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             if imageAssets.count > 0 {
                 uploadImage()
             }else{
-                sendCommentToServer()
+                if isCommentOnComment {
+                    sendCommentOnComment(mainComment: currComment)
+                }else{
+                    sendCommentToServer()
+                }
             }
         }
     }
@@ -338,6 +346,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailQuestionTableViewCell") as! DetailQuestionTableViewCell
             cell.feed = self.feed
             cell.setData()
+            cell.delegate = self
             return cell
         }else{
             let entity = listComment[indexPath.section - 1]
@@ -350,7 +359,9 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                     return cell
                 }else{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
-                    cell.setDataForSubComment(commentEntity: listComment[indexPath.section - 1].subComment[indexPath.row - 1])
+                    cell.mainComment = listComment[indexPath.section - 1]
+                    cell.subComment = listComment[indexPath.section - 1].subComment[indexPath.row - 1]
+                    cell.setDataForSubComment()
                     cell.delegate = self
                     return cell
                 }
@@ -370,7 +381,9 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                         return cell
                     }else{
                         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
-                        cell.setDataForSubComment(commentEntity: listComment[indexPath.section - 1].subComment[indexPath.row - 1])
+                        cell.mainComment = listComment[indexPath.section - 1]
+                        cell.subComment = listComment[indexPath.section - 1].subComment[indexPath.row - 1]
+                        cell.setDataForSubComment()
                         cell.delegate = self
                         return cell
 
@@ -402,6 +415,14 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         self.view.endEditing(true)
     }
     
+    //MARK: DetailQuestionTableViewCellDelegate
+    func replyToPost(feedEntity: FeedsEntity) {
+        textInputBar.textView.placeholder = "Nhập nội dung thảo luận"
+        textInputBar.becomeFirstResponder()
+        isCommentOnComment = false
+        
+    }
+    
     //MARK: MoreCommentTableViewCellDelegate
     func showMoreSubcomment() {
         detailTbl.reloadData()
@@ -411,6 +432,64 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     func replyCommentAction(mainComment: MainCommentEntity) {
         textInputBar.textView.placeholder = "@trả lời bình luận của \(mainComment.author.nickname)"
         textInputBar.becomeFirstResponder()
+        
+        currComment = mainComment
+        isCommentOnComment = true
+    }
+    
+    func sendCommentOnComment(mainComment : MainCommentEntity){
+        self.view.endEditing(true)
+        
+        var requestedUserId = ""
+        let realm = try! Realm()
+        let users = realm.objects(UserEntity.self)
+        if users.count > 0 {
+            requestedUserId = users.first!.id
+        }
+        
+        let commentEntity = CommentEntity()
+        commentEntity.content = textInputBar.text
+        commentEntity.imageUrls = imgCommentDic
+        commentEntity.thumbnailImageUrls = thumImgCommentDic
+        
+        let commentParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId": requestedUserId,
+            "Comment": CommentEntity().toDictionary(entity: commentEntity),
+            "CommentId": mainComment.comment.id
+        ]
+        
+        print(JSON.init(commentParam))
+        Until.showLoading()
+        
+        Alamofire.request(POST_COMMENT_ON_COMMENT, method: .post, parameters: commentParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! NSDictionary
+                        let entity = SubCommentEntity.init(dict: jsonData)
+                        
+//                        mainComment.subComment.append(entity)
+                        self.detailTbl.reloadData()
+                        
+                        self.textInputBar.textView.text = ""
+                        self.imgCommentDic = []
+                        self.thumImgCommentDic = []
+                        
+                        self.imgCollectionViewHeight.constant = 0
+                        self.imageAssets.removeAll()
+                        self.imgCollectionView.reloadData()
+                        self.view.layoutIfNeeded()
+                        
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể lấy được dữ liệu Bình luận. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+            Until.hideLoading()
+        }
     }
     
     override func didReceiveMemoryWarning() {

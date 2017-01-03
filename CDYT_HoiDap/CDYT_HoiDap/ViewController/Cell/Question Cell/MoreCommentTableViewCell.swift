@@ -17,7 +17,6 @@ class MoreCommentTableViewCell: UITableViewCell {
     
     var delegate : MoreCommentTableViewCellDelegate?
     var commentEntity = MainCommentEntity()
-    lazy var indexPath = IndexPath()
     
     override func awakeFromNib() {
         super.awakeFromNib()
