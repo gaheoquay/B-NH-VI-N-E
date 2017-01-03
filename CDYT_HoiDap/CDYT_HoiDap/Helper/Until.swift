@@ -108,6 +108,20 @@ extension UIAlertController {
 }
 
 class Until{
+  
+  class func isLogined() -> Bool {
+    let realm = try! Realm()
+    let users = realm.objects(UserEntity.self)
+    if users.count > 0 {
+      return true
+    }
+    return false
+  }
+  class func gotoLogin(_self : UIViewController ){
+    let storyBoard = UIStoryboard.init(name: "User", bundle: nil)
+    let viewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+    _self.navigationController?.pushViewController(viewController, animated: true)
+  }
     class func isValidEmail(email:String) -> Bool {
         // println("validate calendar: \(testStr)")
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"

@@ -19,7 +19,7 @@ let FOLLOW_TAG = BASE_URL + "/User/FollowTag"
 
 let HOTEST_TAG = BASE_URL + "/Post/GetHotestTags"
 let GET_FEEDS = BASE_URL + "/Post/GetFeed"
-
+let SEARCH = BASE_URL + "/Post/Search"
 let GET_QUESTION_BY_ID = BASE_URL + "/Post/GetQuestionCreatedByUserId"
 
 let GET_UNANSWER = BASE_URL + "/Post/GetUnansweredList"

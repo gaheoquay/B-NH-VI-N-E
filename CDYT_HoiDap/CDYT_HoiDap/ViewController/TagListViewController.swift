@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TagListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TagListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, QuestionTagTableViewCellDelegate {
 
     @IBOutlet weak var tagTableView: UITableView!
     var userEntity = UserEntity()
@@ -33,6 +33,7 @@ class TagListViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTagTableViewCell") as! QuestionTagTableViewCell
+      cell.delegate = self
         cell.hotTag = listHotTag[indexPath.row]
         cell.setData()
         return cell
@@ -96,6 +97,9 @@ class TagListViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
 
-  
+//  MARK: QuestionTagTableViewCellDelegate
+  func checkLogin() {
+    Until.gotoLogin(_self: self)
+  }
 
 }

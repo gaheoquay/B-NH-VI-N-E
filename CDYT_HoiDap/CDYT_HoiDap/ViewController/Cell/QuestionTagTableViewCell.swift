@@ -8,12 +8,16 @@
 
 import UIKit
 
+protocol QuestionTagTableViewCellDelegate {
+  func checkLogin()
+}
+
 class QuestionTagTableViewCell: UITableViewCell {
 
     @IBOutlet weak var tagName: UILabel!
     @IBOutlet weak var followBtn: UIButton!
     @IBOutlet weak var borderView: UIView!
-    
+  var delegate : QuestionTagTableViewCellDelegate?
     var hotTag = HotTagEntity()
     
     override func awakeFromNib() {
@@ -35,7 +39,11 @@ class QuestionTagTableViewCell: UITableViewCell {
     }
     
     @IBAction func followBtnAction(_ sender: Any) {
+      if Until.isLogined() {
         followTag()
+      }else{
+        delegate?.checkLogin()
+      }
     }
     
     func followTag(){
@@ -44,7 +52,6 @@ class QuestionTagTableViewCell: UITableViewCell {
         var userEntity = UserEntity()
         if users.count > 0 {
             userEntity = users.first!
-            
         }
         
         let followParam : [String : Any] = [

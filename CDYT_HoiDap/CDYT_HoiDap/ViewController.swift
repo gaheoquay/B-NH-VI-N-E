@@ -159,7 +159,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         vc.feed = listFedds[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
+//    MARK: Action
+  
+  @IBAction func gotoSearch(_ sender: Any) {
+    let viewController = self.storyboard?.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
+    self.navigationController?.pushViewController(viewController, animated: true)
+  }
     @IBAction func addQuestionTapAction(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddQuestionViewController") as! AddQuestionViewController
         self.navigationController?.pushViewController(vc, animated: true)
