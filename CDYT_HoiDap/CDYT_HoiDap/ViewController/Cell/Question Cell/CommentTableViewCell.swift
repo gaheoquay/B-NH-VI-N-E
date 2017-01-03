@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+protocol CommentTableViewCellDelegate {
+    func replyCommentAction(mainComment : MainCommentEntity)
+}
 class CommentTableViewCell: UITableViewCell {
 
     @IBOutlet weak var solutionLbl: UILabel!
@@ -24,6 +26,10 @@ class CommentTableViewCell: UITableViewCell {
     @IBOutlet weak var seperatorHeight: NSLayoutConstraint!
     
     @IBOutlet weak var replyLbl: UILabel!
+    
+    var delegate : CommentTableViewCellDelegate?
+    var mainComment = MainCommentEntity()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         avaImg.layer.cornerRadius = 8
@@ -32,11 +38,11 @@ class CommentTableViewCell: UITableViewCell {
     }
 
     func replyTapAction(){
-        
+        delegate?.replyCommentAction(mainComment: mainComment)
     }
     
-    func setDataForMainComment(commentEntity: MainCommentEntity) {
-        if commentEntity.comment.isSolution {
+    func setDataForMainComment() {
+        if mainComment.comment.isSolution {
             solutionLbl.isHidden = false
             self.contentView.backgroundColor = UIColor().hexStringToUIColor(hex: "F1FDEA")
         }else{
@@ -45,33 +51,33 @@ class CommentTableViewCell: UITableViewCell {
             self.contentView.backgroundColor = UIColor.white
         }
         
-        avaImg.sd_setImage(with: URL.init(string: commentEntity.author.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
-        nameLbl.text = commentEntity.author.nickname
-        timeLbl.text = String().convertTimeStampWithDateFormat(timeStamp: commentEntity.comment.createdDate, dateFormat: "dd/MM/yy HH:mm")
+        avaImg.sd_setImage(with: URL.init(string: mainComment.author.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
+        nameLbl.text = mainComment.author.nickname
+        timeLbl.text = String().convertTimeStampWithDateFormat(timeStamp: mainComment.comment.createdDate, dateFormat: "dd/MM/yy HH:mm")
         
-        if commentEntity.comment.imageUrls.count > 0 {
+        if mainComment.comment.imageUrls.count > 0 {
             imgComment.isHidden = false
             imgHeight.constant = 140
-            imgComment.sd_setImage(with: URL.init(string: commentEntity.comment.thumbnailImageUrls[0]), placeholderImage: UIImage.init(named: "placeholder_wide.png"))
+            imgComment.sd_setImage(with: URL.init(string: mainComment.comment.thumbnailImageUrls[0]), placeholderImage: UIImage.init(named: "placeholder_wide.png"))
         }else{
             imgComment.isHidden = true
             imgHeight.constant = 0
         }
         
-        contentLbl.text = commentEntity.comment.content
+        contentLbl.text = mainComment.comment.content
         
-        if commentEntity.isLike {
+        if mainComment.isLike {
             likeIcon.image = UIImage.init(named: "Clover1.png")
         }else{
             likeIcon.image = UIImage.init(named: "Clover0.png")
         }
         
-        likeCountLbl.text = "\(commentEntity.likeCount)"
+        likeCountLbl.text = "\(mainComment.likeCount)"
         
         leftViewWidth.constant = 0
         avaImgHeight.constant = 50
         
-        if commentEntity.subComment.count > 0 {
+        if mainComment.subComment.count > 0 {
             seperatorHeight.constant = 0
         }else{
             seperatorHeight.constant = 1

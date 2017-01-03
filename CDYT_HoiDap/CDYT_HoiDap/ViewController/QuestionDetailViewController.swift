@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MoreCommentTableViewCellDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MoreCommentTableViewCellDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CommentTableViewCellDelegate {
 
     @IBOutlet weak var detailTbl: UITableView!
     @IBOutlet weak var imgCollectionView: UICollectionView!
@@ -344,17 +344,22 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             if entity.isShowMore {
                 if indexPath.row == 0{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
-                    cell.setDataForMainComment(commentEntity: listComment[indexPath.section - 1])
+                    cell.mainComment = listComment[indexPath.section - 1]
+                    cell.setDataForMainComment()
+                    cell.delegate = self
                     return cell
                 }else{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
                     cell.setDataForSubComment(commentEntity: listComment[indexPath.section - 1].subComment[indexPath.row - 1])
+                    cell.delegate = self
                     return cell
                 }
             }else{
                 if indexPath.row == 0{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
-                    cell.setDataForMainComment(commentEntity: listComment[indexPath.section - 1])
+                    cell.mainComment = listComment[indexPath.section - 1]
+                    cell.setDataForMainComment()
+                    cell.delegate = self
                     return cell
                 }else{
                     if listComment[indexPath.section - 1].subComment.count > 1 {
@@ -366,6 +371,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                     }else{
                         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
                         cell.setDataForSubComment(commentEntity: listComment[indexPath.section - 1].subComment[indexPath.row - 1])
+                        cell.delegate = self
                         return cell
 
                     }
@@ -399,6 +405,12 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     //MARK: MoreCommentTableViewCellDelegate
     func showMoreSubcomment() {
         detailTbl.reloadData()
+    }
+    
+    //MARK: CommentTableViewCellDelegate
+    func replyCommentAction(mainComment: MainCommentEntity) {
+        textInputBar.textView.placeholder = "@trả lời bình luận của \(mainComment.author.nickname)"
+        textInputBar.becomeFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
