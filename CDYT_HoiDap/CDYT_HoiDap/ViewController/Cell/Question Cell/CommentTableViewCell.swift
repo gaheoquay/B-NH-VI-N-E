@@ -21,18 +21,28 @@ class CommentTableViewCell: UITableViewCell {
     @IBOutlet weak var imgHeight: NSLayoutConstraint!
     @IBOutlet weak var leftViewWidth: NSLayoutConstraint!
     @IBOutlet weak var avaImgHeight: NSLayoutConstraint!
+    @IBOutlet weak var seperatorHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var replyLbl: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         avaImg.layer.cornerRadius = 8
+        
+        replyLbl.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(replyTapAction)))
     }
 
+    func replyTapAction(){
+        
+    }
+    
     func setDataForMainComment(commentEntity: MainCommentEntity) {
         if commentEntity.comment.isSolution {
             solutionLbl.isHidden = false
+            self.contentView.backgroundColor = UIColor().hexStringToUIColor(hex: "F1FDEA")
         }else{
             solutionLbl.isHidden = true
             solutionLbl.text = ""
+            self.contentView.backgroundColor = UIColor.white
         }
         
         avaImg.sd_setImage(with: URL.init(string: commentEntity.author.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
@@ -41,7 +51,7 @@ class CommentTableViewCell: UITableViewCell {
         
         if commentEntity.comment.imageUrls.count > 0 {
             imgComment.isHidden = false
-            imgHeight.constant = 130
+            imgHeight.constant = 140
             imgComment.sd_setImage(with: URL.init(string: commentEntity.comment.thumbnailImageUrls[0]), placeholderImage: UIImage.init(named: "placeholder_wide.png"))
         }else{
             imgComment.isHidden = true
@@ -60,6 +70,12 @@ class CommentTableViewCell: UITableViewCell {
         
         leftViewWidth.constant = 0
         avaImgHeight.constant = 50
+        
+        if commentEntity.subComment.count > 0 {
+            seperatorHeight.constant = 0
+        }else{
+            seperatorHeight.constant = 1
+        }
     }
     
     func setDataForSubComment(commentEntity: SubCommentEntity) {
@@ -93,8 +109,8 @@ class CommentTableViewCell: UITableViewCell {
         
         likeCountLbl.text = "\(commentEntity.likeCount)"
         
-        leftViewWidth.constant = 50
-        avaImgHeight.constant = 40
+        leftViewWidth.constant = 60
+        avaImgHeight.constant = 30
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

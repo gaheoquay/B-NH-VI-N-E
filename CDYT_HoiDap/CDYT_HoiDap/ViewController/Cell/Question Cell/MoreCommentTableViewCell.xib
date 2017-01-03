@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MoreCommentTableViewCell" rowHeight="83" id="KGk-i7-Jjw" customClass="MoreCommentTableViewCell" customModule="CDYT_HoiDap" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MoreCommentTableViewCell" rowHeight="83" id="KGk-i7-Jjw" customClass="MoreCommentTableViewCell" customModule="CDYT_HoiDap" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -20,50 +20,47 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q4k-Ku-3MZ">
-                        <rect key="frame" x="20" y="27" width="30" height="30"/>
+                        <rect key="frame" x="78" y="27" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="EaN-bL-3uH"/>
                             <constraint firstAttribute="width" secondItem="q4k-Ku-3MZ" secondAttribute="height" id="zR0-8X-QqD"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label Label Label Label Label " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P89-Un-lbp">
-                        <rect key="frame" x="58" y="33" width="195" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label Label Label Label Label " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P89-Un-lbp">
+                        <rect key="frame" x="116" y="33" width="194" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.32877659797668457" green="0.3290514349937439" blue="0.3288191556930542" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tgo-Vl-EUR">
-                        <rect key="frame" x="258" y="33" width="54" height="17"/>
-                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                        <color key="textColor" red="0.016677035018801689" green="0.69060689210891724" blue="0.98306149244308472" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huS-R3-EcC">
+                        <rect key="frame" x="0.0" y="82" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="hBL-bt-Ry7"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <gestureRecognizers/>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="P89-Un-lbp" secondAttribute="trailing" constant="10" id="6Tn-KZ-YaB"/>
+                    <constraint firstAttribute="trailing" secondItem="huS-R3-EcC" secondAttribute="trailing" id="6pT-ol-FqR"/>
+                    <constraint firstItem="huS-R3-EcC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="79j-cE-sAG"/>
                     <constraint firstItem="q4k-Ku-3MZ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Awf-lf-hJB"/>
-                    <constraint firstItem="Tgo-Vl-EUR" firstAttribute="leading" secondItem="P89-Un-lbp" secondAttribute="trailing" constant="5" id="Jec-ba-ZDr"/>
-                    <constraint firstItem="q4k-Ku-3MZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="KrC-Mv-sBE"/>
+                    <constraint firstItem="q4k-Ku-3MZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="78" id="KrC-Mv-sBE"/>
                     <constraint firstItem="P89-Un-lbp" firstAttribute="leading" secondItem="q4k-Ku-3MZ" secondAttribute="trailing" constant="8" id="Xkq-tu-OwG"/>
-                    <constraint firstItem="Tgo-Vl-EUR" firstAttribute="centerY" secondItem="P89-Un-lbp" secondAttribute="centerY" id="jrI-4w-u4M"/>
-                    <constraint firstAttribute="trailing" secondItem="Tgo-Vl-EUR" secondAttribute="trailing" constant="8" id="kxL-Z5-CoZ"/>
+                    <constraint firstAttribute="bottom" secondItem="huS-R3-EcC" secondAttribute="bottom" id="ixq-dH-Vjf"/>
                     <constraint firstItem="P89-Un-lbp" firstAttribute="centerY" secondItem="q4k-Ku-3MZ" secondAttribute="centerY" id="sKz-Eq-jqs"/>
                 </constraints>
-                <connections>
-                    <outletCollection property="gestureRecognizers" destination="9Jg-OD-VI8" appends="YES" id="CEf-Sn-9fd"/>
-                </connections>
             </tableViewCellContentView>
             <gestureRecognizers/>
             <connections>
                 <outlet property="avaImg" destination="q4k-Ku-3MZ" id="BrG-QO-6Pd"/>
-                <outlet property="countCommentLbl" destination="Tgo-Vl-EUR" id="GIg-kx-3OK"/>
                 <outlet property="nameLbl" destination="P89-Un-lbp" id="5xS-Da-Ihb"/>
             </connections>
             <point key="canvasLocation" x="25" y="71.5"/>
         </tableViewCell>
-        <tapGestureRecognizer id="9Jg-OD-VI8">
-            <connections>
-                <action selector="tapMoreAction:" destination="KGk-i7-Jjw" id="DvU-iK-afM"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
 </document>
