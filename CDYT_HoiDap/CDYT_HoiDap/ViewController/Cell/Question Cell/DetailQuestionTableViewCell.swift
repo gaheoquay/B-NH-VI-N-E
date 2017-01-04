@@ -56,16 +56,10 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
     }
     
     func likePostAction(){
-        let realm = try! Realm()
-        let users = realm.objects(UserEntity.self)
-        var userEntity = UserEntity()
-        if users.count > 0 {
-            userEntity = users.first!
-        }
         
         let followParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
-            "RequestedUserId": userEntity.id,
+            "RequestedUserId": Until.getCurrentId(),
             "PostId": feed.postEntity.id
         ]
         

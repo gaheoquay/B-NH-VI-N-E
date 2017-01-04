@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QuestionByTagViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class QuestionByTagViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, QuestionTableViewCellDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -43,17 +43,11 @@ class QuestionByTagViewController: UIViewController,UITableViewDelegate,UITableV
   }
   //  MARK: request data
   func getFeeds(){
-    var requestedUserId = ""
-    let realm = try! Realm()
-    let users = realm.objects(UserEntity.self)
-    if users.count > 0 {
-      requestedUserId = users.first!.id
-    }
     let hotParam : [String : Any] = [
       "Auth": Until.getAuthKey(),
       "Page": 1,
       "Size": 10,
-      "RequestedUserId" : requestedUserId,
+      "RequestedUserId" : Until.getCurrentId(),
       "Tag" : hotTagEntity.tag.id
     ]
     Until.showLoading()
@@ -89,11 +83,19 @@ class QuestionByTagViewController: UIViewController,UITableViewDelegate,UITableV
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
+    cell.indexPath = indexPath
+    cell.delegate = self
     cell.feedEntity = listFedds[indexPath.row]
     cell.setData()
     return cell
   }
 
+    //MARK: QuestionTableViewCellDelegate
+    func showQuestionDetail(indexPath: IndexPath) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
+        vc.feed = listFedds[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 //  MARK: Outlet
   @IBOutlet weak var lbTitle: UILabel!
   @IBOutlet weak var tbQuestion: UITableView!

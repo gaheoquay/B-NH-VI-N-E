@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,KeyWordTableViewCellDelegate {
+class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,KeyWordTableViewCellDelegate, QuestionTableViewCellDelegate {
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -45,19 +45,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
   }
 //  MARK: request server
   func getHotTagFromServer(){
-    var requestedUserId = ""
-    let realm = try! Realm()
-    let users = realm.objects(UserEntity.self)
-    if users.count > 0 {
-      let userEntity = users.first!
-      requestedUserId = userEntity.id
-    }
     
     let hotParam : [String : Any] = [
       "Auth": Until.getAuthKey(),
       "Page": 1,
       "Size": 10,
-      "RequestedUserId" : requestedUserId
+      "RequestedUserId" : Until.getCurrentId()
     ]
     
     print(JSON.init(hotParam))
@@ -88,18 +81,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
   }
 
   func getFeeds(){
-    var requestedUserId = ""
-    let realm = try! Realm()
-    let users = realm.objects(UserEntity.self)
-    if users.count > 0 {
-      requestedUserId = users.first!.id
-      
-    }
     let hotParam : [String : Any] = [
       "Auth": Until.getAuthKey(),
       "Page": 1,
       "Size": 10,
-      "RequestedUserId" : requestedUserId
+      "RequestedUserId" : Until.getCurrentId()
     ]
     print(JSON.init(hotParam))
     Until.showLoading()
@@ -147,6 +133,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
       return cell
     }else{
       let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
+        cell.delegate = self
+        cell.indexPath = indexPath
       cell.feedEntity = listFedds[indexPath.row]
       cell.setData()
       return cell
@@ -154,7 +142,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
   }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //MARK: QuestionTableViewCellDelegate
+    func showQuestionDetail(indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
         vc.feed = listFedds[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)

@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+protocol QuestionTableViewCellDelegate {
+    func showQuestionDetail(indexPath : IndexPath)
+}
 class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDelegateLeftAlignedLayout {
   
   override func awakeFromNib() {
@@ -16,7 +18,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
     clvTags.delegate = self
     clvTags.register(UINib.init(nibName: "KeywordCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeywordCollectionViewCell")
 
-    // Initialization code
+    self.contentView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showDetailQuestion)))
   }
   
   override func setSelected(_ selected: Bool, animated: Bool) {
@@ -25,6 +27,10 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
     // Configure the view for the selected state
   }
   
+    func showDetailQuestion(){
+        delegate?.showQuestionDetail(indexPath: self.indexPath)
+    }
+    
   func setData(){
     lbTitle.text = feedEntity.postEntity.title
     lbContent.text = feedEntity.postEntity.content
@@ -94,4 +100,6 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
   @IBOutlet weak var layoutHeighTag: NSLayoutConstraint!
   @IBOutlet weak var layoutTopTag: NSLayoutConstraint!
   @IBOutlet weak var layoutBottomTag: NSLayoutConstraint!
+    var delegate : QuestionTableViewCellDelegate?
+    var indexPath = IndexPath()
 }

@@ -46,12 +46,6 @@ class CommentTableViewCell: UITableViewCell {
     }
     
     func likeCommentAction(){
-        let realm = try! Realm()
-        let users = realm.objects(UserEntity.self)
-        var userEntity = UserEntity()
-        if users.count > 0 {
-            userEntity = users.first!
-        }
         
         var commentID = ""
         var param = ""
@@ -65,7 +59,7 @@ class CommentTableViewCell: UITableViewCell {
         
         let likeParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
-            "RequestedUserId": userEntity.id,
+            "RequestedUserId": Until.getCurrentId(),
             "CommentId": commentID
         ]
         

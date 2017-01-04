@@ -181,16 +181,9 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
                 "CreatedDate" : 0
         ]
         
-        let realm = try! Realm()
-        let users = realm.objects(UserEntity.self)
-        var requestedUserId = ""
-        if users.count > 0 {
-            requestedUserId = users.first!.id
-        }
-        
         let questionParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
-            "RequestedUserId": requestedUserId,
+            "RequestedUserId": Until.getCurrentId(),
             "Post": post,
             "Tags": tagString!
         ]

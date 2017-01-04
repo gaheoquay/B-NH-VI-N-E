@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, QuestionTableViewCellDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -33,18 +33,11 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
   
   //  MARK: request data
   func getFeeds(){
-    var requestedUserId = ""
-    let realm = try! Realm()
-    let users = realm.objects(UserEntity.self)
-    if users.count > 0 {
-      requestedUserId = users.first!.id
-      
-    }
     let hotParam : [String : Any] = [
       "Auth": Until.getAuthKey(),
       "Page": 1,
       "Size": 10,
-      "RequestedUserId" : requestedUserId
+      "RequestedUserId" : Until.getCurrentId()
     ]
     Until.showLoading()
     Alamofire.request(GET_UNANSWER, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -78,11 +71,20 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
+    cell.delegate = self
+    cell.indexPath = indexPath
     cell.feedEntity = listFedds[indexPath.row]
     cell.setData()
     return cell
   }
   
+    //MARK: QuestionTableViewCellDelegate
+    func showQuestionDetail(indexPath: IndexPath) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
+        vc.feed = listFedds[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
   //  MARK: Outlet
   @IBOutlet weak var tbQuestion: UITableView!
   var listFedds = [FeedsEntity]()

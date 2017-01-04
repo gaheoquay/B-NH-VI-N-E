@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class UserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, QuestionTableViewCellDelegate {
 
     @IBOutlet weak var avaImg: UIImageView!
     @IBOutlet weak var nicknameLbl: UILabel!
@@ -90,6 +90,8 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
+        cell.indexPath = indexPath
+        cell.delegate = self
         cell.feedEntity = listMyFeed[indexPath.row]
         cell.setData()
         return cell
@@ -113,6 +115,14 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
+    
+    //MARK: QuestionTableViewCellDelegate
+    func showQuestionDetail(indexPath: IndexPath) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
+        vc.feed = listMyFeed[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

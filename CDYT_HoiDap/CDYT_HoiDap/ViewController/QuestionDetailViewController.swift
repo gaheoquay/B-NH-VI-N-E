@@ -155,13 +155,6 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     func sendCommentToServer(){
         self.view.endEditing(true)
-
-        var requestedUserId = ""
-        let realm = try! Realm()
-        let users = realm.objects(UserEntity.self)
-        if users.count > 0 {
-            requestedUserId = users.first!.id
-        }
         
         let commentEntity = CommentEntity()
         commentEntity.content = textInputBar.text
@@ -170,7 +163,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         
         let commentParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
-            "RequestedUserId": requestedUserId,
+            "RequestedUserId": Until.getCurrentId(),
             "Comment": CommentEntity().toDictionary(entity: commentEntity),
             "PostId": feed.postEntity.id
         ]
@@ -278,19 +271,11 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func getListCommentByPostID(){
-        var requestedUserId = ""
-        let realm = try! Realm()
-        let users = realm.objects(UserEntity.self)
-        if users.count > 0 {
-            requestedUserId = users.first!.id
-            
-        }
-        
         let hotParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
             "Page": 1,
             "Size": 10,
-            "RequestedUserId" : requestedUserId,
+            "RequestedUserId" : Until.getCurrentId(),
             "PostId": feed.postEntity.id
         ]
         print(JSON.init(hotParam))
@@ -440,13 +425,6 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     func sendCommentOnComment(mainComment : MainCommentEntity){
         self.view.endEditing(true)
         
-        var requestedUserId = ""
-        let realm = try! Realm()
-        let users = realm.objects(UserEntity.self)
-        if users.count > 0 {
-            requestedUserId = users.first!.id
-        }
-        
         let commentEntity = CommentEntity()
         commentEntity.content = textInputBar.text
         commentEntity.imageUrls = imgCommentDic
@@ -454,7 +432,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         
         let commentParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
-            "RequestedUserId": requestedUserId,
+            "RequestedUserId": Until.getCurrentId(),
             "Comment": CommentEntity().toDictionary(entity: commentEntity),
             "CommentId": mainComment.comment.id
         ]
@@ -469,7 +447,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                         let jsonData = result as! NSDictionary
                         let entity = SubCommentEntity.init(dict: jsonData)
                         
-//                        mainComment.subComment.append(entity)
+                        mainComment.subComment.append(entity)
                         self.detailTbl.reloadData()
                         
                         self.textInputBar.textView.text = ""

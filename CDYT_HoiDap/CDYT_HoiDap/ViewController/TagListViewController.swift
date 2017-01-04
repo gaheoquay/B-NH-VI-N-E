@@ -11,7 +11,6 @@ import UIKit
 class TagListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, QuestionTagTableViewCellDelegate {
 
     @IBOutlet weak var tagTableView: UITableView!
-    var userEntity = UserEntity()
     var listHotTag = [HotTagEntity]()
     
     override func viewDidLoad() {
@@ -51,18 +50,11 @@ class TagListViewController: UIViewController, UITableViewDataSource, UITableVie
   }
   
     func getHotTagFromServer(){
-        let realm = try! Realm()
-        let users = realm.objects(UserEntity.self)
-        if users.count > 0 {
-            userEntity = users.first!
-            
-        }
-        
         let hotParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
             "Page": 1,
             "Size": 10,
-            "RequestedUserId" : userEntity.id
+            "RequestedUserId" : Until.getCurrentId()
         ]
         
         print(JSON.init(hotParam))

@@ -108,15 +108,17 @@ extension UIAlertController {
 }
 
 class Until{
-  
-  class func isLogined() -> Bool {
-    let realm = try! Realm()
-    let users = realm.objects(UserEntity.self)
-    if users.count > 0 {
-      return true
+    class func getCurrentId() -> String {
+        let realm = try! Realm()
+        let users = realm.objects(UserEntity.self)
+        
+        if users.count > 0 {
+            return users.first!.id
+        }else{
+            return ""
+        }
     }
-    return false
-  }
+    
   class func gotoLogin(_self : UIViewController ){
     let storyBoard = UIStoryboard.init(name: "User", bundle: nil)
     let viewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
