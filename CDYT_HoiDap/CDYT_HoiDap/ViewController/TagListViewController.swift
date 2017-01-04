@@ -117,7 +117,7 @@ class TagListViewController: UIViewController, UITableViewDataSource, UITableVie
 
 //  MARK: QuestionTagTableViewCellDelegate
   func checkLogin() {
-    Until.gotoLogin(_self: self)
+    Until.gotoLogin(_self: self, cannotBack: false)
   }
 
 }

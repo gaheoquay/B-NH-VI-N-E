@@ -119,9 +119,10 @@ class Until{
         }
     }
     
-  class func gotoLogin(_self : UIViewController ){
+  class func gotoLogin(_self : UIViewController, cannotBack:Bool ){
     let storyBoard = UIStoryboard.init(name: "User", bundle: nil)
     let viewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+    viewController.cannotBack = cannotBack
     _self.navigationController?.pushViewController(viewController, animated: true)
   }
     class func isValidEmail(email:String) -> Bool {

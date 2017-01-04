@@ -119,7 +119,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                 }
             }
         }else{
-            Until.gotoLogin(_self: self)
+          Until.gotoLogin(_self: self, cannotBack: false)
         }
     }
     
@@ -428,7 +428,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func gotoLoginFromDetailQuestionVC() {
-        Until.gotoLogin(_self: self)
+      Until.gotoLogin(_self: self, cannotBack: false)
     }
     
     //MARK: MoreCommentTableViewCellDelegate
@@ -446,7 +446,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func gotoLoginFromCommentTableCell() {
-        Until.gotoLogin(_self: self)
+      Until.gotoLogin(_self: self, cannotBack: false)
     }
     
     func sendCommentOnComment(mainComment : MainCommentEntity){

@@ -20,34 +20,36 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        avaImg.layer.cornerRadius = 10
-        self.navigationController?.isNavigationBarHidden = true
-        
-        questionTableView.delegate = self
-        questionTableView.dataSource = self
-        questionTableView.register(UINib.init(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
-        questionTableView.estimatedRowHeight = 500
-        questionTableView.rowHeight = UITableViewAutomaticDimension
-        questionTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-
         let realm = try! Realm()
         let users = realm.objects(UserEntity.self)
         if users.count > 0 {
             userEntity = users.first!
-        }
-        
+        }else{
+          Until.gotoLogin(_self: self, cannotBack: true)
+      }
+      initTable()
+        setUpUI()
         setupUserInfo()
         getFeeds()
     }
-    
+  func setUpUI(){
+    avaImg.layer.cornerRadius = 10
+    self.navigationController?.isNavigationBarHidden = true
+  }
     func setupUserInfo(){
         avaImg.sd_setImage(with: URL.init(string: userEntity.avatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut"))
         nicknameLbl.text = userEntity.nickname
     }
-
+  func initTable(){
+    questionTableView.delegate = self
+    questionTableView.dataSource = self
+    questionTableView.register(UINib.init(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
+    questionTableView.estimatedRowHeight = 500
+    questionTableView.rowHeight = UITableViewAutomaticDimension
+    questionTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+  }
     func getFeeds(){
-        
+      
         
         let hotParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
