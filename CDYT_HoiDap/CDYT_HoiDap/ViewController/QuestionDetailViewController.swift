@@ -30,7 +30,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     var isCommentOnComment = false
     
     var currComment = MainCommentEntity()
-    
+    var currentUserId = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,6 +45,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         setupImagePicker()
         
         imgCollectionViewHeight.constant = 0
+        currentUserId = Until.getCurrentId()
     }
     
     deinit{
@@ -63,6 +64,9 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         imgCollectionView.delegate = self
         imgCollectionView.dataSource = self
         imgCollectionView.register(UINib.init(nibName: "AddImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AddImageCollectionViewCell")
+        
+//        detailTbl.addpull
+        
     }
     
     func configInputBar(){
@@ -94,24 +98,28 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     //MARK: Post comment tap action
     func postCommentAction(){
-        let stringComent = textInputBar.text!
-        if stringComent == "" {
-            let alert = UIAlertController(title: "Thông Báo", message: "Bình luận không được để trống", preferredStyle: .alert)
-            let OkeAction: UIAlertAction = UIAlertAction(title: "Đóng", style: .cancel) { action -> Void in
-                self.textInputBar.becomeFirstResponder()
-            }
-            alert.addAction(OkeAction)
-            self.present(alert, animated: true, completion: nil)
-        }else {
-            if imageAssets.count > 0 {
-                uploadImage()
-            }else{
-                if isCommentOnComment {
-                    sendCommentOnComment(mainComment: currComment)
+        if Until.getCurrentId() != "" {
+            let stringComent = textInputBar.text!
+            if stringComent == "" {
+                let alert = UIAlertController(title: "Thông Báo", message: "Bình luận không được để trống", preferredStyle: .alert)
+                let OkeAction: UIAlertAction = UIAlertAction(title: "Đóng", style: .cancel) { action -> Void in
+                    self.textInputBar.becomeFirstResponder()
+                }
+                alert.addAction(OkeAction)
+                self.present(alert, animated: true, completion: nil)
+            }else {
+                if imageAssets.count > 0 {
+                    uploadImage()
                 }else{
-                    sendCommentToServer()
+                    if isCommentOnComment {
+                        sendCommentOnComment(mainComment: currComment)
+                    }else{
+                        sendCommentToServer()
+                    }
                 }
             }
+        }else{
+            Until.gotoLogin(_self: self)
         }
     }
     
@@ -205,7 +213,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         self.present(pickerController, animated: true, completion: nil)
     }
     
-    //  MARK: Keyboard
+    //  MARK: Keyboard showing
     func keyboardWillShow(notification:NSNotification){
         if let userInfo = notification.userInfo {
             let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
@@ -338,6 +346,12 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             if entity.isShowMore {
                 if indexPath.row == 0{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
+                    if currentUserId == feed.authorEntity.id {
+                        cell.markToResolveBtn.isHidden = false
+                        
+                    }else{
+                        cell.markToResolveBtn.isHidden = true
+                    }
                     cell.mainComment = listComment[indexPath.section - 1]
                     cell.setDataForMainComment()
                     cell.delegate = self
@@ -353,6 +367,11 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             }else{
                 if indexPath.row == 0{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
+                    if currentUserId == feed.authorEntity.id {
+                        cell.markToResolveBtn.isHidden = false
+                    }else{
+                        cell.markToResolveBtn.isHidden = true
+                    }
                     cell.mainComment = listComment[indexPath.section - 1]
                     cell.setDataForMainComment()
                     cell.delegate = self
@@ -408,6 +427,10 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         
     }
     
+    func gotoLoginFromDetailQuestionVC() {
+        Until.gotoLogin(_self: self)
+    }
+    
     //MARK: MoreCommentTableViewCellDelegate
     func showMoreSubcomment() {
         detailTbl.reloadData()
@@ -420,6 +443,10 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         
         currComment = mainComment
         isCommentOnComment = true
+    }
+    
+    func gotoLoginFromCommentTableCell() {
+        Until.gotoLogin(_self: self)
     }
     
     func sendCommentOnComment(mainComment : MainCommentEntity){

@@ -9,6 +9,7 @@
 import UIKit
 protocol CommentTableViewCellDelegate {
     func replyCommentAction(mainComment : MainCommentEntity)
+    func gotoLoginFromCommentTableCell()
 }
 class CommentTableViewCell: UITableViewCell {
 
@@ -26,12 +27,15 @@ class CommentTableViewCell: UITableViewCell {
     @IBOutlet weak var seperatorHeight: NSLayoutConstraint!
     
     @IBOutlet weak var replyLbl: UILabel!
+    @IBOutlet weak var markToResolveBtn: UIButton!
     
     var delegate : CommentTableViewCellDelegate?
     var mainComment = MainCommentEntity()
     var subComment = SubCommentEntity()
     
     var isSubcomment = false
+    let appDel: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+
     override func awakeFromNib() {
         super.awakeFromNib()
         avaImg.layer.cornerRadius = 8
@@ -46,70 +50,82 @@ class CommentTableViewCell: UITableViewCell {
     }
     
     func likeCommentAction(){
-        
-        var commentID = ""
-        var param = ""
-        if isSubcomment {
-            commentID = subComment.comment.id
-            param = LIKE_COMMENT_ON_COMMENT
+        let userID = Until.getCurrentId()
+        if userID == "" {
+            delegate?.gotoLoginFromCommentTableCell()
         }else{
-            commentID = mainComment.comment.id
-            param = LIKE_COMMENT
-        }
-        
-        let likeParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "RequestedUserId": Until.getCurrentId(),
-            "CommentId": commentID
-        ]
-        
-        print(JSON.init(likeParam))
-        
-        Until.showLoading()
-        Alamofire.request(param, method: .post, parameters: likeParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! NSDictionary
-                        let isLike = jsonData["IsLiked"] as! Bool
-                        
-                        if self.isSubcomment {
-                            self.subComment.isLike = isLike
-                            if isLike {
-                                self.subComment.likeCount += 1
+            var commentID = ""
+            var param = ""
+            if isSubcomment {
+                commentID = subComment.comment.id
+                param = LIKE_COMMENT_ON_COMMENT
+            }else{
+                commentID = mainComment.comment.id
+                param = LIKE_COMMENT
+            }
+            
+            let likeParam : [String : Any] = [
+                "Auth": Until.getAuthKey(),
+                "RequestedUserId": userID,
+                "CommentId": commentID
+            ]
+            
+            print(JSON.init(likeParam))
+            
+            Until.showLoading()
+            Alamofire.request(param, method: .post, parameters: likeParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! NSDictionary
+                            let isLike = jsonData["IsLiked"] as! Bool
+                            
+                            if self.isSubcomment {
+                                self.subComment.isLike = isLike
+                                if isLike {
+                                    self.subComment.likeCount += 1
+                                }else{
+                                    self.subComment.likeCount -= 1
+                                }
+                                self.setDataForSubComment()
                             }else{
-                                self.subComment.likeCount -= 1
+                                self.mainComment.isLike = isLike
+                                if isLike {
+                                    self.mainComment.likeCount += 1
+                                }else{
+                                    self.mainComment.likeCount -= 1
+                                }
+                                self.setDataForMainComment()
                             }
-                            self.setDataForSubComment()
-                        }else{
-                            self.mainComment.isLike = isLike
-                            if isLike {
-                                self.mainComment.likeCount += 1
-                            }else{
-                                self.mainComment.likeCount -= 1
-                            }
-                            self.setDataForMainComment()
                         }
+                    }else{
+                        //                    UIAlertController().showAlertWith(title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
                 }else{
-                    //                    UIAlertController().showAlertWith(title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    //                UIAlertController().showAlertWith(title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                //                UIAlertController().showAlertWith(title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                Until.hideLoading()
             }
-            Until.hideLoading()
+        
         }
     }
     
     func setDataForMainComment() {
         isSubcomment = false
+        
         if mainComment.comment.isSolution {
             solutionLbl.isHidden = false
             self.contentView.backgroundColor = UIColor().hexStringToUIColor(hex: "F1FDEA")
+            
+            markToResolveBtn.setImage(UIImage.init(named: "GiaiPhap_Mark.png"), for: UIControlState.normal)
+            
+            markToResolveBtn.isHidden = false
         }else{
             solutionLbl.isHidden = true
             solutionLbl.text = ""
             self.contentView.backgroundColor = UIColor.white
+            
+            markToResolveBtn.setImage(UIImage.init(named: "GiaiPhap_Mark_hide.png"), for: UIControlState.normal)
         }
         
         avaImg.sd_setImage(with: URL.init(string: mainComment.author.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
@@ -147,6 +163,8 @@ class CommentTableViewCell: UITableViewCell {
     
     func setDataForSubComment() {
         isSubcomment = true
+        markToResolveBtn.isHidden = true
+        
         if subComment.comment.isSolution {
             solutionLbl.isHidden = false
         }else{
@@ -179,6 +197,41 @@ class CommentTableViewCell: UITableViewCell {
         
         leftViewWidth.constant = 60
         avaImgHeight.constant = 30
+    }
+    
+    @IBAction func markSolutionTapAction(_ sender: Any) {
+        let userID = Until.getCurrentId()
+        if userID == "" {
+            delegate?.gotoLoginFromCommentTableCell()
+        }else{
+            
+            let markParam : [String : Any] = [
+                "Auth": Until.getAuthKey(),
+                "RequestedUserId": userID,
+                "CommentId": mainComment.comment.id
+            ]
+            
+            print(JSON.init(markParam))
+            
+            Until.showLoading()
+            Alamofire.request(MARK_AS_SOLUTION, method: .post, parameters: markParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! NSDictionary
+                            
+                        }
+                    }else{
+                        //                    UIAlertController().showAlertWith(title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    }
+                }else{
+                    //                UIAlertController().showAlertWith(title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+                Until.hideLoading()
+            }
+            
+        }
+
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -39,7 +39,7 @@
                         </attributedString>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gAH-dw-t5z">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AvaDefaut.png" translatesAutoresizingMaskIntoConstraints="NO" id="gAH-dw-t5z">
                         <rect key="frame" x="18" y="31" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="gAH-dw-t5z" secondAttribute="height" multiplier="1/1" id="BsC-vR-5rq"/>
@@ -111,6 +111,20 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z30-uc-Mo7">
+                        <rect key="frame" x="12" y="65.5" width="25" height="30.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="0KF-Ar-1ZF"/>
+                            <constraint firstAttribute="width" secondItem="Z30-uc-Mo7" secondAttribute="height" multiplier="115:139" id="djZ-E1-lgS"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                        <state key="normal" title=" " image="GiaiPhap_Mark_hide.png">
+                            <color key="titleColor" red="0.050980392159999999" green="0.66274509800000003" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="markSolutionTapAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YfR-Vf-DYB"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="tintColor" red="0.94513756036758423" green="0.99371367692947388" blue="0.91786819696426392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
@@ -122,6 +136,7 @@
                     <constraint firstAttribute="trailing" secondItem="vNb-ml-8Yx" secondAttribute="trailing" constant="15" id="CpJ-ai-ne0"/>
                     <constraint firstItem="Q7l-kE-QKc" firstAttribute="leading" secondItem="MFr-7s-uGu" secondAttribute="leading" id="D0Z-CJ-Idd"/>
                     <constraint firstItem="O1S-6w-XBX" firstAttribute="leading" secondItem="vQL-Ow-3m6" secondAttribute="trailing" id="DA1-7Q-emY"/>
+                    <constraint firstItem="Z30-uc-Mo7" firstAttribute="bottom" secondItem="gAH-dw-t5z" secondAttribute="bottom" constant="15" id="JQf-Q5-Geg"/>
                     <constraint firstItem="vQL-Ow-3m6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="KvK-v6-pXi"/>
                     <constraint firstItem="H09-HH-T2C" firstAttribute="centerY" secondItem="BeK-2R-eds" secondAttribute="centerY" id="Lx1-IV-GWo"/>
                     <constraint firstItem="H09-HH-T2C" firstAttribute="leading" secondItem="BeK-2R-eds" secondAttribute="trailing" constant="5" id="Nkw-Q4-RvB"/>
@@ -142,6 +157,7 @@
                     <constraint firstItem="eqf-MJ-zh0" firstAttribute="leading" secondItem="XcP-bL-hZh" secondAttribute="leading" id="iUg-ts-4Eh"/>
                     <constraint firstItem="vNb-ml-8Yx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="isX-Rq-CdM"/>
                     <constraint firstItem="MFr-7s-uGu" firstAttribute="top" secondItem="gAH-dw-t5z" secondAttribute="top" constant="5" id="jCH-Am-1Rd"/>
+                    <constraint firstItem="Z30-uc-Mo7" firstAttribute="leading" secondItem="gAH-dw-t5z" secondAttribute="leading" constant="-6" id="mKF-Qz-QQz"/>
                     <constraint firstItem="vQL-Ow-3m6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="nYD-an-YNR"/>
                     <constraint firstItem="BeK-2R-eds" firstAttribute="leading" secondItem="0jd-f1-5Vb" secondAttribute="trailing" constant="39" id="nqf-Q4-wQp"/>
                     <constraint firstItem="XcP-bL-hZh" firstAttribute="leading" secondItem="Q7l-kE-QKc" secondAttribute="leading" id="qrk-mw-OOB"/>
@@ -159,6 +175,7 @@
                 <outlet property="leftViewWidth" destination="z6a-2r-3Iz" id="nvR-mc-gkt"/>
                 <outlet property="likeCountLbl" destination="0jd-f1-5Vb" id="co8-gP-xWG"/>
                 <outlet property="likeIcon" destination="eqf-MJ-zh0" id="Sej-t1-JSg"/>
+                <outlet property="markToResolveBtn" destination="Z30-uc-Mo7" id="fxe-TY-AIZ"/>
                 <outlet property="nameLbl" destination="MFr-7s-uGu" id="OkG-1P-57P"/>
                 <outlet property="replyLbl" destination="H09-HH-T2C" id="7m7-ps-wyI"/>
                 <outlet property="seperatorHeight" destination="ggA-sr-Xk3" id="mwP-VR-mlu"/>
@@ -169,7 +186,9 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="AvaDefaut.png" width="294" height="294"/>
         <image name="Clover0.png" width="100" height="100"/>
+        <image name="GiaiPhap_Mark_hide.png" width="115" height="139"/>
         <image name="comment_icon.png" width="100" height="100"/>
     </resources>
 </document>

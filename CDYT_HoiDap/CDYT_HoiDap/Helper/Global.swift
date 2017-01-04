@@ -32,6 +32,7 @@ let POST_COMMENT_ON_COMMENT = BASE_URL + "/Post/CommentOnComment"
 let LIKE_POST = BASE_URL + "/Post/LikePost"
 let LIKE_COMMENT = BASE_URL + "/Post/LikeComment"
 let LIKE_COMMENT_ON_COMMENT = BASE_URL + "/Post/LikeCommentLevel2"
+let MARK_AS_SOLUTION = BASE_URL + "/Post/AcceptAsSolution"
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
 let NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"

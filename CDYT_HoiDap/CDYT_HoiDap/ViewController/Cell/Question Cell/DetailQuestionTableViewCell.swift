@@ -9,6 +9,7 @@
 import UIKit
 protocol DetailQuestionTableViewCellDelegate {
     func replyToPost(feedEntity : FeedsEntity)
+    func gotoLoginFromDetailQuestionVC()
 }
 class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -56,42 +57,45 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
     }
     
     func likePostAction(){
-        
-        let followParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "RequestedUserId": Until.getCurrentId(),
-            "PostId": feed.postEntity.id
-        ]
-        
-        print(JSON.init(followParam))
-        
-        Until.showLoading()
-        Alamofire.request(LIKE_POST, method: .post, parameters: followParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! NSDictionary
-                        let isLike = jsonData["IsLiked"] as! Bool
-                        
-                        self.feed.isLiked = isLike
-                     
-                        if isLike {
-                            self.feed.likeCount += 1
-                        }else{
-                            self.feed.likeCount -= 1
+        let userId = Until.getCurrentId()
+        if userId == "" {
+            delegate?.gotoLoginFromDetailQuestionVC()
+        }else{
+            let followParam : [String : Any] = [
+                "Auth": Until.getAuthKey(),
+                "RequestedUserId": userId,
+                "PostId": feed.postEntity.id
+            ]
+            
+            print(JSON.init(followParam))
+            
+            Until.showLoading()
+            Alamofire.request(LIKE_POST, method: .post, parameters: followParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! NSDictionary
+                            let isLike = jsonData["IsLiked"] as! Bool
+                            
+                            self.feed.isLiked = isLike
+                            
+                            if isLike {
+                                self.feed.likeCount += 1
+                            }else{
+                                self.feed.likeCount -= 1
+                            }
+                            self.setData()
+                            
                         }
-                        self.setData()
-                        
+                    }else{
+                        //                    UIAlertController().showAlertWith(title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
                 }else{
-                    //                    UIAlertController().showAlertWith(title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    //                UIAlertController().showAlertWith(title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                //                UIAlertController().showAlertWith(title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                Until.hideLoading()
             }
-            Until.hideLoading()
         }
-        
     }
     
     func setData(){
