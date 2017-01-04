@@ -31,15 +31,14 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     var currComment = MainCommentEntity()
     var currentUserId = ""
+    var pageIndex = 0
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configTable()
         getListCommentByPostID()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(notification:)), name: NSNotification.Name(rawValue: ALKeyboardFrameDidChangeNotification), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        registerNotification()
         
         configInputBar()
         setupImagePicker()
@@ -52,6 +51,14 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         NotificationCenter.default.removeObserver(self)
     }
     
+    func registerNotification(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(notification:)), name: NSNotification.Name(rawValue: ALKeyboardFrameDidChangeNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(markACommentToSolution(notification:)), name: Notification.Name.init(MARK_COMMENT_TO_RESOLVE), object: nil)
+        
+    }
     func configTable(){
         detailTbl.delegate = self
         detailTbl.dataSource = self
@@ -65,8 +72,31 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         imgCollectionView.dataSource = self
         imgCollectionView.register(UINib.init(nibName: "AddImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AddImageCollectionViewCell")
         
-//        detailTbl.addpull
+        detailTbl.addPullToRefreshHandler {
+            DispatchQueue.main.async {
+                self.detailTbl.pullToRefreshView?.startAnimating()
+                self.reloadData()
+                
+            }
+        }
         
+        detailTbl.addInfiniteScrollingWithHandler {
+            DispatchQueue.main.async {
+                self.detailTbl.infiniteScrollingView?.startAnimating()
+                self.loadMore()
+            }
+        }
+    }
+    
+    func reloadData(){
+        pageIndex = 1
+        listComment.removeAll()
+        getListCommentByPostID()
+    }
+    
+    func loadMore(){
+        pageIndex += 1
+        getListCommentByPostID()
     }
     
     func configInputBar(){
@@ -257,6 +287,19 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
+    //MARK: receive notifiy when mark an comment is solution
+    func markACommentToSolution(notification : Notification){
+        let commentEntity = notification.object as! CommentEntity
+        
+        for item in listComment {
+            if item.comment.id == commentEntity.id {
+                item.comment.isSolution = commentEntity.isSolution
+            }
+        }
+        
+        detailTbl.reloadData()
+    }
+    
     // This is also required
     override var canBecomeFirstResponder: Bool{
         return true
@@ -281,7 +324,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     func getListCommentByPostID(){
         let hotParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
-            "Page": 1,
+            "Page": pageIndex,
             "Size": 10,
             "RequestedUserId" : Until.getCurrentId(),
             "PostId": feed.postEntity.id
@@ -309,6 +352,8 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                 UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
             }
             Until.hideLoading()
+            self.detailTbl.pullToRefreshView?.stopAnimating()
+            self.detailTbl.infiniteScrollingView?.stopAnimating()
         }
     }
     
@@ -347,10 +392,9 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                 if indexPath.row == 0{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
                     if currentUserId == feed.authorEntity.id {
-                        cell.markToResolveBtn.isHidden = false
-                        
+                        cell.isMyPost = true
                     }else{
-                        cell.markToResolveBtn.isHidden = true
+                        cell.isMyPost = false
                     }
                     cell.mainComment = listComment[indexPath.section - 1]
                     cell.setDataForMainComment()
@@ -368,9 +412,9 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                 if indexPath.row == 0{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
                     if currentUserId == feed.authorEntity.id {
-                        cell.markToResolveBtn.isHidden = false
+                        cell.isMyPost = true
                     }else{
-                        cell.markToResolveBtn.isHidden = true
+                        cell.isMyPost = false
                     }
                     cell.mainComment = listComment[indexPath.section - 1]
                     cell.setDataForMainComment()

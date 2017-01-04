@@ -35,7 +35,8 @@ class CommentTableViewCell: UITableViewCell {
     
     var isSubcomment = false
     let appDel: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-
+    var isMyPost = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         avaImg.layer.cornerRadius = 8
@@ -114,16 +115,32 @@ class CommentTableViewCell: UITableViewCell {
         isSubcomment = false
         
         if mainComment.comment.isSolution {
-            solutionLbl.isHidden = false
             self.contentView.backgroundColor = UIColor().hexStringToUIColor(hex: "F1FDEA")
+            solutionLbl.isHidden = false
+            
+            if isMyPost {
+                solutionLbl.text = "Bạn đã chọn làm giải pháp"
+                markToResolveBtn.isHidden = false
+                markToResolveBtn.isUserInteractionEnabled = true
+            }else{
+                solutionLbl.text = "Câu trả lời được chọn làm giải pháp"
+                markToResolveBtn.isHidden = true
+                markToResolveBtn.isUserInteractionEnabled = false
+            }
             
             markToResolveBtn.setImage(UIImage.init(named: "GiaiPhap_Mark.png"), for: UIControlState.normal)
-            
             markToResolveBtn.isHidden = false
         }else{
+            self.contentView.backgroundColor = UIColor.white
+            
             solutionLbl.isHidden = true
             solutionLbl.text = ""
-            self.contentView.backgroundColor = UIColor.white
+            
+            if isMyPost {
+                markToResolveBtn.isHidden = false
+            }else{
+                markToResolveBtn.isHidden = true
+            }
             
             markToResolveBtn.setImage(UIImage.init(named: "GiaiPhap_Mark_hide.png"), for: UIControlState.normal)
         }
@@ -165,12 +182,8 @@ class CommentTableViewCell: UITableViewCell {
         isSubcomment = true
         markToResolveBtn.isHidden = true
         
-        if subComment.comment.isSolution {
-            solutionLbl.isHidden = false
-        }else{
-            solutionLbl.isHidden = true
-            solutionLbl.text = ""
-        }
+        solutionLbl.isHidden = true
+        solutionLbl.text = ""
         
         avaImg.sd_setImage(with: URL.init(string: subComment.author.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
         nameLbl.text = subComment.author.nickname
@@ -219,13 +232,15 @@ class CommentTableViewCell: UITableViewCell {
                     if status == 200{
                         if let result = response.result.value {
                             let jsonData = result as! NSDictionary
+                            let comment = CommentEntity.init(dictionary: jsonData)
                             
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: MARK_COMMENT_TO_RESOLVE), object: comment)
                         }
                     }else{
-                        //                    UIAlertController().showAlertWith(title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                        UIAlertController().showAlertWith(vc: self.appDel.window!.rootViewController!, title: "Thông báo", message: "Có lỗi xảy ra, vui lòng thử lai sau", cancelBtnTitle: "Đóng")
                     }
                 }else{
-                    //                UIAlertController().showAlertWith(title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self.appDel.window!.rootViewController!, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lai sau", cancelBtnTitle: "Đóng")
                 }
                 Until.hideLoading()
             }
