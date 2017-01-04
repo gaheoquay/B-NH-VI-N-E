@@ -34,7 +34,29 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     tbQuestion.rowHeight = UITableViewAutomaticDimension
     tbQuestion.register(UINib.init(nibName: "KeyWordTableViewCell", bundle: nil), forCellReuseIdentifier: "KeyWordTableViewCell")
     tbQuestion.register(UINib.init(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
-
+    tbQuestion.addPullToRefreshHandler {
+      DispatchQueue.main.async {
+        self.tbQuestion.pullToRefreshView?.startAnimating()
+        self.reloadData()
+      }
+    }
+    tbQuestion.addInfiniteScrollingWithHandler {
+      DispatchQueue.main.async {
+        self.tbQuestion.infiniteScrollingView?.startAnimating()
+        self.loadMore()
+      }
+    }
+  }
+  func reloadData(){
+    page = 1
+    listHotTag.removeAll()
+    listFedds.removeAll()
+    getHotTagFromServer()
+    getFeeds()
+  }
+  func loadMore(){
+    page += 1
+    getFeeds()
   }
 //  MARK: KeyWordTableViewCellDelegate
   func gotoListQuestionByTag(indexpath: IndexPath) {
@@ -52,9 +74,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
       "Size": 10,
       "RequestedUserId" : Until.getCurrentId()
     ]
-    
-    print(JSON.init(hotParam))
-    
     Until.showLoading()
     Alamofire.request(HOTEST_TAG, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
@@ -66,10 +85,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
               let hotTag = HotTagEntity.init(dictionary: item)
               self.listHotTag.append(hotTag)
             }
-            
-            self.tbQuestion.reloadData()
-            
           }
+          self.tbQuestion.reloadData()
         }else{
           UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
         }
@@ -83,11 +100,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
   func getFeeds(){
     let hotParam : [String : Any] = [
       "Auth": Until.getAuthKey(),
-      "Page": 1,
+      "Page": page,
       "Size": 10,
       "RequestedUserId" : Until.getCurrentId()
     ]
-    print(JSON.init(hotParam))
     Until.showLoading()
     Alamofire.request(GET_FEEDS, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
@@ -110,6 +126,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
       }
       Until.hideLoading()
+      self.tbQuestion.pullToRefreshView?.stopAnimating()
+      self.tbQuestion.infiniteScrollingView?.stopAnimating()
     }
 
   }
@@ -138,7 +156,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
       cell.feedEntity = listFedds[indexPath.row]
       cell.setData()
       return cell
-
     }
   }
     
@@ -163,5 +180,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
   var listFedds = [FeedsEntity]()
   var listHotTag = [HotTagEntity]()
   var page = 1
+  var canLoadMore = true
 }
 

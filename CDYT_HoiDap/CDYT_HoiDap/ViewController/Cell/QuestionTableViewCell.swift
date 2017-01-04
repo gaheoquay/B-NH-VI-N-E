@@ -9,6 +9,7 @@
 import UIKit
 protocol QuestionTableViewCellDelegate {
     func showQuestionDetail(indexPath : IndexPath)
+//  func 
 }
 class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDelegateLeftAlignedLayout {
   
@@ -17,8 +18,8 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
     clvTags.dataSource = self
     clvTags.delegate = self
     clvTags.register(UINib.init(nibName: "KeywordCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeywordCollectionViewCell")
-
-    self.contentView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showDetailQuestion)))
+    lbTitle.isUserInteractionEnabled = true
+    lbTitle.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showDetailQuestion)))
   }
   
   override func setSelected(_ selected: Bool, animated: Bool) {
@@ -30,7 +31,10 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
     func showDetailQuestion(){
         delegate?.showQuestionDetail(indexPath: self.indexPath)
     }
-    
+  @IBAction func showDetail(_ sender: Any) {
+    delegate?.showQuestionDetail(indexPath: self.indexPath)
+  }
+  
   func setData(){
     lbTitle.text = feedEntity.postEntity.title
     lbContent.text = feedEntity.postEntity.content

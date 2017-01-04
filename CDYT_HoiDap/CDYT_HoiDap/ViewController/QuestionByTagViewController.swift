@@ -35,7 +35,29 @@ class QuestionByTagViewController: UIViewController,UITableViewDelegate,UITableV
     tbQuestion.rowHeight = UITableViewAutomaticDimension
     tbQuestion.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     tbQuestion.register(UINib.init(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
+    tbQuestion.addPullToRefreshHandler {
+      DispatchQueue.main.async {
+        self.tbQuestion.pullToRefreshView?.startAnimating()
+        self.reloadData()
+      }
+    }
+    tbQuestion.addInfiniteScrollingWithHandler {
+      DispatchQueue.main.async {
+        self.tbQuestion.infiniteScrollingView?.startAnimating()
+        self.loadMore()
+      }
+    }
   }
+  func reloadData(){
+    page = 1
+    listFedds.removeAll()
+    getFeeds()
+  }
+  func loadMore(){
+    page += 1
+    getFeeds()
+  }
+
 //  MARK: Action
   
   @IBAction func actionBack(_ sender: Any) {
@@ -45,7 +67,7 @@ class QuestionByTagViewController: UIViewController,UITableViewDelegate,UITableV
   func getFeeds(){
     let hotParam : [String : Any] = [
       "Auth": Until.getAuthKey(),
-      "Page": 1,
+      "Page": page,
       "Size": 10,
       "RequestedUserId" : Until.getCurrentId(),
       "Tag" : hotTagEntity.tag.id
@@ -72,6 +94,8 @@ class QuestionByTagViewController: UIViewController,UITableViewDelegate,UITableV
         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
       }
       Until.hideLoading()
+      self.tbQuestion.pullToRefreshView?.stopAnimating()
+      self.tbQuestion.infiniteScrollingView?.stopAnimating()
     }
     
   }
@@ -101,4 +125,5 @@ class QuestionByTagViewController: UIViewController,UITableViewDelegate,UITableV
   @IBOutlet weak var tbQuestion: UITableView!
   var listFedds = [FeedsEntity]()
   var hotTagEntity : HotTagEntity!
+  var page = 1
 }

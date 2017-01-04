@@ -13,5 +13,6 @@ pod 'TTTAttributedLabel'
 pod 'UICollectionViewLeftAlignedLayout'
 pod 'NVActivityIndicatorView'
 pod 'UITextView+Placeholder'
+pod 'ICSPullToRefresh'
 
 end

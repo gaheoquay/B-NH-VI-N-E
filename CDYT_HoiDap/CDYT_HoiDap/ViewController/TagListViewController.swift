@@ -12,24 +12,47 @@ class TagListViewController: UIViewController, UITableViewDataSource, UITableVie
 
     @IBOutlet weak var tagTableView: UITableView!
     var listHotTag = [HotTagEntity]()
-    
+    var page = 1
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tagTableView.delegate = self
-        tagTableView.dataSource = self
-        tagTableView.estimatedRowHeight = 200
-        tagTableView.rowHeight = UITableViewAutomaticDimension
-        tagTableView.register(UINib.init(nibName: "QuestionTagTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTagTableViewCell")
-        tagTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-
+      initTaleView()
         getHotTagFromServer()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listHotTag.count
     }
-    
+  
+  func initTaleView(){
+    tagTableView.delegate = self
+    tagTableView.dataSource = self
+    tagTableView.estimatedRowHeight = 200
+    tagTableView.rowHeight = UITableViewAutomaticDimension
+    tagTableView.register(UINib.init(nibName: "QuestionTagTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTagTableViewCell")
+    tagTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+    tagTableView.addPullToRefreshHandler {
+      DispatchQueue.main.async {
+        self.tagTableView.pullToRefreshView?.startAnimating()
+        self.reloadData()
+      }
+    }
+    tagTableView.addInfiniteScrollingWithHandler {
+      DispatchQueue.main.async {
+        self.tagTableView.infiniteScrollingView?.startAnimating()
+        self.loadMore()
+      }
+    }
+  }
+  func reloadData(){
+    page = 1
+    listHotTag.removeAll()
+    getHotTagFromServer()
+  }
+  func loadMore(){
+    page += 1
+    getHotTagFromServer()
+  }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTagTableViewCell") as! QuestionTagTableViewCell
       cell.delegate = self
@@ -52,7 +75,7 @@ class TagListViewController: UIViewController, UITableViewDataSource, UITableVie
     func getHotTagFromServer(){
         let hotParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
-            "Page": 1,
+            "Page": page,
             "Size": 10,
             "RequestedUserId" : Until.getCurrentId()
         ]
@@ -81,6 +104,9 @@ class TagListViewController: UIViewController, UITableViewDataSource, UITableVie
                 UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
             }
             Until.hideLoading()
+          self.tagTableView.pullToRefreshView?.stopAnimating()
+          self.tagTableView.infiniteScrollingView?.stopAnimating()
+
         }
     }
     override func didReceiveMemoryWarning() {

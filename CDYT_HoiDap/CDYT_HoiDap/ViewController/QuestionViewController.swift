@@ -29,13 +29,34 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
     tbQuestion.rowHeight = UITableViewAutomaticDimension
     tbQuestion.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     tbQuestion.register(UINib.init(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
+    tbQuestion.addPullToRefreshHandler {
+      DispatchQueue.main.async {
+        self.tbQuestion.pullToRefreshView?.startAnimating()
+        self.reloadData()
+      }
+    }
+    tbQuestion.addInfiniteScrollingWithHandler {
+      DispatchQueue.main.async {
+        self.tbQuestion.infiniteScrollingView?.startAnimating()
+        self.loadMore()
+      }
+    }
   }
-  
+  func reloadData(){
+    page = 1
+    listFedds.removeAll()
+    getFeeds()
+  }
+  func loadMore(){
+    page += 1
+    getFeeds()
+  }
+
   //  MARK: request data
   func getFeeds(){
     let hotParam : [String : Any] = [
       "Auth": Until.getAuthKey(),
-      "Page": 1,
+      "Page": page,
       "Size": 10,
       "RequestedUserId" : Until.getCurrentId()
     ]
@@ -51,9 +72,9 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
               self.listFedds.append(entity)
             }
             
-            self.tbQuestion.reloadData()
             
           }
+          self.tbQuestion.reloadData()
         }else{
           UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
         }
@@ -61,6 +82,8 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
       }
       Until.hideLoading()
+      self.tbQuestion.pullToRefreshView?.stopAnimating()
+      self.tbQuestion.infiniteScrollingView?.stopAnimating()
     }
     
   }
@@ -88,5 +111,5 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
   //  MARK: Outlet
   @IBOutlet weak var tbQuestion: UITableView!
   var listFedds = [FeedsEntity]()
-  
+  var page = 1
 }
