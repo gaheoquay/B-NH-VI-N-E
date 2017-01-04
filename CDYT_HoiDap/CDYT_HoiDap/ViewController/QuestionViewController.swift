@@ -107,7 +107,11 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
         vc.feed = listFedds[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
+  func gotoListQuestionByTag(hotTagId: String) {
+    let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
+    viewController.hotTagId = hotTagId
+    self.navigationController?.pushViewController(viewController, animated: true)
+  }
   //  MARK: Outlet
   @IBOutlet weak var tbQuestion: UITableView!
   var listFedds = [FeedsEntity]()

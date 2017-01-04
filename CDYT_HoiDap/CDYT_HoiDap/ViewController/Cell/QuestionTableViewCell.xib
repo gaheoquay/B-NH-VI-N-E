@@ -165,7 +165,6 @@
             </connections>
             <point key="canvasLocation" x="-20" y="-126.5"/>
         </tableViewCell>
-        <tapGestureRecognizer id="sNl-fl-Et7"/>
     </objects>
     <resources>
         <image name="Clover0.png" width="100" height="100"/>

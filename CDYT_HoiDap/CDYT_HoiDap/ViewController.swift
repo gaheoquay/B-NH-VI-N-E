@@ -59,12 +59,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     getFeeds()
   }
 //  MARK: KeyWordTableViewCellDelegate
-  func gotoListQuestionByTag(indexpath: IndexPath) {
-    let entity = listHotTag[indexpath.row]
+  func gotoListQuestionByTag(hotTagId: String) {
     let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
-    viewController.hotTagEntity = entity
+    viewController.hotTagId = hotTagId
     self.navigationController?.pushViewController(viewController, animated: true)
   }
+  
 //  MARK: request server
   func getHotTagFromServer(){
     

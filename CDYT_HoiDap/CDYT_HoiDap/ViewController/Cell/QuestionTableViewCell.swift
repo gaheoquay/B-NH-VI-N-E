@@ -9,7 +9,7 @@
 import UIKit
 protocol QuestionTableViewCellDelegate {
     func showQuestionDetail(indexPath : IndexPath)
-//  func 
+  func gotoListQuestionByTag(hotTagId: String)
 }
 class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDelegateLeftAlignedLayout {
   
@@ -89,6 +89,10 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
   }
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return 5
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    delegate?.gotoListQuestionByTag(hotTagId: feedEntity.tags[indexPath.row].id)
   }
 
 //  MARK: Outlet

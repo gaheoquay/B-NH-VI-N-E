@@ -25,7 +25,7 @@ class QuestionByTagViewController: UIViewController,UITableViewDelegate,UITableV
   }
 //  MARK: bindData
   func bindData(){
-    lbTitle.text = hotTagEntity.tag.id
+    lbTitle.text = hotTagId
   }
   //MARK: init table view
   func initTableView(){
@@ -70,7 +70,7 @@ class QuestionByTagViewController: UIViewController,UITableViewDelegate,UITableV
       "Page": page,
       "Size": 10,
       "RequestedUserId" : Until.getCurrentId(),
-      "Tag" : hotTagEntity.tag.id
+      "Tag" : hotTagId
     ]
     Until.showLoading()
     Alamofire.request(GET_QUESTION_BY_TAG, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -120,10 +120,16 @@ class QuestionByTagViewController: UIViewController,UITableViewDelegate,UITableV
         vc.feed = listFedds[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
+  func gotoListQuestionByTag(hotTagId: String) {
+    return
+//    let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
+//    viewController.hotTagId = hotTagId
+//    self.navigationController?.pushViewController(viewController, animated: true)
+  }
 //  MARK: Outlet
   @IBOutlet weak var lbTitle: UILabel!
   @IBOutlet weak var tbQuestion: UITableView!
   var listFedds = [FeedsEntity]()
-  var hotTagEntity : HotTagEntity!
+  var hotTagId = ""
   var page = 1
 }

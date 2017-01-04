@@ -122,7 +122,11 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
         vc.feed = listMyFeed[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
+  func gotoListQuestionByTag(hotTagId: String) {
+    let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
+    viewController.hotTagId = hotTagId
+    self.navigationController?.pushViewController(viewController, animated: true)
+  }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

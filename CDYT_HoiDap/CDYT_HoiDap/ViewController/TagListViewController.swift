@@ -68,7 +68,7 @@ class TagListViewController: UIViewController, UITableViewDataSource, UITableVie
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let entity = listHotTag[indexPath.row]
     let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
-    viewController.hotTagEntity = entity
+    viewController.hotTagId = entity.tag.id
     self.navigationController?.pushViewController(viewController, animated: true)
   }
   

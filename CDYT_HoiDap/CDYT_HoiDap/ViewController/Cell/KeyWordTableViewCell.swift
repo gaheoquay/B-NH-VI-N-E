@@ -9,7 +9,7 @@
 import UIKit
 
 protocol KeyWordTableViewCellDelegate {
-  func gotoListQuestionByTag(indexpath:IndexPath)
+  func gotoListQuestionByTag(hotTagId : String)
 }
 
 class KeyWordTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDelegateLeftAlignedLayout,UICollectionViewDelegate {
@@ -38,7 +38,7 @@ class KeyWordTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollect
     return cell
   }
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    delegate?.gotoListQuestionByTag(indexpath: indexPath)
+    delegate?.gotoListQuestionByTag(hotTagId: listTag[indexPath.row].tag.id)
   }
 // MARK: UICollectionViewDelegateLeftAlignedLayout
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
