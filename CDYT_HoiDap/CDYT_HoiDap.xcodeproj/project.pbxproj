@@ -85,6 +85,10 @@
 		8BF1497E1E14BF9C00766F8F /* TinNhan.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1496B1E14BF9C00766F8F /* TinNhan.png */; };
 		A6005BCF1E13722B00095FB7 /* NotifyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6005BCD1E13722B00095FB7 /* NotifyTableViewCell.swift */; };
 		A6005BD01E13722B00095FB7 /* NotifyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6005BCE1E13722B00095FB7 /* NotifyTableViewCell.xib */; };
+		A60430F61E232D49000216FB /* Change_Ava.png in Resources */ = {isa = PBXBuildFile; fileRef = A60430F51E232D49000216FB /* Change_Ava.png */; };
+		A60430FA1E233431000216FB /* SSRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60430F81E233431000216FB /* SSRadioButton.swift */; };
+		A60430FB1E233431000216FB /* SSRadioButtonsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60430F91E233431000216FB /* SSRadioButtonsController.swift */; };
+		A60430FD1E2344DA000216FB /* dropdownicon.png in Resources */ = {isa = PBXBuildFile; fileRef = A60430FC1E2344DA000216FB /* dropdownicon.png */; };
 		A609C2531E1B8F9F006BFBAE /* delete_img.png in Resources */ = {isa = PBXBuildFile; fileRef = A609C2521E1B8F9F006BFBAE /* delete_img.png */; };
 		A63C38DF1E120A7E00DAB016 /* DangKi3.png in Resources */ = {isa = PBXBuildFile; fileRef = A63C38D31E120A7E00DAB016 /* DangKi3.png */; };
 		A6417E1F1E13B56C00BD2D75 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6417E1E1E13B56C00BD2D75 /* SettingViewController.swift */; };
@@ -211,6 +215,10 @@
 		8BF1496B1E14BF9C00766F8F /* TinNhan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TinNhan.png; sourceTree = "<group>"; };
 		A6005BCD1E13722B00095FB7 /* NotifyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyTableViewCell.swift; sourceTree = "<group>"; };
 		A6005BCE1E13722B00095FB7 /* NotifyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotifyTableViewCell.xib; sourceTree = "<group>"; };
+		A60430F51E232D49000216FB /* Change_Ava.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Change_Ava.png; sourceTree = "<group>"; };
+		A60430F81E233431000216FB /* SSRadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSRadioButton.swift; sourceTree = "<group>"; };
+		A60430F91E233431000216FB /* SSRadioButtonsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSRadioButtonsController.swift; sourceTree = "<group>"; };
+		A60430FC1E2344DA000216FB /* dropdownicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropdownicon.png; sourceTree = "<group>"; };
 		A609C2521E1B8F9F006BFBAE /* delete_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_img.png; sourceTree = "<group>"; };
 		A63C38D31E120A7E00DAB016 /* DangKi3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DangKi3.png; sourceTree = "<group>"; };
 		A6417E1E1E13B56C00BD2D75 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -311,6 +319,8 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A60430FC1E2344DA000216FB /* dropdownicon.png */,
+				A60430F51E232D49000216FB /* Change_Ava.png */,
 				A609C2521E1B8F9F006BFBAE /* delete_img.png */,
 				A67311D01E160F3400BCE308 /* placeholder_wide.png */,
 				A67311CE1E1601DB00BCE308 /* comment_icon.png */,
@@ -358,6 +368,7 @@
 		8B3A131E1E10F454005DBC6E /* Libaries */ = {
 			isa = PBXGroup;
 			children = (
+				A60430F71E233431000216FB /* SSRadioButtonController */,
 				8B3A131F1E10F454005DBC6E /* CAPSPageMenu.swift */,
 				8B3A13201E10F454005DBC6E /* DatePickerDialog.swift */,
 				8B3A13211E10F454005DBC6E /* Encription */,
@@ -533,6 +544,15 @@
 			path = "User Cell";
 			sourceTree = "<group>";
 		};
+		A60430F71E233431000216FB /* SSRadioButtonController */ = {
+			isa = PBXGroup;
+			children = (
+				A60430F81E233431000216FB /* SSRadioButton.swift */,
+				A60430F91E233431000216FB /* SSRadioButtonsController.swift */,
+			);
+			path = SSRadioButtonController;
+			sourceTree = "<group>";
+		};
 		A68A95011E14ECE10067736E /* Question Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -662,7 +682,9 @@
 				A68A950E1E150CF80067736E /* Clover0.png in Resources */,
 				A67311D11E160F3400BCE308 /* placeholder_wide.png in Resources */,
 				8BF1497D1E14BF9C00766F8F /* Thongbao.png in Resources */,
+				A60430FD1E2344DA000216FB /* dropdownicon.png in Resources */,
 				A6417E231E13B68D00BD2D75 /* SettingTableViewCell.xib in Resources */,
+				A60430F61E232D49000216FB /* Change_Ava.png in Resources */,
 				A67311D51E164FC400BCE308 /* MoreCommentTableViewCell.xib in Resources */,
 				8B3A13441E10F454005DBC6E /* Back.png in Resources */,
 				8B813CB41E15052E0043F7EF /* Profile.png in Resources */,
@@ -762,6 +784,7 @@
 				8BC2C30E1E23379300B68F72 /* ListNotificationEntity.swift in Sources */,
 				8B3A12E11E10F399005DBC6E /* ViewController.swift in Sources */,
 				8BC2C3101E2337C700B68F72 /* NotificationEntity.swift in Sources */,
+				A60430FB1E233431000216FB /* SSRadioButtonsController.swift in Sources */,
 				A6D083C91E127F9F007EA4D9 /* TagEntity.swift in Sources */,
 				A6E4C2F81E1102A500C2C871 /* RegisterViewController.swift in Sources */,
 				8B3A13881E10FD2A005DBC6E /* UserViewController.swift in Sources */,
@@ -797,6 +820,7 @@
 				8B3A13721E10F454005DBC6E /* NSString+URLEncode.m in Sources */,
 				A68A95041E14ECFB0067736E /* DetailQuestionTableViewCell.swift in Sources */,
 				8B3A12DF1E10F399005DBC6E /* AppDelegate.swift in Sources */,
+				A60430FA1E233431000216FB /* SSRadioButton.swift in Sources */,
 				8B3A137B1E10F454005DBC6E /* RAMTransitionItemAnimations.swift in Sources */,
 				8B3A13741E10F454005DBC6E /* TPKeyboardAvoidingScrollView.m in Sources */,
 				8B1AD45E1E1B97F000D55543 /* SearchTableViewCell.swift in Sources */,
