@@ -9,47 +9,75 @@
 import UIKit
 
 class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-    @IBOutlet weak var notifyTableView: UITableView!
+  
+  @IBOutlet weak var notifyTableView: UITableView!
+  var listNotification = [ListNotificationEntity]()
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupTableView()
+    getListNotification()
+  }
+  
+  //MARK: Set up table
+  func setupTableView(){
+    notifyTableView.dataSource = self
+    notifyTableView.delegate = self
+    notifyTableView.estimatedRowHeight = 200
+    notifyTableView.rowHeight = UITableViewAutomaticDimension
+    notifyTableView.register(UINib.init(nibName: "NotifyTableViewCell", bundle: nil), forCellReuseIdentifier: "NotifyTableViewCell")
+    notifyTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+  }
+  //MARK: get list notification
+  func getListNotification(){
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        notifyTableView.dataSource = self
-        notifyTableView.delegate = self
-        notifyTableView.estimatedRowHeight = 200
-        notifyTableView.rowHeight = UITableViewAutomaticDimension
-        notifyTableView.register(UINib.init(nibName: "NotifyTableViewCell", bundle: nil), forCellReuseIdentifier: "NotifyTableViewCell")
-        notifyTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+    let hotParam : [String : Any] = [
+      "Auth": Until.getAuthKey(),
+      "Page": 1,
+      "Size": 100,
+      "RequestedUserId" : Until.getCurrentId()
+    ]
+    Until.showLoading()
+    Alamofire.request(GET_LIST_NOTIFICATION, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+      if let status = response.response?.statusCode {
+        if status == 200{
+          if let result = response.result.value {
+            let jsonData = result as! [NSDictionary]
+            
+            for item in jsonData {
+              let entity = ListNotificationEntity.init(dictionary: item)
+              self.listNotification.append(entity)
+            }
+          }
+          self.notifyTableView.reloadData()
+        }else{
+          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        }
+      }else{
+        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+      }
+      Until.hideLoading()
+      self.notifyTableView.pullToRefreshView?.stopAnimating()
+      self.notifyTableView.infiniteScrollingView?.stopAnimating()
 
     }
+  }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NotifyTableViewCell") as! NotifyTableViewCell
-        cell.titleLbl.text = "helo 21231a3s13da21s3d132s3"
-        return cell
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func backTapAction(_ sender: Any) {
-        _ = self.navigationController?.popViewController(animated: true)
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+  //MARK: UITableViewDelegate, UITableViewDataSource
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return listNotification.count
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "NotifyTableViewCell") as! NotifyTableViewCell
+    cell.setData(entity: listNotification[indexPath.row])
+    return cell
+  }
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  //MARK: Action
+  @IBAction func backTapAction(_ sender: Any) {
+    _ = self.navigationController?.popViewController(animated: true)
+  }
 }

@@ -20,18 +20,24 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let realm = try! Realm()
-        let users = realm.objects(UserEntity.self)
-        if users.count > 0 {
-            userEntity = users.first!
-        }else{
-          Until.gotoLogin(_self: self, cannotBack: true)
+      let realm = try! Realm()
+      let users = realm.objects(UserEntity.self)
+      if users.count > 0 {
+        userEntity = users.first!
       }
       initTable()
         setUpUI()
         setupUserInfo()
         getFeeds()
     }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    if userEntity.id == "" {
+      
+    }
+
+  }
+  
   func setUpUI(){
     avaImg.layer.cornerRadius = 10
     self.navigationController?.isNavigationBarHidden = true
@@ -120,7 +126,15 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let vc = storyboard.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
+  @IBAction func actionSetting(_ sender: Any) {
+    let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+    let vc = storyboard.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
+    self.navigationController?.pushViewController(vc, animated: true)
+  }
 
+  @IBAction func actionLogin(_ sender: Any) {
+    Until.gotoLogin(_self: self, cannotBack: false)
+  }
     
     //MARK: QuestionTableViewCellDelegate
     func showQuestionDetail(indexPath: IndexPath) {
