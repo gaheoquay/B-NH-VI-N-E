@@ -44,8 +44,10 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
     var radioButtonController: SSRadioButtonsController?
 
     var userEntity = UserEntity()
-    var otherUserId = "123123"
+    var otherUserId = ""
     var genderType = ""
+    var dobDate = Double()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -99,12 +101,18 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
             jobView2.isHidden = false
             jobViewHeight2.constant = 60
             
-            jobTitleLbl.text = userEntity.job
             if userEntity.isVerified {
                 verifyLbl2.text = "(đã được xác minh)"
             }else{
                 verifyLbl2.text = "(chưa xác minh)"
             }
+            jobTitleLbl.text = userEntity.job
+
+            workPlaceTxt.isUserInteractionEnabled = false
+            genderBtn.isUserInteractionEnabled = false
+            dobBtn.isUserInteractionEnabled = false
+            addressTxt.isUserInteractionEnabled = false
+            phoneTxt.isUserInteractionEnabled = false
             
         }else{
             avaImg1.isHidden = false
@@ -128,11 +136,39 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
             jobView2.isHidden = true
             jobViewHeight2.constant = 0
             
-            jobPositionTxt.text = userEntity.job
+            if userEntity.job != "" {
+                jobPositionTxt.text = userEntity.job
+                meidcalRadio.isSelected = true
+                otherRadio.isSelected = false
+            }else{
+                meidcalRadio.isSelected = false
+                otherRadio.isSelected = true
+            }
             
         }
         
+        workPlaceTxt.text = userEntity.company
         
+        if userEntity.gender == 1 {
+            genderBtn.setTitle("Nam", for: UIControlState.normal)
+            genderType = "1"
+        }else{
+            genderBtn.setTitle("Nữ", for: UIControlState.normal)
+            genderType = "0"
+        }
+        
+        if userEntity.dob != 0 {
+            dobBtn.setTitle(String().convertTimeStampWithDateFormat(timeStamp: userEntity.dob, dateFormat: "dd/MM/yyyy"), for: .normal)
+        }else{
+            dobBtn.setTitle("chưa cập nhật", for: UIControlState.normal)
+        }
+        
+        addressTxt.text = userEntity.address
+        phoneTxt.text = userEntity.phone
+        fullnameTxt.text = userEntity.fullname
+
+        imageUrl = userEntity.avatarUrl
+        thumbnailUrl = userEntity.thumbnailAvatarUrl
     }
     
     @IBAction func genderBtnTapAction(_ sender: Any) {
@@ -140,11 +176,13 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
         let manTap = UIAlertAction(title: "Nam", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             self.genderType = "1"
+            self.genderBtn.setTitle("Nam", for: UIControlState.normal)
         })
         
         let femaleTap = UIAlertAction(title: "Nữ", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
-            self.genderType = "2"
+            self.genderType = "0"
+            self.genderBtn.setTitle("Nữ", for: UIControlState.normal)
         })
         
         let cancelTap = UIAlertAction(title: "Huỷ", style: .cancel, handler: {
@@ -161,11 +199,23 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
     }
     
     @IBAction func dobBtnTapAction(_ sender: Any) {
-    
+        DatePickerDialog().show(title: "Ngày sinh", doneButtonTitle: "Xong", cancelButtonTitle: "Hủy", datePickerMode: .date) {
+            (date) -> Void in
+            if date != nil {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd/MM/yyyy"
+                self.dobBtn.setTitle("\(dateFormatter.string(from: date! as Date))", for: UIControlState.normal)
+                self.dobDate = date!.timeIntervalSince1970
+            }
+        }
     }
     
     func didSelectButton(aButton: UIButton?) {
-        
+        if aButton == meidcalRadio {
+            jobPositionTxt.isUserInteractionEnabled = true
+        }else{
+            jobPositionTxt.isUserInteractionEnabled = false
+        }
     }
     
     @IBAction func selectAvaImgAction(_ sender: Any) {
@@ -174,6 +224,12 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
     }
     
     @IBAction func logoutBtnTapAction(_ sender: Any) {
+        let realm = try! Realm()
+        let user = realm.objects(UserEntity.self)
+        try! realm.write {
+            realm.delete(user)
+            _ = self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func initDkImagePicker(){
@@ -191,7 +247,6 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
                 self.avaImg1.image = UIImage.init(named: "AvaDefaut.png")
             }
         }
-        
     }
     
     func uploadImage(){
@@ -236,53 +291,34 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
     }
     
     @IBAction func doneBtnAction(_ sender: Any) {
-        if validateDataUpdate() == "" {
+//        if validateDataUpdate() == "" {
             errLbl.isHidden = true
             if imageAssets.count > 0 {
                 uploadImage()
             }else{
                 updateUserInfoToServer()
             }
-        }else{
-            errLbl.isHidden = false
-            errLbl.text = validateDataUpdate()
-        }
-    }
-    
-    func validateDataUpdate() -> String {
-//        let currPass = currentPassTxt.text
-//        let newPass = newPassTxt.text
-//        let conNewPass = confirmNewPassTxt.text
-        
-        
-//        if currPass == "" && newPass == "" && conNewPass == ""{
-//            return ""
-//        }else if currPass == "" || newPass == "" || conNewPass == "" {
-//            return "Vui lòng điền đầy đủ thông tin để đổi mật khẩu"
-//            
 //        }else{
-//            if newPass != conNewPass {
-//                return "Mật khẩu và xác nhận mật khẩu phải trùng nhau"
-//            }else{
-//                return ""
-//            }
+//            errLbl.isHidden = false
+//            errLbl.text = validateDataUpdate()
 //        }
-        return ""
     }
     
     func updateUserInfoToServer(){
-        
-        let fullname = fullnameTxt.text
-        
+        let job = jobPositionTxt.text != "" ? jobPositionTxt.text : ""
         
         let updateParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
             "RequestedUserId": userEntity.id,
-            "OldPassword": "",
-            "NewPassword": "",
             "AvatarUrl": imageUrl,
             "ThumbnailAvatarUrl": thumbnailUrl,
-            "FullName": fullname!
+            "FullName": fullnameTxt.text!,
+            "Job" : job!,
+            "Address" : addressTxt.text!,
+            "Company" : workPlaceTxt.text!,
+            "Gender" : genderType,
+            "DOB" : dobDate,
+            "Phone": phoneTxt.text!
         ]
         
         print(JSON.init(updateParam))
@@ -298,7 +334,18 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
                         
                         try! reaml.write {
                             reaml.add(entity, update: true)
+                            
+                            let alert = UIAlertController.init(title: "Thông báo", message: "Cập nhật thông tin tài khoản thành công", preferredStyle: UIAlertControllerStyle.alert)
+                            let actionOk = UIAlertAction.init(title: "Đóng", style: UIAlertActionStyle.destructive, handler: { (UIAlertAction) in
+                                _ = self.navigationController?.popViewController(animated: true)
+                            })
+                            
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: UPDATE_USERINFO), object: nil)
+
+                            alert.addAction(actionOk)
+                            self.present(alert, animated: true, completion: nil)
                         }
+                        
                     }
                 }else if status == 400 {
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Email hoặc tên đăng nhập đã tồn tại, vui lòng thử lại.", cancelBtnTitle: "Đóng")

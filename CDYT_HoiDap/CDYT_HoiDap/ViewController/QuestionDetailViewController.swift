@@ -32,13 +32,19 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     var currComment = MainCommentEntity()
     var currentUserId = ""
     var pageIndex = 0
+    
+    var questionID = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        configTable()
-        getListCommentByPostID()
-        
         registerNotification()
+        configTable()
+
+        if questionID != "" {
+            getPostBy(postId: questionID)
+        }else{
+            getListCommentByPostID(postId: feed.postEntity.id)
+        }
         
         configInputBar()
         setupImagePicker()
@@ -59,6 +65,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         NotificationCenter.default.addObserver(self, selector: #selector(markACommentToSolution(notification:)), name: Notification.Name.init(MARK_COMMENT_TO_RESOLVE), object: nil)
         
     }
+    
     func configTable(){
         detailTbl.delegate = self
         detailTbl.dataSource = self
@@ -91,12 +98,21 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     func reloadData(){
         pageIndex = 1
         listComment.removeAll()
-        getListCommentByPostID()
+        if questionID != "" {
+            getListCommentByPostID(postId: questionID)
+        }else{
+            getListCommentByPostID(postId: feed.postEntity.id)
+        }
+        
     }
     
     func loadMore(){
         pageIndex += 1
-        getListCommentByPostID()
+        if questionID != "" {
+            getListCommentByPostID(postId: questionID)
+        }else{
+            getListCommentByPostID(postId: feed.postEntity.id)
+        }
     }
     
     func configInputBar(){
@@ -126,6 +142,82 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         
     }
     
+    //MARk: Get data init
+    func getPostBy(postId : String){
+        Until.showLoading()
+        
+        let getPostParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId" : Until.getCurrentId(),
+            "PostId": postId
+        ]
+        
+        print(JSON.init(getPostParam))
+        
+        Alamofire.request(GET_POST_BY_ID, method: .post, parameters: getPostParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! NSDictionary
+                        
+                        self.feed = FeedsEntity.init(dictionary: jsonData)
+                        
+                        self.getListCommentByPostID(postId: self.feed.postEntity.id)
+
+                        self.detailTbl.reloadData()
+                        
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể lấy được dữ liệu câu hỏi. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+            
+            Until.hideLoading()
+            self.detailTbl.pullToRefreshView?.stopAnimating()
+            self.detailTbl.infiniteScrollingView?.stopAnimating()
+        }
+    }
+    
+    func getListCommentByPostID(postId : String){
+        Until.showLoading()
+
+        let postParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "Page": pageIndex,
+            "Size": 10,
+            "RequestedUserId" : Until.getCurrentId(),
+            "PostId": postId
+        ]
+        print(JSON.init(postParam))
+        Alamofire.request(GET_LIST_COMMENT_BY_POSTID, method: .post, parameters: postParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! [NSDictionary]
+                        
+                        for item in jsonData {
+                            let entity = MainCommentEntity.init(dict: item)
+                            self.listComment.append(entity)
+                        }
+                        
+                        self.detailTbl.reloadData()
+                        
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể lấy được dữ liệu Bình luận. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+            Until.hideLoading()
+            self.detailTbl.pullToRefreshView?.stopAnimating()
+            self.detailTbl.infiniteScrollingView?.stopAnimating()
+        }
+    }
+    
+    
     //MARK: Post comment tap action
     func postCommentAction(){
         if Until.getCurrentId() != "" {
@@ -151,44 +243,6 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         }else{
           Until.gotoLogin(_self: self, cannotBack: false)
         }
-    }
-    
-    func uploadImage(){
-        Until.showLoading()
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
-            for (index, element) in self.imageAssets.enumerated(){
-                element.fetchOriginalImage(true, completeBlock: {(image, info) -> Void in
-                    if let imageData = UIImageJPEGRepresentation(image!, 0.5) {
-                        multipartFormData.append(imageData, withName: "Image", fileName: "file\(index).png", mimeType: "image/png")
-                    }
-                })
-            }
-        }, to: UPLOAD_IMAGE, encodingCompletion: { encodingResult in
-            switch encodingResult {
-            case .success(let upload, _, _):
-                upload.responseJSON { response in
-                    let status = response.response?.statusCode
-                    if status == 200{
-                        if let result = response.result.value {
-                            let json = result as! [NSDictionary]
-                            for dic in json {
-                                let imageUrl = dic["ImageUrl"] as! String
-                                self.imgCommentDic.append(imageUrl)
-                                
-                                let imageThumb = dic["ThumbnailUrl"] as! String
-                                self.thumImgCommentDic.append(imageThumb)
-                            }
-                            self.sendCommentToServer()
-                        }
-                    }
-                    Until.hideLoading()
-                }
-                
-            case .failure(let encodingError):
-                print(encodingError)
-                Until.hideLoading()
-            }
-        })
     }
     
     func sendCommentToServer(){
@@ -239,8 +293,63 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
+    //MARK: Select image and upload
+    func setupImagePicker(){
+        pickerController.assetType = DKImagePickerControllerAssetType.allPhotos
+        pickerController.maxSelectableCount = 1
+        pickerController.didSelectAssets = { [unowned self] ( assets: [DKAsset]) in
+            self.imageAssets = assets
+            if assets.count > 0 {
+                self.imgCollectionViewHeight.constant = 70
+            }else{
+                self.imgCollectionViewHeight.constant = 0
+            }
+            self.view.layoutIfNeeded()
+            self.imgCollectionView.reloadData()
+            
+        }
+    }
+    
     func pickImage(){
         self.present(pickerController, animated: true, completion: nil)
+    }
+    
+    func uploadImage(){
+        Until.showLoading()
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            for (index, element) in self.imageAssets.enumerated(){
+                element.fetchOriginalImage(true, completeBlock: {(image, info) -> Void in
+                    if let imageData = UIImageJPEGRepresentation(image!, 0.5) {
+                        multipartFormData.append(imageData, withName: "Image", fileName: "file\(index).png", mimeType: "image/png")
+                    }
+                })
+            }
+        }, to: UPLOAD_IMAGE, encodingCompletion: { encodingResult in
+            switch encodingResult {
+            case .success(let upload, _, _):
+                upload.responseJSON { response in
+                    let status = response.response?.statusCode
+                    if status == 200{
+                        if let result = response.result.value {
+                            let json = result as! [NSDictionary]
+                            for dic in json {
+                                let imageUrl = dic["ImageUrl"] as! String
+                                self.imgCommentDic.append(imageUrl)
+                                
+                                let imageThumb = dic["ThumbnailUrl"] as! String
+                                self.thumImgCommentDic.append(imageThumb)
+                            }
+                            self.sendCommentToServer()
+                        }
+                    }
+                    Until.hideLoading()
+                }
+                
+            case .failure(let encodingError):
+                print(encodingError)
+                Until.hideLoading()
+            }
+        })
     }
     
     //  MARK: Keyboard showing
@@ -287,6 +396,11 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
+    // This is also required
+    override var canBecomeFirstResponder: Bool{
+        return true
+    }
+    
     //MARK: receive notifiy when mark an comment is solution
     func markACommentToSolution(notification : Notification){
         let commentEntity = notification.object as! CommentEntity
@@ -300,63 +414,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         detailTbl.reloadData()
     }
     
-    // This is also required
-    override var canBecomeFirstResponder: Bool{
-        return true
-    }
-    
-    func setupImagePicker(){
-        pickerController.assetType = DKImagePickerControllerAssetType.allPhotos
-        pickerController.maxSelectableCount = 1
-        pickerController.didSelectAssets = { [unowned self] ( assets: [DKAsset]) in
-            self.imageAssets = assets
-            if assets.count > 0 {
-                self.imgCollectionViewHeight.constant = 70
-            }else{
-                self.imgCollectionViewHeight.constant = 0
-            }
-            self.view.layoutIfNeeded()
-            self.imgCollectionView.reloadData()
-
-        }
-    }
-    
-    func getListCommentByPostID(){
-        let hotParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "Page": pageIndex,
-            "Size": 10,
-            "RequestedUserId" : Until.getCurrentId(),
-            "PostId": feed.postEntity.id
-        ]
-        print(JSON.init(hotParam))
-        Until.showLoading()
-        Alamofire.request(GET_LIST_COMMENT_BY_POSTID, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! [NSDictionary]
-                        
-                        for item in jsonData {
-                            let entity = MainCommentEntity.init(dict: item)
-                            self.listComment.append(entity)
-                        }
-                        
-                        self.detailTbl.reloadData()
-                        
-                    }
-                }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể lấy được dữ liệu Bình luận. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-                }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-            }
-            Until.hideLoading()
-            self.detailTbl.pullToRefreshView?.stopAnimating()
-            self.detailTbl.infiniteScrollingView?.stopAnimating()
-        }
-    }
-    
+    //MARK: Table view delegate and datasource
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1 + listComment.count
     }
@@ -541,13 +599,13 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
+    @IBAction func backTapAction(_ sender: Any) {
+        _ = self.navigationController?.popViewController(animated: true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func backTapAction(_ sender: Any) {
-        _ = self.navigationController?.popViewController(animated: true)
     }
 
 }

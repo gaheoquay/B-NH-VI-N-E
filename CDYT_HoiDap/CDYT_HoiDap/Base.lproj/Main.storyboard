@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -818,19 +818,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RVe-pE-ljK">
-                                <rect key="frame" x="0.0" y="20" width="375" height="120"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="110"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Om5-hO-NtF" userLabel="user view">
-                                        <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="110"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AvaDefaut.png" translatesAutoresizingMaskIntoConstraints="NO" id="FTO-Ub-M9d">
-                                                <rect key="frame" x="30" y="15" width="60" height="60"/>
+                                                <rect key="frame" x="25" y="15" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="FTO-Ub-M9d" secondAttribute="height" multiplier="1:1" id="zhK-6Q-5Qg"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabelLabelLab" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPI-lF-9UV">
-                                                <rect key="frame" x="5" y="80" width="110" height="36"/>
+                                                <rect key="frame" x="5" y="70" width="90" height="36"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -844,25 +844,25 @@
                                             <constraint firstItem="FTO-Ub-M9d" firstAttribute="top" secondItem="Om5-hO-NtF" secondAttribute="top" constant="15" id="Cv7-n6-lpd"/>
                                             <constraint firstAttribute="trailing" secondItem="pPI-lF-9UV" secondAttribute="trailing" constant="5" id="Tlm-mL-7Oq"/>
                                             <constraint firstItem="FTO-Ub-M9d" firstAttribute="centerX" secondItem="Om5-hO-NtF" secondAttribute="centerX" id="Uwg-QJ-dgn"/>
-                                            <constraint firstAttribute="width" secondItem="Om5-hO-NtF" secondAttribute="height" multiplier="1/1" id="i6z-Xe-SZ2"/>
                                             <constraint firstItem="FTO-Ub-M9d" firstAttribute="width" secondItem="Om5-hO-NtF" secondAttribute="width" multiplier="1/2" id="mmA-qy-N1R"/>
+                                            <constraint firstAttribute="width" constant="100" id="qwq-Lh-ub8"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dIR-N4-yZF">
-                                        <rect key="frame" x="120" y="0.0" width="255" height="120"/>
+                                        <rect key="frame" x="100" y="0.0" width="275" height="110"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BYv-7y-fJq" userLabel="view thong bao">
-                                                <rect key="frame" x="0.0" y="0.0" width="127.5" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="137.5" height="55"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Thongbao.png" translatesAutoresizingMaskIntoConstraints="NO" id="u52-Sv-abM">
-                                                        <rect key="frame" x="8" y="22" width="29.5" height="30"/>
+                                                        <rect key="frame" x="8" y="19.5" width="27" height="27.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="u52-Sv-abM" secondAttribute="height" multiplier="1:1" id="gfU-Yl-EFa"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thông báo" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsL-TR-sua">
-                                                        <rect key="frame" x="42.5" y="29" width="77" height="16"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <rect key="frame" x="40" y="26" width="89.5" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -882,16 +882,16 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Wi-35-cSl" userLabel="view tin nhan">
-                                                <rect key="frame" x="127" y="0.0" width="127.5" height="60"/>
+                                                <rect key="frame" x="137" y="0.0" width="137.5" height="55"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tin nhắn" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Etp-yr-sjn">
-                                                        <rect key="frame" x="43" y="29" width="76.5" height="16"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <rect key="frame" x="40.5" y="26" width="89" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TinNhan.png" translatesAutoresizingMaskIntoConstraints="NO" id="erR-50-0n1">
-                                                        <rect key="frame" x="8" y="22" width="30" height="30"/>
+                                                        <rect key="frame" x="8" y="19.5" width="27.5" height="27.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="erR-50-0n1" secondAttribute="height" multiplier="1:1" id="ZtW-tw-BPk"/>
                                                         </constraints>
@@ -912,14 +912,14 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zjp-X5-sMj" userLabel="view tai khoan">
-                                                <rect key="frame" x="0.0" y="60" width="127.5" height="60"/>
+                                                <rect key="frame" x="0.0" y="55" width="137.5" height="55"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TaiKhoan.png" translatesAutoresizingMaskIntoConstraints="NO" id="RR4-l8-VA8">
-                                                        <rect key="frame" x="8" y="8" width="29.5" height="30"/>
+                                                        <rect key="frame" x="8" y="8" width="27" height="27.5"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tài khoản" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iG3-gZ-bVs">
-                                                        <rect key="frame" x="42" y="14.5" width="77.5" height="16"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <rect key="frame" x="39.5" y="15" width="90" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -940,14 +940,14 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxa-Ah-ECQ" userLabel="view cai dat">
-                                                <rect key="frame" x="127" y="60" width="127.5" height="60"/>
+                                                <rect key="frame" x="137" y="55" width="137.5" height="55"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CaiDat.png" translatesAutoresizingMaskIntoConstraints="NO" id="OIQ-0b-aEo">
-                                                        <rect key="frame" x="8" y="8" width="29.5" height="30"/>
+                                                        <rect key="frame" x="8" y="8" width="27" height="27.5"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cài đặt" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veA-lF-c86">
-                                                        <rect key="frame" x="42" y="15" width="77.5" height="16"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <rect key="frame" x="39.5" y="14.5" width="90" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -995,14 +995,14 @@
                                     <constraint firstAttribute="bottom" secondItem="dIR-N4-yZF" secondAttribute="bottom" id="FZF-VP-nzV"/>
                                     <constraint firstItem="Om5-hO-NtF" firstAttribute="top" secondItem="RVe-pE-ljK" secondAttribute="top" id="NuG-Ln-znT"/>
                                     <constraint firstItem="Om5-hO-NtF" firstAttribute="leading" secondItem="RVe-pE-ljK" secondAttribute="leading" id="Vzc-4g-184"/>
-                                    <constraint firstAttribute="height" constant="120" id="XRz-ZP-lVz"/>
+                                    <constraint firstAttribute="height" constant="110" id="XRz-ZP-lVz"/>
                                     <constraint firstAttribute="trailing" secondItem="dIR-N4-yZF" secondAttribute="trailing" id="lCr-mv-JGX"/>
                                     <constraint firstItem="dIR-N4-yZF" firstAttribute="top" secondItem="RVe-pE-ljK" secondAttribute="top" id="vIo-XD-Cdj"/>
                                     <constraint firstAttribute="bottom" secondItem="Om5-hO-NtF" secondAttribute="bottom" id="wwq-2S-2pb"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LTl-aA-3Pz">
-                                <rect key="frame" x="0.0" y="140" width="375" height="478"/>
+                                <rect key="frame" x="0.0" y="130" width="375" height="488"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="15" maxX="0.0" maxY="0.0"/>
                             </tableView>

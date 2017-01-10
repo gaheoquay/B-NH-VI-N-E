@@ -116,10 +116,15 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable {
         
         let uuid = NSUUID().uuidString
         
+        var token = ""
+        if let value = UserDefaults.standard.object(forKey: NOTIFICATION_TOKEN) as? String {
+            token = value
+        }
+        
         let device : [String : Any] = [
             "OS": 0,
             "DeviceId": uuid,
-            "Token": UserDefaults.standard.object(forKey: NOTIFICATION_TOKEN) as! String
+            "Token": token
         ]
         
         let nickString = nicknameTxt.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
