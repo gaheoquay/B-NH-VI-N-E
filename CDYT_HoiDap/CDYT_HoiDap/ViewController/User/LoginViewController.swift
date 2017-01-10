@@ -68,11 +68,14 @@ class LoginViewController: UIViewController {
         let passString = passTxt.text
         
         let uuid = NSUUID().uuidString
-        
+      var token = ""
+      if let value = UserDefaults.standard.object(forKey: NOTIFICATION_TOKEN) as? String {
+        token = value
+      }
         let device : [String : Any] = [
             "OS": 0,
             "DeviceId": uuid,
-            "Token": UserDefaults.standard.object(forKey: NOTIFICATION_TOKEN) as! String
+            "Token": token
         ]
         
         let loginParam : [String : Any] = [
@@ -112,7 +115,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func forgotPassBtnAction(_ sender: Any) {        
-        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "UpdateInfoViewController") as! UpdateInfoViewController
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as! ForgotPasswordViewController
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 
