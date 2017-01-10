@@ -82,11 +82,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     @IBAction func logoutTapAction(_ sender: Any) {
-        let realm = try! Realm()
-        let user = realm.objects(UserEntity.self)
-        try! realm.write {
-            realm.delete(user)
-        }
+        
     }
     
     /*

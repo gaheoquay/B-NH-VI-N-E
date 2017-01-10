@@ -101,22 +101,13 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
             jobView2.isHidden = false
             jobViewHeight2.constant = 60
             
-            if userEntity.job != "" {
-                jobTitleLbl.text = userEntity.job
-                meidcalRadio.isSelected = true
-                otherRadio.isSelected = false
-            }else{
-                meidcalRadio.isSelected = false
-                otherRadio.isSelected = true
-                jobTitleLbl.text = "chưa cập nhật"
-            }
-            
             if userEntity.isVerified {
                 verifyLbl2.text = "(đã được xác minh)"
             }else{
                 verifyLbl2.text = "(chưa xác minh)"
             }
-            
+            jobTitleLbl.text = userEntity.job
+
             workPlaceTxt.isUserInteractionEnabled = false
             genderBtn.isUserInteractionEnabled = false
             dobBtn.isUserInteractionEnabled = false
@@ -145,10 +136,18 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
             jobView2.isHidden = true
             jobViewHeight2.constant = 0
             
-            jobPositionTxt.text = userEntity.job != "" ? userEntity.job : "chưa cập nhật"
+            if userEntity.job != "" {
+                jobPositionTxt.text = userEntity.job
+                meidcalRadio.isSelected = true
+                otherRadio.isSelected = false
+            }else{
+                meidcalRadio.isSelected = false
+                otherRadio.isSelected = true
+            }
+            
         }
         
-        workPlaceTxt.text = userEntity.company != "" ? userEntity.company : "chưa cập nhật"
+        workPlaceTxt.text = userEntity.company
         
         if userEntity.gender == 1 {
             genderBtn.setTitle("Nam", for: UIControlState.normal)
@@ -159,16 +158,17 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
         }
         
         if userEntity.dob != 0 {
-            dobBtn.setTitle(String().convertTimeStampWithDateFormat(timeStamp: userEntity.dob, dateFormat: "dd/MM/yy"), for: .normal)
+            dobBtn.setTitle(String().convertTimeStampWithDateFormat(timeStamp: userEntity.dob, dateFormat: "dd/MM/yyyy"), for: .normal)
         }else{
             dobBtn.setTitle("chưa cập nhật", for: UIControlState.normal)
         }
         
-        addressTxt.text = userEntity.address != "" ? userEntity.address : "chưa cập nhật"
-        phoneTxt.text = userEntity.phone != "" ? userEntity.address : "chưa cập nhật"
+        addressTxt.text = userEntity.address
+        phoneTxt.text = userEntity.phone
+        fullnameTxt.text = userEntity.fullname
+
         imageUrl = userEntity.avatarUrl
         thumbnailUrl = userEntity.thumbnailAvatarUrl
-        
     }
     
     @IBAction func genderBtnTapAction(_ sender: Any) {
@@ -176,11 +176,13 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
         let manTap = UIAlertAction(title: "Nam", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             self.genderType = "1"
+            self.genderBtn.setTitle("Nam", for: UIControlState.normal)
         })
         
         let femaleTap = UIAlertAction(title: "Nữ", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             self.genderType = "0"
+            self.genderBtn.setTitle("Nữ", for: UIControlState.normal)
         })
         
         let cancelTap = UIAlertAction(title: "Huỷ", style: .cancel, handler: {
@@ -222,7 +224,12 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
     }
     
     @IBAction func logoutBtnTapAction(_ sender: Any) {
-    
+        let realm = try! Realm()
+        let user = realm.objects(UserEntity.self)
+        try! realm.write {
+            realm.delete(user)
+            _ = self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func initDkImagePicker(){
@@ -311,6 +318,7 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
             "Company" : workPlaceTxt.text!,
             "Gender" : genderType,
             "DOB" : dobDate,
+            "Phone": phoneTxt.text!
         ]
         
         print(JSON.init(updateParam))
@@ -326,7 +334,18 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
                         
                         try! reaml.write {
                             reaml.add(entity, update: true)
+                            
+                            let alert = UIAlertController.init(title: "Thông báo", message: "Cập nhật thông tin tài khoản thành công", preferredStyle: UIAlertControllerStyle.alert)
+                            let actionOk = UIAlertAction.init(title: "Đóng", style: UIAlertActionStyle.destructive, handler: { (UIAlertAction) in
+                                _ = self.navigationController?.popViewController(animated: true)
+                            })
+                            
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: UPDATE_USERINFO), object: nil)
+
+                            alert.addAction(actionOk)
+                            self.present(alert, animated: true, completion: nil)
                         }
+                        
                     }
                 }else if status == 400 {
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Email hoặc tên đăng nhập đã tồn tại, vui lòng thử lại.", cancelBtnTitle: "Đóng")

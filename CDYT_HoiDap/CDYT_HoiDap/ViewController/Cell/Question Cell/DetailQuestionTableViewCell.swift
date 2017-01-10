@@ -139,6 +139,8 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
             likeCountIcon.image = UIImage.init(named: "Clover0.png")
         }
         
+        tagCollectionView.reloadData()
+        imgCollectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
