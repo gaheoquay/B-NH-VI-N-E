@@ -39,6 +39,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     initTable()
     setUpUI()
     setupUserInfo()
+    listMyFeed.removeAll()  
     getFeeds()
   }
   func setUpUI(){
