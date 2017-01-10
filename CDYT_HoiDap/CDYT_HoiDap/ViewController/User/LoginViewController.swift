@@ -99,6 +99,7 @@ class LoginViewController: UIViewController {
                         
                         try! reaml.write {
                             reaml.add(entity, update: true)
+                          NotificationCenter.default.post(name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
                           _ = self.navigationController?.popToRootViewController(animated: true)
                         }
                     }

@@ -1173,6 +1173,7 @@
                         <outlet property="avaImg" destination="FTO-Ub-M9d" id="ccA-bC-OCC"/>
                         <outlet property="nicknameLbl" destination="pPI-lF-9UV" id="Kei-w9-CUt"/>
                         <outlet property="questionTableView" destination="LTl-aA-3Pz" id="p3U-Ae-cYp"/>
+                        <outlet property="viewUnLogin" destination="S6j-Hj-Olg" id="Fi5-wW-wH1"/>
                     </connections>
                 </viewController>
                 <customObject id="k4E-hX-S4l" customClass="RAMBounceAnimation" customModule="CDYT_HoiDap" customModuleProvider="target">
