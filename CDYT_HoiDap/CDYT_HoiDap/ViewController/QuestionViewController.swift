@@ -12,9 +12,11 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    NotificationCenter.default.addObserver(self, selector: #selector(reloadQuestionData), name: Notification.Name.init(ADD_NEW_QUESTION_SUCCESS), object: nil)
+
     initTableView()
     getFeeds()
-    // Do any additional setup after loading the view.
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -52,6 +54,11 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
     getFeeds()
   }
 
+    //MARK: Receive notify when add new question
+    func reloadQuestionData(){
+        tbQuestion.triggerPullToRefresh()
+    }
+    
   //  MARK: request data
   func getFeeds(){
     let hotParam : [String : Any] = [
@@ -60,7 +67,7 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
       "Size": 10,
       "RequestedUserId" : Until.getCurrentId()
     ]
-    Until.showLoading()
+//    Until.showLoading()
     Alamofire.request(GET_UNANSWER, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
         if status == 200{
@@ -81,7 +88,7 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
       }else{
         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
       }
-      Until.hideLoading()
+//      Until.hideLoading()
       self.tbQuestion.pullToRefreshView?.stopAnimating()
       self.tbQuestion.infiniteScrollingView?.stopAnimating()
     }

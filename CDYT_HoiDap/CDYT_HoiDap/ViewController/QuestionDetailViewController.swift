@@ -27,11 +27,9 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
 
     var imgCommentDic = [String]()
     var thumImgCommentDic = [String]()
-    var isCommentOnComment = false
     
-    var currComment = MainCommentEntity()
     var currentUserId = ""
-    var pageIndex = 0
+    var pageIndex = 1
     
     var questionID = ""
     
@@ -63,7 +61,8 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(markACommentToSolution(notification:)), name: Notification.Name.init(MARK_COMMENT_TO_RESOLVE), object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCommentData), name: Notification.Name.init(COMMENT_ON_COMMENT_SUCCESS), object: nil)
+
     }
     
     func configTable(){
@@ -113,6 +112,11 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         }else{
             getListCommentByPostID(postId: feed.postEntity.id)
         }
+    }
+    
+    //MARK: Receive notify when have new comment 
+    func reloadCommentData() {
+        detailTbl.triggerPullToRefresh()
     }
     
     func configInputBar(){
@@ -175,8 +179,6 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             }
             
             Until.hideLoading()
-            self.detailTbl.pullToRefreshView?.stopAnimating()
-            self.detailTbl.infiniteScrollingView?.stopAnimating()
         }
     }
     
@@ -233,11 +235,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                 if imageAssets.count > 0 {
                     uploadImage()
                 }else{
-                    if isCommentOnComment {
-                        sendCommentOnComment(mainComment: currComment)
-                    }else{
-                        sendCommentToServer()
-                    }
+                    sendCommentToServer()
                 }
             }
         }else{
@@ -255,7 +253,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         
         let commentParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
-            "RequestedUserId": Until.getCurrentId(),
+            "RequestedUserId": currentUserId,
             "Comment": CommentEntity().toDictionary(entity: commentEntity),
             "PostId": feed.postEntity.id
         ]
@@ -270,7 +268,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                         let jsonData = result as! NSDictionary
                         let entity = MainCommentEntity.init(dict: jsonData)
                         
-                        self.listComment.append(entity)
+                        self.listComment.insert(entity, at: 0)
                         self.detailTbl.reloadData()
                         
                         self.textInputBar.textView.text = ""
@@ -522,13 +520,6 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     //MARK: DetailQuestionTableViewCellDelegate
-    func replyToPost(feedEntity: FeedsEntity) {
-        textInputBar.textView.placeholder = "Nhập nội dung thảo luận"
-        textInputBar.becomeFirstResponder()
-        isCommentOnComment = false
-        
-    }
-    
     func gotoLoginFromDetailQuestionVC() {
       Until.gotoLogin(_self: self, cannotBack: false)
     }
@@ -540,63 +531,15 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     //MARK: CommentTableViewCellDelegate
     func replyCommentAction(mainComment: MainCommentEntity) {
-        textInputBar.textView.placeholder = "@trả lời bình luận của \(mainComment.author.nickname)"
-        textInputBar.becomeFirstResponder()
-        
-        currComment = mainComment
-        isCommentOnComment = true
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController
+        vc.feedEntity = feed
+        vc.mainComment = mainComment
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func gotoLoginFromCommentTableCell() {
       Until.gotoLogin(_self: self, cannotBack: false)
-    }
-    
-    func sendCommentOnComment(mainComment : MainCommentEntity){
-        self.view.endEditing(true)
-        
-        let commentEntity = CommentEntity()
-        commentEntity.content = textInputBar.text
-        commentEntity.imageUrls = imgCommentDic
-        commentEntity.thumbnailImageUrls = thumImgCommentDic
-        
-        let commentParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "RequestedUserId": Until.getCurrentId(),
-            "Comment": CommentEntity().toDictionary(entity: commentEntity),
-            "CommentId": mainComment.comment.id
-        ]
-        
-        print(JSON.init(commentParam))
-        Until.showLoading()
-        
-        Alamofire.request(POST_COMMENT_ON_COMMENT, method: .post, parameters: commentParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! NSDictionary
-                        let entity = SubCommentEntity.init(dict: jsonData)
-                        
-                        mainComment.subComment.append(entity)
-                        self.detailTbl.reloadData()
-                        
-                        self.textInputBar.textView.text = ""
-                        self.imgCommentDic = []
-                        self.thumImgCommentDic = []
-                        
-                        self.imgCollectionViewHeight.constant = 0
-                        self.imageAssets.removeAll()
-                        self.imgCollectionView.reloadData()
-                        self.view.layoutIfNeeded()
-                        
-                    }
-                }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể lấy được dữ liệu Bình luận. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-                }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-            }
-            Until.hideLoading()
-        }
     }
     
     @IBAction func backTapAction(_ sender: Any) {

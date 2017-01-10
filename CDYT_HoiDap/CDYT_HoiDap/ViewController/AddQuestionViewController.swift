@@ -165,6 +165,8 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func sendQuestionToServer(){
+        self.view.endEditing(true)
+        
         let titleString = titleTxt.text
         let contentString = contentTxt.text
         let tagString = tagTxt.text
@@ -194,7 +196,8 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         Alamofire.request(POST_QUESTION, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
-                    
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: ADD_NEW_QUESTION_SUCCESS), object: nil)
+
                     _ = self.navigationController?.popViewController(animated: true)
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
