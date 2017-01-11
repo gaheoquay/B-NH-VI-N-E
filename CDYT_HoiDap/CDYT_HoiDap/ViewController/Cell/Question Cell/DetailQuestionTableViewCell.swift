@@ -8,7 +8,6 @@
 
 import UIKit
 protocol DetailQuestionTableViewCellDelegate {
-    func replyToPost(feedEntity : FeedsEntity)
     func gotoLoginFromDetailQuestionVC()
 }
 class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -45,17 +44,10 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
         tagCollectionView.delegate = self
         tagCollectionView.dataSource = self
         tagCollectionView.register(UINib.init(nibName: "KeywordCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeywordCollectionViewCell")
-        
-        commentCountLbl.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(replyToPost)))
-        commentCountIcon.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(replyToPost)))
-        
+                
         likeCountIcon.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(likePostAction)))
     }
 
-    func replyToPost(){
-        delegate?.replyToPost(feedEntity: feed)
-    }
-    
     func likePostAction(){
         let userId = Until.getCurrentId()
         if userId == "" {
