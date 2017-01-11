@@ -18,7 +18,6 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
   var listMyFeed = [FeedsEntity]()
   override func viewDidLoad() {
     super.viewDidLoad()
-//    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(self.reloadView), name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(self.setupUserInfo), name: NSNotification.Name(rawValue: UPDATE_USERINFO), object: nil)
 
