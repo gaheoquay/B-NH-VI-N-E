@@ -13,12 +13,16 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
   override func viewDidLoad() {
     super.viewDidLoad()
     NotificationCenter.default.addObserver(self, selector: #selector(reloadQuestionData), name: Notification.Name.init(ADD_NEW_QUESTION_SUCCESS), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(markACommentToSolution(notification:)), name: Notification.Name.init(MARK_COMMENT_TO_RESOLVE), object: nil)
 
     initTableView()
     getFeeds()
     
   }
   
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
@@ -132,6 +136,12 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
             self.navigationController?.pushViewController(viewController, animated: true)
         }
     }
+    
+    //MARK: receive notifiy when mark an comment is solution
+    func markACommentToSolution(notification : Notification){
+        tbQuestion.triggerPullToRefresh()
+    }
+    
   //  MARK: Outlet
   @IBOutlet weak var tbQuestion: UITableView!
   var listFedds = [FeedsEntity]()

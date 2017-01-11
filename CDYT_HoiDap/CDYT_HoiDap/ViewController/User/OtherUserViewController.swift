@@ -137,6 +137,10 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     @IBAction func accountTapAction(_ sender: Any) {
+        let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "UpdateInfoViewController") as! UpdateInfoViewController
+        vc.otherUserId = user.id
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func messageTapAction(_ sender: Any) {

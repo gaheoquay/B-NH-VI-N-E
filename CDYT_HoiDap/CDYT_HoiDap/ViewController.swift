@@ -13,6 +13,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
   override func viewDidLoad() {
     super.viewDidLoad()
     NotificationCenter.default.addObserver(self, selector: #selector(reloadQuestionData), name: Notification.Name.init(ADD_NEW_QUESTION_SUCCESS), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(markACommentToSolution(notification:)), name: Notification.Name.init(MARK_COMMENT_TO_RESOLVE), object: nil)
 
   initTableView()
     getFeeds()
@@ -28,6 +29,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     super.viewWillAppear(animated)
     self.navigationController?.setNavigationBarHidden(true, animated: true)
   }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
   //MARK: init table view
   func initTableView(){
     tbQuestion.dataSource = self
@@ -198,6 +204,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddQuestionViewController") as! AddQuestionViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    //MARK: receive notifiy when mark an comment is solution
+    func markACommentToSolution(notification : Notification){
+        tbQuestion.triggerPullToRefresh()
+    }
+    
 //MARK: Outlet
   @IBOutlet weak var tbQuestion: UITableView!
   var listFedds = [FeedsEntity]()

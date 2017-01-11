@@ -21,6 +21,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(self.reloadView), name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(self.setupUserInfo), name: NSNotification.Name(rawValue: UPDATE_USERINFO), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(markACommentToSolution(notification:)), name: Notification.Name.init(MARK_COMMENT_TO_RESOLVE), object: nil)
 
     initTable()
     setUpUI()
@@ -38,6 +39,11 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
       viewUnLogin.isHidden = false
     }
   }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
   func reloadView(){
     initTable()
     setUpUI()
@@ -195,6 +201,11 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     viewController.hotTagId = hotTagId
     self.navigationController?.pushViewController(viewController, animated: true)
   }
+    
+    //MARK: receive notifiy when mark an comment is solution
+    func markACommentToSolution(notification : Notification){
+            questionTableView.triggerPullToRefresh()
+    }
     
     func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
         //khong can phai thuc hien ham nay vi dang trong trang profile cua chinh minh

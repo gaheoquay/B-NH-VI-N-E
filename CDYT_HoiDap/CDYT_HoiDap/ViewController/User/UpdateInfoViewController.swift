@@ -35,18 +35,22 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
     @IBOutlet weak var avaImg1Height: NSLayoutConstraint!
     @IBOutlet weak var avaImg2Height: NSLayoutConstraint!
     @IBOutlet weak var logoutBtnHeight: NSLayoutConstraint!
+    @IBOutlet weak var changePassViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var changePassView: UIView!
+    @IBOutlet weak var updateBtn: UIButton!
     
+    var radioButtonController: SSRadioButtonsController?
     let pickerImageController = DKImagePickerController()
     var imageAssets = [DKAsset]()
     
     var imageUrl = ""
     var thumbnailUrl = ""
-    var radioButtonController: SSRadioButtonsController?
 
-    var userEntity = UserEntity()
-    var otherUserId = ""
+    var userToShow = UserEntity()
     var genderType = ""
     var dobDate = Double()
+
+    var otherUserId = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,13 +58,16 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
         setupUI()
         initDkImagePicker()
         
-        let realm = try! Realm()
-        let users = realm.objects(UserEntity.self)
-        if users.count > 0 {
-            userEntity = users.first!
+        if otherUserId == "" {
+            let realm = try! Realm()
+            let users = realm.objects(UserEntity.self)
+            if users.count > 0 {
+                userToShow = users.first!
+            }
+            setDataForView()
+        }else{
+            getUserById()
         }
-        
-        setDataForView()
     }
     
     func setupUI(){
@@ -78,6 +85,39 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
         radioButtonController!.shouldLetDeSelect = false
     }
     
+    func getUserById(){
+        let param : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId": otherUserId
+        ]
+        
+        print(JSON.init(param))
+        
+        Until.showLoading()
+        Alamofire.request(GET_USER_BY_ID, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! NSDictionary
+                        
+                        let entity = UserEntity.initWithDictionary(dictionary: jsonData)
+
+                        self.userToShow = entity
+                        
+                        self.setDataForView()
+                    }
+                }else if status == 400 {
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Email hoặc tên đăng nhập đã tồn tại, vui lòng thử lại.", cancelBtnTitle: "Đóng")
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+            Until.hideLoading()
+        }
+    }
+    
     func setDataForView(){
         if otherUserId != "" {
             avaImg1.isHidden = true
@@ -90,10 +130,10 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
             
             avaImg2.isHidden = false
             avaImg2Height.constant = 90
-            avaImg2.sd_setImage(with: URL.init(string: userEntity.avatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
+            avaImg2.sd_setImage(with: URL.init(string: userToShow.avatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
             
             nameLbl2.isHidden = false
-            nameLbl2.text = userEntity.nickname
+            nameLbl2.text = userToShow.nickname
             
             jobView1.isHidden = true
             jobViewHeight1.constant = 0
@@ -101,25 +141,31 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
             jobView2.isHidden = false
             jobViewHeight2.constant = 60
             
-            if userEntity.isVerified {
+            if userToShow.isVerified {
                 verifyLbl2.text = "(đã được xác minh)"
             }else{
                 verifyLbl2.text = "(chưa xác minh)"
             }
-            jobTitleLbl.text = userEntity.job
+            jobTitleLbl.text = userToShow.job
 
+            changePassViewHeight.constant = 0
+            changePassView.isHidden = true
+            
             workPlaceTxt.isUserInteractionEnabled = false
             genderBtn.isUserInteractionEnabled = false
             dobBtn.isUserInteractionEnabled = false
             addressTxt.isUserInteractionEnabled = false
             phoneTxt.isUserInteractionEnabled = false
+            fullnameTxt.isUserInteractionEnabled = false
+            
+            updateBtn.isHidden = true
             
         }else{
             avaImg1.isHidden = false
             avaImg1Height.constant = 55
-            avaImg1.sd_setImage(with: URL.init(string: userEntity.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
+            avaImg1.sd_setImage(with: URL.init(string: userToShow.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
             
-            nameLbl1.text = userEntity.nickname
+            nameLbl1.text = userToShow.nickname
             
             logoutBtn.isHidden = false
             logoutBtnHeight.constant = 25
@@ -136,8 +182,8 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
             jobView2.isHidden = true
             jobViewHeight2.constant = 0
             
-            if userEntity.job != "" {
-                jobPositionTxt.text = userEntity.job
+            if userToShow.job != "" {
+                jobPositionTxt.text = userToShow.job
                 meidcalRadio.isSelected = true
                 otherRadio.isSelected = false
             }else{
@@ -145,11 +191,14 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
                 otherRadio.isSelected = true
             }
             
+            changePassViewHeight.constant = 35
+            changePassView.isHidden = false
+            updateBtn.isHidden = false
         }
         
-        workPlaceTxt.text = userEntity.company
+        workPlaceTxt.text = userToShow.company
         
-        if userEntity.gender == 1 {
+        if userToShow.gender == 1 {
             genderBtn.setTitle("Nam", for: UIControlState.normal)
             genderType = "1"
         }else{
@@ -157,18 +206,18 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
             genderType = "0"
         }
         
-        if userEntity.dob != 0 {
-            dobBtn.setTitle(String().convertTimeStampWithDateFormat(timeStamp: userEntity.dob, dateFormat: "dd/MM/yyyy"), for: .normal)
+        if userToShow.dob != 0 {
+            dobBtn.setTitle(String().convertTimeStampWithDateFormat(timeStamp: userToShow.dob, dateFormat: "dd/MM/yyyy"), for: .normal)
         }else{
             dobBtn.setTitle("chưa cập nhật", for: UIControlState.normal)
         }
         
-        addressTxt.text = userEntity.address
-        phoneTxt.text = userEntity.phone
-        fullnameTxt.text = userEntity.fullname
+        addressTxt.text = userToShow.address
+        phoneTxt.text = userToShow.phone
+        fullnameTxt.text = userToShow.fullname
 
-        imageUrl = userEntity.avatarUrl
-        thumbnailUrl = userEntity.thumbnailAvatarUrl
+        imageUrl = userToShow.avatarUrl
+        thumbnailUrl = userToShow.thumbnailAvatarUrl
     }
     
     @IBAction func genderBtnTapAction(_ sender: Any) {
@@ -210,6 +259,7 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
         }
     }
     
+    //MARK: Check job
     func didSelectButton(aButton: UIButton?) {
         if aButton == meidcalRadio {
             jobPositionTxt.isUserInteractionEnabled = true
@@ -286,6 +336,9 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
         })
     }
     
+    @IBAction func changePassTapAction(_ sender: Any) {
+    }
+    
     @IBAction func backBtnAction(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)
     }
@@ -309,7 +362,7 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
         
         let updateParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
-            "RequestedUserId": userEntity.id,
+            "RequestedUserId": userToShow.id,
             "AvatarUrl": imageUrl,
             "ThumbnailAvatarUrl": thumbnailUrl,
             "FullName": fullnameTxt.text!,
@@ -347,8 +400,6 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
                         }
                         
                     }
-                }else if status == 400 {
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Email hoặc tên đăng nhập đã tồn tại, vui lòng thử lại.", cancelBtnTitle: "Đóng")
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }

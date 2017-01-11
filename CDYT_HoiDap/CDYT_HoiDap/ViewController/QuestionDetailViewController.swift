@@ -15,6 +15,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var imgCollectionViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var keyboardViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var markImg: UIImageView!
     
     var feed = FeedsEntity()
     var listComment = [MainCommentEntity]()
@@ -41,6 +42,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         if questionID != "" {
             getPostBy(postId: questionID)
         }else{
+            setupMarkerForQuestion()
             getListCommentByPostID(postId: feed.postEntity.id)
         }
         
@@ -114,6 +116,15 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
+    //MARK: Show marker for question 
+    func setupMarkerForQuestion() {
+        if feed.postEntity.status == 0 {
+            markImg.image = UIImage.init(named: "GiaiPhap_Mark_hide.png")
+        }else{
+            markImg.image = UIImage.init(named: "GiaiPhap_Mark.png")
+        }
+    }
+    
     //MARK: Receive notify when have new comment 
     func reloadCommentData() {
         detailTbl.triggerPullToRefresh()
@@ -165,7 +176,8 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                         let jsonData = result as! NSDictionary
                         
                         self.feed = FeedsEntity.init(dictionary: jsonData)
-                        
+                        self.setupMarkerForQuestion()
+
                         self.getListCommentByPostID(postId: self.feed.postEntity.id)
 
                         self.detailTbl.reloadData()
@@ -404,6 +416,12 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     //MARK: receive notifiy when mark an comment is solution
     func markACommentToSolution(notification : Notification){
         let commentEntity = notification.object as! CommentEntity
+        
+        if commentEntity.isSolution == true {
+            markImg.image = UIImage.init(named: "GiaiPhap_Mark.png")
+        }else{
+            markImg.image = UIImage.init(named: "GiaiPhap_Mark_hide.png")
+        }
         
         for item in listComment {
             if item.comment.id == commentEntity.id {

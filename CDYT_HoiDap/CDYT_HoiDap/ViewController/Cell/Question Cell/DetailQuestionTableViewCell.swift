@@ -16,7 +16,6 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
     @IBOutlet weak var avaImg: UIImageView!
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var timeLbl: UILabel!
-    @IBOutlet weak var resolveIcon: UIImageView!
     
     @IBOutlet weak var tagCollectionView: UICollectionView!
     @IBOutlet weak var tagCollectionViewHeight: NSLayoutConstraint!
@@ -101,12 +100,6 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
         avaImg.sd_setImage(with: URL.init(string: feed.authorEntity.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
         nameLbl.text = feed.authorEntity.nickname
         timeLbl.text = String().convertTimeStampWithDateFormat(timeStamp: feed.postEntity.createdDate, dateFormat: "dd/MM/yy HH:mm")
-        
-        if feed.postEntity.status == 0 {
-            resolveIcon.isHidden = true
-        }else{
-            resolveIcon.isHidden = false
-        }
         
         if feed.tags.count > 0 {
             tagCollectionView.isHidden = false

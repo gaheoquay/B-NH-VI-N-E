@@ -472,13 +472,22 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GiaiPhap_Mark.png" translatesAutoresizingMaskIntoConstraints="NO" id="gQk-p2-4k8">
+                                        <rect key="frame" x="335" y="7" width="25" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="1wR-U6-2B7"/>
+                                            <constraint firstAttribute="width" secondItem="gQk-p2-4k8" secondAttribute="height" multiplier="115:139" id="4dl-b5-jSN"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="DPq-dN-UYa"/>
                                     <constraint firstItem="XjI-Un-V0F" firstAttribute="leading" secondItem="1it-gb-EqQ" secondAttribute="leading" id="G7z-qS-sXS"/>
+                                    <constraint firstAttribute="trailing" secondItem="gQk-p2-4k8" secondAttribute="trailing" constant="15" id="Gr8-FT-4HH"/>
                                     <constraint firstItem="YzF-ep-15i" firstAttribute="centerY" secondItem="1it-gb-EqQ" secondAttribute="centerY" id="JjR-c9-Bn9"/>
                                     <constraint firstItem="sao-AH-keU" firstAttribute="centerY" secondItem="1it-gb-EqQ" secondAttribute="centerY" id="NCc-dG-uSa"/>
+                                    <constraint firstItem="gQk-p2-4k8" firstAttribute="centerY" secondItem="1it-gb-EqQ" secondAttribute="centerY" id="Usa-0M-s3s"/>
                                     <constraint firstAttribute="trailing" secondItem="XjI-Un-V0F" secondAttribute="trailing" id="cGh-Tq-MdC"/>
                                     <constraint firstAttribute="bottom" secondItem="XjI-Un-V0F" secondAttribute="bottom" id="l3j-PF-iAe"/>
                                     <constraint firstItem="sao-AH-keU" firstAttribute="leading" secondItem="1it-gb-EqQ" secondAttribute="leading" constant="5" id="l8a-B9-DkK"/>
@@ -544,6 +553,7 @@
                         <outlet property="imgCollectionView" destination="5tr-Je-luG" id="wGV-ir-mkB"/>
                         <outlet property="imgCollectionViewHeight" destination="68M-rT-7JP" id="0du-q4-PKT"/>
                         <outlet property="keyboardViewHeight" destination="eKZ-mr-Sai" id="w7g-4o-Ax2"/>
+                        <outlet property="markImg" destination="gQk-p2-4k8" id="6Bf-iD-owP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k43-rM-mod" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1454,6 +1464,7 @@
         <image name="Back.png" width="100" height="100"/>
         <image name="CaiDat.png" width="100" height="100"/>
         <image name="Camera.png" width="100" height="100"/>
+        <image name="GiaiPhap_Mark.png" width="115" height="139"/>
         <image name="Home.png" width="30" height="29"/>
         <image name="MoreDetail.png" width="50" height="41"/>
         <image name="Profile.png" width="30" height="29"/>
