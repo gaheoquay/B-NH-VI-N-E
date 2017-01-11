@@ -9,27 +9,29 @@
 import UIKit
 
 class NotifyTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var avaImg: UIImageView!
-    @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var timeLbl: UILabel!
+  
+  @IBOutlet weak var avaImg: UIImageView!
+  @IBOutlet weak var titleLbl: UILabel!
+  @IBOutlet weak var timeLbl: UILabel!
+  @IBOutlet weak var viewBound: UIView!
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    // Initialization code
+    avaImg.layer.cornerRadius = 5
+//    viewBound.layer.cornerRadius = 5
+  }
+  
+  override func setSelected(_ selected: Bool, animated: Bool) {
+    super.setSelected(selected, animated: animated)
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-      avaImg.layer.cornerRadius = 5
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    // Configure the view for the selected state
+  }
   func setData(entity:ListNotificationEntity){
     if entity.notificaiton.isRead {
-      contentView.backgroundColor = UIColor.white
+      viewBound.backgroundColor = UIColor.white
     }else{
-      contentView.backgroundColor = UIColor.init(netHex: 0xc7eca1)
+      viewBound.backgroundColor = UIColor.init(netHex: 0xc7eca1)
     }
     avaImg.sd_setImage(with: URL.init(string: entity.linkedUser.avatarUrl), placeholderImage: #imageLiteral(resourceName: "AvaDefaut.png"))
     let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor().hexStringToUIColor(hex: "4A4A4A")]
