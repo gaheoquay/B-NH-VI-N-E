@@ -9,6 +9,7 @@
 import UIKit
 protocol DetailQuestionTableViewCellDelegate {
     func gotoLoginFromDetailQuestionVC()
+    func gotoUserProfileFromDetailQuestion(user : AuthorEntity)
 }
 class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -46,8 +47,14 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
         tagCollectionView.register(UINib.init(nibName: "KeywordCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeywordCollectionViewCell")
                 
         likeCountIcon.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(likePostAction)))
+        nameLbl.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showUserProfile)))
+        avaImg.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showUserProfile)))
     }
 
+    func showUserProfile(){
+        delegate?.gotoUserProfileFromDetailQuestion(user: feed.authorEntity)
+    }
+    
     func likePostAction(){
         let userId = Until.getCurrentId()
         if userId == "" {

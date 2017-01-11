@@ -77,8 +77,8 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
 //        }
     }
     
-    func reloadData(){
-        pageIndex = 1
+//    func reloadData(){
+//        pageIndex = 1
 //        listComment.removeAll()
 //        if questionID != "" {
 //            getListCommentByPostID(postId: questionID)
@@ -86,16 +86,16 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
 //            getListCommentByPostID(postId: feed.postEntity.id)
 //        }
         
-    }
+//    }
     
-    func loadMore(){
-        pageIndex += 1
+//    func loadMore(){
+//        pageIndex += 1
 //        if questionID != "" {
 //            getListCommentByPostID(postId: questionID)
 //        }else{
 //            getListCommentByPostID(postId: feed.postEntity.id)
 //        }
-    }
+//    }
     
     //MARK: Select image and upload
     func setupImagePicker(){

@@ -33,13 +33,13 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
     tbQuestion.register(UINib.init(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
     tbQuestion.addPullToRefreshHandler {
       DispatchQueue.main.async {
-        self.tbQuestion.pullToRefreshView?.startAnimating()
+//        self.tbQuestion.pullToRefreshView?.startAnimating()
         self.reloadData()
       }
     }
     tbQuestion.addInfiniteScrollingWithHandler {
       DispatchQueue.main.async {
-        self.tbQuestion.infiniteScrollingView?.startAnimating()
+//        self.tbQuestion.infiniteScrollingView?.startAnimating()
         self.loadMore()
       }
     }
@@ -119,6 +119,19 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
     viewController.hotTagId = hotTagId
     self.navigationController?.pushViewController(viewController, animated: true)
   }
+    
+    func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
+        if user.id == Until.getCurrentId() {
+//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//            let viewController = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+//            self.navigationController?.pushViewController(viewController, animated: true)
+        }else{
+            let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
+            viewController.user = user
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
   //  MARK: Outlet
   @IBOutlet weak var tbQuestion: UITableView!
   var listFedds = [FeedsEntity]()

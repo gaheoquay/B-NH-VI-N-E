@@ -80,7 +80,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         
         detailTbl.addPullToRefreshHandler {
             DispatchQueue.main.async {
-                self.detailTbl.pullToRefreshView?.startAnimating()
+//                self.detailTbl.pullToRefreshView?.startAnimating()
                 self.reloadData()
                 
             }
@@ -88,7 +88,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         
         detailTbl.addInfiniteScrollingWithHandler {
             DispatchQueue.main.async {
-                self.detailTbl.infiniteScrollingView?.startAnimating()
+//                self.detailTbl.infiniteScrollingView?.startAnimating()
                 self.loadMore()
             }
         }
@@ -279,6 +279,8 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                         self.imageAssets.removeAll()
                         self.imgCollectionView.reloadData()
                         self.view.layoutIfNeeded()
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: COMMENT_ON_COMMENT_SUCCESS), object: nil)
                         
                     }
                 }else{
@@ -529,6 +531,19 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
       Until.gotoLogin(_self: self, cannotBack: false)
     }
     
+    func gotoUserProfileFromDetailQuestion(user: AuthorEntity) {
+        if user.id == Until.getCurrentId() {
+//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//            let viewController = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+//            self.navigationController?.pushViewController(viewController, animated: true)
+        }else{
+            let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
+            viewController.user = user
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+    
     //MARK: MoreCommentTableViewCellDelegate
     func showMoreSubcomment() {
         detailTbl.reloadData()
@@ -545,6 +560,19 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     func gotoLoginFromCommentTableCell() {
       Until.gotoLogin(_self: self, cannotBack: false)
+    }
+    
+    func gotoUserProfileFromCommentCell(user: AuthorEntity) {
+        if user.id == Until.getCurrentId() {
+            //            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            //            let viewController = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+            //            self.navigationController?.pushViewController(viewController, animated: true)
+        }else{
+            let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
+            viewController.user = user
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
     
     @IBAction func backTapAction(_ sender: Any) {

@@ -38,13 +38,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     tbQuestion.register(UINib.init(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
     tbQuestion.addPullToRefreshHandler {
       DispatchQueue.main.async {
-        self.tbQuestion.pullToRefreshView?.startAnimating()
+//        self.tbQuestion.pullToRefreshView?.startAnimating()
         self.reloadData()
       }
     }
     tbQuestion.addInfiniteScrollingWithHandler {
       DispatchQueue.main.async {
-        self.tbQuestion.infiniteScrollingView?.startAnimating()
+//        self.tbQuestion.infiniteScrollingView?.startAnimating()
         self.loadMore()
       }
     }
@@ -113,6 +113,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
       "RequestedUserId" : Until.getCurrentId()
     ]
 //    Until.showLoading()
+    print(JSON.init(hotParam))
     Alamofire.request(GET_FEEDS, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
         if status == 200{
@@ -173,6 +174,20 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         vc.feed = listFedds[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
+        if user.id == Until.getCurrentId() {
+//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//            let viewController = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+//            self.navigationController?.pushViewController(viewController, animated: true)
+        }else{
+            let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
+            viewController.user = user
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+     
 //    MARK: Action
   
   @IBAction func gotoSearch(_ sender: Any) {
