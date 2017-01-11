@@ -113,6 +113,10 @@
 		A68A95111E1517230067736E /* CommentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A95101E1517230067736E /* CommentEntity.swift */; };
 		A68A95131E1518E10067736E /* SubCommentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A95121E1518E10067736E /* SubCommentEntity.swift */; };
 		A68A95151E151B490067736E /* MainCommentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A95141E151B490067736E /* MainCommentEntity.swift */; };
+		A6C463D11E25D2DA0046A367 /* OtherUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C463D01E25D2DA0046A367 /* OtherUserViewController.swift */; };
+		A6C463D71E25DB7D0046A367 /* Recent.png in Resources */ = {isa = PBXBuildFile; fileRef = A6C463D61E25DB7D0046A367 /* Recent.png */; };
+		A6C463DA1E25DB910046A367 /* RecentFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C463D81E25DB910046A367 /* RecentFeedTableViewCell.swift */; };
+		A6C463DB1E25DB910046A367 /* RecentFeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C463D91E25DB910046A367 /* RecentFeedTableViewCell.xib */; };
 		A6D083C31E121A2E007EA4D9 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D083C21E121A2E007EA4D9 /* UserEntity.swift */; };
 		A6D083C61E12747D007EA4D9 /* QuestionTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D083C41E12747D007EA4D9 /* QuestionTagTableViewCell.swift */; };
 		A6D083C71E12747D007EA4D9 /* QuestionTagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6D083C51E12747D007EA4D9 /* QuestionTagTableViewCell.xib */; };
@@ -244,6 +248,10 @@
 		A68A95101E1517230067736E /* CommentEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentEntity.swift; sourceTree = "<group>"; };
 		A68A95121E1518E10067736E /* SubCommentEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCommentEntity.swift; sourceTree = "<group>"; };
 		A68A95141E151B490067736E /* MainCommentEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCommentEntity.swift; sourceTree = "<group>"; };
+		A6C463D01E25D2DA0046A367 /* OtherUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserViewController.swift; sourceTree = "<group>"; };
+		A6C463D61E25DB7D0046A367 /* Recent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Recent.png; sourceTree = "<group>"; };
+		A6C463D81E25DB910046A367 /* RecentFeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentFeedTableViewCell.swift; sourceTree = "<group>"; };
+		A6C463D91E25DB910046A367 /* RecentFeedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecentFeedTableViewCell.xib; sourceTree = "<group>"; };
 		A6D083C21E121A2E007EA4D9 /* UserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 		A6D083C41E12747D007EA4D9 /* QuestionTagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTagTableViewCell.swift; sourceTree = "<group>"; };
 		A6D083C51E12747D007EA4D9 /* QuestionTagTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionTagTableViewCell.xib; sourceTree = "<group>"; };
@@ -321,6 +329,7 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A6C463D61E25DB7D0046A367 /* Recent.png */,
 				A60430FC1E2344DA000216FB /* dropdownicon.png */,
 				A60430F51E232D49000216FB /* Change_Ava.png */,
 				A609C2521E1B8F9F006BFBAE /* delete_img.png */,
@@ -543,6 +552,8 @@
 				A6005BCE1E13722B00095FB7 /* NotifyTableViewCell.xib */,
 				A6417E201E13B68D00BD2D75 /* SettingTableViewCell.swift */,
 				A6417E211E13B68D00BD2D75 /* SettingTableViewCell.xib */,
+				A6C463D81E25DB910046A367 /* RecentFeedTableViewCell.swift */,
+				A6C463D91E25DB910046A367 /* RecentFeedTableViewCell.xib */,
 			);
 			path = "User Cell";
 			sourceTree = "<group>";
@@ -595,6 +606,7 @@
 				A6E9D88E1E1110CF00E31886 /* LoginViewController.swift */,
 				A6E9D8901E11169600E31886 /* UpdateInfoViewController.swift */,
 				A6417E1E1E13B56C00BD2D75 /* SettingViewController.swift */,
+				A6C463D01E25D2DA0046A367 /* OtherUserViewController.swift */,
 				A6E4C2F91E1102BA00C2C871 /* User.storyboard */,
 			);
 			path = User;
@@ -687,6 +699,7 @@
 				8BF1497D1E14BF9C00766F8F /* Thongbao.png in Resources */,
 				A60430FD1E2344DA000216FB /* dropdownicon.png in Resources */,
 				A6417E231E13B68D00BD2D75 /* SettingTableViewCell.xib in Resources */,
+				A6C463DB1E25DB910046A367 /* RecentFeedTableViewCell.xib in Resources */,
 				A60430F61E232D49000216FB /* Change_Ava.png in Resources */,
 				A67311D51E164FC400BCE308 /* MoreCommentTableViewCell.xib in Resources */,
 				8B3A13441E10F454005DBC6E /* Back.png in Resources */,
@@ -700,6 +713,7 @@
 				8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */,
 				8B3A13651E10F454005DBC6E /* tag_mark.png in Resources */,
 				8BF149791E14BF9C00766F8F /* Tab.png in Resources */,
+				A6C463D71E25DB7D0046A367 /* Recent.png in Resources */,
 				8B813CB31E15052E0043F7EF /* Home.png in Resources */,
 				A6005BD01E13722B00095FB7 /* NotifyTableViewCell.xib in Resources */,
 				8B3A13471E10F454005DBC6E /* caidat_button0.png in Resources */,
@@ -789,12 +803,14 @@
 				8BC2C3101E2337C700B68F72 /* NotificationEntity.swift in Sources */,
 				A60430FB1E233431000216FB /* SSRadioButtonsController.swift in Sources */,
 				A6D083C91E127F9F007EA4D9 /* TagEntity.swift in Sources */,
+				A6C463DA1E25DB910046A367 /* RecentFeedTableViewCell.swift in Sources */,
 				A625AD2D1E24CC5700953B0B /* CommentViewController.swift in Sources */,
 				A6E4C2F81E1102A500C2C871 /* RegisterViewController.swift in Sources */,
 				8B3A13881E10FD2A005DBC6E /* UserViewController.swift in Sources */,
 				8B3A13901E112129005DBC6E /* KeyWordTableViewCell.swift in Sources */,
 				A6D083C61E12747D007EA4D9 /* QuestionTagTableViewCell.swift in Sources */,
 				8B3A13771E10F454005DBC6E /* RAMBounceAnimation.swift in Sources */,
+				A6C463D11E25D2DA0046A367 /* OtherUserViewController.swift in Sources */,
 				8B87CD291E135C7A00DA8A33 /* QuestionTableViewCell.swift in Sources */,
 				A6E431F31E14A6510092EF85 /* AddImageCollectionViewCell.swift in Sources */,
 				A6E9D8931E111F3100E31886 /* Until.swift in Sources */,

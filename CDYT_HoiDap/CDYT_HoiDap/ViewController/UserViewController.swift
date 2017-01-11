@@ -24,6 +24,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     initTable()
     setUpUI()
     setupUserInfo()
+    Until.showLoading()
     getFeeds()
   }
   override func viewWillAppear(_ animated: Bool) {
@@ -63,29 +64,45 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     questionTableView.delegate = self
     questionTableView.dataSource = self
     questionTableView.register(UINib.init(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
+    questionTableView.register(UINib.init(nibName: "RecentFeedTableViewCell", bundle: nil), forCellReuseIdentifier: "RecentFeedTableViewCell")
     questionTableView.estimatedRowHeight = 500
     questionTableView.rowHeight = UITableViewAutomaticDimension
     questionTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-  }
-  func getFeeds(){
     
-    let realm = try! Realm()
-    let users = realm.objects(UserEntity.self)
-    var userEntity : UserEntity!
-    if users.count > 0 {
-      userEntity = users.first!
+    questionTableView.addPullToRefreshHandler {
+        DispatchQueue.main.async {
+            self.reloadData()
+        }
     }
+    questionTableView.addInfiniteScrollingWithHandler {
+        DispatchQueue.main.async {
+            self.loadMore()
+        }
+    }
+  }
+    
+    func reloadData(){
+        page = 1
+        listMyFeed.removeAll()
+        getFeeds()
+    }
+    func loadMore(){
+        page += 1
+        getFeeds()
+    }
+    
+  func getFeeds(){
     
     let hotParam : [String : Any] = [
       "Auth": Until.getAuthKey(),
       "Page": page,
       "Size": 10,
-      "UserId": userEntity != nil ? userEntity.id : "",
-      "RequestedUserId" : userEntity != nil ? userEntity.id : ""
+      "UserId": Until.getCurrentId(),
+      "RequestedUserId" : Until.getCurrentId()
     ]
     
     print(JSON.init(hotParam))
-    Until.showLoading()
+//    Until.showLoading()
     Alamofire.request(GET_QUESTION_BY_ID, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
         if status == 200{
@@ -107,21 +124,33 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
       }
       Until.hideLoading()
+        self.questionTableView.pullToRefreshView?.stopAnimating()
+        self.questionTableView.infiniteScrollingView?.stopAnimating()
     }
     
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return listMyFeed.count
+    if listMyFeed.count > 0 {
+        return listMyFeed.count + 1
+    }else{
+        return 0
+    }
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
-    cell.indexPath = indexPath
-    cell.delegate = self
-    cell.feedEntity = listMyFeed[indexPath.row]
-    cell.setData()
-    return cell
+    if indexPath.row == 0 {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RecentFeedTableViewCell") as! RecentFeedTableViewCell
+        cell.titleLbl.text = "Câu hỏi đang theo dõi"
+        return cell
+    }else{
+        let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
+        cell.indexPath = indexPath
+        cell.delegate = self
+        cell.feedEntity = listMyFeed[indexPath.row - 1]
+        cell.setData()
+        return cell
+    }
   }
   
   @IBAction func notificationTapAction(_ sender: Any) {
@@ -158,7 +187,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
   //MARK: QuestionTableViewCellDelegate
   func showQuestionDetail(indexPath: IndexPath) {
     let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
-    vc.feed = listMyFeed[indexPath.row]
+    vc.feed = listMyFeed[indexPath.row - 1]
     self.navigationController?.pushViewController(vc, animated: true)
   }
   func gotoListQuestionByTag(hotTagId: String) {
@@ -166,6 +195,10 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     viewController.hotTagId = hotTagId
     self.navigationController?.pushViewController(viewController, animated: true)
   }
+    
+    func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
+        //khong can phai thuc hien ham nay vi dang trong trang profile cua chinh minh
+    }
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.

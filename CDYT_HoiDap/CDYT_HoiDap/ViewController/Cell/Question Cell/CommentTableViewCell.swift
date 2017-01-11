@@ -10,6 +10,7 @@ import UIKit
 protocol CommentTableViewCellDelegate {
     func replyCommentAction(mainComment : MainCommentEntity)
     func gotoLoginFromCommentTableCell()
+    func gotoUserProfileFromCommentCell(user : AuthorEntity)
 }
 class CommentTableViewCell: UITableViewCell {
 
@@ -44,8 +45,20 @@ class CommentTableViewCell: UITableViewCell {
         replyLbl.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(replyTapAction)))
         
         likeIcon.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(likeCommentAction)))
+        
+        avaImg.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(gotoUserProfile)))
+        nameLbl.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(gotoUserProfile)))
     }
 
+    func gotoUserProfile(){
+        if isSubcomment {
+            delegate?.gotoUserProfileFromCommentCell(user: subComment.author)
+        }else{
+            delegate?.gotoUserProfileFromCommentCell(user: mainComment.author)
+        }
+        
+    }
+    
     func replyTapAction(){
         delegate?.replyCommentAction(mainComment: mainComment)
     }

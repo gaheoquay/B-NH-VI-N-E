@@ -10,6 +10,7 @@ import UIKit
 protocol QuestionTableViewCellDelegate {
     func showQuestionDetail(indexPath : IndexPath)
   func gotoListQuestionByTag(hotTagId: String)
+    func gotoUserProfileFromQuestionCell(user : AuthorEntity)
 }
 class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDelegateLeftAlignedLayout {
   
@@ -20,6 +21,9 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
     clvTags.register(UINib.init(nibName: "KeywordCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeywordCollectionViewCell")
     lbTitle.isUserInteractionEnabled = true
     lbTitle.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showDetailQuestion)))
+    
+    lbAuthor.isUserInteractionEnabled = true
+    lbAuthor.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showUserProfile)))
   }
   
   override func setSelected(_ selected: Bool, animated: Bool) {
@@ -31,6 +35,11 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
     func showDetailQuestion(){
         delegate?.showQuestionDetail(indexPath: self.indexPath)
     }
+    
+    func showUserProfile(){
+        delegate?.gotoUserProfileFromQuestionCell(user: feedEntity.authorEntity)
+    }
+    
   @IBAction func showDetail(_ sender: Any) {
     delegate?.showQuestionDetail(indexPath: self.indexPath)
   }

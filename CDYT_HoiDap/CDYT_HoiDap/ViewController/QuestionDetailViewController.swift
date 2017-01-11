@@ -80,7 +80,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         
         detailTbl.addPullToRefreshHandler {
             DispatchQueue.main.async {
-                self.detailTbl.pullToRefreshView?.startAnimating()
+//                self.detailTbl.pullToRefreshView?.startAnimating()
                 self.reloadData()
                 
             }
@@ -88,7 +88,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         
         detailTbl.addInfiniteScrollingWithHandler {
             DispatchQueue.main.async {
-                self.detailTbl.infiniteScrollingView?.startAnimating()
+//                self.detailTbl.infiniteScrollingView?.startAnimating()
                 self.loadMore()
             }
         }
@@ -280,6 +280,8 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                         self.imgCollectionView.reloadData()
                         self.view.layoutIfNeeded()
                         
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: COMMENT_ON_COMMENT_SUCCESS), object: nil)
+                        
                     }
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể lấy được dữ liệu Bình luận. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -414,7 +416,12 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     //MARK: Table view delegate and datasource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1 + listComment.count
+        if feed.postEntity.id != "" { //trường hợp chưa có thông tin về bài viết (chưa lấy đc dữ liệu từ server)
+            return 1 + listComment.count
+        }else{
+            return 0
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -524,6 +531,19 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
       Until.gotoLogin(_self: self, cannotBack: false)
     }
     
+    func gotoUserProfileFromDetailQuestion(user: AuthorEntity) {
+        if user.id == Until.getCurrentId() {
+//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//            let viewController = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+//            self.navigationController?.pushViewController(viewController, animated: true)
+        }else{
+            let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
+            viewController.user = user
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+    
     //MARK: MoreCommentTableViewCellDelegate
     func showMoreSubcomment() {
         detailTbl.reloadData()
@@ -540,6 +560,19 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     func gotoLoginFromCommentTableCell() {
       Until.gotoLogin(_self: self, cannotBack: false)
+    }
+    
+    func gotoUserProfileFromCommentCell(user: AuthorEntity) {
+        if user.id == Until.getCurrentId() {
+            //            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            //            let viewController = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+            //            self.navigationController?.pushViewController(viewController, animated: true)
+        }else{
+            let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
+            viewController.user = user
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
     
     @IBAction func backTapAction(_ sender: Any) {
