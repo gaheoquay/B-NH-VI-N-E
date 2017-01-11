@@ -414,7 +414,12 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     //MARK: Table view delegate and datasource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1 + listComment.count
+        if feed.postEntity.id != "" { //trường hợp chưa có thông tin về bài viết (chưa lấy đc dữ liệu từ server)
+            return 1 + listComment.count
+        }else{
+            return 0
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
