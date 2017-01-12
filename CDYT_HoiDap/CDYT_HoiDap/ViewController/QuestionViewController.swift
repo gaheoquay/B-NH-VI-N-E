@@ -12,10 +12,11 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    NotificationCenter.default.addObserver(self, selector: #selector(reloadQuestionData), name: Notification.Name.init(ADD_NEW_QUESTION_SUCCESS), object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(markACommentToSolution(notification:)), name: Notification.Name.init(MARK_COMMENT_TO_RESOLVE), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(ADD_NEW_QUESTION_SUCCESS), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
 
     initTableView()
+    Until.showLoading()
     getFeeds()
     
   }
@@ -57,11 +58,6 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
     page += 1
     getFeeds()
   }
-
-    //MARK: Receive notify when add new question
-    func reloadQuestionData(){
-        tbQuestion.triggerPullToRefresh()
-    }
     
   //  MARK: request data
   func getFeeds(){
@@ -92,7 +88,7 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
       }else{
         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
       }
-//      Until.hideLoading()
+      Until.hideLoading()
       self.tbQuestion.pullToRefreshView?.stopAnimating()
       self.tbQuestion.infiniteScrollingView?.stopAnimating()
     }
@@ -138,8 +134,8 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     
     //MARK: receive notifiy when mark an comment is solution
-    func markACommentToSolution(notification : Notification){
-        tbQuestion.triggerPullToRefresh()
+    func reloadDataFromServer(notification : Notification){
+        reloadData()
     }
     
   //  MARK: Outlet

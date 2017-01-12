@@ -20,7 +20,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     super.viewDidLoad()
     NotificationCenter.default.addObserver(self, selector: #selector(self.reloadView), name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(self.setupUserInfo), name: NSNotification.Name(rawValue: UPDATE_USERINFO), object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(markACommentToSolution(notification:)), name: Notification.Name.init(MARK_COMMENT_TO_RESOLVE), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
 
     initTable()
     setUpUI()
@@ -203,8 +203,8 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
   }
     
     //MARK: receive notifiy when mark an comment is solution
-    func markACommentToSolution(notification : Notification){
-            questionTableView.triggerPullToRefresh()
+    func reloadDataFromServer(notification : Notification){
+        reloadData()
     }
     
     func gotoUserProfileFromQuestionCell(user: AuthorEntity) {

@@ -62,7 +62,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(markACommentToSolution(notification:)), name: Notification.Name.init(MARK_COMMENT_TO_RESOLVE), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(markACommentToSolution(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCommentData), name: Notification.Name.init(COMMENT_ON_COMMENT_SUCCESS), object: nil)
 
     }
@@ -546,6 +546,46 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         self.view.endEditing(true)
     }
     
+    //MARK: Xoa bai viet
+    func deleteQuestion(){
+        Until.showLoading()
+        let param : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId": currentUserId,
+            "DeletedObjectId": feed.postEntity.id
+        ]
+        
+        print(JSON.init(param))
+        
+        Alamofire.request(DELETE_ALL, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! NSDictionary
+                        let isDelete = jsonData["IsDeleted"] as! Bool
+                        if isDelete {
+                            let alert = UIAlertController.init(title: "Thông báo", message: "Xoá bài viết thành công.", preferredStyle: UIAlertControllerStyle.alert)
+                            let action = UIAlertAction.init(title: "Đóng", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
+                                _ = self.navigationController?.popViewController(animated: true)
+                            })
+                            alert.addAction(action)
+                            self.present(alert, animated: true, completion: nil)
+                            
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: nil)
+                        }else{
+                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Xoá bài viết bị lỗi, vui lòng thử lại sau.", cancelBtnTitle: "Đóng")
+                        }
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể xoá bài viết. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+            Until.hideLoading()
+        }
+    }
+    
     //MARK: DetailQuestionTableViewCellDelegate
     func gotoLoginFromDetailQuestionVC() {
       Until.gotoLogin(_self: self, cannotBack: false)
@@ -562,6 +602,38 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             viewController.user = user
             self.navigationController?.pushViewController(viewController, animated: true)
         }
+    }
+    
+    func showMoreActionFromDetailQuestion() {
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let editTap = UIAlertAction(title: "Chỉnh sửa", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+        })
+        
+        let deleteTap = UIAlertAction(title: "Xoá", style: .destructive, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có chắc chắn xoá bài viết này?", preferredStyle: UIAlertControllerStyle.alert)
+            let noAction = UIAlertAction.init(title: "Huỷ", style: UIAlertActionStyle.cancel, handler: nil)
+            let yesAction = UIAlertAction.init(title: "Xoá", style: UIAlertActionStyle.destructive, handler: { (UIAlertAction) in
+                self.deleteQuestion()
+            })
+            
+            alert.addAction(noAction)
+            alert.addAction(yesAction)
+            self.present(alert, animated: true, completion: nil)
+        })
+        
+        let cancelTap = UIAlertAction(title: "Huỷ bỏ", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+        
+        optionMenu.addAction(editTap)
+        optionMenu.addAction(deleteTap)
+        optionMenu.addAction(cancelTap)
+        
+        self.present(optionMenu, animated: true, completion: nil)
     }
     
     //MARK: MoreCommentTableViewCellDelegate

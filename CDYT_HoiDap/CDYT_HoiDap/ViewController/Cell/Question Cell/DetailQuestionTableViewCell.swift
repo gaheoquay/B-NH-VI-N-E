@@ -10,7 +10,9 @@ import UIKit
 protocol DetailQuestionTableViewCellDelegate {
     func gotoLoginFromDetailQuestionVC()
     func gotoUserProfileFromDetailQuestion(user : AuthorEntity)
+    func showMoreActionFromDetailQuestion()
 }
+
 class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var avaImg: UIImageView!
@@ -32,6 +34,8 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
     @IBOutlet weak var commentCountIcon: UIImageView!
     
     @IBOutlet weak var imgTag: UIImageView!
+    @IBOutlet weak var moreActionBtn: UIButton!
+    
     var feed = FeedsEntity()
     var delegate : DetailQuestionTableViewCellDelegate?
     override func awakeFromNib() {
@@ -52,6 +56,10 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
 
     func showUserProfile(){
         delegate?.gotoUserProfileFromDetailQuestion(user: feed.authorEntity)
+    }
+    
+    @IBAction func moreActionBtnTap(_ sender: Any) {
+        delegate?.showMoreActionFromDetailQuestion()
     }
     
     func likePostAction(){
@@ -133,6 +141,12 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
         
         tagCollectionView.reloadData()
         imgCollectionView.reloadData()
+        
+        if Until.getCurrentId() == feed.authorEntity.id {
+            moreActionBtn.isHidden = false
+        }else{
+            moreActionBtn.isHidden = true
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

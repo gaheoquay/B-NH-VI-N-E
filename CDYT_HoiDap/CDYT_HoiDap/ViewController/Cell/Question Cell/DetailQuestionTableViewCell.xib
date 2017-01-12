@@ -58,13 +58,13 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTd-mL-IOi">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTd-mL-IOi">
                         <rect key="frame" x="18" y="100.5" width="287" height="33.5"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                         <color key="textColor" red="0.0039215686274509803" green="0.65490196078431373" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DtO-gO-DLQ">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel LabelLabel " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DtO-gO-DLQ">
                         <rect key="frame" x="18" y="136" width="287" height="67"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
@@ -127,6 +127,9 @@
                         </constraints>
                         <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
                         <state key="normal" title=" " image="Edit.png"/>
+                        <connections>
+                            <action selector="moreActionBtnTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8vq-H4-VFO"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -178,6 +181,7 @@
                 <outlet property="imgTag" destination="9xc-21-s5n" id="NNb-aY-yVU"/>
                 <outlet property="likeCountIcon" destination="ckb-qA-9Jp" id="pNf-Vr-Q24"/>
                 <outlet property="likeCountLbl" destination="caG-oV-B50" id="MLt-WT-gBs"/>
+                <outlet property="moreActionBtn" destination="6nr-HQ-bCu" id="n7o-uM-zzA"/>
                 <outlet property="nameLbl" destination="opY-r5-iuo" id="QCq-dZ-tHi"/>
                 <outlet property="tagCollectionView" destination="4V0-3O-8Ol" id="ALp-lq-ed9"/>
                 <outlet property="tagCollectionViewHeight" destination="G5q-1E-nPP" id="WVH-8q-YXh"/>

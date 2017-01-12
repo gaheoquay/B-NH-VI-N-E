@@ -247,7 +247,7 @@ class CommentTableViewCell: UITableViewCell {
                             let jsonData = result as! NSDictionary
                             let comment = CommentEntity.init(dictionary: jsonData)
                             
-                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: MARK_COMMENT_TO_RESOLVE), object: comment)
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: comment)
                         }
                     }else{
                         UIAlertController().showAlertWith(vc: self.appDel.window!.rootViewController!, title: "Thông báo", message: "Có lỗi xảy ra, vui lòng thử lai sau", cancelBtnTitle: "Đóng")
