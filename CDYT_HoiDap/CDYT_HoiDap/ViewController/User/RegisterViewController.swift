@@ -188,12 +188,6 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable {
         }
     }
     
-    @IBAction func loginBtnAction(_ sender: Any) {
-        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        self.navigationController?.pushViewController(viewController, animated: true)
-
-    }
-    
     func validateData() -> String{
         let nickString = nicknameTxt.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let emailString = emailTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines)

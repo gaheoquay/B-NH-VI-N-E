@@ -337,6 +337,9 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
     }
     
     @IBAction func changePassTapAction(_ sender: Any) {
+        let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ChangPassViewController") as! ChangPassViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func backBtnAction(_ sender: Any) {

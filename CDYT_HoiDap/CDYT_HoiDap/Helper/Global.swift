@@ -36,6 +36,7 @@ let MARK_AS_SOLUTION = BASE_URL + "/Post/AcceptAsSolution"
 let GET_LIST_NOTIFICATION = BASE_URL + "/Notification/GetNotificationsByUserId"
 let GET_POST_BY_ID = BASE_URL + "/Post/GetPostById"
 let GET_USER_BY_ID = BASE_URL + "/User/GetUserById"
+let CHANGE_PASSWORD = BASE_URL + "/User/ChangePassword"
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
 let NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"

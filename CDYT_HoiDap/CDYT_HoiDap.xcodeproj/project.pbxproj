@@ -99,6 +99,7 @@
 		A67311D11E160F3400BCE308 /* placeholder_wide.png in Resources */ = {isa = PBXBuildFile; fileRef = A67311D01E160F3400BCE308 /* placeholder_wide.png */; };
 		A67311D41E164FC400BCE308 /* MoreCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67311D21E164FC400BCE308 /* MoreCommentTableViewCell.swift */; };
 		A67311D51E164FC400BCE308 /* MoreCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A67311D31E164FC400BCE308 /* MoreCommentTableViewCell.xib */; };
+		A676E7C31E2731F500DD57B2 /* ChangPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A676E7C21E2731F500DD57B2 /* ChangPassViewController.swift */; };
 		A68A94FC1E14CA240067736E /* DangKi_Right.png in Resources */ = {isa = PBXBuildFile; fileRef = A68A94FB1E14CA240067736E /* DangKi_Right.png */; };
 		A68A94FE1E14CA480067736E /* DangKi_Left.png in Resources */ = {isa = PBXBuildFile; fileRef = A68A94FD1E14CA480067736E /* DangKi_Left.png */; };
 		A68A95001E14EB540067736E /* QuestionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68A94FF1E14EB540067736E /* QuestionDetailViewController.swift */; };
@@ -233,6 +234,7 @@
 		A67311D01E160F3400BCE308 /* placeholder_wide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder_wide.png; sourceTree = "<group>"; };
 		A67311D21E164FC400BCE308 /* MoreCommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreCommentTableViewCell.swift; sourceTree = "<group>"; };
 		A67311D31E164FC400BCE308 /* MoreCommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreCommentTableViewCell.xib; sourceTree = "<group>"; };
+		A676E7C21E2731F500DD57B2 /* ChangPassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangPassViewController.swift; sourceTree = "<group>"; };
 		A68A94FB1E14CA240067736E /* DangKi_Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DangKi_Right.png; sourceTree = "<group>"; };
 		A68A94FD1E14CA480067736E /* DangKi_Left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DangKi_Left.png; sourceTree = "<group>"; };
 		A68A94FF1E14EB540067736E /* QuestionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionDetailViewController.swift; sourceTree = "<group>"; };
@@ -604,6 +606,7 @@
 				A6E9D8901E11169600E31886 /* UpdateInfoViewController.swift */,
 				A6417E1E1E13B56C00BD2D75 /* SettingViewController.swift */,
 				A6C463D01E25D2DA0046A367 /* OtherUserViewController.swift */,
+				A676E7C21E2731F500DD57B2 /* ChangPassViewController.swift */,
 				A6E4C2F91E1102BA00C2C871 /* User.storyboard */,
 			);
 			path = User;
@@ -804,6 +807,7 @@
 				A6E4C2F81E1102A500C2C871 /* RegisterViewController.swift in Sources */,
 				8B3A13881E10FD2A005DBC6E /* UserViewController.swift in Sources */,
 				8B3A13901E112129005DBC6E /* KeyWordTableViewCell.swift in Sources */,
+				A676E7C31E2731F500DD57B2 /* ChangPassViewController.swift in Sources */,
 				A6D083C61E12747D007EA4D9 /* QuestionTagTableViewCell.swift in Sources */,
 				8B3A13771E10F454005DBC6E /* RAMBounceAnimation.swift in Sources */,
 				A6C463D11E25D2DA0046A367 /* OtherUserViewController.swift in Sources */,

@@ -415,17 +415,19 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     //MARK: receive notifiy when mark an comment is solution
     func markACommentToSolution(notification : Notification){
-        let commentEntity = notification.object as! CommentEntity
-        
-        if commentEntity.isSolution == true {
-            markImg.image = UIImage.init(named: "GiaiPhap_Mark.png")
-        }else{
-            markImg.image = UIImage.init(named: "GiaiPhap_Mark_hide.png")
-        }
-        
-        for item in listComment {
-            if item.comment.id == commentEntity.id {
-                item.comment.isSolution = commentEntity.isSolution
+        if notification.object != nil {
+            let commentEntity = notification.object as! CommentEntity
+            
+            if commentEntity.isSolution == true {
+                markImg.image = UIImage.init(named: "GiaiPhap_Mark.png")
+            }else{
+                markImg.image = UIImage.init(named: "GiaiPhap_Mark_hide.png")
+            }
+            
+            for item in listComment {
+                if item.comment.id == commentEntity.id {
+                    item.comment.isSolution = commentEntity.isSolution
+                }
             }
         }
         
