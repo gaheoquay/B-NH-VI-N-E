@@ -12,7 +12,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(ADD_NEW_QUESTION_SUCCESS), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
 
   initTableView()
@@ -164,7 +163,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
       let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
         cell.delegate = self
         cell.indexPath = indexPath
-      cell.feedEntity = listFedds[indexPath.row]
+        if listFedds.count > 0 {
+            cell.feedEntity = listFedds[indexPath.row]
+        }
+      
       cell.setData()
       return cell
     }
@@ -173,7 +175,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     //MARK: QuestionTableViewCellDelegate
     func showQuestionDetail(indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
-        vc.feed = listFedds[indexPath.row]
+        vc.feedObj = listFedds[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

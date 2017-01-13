@@ -12,7 +12,6 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(ADD_NEW_QUESTION_SUCCESS), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
 
     initTableView()
@@ -111,7 +110,7 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
     //MARK: QuestionTableViewCellDelegate
     func showQuestionDetail(indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
-        vc.feed = listFedds[indexPath.row]
+        vc.feedObj = listFedds[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
   func gotoListQuestionByTag(hotTagId: String) {

@@ -293,8 +293,6 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
                     self.avaImg1.image = image!
                 })
                 
-            }else{
-                self.avaImg1.image = UIImage.init(named: "AvaDefaut.png")
             }
         }
     }

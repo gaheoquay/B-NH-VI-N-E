@@ -150,7 +150,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
     func showQuestionDetail(indexPath: IndexPath) {
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
-        vc.feed = listFeeds[indexPath.row - 1]
+        vc.feedObj = listFeeds[indexPath.row - 1]
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

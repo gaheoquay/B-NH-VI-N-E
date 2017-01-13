@@ -175,7 +175,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="iW4-4m-FeO" secondAttribute="height" multiplier="1/1" id="Rsz-7F-szB"/>
                                         </constraints>
-                                        <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" title=" " image="Back.png"/>
                                         <connections>
                                             <action selector="backTapAction:" destination="hfO-oq-tkM" eventType="touchUpInside" id="Bje-Pg-65j"/>
@@ -270,16 +270,16 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nội dung" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FvI-Fy-A2d">
-                                                <rect key="frame" x="23" y="116" width="70" height="20"/>
+                                                <rect key="frame" x="23" y="111" width="70" height="20"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                 <color key="textColor" red="0.42745098040000001" green="0.57647058819999997" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1vf-bL-Moi">
-                                                <rect key="frame" x="23" y="144" width="333" height="140"/>
+                                                <rect key="frame" x="23" y="139" width="333" height="150"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="140" id="1hl-F5-Fv8"/>
+                                                    <constraint firstAttribute="height" constant="150" id="1hl-F5-Fv8"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -289,16 +289,16 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gắn từ khoá" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8F-0H-5gQ">
-                                                <rect key="frame" x="23" y="305" width="95" height="20"/>
+                                                <rect key="frame" x="23" y="310" width="95" height="20"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                 <color key="textColor" red="0.42745098040000001" green="0.57647058819999997" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0aG-kK-Ak1">
-                                                <rect key="frame" x="23" y="333" width="333" height="120"/>
+                                                <rect key="frame" x="23" y="338" width="333" height="100"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="120" id="s35-qB-DWs"/>
+                                                    <constraint firstAttribute="height" constant="100" id="s35-qB-DWs"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -314,7 +314,7 @@
                                                 </constraints>
                                             </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JUJ-O4-QdN">
-                                                <rect key="frame" x="23" y="461" width="333" height="110"/>
+                                                <rect key="frame" x="23" y="446" width="333" height="110"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="110" id="Rfi-E4-6Ef"/>
@@ -337,10 +337,10 @@
                                                 </cells>
                                             </collectionView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X63-qs-P9e">
-                                                <rect key="frame" x="23" y="50" width="333" height="45"/>
+                                                <rect key="frame" x="23" y="50" width="333" height="40"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" nhập tiêu đề câu hỏi" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="aTb-MZ-VyV">
-                                                        <rect key="frame" x="5" y="0.0" width="328" height="45"/>
+                                                        <rect key="frame" x="5" y="0.0" width="328" height="40"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -352,7 +352,7 @@
                                                     <constraint firstAttribute="bottom" secondItem="aTb-MZ-VyV" secondAttribute="bottom" id="5I9-d3-VdX"/>
                                                     <constraint firstAttribute="trailing" secondItem="aTb-MZ-VyV" secondAttribute="trailing" id="GAg-Gi-eH6"/>
                                                     <constraint firstItem="aTb-MZ-VyV" firstAttribute="top" secondItem="X63-qs-P9e" secondAttribute="top" id="Ico-1g-Z7x"/>
-                                                    <constraint firstAttribute="height" constant="45" id="yG4-wY-6tl"/>
+                                                    <constraint firstAttribute="height" constant="40" id="yG4-wY-6tl"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -412,10 +412,14 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="700"/>
                     <connections>
+                        <outlet property="addImgView" destination="zMu-tv-La0" id="CJm-Lc-XwI"/>
+                        <outlet property="addImgViewHeight" destination="vAa-O9-euc" id="seo-IS-eW7"/>
                         <outlet property="contentTxt" destination="1vf-bL-Moi" id="meN-uh-oQs"/>
                         <outlet property="imgClv" destination="JUJ-O4-QdN" id="czt-Ba-lbu"/>
                         <outlet property="imgClvheight" destination="Rfi-E4-6Ef" id="ZFc-7i-Q6P"/>
+                        <outlet property="postBtn" destination="W5o-QB-GYM" id="cB2-OU-NUL"/>
                         <outlet property="tagTxt" destination="0aG-kK-Ak1" id="5xO-jZ-sLi"/>
+                        <outlet property="titleNaviBarLbl" destination="YJg-m6-STi" id="Wc2-hA-E4z"/>
                         <outlet property="titleTxt" destination="aTb-MZ-VyV" id="sIr-Wy-vvu"/>
                         <outlet property="titleTxtBorderView" destination="X63-qs-P9e" id="d5b-lH-Bdp"/>
                     </connections>
@@ -785,7 +789,7 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKD-sf-9ZR">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" title=" " image="Back.png"/>
                                         <connections>
                                             <action selector="actionBack:" destination="XSg-nc-tYD" eventType="touchUpInside" id="rVh-re-rhY"/>
