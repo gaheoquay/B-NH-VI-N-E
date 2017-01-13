@@ -9,6 +9,7 @@
 import UIKit
 
 class MainCommentEntity: NSObject {
+    var post = PostEntity()
     var author = AuthorEntity()
     var comment = CommentEntity()
     var isLike = false
@@ -21,6 +22,9 @@ class MainCommentEntity: NSObject {
     }
     
     init(dict : NSDictionary) {
+        if let value = dict["Post"] as? NSDictionary {
+            post = PostEntity.init(dictionary: value)
+        }
         if let value = dict["Author"] as? NSDictionary {
             author = AuthorEntity.init(dictionary: value)
         }
@@ -39,6 +43,5 @@ class MainCommentEntity: NSObject {
                 subComment.append(entity)
             }
         }
-        
     }
 }

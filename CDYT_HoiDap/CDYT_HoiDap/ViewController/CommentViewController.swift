@@ -14,6 +14,8 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var keyboardViewHeight: NSLayoutConstraint!
     @IBOutlet weak var imgClv: UICollectionView!
     @IBOutlet weak var imgClvHeight: NSLayoutConstraint!
+    @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var resolveImg: UIImageView!
     
     let textInputBar = ALTextInputBar()
     let keyboardObserver = ALKeyboardObservingView()
@@ -23,10 +25,11 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var imgCommentDic = [String]()
     var thumImgCommentDic = [String]()
-    var pageIndex = 0
+    var pageIndex = 1
     var mainComment = MainCommentEntity()
     var currentUserId = ""
     var feedEntity = FeedsEntity()
+    var commentId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +40,15 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         imgClvHeight.constant = 0
         currentUserId = Until.getCurrentId()
+    
+        if commentId != "" {
+            getCommentFromNotification()
+        }
+        
+        //Check feedEntity is exsit or not
+        if feedEntity.postEntity.title != "" {
+            setupData()
+        }
     }
     
     deinit{
@@ -60,43 +72,53 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         imgClv.delegate = self
         imgClv.dataSource = self
         imgClv.register(UINib.init(nibName: "AddImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AddImageCollectionViewCell")
+
+        if commentId != "" {
+            commentTbl.addPullToRefreshHandler {
+                DispatchQueue.main.async {
+                    self.reloadData()
+                    
+                }
+            }
+            
+            commentTbl.addInfiniteScrollingWithHandler {
+                DispatchQueue.main.async {
+                    self.loadMore()
+                }
+            }
+        }
         
-//        commentTbl.addPullToRefreshHandler {
-//            DispatchQueue.main.async {
-//                self.commentTbl.pullToRefreshView?.startAnimating()
-//                self.reloadData()
-//                
-//            }
-//        }
-        
-//        commentTbl.addInfiniteScrollingWithHandler {
-//            DispatchQueue.main.async {
-//                self.commentTbl.infiniteScrollingView?.startAnimating()
-//                self.loadMore()
-//            }
-//        }
     }
     
-//    func reloadData(){
-//        pageIndex = 1
-//        listComment.removeAll()
-//        if questionID != "" {
-//            getListCommentByPostID(postId: questionID)
-//        }else{
-//            getListCommentByPostID(postId: feed.postEntity.id)
-//        }
-        
-//    }
+    func reloadData(){
+        pageIndex = 1
+        getCommentFromNotification()
+    }
     
-//    func loadMore(){
-//        pageIndex += 1
-//        if questionID != "" {
-//            getListCommentByPostID(postId: questionID)
-//        }else{
-//            getListCommentByPostID(postId: feed.postEntity.id)
-//        }
-//    }
+    func loadMore(){
+        pageIndex += 1
+        getCommentFromNotification()
+    }
     
+    //MARK: Setup UI
+    func setupData(){
+        titleLbl.text = feedEntity.postEntity.title
+        if feedEntity.postEntity.status == 0 {
+            resolveImg.image = UIImage.init(named: "GiaiPhap_Mark_hide.png")
+        }else{
+            resolveImg.image = UIImage.init(named: "GiaiPhap_Mark.png")
+        }
+    }
+    
+    //MARK: UPdate UI for comment
+    func setupUIForComment(mainComment : MainCommentEntity){
+        titleLbl.text = mainComment.post.title
+        if mainComment.post.status == 0 {
+            resolveImg.image = UIImage.init(named: "GiaiPhap_Mark_hide.png")
+        }else{
+            resolveImg.image = UIImage.init(named: "GiaiPhap_Mark.png")
+        }
+    }
     //MARK: Select image and upload
     func setupImagePicker(){
         pickerController.assetType = DKImagePickerControllerAssetType.allPhotos
@@ -190,9 +212,51 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         return true
     }
     
+    //MARK: get comment from notification
+    func getCommentFromNotification(){
+        self.view.endEditing(true)
+        
+        let commentParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId": currentUserId,
+            "CommentId": commentId,
+            "Page": pageIndex,
+            "Size": "10"
+        ]
+        
+        print(JSON.init(commentParam))
+        Until.showLoading()
+        
+        Alamofire.request(GET_LIST_SUBCOMMENT, method: .post, parameters: commentParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! NSDictionary 
+                        let entity = MainCommentEntity.init(dict: jsonData)
+                        
+                        self.mainComment = entity
+                        self.setupUIForComment(mainComment: entity)
+                        self.commentTbl.reloadData()
+                        
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể lấy được dữ liệu Bình luận. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+            Until.hideLoading()
+        }
+    }
+    
     //MARK: Table view delegate and datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1 + mainComment.subComment.count
+        if mainComment.subComment.count > 0 {
+            return 1 + mainComment.subComment.count
+        }else{
+            return 0
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -17,7 +17,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var keyboardViewHeight: NSLayoutConstraint!
     @IBOutlet weak var markImg: UIImageView!
     
-    var feed = FeedsEntity()
+    var feedObj = FeedsEntity()
     var listComment = [MainCommentEntity]()
     
     let textInputBar = ALTextInputBar()
@@ -43,7 +43,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             getPostBy(postId: questionID)
         }else{
             setupMarkerForQuestion()
-            getListCommentByPostID(postId: feed.postEntity.id)
+            getListCommentByPostID(postId: feedObj.postEntity.id)
         }
         
         configInputBar()
@@ -64,7 +64,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         
         NotificationCenter.default.addObserver(self, selector: #selector(markACommentToSolution(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCommentData), name: Notification.Name.init(COMMENT_ON_COMMENT_SUCCESS), object: nil)
-
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadQuestionAfterUpdated(notification:)), name: Notification.Name.init(RELOAD_QUESTION_DETAIL), object: nil)
     }
     
     func configTable(){
@@ -102,7 +102,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         if questionID != "" {
             getListCommentByPostID(postId: questionID)
         }else{
-            getListCommentByPostID(postId: feed.postEntity.id)
+            getListCommentByPostID(postId: feedObj.postEntity.id)
         }
         
     }
@@ -112,16 +112,24 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         if questionID != "" {
             getListCommentByPostID(postId: questionID)
         }else{
-            getListCommentByPostID(postId: feed.postEntity.id)
+            getListCommentByPostID(postId: feedObj.postEntity.id)
         }
     }
     
     //MARK: Show marker for question 
     func setupMarkerForQuestion() {
-        if feed.postEntity.status == 0 {
+        if feedObj.postEntity.status == 0 {
             markImg.image = UIImage.init(named: "GiaiPhap_Mark_hide.png")
         }else{
             markImg.image = UIImage.init(named: "GiaiPhap_Mark.png")
+        }
+    }
+    
+    func reloadQuestionAfterUpdated(notification : Notification){
+        if notification.object != nil {
+            let feed = notification.object as! FeedsEntity
+            self.feedObj = feed
+            self.detailTbl.reloadData()
         }
     }
     
@@ -175,10 +183,10 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                     if let result = response.result.value {
                         let jsonData = result as! NSDictionary
                         
-                        self.feed = FeedsEntity.init(dictionary: jsonData)
+                        self.feedObj = FeedsEntity.init(dictionary: jsonData)
                         self.setupMarkerForQuestion()
 
-                        self.getListCommentByPostID(postId: self.feed.postEntity.id)
+                        self.getListCommentByPostID(postId: self.feedObj.postEntity.id)
 
                         self.detailTbl.reloadData()
                         
@@ -267,7 +275,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             "Auth": Until.getAuthKey(),
             "RequestedUserId": currentUserId,
             "Comment": CommentEntity().toDictionary(entity: commentEntity),
-            "PostId": feed.postEntity.id
+            "PostId": feedObj.postEntity.id
         ]
         
         print(JSON.init(commentParam))
@@ -436,12 +444,11 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     //MARK: Table view delegate and datasource
     func numberOfSections(in tableView: UITableView) -> Int {
-        if feed.postEntity.id != "" { //trường hợp chưa có thông tin về bài viết (chưa lấy đc dữ liệu từ server)
+        if feedObj.postEntity.id != "" { //trường hợp chưa có thông tin về bài viết (chưa lấy đc dữ liệu từ server)
             return 1 + listComment.count
         }else{
             return 0
         }
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -465,7 +472,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailQuestionTableViewCell") as! DetailQuestionTableViewCell
-            cell.feed = self.feed
+            cell.feed = self.feedObj
             cell.setData()
             cell.delegate = self
             return cell
@@ -474,7 +481,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             if entity.isShowMore {
                 if indexPath.row == 0{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
-                    if currentUserId == feed.authorEntity.id {
+                    if currentUserId == feedObj.authorEntity.id {
                         cell.isMyPost = true
                     }else{
                         cell.isMyPost = false
@@ -494,7 +501,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             }else{
                 if indexPath.row == 0{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
-                    if currentUserId == feed.authorEntity.id {
+                    if currentUserId == feedObj.authorEntity.id {
                         cell.isMyPost = true
                     }else{
                         cell.isMyPost = false
@@ -552,7 +559,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         let param : [String : Any] = [
             "Auth": Until.getAuthKey(),
             "RequestedUserId": currentUserId,
-            "DeletedObjectId": feed.postEntity.id
+            "DeletedObjectId": feedObj.postEntity.id
         ]
         
         print(JSON.init(param))
@@ -608,7 +615,12 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let editTap = UIAlertAction(title: "Chỉnh sửa", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
-            
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "AddQuestionViewController") as! AddQuestionViewController
+            vc.feedObj = self.feedObj
+            vc.isEditPost = true
+            self.navigationController?.pushViewController(vc, animated: true)
+
         })
         
         let deleteTap = UIAlertAction(title: "Xoá", style: .destructive, handler: {
@@ -645,7 +657,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     func replyCommentAction(mainComment: MainCommentEntity) {
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController
-        vc.feedEntity = feed
+        vc.feedEntity = feedObj
         vc.mainComment = mainComment
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -665,6 +677,43 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             viewController.user = user
             self.navigationController?.pushViewController(viewController, animated: true)
         }
+    }
+    
+    func showMoreActionCommentFromCommentCell() {
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let editTap = UIAlertAction(title: "Chỉnh sửa", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "AddQuestionViewController") as! AddQuestionViewController
+//            vc.feedObj = self.feedObj
+//            vc.isEditPost = true
+//            self.navigationController?.pushViewController(vc, animated: true)
+            
+        })
+        
+        let deleteTap = UIAlertAction(title: "Xoá", style: .destructive, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có chắc chắn xoá bài viết này?", preferredStyle: UIAlertControllerStyle.alert)
+            let noAction = UIAlertAction.init(title: "Huỷ", style: UIAlertActionStyle.cancel, handler: nil)
+            let yesAction = UIAlertAction.init(title: "Xoá", style: UIAlertActionStyle.destructive, handler: { (UIAlertAction) in
+//                self.deleteQuestion()
+            })
+            
+            alert.addAction(noAction)
+            alert.addAction(yesAction)
+            self.present(alert, animated: true, completion: nil)
+        })
+        
+        let cancelTap = UIAlertAction(title: "Huỷ bỏ", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+        
+        optionMenu.addAction(editTap)
+        optionMenu.addAction(deleteTap)
+        optionMenu.addAction(cancelTap)
+        
+        self.present(optionMenu, animated: true, completion: nil)
     }
     
     @IBAction func backTapAction(_ sender: Any) {

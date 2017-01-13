@@ -728,7 +728,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="jHf-QW-KNK" secondAttribute="height" multiplier="1:1" id="QwF-Rt-4EU"/>
                                                 </constraints>
-                                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                <inset key="imageEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
                                                 <state key="normal" title=" " image="Change_Ava.png">
                                                     <color key="titleColor" red="0.52941176469999995" green="0.72941176470000002" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>

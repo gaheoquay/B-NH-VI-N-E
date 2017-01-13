@@ -11,6 +11,7 @@ protocol CommentTableViewCellDelegate {
     func replyCommentAction(mainComment : MainCommentEntity)
     func gotoLoginFromCommentTableCell()
     func gotoUserProfileFromCommentCell(user : AuthorEntity)
+    func showMoreActionCommentFromCommentCell()
 }
 class CommentTableViewCell: UITableViewCell {
 
@@ -29,6 +30,7 @@ class CommentTableViewCell: UITableViewCell {
     
     @IBOutlet weak var replyLbl: UILabel!
     @IBOutlet weak var markToResolveBtn: UIButton!
+    @IBOutlet weak var moreActionBtn: UIButton!
     
     var delegate : CommentTableViewCellDelegate?
     var mainComment = MainCommentEntity()
@@ -124,6 +126,7 @@ class CommentTableViewCell: UITableViewCell {
         }
     }
     
+    //MARK: set data for main comment
     func setDataForMainComment() {
         isSubcomment = false
         
@@ -189,8 +192,15 @@ class CommentTableViewCell: UITableViewCell {
         }else{
             seperatorHeight.constant = 1
         }
+        
+        if Until.getCurrentId() == mainComment.author.id {
+            moreActionBtn.isHidden = false
+        }else{
+            moreActionBtn.isHidden = true
+        }
     }
     
+    //MARK: Set data for sub comment
     func setDataForSubComment() {
         isSubcomment = true
         markToResolveBtn.isHidden = true
@@ -221,10 +231,19 @@ class CommentTableViewCell: UITableViewCell {
         
         likeCountLbl.text = "\(subComment.likeCount)"
         
+        if Until.getCurrentId() == subComment.author.id {
+            moreActionBtn.isHidden = false
+        }else{
+            moreActionBtn.isHidden = true
+        }
+        
         leftViewWidth.constant = 60
         avaImgHeight.constant = 30
+        
+        
     }
     
+    //MARK: Mark a comment is solution
     @IBAction func markSolutionTapAction(_ sender: Any) {
         let userID = Until.getCurrentId()
         if userID == "" {
@@ -260,6 +279,11 @@ class CommentTableViewCell: UITableViewCell {
             
         }
 
+    }
+    
+    //MARK: Show more action (delete/edit) comment
+    @IBAction func showMoreTapAction(_ sender: Any) {
+        delegate?.showMoreActionCommentFromCommentCell()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

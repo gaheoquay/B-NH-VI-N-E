@@ -38,7 +38,7 @@ class FeedsEntity: NSObject {
     if let value = dictionary["Tags"] as? [NSDictionary] {
       for element in value {
         let entity = TagEntity.init(dictionary: element)
-        tags.append(entity)
+        tags.insert(entity, at: 0)
       }
     }
     

@@ -117,7 +117,7 @@ class QuestionByTagViewController: UIViewController,UITableViewDelegate,UITableV
     //MARK: QuestionTableViewCellDelegate
     func showQuestionDetail(indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
-        vc.feed = listFedds[indexPath.row]
+        vc.feedObj = listFedds[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
   func gotoListQuestionByTag(hotTagId: String) {

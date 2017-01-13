@@ -16,12 +16,19 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var imgClv: UICollectionView!
     @IBOutlet weak var imgClvheight: NSLayoutConstraint!
     @IBOutlet weak var titleTxtBorderView: UIView!
+    @IBOutlet weak var titleNaviBarLbl: UILabel!
+    @IBOutlet weak var postBtn: UIButton!
+    @IBOutlet weak var addImgView: UIView!
+    @IBOutlet weak var addImgViewHeight: NSLayoutConstraint!
     
     let pickerImageController = DKImagePickerController()
     var imageAssets = [DKAsset]()
     
     var imageDic = [String]()
     var thumImgDic = [String]()
+    
+    var isEditPost = false
+    var feedObj = FeedsEntity()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +72,33 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         tagTxt.layer.borderWidth = 1
         tagTxt.layer.borderColor = UIColor().hexStringToUIColor(hex: "D8D8D8").cgColor
         
+        if isEditPost {
+            postBtn.setTitle("Cập nhật", for: .normal)
+            titleNaviBarLbl.text = "Sửa câu hỏi"
+            titleTxt.isEnabled = false
+            imgClvheight.constant = 0
+            addImgView.isHidden = true
+            addImgViewHeight.constant = 0
+            
+            setupDataForUpdateQuestion()
+        }else{
+            postBtn.setTitle("Đăng", for: .normal)
+            titleNaviBarLbl.text = "Đặt câu hỏi"
+            titleTxt.isEnabled = true
+        }
+    }
+    
+    //MARK: Setup UI for update question view
+    func setupDataForUpdateQuestion(){
+        titleTxt.text = feedObj.postEntity.title
+        contentTxt.text = feedObj.postEntity.content
+        
+        var listTag = [String]()
+        for item in feedObj.tags {
+            listTag.append(item.id)
+        }
+        let listTagString = listTag.joined(separator: ",")
+        tagTxt.text = listTagString
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -118,10 +152,14 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         if validateDataQuestion() != "" {
             UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: validateDataQuestion(), cancelBtnTitle: "Đóng")
         }else{
-            if imageAssets.count > 0 {
-                uploadImage()
+            if isEditPost {
+                updateQuestionToServer()
             }else{
-                sendQuestionToServer()
+                if imageAssets.count > 0 {
+                    uploadImage()
+                }else{
+                    sendNewQuestionToServer()
+                }
             }
         }
     }
@@ -151,7 +189,7 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
                                 let imageThumb = dic["ThumbnailUrl"] as! String
                                 self.thumImgDic.append(imageThumb)
                             }
-                            self.sendQuestionToServer()
+                            self.sendNewQuestionToServer()
                         }
                     }
                     Until.hideLoading()
@@ -164,7 +202,77 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         })
     }
     
-    func sendQuestionToServer(){
+    
+    //MARK: Update current question
+    func updateQuestionToServer(){
+        self.view.endEditing(true)
+        
+        let titleString = titleTxt.text
+        let contentString = contentTxt.text
+        let tagString = tagTxt.text
+        
+        let post : [String : Any] = [
+            "Id" : feedObj.postEntity.id,
+            "Title" : titleString!,
+            "Content" : contentString!,
+            "ImageUrls" : feedObj.postEntity.imageUrls,
+            "ThumbnailImageUrls" : feedObj.postEntity.thumbnailImageUrls,
+            "Status" : feedObj.postEntity.status,
+            "Rating" : feedObj.postEntity.rating,
+            "UpdatedDate" : 0,
+            "CreatedDate" : feedObj.postEntity.createdDate
+        ]
+        
+        let questionParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId": Until.getCurrentId(),
+            "Post": post,
+            "Tags": tagString!
+        ]
+        
+        print(JSON.init(questionParam))
+        
+        Until.showLoading()
+        Alamofire.request(UPDATE_POST, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! NSDictionary
+                        let isUpdated = jsonData["IsUpdated"] as! Bool
+                        self.feedObj.postEntity.content = contentString!
+
+                        let tags = tagString?.components(separatedBy: ",")
+                        var tagArr = [TagEntity]()
+                        for item in tags! {
+                            let tag = TagEntity.init()
+                            tag.id = item
+                            tagArr.append(tag)
+                        }
+
+                        self.feedObj.tags = tagArr
+                        
+                        if isUpdated {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_QUESTION_DETAIL), object: self.feedObj)
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: nil)
+                            
+                            _ = self.navigationController?.popViewController(animated: true)
+                        }else{
+                            
+                        }
+                    }
+                    
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+            Until.hideLoading()
+        }
+    }
+    
+    //MARK: Request create new question
+    func sendNewQuestionToServer(){
         self.view.endEditing(true)
         
         let titleString = titleTxt.text
@@ -196,7 +304,7 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         Alamofire.request(POST_QUESTION, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: ADD_NEW_QUESTION_SUCCESS), object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: nil)
 
                     _ = self.navigationController?.popViewController(animated: true)
                 }else{
