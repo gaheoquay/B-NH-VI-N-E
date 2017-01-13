@@ -679,6 +679,43 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
+    func showMoreActionCommentFromCommentCell() {
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let editTap = UIAlertAction(title: "Chỉnh sửa", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "AddQuestionViewController") as! AddQuestionViewController
+//            vc.feedObj = self.feedObj
+//            vc.isEditPost = true
+//            self.navigationController?.pushViewController(vc, animated: true)
+            
+        })
+        
+        let deleteTap = UIAlertAction(title: "Xoá", style: .destructive, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có chắc chắn xoá bài viết này?", preferredStyle: UIAlertControllerStyle.alert)
+            let noAction = UIAlertAction.init(title: "Huỷ", style: UIAlertActionStyle.cancel, handler: nil)
+            let yesAction = UIAlertAction.init(title: "Xoá", style: UIAlertActionStyle.destructive, handler: { (UIAlertAction) in
+//                self.deleteQuestion()
+            })
+            
+            alert.addAction(noAction)
+            alert.addAction(yesAction)
+            self.present(alert, animated: true, completion: nil)
+        })
+        
+        let cancelTap = UIAlertAction(title: "Huỷ bỏ", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+        
+        optionMenu.addAction(editTap)
+        optionMenu.addAction(deleteTap)
+        optionMenu.addAction(cancelTap)
+        
+        self.present(optionMenu, animated: true, completion: nil)
+    }
+    
     @IBAction func backTapAction(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)
     }
