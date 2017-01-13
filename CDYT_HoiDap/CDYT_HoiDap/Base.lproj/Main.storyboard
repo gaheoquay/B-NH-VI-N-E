@@ -579,9 +579,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7E-8B-TQc">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bình luận" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISf-zk-rib">
-                                        <rect key="frame" x="151.5" y="12" width="72" height="20"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bình luận" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISf-zk-rib">
+                                        <rect key="frame" x="57" y="14" width="270" height="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <color key="textColor" red="0.3803921569" green="0.6705882353" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -608,17 +608,27 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GiaiPhap_Mark.png" translatesAutoresizingMaskIntoConstraints="NO" id="7mh-rS-wzj">
+                                        <rect key="frame" x="335" y="7" width="25" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="BTm-DI-qhg"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="GyE-ax-w15" firstAttribute="leading" secondItem="r7E-8B-TQc" secondAttribute="leading" constant="5" id="0OH-aW-t6g"/>
+                                    <constraint firstItem="7mh-rS-wzj" firstAttribute="width" secondItem="7mh-rS-wzj" secondAttribute="height" multiplier="115:139" id="0xi-qT-ks2"/>
+                                    <constraint firstItem="ISf-zk-rib" firstAttribute="leading" secondItem="GyE-ax-w15" secondAttribute="trailing" constant="8" id="7fJ-Nl-Cow"/>
                                     <constraint firstItem="GyE-ax-w15" firstAttribute="top" secondItem="r7E-8B-TQc" secondAttribute="top" id="7mj-4R-v04"/>
                                     <constraint firstItem="wnn-k0-qPJ" firstAttribute="leading" secondItem="r7E-8B-TQc" secondAttribute="leading" id="HG0-50-Yxa"/>
-                                    <constraint firstItem="ISf-zk-rib" firstAttribute="centerX" secondItem="r7E-8B-TQc" secondAttribute="centerX" id="W7A-mc-9wZ"/>
+                                    <constraint firstItem="7mh-rS-wzj" firstAttribute="leading" secondItem="ISf-zk-rib" secondAttribute="trailing" constant="8" id="PzQ-0h-4PB"/>
+                                    <constraint firstItem="7mh-rS-wzj" firstAttribute="centerY" secondItem="r7E-8B-TQc" secondAttribute="centerY" id="Z8i-zd-Opo"/>
                                     <constraint firstItem="ISf-zk-rib" firstAttribute="centerY" secondItem="r7E-8B-TQc" secondAttribute="centerY" id="d7i-vf-bnP"/>
                                     <constraint firstAttribute="bottom" secondItem="wnn-k0-qPJ" secondAttribute="bottom" id="f3Z-wv-qGo"/>
                                     <constraint firstAttribute="height" constant="44" id="g8D-cn-XFq"/>
                                     <constraint firstItem="GyE-ax-w15" firstAttribute="centerY" secondItem="r7E-8B-TQc" secondAttribute="centerY" id="pg2-zK-A4b"/>
+                                    <constraint firstAttribute="trailing" secondItem="7mh-rS-wzj" secondAttribute="trailing" constant="15" id="xhf-fc-nIC"/>
                                     <constraint firstAttribute="trailing" secondItem="wnn-k0-qPJ" secondAttribute="trailing" id="y9R-P6-fwc"/>
                                 </constraints>
                             </view>
@@ -679,11 +689,13 @@
                         <outlet property="imgClv" destination="QRr-Gx-db8" id="D8F-xl-0pd"/>
                         <outlet property="imgClvHeight" destination="CbR-XL-sN8" id="Csw-Mq-Tcb"/>
                         <outlet property="keyboardViewHeight" destination="RdZ-Kq-jfy" id="aiB-Ah-SXt"/>
+                        <outlet property="resolveImg" destination="7mh-rS-wzj" id="aZP-CB-TzW"/>
+                        <outlet property="titleLbl" destination="ISf-zk-rib" id="Nuc-VD-Txa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZTt-Zk-cLC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1548" y="688.60569715142435"/>
+            <point key="canvasLocation" x="1547.5" y="733.5"/>
         </scene>
         <!--Question View Controller-->
         <scene sceneID="bR1-bX-dBt">

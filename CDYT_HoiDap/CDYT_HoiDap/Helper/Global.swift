@@ -39,6 +39,7 @@ let GET_USER_BY_ID = BASE_URL + "/User/GetUserById"
 let CHANGE_PASSWORD = BASE_URL + "/User/ChangePassword"
 let DELETE_ALL = BASE_URL + "/Post/Delete"
 let UPDATE_POST = BASE_URL + "/Post/UpdatePost"
+let GET_LIST_SUBCOMMENT = BASE_URL + "/Post/GetListSubCommentByCommentId"
 
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
