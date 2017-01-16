@@ -24,6 +24,6 @@
 @import NVActivityIndicatorView;
 @import UITextView_Placeholder;
 @import ICSPullToRefresh;
-
+@import WYPopoverController;
 
 #endif /* HoiDap_Header_h */

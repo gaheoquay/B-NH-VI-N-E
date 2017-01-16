@@ -89,6 +89,7 @@
 		A60430FD1E2344DA000216FB /* dropdownicon.png in Resources */ = {isa = PBXBuildFile; fileRef = A60430FC1E2344DA000216FB /* dropdownicon.png */; };
 		A609C2531E1B8F9F006BFBAE /* delete_img.png in Resources */ = {isa = PBXBuildFile; fileRef = A609C2521E1B8F9F006BFBAE /* delete_img.png */; };
 		A625AD2D1E24CC5700953B0B /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A625AD2C1E24CC5700953B0B /* CommentViewController.swift */; };
+		A62F58601E2CA78100459408 /* EditCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62F585F1E2CA78100459408 /* EditCommentViewController.swift */; };
 		A63C38DF1E120A7E00DAB016 /* DangKi3.png in Resources */ = {isa = PBXBuildFile; fileRef = A63C38D31E120A7E00DAB016 /* DangKi3.png */; };
 		A6417E1F1E13B56C00BD2D75 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6417E1E1E13B56C00BD2D75 /* SettingViewController.swift */; };
 		A6417E221E13B68D00BD2D75 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6417E201E13B68D00BD2D75 /* SettingTableViewCell.swift */; };
@@ -224,6 +225,7 @@
 		A60430FC1E2344DA000216FB /* dropdownicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropdownicon.png; sourceTree = "<group>"; };
 		A609C2521E1B8F9F006BFBAE /* delete_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_img.png; sourceTree = "<group>"; };
 		A625AD2C1E24CC5700953B0B /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		A62F585F1E2CA78100459408 /* EditCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCommentViewController.swift; sourceTree = "<group>"; };
 		A63C38D31E120A7E00DAB016 /* DangKi3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DangKi3.png; sourceTree = "<group>"; };
 		A6417E1E1E13B56C00BD2D75 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		A6417E201E13B68D00BD2D75 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
@@ -510,6 +512,7 @@
 				8B1AD45A1E1B828500D55543 /* SearchViewController.swift */,
 				8BC2C30B1E2333A800B68F72 /* ForgotPasswordViewController.swift */,
 				A625AD2C1E24CC5700953B0B /* CommentViewController.swift */,
+				A62F585F1E2CA78100459408 /* EditCommentViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -794,6 +797,7 @@
 			files = (
 				8B87CD2C1E1365A400DA8A33 /* AuthorEntity.swift in Sources */,
 				8B3A13701E10F454005DBC6E /* DataEncryption.m in Sources */,
+				A62F58601E2CA78100459408 /* EditCommentViewController.swift in Sources */,
 				8B3A13751E10F454005DBC6E /* TPKeyboardAvoidingTableView.m in Sources */,
 				A68A95081E14ED1C0067736E /* CommentTableViewCell.swift in Sources */,
 				8B87CD301E13681200DA8A33 /* FeedsEntity.swift in Sources */,

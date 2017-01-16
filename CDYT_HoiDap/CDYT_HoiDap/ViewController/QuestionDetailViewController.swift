@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MoreCommentTableViewCellDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CommentTableViewCellDelegate, DetailQuestionTableViewCellDelegate {
+class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MoreCommentTableViewCellDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CommentTableViewCellDelegate, DetailQuestionTableViewCellDelegate, WYPopoverControllerDelegate,EditCommentViewControllerDelegate {
 
     @IBOutlet weak var detailTbl: UITableView!
     @IBOutlet weak var imgCollectionView: UICollectionView!
@@ -19,7 +19,8 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     var feedObj = FeedsEntity()
     var listComment = [MainCommentEntity]()
-    
+    var popupViewController:WYPopoverController!
+
     let textInputBar = ALTextInputBar()
     let keyboardObserver = ALKeyboardObservingView()
     
@@ -65,6 +66,9 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         NotificationCenter.default.addObserver(self, selector: #selector(markACommentToSolution(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCommentData), name: Notification.Name.init(COMMENT_ON_COMMENT_SUCCESS), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadQuestionAfterUpdated(notification:)), name: Notification.Name.init(RELOAD_QUESTION_DETAIL), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadMainCommentAfterUpdated(notification:)), name: Notification.Name.init(RELOAD_COMMENT_DETAIL), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadSubCommentAfterUpdated(notification:)), name: Notification.Name.init(RELOAD_SUBCOMMENT_DETAIL), object: nil)
+
     }
     
     func configTable(){
@@ -125,11 +129,42 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
+    //MARK: Reload question after update and get notification
     func reloadQuestionAfterUpdated(notification : Notification){
         if notification.object != nil {
             let feed = notification.object as! FeedsEntity
             self.feedObj = feed
             self.detailTbl.reloadData()
+        }
+    }
+    
+    //MARK: Reload main comment after update and get notification
+    func reloadMainCommentAfterUpdated(notification : Notification){
+        if notification.object != nil {
+            let mainComment = notification.object as! MainCommentEntity
+            for item in listComment {
+                if item.comment.id == mainComment.comment.id {
+                    item.comment.content = mainComment.comment.content
+                }
+            }
+            
+            detailTbl.reloadData()
+        }
+    }
+    
+    //MARK: Reload sub comment after update and get notification
+    func reloadSubCommentAfterUpdated(notification : Notification){
+        if notification.object != nil {
+            let subComment = notification.object as! SubCommentEntity
+            for itemComment in listComment {
+                for itemSub in itemComment.subComment {
+                    if itemSub.comment.id == subComment.comment.id {
+                        itemSub.comment.content = subComment.comment.content
+                    }
+                }
+            }
+            
+            detailTbl.reloadData()
         }
     }
     
@@ -163,6 +198,54 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         textInputBar.keyboardObserver = keyboardObserver
         view.addSubview(textInputBar)
         
+    }
+    
+    //  MARK: Keyboard showing
+    func keyboardWillShow(notification:NSNotification){
+        if let userInfo = notification.userInfo {
+            let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            textInputBar.frame.origin.y = frame.origin.y
+            
+            UIView.animate(withDuration: 0.2) {
+                self.view.layoutIfNeeded()
+                self.keyboardViewHeight.constant = frame.size.height
+                
+            }
+        }
+    }
+    
+    func keyboardWillHide(notification:NSNotification){
+        if let userInfo = notification.userInfo {
+            let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            
+            UIView.animate(withDuration:0.2) {
+                self.keyboardViewHeight.constant = frame.size.height
+                self.textInputBar.frame.origin.y = frame.origin.y
+            }
+        }
+    }
+    
+    func keyboardFrameChanged(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.keyboardViewHeight.constant = frame.size.height
+                self.textInputBar.frame.origin.y = frame.origin.y
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    
+    override var inputAccessoryView: UIView? {
+        get {
+            return keyboardObserver
+        }
+    }
+    
+    // This is also required
+    override var canBecomeFirstResponder: Bool{
+        return true
     }
     
     //MARk: Get data init
@@ -300,8 +383,9 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                         self.imgCollectionView.reloadData()
                         self.view.layoutIfNeeded()
                         
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: COMMENT_ON_COMMENT_SUCCESS), object: nil)
-                        
+//                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: COMMENT_ON_COMMENT_SUCCESS), object: nil)
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: nil)
+  
                     }
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể lấy được dữ liệu Bình luận. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -372,55 +456,6 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         })
     }
     
-    //  MARK: Keyboard showing
-    func keyboardWillShow(notification:NSNotification){
-        if let userInfo = notification.userInfo {
-            let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-            textInputBar.frame.origin.y = frame.origin.y
-            
-            UIView.animate(withDuration: 0.2) {
-                self.view.layoutIfNeeded()
-                self.keyboardViewHeight.constant = frame.size.height
-                
-            }
-        }
-    }
-    
-    func keyboardWillHide(notification:NSNotification){
-        if let userInfo = notification.userInfo {
-            let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-            
-            UIView.animate(withDuration:0) {
-                self.keyboardViewHeight.constant = frame.size.height
-                self.textInputBar.frame.origin.y = frame.origin.y
-                
-            }
-        }
-    }
-    
-    func keyboardFrameChanged(notification: NSNotification) {
-        if let userInfo = notification.userInfo {
-            let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-            
-            UIView.animate(withDuration: 0.2, animations: {
-                self.keyboardViewHeight.constant = frame.size.height
-                self.textInputBar.frame.origin.y = frame.origin.y
-                self.view.layoutIfNeeded()
-            })
-        }
-    }
-    
-    override var inputAccessoryView: UIView? {
-        get {
-            return keyboardObserver
-        }
-    }
-    
-    // This is also required
-    override var canBecomeFirstResponder: Bool{
-        return true
-    }
-    
     //MARK: receive notifiy when mark an comment is solution
     func markACommentToSolution(notification : Notification){
         if notification.object != nil {
@@ -488,6 +523,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                     }
                     cell.mainComment = listComment[indexPath.section - 1]
                     cell.setDataForMainComment()
+                    cell.indexPath = indexPath
                     cell.delegate = self
                     return cell
                 }else{
@@ -495,6 +531,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                     cell.mainComment = listComment[indexPath.section - 1]
                     cell.subComment = listComment[indexPath.section - 1].subComment[indexPath.row - 1]
                     cell.setDataForSubComment()
+                    cell.indexPath = indexPath
                     cell.delegate = self
                     return cell
                 }
@@ -508,6 +545,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                     }
                     cell.mainComment = listComment[indexPath.section - 1]
                     cell.setDataForMainComment()
+                    cell.indexPath = indexPath
                     cell.delegate = self
                     return cell
                 }else{
@@ -522,6 +560,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                         cell.mainComment = listComment[indexPath.section - 1]
                         cell.subComment = listComment[indexPath.section - 1].subComment[indexPath.row - 1]
                         cell.setDataForSubComment()
+                        cell.indexPath = indexPath
                         cell.delegate = self
                         return cell
 
@@ -553,7 +592,58 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         self.view.endEditing(true)
     }
     
-    //MARK: Xoa bai viet
+    //MARK: Delete comment
+    func deleteComment(objID : String, isSubcomment : Bool, indexPath: IndexPath){
+        Until.showLoading()
+        let param : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId": currentUserId,
+            "DeletedObjectId": objID
+        ]
+        
+        print(JSON.init(param))
+        
+        Alamofire.request(DELETE_ALL, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! NSDictionary
+                        let isDelete = jsonData["IsDeleted"] as! Bool
+                        if isDelete {
+                            if isSubcomment {
+                                for (index, item) in self.listComment[indexPath.section - 1].subComment.enumerated() {
+                                    if item.comment.id == objID {
+                                        self.listComment[indexPath.section - 1].subComment.remove(at: index)
+                                    }
+                                }
+                            }else{
+                                for (index, item) in self.listComment.enumerated() {
+                                    if item.comment.id == objID {
+                                        self.listComment.remove(at: index)
+                                    }
+                                }
+                            }
+                            
+                            self.detailTbl.reloadData()
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: nil)
+                            
+                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Xoá bình luận thành công", cancelBtnTitle: "Đóng")
+                            
+                        }else{
+                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không thế xoá bình luận, vui lòng thử lại sau.", cancelBtnTitle: "Đóng")
+                        }
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể xoá bài viết. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+            Until.hideLoading()
+        }
+    }
+    
+    //MARK: Delete post
     func deleteQuestion(){
         Until.showLoading()
         let param : [String : Any] = [
@@ -571,6 +661,8 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                         let jsonData = result as! NSDictionary
                         let isDelete = jsonData["IsDeleted"] as! Bool
                         if isDelete {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: nil)
+                            
                             let alert = UIAlertController.init(title: "Thông báo", message: "Xoá bài viết thành công.", preferredStyle: UIAlertControllerStyle.alert)
                             let action = UIAlertAction.init(title: "Đóng", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
                                 _ = self.navigationController?.popViewController(animated: true)
@@ -578,7 +670,6 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                             alert.addAction(action)
                             self.present(alert, animated: true, completion: nil)
                             
-                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: nil)
                         }else{
                             UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Xoá bài viết bị lỗi, vui lòng thử lại sau.", cancelBtnTitle: "Đóng")
                         }
@@ -612,6 +703,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func showMoreActionFromDetailQuestion() {
+        self.view.endEditing(true)
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let editTap = UIAlertAction(title: "Chỉnh sửa", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
@@ -679,25 +771,41 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
-    func showMoreActionCommentFromCommentCell() {
+    func showMoreActionCommentFromCommentCell(isSubcomment: Bool, subComment: SubCommentEntity, mainComment: MainCommentEntity, indexPath: IndexPath) {
+        self.view.endEditing(true)
+        
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let editTap = UIAlertAction(title: "Chỉnh sửa", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
-//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-//            let vc = storyboard.instantiateViewController(withIdentifier: "AddQuestionViewController") as! AddQuestionViewController
-//            vc.feedObj = self.feedObj
-//            vc.isEditPost = true
-//            self.navigationController?.pushViewController(vc, animated: true)
-            
+            if self.popupViewController == nil {
+                
+                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let popoverVC = mainStoryboard.instantiateViewController(withIdentifier: "EditCommentViewController") as! EditCommentViewController
+                popoverVC.isSubComment = isSubcomment
+                popoverVC.subComment = subComment
+                popoverVC.mainComment = mainComment
+                popoverVC.delegate = self
+                popoverVC.preferredContentSize = CGSize.init(width: 320, height: 250)
+                popoverVC.isModalInPopover = false
+                self.popupViewController = WYPopoverController(contentViewController: popoverVC)
+                self.popupViewController.delegate = self
+                self.popupViewController.wantsDefaultContentAppearance = false;
+                self.popupViewController.presentPopover(from: CGRect.init(x: 0, y: 0, width: 0, height: 0), in: self.view, permittedArrowDirections: WYPopoverArrowDirection.none, animated: true, options: WYPopoverAnimationOptions.fade, completion: nil)
+                
+            }
         })
         
         let deleteTap = UIAlertAction(title: "Xoá", style: .destructive, handler: {
             (alert: UIAlertAction!) -> Void in
             
-            let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có chắc chắn xoá bài viết này?", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có chắc chắn xoá bình luận này?", preferredStyle: UIAlertControllerStyle.alert)
             let noAction = UIAlertAction.init(title: "Huỷ", style: UIAlertActionStyle.cancel, handler: nil)
             let yesAction = UIAlertAction.init(title: "Xoá", style: UIAlertActionStyle.destructive, handler: { (UIAlertAction) in
-//                self.deleteQuestion()
+                if isSubcomment {
+                    self.deleteComment(objID: subComment.comment.id, isSubcomment: isSubcomment, indexPath: indexPath)
+                }else{
+                    self.deleteComment(objID: mainComment.comment.id, isSubcomment: isSubcomment, indexPath: indexPath)
+                }
             })
             
             alert.addAction(noAction)
@@ -714,6 +822,22 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         optionMenu.addAction(cancelTap)
         
         self.present(optionMenu, animated: true, completion: nil)
+    }
+    
+    //  MARK: WYPopoverControllerDelegate
+    func popoverControllerDidDismissPopover(_ popoverController: WYPopoverController!) {
+        if popupViewController != nil {
+            popupViewController.delegate = nil
+            popupViewController = nil
+        } 
+    }
+    
+    //MARK: EditCommentViewControllerDelegate
+    func cancelEditComment() {
+        popupViewController.dismissPopover(animated: true)
+        popupViewController.delegate = nil
+        popupViewController = nil
+
     }
     
     @IBAction func backTapAction(_ sender: Any) {
