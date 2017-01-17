@@ -8,9 +8,12 @@
 
 import UIKit
 protocol CommentViewControllerDelegate {
-    func removeMainCommentFromCommentView(mainComment : MainCommentEntity)
-    func removeSubCommentFromCommentView(subComment : SubCommentEntity)
+  func reloadTable()
+  func removeMainCommentFromCommentView(mainComment : MainCommentEntity)
+  func removeSubCommentFromCommentView(subComment : SubCommentEntity)
+
 }
+
 class CommentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CommentTableViewCellDelegate, EditCommentViewControllerDelegate, WYPopoverControllerDelegate {
 
     @IBOutlet weak var commentTbl: UITableView!
@@ -33,8 +36,10 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     var currentUserId = ""
     var feedEntity = FeedsEntity()
     var commentId = ""
+  var notification : ListNotificationEntity!
+  var delegate:CommentViewControllerDelegate?
+
     var popupViewController:WYPopoverController!
-    var delegate : CommentViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +54,10 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         if commentId != "" {
             getCommentFromNotification()
         }
-        
+      if notification != nil && !notification.notificaiton.isRead {
+        setReadNotification()
+      }
+
         //Check feedEntity is exsit or not
         if feedEntity.postEntity.title != "" {
             setupData()
@@ -218,7 +226,35 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     override var canBecomeFirstResponder: Bool{
         return true
     }
+  //MARk: set read notification
+  func setReadNotification(){
+    Until.showLoading()
     
+    let getPostParam : [String : Any] = [
+      "Auth": Until.getAuthKey(),
+      "RequestedUserId" : Until.getCurrentId(),
+      "NotificationId": notification!.notificaiton.id
+    ]
+    
+    print(JSON.init(getPostParam))
+    
+    Alamofire.request(SET_READ_NOTIFICATION, method: .post, parameters: getPostParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+      if let status = response.response?.statusCode {
+        if status == 200{
+          if let result = response.result.value {
+            if result is NSDictionary {
+              self.notification.notificaiton.isRead = true
+              self.delegate?.reloadTable()
+            }
+          }
+        }
+      }
+      
+      Until.hideLoading()
+    }
+    
+  }
+
     //MARK: get comment from notification
     func getCommentFromNotification(){
         self.view.endEditing(true)
@@ -240,9 +276,13 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                     if let result = response.result.value {
                         let jsonData = result as! NSDictionary 
                         let entity = MainCommentEntity.init(dict: jsonData)
-                        
+                      if self.pageIndex == 1{
                         self.mainComment = entity
-                        self.setupUIForComment(mainComment: entity)
+                      }else{
+                        self.mainComment.subComment += entity.subComment
+                      }
+                      
+                        self.setupUIForComment(mainComment: self.mainComment)
                         self.commentTbl.reloadData()
                         
                     }
@@ -253,6 +293,8 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
                 UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
             }
             Until.hideLoading()
+          self.commentTbl.pullToRefreshView?.stopAnimating()
+          self.commentTbl.infiniteScrollingView?.stopAnimating()
         }
     }
     

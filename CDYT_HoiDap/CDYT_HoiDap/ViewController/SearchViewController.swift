@@ -32,6 +32,10 @@ class SearchViewController: UIViewController,UITableViewDelegate,UITableViewData
       timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(requestData), userInfo: nil, repeats: false)
     }
   }
+  
+  @IBAction func actionBack(_ sender: Any) {
+    _ = self.navigationController?.popViewController(animated: true)
+  }
 //  MARK: request data
   func requestData(){
     let param : [String : Any] = [
@@ -62,8 +66,8 @@ class SearchViewController: UIViewController,UITableViewDelegate,UITableViewData
       }
       Until.hideLoading()
     }
-
   }
+  
 //  MARK: setup table
   func setUpTableView(){
     tbResult.delegate = self
@@ -82,6 +86,17 @@ class SearchViewController: UIViewController,UITableViewDelegate,UITableViewData
       cell.setData(result: listSearch[indexPath.row].title, isAsk: false)
     }
     return cell
+  }
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if indexPath.row == listSearch.count {
+      let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AddQuestionViewController") as! AddQuestionViewController
+//      viewController.titleTxt.text = txtSearch.text!
+      self.navigationController?.pushViewController(viewController, animated: true)
+    }else{
+      let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
+      viewController.questionID = listSearch[indexPath.row].id
+      self.navigationController?.pushViewController(viewController, animated: true)
+    }
   }
 //  MARK: Outlet
   @IBOutlet weak var txtSearch: UITextField!

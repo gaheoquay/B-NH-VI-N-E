@@ -7,6 +7,9 @@
 //
 
 import UIKit
+protocol QuestionDetailViewControllerDelegate {
+  func reloadTable()
+}
 
 class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MoreCommentTableViewCellDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CommentTableViewCellDelegate, DetailQuestionTableViewCellDelegate, WYPopoverControllerDelegate,EditCommentViewControllerDelegate, CommentViewControllerDelegate {
 
@@ -32,9 +35,10 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     var currentUserId = ""
     var pageIndex = 1
-    
     var questionID = ""
-    
+  var notification : ListNotificationEntity!
+  var delegate:QuestionDetailViewControllerDelegate?
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         registerNotification()
@@ -46,7 +50,9 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             setupMarkerForQuestion()
             getListCommentByPostID(postId: feedObj.postEntity.id)
         }
-        
+      if notification != nil && !notification.notificaiton.isRead {
+        setReadNotification()
+      }
         configInputBar()
         setupImagePicker()
         
@@ -197,7 +203,36 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         view.addSubview(textInputBar)
         
     }
+  //MARk: set read notification
+  func setReadNotification(){
+    Until.showLoading()
     
+    let getPostParam : [String : Any] = [
+      "Auth": Until.getAuthKey(),
+      "RequestedUserId" : Until.getCurrentId(),
+      "NotificationId": notification!.notificaiton.id
+    ]
+    
+    print(JSON.init(getPostParam))
+    
+    Alamofire.request(SET_READ_NOTIFICATION, method: .post, parameters: getPostParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+      if let status = response.response?.statusCode {
+        if status == 200{
+          if let result = response.result.value {
+            if result is NSDictionary {
+              self.notification.notificaiton.isRead = true
+              self.delegate?.reloadTable()
+            }
+          }
+        }
+      }
+      
+      Until.hideLoading()
+    }
+
+  }
+
+  
     //  MARK: Keyboard showing
     func keyboardWillShow(notification:NSNotification){
         if let userInfo = notification.userInfo {
@@ -249,7 +284,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     //MARk: Get data init
     func getPostBy(postId : String){
         Until.showLoading()
-        
+      
         let getPostParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
             "RequestedUserId" : Until.getCurrentId(),
@@ -272,6 +307,13 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                         self.detailTbl.reloadData()
                         
                     }
+                }else if status == 201{
+                  let alert = UIAlertController.init(title: "Thông báo", message: "Bài viết đã bị xóa", preferredStyle: UIAlertControllerStyle.alert)
+                  let action = UIAlertAction.init(title: "Đồng ý", style: UIAlertActionStyle.default, handler: { (action) in
+                    _ = self.navigationController?.popViewController(animated: true)
+                  })
+                  alert.addAction(action)
+                  self.present(alert, animated: true, completion: nil)
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể lấy được dữ liệu câu hỏi. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
@@ -844,6 +886,9 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     //MARK: CommentViewControllerDelegate
+  func reloadTable() {
+    
+  }
     func removeMainCommentFromCommentView(mainComment: MainCommentEntity) {
         if listComment.count > 0 {
             for (index,item) in listComment.enumerated() {
