@@ -291,7 +291,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="thêm từ khóa để câu hỏi dễ được thấy bởi người khác. Giữa các từ khóa ngăn cách bởi dấu phẩy (,)"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="nhập từ khoá cho câu hỏi của bạn, ngăn cách giữa các từ khoá bởi dấu &quot;,&quot;"/>
                                                 </userDefinedRuntimeAttributes>
                                             </textView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y5B-6o-Tfc" userLabel="top seperator">

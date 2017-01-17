@@ -119,8 +119,8 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func validateDataQuestion() -> String{
-        let titleString = titleTxt.text
-        let contentString = contentTxt.text
+        let titleString = titleTxt.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let contentString = contentTxt.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         if titleString == "" {
             titleTxt.becomeFirstResponder()
@@ -277,7 +277,7 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         
         let titleString = titleTxt.text
         let contentString = contentTxt.text
-        let tagString = tagTxt.text
+        let tagTrimmed = tagTxt.text!.replacingOccurrences(of: "\n", with: "", options: .regularExpression)
         
         let post : [String : Any] = [
                 "Id" : "",
@@ -295,7 +295,7 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
             "Auth": Until.getAuthKey(),
             "RequestedUserId": Until.getCurrentId(),
             "Post": post,
-            "Tags": tagString!
+            "Tags": tagTrimmed
         ]
         
         print(JSON.init(questionParam))
