@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MoreCommentTableViewCellDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CommentTableViewCellDelegate, DetailQuestionTableViewCellDelegate, WYPopoverControllerDelegate,EditCommentViewControllerDelegate {
+class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MoreCommentTableViewCellDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CommentTableViewCellDelegate, DetailQuestionTableViewCellDelegate, WYPopoverControllerDelegate,EditCommentViewControllerDelegate, CommentViewControllerDelegate {
 
     @IBOutlet weak var detailTbl: UITableView!
     @IBOutlet weak var imgCollectionView: UICollectionView!
@@ -86,7 +86,6 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         
         detailTbl.addPullToRefreshHandler {
             DispatchQueue.main.async {
-//                self.detailTbl.pullToRefreshView?.startAnimating()
                 self.reloadData()
                 
             }
@@ -94,7 +93,6 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         
         detailTbl.addInfiniteScrollingWithHandler {
             DispatchQueue.main.async {
-//                self.detailTbl.infiniteScrollingView?.startAnimating()
                 self.loadMore()
             }
         }
@@ -751,6 +749,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         let vc = storyboard.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController
         vc.feedEntity = feedObj
         vc.mainComment = mainComment
+        vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -838,6 +837,31 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         popupViewController.delegate = nil
         popupViewController = nil
 
+    }
+    
+    //MARK: CommentViewControllerDelegate
+    func removeMainCommentFromCommentView(mainComment: MainCommentEntity) {
+        if listComment.count > 0 {
+            for (index,item) in listComment.enumerated() {
+                if item.comment.id == mainComment.comment.id {
+                    listComment.remove(at: index)
+                }
+            }
+            detailTbl.reloadData()
+        }
+    }
+    
+    func removeSubCommentFromCommentView(subComment: SubCommentEntity) {
+        if listComment.count > 0 {
+            for mainComment in listComment {
+                for (index,subCom) in mainComment.subComment.enumerated() {
+                    if subCom.comment.id == subComment.comment.id {
+                        mainComment.subComment.remove(at: index)
+                    }
+                }
+            }
+            detailTbl.reloadData()
+        }
     }
     
     @IBAction func backTapAction(_ sender: Any) {
