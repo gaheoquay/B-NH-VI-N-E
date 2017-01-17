@@ -40,7 +40,7 @@ let CHANGE_PASSWORD = BASE_URL + "/User/ChangePassword"
 let DELETE_ALL = BASE_URL + "/Post/Delete"
 let UPDATE_POST = BASE_URL + "/Post/UpdatePost"
 let GET_LIST_SUBCOMMENT = BASE_URL + "/Post/GetListSubCommentByCommentId"
-
+let SET_READ_NOTIFICATION = BASE_URL + "/Notification/SetRead"
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
 let NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"

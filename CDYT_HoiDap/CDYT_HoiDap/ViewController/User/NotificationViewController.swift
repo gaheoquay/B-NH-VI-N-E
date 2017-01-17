@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, QuestionDetailViewControllerDelegate ,CommentViewControllerDelegate {
   
   @IBOutlet weak var notifyTableView: UITableView!
   var listNotification = [ListNotificationEntity]()
@@ -72,6 +72,33 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     cell.setData(entity: listNotification[indexPath.row])
     return cell
   }
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+    let entity = listNotification[indexPath.row]
+    if entity.notificaiton.type == 1 || entity.notificaiton.type == 3 {
+      let viewController = storyBoard.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
+      viewController.questionID = entity.notificaiton.parentId
+      viewController.notification = entity
+      viewController.delegate = self
+      self.navigationController?.pushViewController(viewController, animated: true)
+    }else{
+      let viewController = storyBoard.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController
+      if entity.notificaiton.type == 0 || entity.notificaiton.type == 4 || entity.notificaiton.type == 5{
+        viewController.commentId = entity.notificaiton.detailId
+      }else if entity.notificaiton.type == 2{
+        viewController.commentId = entity.notificaiton.parentId
+      }
+      viewController.notification = entity
+      viewController.delegate = self
+      self.navigationController?.pushViewController(viewController, animated: true)
+    }
+  }
+  
+//  MARK: QuestionDetailViewControllerDelegate, CommentViewControllerDelegate
+  func reloadTable() {
+    notifyTableView.reloadData()
+  }
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
