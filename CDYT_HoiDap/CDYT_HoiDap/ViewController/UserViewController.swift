@@ -153,8 +153,10 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
         cell.indexPath = indexPath
         cell.delegate = self
-        cell.feedEntity = listMyFeed[indexPath.row - 1]
-        cell.setData()
+        if listMyFeed.count > 0 {
+            cell.feedEntity = listMyFeed[indexPath.row - 1]
+            cell.setData()
+        }
         return cell
     }
   }

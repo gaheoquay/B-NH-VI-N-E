@@ -55,9 +55,11 @@ class TagListViewController: UIViewController, UITableViewDataSource, UITableVie
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTagTableViewCell") as! QuestionTagTableViewCell
-      cell.delegate = self
-        cell.hotTag = listHotTag[indexPath.row]
-        cell.setData()
+        cell.delegate = self
+        if listHotTag.count > 0 {
+            cell.hotTag = listHotTag[indexPath.row]
+            cell.setData()
+        }
         return cell
     }
     

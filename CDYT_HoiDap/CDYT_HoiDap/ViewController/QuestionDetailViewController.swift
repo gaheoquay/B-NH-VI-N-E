@@ -784,6 +784,13 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         self.present(skBrowser, animated: true, completion: nil)
     }
     
+    func gotoQuestionTagListFromDetailPost(tagId: String) {
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
+        viewController.hotTagId = tagId
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     //MARK: MoreCommentTableViewCellDelegate
     func showMoreSubcomment() {
         detailTbl.reloadData()

@@ -12,6 +12,7 @@ protocol DetailQuestionTableViewCellDelegate {
     func gotoUserProfileFromDetailQuestion(user : AuthorEntity)
     func showMoreActionFromDetailQuestion()
     func showImageFromDetailPost(skBrowser : SKPhotoBrowser )
+    func gotoQuestionTagListFromDetailPost(tagId : String)
 }
 
 class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -185,17 +186,21 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var images = [SKPhoto]()
-        
-        for item in self.feed.postEntity.imageUrls{
+        if collectionView == imgCollectionView {
+            var images = [SKPhoto]()
             
-            let photo = SKPhoto.photoWithImageURL(item)
-            photo.shouldCachePhotoURLImage = true
-            images.append(photo)
+            for item in self.feed.postEntity.imageUrls{
+                
+                let photo = SKPhoto.photoWithImageURL(item)
+                photo.shouldCachePhotoURLImage = true
+                images.append(photo)
+            }
+            let browser = SKPhotoBrowser(photos: images)
+            
+            delegate?.showImageFromDetailPost(skBrowser: browser)
+        }else{
+           delegate?.gotoQuestionTagListFromDetailPost(tagId: feed.tags[indexPath.row].id)
         }
-        let browser = SKPhotoBrowser(photos: images)
-        
-        delegate?.showImageFromDetailPost(skBrowser: browser)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

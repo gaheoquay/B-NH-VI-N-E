@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,10 +25,10 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uqo-Tw-36z">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
-                                <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.72999999999999998" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ask.png" translatesAutoresizingMaskIntoConstraints="NO" id="hzb-dK-Pro">
-                                <rect key="frame" x="315" y="37" width="43" height="43"/>
+                                <rect key="frame" x="315" y="31" width="43" height="43"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="43" id="CcQ-JM-wvQ"/>
@@ -39,16 +39,16 @@
                                 </connections>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cna-vZ-RgD">
-                                <rect key="frame" x="8" y="37" width="295" height="46"/>
+                                <rect key="frame" x="8" y="30" width="295" height="45"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SearchGrey.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ze9-qW-ULo">
-                                        <rect key="frame" x="8" y="12" width="22" height="22"/>
+                                        <rect key="frame" x="8" y="12" width="21" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Ze9-qW-ULo" secondAttribute="height" id="W7O-Is-Gp6"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tìm câu hỏi trên trang cộng đồng" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Udh-31-o9K">
-                                        <rect key="frame" x="38" y="14.5" width="253" height="17"/>
+                                        <rect key="frame" x="37" y="14" width="254" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.61960784313725492" green="0.61960784313725492" blue="0.61960784313725492" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -60,7 +60,7 @@
                                     <constraint firstItem="Ze9-qW-ULo" firstAttribute="leading" secondItem="cna-vZ-RgD" secondAttribute="leading" constant="8" id="4mb-Rt-DHz"/>
                                     <constraint firstAttribute="trailing" secondItem="Udh-31-o9K" secondAttribute="trailing" constant="4" id="6X5-cn-SWW"/>
                                     <constraint firstItem="Ze9-qW-ULo" firstAttribute="top" secondItem="cna-vZ-RgD" secondAttribute="top" constant="12" id="DCZ-Bu-QK7"/>
-                                    <constraint firstAttribute="height" constant="46" id="Oce-f3-Zeq"/>
+                                    <constraint firstAttribute="height" constant="45" id="Oce-f3-Zeq"/>
                                     <constraint firstAttribute="bottom" secondItem="Ze9-qW-ULo" secondAttribute="bottom" constant="12" id="o8e-ti-n0W"/>
                                     <constraint firstItem="Udh-31-o9K" firstAttribute="leading" secondItem="Ze9-qW-ULo" secondAttribute="trailing" constant="8" id="toj-op-gcr"/>
                                     <constraint firstItem="Udh-31-o9K" firstAttribute="centerY" secondItem="cna-vZ-RgD" secondAttribute="centerY" id="uxK-UO-iRL"/>
@@ -71,7 +71,7 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="w2Q-QV-C5Z">
                                 <rect key="frame" x="0.0" y="83" width="375" height="535"/>
-                                <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="0.72999999999999998" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableView>
                         </subviews>
@@ -82,13 +82,13 @@
                             <constraint firstAttribute="trailing" secondItem="Uqo-Tw-36z" secondAttribute="trailing" id="9bq-k8-Rzr"/>
                             <constraint firstItem="cna-vZ-RgD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="Aa8-ya-M5J"/>
                             <constraint firstItem="w2Q-QV-C5Z" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Blg-hc-fpT"/>
+                            <constraint firstItem="hzb-dK-Pro" firstAttribute="centerY" secondItem="cna-vZ-RgD" secondAttribute="centerY" id="GFW-gg-WBz"/>
                             <constraint firstItem="hzb-dK-Pro" firstAttribute="leading" secondItem="cna-vZ-RgD" secondAttribute="trailing" constant="12" id="Ovn-2M-2mm"/>
                             <constraint firstItem="Uqo-Tw-36z" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Vm2-zV-lWO"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="w2Q-QV-C5Z" secondAttribute="bottom" id="bW9-Gd-SK4"/>
-                            <constraint firstItem="hzb-dK-Pro" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="17" id="kyW-5b-wRD"/>
                             <constraint firstItem="w2Q-QV-C5Z" firstAttribute="top" secondItem="Uqo-Tw-36z" secondAttribute="bottom" id="mbp-Bg-LYg"/>
-                            <constraint firstItem="cna-vZ-RgD" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="17" id="nrC-FY-leJ"/>
-                            <constraint firstItem="w2Q-QV-C5Z" firstAttribute="top" secondItem="cna-vZ-RgD" secondAttribute="bottom" id="qPh-xq-wI7"/>
+                            <constraint firstItem="cna-vZ-RgD" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="nrC-FY-leJ"/>
+                            <constraint firstItem="w2Q-QV-C5Z" firstAttribute="top" secondItem="cna-vZ-RgD" secondAttribute="bottom" constant="8" id="qPh-xq-wI7"/>
                             <constraint firstAttribute="trailing" secondItem="w2Q-QV-C5Z" secondAttribute="trailing" id="zhh-o8-nxR"/>
                         </constraints>
                     </view>
@@ -105,6 +105,7 @@
                     <navigationItem key="navigationItem" id="fje-mT-HHZ"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="searchView" destination="cna-vZ-RgD" id="O63-Aw-DfU"/>
                         <outlet property="tbQuestion" destination="w2Q-QV-C5Z" id="EU1-V7-Wab"/>
                     </connections>
                 </viewController>

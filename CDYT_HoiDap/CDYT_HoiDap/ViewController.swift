@@ -13,14 +13,19 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
   override func viewDidLoad() {
     super.viewDidLoad()
     NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
-
-  initTableView()
+    
+    setupUI()
+    initTableView()
     Until.showLoading()
     getFeeds()
     getHotTagFromServer()
     // Do any additional setup after loading the view, typically from a nib.
   }
 
+    func setupUI() {
+        searchView.layer.cornerRadius = 8
+        searchView.clipsToBounds = true
+    }
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
@@ -210,6 +215,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
 //MARK: Outlet
   @IBOutlet weak var tbQuestion: UITableView!
+    @IBOutlet weak var searchView: UIView!
   var listFedds = [FeedsEntity]()
   var listHotTag = [HotTagEntity]()
   var page = 1

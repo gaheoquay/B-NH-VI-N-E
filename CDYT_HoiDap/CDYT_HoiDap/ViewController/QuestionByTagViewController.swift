@@ -109,8 +109,10 @@ class QuestionByTagViewController: UIViewController,UITableViewDelegate,UITableV
     let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
     cell.indexPath = indexPath
     cell.delegate = self
-    cell.feedEntity = listFedds[indexPath.row]
-    cell.setData()
+    if listFedds.count > 0 {
+        cell.feedEntity = listFedds[indexPath.row]
+        cell.setData()
+    }
     return cell
   }
 
