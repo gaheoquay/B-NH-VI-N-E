@@ -11,7 +11,7 @@ protocol CommentTableViewCellDelegate {
     func replyCommentAction(mainComment : MainCommentEntity)
     func gotoLoginFromCommentTableCell()
     func gotoUserProfileFromCommentCell(user : AuthorEntity)
-    func showMoreActionCommentFromCommentCell()
+    func showMoreActionCommentFromCommentCell(isSubcomment : Bool, subComment: SubCommentEntity, mainComment : MainCommentEntity, indexPath : IndexPath)
 }
 class CommentTableViewCell: UITableViewCell {
 
@@ -40,6 +40,7 @@ class CommentTableViewCell: UITableViewCell {
     let appDel: AppDelegate = UIApplication.shared.delegate as! AppDelegate
     var isMyPost = false
     
+    var indexPath = IndexPath() //for remove subcomment
     override func awakeFromNib() {
         super.awakeFromNib()
         avaImg.layer.cornerRadius = 8
@@ -283,7 +284,7 @@ class CommentTableViewCell: UITableViewCell {
     
     //MARK: Show more action (delete/edit) comment
     @IBAction func showMoreTapAction(_ sender: Any) {
-        delegate?.showMoreActionCommentFromCommentCell()
+        delegate?.showMoreActionCommentFromCommentCell(isSubcomment: isSubcomment, subComment: subComment, mainComment: mainComment, indexPath : indexPath)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
