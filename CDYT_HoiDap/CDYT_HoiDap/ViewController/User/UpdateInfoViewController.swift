@@ -391,7 +391,7 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
                             
                             let alert = UIAlertController.init(title: "Thông báo", message: "Cập nhật thông tin tài khoản thành công", preferredStyle: UIAlertControllerStyle.alert)
                             let actionOk = UIAlertAction.init(title: "Đóng", style: UIAlertActionStyle.destructive, handler: { (UIAlertAction) in
-                                _ = self.navigationController?.popViewController(animated: true)
+//                                _ = self.navigationController?.popViewController(animated: true)
                             })
                             
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: UPDATE_USERINFO), object: nil)

@@ -738,6 +738,10 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         self.present(optionMenu, animated: true, completion: nil)
     }
     
+    func showImageFromDetailPost(skBrowser: SKPhotoBrowser) {
+        self.present(skBrowser, animated: true, completion: nil)
+    }
+    
     //MARK: MoreCommentTableViewCellDelegate
     func showMoreSubcomment() {
         detailTbl.reloadData()
