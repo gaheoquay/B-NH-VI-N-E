@@ -43,6 +43,7 @@ let GET_LIST_SUBCOMMENT = BASE_URL + "/Post/GetListSubCommentByCommentId"
 let SET_READ_NOTIFICATION = BASE_URL + "/Notification/SetRead"
 let UPDATE_COMMENT = BASE_URL + "/Post/UpdateComment"
 let UPDATE_SUBCOMMENT = BASE_URL + "/Post/UpdateSubComment"
+let FOLLOW_POST = BASE_URL + "/Post/FollowPost"
 
 
 let KEY_AUTH_DEFAULT = "123i@123sora"

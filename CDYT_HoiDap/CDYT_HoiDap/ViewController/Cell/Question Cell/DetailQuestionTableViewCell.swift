@@ -37,6 +37,7 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
     
     @IBOutlet weak var imgTag: UIImageView!
     @IBOutlet weak var moreActionBtn: UIButton!
+    @IBOutlet weak var followBtn: UIButton!
     
     var feed = FeedsEntity()
     var delegate : DetailQuestionTableViewCellDelegate?
@@ -64,6 +65,7 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
         delegate?.showMoreActionFromDetailQuestion()
     }
     
+    //MARK: Like post action
     func likePostAction(){
         let userId = Until.getCurrentId()
         if userId == "" {
@@ -149,6 +151,14 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
         }else{
             moreActionBtn.isHidden = true
         }
+        
+        if feed.isFollowed {
+            followBtn.setTitleColor(UIColor().hexStringToUIColor(hex: "3A3A3A"), for: UIControlState.normal)
+            followBtn.setTitle("Bỏ theo dõi", for: UIControlState.normal)
+        }else{
+            followBtn.setTitleColor(UIColor().hexStringToUIColor(hex: "89D924"), for: UIControlState.normal)
+            followBtn.setTitle("Theo dõi", for: UIControlState.normal)
+        }
     }
     
     //MARK: Collection view delegate
@@ -203,6 +213,44 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
         }
     }
 
+    //MARK: Follow post
+    @IBAction func followPostBtnAction(_ sender: Any) {
+        let userId = Until.getCurrentId()
+        if userId == "" {
+            delegate?.gotoLoginFromDetailQuestionVC()
+        }else{
+            let followParam : [String : Any] = [
+                "Auth": Until.getAuthKey(),
+                "RequestedUserId": userId,
+                "PostId": feed.postEntity.id
+            ]
+            
+            print(JSON.init(followParam))
+            
+            Until.showLoading()
+            Alamofire.request(FOLLOW_POST, method: .post, parameters: followParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! NSDictionary
+                            let isFollowed = jsonData["IsFollowed"] as! Bool
+                            
+                            self.feed.isFollowed = isFollowed
+                        
+                            self.setData()
+                            
+                        }
+                    }else{
+                        //                    UIAlertController().showAlertWith(title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    }
+                }else{
+                    //                UIAlertController().showAlertWith(title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+                Until.hideLoading()
+            }
+        }
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

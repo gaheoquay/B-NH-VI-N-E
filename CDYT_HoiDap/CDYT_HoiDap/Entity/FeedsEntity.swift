@@ -14,6 +14,7 @@ class FeedsEntity: NSObject {
   var likeCount = 0
   var commentCount = 0
   var isLiked = false
+    var isFollowed = false
   var tags = [TagEntity]()
   
   override init(){
@@ -34,6 +35,9 @@ class FeedsEntity: NSObject {
     }
     if let value = dictionary["IsLiked"] as? Bool {
       isLiked = value
+    }
+    if let value = dictionary["IsFollowed"] as? Bool {
+        isFollowed = value
     }
     if let value = dictionary["Tags"] as? [NSDictionary] {
       for element in value {

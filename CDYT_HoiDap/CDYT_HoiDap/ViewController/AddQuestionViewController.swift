@@ -20,6 +20,7 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var postBtn: UIButton!
     @IBOutlet weak var addImgView: UIView!
     @IBOutlet weak var addImgViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var keyboardViewHeight: NSLayoutConstraint!
     
     let pickerImageController = DKImagePickerController()
     var imageAssets = [DKAsset]()
@@ -32,13 +33,23 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        registerNotification()
         configImageCollectionView()
         imgClvheight.constant = 0
+        keyboardViewHeight.constant = 0
         configUI()
         setupImagePicker()
     }
 
+    func registerNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func configImageCollectionView(){
         imgClv.delegate = self
         imgClv.dataSource = self
@@ -117,6 +128,21 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize.init(width: 110, height: 110)
     }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var images = [SKPhoto]()
+        
+        for item in self.imageAssets{
+            item.fetchOriginalImage(true) { (image, info) in
+                let photo = SKPhoto.photoWithImage(image!)
+                photo.shouldCachePhotoURLImage = true // you can use image cache by true(NSCache)
+                images.append(photo)
+            }
+        }
+        let browser = SKPhotoBrowser(photos: images)
+        
+        self.present(browser, animated: true, completion: nil)
+    }
     
     func validateDataQuestion() -> String{
         let titleString = titleTxt.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
@@ -132,20 +158,19 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
             return ""
         }
     }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var images = [SKPhoto]()
-        
-        for item in self.imageAssets{
-            item.fetchOriginalImage(true) { (image, info) in
-                let photo = SKPhoto.photoWithImage(image!)
-                photo.shouldCachePhotoURLImage = true // you can use image cache by true(NSCache)
-                images.append(photo)
-            }
+    
+    //MARK: show keyboard
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardFrame.size.height
+            keyboardViewHeight.constant = keyboardHeight
+            self.view.layoutIfNeeded()
         }
-        let browser = SKPhotoBrowser(photos: images)
-        
-        self.present(browser, animated: true, completion: nil)
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        keyboardViewHeight.constant = 0
+        self.view.layoutIfNeeded()
     }
     
     @IBAction func postTapAction(_ sender: Any) {
