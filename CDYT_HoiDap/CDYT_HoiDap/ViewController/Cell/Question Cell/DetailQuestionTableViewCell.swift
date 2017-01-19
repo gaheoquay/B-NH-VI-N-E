@@ -31,13 +31,13 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
     @IBOutlet weak var imgCollectionViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var likeCountLbl: UILabel!
-    @IBOutlet weak var likeCountIcon: UIImageView!
     @IBOutlet weak var commentCountLbl: UILabel!
     @IBOutlet weak var commentCountIcon: UIImageView!
     
     @IBOutlet weak var imgTag: UIImageView!
     @IBOutlet weak var moreActionBtn: UIButton!
     @IBOutlet weak var followBtn: UIButton!
+    @IBOutlet weak var likeBtn: UIButton!
     
     var feed = FeedsEntity()
     var delegate : DetailQuestionTableViewCellDelegate?
@@ -52,7 +52,7 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
         tagCollectionView.dataSource = self
         tagCollectionView.register(UINib.init(nibName: "KeywordCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeywordCollectionViewCell")
                 
-        likeCountIcon.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(likePostAction)))
+        likeCountLbl.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(likePostAction)))
         nameLbl.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showUserProfile)))
         avaImg.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showUserProfile)))
     }
@@ -63,6 +63,10 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
     
     @IBAction func moreActionBtnTap(_ sender: Any) {
         delegate?.showMoreActionFromDetailQuestion()
+    }
+    
+    @IBAction func likeBtnTapAction(_ sender: Any) {
+        likePostAction()
     }
     
     //MARK: Like post action
@@ -138,9 +142,9 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
         commentCountLbl.text = "\(feed.commentCount)"
         
         if feed.isLiked {
-            likeCountIcon.image = UIImage.init(named: "Clover1.png")
+            likeBtn.setImage(UIImage.init(named: "Clover1.png"), for: UIControlState.normal)
         }else{
-            likeCountIcon.image = UIImage.init(named: "Clover0.png")
+            likeBtn.setImage(UIImage.init(named: "Clover0.png"), for: UIControlState.normal)
         }
         
         tagCollectionView.reloadData()

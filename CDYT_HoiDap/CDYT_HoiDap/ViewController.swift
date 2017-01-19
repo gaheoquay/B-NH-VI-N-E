@@ -204,8 +204,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     self.navigationController?.pushViewController(viewController, animated: true)
   }
     @IBAction func addQuestionTapAction(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddQuestionViewController") as! AddQuestionViewController
-        self.navigationController?.pushViewController(vc, animated: true)
+        if Until.getCurrentId() != "" {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddQuestionViewController") as! AddQuestionViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+            Until.gotoLogin(_self: self, cannotBack: false)
+        }
+        
     }
     
     //MARK: receive notifiy when mark an comment is solution

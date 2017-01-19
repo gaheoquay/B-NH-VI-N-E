@@ -30,6 +30,7 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
     
     var isEditPost = false
     var feedObj = FeedsEntity()
+    var searchText = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +40,8 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         keyboardViewHeight.constant = 0
         configUI()
         setupImagePicker()
+        
+        titleTxt.text = searchText
     }
 
     func registerNotification() {

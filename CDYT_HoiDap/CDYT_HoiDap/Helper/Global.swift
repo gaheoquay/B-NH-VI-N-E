@@ -9,7 +9,8 @@
 import UIKit
 
 //let BASE_URL = "http://onlineapi.info:8096"    //RELEASE
-let BASE_URL = "http://onlineapi.info:38096"     //DEV
+//let BASE_URL = "http://onlineapi.info:38096"     //DEV
+let BASE_URL = "http://123.24.206.9:38192"     //DEV
 
 let REGISTER_USER = BASE_URL + "/User/Register"
 let UPLOAD_IMAGE = BASE_URL + "/Image/UploadImage"

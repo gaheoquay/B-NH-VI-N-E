@@ -81,17 +81,22 @@ class SearchViewController: UIViewController,UITableViewDelegate,UITableViewData
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell") as! SearchTableViewCell
     if indexPath.row == listSearch.count {
-      cell.setData(result: "", isAsk: true)
+      cell.setData(result: "", isAsk: true, textSearch: txtSearch.text!)
     }else{
-      cell.setData(result: listSearch[indexPath.row].title, isAsk: false)
+      cell.setData(result: listSearch[indexPath.row].title, isAsk: false, textSearch: txtSearch.text!)
     }
     return cell
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if indexPath.row == listSearch.count {
-      let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AddQuestionViewController") as! AddQuestionViewController
-//      viewController.titleTxt.text = txtSearch.text!
-      self.navigationController?.pushViewController(viewController, animated: true)
+        if Until.getCurrentId() != "" {
+            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AddQuestionViewController") as! AddQuestionViewController
+            viewController.searchText = txtSearch.text!
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }else{
+            Until.gotoLogin(_self: self, cannotBack: true)
+        }
+      
     }else{
       let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
       viewController.questionID = listSearch[indexPath.row].id

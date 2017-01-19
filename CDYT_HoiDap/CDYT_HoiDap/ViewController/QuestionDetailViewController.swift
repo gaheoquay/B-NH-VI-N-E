@@ -366,17 +366,17 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     //MARK: Post comment tap action
     func postCommentAction(){
         if Until.getCurrentId() != "" {
-            let stringComent = textInputBar.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            if stringComent == "" {
-                let alert = UIAlertController(title: "Thông Báo", message: "Bình luận không được để trống", preferredStyle: .alert)
-                let OkeAction: UIAlertAction = UIAlertAction(title: "Đóng", style: .cancel) { action -> Void in
-                    self.textInputBar.becomeFirstResponder()
-                }
-                alert.addAction(OkeAction)
-                self.present(alert, animated: true, completion: nil)
-            }else {
-                if imageAssets.count > 0 {
-                    uploadImage()
+            if imageAssets.count > 0 {
+                uploadImage()
+            }else{
+                let stringComent = textInputBar.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                if stringComent == "" {
+                    let alert = UIAlertController(title: "Thông Báo", message: "Bình luận không được để trống", preferredStyle: .alert)
+                    let OkeAction: UIAlertAction = UIAlertAction(title: "Đóng", style: .cancel) { action -> Void in
+                        self.textInputBar.becomeFirstResponder()
+                    }
+                    alert.addAction(OkeAction)
+                    self.present(alert, animated: true, completion: nil)
                 }else{
                     sendCommentToServer()
                 }

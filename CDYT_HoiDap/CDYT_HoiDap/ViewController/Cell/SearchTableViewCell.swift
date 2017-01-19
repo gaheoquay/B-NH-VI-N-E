@@ -21,16 +21,16 @@ class SearchTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
   
-  func setData(result:String,isAsk:Bool){
-    if isAsk {
-      lbSearch.text = "Đặt câu hỏi với từ khóa đang nhập"
-      lbSearch.font = UIFont.boldSystemFont(ofSize: 14)
-      lbSearch.textColor = UIColor.init(netHex: 0x01a7fa)
-    }else{
-      lbSearch.text = result
-      lbSearch.font = UIFont.boldSystemFont(ofSize: 14)
-      lbSearch.textColor = UIColor.black
-    }
+    func setData(result:String,isAsk:Bool, textSearch: String){
+        if isAsk {
+            lbSearch.text = "Đặt câu hỏi với từ khóa: \"\(textSearch)\""
+            lbSearch.font = UIFont.boldSystemFont(ofSize: 14)
+            lbSearch.textColor = UIColor.init(netHex: 0x01a7fa)
+        }else{
+            lbSearch.text = result
+            lbSearch.font = UIFont.boldSystemFont(ofSize: 14)
+            lbSearch.textColor = UIColor.black
+        }
   }
   
 //    MARK: Outlet
