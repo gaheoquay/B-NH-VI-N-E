@@ -239,7 +239,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             textInputBar.frame.origin.y = frame.origin.y
             
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: 0.3) {
                 self.view.layoutIfNeeded()
                 self.keyboardViewHeight.constant = frame.size.height
                 
@@ -251,10 +251,15 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         if let userInfo = notification.userInfo {
             let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             
-            UIView.animate(withDuration:0.2) {
-                self.keyboardViewHeight.constant = frame.size.height
-                self.textInputBar.frame.origin.y = frame.origin.y
+            UIView.animate(withDuration:0.3) {
+                if frame.origin.y == UIScreen.main.bounds.height{
+                    self.textInputBar.frame.origin.y = frame.origin.y - 44
+                }else{
+                    self.textInputBar.frame.origin.y = frame.origin.y
+                }
             }
+            self.keyboardViewHeight.constant = 0
+
         }
     }
     
@@ -262,7 +267,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         if let userInfo = notification.userInfo {
             let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             
-            UIView.animate(withDuration: 0.2, animations: {
+            UIView.animate(withDuration: 0.3, animations: {
                 self.keyboardViewHeight.constant = frame.size.height
                 self.textInputBar.frame.origin.y = frame.origin.y
                 self.view.layoutIfNeeded()
@@ -412,6 +417,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                         let entity = MainCommentEntity.init(dict: jsonData)
                         
                         self.listComment.insert(entity, at: 0)
+                        self.feedObj.commentCount += 1
                         self.detailTbl.reloadData()
                         
                         self.textInputBar.textView.text = ""
@@ -662,6 +668,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                                         self.listComment.remove(at: index)
                                     }
                                 }
+                                self.feedObj.commentCount -= 1
                             }
                             
                             self.detailTbl.reloadData()

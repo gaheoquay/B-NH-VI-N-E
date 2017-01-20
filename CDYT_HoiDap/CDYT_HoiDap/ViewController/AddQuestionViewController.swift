@@ -41,7 +41,10 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         configUI()
         setupImagePicker()
         
-        titleTxt.text = searchText
+        if searchText != "" {
+            titleTxt.text = searchText
+        }
+        
     }
 
     func registerNotification() {

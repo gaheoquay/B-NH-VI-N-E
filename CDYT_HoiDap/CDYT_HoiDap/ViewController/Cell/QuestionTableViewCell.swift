@@ -19,8 +19,14 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
     clvTags.dataSource = self
     clvTags.delegate = self
     clvTags.register(UINib.init(nibName: "KeywordCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeywordCollectionViewCell")
+    
     lbTitle.isUserInteractionEnabled = true
     lbTitle.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showDetailQuestion)))
+    
+    lbContent.isUserInteractionEnabled = true
+    lbContent.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showDetailQuestion)))
+    
+    leftView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showDetailQuestion)))
     
     lbAuthor.isUserInteractionEnabled = true
     lbAuthor.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showUserProfile)))
@@ -117,6 +123,8 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
   @IBOutlet weak var layoutHeighTag: NSLayoutConstraint!
   @IBOutlet weak var layoutTopTag: NSLayoutConstraint!
   @IBOutlet weak var layoutBottomTag: NSLayoutConstraint!
+    @IBOutlet weak var leftView: UIView!
+    
     var delegate : QuestionTableViewCellDelegate?
     var indexPath = IndexPath()
 }
