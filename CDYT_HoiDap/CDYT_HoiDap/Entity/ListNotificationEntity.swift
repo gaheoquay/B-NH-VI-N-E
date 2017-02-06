@@ -8,28 +8,32 @@
 
 import UIKit
 
-class ListNotificationEntity: NSObject {
-  var linkedUser = AuthorEntity()
-  var notificaiton = NotificationEntity()
-  var postTitle = ""
-  var content = ""
-		
-  override init(){
-    super.init()
-  }
-  
-  init(dictionary:NSDictionary) {
-    if let value = dictionary["LinkedUser"] as? NSDictionary {
-      linkedUser = AuthorEntity.init(dictionary: value)
+class ListNotificationEntity: Object {
+    dynamic var linkedUser : LinkedUser?
+    dynamic var notificaiton : NotificationEntity?
+    dynamic var postTitle = ""
+    dynamic var content = ""
+    dynamic var pkId = 0
+    
+    override static func primaryKey() -> String? {
+        return "pkId"
     }
-    if let value = dictionary["Notification"] as? NSDictionary {
-      notificaiton = NotificationEntity.init(dictionary: value)
+    
+    class func initWithDict(dictionary : NSDictionary, index:Int) -> ListNotificationEntity{
+        let this = ListNotificationEntity()
+        this.pkId = index
+        if let value = dictionary["LinkedUser"] as? NSDictionary {
+            this.linkedUser = LinkedUser.initWithDictionary(dictionary: value)
+        }
+        if let value = dictionary["Notification"] as? NSDictionary {
+            this.notificaiton = NotificationEntity.initWithDictionary(dictionary: value)
+        }
+        if let value = dictionary["PostTitle"] as? String {
+            this.postTitle = value
+        }
+        if let value = dictionary["Content"] as? String {
+            this.content = value
+        }
+        return this
     }
-    if let value = dictionary["PostTitle"] as? String {
-      postTitle = value
-    }
-    if let value = dictionary["Content"] as? String {
-      content = value
-    }
-  }
 }

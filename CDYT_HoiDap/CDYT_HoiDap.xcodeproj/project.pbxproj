@@ -130,6 +130,7 @@
 		A6E9D88F1E1110CF00E31886 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E9D88E1E1110CF00E31886 /* LoginViewController.swift */; };
 		A6E9D8911E11169600E31886 /* UpdateInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E9D8901E11169600E31886 /* UpdateInfoViewController.swift */; };
 		A6E9D8931E111F3100E31886 /* Until.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E9D8921E111F3100E31886 /* Until.swift */; };
+		A6F980A01E48607E0007CD63 /* LinkedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F9809F1E48607E0007CD63 /* LinkedUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -267,6 +268,7 @@
 		A6E9D88E1E1110CF00E31886 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A6E9D8901E11169600E31886 /* UpdateInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateInfoViewController.swift; sourceTree = "<group>"; };
 		A6E9D8921E111F3100E31886 /* Until.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Until.swift; sourceTree = "<group>"; };
+		A6F9809F1E48607E0007CD63 /* LinkedUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedUser.swift; sourceTree = "<group>"; };
 		FDD88BA19051C23DD96B53FB /* Pods-CDYT_HoiDap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYT_HoiDap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -585,6 +587,7 @@
 		A6D083C11E121A1C007EA4D9 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				A6F9809E1E4860660007CD63 /* Realm Object */,
 				A6D083C21E121A2E007EA4D9 /* UserEntity.swift */,
 				A6D083C81E127F9F007EA4D9 /* TagEntity.swift */,
 				A6D083CA1E12803C007EA4D9 /* HotTagEntity.swift */,
@@ -613,6 +616,14 @@
 				A6E4C2F91E1102BA00C2C871 /* User.storyboard */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		A6F9809E1E4860660007CD63 /* Realm Object */ = {
+			isa = PBXGroup;
+			children = (
+				A6F9809F1E48607E0007CD63 /* LinkedUser.swift */,
+			);
+			path = "Realm Object";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -828,6 +839,7 @@
 				8B3A13781E10F454005DBC6E /* RAMFrameItemAnimation.swift in Sources */,
 				8B3A136F1E10F454005DBC6E /* DatePickerDialog.swift in Sources */,
 				A68A95151E151B490067736E /* MainCommentEntity.swift in Sources */,
+				A6F980A01E48607E0007CD63 /* LinkedUser.swift in Sources */,
 				A6E9D8911E11169600E31886 /* UpdateInfoViewController.swift in Sources */,
 				A6D083CB1E12803C007EA4D9 /* HotTagEntity.swift in Sources */,
 				8B3A13811E10F46B005DBC6E /* Global.swift in Sources */,

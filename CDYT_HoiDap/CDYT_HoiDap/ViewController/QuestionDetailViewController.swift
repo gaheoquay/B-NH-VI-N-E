@@ -50,7 +50,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             setupMarkerForQuestion()
             getListCommentByPostID(postId: feedObj.postEntity.id)
         }
-      if notification != nil && !notification.notificaiton.isRead {
+      if notification != nil && !(notification.notificaiton?.isRead)! {
         setReadNotification()
       }
         configInputBar()
@@ -210,7 +210,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     let getPostParam : [String : Any] = [
       "Auth": Until.getAuthKey(),
       "RequestedUserId" : Until.getCurrentId(),
-      "NotificationId": notification!.notificaiton.id
+      "NotificationId": notification!.notificaiton!.id
     ]
     
     print(JSON.init(getPostParam))
@@ -220,8 +220,11 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         if status == 200{
           if let result = response.result.value {
             if result is NSDictionary {
-              self.notification.notificaiton.isRead = true
-              self.delegate?.reloadTable()
+                let realm = try! Realm()
+                try! realm.write {
+                    self.notification.notificaiton?.isRead = true
+                    self.delegate?.reloadTable()
+                }
             }
           }
         }

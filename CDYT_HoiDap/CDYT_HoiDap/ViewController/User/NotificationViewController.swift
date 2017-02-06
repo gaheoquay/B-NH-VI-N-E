@@ -11,7 +11,9 @@ import UIKit
 class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, QuestionDetailViewControllerDelegate ,CommentViewControllerDelegate {
   
   @IBOutlet weak var notifyTableView: UITableView!
-  var listNotification = [ListNotificationEntity]()
+//    var listNotification : [ListNotificationEntity] = [ListNotificationEntity]()
+    var listNotification : Results<ListNotificationEntity>!
+    var page = 1
   override func viewDidLoad() {
     super.viewDidLoad()
     setupTableView()
@@ -26,26 +28,44 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     notifyTableView.rowHeight = UITableViewAutomaticDimension
     notifyTableView.register(UINib.init(nibName: "NotifyTableViewCell", bundle: nil), forCellReuseIdentifier: "NotifyTableViewCell")
     notifyTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+    notifyTableView.addPullToRefreshHandler {
+        DispatchQueue.main.async {
+            //        self.tagTableView.pullToRefreshView?.startAnimating()
+            self.reloadData()
+        }
+    }
   }
+    
+    func reloadData(){
+        page = 1
+        getListNotification()
+    }
+    
   //MARK: get list notification
   func getListNotification(){
     
     let hotParam : [String : Any] = [
       "Auth": Until.getAuthKey(),
-      "Page": 1,
-      "Size": 100,
+      "Page": page,
+      "Size": 20,
       "RequestedUserId" : Until.getCurrentId()
     ]
-    Until.showLoading()
+    print(JSON.init(hotParam))
+
     Alamofire.request(GET_LIST_NOTIFICATION, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
         if status == 200{
           if let result = response.result.value {
             let jsonData = result as! [NSDictionary]
             
-            for item in jsonData {
-              let entity = ListNotificationEntity.init(dictionary: item)
-              self.listNotification.append(entity)
+            let realm = try! Realm()
+            
+            for (index, item) in jsonData.enumerated() {
+                let entity = ListNotificationEntity.initWithDict(dictionary: item, index: index)
+            
+                try! realm.write {
+                    realm.add(entity, update: true)
+                }
             }
           }
           self.notifyTableView.reloadData()
@@ -55,7 +75,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
       }else{
         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
       }
-      Until.hideLoading()
+
       self.notifyTableView.pullToRefreshView?.stopAnimating()
       self.notifyTableView.infiniteScrollingView?.stopAnimating()
 
@@ -64,6 +84,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
   //MARK: UITableViewDelegate, UITableViewDataSource
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    let realm = try! Realm()
+    listNotification = realm.objects(ListNotificationEntity.self)
     return listNotification.count
   }
   
@@ -75,18 +97,18 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
     let entity = listNotification[indexPath.row]
-    if entity.notificaiton.type == 1 || entity.notificaiton.type == 3 {
+    if entity.notificaiton?.type == 1 || entity.notificaiton?.type == 3 {
       let viewController = storyBoard.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
-      viewController.questionID = entity.notificaiton.parentId
+      viewController.questionID = (entity.notificaiton?.parentId)!
       viewController.notification = entity
       viewController.delegate = self
       self.navigationController?.pushViewController(viewController, animated: true)
     }else{
       let viewController = storyBoard.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController
-      if entity.notificaiton.type == 0 || entity.notificaiton.type == 4 || entity.notificaiton.type == 5{
-        viewController.commentId = entity.notificaiton.detailId
-      }else if entity.notificaiton.type == 2{
-        viewController.commentId = entity.notificaiton.parentId
+      if entity.notificaiton?.type == 0 || entity.notificaiton?.type == 4 || entity.notificaiton?.type == 5{
+        viewController.commentId = (entity.notificaiton?.detailId)!
+      }else if entity.notificaiton?.type == 2{
+        viewController.commentId = (entity.notificaiton?.parentId)!
       }
       viewController.notification = entity
       viewController.delegate = self
