@@ -69,6 +69,62 @@
 		8BC2C30C1E2333A800B68F72 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2C30B1E2333A800B68F72 /* ForgotPasswordViewController.swift */; };
 		8BC2C30E1E23379300B68F72 /* ListNotificationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2C30D1E23379300B68F72 /* ListNotificationEntity.swift */; };
 		8BC2C3101E2337C700B68F72 /* NotificationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2C30F1E2337C700B68F72 /* NotificationEntity.swift */; };
+		8BD49EF61E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49ED51E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.xib */; };
+		8BD49EF71E48215500C98E74 /* CreateGroupChannelUserListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49ED71E48215500C98E74 /* CreateGroupChannelUserListViewController.xib */; };
+		8BD49EF81E48215500C98E74 /* GroupChannelListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49ED91E48215500C98E74 /* GroupChannelListViewController.xib */; };
+		8BD49EF91E48215500C98E74 /* MemberListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49EDB1E48215500C98E74 /* MemberListViewController.xib */; };
+		8BD49EFA1E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49EDD1E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.swift */; };
+		8BD49EFB1E48215500C98E74 /* CreateGroupChannelUserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49EDE1E48215500C98E74 /* CreateGroupChannelUserListViewController.swift */; };
+		8BD49EFC1E48215500C98E74 /* GroupChannelChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49EDF1E48215500C98E74 /* GroupChannelChattingViewController.swift */; };
+		8BD49EFD1E48215500C98E74 /* GroupChannelChattingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49EE01E48215500C98E74 /* GroupChannelChattingViewController.xib */; };
+		8BD49EFE1E48215500C98E74 /* GroupChannelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49EE11E48215500C98E74 /* GroupChannelListViewController.swift */; };
+		8BD49F031E48215500C98E74 /* MemberListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49EEA1E48215500C98E74 /* MemberListViewController.swift */; };
+		8BD49F041E48215500C98E74 /* CreateGroupChannelUserListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49EEC1E48215500C98E74 /* CreateGroupChannelUserListTableViewCell.swift */; };
+		8BD49F051E48215500C98E74 /* CreateGroupChannelUserListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49EED1E48215500C98E74 /* CreateGroupChannelUserListTableViewCell.xib */; };
+		8BD49F061E48215500C98E74 /* GroupChannelListEditableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49EEE1E48215500C98E74 /* GroupChannelListEditableTableViewCell.swift */; };
+		8BD49F071E48215500C98E74 /* GroupChannelListEditableTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49EEF1E48215500C98E74 /* GroupChannelListEditableTableViewCell.xib */; };
+		8BD49F081E48215500C98E74 /* GroupChannelListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49EF01E48215500C98E74 /* GroupChannelListTableViewCell.swift */; };
+		8BD49F091E48215500C98E74 /* GroupChannelListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49EF11E48215500C98E74 /* GroupChannelListTableViewCell.xib */; };
+		8BD49F0A1E48215500C98E74 /* MemberListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49EF21E48215500C98E74 /* MemberListTableViewCell.swift */; };
+		8BD49F0B1E48215500C98E74 /* MemberListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49EF31E48215500C98E74 /* MemberListTableViewCell.xib */; };
+		8BD49F0C1E48215500C98E74 /* SelectedUserListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49EF41E48215500C98E74 /* SelectedUserListCollectionViewCell.swift */; };
+		8BD49F0D1E48215500C98E74 /* SelectedUserListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49EF51E48215500C98E74 /* SelectedUserListCollectionViewCell.xib */; };
+		8BD49F0F1E4824EA00C98E74 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F0E1E4824EA00C98E74 /* Constants.swift */; };
+		8BD49F261E482C1500C98E74 /* ChattingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49F111E482C1500C98E74 /* ChattingView.xib */; };
+		8BD49F271E482C1500C98E74 /* ChattingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F131E482C1500C98E74 /* ChattingView.swift */; };
+		8BD49F291E482C1500C98E74 /* IncomingFileMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F171E482C1500C98E74 /* IncomingFileMessageTableViewCell.swift */; };
+		8BD49F2A1E482C1500C98E74 /* IncomingFileMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49F181E482C1500C98E74 /* IncomingFileMessageTableViewCell.xib */; };
+		8BD49F2B1E482C1500C98E74 /* IncomingImageFileMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F191E482C1500C98E74 /* IncomingImageFileMessageTableViewCell.swift */; };
+		8BD49F2C1E482C1500C98E74 /* IncomingImageFileMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49F1A1E482C1500C98E74 /* IncomingImageFileMessageTableViewCell.xib */; };
+		8BD49F2D1E482C1500C98E74 /* IncomingUserMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F1B1E482C1500C98E74 /* IncomingUserMessageTableViewCell.swift */; };
+		8BD49F2E1E482C1500C98E74 /* IncomingUserMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49F1C1E482C1500C98E74 /* IncomingUserMessageTableViewCell.xib */; };
+		8BD49F2F1E482C1500C98E74 /* MessageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F1D1E482C1500C98E74 /* MessageDelegate.swift */; };
+		8BD49F301E482C1500C98E74 /* NeutralMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F1E1E482C1500C98E74 /* NeutralMessageTableViewCell.swift */; };
+		8BD49F311E482C1500C98E74 /* NeutralMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49F1F1E482C1500C98E74 /* NeutralMessageTableViewCell.xib */; };
+		8BD49F321E482C1500C98E74 /* OutgoingFileMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F201E482C1500C98E74 /* OutgoingFileMessageTableViewCell.swift */; };
+		8BD49F331E482C1600C98E74 /* OutgoingFileMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49F211E482C1500C98E74 /* OutgoingFileMessageTableViewCell.xib */; };
+		8BD49F341E482C1600C98E74 /* OutgoingImageFileMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F221E482C1500C98E74 /* OutgoingImageFileMessageTableViewCell.swift */; };
+		8BD49F351E482C1600C98E74 /* OutgoingImageFileMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49F231E482C1500C98E74 /* OutgoingImageFileMessageTableViewCell.xib */; };
+		8BD49F361E482C1600C98E74 /* OutgoingUserMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F241E482C1500C98E74 /* OutgoingUserMessageTableViewCell.swift */; };
+		8BD49F371E482C1600C98E74 /* OutgoingUserMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49F251E482C1500C98E74 /* OutgoingUserMessageTableViewCell.xib */; };
+		8BD49F3A1E482C4F00C98E74 /* ReusableViewFromXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F391E482C4F00C98E74 /* ReusableViewFromXib.swift */; };
+		8BD49F3C1E482C9900C98E74 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F3B1E482C9900C98E74 /* Utils.swift */; };
+		8BD49F5B1E482D1100C98E74 /* BlockedUserListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49F3E1E482D1100C98E74 /* BlockedUserListViewController.xib */; };
+		8BD49F5C1E482D1100C98E74 /* CreateOpenChannelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49F401E482D1100C98E74 /* CreateOpenChannelViewController.xib */; };
+		8BD49F5D1E482D1100C98E74 /* OpenChannelListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49F421E482D1100C98E74 /* OpenChannelListViewController.xib */; };
+		8BD49F5E1E482D1100C98E74 /* ParticipantListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49F441E482D1100C98E74 /* ParticipantListViewController.xib */; };
+		8BD49F5F1E482D1100C98E74 /* BlockedUserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F461E482D1100C98E74 /* BlockedUserListViewController.swift */; };
+		8BD49F601E482D1100C98E74 /* CreateOpenChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F471E482D1100C98E74 /* CreateOpenChannelViewController.swift */; };
+		8BD49F651E482D1100C98E74 /* OpenChannelChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F501E482D1100C98E74 /* OpenChannelChattingViewController.swift */; };
+		8BD49F661E482D1100C98E74 /* OpenChannelChattingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49F511E482D1100C98E74 /* OpenChannelChattingViewController.xib */; };
+		8BD49F671E482D1100C98E74 /* OpenChannelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F521E482D1100C98E74 /* OpenChannelListViewController.swift */; };
+		8BD49F681E482D1100C98E74 /* ParticipantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F531E482D1100C98E74 /* ParticipantListViewController.swift */; };
+		8BD49F691E482D1100C98E74 /* BlockedUserListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F551E482D1100C98E74 /* BlockedUserListTableViewCell.swift */; };
+		8BD49F6A1E482D1100C98E74 /* BlockedUserListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49F561E482D1100C98E74 /* BlockedUserListTableViewCell.xib */; };
+		8BD49F6B1E482D1100C98E74 /* OpenChannelListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F571E482D1100C98E74 /* OpenChannelListTableViewCell.swift */; };
+		8BD49F6C1E482D1100C98E74 /* OpenChannelListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49F581E482D1100C98E74 /* OpenChannelListTableViewCell.xib */; };
+		8BD49F6D1E482D1100C98E74 /* ParticipantListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F591E482D1100C98E74 /* ParticipantListTableViewCell.swift */; };
+		8BD49F6E1E482D1100C98E74 /* ParticipantListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49F5A1E482D1100C98E74 /* ParticipantListTableViewCell.xib */; };
 		8BF1496C1E14BF9C00766F8F /* Answer0.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF149591E14BF9C00766F8F /* Answer0.png */; };
 		8BF1496E1E14BF9C00766F8F /* Ask.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1495B1E14BF9C00766F8F /* Ask.png */; };
 		8BF1496F1E14BF9C00766F8F /* CaiDat.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1495C1E14BF9C00766F8F /* CaiDat.png */; };
@@ -205,6 +261,62 @@
 		8BC2C30B1E2333A800B68F72 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		8BC2C30D1E23379300B68F72 /* ListNotificationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListNotificationEntity.swift; sourceTree = "<group>"; };
 		8BC2C30F1E2337C700B68F72 /* NotificationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationEntity.swift; sourceTree = "<group>"; };
+		8BD49ED61E48215500C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CreateGroupChannelSelectOptionViewController.xib; sourceTree = "<group>"; };
+		8BD49ED81E48215500C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CreateGroupChannelUserListViewController.xib; sourceTree = "<group>"; };
+		8BD49EDA1E48215500C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GroupChannelListViewController.xib; sourceTree = "<group>"; };
+		8BD49EDC1E48215500C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MemberListViewController.xib; sourceTree = "<group>"; };
+		8BD49EDD1E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupChannelSelectOptionViewController.swift; sourceTree = "<group>"; };
+		8BD49EDE1E48215500C98E74 /* CreateGroupChannelUserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupChannelUserListViewController.swift; sourceTree = "<group>"; };
+		8BD49EDF1E48215500C98E74 /* GroupChannelChattingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupChannelChattingViewController.swift; sourceTree = "<group>"; };
+		8BD49EE01E48215500C98E74 /* GroupChannelChattingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupChannelChattingViewController.xib; sourceTree = "<group>"; };
+		8BD49EE11E48215500C98E74 /* GroupChannelListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupChannelListViewController.swift; sourceTree = "<group>"; };
+		8BD49EEA1E48215500C98E74 /* MemberListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberListViewController.swift; sourceTree = "<group>"; };
+		8BD49EEC1E48215500C98E74 /* CreateGroupChannelUserListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupChannelUserListTableViewCell.swift; sourceTree = "<group>"; };
+		8BD49EED1E48215500C98E74 /* CreateGroupChannelUserListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateGroupChannelUserListTableViewCell.xib; sourceTree = "<group>"; };
+		8BD49EEE1E48215500C98E74 /* GroupChannelListEditableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupChannelListEditableTableViewCell.swift; sourceTree = "<group>"; };
+		8BD49EEF1E48215500C98E74 /* GroupChannelListEditableTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupChannelListEditableTableViewCell.xib; sourceTree = "<group>"; };
+		8BD49EF01E48215500C98E74 /* GroupChannelListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupChannelListTableViewCell.swift; sourceTree = "<group>"; };
+		8BD49EF11E48215500C98E74 /* GroupChannelListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupChannelListTableViewCell.xib; sourceTree = "<group>"; };
+		8BD49EF21E48215500C98E74 /* MemberListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberListTableViewCell.swift; sourceTree = "<group>"; };
+		8BD49EF31E48215500C98E74 /* MemberListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemberListTableViewCell.xib; sourceTree = "<group>"; };
+		8BD49EF41E48215500C98E74 /* SelectedUserListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedUserListCollectionViewCell.swift; sourceTree = "<group>"; };
+		8BD49EF51E48215500C98E74 /* SelectedUserListCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectedUserListCollectionViewCell.xib; sourceTree = "<group>"; };
+		8BD49F0E1E4824EA00C98E74 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8BD49F121E482C1500C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ChattingView.xib; sourceTree = "<group>"; };
+		8BD49F131E482C1500C98E74 /* ChattingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingView.swift; sourceTree = "<group>"; };
+		8BD49F171E482C1500C98E74 /* IncomingFileMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingFileMessageTableViewCell.swift; sourceTree = "<group>"; };
+		8BD49F181E482C1500C98E74 /* IncomingFileMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IncomingFileMessageTableViewCell.xib; sourceTree = "<group>"; };
+		8BD49F191E482C1500C98E74 /* IncomingImageFileMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingImageFileMessageTableViewCell.swift; sourceTree = "<group>"; };
+		8BD49F1A1E482C1500C98E74 /* IncomingImageFileMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IncomingImageFileMessageTableViewCell.xib; sourceTree = "<group>"; };
+		8BD49F1B1E482C1500C98E74 /* IncomingUserMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingUserMessageTableViewCell.swift; sourceTree = "<group>"; };
+		8BD49F1C1E482C1500C98E74 /* IncomingUserMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IncomingUserMessageTableViewCell.xib; sourceTree = "<group>"; };
+		8BD49F1D1E482C1500C98E74 /* MessageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDelegate.swift; sourceTree = "<group>"; };
+		8BD49F1E1E482C1500C98E74 /* NeutralMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeutralMessageTableViewCell.swift; sourceTree = "<group>"; };
+		8BD49F1F1E482C1500C98E74 /* NeutralMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NeutralMessageTableViewCell.xib; sourceTree = "<group>"; };
+		8BD49F201E482C1500C98E74 /* OutgoingFileMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingFileMessageTableViewCell.swift; sourceTree = "<group>"; };
+		8BD49F211E482C1500C98E74 /* OutgoingFileMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutgoingFileMessageTableViewCell.xib; sourceTree = "<group>"; };
+		8BD49F221E482C1500C98E74 /* OutgoingImageFileMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingImageFileMessageTableViewCell.swift; sourceTree = "<group>"; };
+		8BD49F231E482C1500C98E74 /* OutgoingImageFileMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutgoingImageFileMessageTableViewCell.xib; sourceTree = "<group>"; };
+		8BD49F241E482C1500C98E74 /* OutgoingUserMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingUserMessageTableViewCell.swift; sourceTree = "<group>"; };
+		8BD49F251E482C1500C98E74 /* OutgoingUserMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutgoingUserMessageTableViewCell.xib; sourceTree = "<group>"; };
+		8BD49F391E482C4F00C98E74 /* ReusableViewFromXib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableViewFromXib.swift; sourceTree = "<group>"; };
+		8BD49F3B1E482C9900C98E74 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		8BD49F3F1E482D1100C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BlockedUserListViewController.xib; sourceTree = "<group>"; };
+		8BD49F411E482D1100C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CreateOpenChannelViewController.xib; sourceTree = "<group>"; };
+		8BD49F431E482D1100C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OpenChannelListViewController.xib; sourceTree = "<group>"; };
+		8BD49F451E482D1100C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ParticipantListViewController.xib; sourceTree = "<group>"; };
+		8BD49F461E482D1100C98E74 /* BlockedUserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockedUserListViewController.swift; sourceTree = "<group>"; };
+		8BD49F471E482D1100C98E74 /* CreateOpenChannelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateOpenChannelViewController.swift; sourceTree = "<group>"; };
+		8BD49F501E482D1100C98E74 /* OpenChannelChattingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenChannelChattingViewController.swift; sourceTree = "<group>"; };
+		8BD49F511E482D1100C98E74 /* OpenChannelChattingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpenChannelChattingViewController.xib; sourceTree = "<group>"; };
+		8BD49F521E482D1100C98E74 /* OpenChannelListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenChannelListViewController.swift; sourceTree = "<group>"; };
+		8BD49F531E482D1100C98E74 /* ParticipantListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantListViewController.swift; sourceTree = "<group>"; };
+		8BD49F551E482D1100C98E74 /* BlockedUserListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockedUserListTableViewCell.swift; sourceTree = "<group>"; };
+		8BD49F561E482D1100C98E74 /* BlockedUserListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlockedUserListTableViewCell.xib; sourceTree = "<group>"; };
+		8BD49F571E482D1100C98E74 /* OpenChannelListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenChannelListTableViewCell.swift; sourceTree = "<group>"; };
+		8BD49F581E482D1100C98E74 /* OpenChannelListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpenChannelListTableViewCell.xib; sourceTree = "<group>"; };
+		8BD49F591E482D1100C98E74 /* ParticipantListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantListTableViewCell.swift; sourceTree = "<group>"; };
+		8BD49F5A1E482D1100C98E74 /* ParticipantListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParticipantListTableViewCell.xib; sourceTree = "<group>"; };
 		8BF149591E14BF9C00766F8F /* Answer0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Answer0.png; sourceTree = "<group>"; };
 		8BF1495B1E14BF9C00766F8F /* Ask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ask.png; sourceTree = "<group>"; };
 		8BF1495C1E14BF9C00766F8F /* CaiDat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CaiDat.png; sourceTree = "<group>"; };
@@ -492,6 +604,8 @@
 		8B3A137F1E10F46B005DBC6E /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				8BD49F3B1E482C9900C98E74 /* Utils.swift */,
+				8BD49F0E1E4824EA00C98E74 /* Constants.swift */,
 				A6E9D8921E111F3100E31886 /* Until.swift */,
 				8B3A13801E10F46B005DBC6E /* Global.swift */,
 			);
@@ -501,6 +615,7 @@
 		8B3A13841E10FCB6005DBC6E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8BD49ED31E48215500C98E74 /* Chat */,
 				8B3A138D1E111FA5005DBC6E /* Cell */,
 				A6E4C2F61E11022B00C2C871 /* User */,
 				8B3A13851E10FD1B005DBC6E /* TagListViewController.swift */,
@@ -536,6 +651,123 @@
 				8B1AD45D1E1B97F000D55543 /* SearchTableViewCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		8BD49ED31E48215500C98E74 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				8BD49F3D1E482D1100C98E74 /* OpenChannel */,
+				8BD49F381E482C4F00C98E74 /* ReusableViewFromXib */,
+				8BD49F101E482C1500C98E74 /* Chatting */,
+				8BD49ED41E48215500C98E74 /* GroupChannel */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		8BD49ED41E48215500C98E74 /* GroupChannel */ = {
+			isa = PBXGroup;
+			children = (
+				8BD49ED51E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.xib */,
+				8BD49ED71E48215500C98E74 /* CreateGroupChannelUserListViewController.xib */,
+				8BD49ED91E48215500C98E74 /* GroupChannelListViewController.xib */,
+				8BD49EDB1E48215500C98E74 /* MemberListViewController.xib */,
+				8BD49EDD1E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.swift */,
+				8BD49EDE1E48215500C98E74 /* CreateGroupChannelUserListViewController.swift */,
+				8BD49EDF1E48215500C98E74 /* GroupChannelChattingViewController.swift */,
+				8BD49EE01E48215500C98E74 /* GroupChannelChattingViewController.xib */,
+				8BD49EE11E48215500C98E74 /* GroupChannelListViewController.swift */,
+				8BD49EEA1E48215500C98E74 /* MemberListViewController.swift */,
+				8BD49EEB1E48215500C98E74 /* ViewCell */,
+			);
+			path = GroupChannel;
+			sourceTree = "<group>";
+		};
+		8BD49EEB1E48215500C98E74 /* ViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8BD49EEC1E48215500C98E74 /* CreateGroupChannelUserListTableViewCell.swift */,
+				8BD49EED1E48215500C98E74 /* CreateGroupChannelUserListTableViewCell.xib */,
+				8BD49EEE1E48215500C98E74 /* GroupChannelListEditableTableViewCell.swift */,
+				8BD49EEF1E48215500C98E74 /* GroupChannelListEditableTableViewCell.xib */,
+				8BD49EF01E48215500C98E74 /* GroupChannelListTableViewCell.swift */,
+				8BD49EF11E48215500C98E74 /* GroupChannelListTableViewCell.xib */,
+				8BD49EF21E48215500C98E74 /* MemberListTableViewCell.swift */,
+				8BD49EF31E48215500C98E74 /* MemberListTableViewCell.xib */,
+				8BD49EF41E48215500C98E74 /* SelectedUserListCollectionViewCell.swift */,
+				8BD49EF51E48215500C98E74 /* SelectedUserListCollectionViewCell.xib */,
+			);
+			path = ViewCell;
+			sourceTree = "<group>";
+		};
+		8BD49F101E482C1500C98E74 /* Chatting */ = {
+			isa = PBXGroup;
+			children = (
+				8BD49F111E482C1500C98E74 /* ChattingView.xib */,
+				8BD49F131E482C1500C98E74 /* ChattingView.swift */,
+				8BD49F161E482C1500C98E74 /* ViewCell */,
+			);
+			path = Chatting;
+			sourceTree = "<group>";
+		};
+		8BD49F161E482C1500C98E74 /* ViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8BD49F171E482C1500C98E74 /* IncomingFileMessageTableViewCell.swift */,
+				8BD49F181E482C1500C98E74 /* IncomingFileMessageTableViewCell.xib */,
+				8BD49F191E482C1500C98E74 /* IncomingImageFileMessageTableViewCell.swift */,
+				8BD49F1A1E482C1500C98E74 /* IncomingImageFileMessageTableViewCell.xib */,
+				8BD49F1B1E482C1500C98E74 /* IncomingUserMessageTableViewCell.swift */,
+				8BD49F1C1E482C1500C98E74 /* IncomingUserMessageTableViewCell.xib */,
+				8BD49F1D1E482C1500C98E74 /* MessageDelegate.swift */,
+				8BD49F1E1E482C1500C98E74 /* NeutralMessageTableViewCell.swift */,
+				8BD49F1F1E482C1500C98E74 /* NeutralMessageTableViewCell.xib */,
+				8BD49F201E482C1500C98E74 /* OutgoingFileMessageTableViewCell.swift */,
+				8BD49F211E482C1500C98E74 /* OutgoingFileMessageTableViewCell.xib */,
+				8BD49F221E482C1500C98E74 /* OutgoingImageFileMessageTableViewCell.swift */,
+				8BD49F231E482C1500C98E74 /* OutgoingImageFileMessageTableViewCell.xib */,
+				8BD49F241E482C1500C98E74 /* OutgoingUserMessageTableViewCell.swift */,
+				8BD49F251E482C1500C98E74 /* OutgoingUserMessageTableViewCell.xib */,
+			);
+			path = ViewCell;
+			sourceTree = "<group>";
+		};
+		8BD49F381E482C4F00C98E74 /* ReusableViewFromXib */ = {
+			isa = PBXGroup;
+			children = (
+				8BD49F391E482C4F00C98E74 /* ReusableViewFromXib.swift */,
+			);
+			path = ReusableViewFromXib;
+			sourceTree = "<group>";
+		};
+		8BD49F3D1E482D1100C98E74 /* OpenChannel */ = {
+			isa = PBXGroup;
+			children = (
+				8BD49F3E1E482D1100C98E74 /* BlockedUserListViewController.xib */,
+				8BD49F401E482D1100C98E74 /* CreateOpenChannelViewController.xib */,
+				8BD49F421E482D1100C98E74 /* OpenChannelListViewController.xib */,
+				8BD49F441E482D1100C98E74 /* ParticipantListViewController.xib */,
+				8BD49F461E482D1100C98E74 /* BlockedUserListViewController.swift */,
+				8BD49F471E482D1100C98E74 /* CreateOpenChannelViewController.swift */,
+				8BD49F501E482D1100C98E74 /* OpenChannelChattingViewController.swift */,
+				8BD49F511E482D1100C98E74 /* OpenChannelChattingViewController.xib */,
+				8BD49F521E482D1100C98E74 /* OpenChannelListViewController.swift */,
+				8BD49F531E482D1100C98E74 /* ParticipantListViewController.swift */,
+				8BD49F541E482D1100C98E74 /* ViewCell */,
+			);
+			path = OpenChannel;
+			sourceTree = "<group>";
+		};
+		8BD49F541E482D1100C98E74 /* ViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8BD49F551E482D1100C98E74 /* BlockedUserListTableViewCell.swift */,
+				8BD49F561E482D1100C98E74 /* BlockedUserListTableViewCell.xib */,
+				8BD49F571E482D1100C98E74 /* OpenChannelListTableViewCell.swift */,
+				8BD49F581E482D1100C98E74 /* OpenChannelListTableViewCell.xib */,
+				8BD49F591E482D1100C98E74 /* ParticipantListTableViewCell.swift */,
+				8BD49F5A1E482D1100C98E74 /* ParticipantListTableViewCell.xib */,
+			);
+			path = ViewCell;
 			sourceTree = "<group>";
 		};
 		9709AA8D06A12926790E0992 /* Pods */ = {
@@ -662,6 +894,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 8B3A12D21E10F399005DBC6E;
 			productRefGroup = 8B3A12DC1E10F399005DBC6E /* Products */;
@@ -679,33 +912,51 @@
 			buildActionMask = 2147483647;
 			files = (
 				A609C2531E1B8F9F006BFBAE /* delete_img.png in Resources */,
+				8BD49F2A1E482C1500C98E74 /* IncomingFileMessageTableViewCell.xib in Resources */,
 				A68A95051E14ECFB0067736E /* DetailQuestionTableViewCell.xib in Resources */,
 				8BF1496E1E14BF9C00766F8F /* Ask.png in Resources */,
 				8BF149701E14BF9C00766F8F /* Camera.png in Resources */,
+				8BD49F0D1E48215500C98E74 /* SelectedUserListCollectionViewCell.xib in Resources */,
 				8B3A13911E112129005DBC6E /* KeyWordTableViewCell.xib in Resources */,
 				8B3A134A1E10F454005DBC6E /* copyright.png in Resources */,
 				8BF1496F1E14BF9C00766F8F /* CaiDat.png in Resources */,
 				8BB92DD81E24884E007C5516 /* MoreDetail.png in Resources */,
+				8BD49F6E1E482D1100C98E74 /* ParticipantListTableViewCell.xib in Resources */,
 				8BF149731E14BF9C00766F8F /* GiaiPhap_Mark.png in Resources */,
 				A6C463DD1E26493A0046A367 /* Edit.png in Resources */,
+				8BD49F6A1E482D1100C98E74 /* BlockedUserListTableViewCell.xib in Resources */,
+				8BD49F0B1E48215500C98E74 /* MemberListTableViewCell.xib in Resources */,
 				A6D083C71E12747D007EA4D9 /* QuestionTagTableViewCell.xib in Resources */,
+				8BD49F5E1E482D1100C98E74 /* ParticipantListViewController.xib in Resources */,
 				8B3A134D1E10F454005DBC6E /* DaHoi_Button0.png in Resources */,
 				8BF149781E14BF9C00766F8F /* Search_Inbox.png in Resources */,
+				8BD49EF91E48215500C98E74 /* MemberListViewController.xib in Resources */,
+				8BD49F5C1E482D1100C98E74 /* CreateOpenChannelViewController.xib in Resources */,
+				8BD49EFD1E48215500C98E74 /* GroupChannelChattingViewController.xib in Resources */,
 				8BF1497C1E14BF9C00766F8F /* TaiKhoan.png in Resources */,
 				8BF149721E14BF9C00766F8F /* GiaiPhap_Mark_hide.png in Resources */,
+				8BD49F2C1E482C1500C98E74 /* IncomingImageFileMessageTableViewCell.xib in Resources */,
+				8BD49F6C1E482D1100C98E74 /* OpenChannelListTableViewCell.xib in Resources */,
 				A68A94FC1E14CA240067736E /* DangKi_Right.png in Resources */,
 				8B3A136B1E10F454005DBC6E /* Tinnhan_button01.png in Resources */,
 				8B3A135C1E10F454005DBC6E /* photo-camera.png in Resources */,
+				8BD49F661E482D1100C98E74 /* OpenChannelChattingViewController.xib in Resources */,
+				8BD49F331E482C1600C98E74 /* OutgoingFileMessageTableViewCell.xib in Resources */,
 				8B3A13561E10F454005DBC6E /* Like0.png in Resources */,
 				A68A950E1E150CF80067736E /* Clover0.png in Resources */,
 				A67311D11E160F3400BCE308 /* placeholder_wide.png in Resources */,
+				8BD49F5D1E482D1100C98E74 /* OpenChannelListViewController.xib in Resources */,
 				8BF1497D1E14BF9C00766F8F /* Thongbao.png in Resources */,
+				8BD49F071E48215500C98E74 /* GroupChannelListEditableTableViewCell.xib in Resources */,
 				A60430FD1E2344DA000216FB /* dropdownicon.png in Resources */,
 				A6417E231E13B68D00BD2D75 /* SettingTableViewCell.xib in Resources */,
 				A6C463DB1E25DB910046A367 /* RecentFeedTableViewCell.xib in Resources */,
 				A60430F61E232D49000216FB /* Change_Ava.png in Resources */,
 				A67311D51E164FC400BCE308 /* MoreCommentTableViewCell.xib in Resources */,
+				8BD49EF61E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.xib in Resources */,
+				8BD49F5B1E482D1100C98E74 /* BlockedUserListViewController.xib in Resources */,
 				8B3A13441E10F454005DBC6E /* Back.png in Resources */,
+				8BD49F371E482C1600C98E74 /* OutgoingUserMessageTableViewCell.xib in Resources */,
 				8B813CB41E15052E0043F7EF /* Profile.png in Resources */,
 				8B3A13831E10F484005DBC6E /* Podfile in Resources */,
 				8B3A12E91E10F399005DBC6E /* LaunchScreen.storyboard in Resources */,
@@ -719,20 +970,28 @@
 				A6C463D71E25DB7D0046A367 /* Recent.png in Resources */,
 				8B813CB31E15052E0043F7EF /* Home.png in Resources */,
 				A6005BD01E13722B00095FB7 /* NotifyTableViewCell.xib in Resources */,
+				8BD49EF71E48215500C98E74 /* CreateGroupChannelUserListViewController.xib in Resources */,
 				8B3A13471E10F454005DBC6E /* caidat_button0.png in Resources */,
 				8BF1496C1E14BF9C00766F8F /* Answer0.png in Resources */,
+				8BD49F051E48215500C98E74 /* CreateGroupChannelUserListTableViewCell.xib in Resources */,
+				8BD49F351E482C1600C98E74 /* OutgoingImageFileMessageTableViewCell.xib in Resources */,
 				A6E4C2FA1E1102BA00C2C871 /* User.storyboard in Resources */,
+				8BD49F261E482C1500C98E74 /* ChattingView.xib in Resources */,
 				8B813CB51E15052E0043F7EF /* Tag.png in Resources */,
 				8B813CB91E1519150043F7EF /* SearchGrey.png in Resources */,
 				8BF149711E14BF9C00766F8F /* DangNhap_BG.png in Resources */,
+				8BD49F091E48215500C98E74 /* GroupChannelListTableViewCell.xib in Resources */,
 				8B3A13591E10F454005DBC6E /* Like1.png in Resources */,
+				8BD49EF81E48215500C98E74 /* GroupChannelListViewController.xib in Resources */,
 				8BF1497E1E14BF9C00766F8F /* TinNhan.png in Resources */,
 				8B87CD2A1E135C7A00DA8A33 /* QuestionTableViewCell.xib in Resources */,
 				A67311CF1E1601DB00BCE308 /* comment_icon.png in Resources */,
 				8B3A13621E10F454005DBC6E /* star1.png in Resources */,
 				8B1AD45F1E1B97F000D55543 /* SearchTableViewCell.xib in Resources */,
 				A63C38DF1E120A7E00DAB016 /* DangKi3.png in Resources */,
+				8BD49F2E1E482C1500C98E74 /* IncomingUserMessageTableViewCell.xib in Resources */,
 				8B3A12E61E10F399005DBC6E /* Assets.xcassets in Resources */,
+				8BD49F311E482C1500C98E74 /* NeutralMessageTableViewCell.xib in Resources */,
 				8B3A12E41E10F399005DBC6E /* Main.storyboard in Resources */,
 				A68A94FE1E14CA480067736E /* DangKi_Left.png in Resources */,
 				A68A950F1E150CF80067736E /* Clover1.png in Resources */,
@@ -797,6 +1056,7 @@
 			files = (
 				8B87CD2C1E1365A400DA8A33 /* AuthorEntity.swift in Sources */,
 				8B3A13701E10F454005DBC6E /* DataEncryption.m in Sources */,
+				8BD49F6D1E482D1100C98E74 /* ParticipantListTableViewCell.swift in Sources */,
 				A62F58601E2CA78100459408 /* EditCommentViewController.swift in Sources */,
 				8B3A13751E10F454005DBC6E /* TPKeyboardAvoidingTableView.m in Sources */,
 				A68A95081E14ED1C0067736E /* CommentTableViewCell.swift in Sources */,
@@ -808,41 +1068,65 @@
 				A6D083C91E127F9F007EA4D9 /* TagEntity.swift in Sources */,
 				A6C463DA1E25DB910046A367 /* RecentFeedTableViewCell.swift in Sources */,
 				A625AD2D1E24CC5700953B0B /* CommentViewController.swift in Sources */,
+				8BD49F2F1E482C1500C98E74 /* MessageDelegate.swift in Sources */,
 				A6E4C2F81E1102A500C2C871 /* RegisterViewController.swift in Sources */,
 				8B3A13881E10FD2A005DBC6E /* UserViewController.swift in Sources */,
+				8BD49F0A1E48215500C98E74 /* MemberListTableViewCell.swift in Sources */,
 				8B3A13901E112129005DBC6E /* KeyWordTableViewCell.swift in Sources */,
+				8BD49F081E48215500C98E74 /* GroupChannelListTableViewCell.swift in Sources */,
 				A676E7C31E2731F500DD57B2 /* ChangPassViewController.swift in Sources */,
+				8BD49F061E48215500C98E74 /* GroupChannelListEditableTableViewCell.swift in Sources */,
+				8BD49F041E48215500C98E74 /* CreateGroupChannelUserListTableViewCell.swift in Sources */,
 				A6D083C61E12747D007EA4D9 /* QuestionTagTableViewCell.swift in Sources */,
+				8BD49F6B1E482D1100C98E74 /* OpenChannelListTableViewCell.swift in Sources */,
 				8B3A13771E10F454005DBC6E /* RAMBounceAnimation.swift in Sources */,
 				A6C463D11E25D2DA0046A367 /* OtherUserViewController.swift in Sources */,
 				8B87CD291E135C7A00DA8A33 /* QuestionTableViewCell.swift in Sources */,
+				8BD49EFE1E48215500C98E74 /* GroupChannelListViewController.swift in Sources */,
 				A6E431F31E14A6510092EF85 /* AddImageCollectionViewCell.swift in Sources */,
 				A6E9D8931E111F3100E31886 /* Until.swift in Sources */,
+				8BD49F301E482C1500C98E74 /* NeutralMessageTableViewCell.swift in Sources */,
+				8BD49F5F1E482D1100C98E74 /* BlockedUserListViewController.swift in Sources */,
 				A65FF1C91E13782C00A63C02 /* NotificationViewController.swift in Sources */,
 				A6005BCF1E13722B00095FB7 /* NotifyTableViewCell.swift in Sources */,
 				8B3A137D1E10F454005DBC6E /* RAMBadge.swift in Sources */,
 				A68A95111E1517230067736E /* CommentEntity.swift in Sources */,
 				8B3A138A1E10FD58005DBC6E /* QuestionViewController.swift in Sources */,
+				8BD49F291E482C1500C98E74 /* IncomingFileMessageTableViewCell.swift in Sources */,
+				8BD49F671E482D1100C98E74 /* OpenChannelListViewController.swift in Sources */,
 				8B3A13731E10F454005DBC6E /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				A6D083C31E121A2E007EA4D9 /* UserEntity.swift in Sources */,
+				8BD49F0F1E4824EA00C98E74 /* Constants.swift in Sources */,
 				8B3A13781E10F454005DBC6E /* RAMFrameItemAnimation.swift in Sources */,
 				8B3A136F1E10F454005DBC6E /* DatePickerDialog.swift in Sources */,
 				A68A95151E151B490067736E /* MainCommentEntity.swift in Sources */,
+				8BD49F691E482D1100C98E74 /* BlockedUserListTableViewCell.swift in Sources */,
+				8BD49F321E482C1500C98E74 /* OutgoingFileMessageTableViewCell.swift in Sources */,
+				8BD49F361E482C1600C98E74 /* OutgoingUserMessageTableViewCell.swift in Sources */,
 				A6E9D8911E11169600E31886 /* UpdateInfoViewController.swift in Sources */,
+				8BD49F3A1E482C4F00C98E74 /* ReusableViewFromXib.swift in Sources */,
+				8BD49F681E482D1100C98E74 /* ParticipantListViewController.swift in Sources */,
 				A6D083CB1E12803C007EA4D9 /* HotTagEntity.swift in Sources */,
 				8B3A13811E10F46B005DBC6E /* Global.swift in Sources */,
 				A68A95131E1518E10067736E /* SubCommentEntity.swift in Sources */,
+				8BD49F601E482D1100C98E74 /* CreateOpenChannelViewController.swift in Sources */,
 				A6417E221E13B68D00BD2D75 /* SettingTableViewCell.swift in Sources */,
 				8B7AB6BE1E1211E20015DFBE /* KeywordCollectionViewCell.swift in Sources */,
+				8BD49F031E48215500C98E74 /* MemberListViewController.swift in Sources */,
 				A6417E251E13C78D00BD2D75 /* AddQuestionViewController.swift in Sources */,
 				8B3A137C1E10F454005DBC6E /* RAMAnimatedTabBarController.swift in Sources */,
 				A6E9D88F1E1110CF00E31886 /* LoginViewController.swift in Sources */,
+				8BD49EFC1E48215500C98E74 /* GroupChannelChattingViewController.swift in Sources */,
 				8B1AD45B1E1B828500D55543 /* SearchViewController.swift in Sources */,
 				8B3A13761E10F454005DBC6E /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				8B3A13791E10F454005DBC6E /* RAMFumeAnimation.swift in Sources */,
+				8BD49F341E482C1600C98E74 /* OutgoingImageFileMessageTableViewCell.swift in Sources */,
+				8BD49F651E482D1100C98E74 /* OpenChannelChattingViewController.swift in Sources */,
+				8BD49F3C1E482C9900C98E74 /* Utils.swift in Sources */,
 				8B3A13861E10FD1B005DBC6E /* TagListViewController.swift in Sources */,
 				8B3A13721E10F454005DBC6E /* NSString+URLEncode.m in Sources */,
 				A68A95041E14ECFB0067736E /* DetailQuestionTableViewCell.swift in Sources */,
+				8BD49F271E482C1500C98E74 /* ChattingView.swift in Sources */,
 				8B3A12DF1E10F399005DBC6E /* AppDelegate.swift in Sources */,
 				A60430FA1E233431000216FB /* SSRadioButton.swift in Sources */,
 				8B3A137B1E10F454005DBC6E /* RAMTransitionItemAnimations.swift in Sources */,
@@ -851,13 +1135,18 @@
 				8B3A136E1E10F454005DBC6E /* CAPSPageMenu.swift in Sources */,
 				8B813CB71E1510500043F7EF /* QuestionByTagViewController.swift in Sources */,
 				A6417E1F1E13B56C00BD2D75 /* SettingViewController.swift in Sources */,
+				8BD49F2D1E482C1500C98E74 /* IncomingUserMessageTableViewCell.swift in Sources */,
+				8BD49F0C1E48215500C98E74 /* SelectedUserListCollectionViewCell.swift in Sources */,
 				A68A95001E14EB540067736E /* QuestionDetailViewController.swift in Sources */,
 				8B3A13711E10F454005DBC6E /* NSData+Base64.m in Sources */,
+				8BD49F2B1E482C1500C98E74 /* IncomingImageFileMessageTableViewCell.swift in Sources */,
 				8B3A137A1E10F454005DBC6E /* RAMRotationAnimation.swift in Sources */,
 				8BC2C30C1E2333A800B68F72 /* ForgotPasswordViewController.swift in Sources */,
+				8BD49EFB1E48215500C98E74 /* CreateGroupChannelUserListViewController.swift in Sources */,
 				8B87CD2E1E13665500DA8A33 /* PostEntity.swift in Sources */,
 				8B3A137E1E10F454005DBC6E /* RAMItemAnimationProtocol.swift in Sources */,
 				A67311D41E164FC400BCE308 /* MoreCommentTableViewCell.swift in Sources */,
+				8BD49EFA1E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,6 +1167,78 @@
 				8B3A12E81E10F399005DBC6E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8BD49ED51E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8BD49ED61E48215500C98E74 /* Base */,
+			);
+			name = CreateGroupChannelSelectOptionViewController.xib;
+			sourceTree = "<group>";
+		};
+		8BD49ED71E48215500C98E74 /* CreateGroupChannelUserListViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8BD49ED81E48215500C98E74 /* Base */,
+			);
+			name = CreateGroupChannelUserListViewController.xib;
+			sourceTree = "<group>";
+		};
+		8BD49ED91E48215500C98E74 /* GroupChannelListViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8BD49EDA1E48215500C98E74 /* Base */,
+			);
+			name = GroupChannelListViewController.xib;
+			sourceTree = "<group>";
+		};
+		8BD49EDB1E48215500C98E74 /* MemberListViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8BD49EDC1E48215500C98E74 /* Base */,
+			);
+			name = MemberListViewController.xib;
+			sourceTree = "<group>";
+		};
+		8BD49F111E482C1500C98E74 /* ChattingView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8BD49F121E482C1500C98E74 /* Base */,
+			);
+			name = ChattingView.xib;
+			sourceTree = "<group>";
+		};
+		8BD49F3E1E482D1100C98E74 /* BlockedUserListViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8BD49F3F1E482D1100C98E74 /* Base */,
+			);
+			name = BlockedUserListViewController.xib;
+			sourceTree = "<group>";
+		};
+		8BD49F401E482D1100C98E74 /* CreateOpenChannelViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8BD49F411E482D1100C98E74 /* Base */,
+			);
+			name = CreateOpenChannelViewController.xib;
+			sourceTree = "<group>";
+		};
+		8BD49F421E482D1100C98E74 /* OpenChannelListViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8BD49F431E482D1100C98E74 /* Base */,
+			);
+			name = OpenChannelListViewController.xib;
+			sourceTree = "<group>";
+		};
+		8BD49F441E482D1100C98E74 /* ParticipantListViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8BD49F451E482D1100C98E74 /* Base */,
+			);
+			name = ParticipantListViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

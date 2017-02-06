@@ -25,5 +25,5 @@
 @import UITextView_Placeholder;
 @import ICSPullToRefresh;
 @import WYPopoverController;
-
+@import SendBirdSDK;
 #endif /* HoiDap_Header_h */

@@ -15,5 +15,8 @@ pod 'NVActivityIndicatorView'
 pod 'UITextView+Placeholder'
 pod 'ICSPullToRefresh'
 pod 'WYPopoverController'
+pod 'SendBirdSDK'
+pod 'AlamofireImage'
+pod 'MGSwipeTableCell'
 
 end

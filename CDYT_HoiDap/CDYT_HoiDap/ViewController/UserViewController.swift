@@ -16,17 +16,19 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
   @IBOutlet weak var questionTableView: UITableView!
   var page = 1
   var listMyFeed = [FeedsEntity]()
+  var groupChannelListViewController: GroupChannelListViewController?
   override func viewDidLoad() {
     super.viewDidLoad()
     NotificationCenter.default.addObserver(self, selector: #selector(self.reloadView), name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(self.setupUserInfo), name: NSNotification.Name(rawValue: UPDATE_USERINFO), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
-
+    
     initTable()
     setUpUI()
     setupUserInfo()
     Until.showLoading()
     getFeeds()
+    
   }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -38,16 +40,17 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
       viewUnLogin.isHidden = false
     }
   }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
+  
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+  
   func reloadView(){
+    initSendBird()
     initTable()
     setUpUI()
     setupUserInfo()
-    listMyFeed.removeAll()  
+    listMyFeed.removeAll()
     getFeeds()
   }
   func setUpUI(){
@@ -76,27 +79,27 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     questionTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     
     questionTableView.addPullToRefreshHandler {
-        DispatchQueue.main.async {
-            self.reloadData()
-        }
+      DispatchQueue.main.async {
+        self.reloadData()
+      }
     }
     questionTableView.addInfiniteScrollingWithHandler {
-        DispatchQueue.main.async {
-            self.loadMore()
-        }
+      DispatchQueue.main.async {
+        self.loadMore()
+      }
     }
   }
-    
-    func reloadData(){
-        page = 1
-        listMyFeed.removeAll()
-        getFeeds()
-    }
-    func loadMore(){
-        page += 1
-        getFeeds()
-    }
-    
+  
+  func reloadData(){
+    page = 1
+    listMyFeed.removeAll()
+    getFeeds()
+  }
+  func loadMore(){
+    page += 1
+    getFeeds()
+  }
+  
   func getFeeds(){
     
     let hotParam : [String : Any] = [
@@ -108,7 +111,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     ]
     
     print(JSON.init(hotParam))
-//    Until.showLoading()
+    //    Until.showLoading()
     Alamofire.request(GET_QUESTION_BY_ID, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
         if status == 200{
@@ -130,34 +133,34 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
       }
       Until.hideLoading()
-        self.questionTableView.pullToRefreshView?.stopAnimating()
-        self.questionTableView.infiniteScrollingView?.stopAnimating()
+      self.questionTableView.pullToRefreshView?.stopAnimating()
+      self.questionTableView.infiniteScrollingView?.stopAnimating()
     }
     
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if listMyFeed.count > 0 {
-        return listMyFeed.count + 1
+      return listMyFeed.count + 1
     }else{
-        return 0
+      return 0
     }
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.row == 0 {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RecentFeedTableViewCell") as! RecentFeedTableViewCell
-        cell.titleLbl.text = "Câu hỏi đang theo dõi"
-        return cell
+      let cell = tableView.dequeueReusableCell(withIdentifier: "RecentFeedTableViewCell") as! RecentFeedTableViewCell
+      cell.titleLbl.text = "Câu hỏi đang theo dõi"
+      return cell
     }else{
-        let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
-        cell.indexPath = indexPath
-        cell.delegate = self
-        if listMyFeed.count > 0 {
-            cell.feedEntity = listMyFeed[indexPath.row - 1]
-            cell.setData()
-        }
-        return cell
+      let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
+      cell.indexPath = indexPath
+      cell.delegate = self
+      if listMyFeed.count > 0 {
+        cell.feedEntity = listMyFeed[indexPath.row - 1]
+        cell.setData()
+      }
+      return cell
     }
   }
   
@@ -166,8 +169,71 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let vc = storyboard.instantiateViewController(withIdentifier: "NotificationViewController") as! NotificationViewController
     self.navigationController?.pushViewController(vc, animated: true)
   }
-  
+  func initSendBird(){
+    let realm = try! Realm()
+    let userEntity = realm.objects(UserEntity.self).first
+    
+    if userEntity != nil {
+      SBDMain.connect(withUserId: userEntity!.id, completionHandler: { (user, error) in
+        if error != nil {
+          
+          let vc = UIAlertController(title: "Lỗi", message: error?.domain, preferredStyle: UIAlertControllerStyle.alert)
+          let closeAction = UIAlertAction(title: "Đóng", style: UIAlertActionStyle.cancel, handler: nil)
+          vc.addAction(closeAction)
+          DispatchQueue.main.async {
+            self.present(vc, animated: true, completion: nil)
+          }
+          
+          return
+        }
+        
+        if SBDMain.getPendingPushToken() != nil {
+          SBDMain.registerDevicePushToken(SBDMain.getPendingPushToken()!, unique: true, completionHandler: { (status, error) in
+            if error == nil {
+              if status == SBDPushTokenRegistrationStatus.pending {
+                print("Push registeration is pending.")
+              }
+              else {
+                print("APNS Token is registered.")
+              }
+            }
+            else {
+              print("APNS registration failed.")
+            }
+          })
+        }
+        
+        SBDMain.updateCurrentUserInfo(withNickname: userEntity!.nickname, profileUrl: userEntity!.avatarUrl, completionHandler: { (error) in
+          if error != nil {
+            let vc = UIAlertController(title: "Lỗi", message: error?.domain, preferredStyle: UIAlertControllerStyle.alert)
+            let closeAction = UIAlertAction(title: "Đóng", style: UIAlertActionStyle.cancel, handler: nil)
+            vc.addAction(closeAction)
+            DispatchQueue.main.async {
+              self.present(vc, animated: true, completion: nil)
+            }
+            
+            SBDMain.disconnect(completionHandler: {
+              
+            })
+            
+            return
+          }
+        })
+      })
+    }
+  }
   @IBAction func messageTapAction(_ sender: Any) {
+    self.gotoInbox()
+  }
+  
+  func gotoInbox(){
+    
+    if self.groupChannelListViewController == nil {
+      self.groupChannelListViewController = GroupChannelListViewController()
+      self.groupChannelListViewController?.addDelegates()
+    }
+    self.groupChannelListViewController?.view.frame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y, width: self.view.frame.size.width, height: self.view.frame.size.height)
+    self.navigationController?.pushViewController(self.groupChannelListViewController!, animated: true)
   }
   
   @IBAction func accountTapAction(_ sender: Any) {
@@ -203,15 +269,15 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     viewController.hotTagId = hotTagId
     self.navigationController?.pushViewController(viewController, animated: true)
   }
-    
-    //MARK: receive notifiy when mark an comment is solution
-    func reloadDataFromServer(notification : Notification){
-        reloadData()
-    }
-    
-    func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
-        //khong can phai thuc hien ham nay vi dang trong trang profile cua chinh minh
-    }
+  
+  //MARK: receive notifiy when mark an comment is solution
+  func reloadDataFromServer(notification : Notification){
+    reloadData()
+  }
+  
+  func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
+    //khong can phai thuc hien ham nay vi dang trong trang profile cua chinh minh
+  }
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
