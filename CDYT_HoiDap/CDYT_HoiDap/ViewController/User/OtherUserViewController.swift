@@ -23,6 +23,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      NotificationCenter.default.addObserver(self, selector: #selector(self.reloadView), name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
         configTableView()
         Until.showLoading()
         getFeeds()
@@ -72,7 +73,62 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
         page += 1
         getFeeds()
     }
+  func reloadView(){
+    initSendBird()
+  }
+  func initSendBird(){
+    let realm = try! Realm()
+    let userEntity = realm.objects(UserEntity.self).first
     
+    if userEntity != nil {
+      SBDMain.connect(withUserId: userEntity!.id, completionHandler: { (user, error) in
+        if error != nil {
+          
+          let vc = UIAlertController(title: "Lỗi", message: error?.domain, preferredStyle: UIAlertControllerStyle.alert)
+          let closeAction = UIAlertAction(title: "Đóng", style: UIAlertActionStyle.cancel, handler: nil)
+          vc.addAction(closeAction)
+          DispatchQueue.main.async {
+            self.present(vc, animated: true, completion: nil)
+          }
+          
+          return
+        }
+        
+        if SBDMain.getPendingPushToken() != nil {
+          SBDMain.registerDevicePushToken(SBDMain.getPendingPushToken()!, unique: true, completionHandler: { (status, error) in
+            if error == nil {
+              if status == SBDPushTokenRegistrationStatus.pending {
+                print("Push registeration is pending.")
+              }
+              else {
+                print("APNS Token is registered.")
+              }
+            }
+            else {
+              print("APNS registration failed.")
+            }
+          })
+        }
+        
+        SBDMain.updateCurrentUserInfo(withNickname: userEntity!.nickname, profileUrl: userEntity!.avatarUrl, completionHandler: { (error) in
+          if error != nil {
+            let vc = UIAlertController(title: "Lỗi", message: error?.domain, preferredStyle: UIAlertControllerStyle.alert)
+            let closeAction = UIAlertAction(title: "Đóng", style: UIAlertActionStyle.cancel, handler: nil)
+            vc.addAction(closeAction)
+            DispatchQueue.main.async {
+              self.present(vc, animated: true, completion: nil)
+            }
+            
+            SBDMain.disconnect(completionHandler: {
+              
+            })
+            
+            return
+          }
+        })
+      })
+    }
+  }
     func getFeeds(){
         let param : [String : Any] = [
             "Auth": Until.getAuthKey(),
