@@ -146,22 +146,28 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     @IBAction func messageTapAction(_ sender: Any) {
-      SBDGroupChannel.createChannel(with: self.selectedUser, isDistinct: true) { (channel, error) in
-        if error != nil {
-          let vc = UIAlertController(title: "Lỗi", message: error?.domain, preferredStyle: UIAlertControllerStyle.alert)
-          let closeAction = UIAlertAction(title: "Đóng", style: UIAlertActionStyle.cancel, handler: { (action) in
-            
-          })
-          vc.addAction(closeAction)
-          DispatchQueue.main.async {
-            self.present(vc, animated: true, completion: nil)
+      let realm = try! Realm()
+      let currentUser = realm.objects(UserEntity.self)
+      if currentUser.count == 0 {
+        Until.gotoLogin(_self: self, cannotBack: false)
+      }else{
+        SBDGroupChannel.createChannel(with: self.selectedUser, isDistinct: true) { (channel, error) in
+          if error != nil {
+            let vc = UIAlertController(title: "Lỗi", message: error?.domain, preferredStyle: UIAlertControllerStyle.alert)
+            let closeAction = UIAlertAction(title: "Đóng", style: UIAlertActionStyle.cancel, handler: { (action) in
+              
+            })
+            vc.addAction(closeAction)
+            DispatchQueue.main.async {
+              self.present(vc, animated: true, completion: nil)
+            }
+            return
           }
-          return
-        }
-        DispatchQueue.main.async {
-          let vc = GroupChannelChattingViewController()
-          vc.groupChannel = channel
-          self.present(vc, animated: false, completion: nil)
+          DispatchQueue.main.async {
+            let vc = GroupChannelChattingViewController()
+            vc.groupChannel = channel
+            self.present(vc, animated: false, completion: nil)
+          }
         }
       }
     }
