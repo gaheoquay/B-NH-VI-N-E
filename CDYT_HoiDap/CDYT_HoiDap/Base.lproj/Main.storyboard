@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -139,7 +139,7 @@
                         <viewControllerLayoutGuide type="bottom" id="h1d-qM-f7Y"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="p5q-6d-Wy9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="700"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="702"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozb-q1-3G8">
@@ -203,7 +203,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zMu-tv-La0" userLabel="add image view">
-                                <rect key="frame" x="0.0" y="611" width="375" height="45"/>
+                                <rect key="frame" x="0.0" y="613" width="375" height="45"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Camera.png" translatesAutoresizingMaskIntoConstraints="NO" id="yYl-gE-4HH">
                                         <rect key="frame" x="30" y="8" width="30" height="30"/>
@@ -245,11 +245,11 @@
                                     <outletCollection property="gestureRecognizers" destination="VHS-7q-Qas" appends="YES" id="zMM-Bk-8FK"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Zh-jy-Hr6">
-                                <rect key="frame" x="0.0" y="64" width="375" height="547"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Zh-jy-Hr6" userLabel="View1">
+                                <rect key="frame" x="0.0" y="64" width="375" height="549"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zT0-Ln-X36" customClass="TPKeyboardAvoidingScrollView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="547"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="549"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tiêu đề câu hỏi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lhw-tN-F4w">
                                                 <rect key="frame" x="23" y="22" width="117" height="20"/>
@@ -380,7 +380,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fi4-2R-DZX">
-                                <rect key="frame" x="0.0" y="656" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="658" width="375" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="9yr-sn-oPF"/>
@@ -408,7 +408,7 @@
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="700"/>
+                    <size key="freeformSize" width="375" height="702"/>
                     <connections>
                         <outlet property="addImgView" destination="zMu-tv-La0" id="CJm-Lc-XwI"/>
                         <outlet property="addImgViewHeight" destination="vAa-O9-euc" id="seo-IS-eW7"/>
@@ -430,7 +430,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="769" y="-64"/>
+            <point key="canvasLocation" x="887" y="-99"/>
         </scene>
         <!--Question Detail View Controller-->
         <scene sceneID="Hrc-gj-rFD">
@@ -854,7 +854,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rOS-wG-0LO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1253" y="-81"/>
+            <point key="canvasLocation" x="1590" y="-98"/>
         </scene>
         <!--Tag List View Controller-->
         <scene sceneID="r5b-y4-wJS">
@@ -1571,7 +1571,7 @@
         <image name="CaiDat.png" width="100" height="100"/>
         <image name="Camera.png" width="100" height="100"/>
         <image name="GiaiPhap_Mark.png" width="115" height="139"/>
-        <image name="Home.png" width="30" height="29"/>
+        <image name="Home.png" width="50" height="48"/>
         <image name="MoreDetail.png" width="50" height="41"/>
         <image name="Profile.png" width="30" height="29"/>
         <image name="SearchGrey.png" width="100" height="100"/>

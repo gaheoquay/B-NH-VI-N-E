@@ -146,6 +146,7 @@
 		A609C2531E1B8F9F006BFBAE /* delete_img.png in Resources */ = {isa = PBXBuildFile; fileRef = A609C2521E1B8F9F006BFBAE /* delete_img.png */; };
 		A625AD2D1E24CC5700953B0B /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A625AD2C1E24CC5700953B0B /* CommentViewController.swift */; };
 		A62F58601E2CA78100459408 /* EditCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62F585F1E2CA78100459408 /* EditCommentViewController.swift */; };
+		A632043C1E49BB0A00B9152A /* PolicyAndRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A632043B1E49BB0A00B9152A /* PolicyAndRuleViewController.swift */; };
 		A63C38DF1E120A7E00DAB016 /* DangKi3.png in Resources */ = {isa = PBXBuildFile; fileRef = A63C38D31E120A7E00DAB016 /* DangKi3.png */; };
 		A6417E1F1E13B56C00BD2D75 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6417E1E1E13B56C00BD2D75 /* SettingViewController.swift */; };
 		A6417E221E13B68D00BD2D75 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6417E201E13B68D00BD2D75 /* SettingTableViewCell.swift */; };
@@ -339,6 +340,7 @@
 		A609C2521E1B8F9F006BFBAE /* delete_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_img.png; sourceTree = "<group>"; };
 		A625AD2C1E24CC5700953B0B /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		A62F585F1E2CA78100459408 /* EditCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCommentViewController.swift; sourceTree = "<group>"; };
+		A632043B1E49BB0A00B9152A /* PolicyAndRuleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolicyAndRuleViewController.swift; sourceTree = "<group>"; };
 		A63C38D31E120A7E00DAB016 /* DangKi3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DangKi3.png; sourceTree = "<group>"; };
 		A6417E1E1E13B56C00BD2D75 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		A6417E201E13B68D00BD2D75 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
@@ -846,6 +848,7 @@
 				A6C463D01E25D2DA0046A367 /* OtherUserViewController.swift */,
 				A676E7C21E2731F500DD57B2 /* ChangPassViewController.swift */,
 				A6E4C2F91E1102BA00C2C871 /* User.storyboard */,
+				A632043B1E49BB0A00B9152A /* PolicyAndRuleViewController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1073,6 +1076,7 @@
 				A68A95081E14ED1C0067736E /* CommentTableViewCell.swift in Sources */,
 				8B87CD301E13681200DA8A33 /* FeedsEntity.swift in Sources */,
 				8BC2C30E1E23379300B68F72 /* ListNotificationEntity.swift in Sources */,
+				A632043C1E49BB0A00B9152A /* PolicyAndRuleViewController.swift in Sources */,
 				8B3A12E11E10F399005DBC6E /* ViewController.swift in Sources */,
 				8BC2C3101E2337C700B68F72 /* NotificationEntity.swift in Sources */,
 				A60430FB1E233431000216FB /* SSRadioButtonsController.swift in Sources */,
@@ -1111,13 +1115,10 @@
 				8B3A13781E10F454005DBC6E /* RAMFrameItemAnimation.swift in Sources */,
 				8B3A136F1E10F454005DBC6E /* DatePickerDialog.swift in Sources */,
 				A68A95151E151B490067736E /* MainCommentEntity.swift in Sources */,
-
 				A6F980A01E48607E0007CD63 /* LinkedUser.swift in Sources */,
-
 				8BD49F691E482D1100C98E74 /* BlockedUserListTableViewCell.swift in Sources */,
 				8BD49F321E482C1500C98E74 /* OutgoingFileMessageTableViewCell.swift in Sources */,
 				8BD49F361E482C1600C98E74 /* OutgoingUserMessageTableViewCell.swift in Sources */,
-
 				A6E9D8911E11169600E31886 /* UpdateInfoViewController.swift in Sources */,
 				8BD49F3A1E482C4F00C98E74 /* ReusableViewFromXib.swift in Sources */,
 				8BD49F681E482D1100C98E74 /* ParticipantListViewController.swift in Sources */,

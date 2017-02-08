@@ -7,92 +7,102 @@
 //
 
 import UIKit
+import MessageUI
 
-class SettingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-    @IBOutlet weak var settingTbl: UITableView!
+class SettingViewController: UIViewController, MFMailComposeViewControllerDelegate {
+    
+    @IBOutlet weak var versionLbl: UILabel!
+    @IBOutlet weak var updateVersionBtn: UIButton!
+    @IBOutlet weak var rateAppBtn: UIButton!
+    @IBOutlet weak var feedbackBugBtn: UIButton!
+    @IBOutlet weak var testVersionLb: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        settingTbl.dataSource = self
-        settingTbl.delegate = self
-        settingTbl.estimatedRowHeight = 200
-        settingTbl.rowHeight = UITableViewAutomaticDimension
-        settingTbl.register(UINib.init(nibName: "SettingTableViewCell", bundle: nil), forCellReuseIdentifier: "SettingTableViewCell")
-        settingTbl.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingTableViewCell") as! SettingTableViewCell
+        updateVersionBtn.layer.cornerRadius = 5
+        updateVersionBtn.layer.layoutIfNeeded()
+        rateAppBtn.layer.cornerRadius = 5
+        rateAppBtn.layer.layoutIfNeeded()
+        feedbackBugBtn.layer.cornerRadius = 5
+        feedbackBugBtn.layer.layoutIfNeeded()
         
-        switch indexPath.row {
-        case 0:
-            cell.titleLbl.text = "Nâng cấp"
-        case 1:
-            cell.titleLbl.text = "Chính sách riêng tư"
-        case 2:
-            cell.titleLbl.text = "Điều khoản sử dụng"
-        case 3:
-            cell.titleLbl.text = "Đánh giá ứng dụng"
-        case 4:
-            cell.titleLbl.text = "Góp ý báo lỗi"
-        case 5:
-            cell.titleLbl.text = "Chia sẻ cho bạn bè"
-        case 6:
-            cell.titleLbl.text = "Phiên bản"
-        default:
-            cell.titleLbl.text = ""
+        setVersionLabel()
+    }
+
+    func setVersionLabel() {
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            versionLbl.text = "\(version)"
         }
-        return cell
+        testVersionLb.text = "Phiên bản thử nghiệm"
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
-            print("Nâng cấp")
-        case 1:
-            print("Chính sách riêng tư")
-        case 2:
-            print("Điều khoản sử dụng")
-        case 3:
-            print("Đánh giá ứng dụng")
-        case 4:
-            print("Góp ý báo lỗi")
-        case 5:
-            print("Chia sẻ cho bạn bè")
-        case 6:
-            print("Phiên bản")
-        default:
-            print("")
+    @IBAction func chinhSachTapBtn(_ sender: Any) {
+        let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PolicyAndRuleViewController") as! PolicyAndRuleViewController
+        vc.isPolicy = true
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func dieuKhoanTapBtn(_ sender: Any) {
+        let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PolicyAndRuleViewController") as! PolicyAndRuleViewController
+        vc.isPolicy = false
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func chiaSeTapBtn(_ sender: Any) {
+        let linkApp = "Ứng dụng hỏi đáp y tế: "
+        let vc = UIActivityViewController(activityItems: [linkApp], applicationActivities: [])
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func updateVersionTapBtn(_ sender: Any) {
+        UIApplication.shared.openURL(URL.init(string: "https://itunes.apple.com/vn/app/cong-ong-y-te/id1128162959?mt=8")!)
+    }
+    
+    @IBAction func rateAppTapBtn(_ sender: Any) {
+        UIApplication.shared.openURL(URL.init(string: "https://itunes.apple.com/vn/app/cong-ong-y-te/id1128162959?mt=8")!)
+    }
+    
+    @IBAction func feedbackTapAction(_ sender: Any) {
+        if MFMailComposeViewController.canSendMail() {
+            let emailTitle = "Góp ý ứng dụng Hỏi đáp Y Tế"
+            let toRecipents = ["isorasoftvn@gmail.com"]
+            let mc: MFMailComposeViewController = MFMailComposeViewController()
+            mc.setSubject(emailTitle)
+            mc.setToRecipients(toRecipents)
+            mc.mailComposeDelegate = self
+            self.present(mc, animated: true, completion: nil)
+        }else{
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng cài đặt tài khoản email của bạn", cancelBtnTitle: "Đóng")
         }
+    }
+    
+    func mailComposeController(_ controller:MFMailComposeViewController, didFinishWith result:MFMailComposeResult, error:Error?) {
+        switch result {
+        case MFMailComposeResult.cancelled:
+            print("Mail cancelled")
+        case MFMailComposeResult.saved:
+            print("Mail saved")
+        case MFMailComposeResult.sent:
+            print("Mail sent")
+        case MFMailComposeResult.failed:
+//            print("Mail sent failure: \(error?.localizedDescription)")
+            UIAlertController().showAlertWith(vc: self, title: "Lỗi", message: (error?.localizedDescription)!, cancelBtnTitle: "Đóng")
+
+        default:
+            break
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func backTapAction(_ sender: Any) {
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func backTapAction(_ sender: Any) {
-        _ = self.navigationController?.popViewController(animated: true)
-    }
-
-    @IBAction func logoutTapAction(_ sender: Any) {
-        
-    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

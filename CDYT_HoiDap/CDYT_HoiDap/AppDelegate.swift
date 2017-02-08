@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     registerNotification(application: application)
-    SBDMain.initWithApplicationId("DF9BB0FC-0D42-47CF-904E-1AB867BC0FFD")
+    SBDMain.initWithApplicationId(SENDBIRD_APPKEY)
     //    SBDMain.setLogLevel(SBDLogLevel.debug)
     initSendBird()
     return true
