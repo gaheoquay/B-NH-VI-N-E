@@ -21,6 +21,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     SBDMain.initWithApplicationId(SENDBIRD_APPKEY)
     //    SBDMain.setLogLevel(SBDLogLevel.debug)
     initSendBird()
+    
+    // Configure tracker from GoogleService-Info.plist.
+    var configureError: NSError?
+    GGLContext.sharedInstance().configureWithError(&configureError)
+    assert(configureError == nil, "Error configuring Google services: \(configureError)")
+    
+    // Optional: configure GAI options.
+    guard let gai = GAI.sharedInstance() else {
+        assert(false, "Google Analytics not configured correctly")
+    }
+    gai.trackUncaughtExceptions = true  // report uncaught exceptions
+    gai.logger.logLevel = GAILogLevel.verbose  // remove before app release
+    
     return true
   }
   func initSendBird(){

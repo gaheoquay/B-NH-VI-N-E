@@ -18,5 +18,6 @@ pod 'WYPopoverController'
 pod 'SendBirdSDK'
 pod 'AlamofireImage'
 pod 'MGSwipeTableCell'
+pod 'Google/Analytics'
 
 end

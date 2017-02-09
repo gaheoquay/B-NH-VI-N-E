@@ -175,6 +175,7 @@
 		A6C463DA1E25DB910046A367 /* RecentFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C463D81E25DB910046A367 /* RecentFeedTableViewCell.swift */; };
 		A6C463DB1E25DB910046A367 /* RecentFeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C463D91E25DB910046A367 /* RecentFeedTableViewCell.xib */; };
 		A6C463DD1E26493A0046A367 /* Edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A6C463DC1E26493A0046A367 /* Edit.png */; };
+		A6CD32D01E4C2C9400FA2B21 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A6CD32CF1E4C2C9400FA2B21 /* GoogleService-Info.plist */; };
 		A6D083C31E121A2E007EA4D9 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D083C21E121A2E007EA4D9 /* UserEntity.swift */; };
 		A6D083C61E12747D007EA4D9 /* QuestionTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D083C41E12747D007EA4D9 /* QuestionTagTableViewCell.swift */; };
 		A6D083C71E12747D007EA4D9 /* QuestionTagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6D083C51E12747D007EA4D9 /* QuestionTagTableViewCell.xib */; };
@@ -369,6 +370,7 @@
 		A6C463D81E25DB910046A367 /* RecentFeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentFeedTableViewCell.swift; sourceTree = "<group>"; };
 		A6C463D91E25DB910046A367 /* RecentFeedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecentFeedTableViewCell.xib; sourceTree = "<group>"; };
 		A6C463DC1E26493A0046A367 /* Edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Edit.png; sourceTree = "<group>"; };
+		A6CD32CF1E4C2C9400FA2B21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A6D083C21E121A2E007EA4D9 /* UserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 		A6D083C41E12747D007EA4D9 /* QuestionTagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTagTableViewCell.swift; sourceTree = "<group>"; };
 		A6D083C51E12747D007EA4D9 /* QuestionTagTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionTagTableViewCell.xib; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 		8B3A12DD1E10F399005DBC6E /* CDYT_HoiDap */ = {
 			isa = PBXGroup;
 			children = (
+				A6CD32CF1E4C2C9400FA2B21 /* GoogleService-Info.plist */,
 				A6D083C11E121A1C007EA4D9 /* Entity */,
 				8B3A13841E10FCB6005DBC6E /* ViewController */,
 				8B3A137F1E10F46B005DBC6E /* Helper */,
@@ -978,6 +981,7 @@
 				8B3A13681E10F454005DBC6E /* Tinnhan_button01 Copy.png in Resources */,
 				A68A95091E14ED1C0067736E /* CommentTableViewCell.xib in Resources */,
 				8B3A13411E10F454005DBC6E /* AvaDefaut.png in Resources */,
+				A6CD32D01E4C2C9400FA2B21 /* GoogleService-Info.plist in Resources */,
 				8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */,
 				8B3A13651E10F454005DBC6E /* tag_mark.png in Resources */,
 				8BF149791E14BF9C00766F8F /* Tab.png in Resources */,

@@ -26,4 +26,6 @@
 @import ICSPullToRefresh;
 @import WYPopoverController;
 @import SendBirdSDK;
+#import <Google/Analytics.h>
+
 #endif /* HoiDap_Header_h */
