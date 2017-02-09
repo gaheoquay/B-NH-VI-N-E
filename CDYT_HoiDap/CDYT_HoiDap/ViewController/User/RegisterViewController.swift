@@ -172,6 +172,7 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable {
                         
                         try! reaml.write {
                             reaml.add(entity, update: true)
+                          Until.initSendBird()
                           NotificationCenter.default.post(name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
                           _ = self.navigationController?.popToRootViewController(animated: true)
                         }

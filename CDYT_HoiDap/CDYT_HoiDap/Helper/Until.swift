@@ -118,7 +118,44 @@ class Until{
             return ""
         }
     }
+  class func initSendBird(){
+    let realm = try! Realm()
+    let userEntity = realm.objects(UserEntity.self).first
     
+    if userEntity != nil {
+      SBDMain.connect(withUserId: userEntity!.id, completionHandler: { (user, error) in
+        if error != nil {
+          return
+        }
+        
+        if SBDMain.getPendingPushToken() != nil {
+          SBDMain.registerDevicePushToken(SBDMain.getPendingPushToken()!, unique: true, completionHandler: { (status, error) in
+            if error == nil {
+              if status == SBDPushTokenRegistrationStatus.pending {
+                print("Push registeration is pending.")
+              }
+              else {
+                print("APNS Token is registered.")
+              }
+            }
+            else {
+              print("APNS registration failed.")
+            }
+          })
+        }
+        
+        SBDMain.updateCurrentUserInfo(withNickname: userEntity!.nickname, profileUrl: userEntity!.avatarUrl, completionHandler: { (error) in
+          if error != nil {
+            SBDMain.disconnect(completionHandler: {
+            })
+            
+            return
+          }
+        })
+      })
+    }
+  }
+
   class func gotoLogin(_self : UIViewController, cannotBack:Bool ){
     let storyBoard = UIStoryboard.init(name: "User", bundle: nil)
     let viewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
