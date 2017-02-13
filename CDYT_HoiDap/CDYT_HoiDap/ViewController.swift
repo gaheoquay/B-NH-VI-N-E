@@ -20,6 +20,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     getFeeds()
     getHotTagFromServer()
     // Do any additional setup after loading the view, typically from a nib.
+    
+    guard let tracker = GAI.sharedInstance().defaultTracker else { return }
+    tracker.set(kGAIScreenName, value: "ViewController")
+    
+    guard let builder = GAIDictionaryBuilder.createScreenView() else { return }
+    tracker.send(builder.build() as [NSObject : AnyObject])
+    
   }
 
     func setupUI() {

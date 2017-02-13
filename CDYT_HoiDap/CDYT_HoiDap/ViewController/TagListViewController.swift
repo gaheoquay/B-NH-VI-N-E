@@ -68,10 +68,16 @@ class TagListViewController: UIViewController, UITableViewDataSource, UITableVie
     }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
     let entity = listHotTag[indexPath.row]
+    
+    let tracker = GAI.sharedInstance().defaultTracker
+    tracker?.send(GAIDictionaryBuilder.createEvent(withCategory: "Tag", action: "ClickTagInPage", label: "\(entity.tag.id)", value: nil).build() as [NSObject : AnyObject])
+
     let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
     viewController.hotTagId = entity.tag.id
     self.navigationController?.pushViewController(viewController, animated: true)
+    
   }
   
     func getHotTagFromServer(){
