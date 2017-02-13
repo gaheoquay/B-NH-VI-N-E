@@ -240,7 +240,7 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         
         let titleString = titleTxt.text
         let contentString = contentTxt.text
-        let tagString = tagTxt.text
+        let tagString = tagTxt.text.trimmingCharacters(in: .whitespaces)
         
         let post : [String : Any] = [
             "Id" : feedObj.postEntity.id,
@@ -258,7 +258,7 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
             "Auth": Until.getAuthKey(),
             "RequestedUserId": Until.getCurrentId(),
             "Post": post,
-            "Tags": tagString!
+            "Tags": tagString
         ]
         
         print(JSON.init(questionParam))
@@ -272,12 +272,16 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
                         let isUpdated = jsonData["IsUpdated"] as! Bool
                         self.feedObj.postEntity.content = contentString!
 
-                        let tags = tagString?.components(separatedBy: ",")
+                        let tags = tagString.components(separatedBy: ",")
                         var tagArr = [TagEntity]()
-                        for item in tags! {
+                        for item in tags {
                             let tag = TagEntity.init()
                             tag.id = item
                             tagArr.append(tag)
+                        }
+                        
+                        if tagString == "" {
+                            tagArr.removeAll()
                         }
 
                         self.feedObj.tags = tagArr
@@ -285,12 +289,14 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
                         if isUpdated {
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_QUESTION_DETAIL), object: self.feedObj)
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: nil)
-                            
+
                             _ = self.navigationController?.popViewController(animated: true)
                         }else{
                             
                         }
                     }
+                    
+                  
                     
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
