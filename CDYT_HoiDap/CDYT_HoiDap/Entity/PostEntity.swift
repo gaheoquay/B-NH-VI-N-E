@@ -9,45 +9,59 @@
 import UIKit
 
 class PostEntity: NSObject {
-  var id = ""
-  var title = ""
-  var content = ""
-  var imageUrls = [String]()
-  var thumbnailImageUrls = [String]()
-  var status = 0 //0: Not resolve - 1 : Resolved
-  var rating:Double = 0
-  var updatedDate:Double = 0
-  var createdDate:Double = 0
-  override init() {
-    super.init()
-  }
-  init(dictionary:NSDictionary) {
-    if let value = dictionary["Id"] as? String{
-      id = value
+    var id = ""
+    var title = ""
+    var content = ""
+    var imageUrls = [String]()
+    var thumbnailImageUrls = [String]()
+    var status = 0 //0: Not resolve - 1 : Resolved
+    var rating:Double = 0
+    var categoryId = ""
+    var isPrivate = false
+    var isClassified = false
+    var updatedDate:Double = 0
+    var createdDate:Double = 0
+    
+    override init() {
+        super.init()
     }
-    if let value = dictionary["Title"] as? String {
-      title = value
+    
+    init(dictionary:NSDictionary) {
+        if let value = dictionary["Id"] as? String{
+            id = value
+        }
+        if let value = dictionary["Title"] as? String {
+            title = value
+        }
+        if let value = dictionary["Content"] as? String {
+            content = value
+        }
+        if let value = dictionary["ImageUrls"] as? [String] {
+            imageUrls = value
+        }
+        if let value = dictionary["ThumbnailImageUrls"] as? [String] {
+            thumbnailImageUrls = value
+        }
+        if let value = dictionary["Status"] as? Int {
+            status = value
+        }
+        if let value = dictionary["Rating"] as? Double {
+            rating = value
+        }
+        if let value = dictionary["CategoryId"] as? String {
+            categoryId = value
+        }
+        if let value = dictionary["IsPrivate"] as? Bool {
+            isPrivate = value
+        }
+        if let value = dictionary["IsClassified"] as? Bool {
+            isClassified = value
+        }
+        if let value = dictionary["UpdatedDate"] as? Double {
+            updatedDate = value
+        }
+        if let value = dictionary["CreatedDate"] as? Double {
+            createdDate = value
+        }
     }
-    if let value = dictionary["Content"] as? String {
-      content = value
-    }
-    if let value = dictionary["ImageUrls"] as? [String] {
-      imageUrls = value
-    }
-    if let value = dictionary["ThumbnailImageUrls"] as? [String] {
-      thumbnailImageUrls = value
-    }
-    if let value = dictionary["Status"] as? Int {
-      status = value
-    }
-    if let value = dictionary["Rating"] as? Double {
-      rating = value
-    }
-    if let value = dictionary["UpdatedDate"] as? Double {
-      updatedDate = value
-    }
-    if let value = dictionary["CreatedDate"] as? Double {
-      createdDate = value
-    }
-  }
 }

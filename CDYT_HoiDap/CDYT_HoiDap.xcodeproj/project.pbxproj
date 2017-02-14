@@ -268,8 +268,8 @@
 		8B87CD2F1E13681200DA8A33 /* FeedsEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedsEntity.swift; sourceTree = "<group>"; };
 		8BB92DD71E24884E007C5516 /* MoreDetail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MoreDetail.png; sourceTree = "<group>"; };
 		8BC2C30B1E2333A800B68F72 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
-		8BC2C30D1E23379300B68F72 /* ListNotificationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListNotificationEntity.swift; sourceTree = "<group>"; };
-		8BC2C30F1E2337C700B68F72 /* NotificationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationEntity.swift; sourceTree = "<group>"; };
+		8BC2C30D1E23379300B68F72 /* ListNotificationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListNotificationEntity.swift; path = ../ListNotificationEntity.swift; sourceTree = "<group>"; };
+		8BC2C30F1E2337C700B68F72 /* NotificationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationEntity.swift; path = ../NotificationEntity.swift; sourceTree = "<group>"; };
 		8BD49ED61E48215500C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CreateGroupChannelSelectOptionViewController.xib; sourceTree = "<group>"; };
 		8BD49ED81E48215500C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CreateGroupChannelUserListViewController.xib; sourceTree = "<group>"; };
 		8BD49EDA1E48215500C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GroupChannelListViewController.xib; sourceTree = "<group>"; };
@@ -377,7 +377,7 @@
 		A6C463D91E25DB910046A367 /* RecentFeedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecentFeedTableViewCell.xib; sourceTree = "<group>"; };
 		A6C463DC1E26493A0046A367 /* Edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Edit.png; sourceTree = "<group>"; };
 		A6CD32CF1E4C2C9400FA2B21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		A6D083C21E121A2E007EA4D9 /* UserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
+		A6D083C21E121A2E007EA4D9 /* UserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserEntity.swift; path = ../UserEntity.swift; sourceTree = "<group>"; };
 		A6D083C41E12747D007EA4D9 /* QuestionTagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTagTableViewCell.swift; sourceTree = "<group>"; };
 		A6D083C51E12747D007EA4D9 /* QuestionTagTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionTagTableViewCell.xib; sourceTree = "<group>"; };
 		A6D083C81E127F9F007EA4D9 /* TagEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagEntity.swift; sourceTree = "<group>"; };
@@ -833,7 +833,6 @@
 			isa = PBXGroup;
 			children = (
 				A6F9809E1E4860660007CD63 /* Realm Object */,
-				A6D083C21E121A2E007EA4D9 /* UserEntity.swift */,
 				A6D083C81E127F9F007EA4D9 /* TagEntity.swift */,
 				A6D083CA1E12803C007EA4D9 /* HotTagEntity.swift */,
 				8B87CD2B1E1365A400DA8A33 /* AuthorEntity.swift */,
@@ -842,8 +841,6 @@
 				A68A95101E1517230067736E /* CommentEntity.swift */,
 				A68A95121E1518E10067736E /* SubCommentEntity.swift */,
 				A68A95141E151B490067736E /* MainCommentEntity.swift */,
-				8BC2C30D1E23379300B68F72 /* ListNotificationEntity.swift */,
-				8BC2C30F1E2337C700B68F72 /* NotificationEntity.swift */,
 				0F17AB181E51BAC2008BA308 /* CateEntity.swift */,
 			);
 			path = Entity;
@@ -868,6 +865,9 @@
 		A6F9809E1E4860660007CD63 /* Realm Object */ = {
 			isa = PBXGroup;
 			children = (
+				8BC2C30F1E2337C700B68F72 /* NotificationEntity.swift */,
+				8BC2C30D1E23379300B68F72 /* ListNotificationEntity.swift */,
+				A6D083C21E121A2E007EA4D9 /* UserEntity.swift */,
 				A6F9809F1E48607E0007CD63 /* LinkedUser.swift */,
 			);
 			path = "Realm Object";
