@@ -18,6 +18,12 @@ class PostEntity: NSObject {
   var rating:Double = 0
   var updatedDate:Double = 0
   var createdDate:Double = 0
+    var categoryId = ""
+    var isPrivate = false
+    var isClass =   false
+    
+   
+    
   override init() {
     super.init()
   }
@@ -48,6 +54,15 @@ class PostEntity: NSObject {
     }
     if let value = dictionary["CreatedDate"] as? Double {
       createdDate = value
+    }
+    if let value = dictionary["CategoryId"] as? String {
+        categoryId = value
+    }
+    if let value = dictionary["IsPrivate"] as? Bool {
+        isPrivate = value
+    }
+    if let value = dictionary["IsClassified"] as? Bool {
+        isClass = value
     }
   }
 }
