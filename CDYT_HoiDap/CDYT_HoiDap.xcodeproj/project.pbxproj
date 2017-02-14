@@ -909,7 +909,7 @@
 					8B3A12DA1E10F399005DBC6E = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = BY2N2SG836;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1372,12 +1372,15 @@
 			baseConfigurationReference = FDD88BA19051C23DD96B53FB /* Pods-CDYT_HoiDap.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = BY2N2SG836;
 				INFOPLIST_FILE = CDYT_HoiDap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e0c3834e-6e72-4fe3-8ab1-752a3e8e31a1";
+				PROVISIONING_PROFILE_SPECIFIER = "benh vien e development";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1388,12 +1391,15 @@
 			baseConfigurationReference = 54350AF3B96C58CE38450098 /* Pods-CDYT_HoiDap.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = BY2N2SG836;
 				INFOPLIST_FILE = CDYT_HoiDap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4ed51a3b-1e9a-4aa2-b5b0-29a89291e60a";
+				PROVISIONING_PROFILE_SPECIFIER = "benh vien e distribution";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};
