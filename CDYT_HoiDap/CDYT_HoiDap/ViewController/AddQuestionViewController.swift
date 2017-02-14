@@ -44,11 +44,13 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        requestCate()
         registerNotification()
         configImageCollectionView()
         imgClvheight.constant = 0
         keyboardViewHeight.constant = 0
         configUI()
+
         setupImagePicker()
         
         if searchText != "" {
@@ -60,7 +62,6 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         viewCategory.layer.borderWidth = 1
         viewCategory.layer.cornerRadius = 4
         viewCategory.layer.borderColor = UIColor.lightGray.cgColor
-        requestCate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -117,7 +118,7 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
             addImgView.isHidden = true
             addImgViewHeight.constant = 0
             
-            setupDataForUpdateQuestion()
+//            setupDataForUpdateQuestion()
         }else{
             postBtn.setTitle("Đăng", for: .normal)
             titleNaviBarLbl.text = "Đặt câu hỏi"
@@ -130,6 +131,11 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         titleTxt.text = feedObj.postEntity.title
         contentTxt.text = feedObj.postEntity.content
         
+            for item in arrayCate {
+                if item.id == feedObj.postEntity.categoryId {
+                    lbCate.text = item.name
+                }
+        }
         
         var listTag = [String]()
         for item in feedObj.tags {
@@ -137,6 +143,13 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         }
         let listTagString = listTag.joined(separator: ",")
         tagTxt.text = listTagString
+        
+        if feedObj.postEntity.isPrivate == false {
+            btnSwitch.setOn(false, animated: true)
+        }else {
+            btnSwitch.setOn(true, animated: true)
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -297,7 +310,8 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
                         let jsonData = result as! NSDictionary
                         let isUpdated = jsonData["IsUpdated"] as! Bool
                         self.feedObj.postEntity.content = contentString!
-
+                        self.feedObj.postEntity.categoryId = self.id
+                        self.feedObj.postEntity.isPrivate = self.ischeck
                         let tags = tagString.components(separatedBy: ",")
                         var tagArr = [TagEntity]()
                         for item in tags {
@@ -435,6 +449,8 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         // Dispose of any resources that can be recreated.
     }
     
+  
+    
     func requestCate() {
         let cateParam : [String : Any] = [
             "Auth": Until.getAuthKey()
@@ -449,6 +465,7 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
                             self.arrayCate.append(entity)
                         }
                     }
+                    self.setupDataForUpdateQuestion()
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
