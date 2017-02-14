@@ -28,7 +28,11 @@ class SettingViewController: UIViewController, MFMailComposeViewControllerDelega
         
         setVersionLabel()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        Until.sendAndSetTracer(value: SETTING)
 
+    }
     func setVersionLabel() {
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             versionLbl.text = "\(version)"

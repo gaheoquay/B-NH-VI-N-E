@@ -18,6 +18,11 @@ class TagListViewController: UIViewController, UITableViewDataSource, UITableVie
       initTaleView()
         getHotTagFromServer()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        Until.sendAndSetTracer(value: SLECT_TAG)
+
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listHotTag.count

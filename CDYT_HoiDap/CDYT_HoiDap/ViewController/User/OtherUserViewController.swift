@@ -31,6 +31,9 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
       self.loadUserList(initial: true)
 
     }
+    override func viewDidAppear(_ animated: Bool) {
+        Until.sendAndSetTracer(value: USER_PAGE)
+    }
 
     func setupUserData() {
         avaImg.layer.cornerRadius = 8

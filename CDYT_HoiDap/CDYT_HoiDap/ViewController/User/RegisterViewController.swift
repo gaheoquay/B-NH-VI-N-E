@@ -30,6 +30,10 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable {
         initDkImagePicker()
         setupUI()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        Until.sendAndSetTracer(value: REGISTER_USER)
+    }
 
     func setupUI(){
         avatarImg.layer.cornerRadius = 10

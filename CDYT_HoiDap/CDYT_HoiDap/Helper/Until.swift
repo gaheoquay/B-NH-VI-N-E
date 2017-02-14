@@ -201,4 +201,8 @@ class Until{
         tracker.send(builder.build() as [NSObject : AnyObject])
 
     }
+    class func sendEventTracker(category: String, action : String , label : String){
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker?.send(GAIDictionaryBuilder.createEvent(withCategory: category, action: action, label: label, value: nil).build() as [NSObject : AnyObject])
+    }
 }

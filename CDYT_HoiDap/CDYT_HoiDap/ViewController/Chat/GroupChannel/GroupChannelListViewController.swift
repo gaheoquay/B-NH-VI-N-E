@@ -39,7 +39,10 @@ class GroupChannelListViewController: UIViewController, UITableViewDelegate, UIT
         self.noChannelLabel.isHidden = true
         self.refreshChannelList()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        Until.sendAndSetTracer(value: MAIL_BOX)
 
+    }
     func addDelegates() {
         SBDMain.add(self as SBDChannelDelegate, identifier: self.description)
         SBDMain.add(self as SBDConnectionDelegate, identifier: self.description)

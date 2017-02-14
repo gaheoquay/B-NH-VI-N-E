@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F17AB151E51A682008BA308 /* CheckList.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F17AB141E51A682008BA308 /* CheckList.png */; };
+		0F17AB171E51ACFF008BA308 /* Private.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F17AB161E51ACFF008BA308 /* Private.png */; };
+		0F17AB191E51BAC2008BA308 /* CateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17AB181E51BAC2008BA308 /* CateEntity.swift */; };
 		792444BAFCB405C2DBAC9872 /* Pods_CDYT_HoiDap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */; };
 		8B1AD45B1E1B828500D55543 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AD45A1E1B828500D55543 /* SearchViewController.swift */; };
 		8B1AD45E1E1B97F000D55543 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AD45C1E1B97F000D55543 /* SearchTableViewCell.swift */; };
@@ -192,6 +195,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F17AB141E51A682008BA308 /* CheckList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckList.png; sourceTree = "<group>"; };
+		0F17AB161E51ACFF008BA308 /* Private.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Private.png; sourceTree = "<group>"; };
+		0F17AB181E51BAC2008BA308 /* CateEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CateEntity.swift; sourceTree = "<group>"; };
 		4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CDYT_HoiDap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54350AF3B96C58CE38450098 /* Pods-CDYT_HoiDap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYT_HoiDap.release.xcconfig"; path = "Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap.release.xcconfig"; sourceTree = "<group>"; };
 		8B1AD45A1E1B828500D55543 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -450,6 +456,8 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0F17AB161E51ACFF008BA308 /* Private.png */,
+				0F17AB141E51A682008BA308 /* CheckList.png */,
 				A6C463DC1E26493A0046A367 /* Edit.png */,
 				A6C463D61E25DB7D0046A367 /* Recent.png */,
 				A60430FC1E2344DA000216FB /* dropdownicon.png */,
@@ -836,6 +844,7 @@
 				A68A95141E151B490067736E /* MainCommentEntity.swift */,
 				8BC2C30D1E23379300B68F72 /* ListNotificationEntity.swift */,
 				8BC2C30F1E2337C700B68F72 /* NotificationEntity.swift */,
+				0F17AB181E51BAC2008BA308 /* CateEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -961,6 +970,7 @@
 				8BD49F331E482C1600C98E74 /* OutgoingFileMessageTableViewCell.xib in Resources */,
 				8B3A13561E10F454005DBC6E /* Like0.png in Resources */,
 				A68A950E1E150CF80067736E /* Clover0.png in Resources */,
+				0F17AB171E51ACFF008BA308 /* Private.png in Resources */,
 				A67311D11E160F3400BCE308 /* placeholder_wide.png in Resources */,
 				8BD49F5D1E482D1100C98E74 /* OpenChannelListViewController.xib in Resources */,
 				8BF1497D1E14BF9C00766F8F /* Thongbao.png in Resources */,
@@ -984,6 +994,7 @@
 				A6CD32D01E4C2C9400FA2B21 /* GoogleService-Info.plist in Resources */,
 				8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */,
 				8B3A13651E10F454005DBC6E /* tag_mark.png in Resources */,
+				0F17AB151E51A682008BA308 /* CheckList.png in Resources */,
 				8BF149791E14BF9C00766F8F /* Tab.png in Resources */,
 				A6C463D71E25DB7D0046A367 /* Recent.png in Resources */,
 				8B813CB31E15052E0043F7EF /* Home.png in Resources */,
@@ -1141,6 +1152,7 @@
 				8B3A13761E10F454005DBC6E /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				8B3A13791E10F454005DBC6E /* RAMFumeAnimation.swift in Sources */,
 				8BD49F341E482C1600C98E74 /* OutgoingImageFileMessageTableViewCell.swift in Sources */,
+				0F17AB191E51BAC2008BA308 /* CateEntity.swift in Sources */,
 				8BD49F651E482D1100C98E74 /* OpenChannelChattingViewController.swift in Sources */,
 				8BD49F3C1E482C9900C98E74 /* Utils.swift in Sources */,
 				8B3A13861E10FD1B005DBC6E /* TagListViewController.swift in Sources */,

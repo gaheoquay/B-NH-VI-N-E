@@ -60,6 +60,10 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         currentUserId = Until.getCurrentId()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        Until.sendAndSetTracer(value: DETAILS_POST)
+    }
+    
     deinit{
         NotificationCenter.default.removeObserver(self)
     }

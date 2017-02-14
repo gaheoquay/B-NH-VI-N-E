@@ -18,6 +18,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     super.viewDidLoad()
     setupTableView()
     getListNotification()
+    Until.sendAndSetTracer(value: NOTIFICATION)
   }
   
   //MARK: Set up table

@@ -15,6 +15,10 @@ class SearchViewController: UIViewController,UITableViewDelegate,UITableViewData
       setUpTableView()
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        Until.sendAndSetTracer(value: SEARCHS)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

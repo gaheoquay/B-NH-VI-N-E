@@ -17,13 +17,19 @@ class PolicyAndRuleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if isPolicy {
-            titleLb.text = "Chính sách riêng tư"
-        }else{
-            titleLb.text = "Điều khoản sử dụng"
-        }
+        
         
         getPolicyAndRuleFromServer()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if isPolicy {
+            titleLb.text = "Chính sách riêng tư"
+            Until.sendAndSetTracer(value: POLICIES)
+        }else{
+            titleLb.text = "Điều khoản sử dụng"
+            Until.sendAndSetTracer(value: TERM)
+        }
     }
 
     func getPolicyAndRuleFromServer(){

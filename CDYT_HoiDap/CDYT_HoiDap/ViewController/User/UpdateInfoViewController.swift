@@ -70,6 +70,11 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        Until.sendAndSetTracer(value: MY_ACCOUNT)
+
+    }
+    
     func setupUI(){
         avaImg1.layer.cornerRadius = 10
         avaImg1.clipsToBounds = true

@@ -30,6 +30,11 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     getFeeds()
     
   }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        Until.sendAndSetTracer(value: MY_PAGE)
+
+    }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     let realm = try! Realm()

@@ -21,13 +21,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     getHotTagFromServer()
     // Do any additional setup after loading the view, typically from a nib.
     
-    guard let tracker = GAI.sharedInstance().defaultTracker else { return }
-    tracker.set(kGAIScreenName, value: HOME)
-    
-    guard let builder = GAIDictionaryBuilder.createScreenView() else { return }
-    tracker.send(builder.build() as [NSObject : AnyObject])
-    
   }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        Until.sendAndSetTracer(value: HOME)
+    }
 
     func setupUI() {
         searchView.layer.cornerRadius = 8

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,UIPickerViewDelegate,UIPickerViewDataSource {
 
     @IBOutlet weak var titleTxt: UITextField!
     @IBOutlet weak var contentTxt: UITextView!
@@ -21,9 +21,15 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var addImgView: UIView!
     @IBOutlet weak var addImgViewHeight: NSLayoutConstraint!
     @IBOutlet weak var keyboardViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var viewCategory: UIView!
+    @IBOutlet weak var btnSwitch: UISwitch!
+    @IBOutlet weak var lbCate: UILabel!
+    
     
     let pickerImageController = DKImagePickerController()
     var imageAssets = [DKAsset]()
+    var id = ""
+    var name = ""
     
     var imageDic = [String]()
     var thumImgDic = [String]()
@@ -31,7 +37,11 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
     var isEditPost = false
     var feedObj = FeedsEntity()
     var searchText = ""
+    var ischeck = false
     
+    var pickerFrame = CGRect(x: 0, y: 50, width: 270, height: 150)
+    var arrayCate = [CateEntity]()
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         registerNotification()
@@ -45,6 +55,16 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
             titleTxt.text = searchText
         }
         
+    
+        
+        viewCategory.layer.borderWidth = 1
+        viewCategory.layer.cornerRadius = 4
+        viewCategory.layer.borderColor = UIColor.lightGray.cgColor
+        requestCate()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        Until.sendAndSetTracer(value: POST_QUESTION)
     }
 
     func registerNotification() {
@@ -109,6 +129,7 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
     func setupDataForUpdateQuestion(){
         titleTxt.text = feedObj.postEntity.title
         contentTxt.text = feedObj.postEntity.content
+        
         
         var listTag = [String]()
         for item in feedObj.tags {
@@ -188,8 +209,10 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
             }else{
                 if imageAssets.count > 0 {
                     uploadImage()
+                    Until.sendEventTracker(category: "Post", action: "CreatePostWithImage", label: feedObj.authorEntity.id)
                 }else{
                     sendNewQuestionToServer()
+                    Until.sendEventTracker(category: "Post", action: "CreatePostWithoutImage", label: feedObj.authorEntity.id)
                 }
             }
         }
@@ -251,6 +274,9 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
             "Status" : feedObj.postEntity.status,
             "Rating" : feedObj.postEntity.rating,
             "UpdatedDate" : 0,
+            "CategoryId": id,
+            "IsPrivate": ischeck,
+            "IsClassified": false,
             "CreatedDate" : feedObj.postEntity.createdDate
         ]
         
@@ -325,6 +351,9 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
                 "Status" : 0,
                 "Rating" : 0,
                 "UpdatedDate" : 0,
+                "CategoryId": id,
+                "IsPrivate": ischeck,
+                "IsClassified": false,
                 "CreatedDate" : 0
         ]
         
@@ -362,10 +391,81 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBAction func backTapAction(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func cateTapAction(_ sender: Any) {
+        creatAlert()
+    }
+    
+    func creatAlert(){
+        let alertView = UIAlertController(title: "Category", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let pickerView = UIPickerView(frame: pickerFrame)
+        
+        alertView.view.addSubview(pickerView)
+        
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        
+        
+        let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                self.lbCate.text = self.name
+        })
+        
+        alertView.addAction(action)
+        present(alertView, animated: true, completion: nil)
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return arrayCate.count
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return arrayCate[row].name
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        id = arrayCate[row].id
+        name = arrayCate[row].name
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    func requestCate() {
+        let cateParam : [String : Any] = [
+            "Auth": Until.getAuthKey()
+            ]
+        Alamofire.request(GET_CATE, method: .post, parameters: cateParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let json = result as! [NSDictionary]
+                        for element in json {
+                            let entity = CateEntity.init(dictionary: element)
+                            self.arrayCate.append(entity)
+                        }
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+            Until.hideLoading()
+        }
+    }
+    
+    @IBAction func actionSwitch(_ sender: Any) {
+        if btnSwitch.isOn {
+            ischeck = true
+        }else {
+            ischeck = false
+        }
+    }
+    
+    
 }

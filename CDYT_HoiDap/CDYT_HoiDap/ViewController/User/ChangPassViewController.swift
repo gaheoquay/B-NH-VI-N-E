@@ -20,6 +20,10 @@ class ChangPassViewController: UIViewController {
 
         errLbl.isHidden = true
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        Until.sendAndSetTracer(value: CHANGE_PASS)
+    }
 
     func validateData() -> String{
         let curPassString = curentPass.text

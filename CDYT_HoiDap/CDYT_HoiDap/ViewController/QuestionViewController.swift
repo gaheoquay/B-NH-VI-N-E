@@ -19,6 +19,10 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
     getFeeds()
     
   }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        Until.sendAndSetTracer(value: SLECT_QUESTION_NO_ANSWER)
+    }
   
     deinit {
         NotificationCenter.default.removeObserver(self)

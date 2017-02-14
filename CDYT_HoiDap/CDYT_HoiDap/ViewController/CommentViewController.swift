@@ -64,6 +64,10 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        Until.sendAndSetTracer(value: DETAIL_COMMENT)
+    }
+    
     deinit{
         NotificationCenter.default.removeObserver(self)
     }

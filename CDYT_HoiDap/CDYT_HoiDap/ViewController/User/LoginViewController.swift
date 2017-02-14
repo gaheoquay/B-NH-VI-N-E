@@ -24,6 +24,10 @@ class LoginViewController: UIViewController {
         setupUI()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        Until.sendAndSetTracer(value: LOGIN)
+    }
+    
     func setupUI(){
       if cannotBack {
         btnBack.isHidden = true
