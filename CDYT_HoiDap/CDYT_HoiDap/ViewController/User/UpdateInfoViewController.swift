@@ -281,8 +281,10 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
     @IBAction func logoutBtnTapAction(_ sender: Any) {
         let realm = try! Realm()
         let user = realm.objects(UserEntity.self)
+        let notification = realm.objects(ListNotificationEntity.self)
         try! realm.write {
             realm.delete(user)
+            realm.delete(notification)
             _ = self.navigationController?.popViewController(animated: true)
         }
     }

@@ -47,6 +47,7 @@ let UPDATE_COMMENT = BASE_URL + "/Post/UpdateComment"
 let UPDATE_SUBCOMMENT = BASE_URL + "/Post/UpdateSubComment"
 let FOLLOW_POST = BASE_URL + "/Post/FollowPost"
 let POLICY_RULE = BASE_URL + "/PolicyAndCondition"
+let GET_UNREAD_NOTIFICATION = BASE_URL + "/Notification/GetUnreadNotificationCount"
 
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
