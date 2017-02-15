@@ -53,7 +53,6 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
   func setData(){
     if feedEntity.postEntity.status == 0 {
         leftView.backgroundColor = UIColor().hexStringToUIColor(hex: "f4f4f4")
-
     }else{
         leftView.backgroundColor = UIColor().hexStringToUIColor(hex: "C7ECA1")
     }
