@@ -10,6 +10,7 @@ import UIKit
 
 class UserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, QuestionTableViewCellDelegate {
   
+    @IBOutlet weak var notiCountLb: UILabel!
   @IBOutlet weak var viewUnLogin: UIView!
   @IBOutlet weak var avaImg: UIImageView!
   @IBOutlet weak var nicknameLbl: UILabel!
@@ -17,12 +18,12 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
   var page = 1
   var listMyFeed = [FeedsEntity]()
   var groupChannelListViewController: GroupChannelListViewController?
+    
   override func viewDidLoad() {
     super.viewDidLoad()
-    NotificationCenter.default.addObserver(self, selector: #selector(self.reloadView), name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(self.setupUserInfo), name: NSNotification.Name(rawValue: UPDATE_USERINFO), object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
     
+    registerNotification()
+    getNotificationCount()
     initTable()
     setUpUI()
     setupUserInfo()
@@ -50,6 +51,12 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     NotificationCenter.default.removeObserver(self)
   }
   
+    func registerNotification(){
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadView), name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.setupUserInfo), name: NSNotification.Name(rawValue: UPDATE_USERINFO), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
+    }
+    
   func reloadView(){
     initTable()
     setUpUI()
@@ -60,6 +67,9 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
   func setUpUI(){
     avaImg.layer.cornerRadius = 10
     self.navigationController?.isNavigationBarHidden = true
+    
+    notiCountLb.layer.cornerRadius = 5
+    notiCountLb.layer.masksToBounds = true
   }
   func setupUserInfo(){
     let realm = try! Realm()
@@ -104,6 +114,31 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     getFeeds()
   }
   
+    func getNotificationCount(){
+        let followParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId": Until.getCurrentId()
+        ]
+                
+        Alamofire.request(GET_UNREAD_NOTIFICATION, method: .post, parameters: followParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! NSDictionary
+                        let count = jsonData["Count"] as! Int
+                        self.notiCountLb.text = " \(count) "
+                        self.notiCountLb.isHidden = false
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không thể lấy được số lượng thông báo.", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+        }
+    }
+    
+    
   func getFeeds(){
     
     let hotParam : [String : Any] = [

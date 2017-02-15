@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1099,6 +1099,13 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 0 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mu0-Si-7T7">
+                                                        <rect key="frame" x="35" y="11.5" width="13.5" height="13.5"/>
+                                                        <color key="backgroundColor" red="0.97924929857254028" green="0.29259371757507324" blue="0.42360758781433105" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <gestureRecognizers/>
@@ -1107,6 +1114,8 @@
                                                     <constraint firstItem="bsL-TR-sua" firstAttribute="centerY" secondItem="u52-Sv-abM" secondAttribute="centerY" id="Dov-8C-RlP"/>
                                                     <constraint firstItem="u52-Sv-abM" firstAttribute="height" secondItem="BYv-7y-fJq" secondAttribute="height" multiplier="1/2" id="OIf-wg-O7f"/>
                                                     <constraint firstAttribute="trailing" secondItem="bsL-TR-sua" secondAttribute="trailing" constant="8" id="RC4-BJ-p6v"/>
+                                                    <constraint firstItem="bsL-TR-sua" firstAttribute="top" secondItem="Mu0-Si-7T7" secondAttribute="bottom" constant="1" id="bxE-Rs-4CY"/>
+                                                    <constraint firstItem="Mu0-Si-7T7" firstAttribute="leading" secondItem="bsL-TR-sua" secondAttribute="leading" constant="-5" id="bxG-mT-c3K"/>
                                                     <constraint firstAttribute="bottom" secondItem="u52-Sv-abM" secondAttribute="bottom" constant="8" id="dev-tV-XYH"/>
                                                     <constraint firstItem="bsL-TR-sua" firstAttribute="leading" secondItem="u52-Sv-abM" secondAttribute="trailing" constant="5" id="kB1-Bx-UIB"/>
                                                 </constraints>
@@ -1247,7 +1256,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S6j-Hj-Olg">
-                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <rect key="frame" x="0.0" y="220" width="375" height="398"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pjv-CK-3HD">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
@@ -1382,7 +1391,7 @@
                             <constraint firstAttribute="trailing" secondItem="LTl-aA-3Pz" secondAttribute="trailing" id="BaU-7a-eEe"/>
                             <constraint firstAttribute="trailing" secondItem="RVe-pE-ljK" secondAttribute="trailing" id="Di6-hi-gLu"/>
                             <constraint firstItem="S6j-Hj-Olg" firstAttribute="leading" secondItem="TRb-Az-Gre" secondAttribute="leading" id="SXK-oZ-ddo"/>
-                            <constraint firstItem="S6j-Hj-Olg" firstAttribute="top" secondItem="CVa-gW-acP" secondAttribute="bottom" id="TpV-6R-QUL"/>
+                            <constraint firstItem="S6j-Hj-Olg" firstAttribute="top" secondItem="CVa-gW-acP" secondAttribute="bottom" constant="200" id="TpV-6R-QUL"/>
                             <constraint firstItem="LTl-aA-3Pz" firstAttribute="top" secondItem="RVe-pE-ljK" secondAttribute="bottom" id="Y7Q-N1-czC"/>
                             <constraint firstItem="Lzg-ZX-VSg" firstAttribute="leading" secondItem="TRb-Az-Gre" secondAttribute="leading" id="ZFl-eT-8VX"/>
                             <constraint firstItem="RVe-pE-ljK" firstAttribute="leading" secondItem="TRb-Az-Gre" secondAttribute="leading" id="ZuB-oG-zYL"/>
@@ -1405,6 +1414,7 @@
                     <connections>
                         <outlet property="avaImg" destination="FTO-Ub-M9d" id="ccA-bC-OCC"/>
                         <outlet property="nicknameLbl" destination="pPI-lF-9UV" id="Kei-w9-CUt"/>
+                        <outlet property="notiCountLb" destination="Mu0-Si-7T7" id="Mea-dP-Ij3"/>
                         <outlet property="questionTableView" destination="LTl-aA-3Pz" id="p3U-Ae-cYp"/>
                         <outlet property="viewUnLogin" destination="S6j-Hj-Olg" id="Fi5-wW-wH1"/>
                     </connections>
