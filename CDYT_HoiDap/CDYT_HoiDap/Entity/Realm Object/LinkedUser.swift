@@ -9,30 +9,30 @@
 import Foundation
 import RealmSwift
 
-class LinkedUser: Object {
-    dynamic var id = ""
-    dynamic var email = ""
-    dynamic var nickname = ""
-    dynamic var fullname = ""
-    dynamic var job = ""
-    dynamic var company = ""
-    dynamic var dob : Double = 0
-    dynamic var address = ""
-    dynamic var gender = 0
-    dynamic var thumbnailAvatarUrl = ""
-    dynamic var avatarUrl = ""
-    dynamic var phone = ""
-    dynamic var socialId = ""
-    dynamic var socialType = 0
-    dynamic var role = 1
-    dynamic var reputationRate = 1
-    dynamic var isVerified = false
-    dynamic var updatedDate : Double = 0
-    dynamic var createdDate : Double = 0
+class LinkedUser: NSObject {
+    var id = ""
+    var email = ""
+    var nickname = ""
+    var fullname = ""
+    var job = ""
+    var company = ""
+    var dob : Double = 0
+    var address = ""
+    var gender = 0
+    var thumbnailAvatarUrl = ""
+    var avatarUrl = ""
+    var phone = ""
+    var socialId = ""
+    var socialType = 0
+    var role = 1
+    var reputationRate = 1
+    var isVerified = false
+    var updatedDate : Double = 0
+    var createdDate : Double = 0
     
-    override static func primaryKey() -> String? {
-        return "id"
-    }
+//    override static func primaryKey() -> String? {
+//        return "id"
+//    }
     
     class func initWithDictionary(dictionary: NSDictionary) -> LinkedUser {
         let this = LinkedUser()
@@ -97,4 +97,8 @@ class LinkedUser: Object {
         return this
     }
 
+    override init(){
+        super.init()
+    }
+    
 }

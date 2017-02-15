@@ -85,4 +85,5 @@ let DETAIL_COMMENT = "ScreenDetailComment"
 let CREATE_QUESTION = "ScreenCreateQuestion"
 let SEARCHS = "ScreenSearch"
 
+var listNotification = [ListNotificationEntity]()
 

@@ -8,16 +8,19 @@
 
 import UIKit
 
-class NotificationEntity: Object {
-  dynamic var id = ""
-  dynamic var type = 0
-  dynamic var detailId = ""
-  dynamic var parentId = ""
-  dynamic var isRead = false
-  dynamic var createdDate : Double = 0
+class NotificationEntity: NSObject {
+  var id = ""
+  var type = 0
+  var detailId = ""
+  var parentId = ""
+  var isRead = false
+  var createdDate : Double = 0
     
-    override static func primaryKey() -> String? {
-        return "id"
+//    override static func primaryKey() -> String? {
+//        return "id"
+//    }
+    override init(){
+        super.init()
     }
     
    class func initWithDictionary(dictionary:NSDictionary) -> NotificationEntity{
