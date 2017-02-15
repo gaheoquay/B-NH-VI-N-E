@@ -10,6 +10,8 @@
 		0F17AB151E51A682008BA308 /* CheckList.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F17AB141E51A682008BA308 /* CheckList.png */; };
 		0F17AB171E51ACFF008BA308 /* Private.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F17AB161E51ACFF008BA308 /* Private.png */; };
 		0F17AB191E51BAC2008BA308 /* CateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17AB181E51BAC2008BA308 /* CateEntity.swift */; };
+		0F36980D1E54013C004B028D /* Ask copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F36980B1E54013C004B028D /* Ask copy.png */; };
+		0F36980E1E54013C004B028D /* LogoMarker.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F36980C1E54013C004B028D /* LogoMarker.png */; };
 		792444BAFCB405C2DBAC9872 /* Pods_CDYT_HoiDap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */; };
 		8B1AD45B1E1B828500D55543 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AD45A1E1B828500D55543 /* SearchViewController.swift */; };
 		8B1AD45E1E1B97F000D55543 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AD45C1E1B97F000D55543 /* SearchTableViewCell.swift */; };
@@ -129,7 +131,6 @@
 		8BD49F6D1E482D1100C98E74 /* ParticipantListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD49F591E482D1100C98E74 /* ParticipantListTableViewCell.swift */; };
 		8BD49F6E1E482D1100C98E74 /* ParticipantListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49F5A1E482D1100C98E74 /* ParticipantListTableViewCell.xib */; };
 		8BF1496C1E14BF9C00766F8F /* Answer0.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF149591E14BF9C00766F8F /* Answer0.png */; };
-		8BF1496E1E14BF9C00766F8F /* Ask.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1495B1E14BF9C00766F8F /* Ask.png */; };
 		8BF1496F1E14BF9C00766F8F /* CaiDat.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1495C1E14BF9C00766F8F /* CaiDat.png */; };
 		8BF149701E14BF9C00766F8F /* Camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1495D1E14BF9C00766F8F /* Camera.png */; };
 		8BF149711E14BF9C00766F8F /* DangNhap_BG.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1495E1E14BF9C00766F8F /* DangNhap_BG.png */; };
@@ -198,6 +199,8 @@
 		0F17AB141E51A682008BA308 /* CheckList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckList.png; sourceTree = "<group>"; };
 		0F17AB161E51ACFF008BA308 /* Private.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Private.png; sourceTree = "<group>"; };
 		0F17AB181E51BAC2008BA308 /* CateEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CateEntity.swift; sourceTree = "<group>"; };
+		0F36980B1E54013C004B028D /* Ask copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ask copy.png"; sourceTree = "<group>"; };
+		0F36980C1E54013C004B028D /* LogoMarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoMarker.png; sourceTree = "<group>"; };
 		4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CDYT_HoiDap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54350AF3B96C58CE38450098 /* Pods-CDYT_HoiDap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYT_HoiDap.release.xcconfig"; path = "Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap.release.xcconfig"; sourceTree = "<group>"; };
 		8B1AD45A1E1B828500D55543 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -327,7 +330,6 @@
 		8BD49F591E482D1100C98E74 /* ParticipantListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantListTableViewCell.swift; sourceTree = "<group>"; };
 		8BD49F5A1E482D1100C98E74 /* ParticipantListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParticipantListTableViewCell.xib; sourceTree = "<group>"; };
 		8BF149591E14BF9C00766F8F /* Answer0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Answer0.png; sourceTree = "<group>"; };
-		8BF1495B1E14BF9C00766F8F /* Ask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ask.png; sourceTree = "<group>"; };
 		8BF1495C1E14BF9C00766F8F /* CaiDat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CaiDat.png; sourceTree = "<group>"; };
 		8BF1495D1E14BF9C00766F8F /* Camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera.png; sourceTree = "<group>"; };
 		8BF1495E1E14BF9C00766F8F /* DangNhap_BG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DangNhap_BG.png; sourceTree = "<group>"; };
@@ -456,6 +458,8 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0F36980B1E54013C004B028D /* Ask copy.png */,
+				0F36980C1E54013C004B028D /* LogoMarker.png */,
 				0F17AB161E51ACFF008BA308 /* Private.png */,
 				0F17AB141E51A682008BA308 /* CheckList.png */,
 				A6C463DC1E26493A0046A367 /* Edit.png */,
@@ -474,7 +478,6 @@
 				A68A94FD1E14CA480067736E /* DangKi_Left.png */,
 				A68A94FB1E14CA240067736E /* DangKi_Right.png */,
 				8BF149591E14BF9C00766F8F /* Answer0.png */,
-				8BF1495B1E14BF9C00766F8F /* Ask.png */,
 				8BF1495C1E14BF9C00766F8F /* CaiDat.png */,
 				8BF1495D1E14BF9C00766F8F /* Camera.png */,
 				8BF1495E1E14BF9C00766F8F /* DangNhap_BG.png */,
@@ -940,7 +943,6 @@
 				A609C2531E1B8F9F006BFBAE /* delete_img.png in Resources */,
 				8BD49F2A1E482C1500C98E74 /* IncomingFileMessageTableViewCell.xib in Resources */,
 				A68A95051E14ECFB0067736E /* DetailQuestionTableViewCell.xib in Resources */,
-				8BF1496E1E14BF9C00766F8F /* Ask.png in Resources */,
 				8BF149701E14BF9C00766F8F /* Camera.png in Resources */,
 				8BD49F0D1E48215500C98E74 /* SelectedUserListCollectionViewCell.xib in Resources */,
 				8B3A13911E112129005DBC6E /* KeyWordTableViewCell.xib in Resources */,
@@ -955,6 +957,7 @@
 				A6D083C71E12747D007EA4D9 /* QuestionTagTableViewCell.xib in Resources */,
 				8BD49F5E1E482D1100C98E74 /* ParticipantListViewController.xib in Resources */,
 				8B3A134D1E10F454005DBC6E /* DaHoi_Button0.png in Resources */,
+				0F36980D1E54013C004B028D /* Ask copy.png in Resources */,
 				8BF149781E14BF9C00766F8F /* Search_Inbox.png in Resources */,
 				8BD49EF91E48215500C98E74 /* MemberListViewController.xib in Resources */,
 				8BD49F5C1E482D1100C98E74 /* CreateOpenChannelViewController.xib in Resources */,
@@ -1007,6 +1010,7 @@
 				A6E4C2FA1E1102BA00C2C871 /* User.storyboard in Resources */,
 				8BD49F261E482C1500C98E74 /* ChattingView.xib in Resources */,
 				8B813CB51E15052E0043F7EF /* Tag.png in Resources */,
+				0F36980E1E54013C004B028D /* LogoMarker.png in Resources */,
 				8B813CB91E1519150043F7EF /* SearchGrey.png in Resources */,
 				8BF149711E14BF9C00766F8F /* DangNhap_BG.png in Resources */,
 				8BD49F091E48215500C98E74 /* GroupChannelListTableViewCell.xib in Resources */,
