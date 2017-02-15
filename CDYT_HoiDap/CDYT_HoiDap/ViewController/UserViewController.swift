@@ -23,7 +23,6 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     super.viewDidLoad()
     
     registerNotification()
-    getNotificationCount()
     initTable()
     setUpUI()
     setupUserInfo()
@@ -45,6 +44,8 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }else{
       viewUnLogin.isHidden = false
     }
+    notiCountLb.isHidden = true
+    getNotificationCount()
   }
   
   deinit {
