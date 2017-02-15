@@ -60,9 +60,14 @@ class IncomingUserMessageTableViewCell: UITableViewCell {
     
     func setModel(aMessage: SBDUserMessage) {
         self.message = aMessage
-        
-        self.profileImageView.af_setImage(withURL: URL(string: (self.message.sender?.profileUrl!)!)!, placeholderImage: UIImage(named: "img_profile"))
-        
+      let profileUrl = URL(string: (self.message.sender?.profileUrl!)!)
+      if profileUrl != nil {
+        self.profileImageView.af_setImage(withURL: profileUrl!, placeholderImage: UIImage(named: "img_profile"))
+      }else{
+        self.profileImageView.image = UIImage(named: "img_profile")
+
+      }
+      
         let profileImageTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickProfileImage))
         self.profileImageView.isUserInteractionEnabled = true
         self.profileImageView.addGestureRecognizer(profileImageTapRecognizer)
