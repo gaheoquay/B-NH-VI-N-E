@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // Optional: configure GAI options.
     guard let gai = GAI.sharedInstance() else {
         assert(false, "Google Analytics not configured correctly")
-        
+      return true
     }
     gai.trackUncaughtExceptions = true  // report uncaught exceptions
     
@@ -47,10 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
           let vc = UIAlertController(title: "Lỗi", message: error?.domain, preferredStyle: UIAlertControllerStyle.alert)
           let closeAction = UIAlertAction(title: "Đóng", style: UIAlertActionStyle.cancel, handler: nil)
           vc.addAction(closeAction)
-          DispatchQueue.main.async {
-//            self.present(vc, animated: true, completion: nil)
-          }
-          
           return
         }
         
@@ -75,8 +71,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let vc = UIAlertController(title: "Lỗi", message: error?.domain, preferredStyle: UIAlertControllerStyle.alert)
             let closeAction = UIAlertAction(title: "Đóng", style: UIAlertActionStyle.cancel, handler: nil)
             vc.addAction(closeAction)
-
-            
             SBDMain.disconnect(completionHandler: {
               
             })

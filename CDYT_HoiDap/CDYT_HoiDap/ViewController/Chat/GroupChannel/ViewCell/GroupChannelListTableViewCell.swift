@@ -110,7 +110,13 @@ class GroupChannelListTableViewCell: UITableViewCell {
         if self.channel.memberCount == 1 {
             self.coverImageContainerForOne.isHidden = false
             let member = self.channel.members?[0] as! SBDUser
-            self.coverImageView11.af_setImage(withURL: URL(string: member.profileUrl!)!, placeholderImage: UIImage(named: "img_profile"))
+          let profileUrl = URL(string: member.profileUrl!)
+          if profileUrl != nil {
+            self.coverImageView11.af_setImage(withURL: profileUrl!, placeholderImage: UIImage(named: "img_profile"))
+          }else{
+            self.coverImageView11.image = UIImage(named: "img_profile")
+          }
+//            self.coverImageView11.af_setImage(withURL: URL(string: member.profileUrl!)!, placeholderImage: UIImage(named: "img_profile"))
         }
         else if self.channel.memberCount == 2 {
             self.coverImageContainerForOne.isHidden = false
@@ -118,7 +124,12 @@ class GroupChannelListTableViewCell: UITableViewCell {
                 if member.userId == SBDMain.getCurrentUser()?.userId {
                     continue
                 }
-                self.coverImageView11.af_setImage(withURL: URL(string: member.profileUrl!)!, placeholderImage: UIImage(named: "img_profile"))
+              let profileUrl = URL(string: member.profileUrl!)
+              if profileUrl != nil {
+                self.coverImageView11.af_setImage(withURL: profileUrl!, placeholderImage: UIImage(named: "img_profile"))
+              }else{
+                self.coverImageView11.image = UIImage(named: "img_profile")
+              }
                 memberNames.append(member.nickname!)
             }
         }
