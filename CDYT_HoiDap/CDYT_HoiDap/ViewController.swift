@@ -28,7 +28,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
 
     func setupUI() {
-        searchView.layer.cornerRadius = 8
+        searchView.layer.cornerRadius = 4
         searchView.clipsToBounds = true
     }
   override func didReceiveMemoryWarning() {
