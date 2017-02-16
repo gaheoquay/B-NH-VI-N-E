@@ -29,6 +29,10 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     Until.showLoading()
     getFeeds()
     
+    if Until.getCurrentId() != "" {
+        getListNotification()
+    }
+    
   }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -114,14 +118,42 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     page += 1
     getFeeds()
   }
-  
+    
+    func getListNotification(){
+        
+        let hotParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "Page": 1,
+            "Size": 20,
+            "RequestedUserId" : Until.getCurrentId()
+        ]
+        print(JSON.init(hotParam))
+        
+        Alamofire.request(GET_LIST_NOTIFICATION, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! [NSDictionary]
+                        listNotification.removeAll()
+                        for item in jsonData {
+                            let entity = ListNotificationEntity.initWithDict(dictionary: item)
+                            listNotification.append(entity)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
     func getNotificationCount(){
-        let followParam : [String : Any] = [
+        let param : [String : Any] = [
             "Auth": Until.getAuthKey(),
             "RequestedUserId": Until.getCurrentId()
         ]
-                
-        Alamofire.request(GET_UNREAD_NOTIFICATION, method: .post, parameters: followParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+        
+        print(JSON.init(param))
+        Alamofire.request(GET_UNREAD_NOTIFICATION, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
                     if let result = response.result.value {
@@ -190,7 +222,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.row == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "RecentFeedTableViewCell") as! RecentFeedTableViewCell
-      cell.titleLbl.text = "Câu hỏi đang theo dõi"
+      cell.titleLbl.text = "Câu hỏi đã tạo"
       return cell
     }else{
       let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell

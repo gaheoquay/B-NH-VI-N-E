@@ -8,20 +8,42 @@
 
 import UIKit
 
-class ListNotificationEntity: Object {
-    dynamic var linkedUser : LinkedUser?
-    dynamic var notificaiton : NotificationEntity?
-    dynamic var postTitle = ""
-    dynamic var content = ""
-    dynamic var pkId = 0
+class ListNotificationEntity: NSObject {
+     var linkedUser : LinkedUser?
+     var notificaiton : NotificationEntity?
+     var postTitle = ""
+     var content = ""
+     var pkId = 0
     
-    override static func primaryKey() -> String? {
-        return "pkId"
+//    override static func primaryKey() -> String? {
+//        return "pkId"
+//    }
+    
+//    class func initWithDict(dictionary : NSDictionary, index:Int) -> ListNotificationEntity{
+//        let this = ListNotificationEntity()
+//        this.pkId = index
+//        if let value = dictionary["LinkedUser"] as? NSDictionary {
+//            this.linkedUser = LinkedUser.initWithDictionary(dictionary: value)
+//        }
+//        if let value = dictionary["Notification"] as? NSDictionary {
+//            this.notificaiton = NotificationEntity.initWithDictionary(dictionary: value)
+//        }
+//        if let value = dictionary["PostTitle"] as? String {
+//            this.postTitle = value
+//        }
+//        if let value = dictionary["Content"] as? String {
+//            this.content = value
+//        }
+//        return this
+//    }
+    
+    override init(){
+        super.init()
     }
     
-    class func initWithDict(dictionary : NSDictionary, index:Int) -> ListNotificationEntity{
+    class func initWithDict(dictionary : NSDictionary) -> ListNotificationEntity{
         let this = ListNotificationEntity()
-        this.pkId = index
+        
         if let value = dictionary["LinkedUser"] as? NSDictionary {
             this.linkedUser = LinkedUser.initWithDictionary(dictionary: value)
         }

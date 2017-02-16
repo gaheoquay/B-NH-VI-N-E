@@ -107,6 +107,8 @@ class LoginViewController: UIViewController {
                           NotificationCenter.default.post(name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
                           _ = self.navigationController?.popToRootViewController(animated: true)
                         }
+                        
+                        self.getListNotification()
                     }
                 }else if status == 400 {
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Email/Tên đăng nhập và mật khẩu không đúng, vui lòng thử lại.", cancelBtnTitle: "Đóng")
@@ -117,6 +119,33 @@ class LoginViewController: UIViewController {
                 UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
             }
             Until.hideLoading()
+        }
+    }
+    
+    
+    func getListNotification(){
+        
+        let hotParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "Page": 1,
+            "Size": 20,
+            "RequestedUserId" : Until.getCurrentId()
+        ]
+        print(JSON.init(hotParam))
+        
+        Alamofire.request(GET_LIST_NOTIFICATION, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! [NSDictionary]
+                        listNotification.removeAll()
+                        for item in jsonData {
+                            let entity = ListNotificationEntity.initWithDict(dictionary: item)
+                            listNotification.append(entity)
+                        }
+                    }
+                }
+            }
         }
     }
     

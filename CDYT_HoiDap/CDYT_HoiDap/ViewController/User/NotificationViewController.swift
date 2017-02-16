@@ -11,13 +11,12 @@ import UIKit
 class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, QuestionDetailViewControllerDelegate ,CommentViewControllerDelegate {
   
   @IBOutlet weak var notifyTableView: UITableView!
-//    var listNotification : [ListNotificationEntity] = [ListNotificationEntity]()
-    var listNotification : Results<ListNotificationEntity>!
+//    var listNotification : [ListNotificationEntity]()
+//    var listNotification : Results<ListNotificationEntity>!
     var page = 1
   override func viewDidLoad() {
     super.viewDidLoad()
     setupTableView()
-    getListNotification()
     Until.sendAndSetTracer(value: NOTIFICATION)
   }
   
@@ -35,10 +34,23 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             self.reloadData()
         }
     }
+    
+    notifyTableView.addInfiniteScrollingWithHandler {
+        DispatchQueue.main.async {
+            self.loadMore()
+        }
+    }
+    
   }
     
     func reloadData(){
         page = 1
+        listNotification.removeAll()
+        getListNotification()
+    }
+    
+    func loadMore(){
+        page += 1
         getListNotification()
     }
     
@@ -59,14 +71,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
           if let result = response.result.value {
             let jsonData = result as! [NSDictionary]
             
-            let realm = try! Realm()
-            
-            for (index, item) in jsonData.enumerated() {
-                let entity = ListNotificationEntity.initWithDict(dictionary: item, index: index)
-            
-                try! realm.write {
-                    realm.add(entity, update: true)
-                }
+            for item in jsonData {
+                let entity = ListNotificationEntity.initWithDict(dictionary: item)
+                listNotification.append(entity)
             }
           }
           self.notifyTableView.reloadData()
@@ -85,8 +92,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
   //MARK: UITableViewDelegate, UITableViewDataSource
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    let realm = try! Realm()
-    listNotification = realm.objects(ListNotificationEntity.self)
+//    let realm = try! Realm()
+//    listNotification = realm.objects(ListNotificationEntity.self)
     return listNotification.count
   }
   
