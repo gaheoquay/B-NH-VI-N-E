@@ -142,14 +142,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     SBDMain.registerDevicePushToken(deviceToken, unique: true) { (status, error) in
       if error == nil {
         if status == SBDPushTokenRegistrationStatus.pending {
-          
+          // Registration is pending.
+          print("Registration is pending")
         }
         else {
-          
+          // Registration succeeded.
+          print("Registration succeeded")
+
         }
       }
       else {
-        
+        // Registration failed.
+        print("Registration failed")
+
       }
     }
   }
