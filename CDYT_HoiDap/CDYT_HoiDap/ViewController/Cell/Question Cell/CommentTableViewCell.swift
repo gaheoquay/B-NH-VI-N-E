@@ -31,6 +31,8 @@ class CommentTableViewCell: UITableViewCell {
     @IBOutlet weak var replyLbl: UILabel!
     @IBOutlet weak var markToResolveBtn: UIButton!
     @IBOutlet weak var moreActionBtn: UIButton!
+    @IBOutlet weak var departmantLb: UILabel!
+    @IBOutlet weak var verifyIconHeight: NSLayoutConstraint!
     
     var delegate : CommentTableViewCellDelegate?
     var mainComment = MainCommentEntity()
@@ -147,6 +149,8 @@ class CommentTableViewCell: UITableViewCell {
             
             markToResolveBtn.setImage(UIImage.init(named: "GiaiPhap_Mark.png"), for: UIControlState.normal)
             markToResolveBtn.isHidden = false
+            
+            moreActionBtn.isHidden = true
         }else{
             self.contentView.backgroundColor = UIColor.white
             
@@ -160,6 +164,7 @@ class CommentTableViewCell: UITableViewCell {
             }
             
             markToResolveBtn.setImage(UIImage.init(named: "GiaiPhap_Mark_hide.png"), for: UIControlState.normal)
+            moreActionBtn.isHidden = false
         }
         
         avaImg.sd_setImage(with: URL.init(string: mainComment.author.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
@@ -198,6 +203,19 @@ class CommentTableViewCell: UITableViewCell {
             moreActionBtn.isHidden = false
         }else{
             moreActionBtn.isHidden = true
+        }
+        
+        if mainComment.author.role == 1 {
+            for item in listCate {
+                if mainComment.author.departmentId == item.id {
+                    departmantLb.text = item.name
+                }
+            }
+            verifyIconHeight.constant = 20
+            nameLbl.textColor = UIColor().hexStringToUIColor(hex: "01A7FA")
+        }else{
+            departmantLb.text = ""
+            verifyIconHeight.constant = 0
         }
     }
     

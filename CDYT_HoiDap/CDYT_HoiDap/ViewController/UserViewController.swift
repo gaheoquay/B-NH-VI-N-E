@@ -164,11 +164,12 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             self.notiCountLb.isHidden = false
                         }else{
                             self.notiCountLb.text = ""
+                            self.notiCountLb.isHidden = true
                         }
                         
                     }
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không thể lấy được số lượng thông báo.", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không thể lấy được số lượng thông báo. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
             }else{
                 UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
