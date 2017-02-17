@@ -86,4 +86,4 @@ let CREATE_QUESTION = "ScreenCreateQuestion"
 let SEARCHS = "ScreenSearch"
 
 var listNotification = [ListNotificationEntity]()
-
+var listCate = [CateEntity]()

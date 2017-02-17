@@ -423,7 +423,12 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                         let jsonData = result as! NSDictionary
                         let entity = MainCommentEntity.init(dict: jsonData)
                         
-                        self.listComment.insert(entity, at: 0)
+                        if self.feedObj.postEntity.status == 1 {
+                            self.listComment.insert(entity, at: 1)
+                        }else{
+                            self.listComment.insert(entity, at: 0)
+                        }
+                        
                         self.feedObj.commentCount += 1
                         self.detailTbl.reloadData()
                         

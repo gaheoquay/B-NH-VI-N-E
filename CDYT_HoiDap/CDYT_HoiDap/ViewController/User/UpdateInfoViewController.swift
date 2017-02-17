@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegate {
+class UpdateInfoViewController: UIViewController {
     
     @IBOutlet weak var avaImg1: UIImageView!
     @IBOutlet weak var avaImg2: UIImageView!
@@ -16,17 +16,6 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
     @IBOutlet weak var nameLbl2: UILabel!
     @IBOutlet weak var logoutBtn: UIButton!
     @IBOutlet weak var fullnameTxt: UITextField!
-    @IBOutlet weak var verifyLbl: UILabel!
-    @IBOutlet weak var meidcalRadio: SSRadioButton!
-    @IBOutlet weak var jobPositionTxt: UITextField!
-    @IBOutlet weak var otherRadio: SSRadioButton!
-    @IBOutlet weak var jobTitleLbl: UILabel!
-    @IBOutlet weak var verifyLbl2: UILabel!
-    @IBOutlet weak var jobView1: UIView!
-    @IBOutlet weak var jobViewHeight1: NSLayoutConstraint!
-    @IBOutlet weak var jobView2: UIView!
-    @IBOutlet weak var jobViewHeight2: NSLayoutConstraint!
-    @IBOutlet weak var workPlaceTxt: UITextField!
     @IBOutlet weak var genderBtn: UIButton!
     @IBOutlet weak var dobBtn: UIButton!
     @IBOutlet weak var addressTxt: UITextField!
@@ -38,8 +27,22 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
     @IBOutlet weak var changePassViewHeight: NSLayoutConstraint!
     @IBOutlet weak var changePassView: UIView!
     @IBOutlet weak var updateBtn: UIButton!
+    @IBOutlet weak var emailTxt: UITextField!
+
+    @IBOutlet weak var verifyLb: UILabel!
+    @IBOutlet weak var verifyIcon: UIImageView!
+    @IBOutlet weak var departmentLbl: UILabel!
+    @IBOutlet weak var departmentTittle: UILabel!
+    @IBOutlet weak var jobTitle: UILabel!
+    @IBOutlet weak var jobLb: UILabel!
     
-    var radioButtonController: SSRadioButtonsController?
+    @IBOutlet weak var departmentTopConstant: NSLayoutConstraint!
+    @IBOutlet weak var departmentBottomConstant: NSLayoutConstraint!
+    @IBOutlet weak var jobTitleConstant: NSLayoutConstraint!
+    @IBOutlet weak var jobTitleBottomConstant: NSLayoutConstraint!
+    @IBOutlet weak var departmentSeperator: UILabel!
+    @IBOutlet weak var jobTitleSeperator: UILabel!
+    
     let pickerImageController = DKImagePickerController()
     var imageAssets = [DKAsset]()
     
@@ -84,10 +87,6 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
         
         logoutBtn.layer.cornerRadius = 8
         logoutBtn.clipsToBounds = true
-        
-        radioButtonController = SSRadioButtonsController(buttons: meidcalRadio, otherRadio)
-        radioButtonController!.delegate = self
-        radioButtonController!.shouldLetDeSelect = false
     }
     
     func getUserById(){
@@ -140,23 +139,9 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
             nameLbl2.isHidden = false
             nameLbl2.text = userToShow.nickname
             
-            jobView1.isHidden = true
-            jobViewHeight1.constant = 0
-            
-            jobView2.isHidden = false
-            jobViewHeight2.constant = 60
-            
-            if userToShow.isVerified {
-                verifyLbl2.text = "(đã được xác minh)"
-            }else{
-                verifyLbl2.text = "(chưa xác minh)"
-            }
-            jobTitleLbl.text = userToShow.job
-
             changePassViewHeight.constant = 0
             changePassView.isHidden = true
             
-            workPlaceTxt.isUserInteractionEnabled = false
             genderBtn.isUserInteractionEnabled = false
             dobBtn.isUserInteractionEnabled = false
             addressTxt.isUserInteractionEnabled = false
@@ -164,6 +149,13 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
             fullnameTxt.isUserInteractionEnabled = false
             
             updateBtn.isHidden = true
+            if userToShow.role == 1 && userToShow.isVerified == true {
+                verifyLb.text = "đã được xác minh"
+                verifyIcon.isHidden = false
+            }else{
+                verifyLb.text = ""
+                verifyIcon.isHidden = true
+            }
             
         }else{
             avaImg1.isHidden = false
@@ -181,27 +173,42 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
             nameLbl2.isHidden = true
             nameLbl2.text = ""
             
-            jobView1.isHidden = false
-            jobViewHeight1.constant = 140
-            
-            jobView2.isHidden = true
-            jobViewHeight2.constant = 0
-            
-            if userToShow.job != "" {
-                jobPositionTxt.text = userToShow.job
-                meidcalRadio.isSelected = true
-                otherRadio.isSelected = false
-            }else{
-                meidcalRadio.isSelected = false
-                otherRadio.isSelected = true
-            }
-            
             changePassViewHeight.constant = 35
             changePassView.isHidden = false
             updateBtn.isHidden = false
+            
+            verifyLb.text = ""
+            verifyIcon.isHidden = true
         }
         
-        workPlaceTxt.text = userToShow.company
+        if userToShow.role == 1 {
+            jobLb.text = userToShow.jobTitle == "" ? "chưa cập nhật" : userToShow.jobTitle
+            
+            if userToShow.departmentId != "" {
+                for item in listCate {
+                    if item.id == userToShow.departmentId {
+                        departmentLbl.text = item.name
+                    }
+                }
+            }else{
+                departmentLbl.text = "chưa cập nhật"
+            }
+            
+        }else{
+            departmentLbl.text = ""
+            departmentTittle.text = ""
+            jobTitle.text = ""
+            jobLb.text = ""
+            
+            departmentTopConstant.constant = 0
+            departmentBottomConstant.constant = 0
+            jobTitleConstant.constant = 0
+            jobTitleBottomConstant.constant = 0
+            
+            departmentSeperator.isHidden = true
+            jobTitleSeperator.isHidden = true
+
+        }
         
         if userToShow.gender == 1 {
             genderBtn.setTitle("Nam", for: UIControlState.normal)
@@ -223,6 +230,7 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
 
         imageUrl = userToShow.avatarUrl
         thumbnailUrl = userToShow.thumbnailAvatarUrl
+        emailTxt.text = userToShow.email
     }
     
     @IBAction func genderBtnTapAction(_ sender: Any) {
@@ -261,15 +269,6 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
                 self.dobBtn.setTitle("\(dateFormatter.string(from: date! as Date))", for: UIControlState.normal)
                 self.dobDate = date!.timeIntervalSince1970
             }
-        }
-    }
-    
-    //MARK: Check job
-    func didSelectButton(aButton: UIButton?) {
-        if aButton == meidcalRadio {
-            jobPositionTxt.isUserInteractionEnabled = true
-        }else{
-            jobPositionTxt.isUserInteractionEnabled = false
         }
     }
     
@@ -368,7 +367,6 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
     }
     
     func updateUserInfoToServer(){
-        let job = jobPositionTxt.text != "" ? jobPositionTxt.text : ""
         
         let updateParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
@@ -376,9 +374,9 @@ class UpdateInfoViewController: UIViewController, SSRadioButtonControllerDelegat
             "AvatarUrl": imageUrl,
             "ThumbnailAvatarUrl": thumbnailUrl,
             "FullName": fullnameTxt.text!,
-            "Job" : job!,
+            "Job" : "",
             "Address" : addressTxt.text!,
-            "Company" : workPlaceTxt.text!,
+            "Company" : "",
             "Gender" : genderType,
             "DOB" : dobDate,
             "Phone": phoneTxt.text!
