@@ -159,8 +159,13 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     if let result = response.result.value {
                         let jsonData = result as! NSDictionary
                         let count = jsonData["Count"] as! Int
-                        self.notiCountLb.text = " \(count) "
-                        self.notiCountLb.isHidden = false
+                        if count != 0 {
+                            self.notiCountLb.text = " \(count) "
+                            self.notiCountLb.isHidden = false
+                        }else{
+                            self.notiCountLb.text = ""
+                        }
+                        
                     }
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không thể lấy được số lượng thông báo.", cancelBtnTitle: "Đóng")

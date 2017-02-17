@@ -40,7 +40,6 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
     var ischeck = false
     
     var pickerFrame = CGRect(x: 0, y: 50, width: 270, height: 150)
-    var arrayCate = [CateEntity]()
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +55,6 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         if searchText != "" {
             titleTxt.text = searchText
         }
-        
-    
         
         viewCategory.layer.borderWidth = 1
         viewCategory.layer.cornerRadius = 4
@@ -131,7 +128,7 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         titleTxt.text = feedObj.postEntity.title
         contentTxt.text = feedObj.postEntity.content
         
-            for item in arrayCate {
+            for item in listCate {
                 if item.id == feedObj.postEntity.categoryId {
                     lbCate.text = item.name
                 }
@@ -433,15 +430,15 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         return 1
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return arrayCate.count
+        return listCate.count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return arrayCate[row].name
+        return listCate[row].name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        id = arrayCate[row].id
-        name = arrayCate[row].name
+        id = listCate[row].id
+        name = listCate[row].name
     }
 
     override func didReceiveMemoryWarning() {
@@ -460,19 +457,19 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
                 if status == 200{
                     if let result = response.result.value {
                         let json = result as! [NSDictionary]
+                        listCate.removeAll()
                         for element in json {
                             let entity = CateEntity.init(dictionary: element)
-                            self.arrayCate.append(entity)
+                            listCate.append(entity)
                         }
                     }
                     self.setupDataForUpdateQuestion()
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể lấy danh sách chuyên khoa. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
             }else{
                 UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
             }
-            Until.hideLoading()
         }
     }
     

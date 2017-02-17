@@ -33,9 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
       return true
     }
     gai.trackUncaughtExceptions = true  // report uncaught exceptions
-    
+    requestCate()
     return true
   }
+    
   func initSendBird(){
     let realm = try! Realm()
     let userEntity = realm.objects(UserEntity.self).first
@@ -82,6 +83,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
   }
 
+    
+    func requestCate() {
+        let cateParam : [String : Any] = [
+            "Auth": Until.getAuthKey()
+        ]
+        Alamofire.request(GET_CATE, method: .post, parameters: cateParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let json = result as! [NSDictionary]
+                        listCate.removeAll()
+                        for element in json {
+                            let entity = CateEntity.init(dictionary: element)
+                            listCate.append(entity)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
   func applicationWillResignActive(_ application: UIApplication) {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

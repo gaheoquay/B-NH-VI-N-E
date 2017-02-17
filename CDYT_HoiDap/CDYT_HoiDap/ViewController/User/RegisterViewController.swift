@@ -140,7 +140,7 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable {
             "Password": DataEncryption.getMD5(from: passString),
             "Nickname": nickString!,
             "FullName": "",
-            "Role": 1,
+            "Role": 0,
             "Job": "",
             "Address": "",
             "Phone": "",

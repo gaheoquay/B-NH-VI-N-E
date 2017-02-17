@@ -24,9 +24,11 @@ class UserEntity: Object {
     dynamic var phone = ""
     dynamic var socialId = ""
     dynamic var socialType = 0
-    dynamic var role = 1
+    dynamic var role = 0
     dynamic var reputationRate = 1
     dynamic var isVerified = false
+    dynamic var departmentId = ""
+    dynamic var jobTitle = ""
     dynamic var updatedDate : Double = 0
     dynamic var createdDate : Double = 0
 
@@ -77,6 +79,12 @@ class UserEntity: Object {
         }
         if let value = dictionary["SocialType"] as? Int {
             this.socialType = value
+        }
+        if let value = dictionary["DepartmentId"] as? String {
+            this.departmentId = value
+        }
+        if let value = dictionary["JobTitle"] as? String {
+            this.jobTitle = value
         }
         if let value = dictionary["Role"] as? Int {
             this.role = value
