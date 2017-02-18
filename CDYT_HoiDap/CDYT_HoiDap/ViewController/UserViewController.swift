@@ -10,13 +10,25 @@ import UIKit
 
 class UserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, QuestionTableViewCellDelegate {
   
+  @IBOutlet weak var viewFollowingQuestion: UIView!
+  @IBOutlet weak var layoutWidthViewFollowingQuestion: NSLayoutConstraint!
+  
+  @IBOutlet weak var viewQuestionWaitingToAnwser: UIView!
+  @IBOutlet weak var viewCreatedQuestion: UIView!
     @IBOutlet weak var notiCountLb: UILabel!
   @IBOutlet weak var viewUnLogin: UIView!
   @IBOutlet weak var avaImg: UIImageView!
   @IBOutlet weak var nicknameLbl: UILabel!
   @IBOutlet weak var questionTableView: UITableView!
-  var page = 1
+  var pageMyFeed = 1
   var listMyFeed = [FeedsEntity]()
+  var isMyFeed = false
+  var pageFollowing = 1
+  var listQuestionFollowing = [FeedsEntity]()
+  var isFollowing = true
+  var pageWaiting = 1
+  var listQuestionWaitingToAnwser = [FeedsEntity]()
+  var isWaiting = false
   var groupChannelListViewController: GroupChannelListViewController?
     
   override func viewDidLoad() {
@@ -27,8 +39,9 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     setUpUI()
     setupUserInfo()
     Until.showLoading()
-    getFeeds()
-    
+    getMyFeeds()
+    getFollowingFeed()
+    getWaitingFeed()
     if Until.getCurrentId() != "" {
         getListNotification()
     }
@@ -37,8 +50,8 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidAppear(_ animated: Bool) {
         Until.sendAndSetTracer(value: MY_PAGE)
-
     }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     let realm = try! Realm()
@@ -66,16 +79,56 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     initTable()
     setUpUI()
     setupUserInfo()
+    isMyFeed = true
+    isFollowing = false
+    isWaiting = false
+    pageMyFeed = 1
+    pageFollowing = 1
+    pageWaiting = 1
     listMyFeed.removeAll()
-    getFeeds()
+    listQuestionWaitingToAnwser.removeAll()
+    listQuestionFollowing.removeAll()
+    getMyFeeds()
+    getWaitingFeed()
+    getFollowingFeed()
   }
   func setUpUI(){
     avaImg.layer.cornerRadius = 10
     self.navigationController?.isNavigationBarHidden = true
-    
     notiCountLb.layer.cornerRadius = 5
     notiCountLb.layer.masksToBounds = true
+    setBackgroundView(view: viewFollowingQuestion, check: isFollowing)
+    setBackgroundView(view: viewCreatedQuestion, check: isMyFeed)
+    setBackgroundView(view: viewQuestionWaitingToAnwser, check: isWaiting)
+    questionTableView.reloadData()
   }
+  func setBackgroundView(view:UIView,check:Bool){
+    if check {
+      view.backgroundColor = UIColor.init(netHex: 0xECEDEF)
+    }else{
+      view.backgroundColor = UIColor.white
+    }
+  }
+  @IBAction func selectFollowingQuestion(_ sender: Any) {
+    isFollowing = true
+    isMyFeed = false
+    isWaiting = false
+    setUpUI()
+    
+  }
+  @IBAction func selectMyFeed(_ sender: Any) {
+    isFollowing = false
+    isMyFeed = true
+    isWaiting = false
+    setUpUI()
+  }
+  @IBAction func selectWaitingQuestion(_ sender: Any) {
+    isFollowing = false
+    isMyFeed = false
+    isWaiting = true
+    setUpUI()
+  }
+  
   func setupUserInfo(){
     let realm = try! Realm()
     let users = realm.objects(UserEntity.self)
@@ -86,6 +139,12 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     if userEntity != nil {
       avaImg.sd_setImage(with: URL.init(string: userEntity.avatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut"))
       nicknameLbl.text = userEntity.nickname
+      if userEntity.role == 1 {
+        layoutWidthViewFollowingQuestion.constant = UIScreen.main.bounds.width/3
+      }else{
+        layoutWidthViewFollowingQuestion.constant = UIScreen.main.bounds.width/2
+      }
+      self.view.layoutIfNeeded()
     }
   }
   func initTable(){
@@ -110,13 +169,31 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
   }
   
   func reloadData(){
-    page = 1
-    listMyFeed.removeAll()
-    getFeeds()
+    if isMyFeed {
+      pageMyFeed = 1
+      listMyFeed.removeAll()
+      getMyFeeds()
+    }else if isFollowing{
+      pageFollowing = 1
+      listQuestionFollowing.removeAll()
+      getFollowingFeed()
+    }else{
+      pageWaiting = 1
+      listQuestionWaitingToAnwser.removeAll()
+      getWaitingFeed()
+    }
   }
   func loadMore(){
-    page += 1
-    getFeeds()
+    if isMyFeed {
+      pageMyFeed += 1
+      getMyFeeds()
+    }else if isFollowing{
+      pageFollowing += 1
+      getFollowingFeed()
+    }else{
+      pageWaiting += 1
+      getWaitingFeed()
+    }
   }
     
     func getListNotification(){
@@ -178,11 +255,11 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-  func getFeeds(){
+  func getMyFeeds(){
     
     let hotParam : [String : Any] = [
       "Auth": Until.getAuthKey(),
-      "Page": page,
+      "Page": pageMyFeed,
       "Size": 10,
       "UserId": Until.getCurrentId(),
       "RequestedUserId" : Until.getCurrentId()
@@ -216,30 +293,115 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
   }
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if listMyFeed.count > 0 {
-      return listMyFeed.count + 1
-    }else{
-      return 0
+  func getFollowingFeed(){
+    
+    let hotParam : [String : Any] = [
+      "Auth": Until.getAuthKey(),
+      "Page": pageFollowing,
+      "Size": 10,
+      "UserId": Until.getCurrentId(),
+      "RequestedUserId" : Until.getCurrentId()
+    ]
+    
+    print(JSON.init(hotParam))
+    //    Until.showLoading()
+    Alamofire.request(GET_QUESTION_FOLLOWED, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+      if let status = response.response?.statusCode {
+        if status == 200{
+          if let result = response.result.value {
+            let jsonData = result as! [NSDictionary]
+            
+            for item in jsonData {
+              let entity = FeedsEntity.init(dictionary: item)
+              self.listQuestionFollowing.append(entity)
+            }
+            
+            self.questionTableView.reloadData()
+            
+          }
+        }else{
+          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        }
+      }else{
+        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+      }
+      Until.hideLoading()
+      self.questionTableView.pullToRefreshView?.stopAnimating()
+      self.questionTableView.infiniteScrollingView?.stopAnimating()
     }
+  }
+  func getWaitingFeed(){
+    
+    let hotParam : [String : Any] = [
+      "Auth": Until.getAuthKey(),
+      "Page": pageWaiting,
+      "Size": 10,
+      "UserId": Until.getCurrentId(),
+      "RequestedUserId" : Until.getCurrentId()
+    ]
+    
+    print(JSON.init(hotParam))
+    //    Until.showLoading()
+    Alamofire.request(GET_QUESTION_ASSIGN, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+      if let status = response.response?.statusCode {
+        if status == 200{
+          if let result = response.result.value {
+            let jsonData = result as! [NSDictionary]
+            
+            for item in jsonData {
+              let entity = FeedsEntity.init(dictionary: item)
+              self.listQuestionWaitingToAnwser.append(entity)
+            }
+            
+            self.questionTableView.reloadData()
+            
+          }
+        }else{
+          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        }
+      }else{
+        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+      }
+      Until.hideLoading()
+      self.questionTableView.pullToRefreshView?.stopAnimating()
+      self.questionTableView.infiniteScrollingView?.stopAnimating()
+    }
+  }
+
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if isMyFeed {
+      return listMyFeed.count
+    }
+    if isFollowing {
+      return listQuestionFollowing.count
+    }
+    if  isWaiting {
+      return listQuestionWaitingToAnwser.count
+    }
+    return 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if indexPath.row == 0 {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "RecentFeedTableViewCell") as! RecentFeedTableViewCell
-      cell.titleLbl.text = "Câu hỏi đã tạo"
-      return cell
-    }else{
-      let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
-      cell.indexPath = indexPath
-      cell.delegate = self
+    let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
+    cell.indexPath = indexPath
+    cell.delegate = self
+    if isMyFeed {
       if listMyFeed.count > 0 {
-        cell.feedEntity = listMyFeed[indexPath.row - 1]
+        cell.feedEntity = listMyFeed[indexPath.row]
         cell.setData()
       }
-      return cell
+    }else if isFollowing {
+      if listQuestionFollowing.count > 0 {
+        cell.feedEntity = listQuestionFollowing[indexPath.row]
+        cell.setData()
+      }
+    }else{
+      if listQuestionWaitingToAnwser.count > 0 {
+        cell.feedEntity = listQuestionWaitingToAnwser[indexPath.row]
+        cell.setData()
+      }
     }
+    return cell
   }
   
   @IBAction func notificationTapAction(_ sender: Any) {

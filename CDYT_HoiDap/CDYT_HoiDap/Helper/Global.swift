@@ -48,7 +48,8 @@ let UPDATE_SUBCOMMENT = BASE_URL + "/Post/UpdateSubComment"
 let FOLLOW_POST = BASE_URL + "/Post/FollowPost"
 let POLICY_RULE = BASE_URL + "/PolicyAndCondition"
 let GET_UNREAD_NOTIFICATION = BASE_URL + "/Notification/GetUnreadNotificationCount"
-
+let GET_QUESTION_FOLLOWED = BASE_URL + "/Post/GetQuestionFollowedByUserId"
+let GET_QUESTION_ASSIGN = BASE_URL + "/Post/GetQuestionAssignToUser"
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
 let NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"
