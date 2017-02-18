@@ -41,6 +41,7 @@ class GroupChannelListViewController: UIViewController, UITableViewDelegate, UIT
     }
     override func viewDidAppear(_ animated: Bool) {
         Until.sendAndSetTracer(value: MAIL_BOX)
+      refreshChannelList()
 
     }
     func addDelegates() {

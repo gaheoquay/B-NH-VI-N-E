@@ -18,7 +18,7 @@ class TagListViewController: UIViewController, UITableViewDataSource, UITableVie
       initTaleView()
         getHotTagFromServer()
     }
-    
+  
     override func viewDidAppear(_ animated: Bool) {
         Until.sendAndSetTracer(value: SLECT_TAG)
 

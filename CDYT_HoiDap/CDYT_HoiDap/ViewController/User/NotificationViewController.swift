@@ -11,15 +11,16 @@ import UIKit
 class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, QuestionDetailViewControllerDelegate ,CommentViewControllerDelegate {
   
   @IBOutlet weak var notifyTableView: UITableView!
-//    var listNotification : [ListNotificationEntity]()
-//    var listNotification : Results<ListNotificationEntity>!
     var page = 1
   override func viewDidLoad() {
     super.viewDidLoad()
     setupTableView()
+    
+  }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     Until.sendAndSetTracer(value: NOTIFICATION)
   }
-  
   //MARK: Set up table
   func setupTableView(){
     notifyTableView.dataSource = self
@@ -63,8 +64,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
       "Size": 20,
       "RequestedUserId" : Until.getCurrentId()
     ]
-    print(JSON.init(hotParam))
-
     Alamofire.request(GET_LIST_NOTIFICATION, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
         if status == 200{
@@ -92,8 +91,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
   //MARK: UITableViewDelegate, UITableViewDataSource
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//    let realm = try! Realm()
-//    listNotification = realm.objects(ListNotificationEntity.self)
     return listNotification.count
   }
   

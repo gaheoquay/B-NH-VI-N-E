@@ -75,6 +75,9 @@
 		8BC2C30C1E2333A800B68F72 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2C30B1E2333A800B68F72 /* ForgotPasswordViewController.swift */; };
 		8BC2C30E1E23379300B68F72 /* ListNotificationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2C30D1E23379300B68F72 /* ListNotificationEntity.swift */; };
 		8BC2C3101E2337C700B68F72 /* NotificationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2C30F1E2337C700B68F72 /* NotificationEntity.swift */; };
+		8BC380691E583D8D00DF154A /* DatKham.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC380681E583D8D00DF154A /* DatKham.png */; };
+		8BC3806D1E58481600DF154A /* SplashLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC3806C1E58481600DF154A /* SplashLogo.png */; };
+		8BC3806F1E58510E00DF154A /* ListDoctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC3806E1E58510E00DF154A /* ListDoctor.swift */; };
 		8BD49EF61E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49ED51E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.xib */; };
 		8BD49EF71E48215500C98E74 /* CreateGroupChannelUserListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49ED71E48215500C98E74 /* CreateGroupChannelUserListViewController.xib */; };
 		8BD49EF81E48215500C98E74 /* GroupChannelListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49ED91E48215500C98E74 /* GroupChannelListViewController.xib */; };
@@ -277,6 +280,9 @@
 		8BC2C30B1E2333A800B68F72 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		8BC2C30D1E23379300B68F72 /* ListNotificationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListNotificationEntity.swift; path = ../ListNotificationEntity.swift; sourceTree = "<group>"; };
 		8BC2C30F1E2337C700B68F72 /* NotificationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationEntity.swift; path = ../NotificationEntity.swift; sourceTree = "<group>"; };
+		8BC380681E583D8D00DF154A /* DatKham.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DatKham.png; sourceTree = "<group>"; };
+		8BC3806C1E58481600DF154A /* SplashLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashLogo.png; sourceTree = "<group>"; };
+		8BC3806E1E58510E00DF154A /* ListDoctor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDoctor.swift; sourceTree = "<group>"; };
 		8BD49ED61E48215500C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CreateGroupChannelSelectOptionViewController.xib; sourceTree = "<group>"; };
 		8BD49ED81E48215500C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CreateGroupChannelUserListViewController.xib; sourceTree = "<group>"; };
 		8BD49EDA1E48215500C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GroupChannelListViewController.xib; sourceTree = "<group>"; };
@@ -464,6 +470,8 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8BC3806C1E58481600DF154A /* SplashLogo.png */,
+				8BC380681E583D8D00DF154A /* DatKham.png */,
 				A663AB611E56B7C000A5AD4A /* Verified.png */,
 				0F36980B1E54013C004B028D /* Ask copy.png */,
 				0F36980C1E54013C004B028D /* LogoMarker.png */,
@@ -853,6 +861,7 @@
 				A68A95121E1518E10067736E /* SubCommentEntity.swift */,
 				A68A95141E151B490067736E /* MainCommentEntity.swift */,
 				0F17AB181E51BAC2008BA308 /* CateEntity.swift */,
+				8BC3806E1E58510E00DF154A /* ListDoctor.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -997,6 +1006,7 @@
 				A60430FD1E2344DA000216FB /* dropdownicon.png in Resources */,
 				A6417E231E13B68D00BD2D75 /* SettingTableViewCell.xib in Resources */,
 				A6C463DB1E25DB910046A367 /* RecentFeedTableViewCell.xib in Resources */,
+				8BC380691E583D8D00DF154A /* DatKham.png in Resources */,
 				A60430F61E232D49000216FB /* Change_Ava.png in Resources */,
 				A67311D51E164FC400BCE308 /* MoreCommentTableViewCell.xib in Resources */,
 				8BD49EF61E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.xib in Resources */,
@@ -1012,6 +1022,7 @@
 				A663AB621E56B7C000A5AD4A /* Verified.png in Resources */,
 				8B3A13411E10F454005DBC6E /* AvaDefaut.png in Resources */,
 				A6CD32D01E4C2C9400FA2B21 /* GoogleService-Info.plist in Resources */,
+				8BC3806D1E58481600DF154A /* SplashLogo.png in Resources */,
 				8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */,
 				8B3A13651E10F454005DBC6E /* tag_mark.png in Resources */,
 				0F17AB151E51A682008BA308 /* CheckList.png in Resources */,
@@ -1104,6 +1115,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BC3806F1E58510E00DF154A /* ListDoctor.swift in Sources */,
 				8B87CD2C1E1365A400DA8A33 /* AuthorEntity.swift in Sources */,
 				8B3A13701E10F454005DBC6E /* DataEncryption.m in Sources */,
 				8BD49F6D1E482D1100C98E74 /* ParticipantListTableViewCell.swift in Sources */,

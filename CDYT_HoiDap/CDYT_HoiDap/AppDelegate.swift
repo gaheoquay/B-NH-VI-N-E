@@ -18,10 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     registerNotification(application: application)
+    UIApplication.shared.statusBarStyle = .lightContent
     SBDMain.initWithApplicationId(SENDBIRD_APPKEY)
     //    SBDMain.setLogLevel(SBDLogLevel.debug)
     initSendBird()
-    
+    requestCate()
+
     // Configure tracker from GoogleService-Info.plist.
     var configureError: NSError?
     GGLContext.sharedInstance().configureWithError(&configureError)
@@ -33,7 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
       return true
     }
     gai.trackUncaughtExceptions = true  // report uncaught exceptions
-    requestCate()
     return true
   }
     

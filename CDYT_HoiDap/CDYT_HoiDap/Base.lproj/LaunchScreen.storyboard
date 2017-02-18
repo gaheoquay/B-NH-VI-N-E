@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,16 +21,81 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="Sjh-Zg-Tzs">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BỆNH VIỆN E" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGd-WZ-RUr">
+                                <rect key="frame" x="129" y="322" width="117" height="23"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <color key="textColor" red="0.074509803921568626" green="0.57647058823529407" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chăm sóc sức khỏe chủ động" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9op-HW-A5l">
+                                <rect key="frame" x="8" y="353" width="359" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.52941176470588236" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Mno-8C-SWa">
+                                <rect key="frame" x="137" y="190" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="0uB-XR-pd6"/>
+                                    <constraint firstAttribute="width" constant="100" id="wXv-Wi-RES"/>
+                                </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQD-MD-bZ3">
+                                <rect key="frame" x="8" y="639" width="359" height="20"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="©">
+                                        <attributes>
+                                            <color key="NSColor" red="0.38431372549019605" green="0.38431372549019605" blue="0.38431372549019605" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="17" name="Helvetica-Bold"/>
+                                            <font key="NSOriginalFont" size="17" name="Helvetica-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="  ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.38431372549019605" green="0.38431372549019605" blue="0.38431372549019605" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Một sản phẩm của">
+                                        <attributes>
+                                            <color key="NSColor" red="0.38431372549019605" green="0.38431372549019605" blue="0.38431372549019605" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="16" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.38431372549019605" green="0.38431372549019605" blue="0.38431372549019605" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="ISORA SOFT">
+                                        <attributes>
+                                            <color key="NSColor" red="0.38431372549019605" green="0.38431372549019605" blue="0.38431372549019605" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="16" name="Helvetica-Bold"/>
+                                            <font key="NSOriginalFont" size="16" name="Helvetica-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Sjh-Zg-Tzs" secondAttribute="trailing" id="Lei-cX-AbJ"/>
-                            <constraint firstItem="Sjh-Zg-Tzs" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="MSN-Im-uqD"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Sjh-Zg-Tzs" secondAttribute="bottom" id="dIo-TY-bpG"/>
-                            <constraint firstItem="Sjh-Zg-Tzs" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="h8g-GT-hoO"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="dQD-MD-bZ3" secondAttribute="bottom" constant="8" id="47N-ZA-CR7"/>
+                            <constraint firstItem="KGd-WZ-RUr" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="4Tv-vS-SN3"/>
+                            <constraint firstItem="9op-HW-A5l" firstAttribute="top" secondItem="KGd-WZ-RUr" secondAttribute="bottom" constant="8" id="5o4-ki-cDq"/>
+                            <constraint firstAttribute="trailing" secondItem="9op-HW-A5l" secondAttribute="trailing" constant="8" id="DJH-95-Dve"/>
+                            <constraint firstItem="KGd-WZ-RUr" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="JD6-5a-UeX"/>
+                            <constraint firstAttribute="trailing" secondItem="dQD-MD-bZ3" secondAttribute="trailing" constant="8" id="Puy-bW-ZCi"/>
+                            <constraint firstItem="Mno-8C-SWa" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="RQt-eW-w0k"/>
+                            <constraint firstItem="dQD-MD-bZ3" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="8" id="Xrf-HF-rkf"/>
+                            <constraint firstItem="9op-HW-A5l" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="8" id="mfz-uX-Jcm"/>
+                            <constraint firstItem="KGd-WZ-RUr" firstAttribute="top" secondItem="Mno-8C-SWa" secondAttribute="bottom" constant="32" id="zIA-pP-fKf"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -40,6 +105,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Splash.png" width="375" height="667"/>
+        <image name="SplashLogo.png" width="293" height="281"/>
     </resources>
 </document>
