@@ -43,16 +43,16 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         registerNotification()
         configTable()
-
+        
         if questionID != "" {
             getPostBy(postId: questionID)
         }else{
             setupMarkerForQuestion()
             getListCommentByPostID(postId: feedObj.postEntity.id)
         }
-      if notification != nil && !(notification.notificaiton?.isRead)! {
-        setReadNotification()
-      }
+        if notification != nil && !(notification.notificaiton?.isRead)! {
+            setReadNotification()
+        }
         configInputBar()
         setupImagePicker()
         
@@ -178,7 +178,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     //MARK: Receive notify when have new comment 
     func reloadCommentData() {
-        detailTbl.triggerPullToRefresh()
+        getListCommentByPostID(postId: feedObj.postEntity.id)
     }
     
     func configInputBar(){
@@ -358,7 +358,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                             let entity = MainCommentEntity.init(dict: item)
                             self.listComment.append(entity)
                         }
-                        
+                        self.feedObj.commentCount = self.listComment.count
                         self.detailTbl.reloadData()
                         
                     }
@@ -383,7 +383,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             }else{
                 let stringComent = textInputBar.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
                 if stringComent == "" {
-                    let alert = UIAlertController(title: "Thông Báo", message: "Bình luận không được để trống", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Thông Báo", message: "Bình luận không được để khoảng trắng.", preferredStyle: .alert)
                     let OkeAction: UIAlertAction = UIAlertAction(title: "Đóng", style: .cancel) { action -> Void in
                         self.textInputBar.becomeFirstResponder()
                     }
@@ -441,7 +441,6 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                         self.imgCollectionView.reloadData()
                         self.view.layoutIfNeeded()
                         
-//                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: COMMENT_ON_COMMENT_SUCCESS), object: nil)
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: nil)
   
                     }
@@ -501,10 +500,11 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
                                 let imageThumb = dic["ThumbnailUrl"] as! String
                                 self.thumImgCommentDic.append(imageThumb)
                             }
+                            Until.hideLoading()
+
                             self.sendCommentToServer()
                         }
                     }
-                    Until.hideLoading()
                 }
                 
             case .failure(let encodingError):
