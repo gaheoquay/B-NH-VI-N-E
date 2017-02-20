@@ -59,6 +59,13 @@
 		8B3A138A1E10FD58005DBC6E /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A13891E10FD58005DBC6E /* QuestionViewController.swift */; };
 		8B3A13901E112129005DBC6E /* KeyWordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A138E1E112129005DBC6E /* KeyWordTableViewCell.swift */; };
 		8B3A13911E112129005DBC6E /* KeyWordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B3A138F1E112129005DBC6E /* KeyWordTableViewCell.xib */; };
+		8B79D0DE1E5A8E2C0010C5C0 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79D0DD1E5A8E2C0010C5C0 /* AboutViewController.swift */; };
+		8B79D0E01E5A91C80010C5C0 /* ListDoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79D0DF1E5A91C80010C5C0 /* ListDoctorViewController.swift */; };
+		8B79D0E21E5A91F30010C5C0 /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79D0E11E5A91F30010C5C0 /* DescriptionViewController.swift */; };
+		8B79D0E51E5A9B350010C5C0 /* DoctorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79D0E31E5A9B350010C5C0 /* DoctorTableViewCell.swift */; };
+		8B79D0E61E5A9B350010C5C0 /* DoctorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B79D0E41E5A9B350010C5C0 /* DoctorTableViewCell.xib */; };
+		8B79D0E81E5AA7D20010C5C0 /* DetailEdit.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B79D0E71E5AA7D20010C5C0 /* DetailEdit.png */; };
+		8B79D0EA1E5AAB1A0010C5C0 /* DetailEditUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B79D0E91E5AAB1A0010C5C0 /* DetailEditUp.png */; };
 		8B7AB6BE1E1211E20015DFBE /* KeywordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7AB6BC1E1211E20015DFBE /* KeywordCollectionViewCell.swift */; };
 		8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B7AB6BD1E1211E20015DFBE /* KeywordCollectionViewCell.xib */; };
 		8B813CB31E15052E0043F7EF /* Home.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B813CB01E15052E0043F7EF /* Home.png */; };
@@ -77,7 +84,7 @@
 		8BC2C3101E2337C700B68F72 /* NotificationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2C30F1E2337C700B68F72 /* NotificationEntity.swift */; };
 		8BC380691E583D8D00DF154A /* DatKham.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC380681E583D8D00DF154A /* DatKham.png */; };
 		8BC3806D1E58481600DF154A /* SplashLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC3806C1E58481600DF154A /* SplashLogo.png */; };
-		8BC3806F1E58510E00DF154A /* ListDoctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC3806E1E58510E00DF154A /* ListDoctor.swift */; };
+		8BC3806F1E58510E00DF154A /* ListDoctorEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC3806E1E58510E00DF154A /* ListDoctorEntity.swift */; };
 		8BD49EF61E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49ED51E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.xib */; };
 		8BD49EF71E48215500C98E74 /* CreateGroupChannelUserListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49ED71E48215500C98E74 /* CreateGroupChannelUserListViewController.xib */; };
 		8BD49EF81E48215500C98E74 /* GroupChannelListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BD49ED91E48215500C98E74 /* GroupChannelListViewController.xib */; };
@@ -264,6 +271,13 @@
 		8B3A13891E10FD58005DBC6E /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		8B3A138E1E112129005DBC6E /* KeyWordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyWordTableViewCell.swift; sourceTree = "<group>"; };
 		8B3A138F1E112129005DBC6E /* KeyWordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyWordTableViewCell.xib; sourceTree = "<group>"; };
+		8B79D0DD1E5A8E2C0010C5C0 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		8B79D0DF1E5A91C80010C5C0 /* ListDoctorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDoctorViewController.swift; sourceTree = "<group>"; };
+		8B79D0E11E5A91F30010C5C0 /* DescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
+		8B79D0E31E5A9B350010C5C0 /* DoctorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorTableViewCell.swift; sourceTree = "<group>"; };
+		8B79D0E41E5A9B350010C5C0 /* DoctorTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoctorTableViewCell.xib; sourceTree = "<group>"; };
+		8B79D0E71E5AA7D20010C5C0 /* DetailEdit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DetailEdit.png; sourceTree = "<group>"; };
+		8B79D0E91E5AAB1A0010C5C0 /* DetailEditUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DetailEditUp.png; sourceTree = "<group>"; };
 		8B7AB6BC1E1211E20015DFBE /* KeywordCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordCollectionViewCell.swift; sourceTree = "<group>"; };
 		8B7AB6BD1E1211E20015DFBE /* KeywordCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeywordCollectionViewCell.xib; sourceTree = "<group>"; };
 		8B813CB01E15052E0043F7EF /* Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home.png; sourceTree = "<group>"; };
@@ -282,7 +296,7 @@
 		8BC2C30F1E2337C700B68F72 /* NotificationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationEntity.swift; path = ../NotificationEntity.swift; sourceTree = "<group>"; };
 		8BC380681E583D8D00DF154A /* DatKham.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DatKham.png; sourceTree = "<group>"; };
 		8BC3806C1E58481600DF154A /* SplashLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashLogo.png; sourceTree = "<group>"; };
-		8BC3806E1E58510E00DF154A /* ListDoctor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDoctor.swift; sourceTree = "<group>"; };
+		8BC3806E1E58510E00DF154A /* ListDoctorEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDoctorEntity.swift; sourceTree = "<group>"; };
 		8BD49ED61E48215500C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CreateGroupChannelSelectOptionViewController.xib; sourceTree = "<group>"; };
 		8BD49ED81E48215500C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CreateGroupChannelUserListViewController.xib; sourceTree = "<group>"; };
 		8BD49EDA1E48215500C98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GroupChannelListViewController.xib; sourceTree = "<group>"; };
@@ -470,6 +484,8 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8B79D0E91E5AAB1A0010C5C0 /* DetailEditUp.png */,
+				8B79D0E71E5AA7D20010C5C0 /* DetailEdit.png */,
 				8BC3806C1E58481600DF154A /* SplashLogo.png */,
 				8BC380681E583D8D00DF154A /* DatKham.png */,
 				A663AB611E56B7C000A5AD4A /* Verified.png */,
@@ -662,6 +678,9 @@
 				A625AD2C1E24CC5700953B0B /* CommentViewController.swift */,
 				A62F585F1E2CA78100459408 /* EditCommentViewController.swift */,
 				8B0D35F41E56EB2D002CF784 /* BookingViewController.swift */,
+				8B79D0DD1E5A8E2C0010C5C0 /* AboutViewController.swift */,
+				8B79D0DF1E5A91C80010C5C0 /* ListDoctorViewController.swift */,
+				8B79D0E11E5A91F30010C5C0 /* DescriptionViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -683,6 +702,8 @@
 				A6E431F21E14A6510092EF85 /* AddImageCollectionViewCell.xib */,
 				8B1AD45C1E1B97F000D55543 /* SearchTableViewCell.swift */,
 				8B1AD45D1E1B97F000D55543 /* SearchTableViewCell.xib */,
+				8B79D0E31E5A9B350010C5C0 /* DoctorTableViewCell.swift */,
+				8B79D0E41E5A9B350010C5C0 /* DoctorTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -861,7 +882,7 @@
 				A68A95121E1518E10067736E /* SubCommentEntity.swift */,
 				A68A95141E151B490067736E /* MainCommentEntity.swift */,
 				0F17AB181E51BAC2008BA308 /* CateEntity.swift */,
-				8BC3806E1E58510E00DF154A /* ListDoctor.swift */,
+				8BC3806E1E58510E00DF154A /* ListDoctorEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -966,6 +987,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A609C2531E1B8F9F006BFBAE /* delete_img.png in Resources */,
+				8B79D0E61E5A9B350010C5C0 /* DoctorTableViewCell.xib in Resources */,
 				8BD49F2A1E482C1500C98E74 /* IncomingFileMessageTableViewCell.xib in Resources */,
 				A68A95051E14ECFB0067736E /* DetailQuestionTableViewCell.xib in Resources */,
 				8BF149701E14BF9C00766F8F /* Camera.png in Resources */,
@@ -1008,7 +1030,9 @@
 				A6C463DB1E25DB910046A367 /* RecentFeedTableViewCell.xib in Resources */,
 				8BC380691E583D8D00DF154A /* DatKham.png in Resources */,
 				A60430F61E232D49000216FB /* Change_Ava.png in Resources */,
+				8B79D0E81E5AA7D20010C5C0 /* DetailEdit.png in Resources */,
 				A67311D51E164FC400BCE308 /* MoreCommentTableViewCell.xib in Resources */,
+				8B79D0EA1E5AAB1A0010C5C0 /* DetailEditUp.png in Resources */,
 				8BD49EF61E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.xib in Resources */,
 				8BD49F5B1E482D1100C98E74 /* BlockedUserListViewController.xib in Resources */,
 				8B3A13441E10F454005DBC6E /* Back.png in Resources */,
@@ -1115,13 +1139,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BC3806F1E58510E00DF154A /* ListDoctor.swift in Sources */,
+				8BC3806F1E58510E00DF154A /* ListDoctorEntity.swift in Sources */,
 				8B87CD2C1E1365A400DA8A33 /* AuthorEntity.swift in Sources */,
 				8B3A13701E10F454005DBC6E /* DataEncryption.m in Sources */,
 				8BD49F6D1E482D1100C98E74 /* ParticipantListTableViewCell.swift in Sources */,
 				A62F58601E2CA78100459408 /* EditCommentViewController.swift in Sources */,
 				8B3A13751E10F454005DBC6E /* TPKeyboardAvoidingTableView.m in Sources */,
+				8B79D0E21E5A91F30010C5C0 /* DescriptionViewController.swift in Sources */,
 				A68A95081E14ED1C0067736E /* CommentTableViewCell.swift in Sources */,
+				8B79D0E51E5A9B350010C5C0 /* DoctorTableViewCell.swift in Sources */,
 				8B87CD301E13681200DA8A33 /* FeedsEntity.swift in Sources */,
 				8BC2C30E1E23379300B68F72 /* ListNotificationEntity.swift in Sources */,
 				A632043C1E49BB0A00B9152A /* PolicyAndRuleViewController.swift in Sources */,
@@ -1172,6 +1198,7 @@
 				8BD49F681E482D1100C98E74 /* ParticipantListViewController.swift in Sources */,
 				A6D083CB1E12803C007EA4D9 /* HotTagEntity.swift in Sources */,
 				8B3A13811E10F46B005DBC6E /* Global.swift in Sources */,
+				8B79D0DE1E5A8E2C0010C5C0 /* AboutViewController.swift in Sources */,
 				A68A95131E1518E10067736E /* SubCommentEntity.swift in Sources */,
 				8BD49F601E482D1100C98E74 /* CreateOpenChannelViewController.swift in Sources */,
 				A6417E221E13B68D00BD2D75 /* SettingTableViewCell.swift in Sources */,
@@ -1185,6 +1212,7 @@
 				8B3A13761E10F454005DBC6E /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				8B3A13791E10F454005DBC6E /* RAMFumeAnimation.swift in Sources */,
 				8BD49F341E482C1600C98E74 /* OutgoingImageFileMessageTableViewCell.swift in Sources */,
+				8B79D0E01E5A91C80010C5C0 /* ListDoctorViewController.swift in Sources */,
 				0F17AB191E51BAC2008BA308 /* CateEntity.swift in Sources */,
 				8B0D35F51E56EB2D002CF784 /* BookingViewController.swift in Sources */,
 				8BD49F651E482D1100C98E74 /* OpenChannelChattingViewController.swift in Sources */,

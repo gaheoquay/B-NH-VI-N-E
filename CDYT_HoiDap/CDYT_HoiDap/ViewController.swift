@@ -217,6 +217,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
         
     }
+  @IBAction func gotoAbout(_ sender: Any) {
+    let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AboutViewController") as! AboutViewController
+    self.navigationController?.pushViewController(viewController, animated: true)
+  }
     
     //MARK: receive notifiy when mark an comment is solution
     func reloadDataFromServer(notification : Notification){
