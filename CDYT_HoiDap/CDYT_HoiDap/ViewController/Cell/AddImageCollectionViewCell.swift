@@ -7,13 +7,23 @@
 //
 
 import UIKit
+protocol AddImageCollectionViewCellDelegate {
+    func deleteImageAction(indexPath : IndexPath)
+}
 
 class AddImageCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
+    var indexPath = IndexPath()
+    @IBOutlet weak var deleteBtn: UIButton!
+    var delegate : AddImageCollectionViewCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
+    @IBAction func removeImage(_ sender: Any) {
+        delegate?.deleteImageAction(indexPath: indexPath)
+    }
 }

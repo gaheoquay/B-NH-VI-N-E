@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,UIPickerViewDelegate,UIPickerViewDataSource {
+class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,UIPickerViewDelegate,UIPickerViewDataSource, AddImageCollectionViewCellDelegate {
 
     @IBOutlet weak var titleTxt: UITextField!
     @IBOutlet weak var contentTxt: UITextView!
@@ -46,7 +46,7 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         requestCate()
         registerNotification()
         configImageCollectionView()
-        imgClvheight.constant = 0
+//        imgClvheight.constant = 0
         keyboardViewHeight.constant = 0
         configUI()
 
@@ -84,7 +84,7 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         pickerImageController.assetType = DKImagePickerControllerAssetType.allPhotos
         pickerImageController.didSelectAssets = { [unowned self] ( assets: [DKAsset]) in
             self.imageAssets = assets
-            if assets.count == 0 {
+            if assets.count == 0 && self.feedObj.postEntity.imageUrls.count == 0 {
                 self.imgClvheight.constant = 0
             }else{
                 self.imgClvheight.constant = 110
@@ -111,9 +111,9 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
             postBtn.setTitle("Cập nhật", for: .normal)
             titleNaviBarLbl.text = "Sửa câu hỏi"
             titleTxt.isEnabled = false
-            imgClvheight.constant = 0
-            addImgView.isHidden = true
-            addImgViewHeight.constant = 0
+//            imgClvheight.constant = 0
+//            addImgView.isHidden = true
+//            addImgViewHeight.constant = 0
             
 //            setupDataForUpdateQuestion()
         }else{
@@ -121,11 +121,19 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
             titleNaviBarLbl.text = "Đặt câu hỏi"
             titleTxt.isEnabled = true
         }
+        
+        if self.imageAssets.count == 0 && self.feedObj.postEntity.imageUrls.count == 0 {
+            self.imgClvheight.constant = 0
+        }else{
+            self.imgClvheight.constant = 110
+        }
     }
     
     //MARK: Setup UI for update question view
     func setupDataForUpdateQuestion(){
-        titleTxt.text = feedObj.postEntity.title
+        if searchText == "" {
+            titleTxt.text = feedObj.postEntity.title
+        }
         contentTxt.text = feedObj.postEntity.content
         
             for item in listCate {
@@ -147,18 +155,27 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
             btnSwitch.setOn(true, animated: true)
         }
         
+        imgClv.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageAssets.count
+        return imageAssets.count + feedObj.postEntity.imageUrls.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddImageCollectionViewCell", for: indexPath) as! AddImageCollectionViewCell
-        let asset = imageAssets[indexPath.row]
-        asset.fetchOriginalImage(true) { (image, info) in
-            cell.imageView.image = image
+        if indexPath.row >= feedObj.postEntity.imageUrls.count {
+            let asset = imageAssets[indexPath.row - feedObj.postEntity.imageUrls.count]
+            asset.fetchOriginalImage(true) { (image, info) in
+                cell.imageView.image = image
+            }
+        }else{
+            cell.imageView.sd_setImage(with: URL.init(string: feedObj.postEntity.imageUrls[indexPath.row]), placeholderImage: #imageLiteral(resourceName: "placeholder_wide.png"))
         }
+        cell.indexPath = indexPath
+        cell.deleteBtn.isHidden = false
+        cell.delegate = self
+    
         return cell
     }
     
@@ -176,8 +193,13 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
                 images.append(photo)
             }
         }
-        let browser = SKPhotoBrowser(photos: images)
         
+        for itemUrl in self.feedObj.postEntity.imageUrls {
+            let photo = SKPhoto.photoWithImageURL(itemUrl, holder: #imageLiteral(resourceName: "placeholder_wide.png"))
+            images.append(photo)
+        }
+        
+        let browser = SKPhotoBrowser(photos: images)
         self.present(browser, animated: true, completion: nil)
     }
     
@@ -194,6 +216,15 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         }else{
             return ""
         }
+    }
+    //MARK: AddImageCollectionViewCellDelegate
+    func deleteImageAction(indexPath: IndexPath) {
+        if indexPath.row >= feedObj.postEntity.imageUrls.count {
+            imageAssets.remove(at: indexPath.row - feedObj.postEntity.imageUrls.count)
+        }else{
+            feedObj.postEntity.imageUrls.remove(at: indexPath.row)
+        }
+        imgClv.reloadData()
     }
     
     //MARK: show keyboard
@@ -215,7 +246,11 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
             UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: validateDataQuestion(), cancelBtnTitle: "Đóng")
         }else{
             if isEditPost {
-                updateQuestionToServer()
+                if imageAssets.count > 0 {
+                    uploadImage()
+                }else{
+                    updateQuestionToServer()
+                }
             }else{
                 if imageAssets.count > 0 {
                     uploadImage()
@@ -248,12 +283,21 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
                             let json = result as! [NSDictionary]
                             for dic in json {
                                 let imageUrl = dic["ImageUrl"] as! String
-                                self.imageDic.append(imageUrl)
-                                
                                 let imageThumb = dic["ThumbnailUrl"] as! String
-                                self.thumImgDic.append(imageThumb)
+                                if self.isEditPost {
+                                    self.feedObj.postEntity.imageUrls.append(imageUrl)
+                                    self.feedObj.postEntity.thumbnailImageUrls.append(imageThumb)
+                                }else{
+                                    self.imageDic.append(imageUrl)
+                                    self.thumImgDic.append(imageThumb)
+                                }
                             }
-                            self.sendNewQuestionToServer()
+                            
+                            if self.isEditPost {
+                                self.updateQuestionToServer()
+                            }else{
+                                self.sendNewQuestionToServer()
+                            }
                         }
                     }
                     Until.hideLoading()

@@ -183,7 +183,10 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddImageCollectionViewCell", for: indexPath) as! AddImageCollectionViewCell
-                cell.imageView.sd_setImage(with: URL.init(string: feed.postEntity.thumbnailImageUrls[indexPath.row]), placeholderImage: UIImage.init(named: "placeholder_wide.png"))
+                cell.imageView.sd_setImage(with: URL.init(string: feed.postEntity.thumbnailImageUrls[indexPath.row]), placeholderImage: UIImage.init(named:
+                    "placeholder_wide.png"))
+            cell.deleteBtn.isHidden = true
+
             return cell
         }
     }

@@ -639,6 +639,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         asset.fetchOriginalImage(true) { (image, info) in
             cell.imageView.image = image
         }
+        cell.deleteBtn.isHidden = true
         return cell
     }
     
