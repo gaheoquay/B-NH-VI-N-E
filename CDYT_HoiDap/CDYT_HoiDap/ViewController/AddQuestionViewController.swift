@@ -446,8 +446,6 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
         // Dispose of any resources that can be recreated.
     }
     
-  
-    
     func requestCate() {
         let cateParam : [String : Any] = [
             "Auth": Until.getAuthKey()

@@ -259,6 +259,18 @@ class CommentTableViewCell: UITableViewCell {
         leftViewWidth.constant = 60
         avaImgHeight.constant = 30
         
+        if mainComment.author.role == 1 {
+            for item in listCate {
+                if mainComment.author.departmentId == item.id {
+                    departmantLb.text = item.name
+                }
+            }
+            verifyIconHeight.constant = 20
+            nameLbl.textColor = UIColor().hexStringToUIColor(hex: "01A7FA")
+        }else{
+            departmantLb.text = ""
+            verifyIconHeight.constant = 0
+        }
         
     }
     

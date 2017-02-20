@@ -96,7 +96,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "NotifyTableViewCell") as! NotifyTableViewCell
-    cell.setData(entity: listNotification[indexPath.row])
+    if listNotification.count > 0 {
+        cell.setData(entity: listNotification[indexPath.row])
+    }
     return cell
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
