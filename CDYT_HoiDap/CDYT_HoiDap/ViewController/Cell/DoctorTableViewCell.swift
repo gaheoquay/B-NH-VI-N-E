@@ -26,6 +26,6 @@ class DoctorTableViewCell: UITableViewCell {
   func setData(entity:AuthorEntity){
     imgProfile.sd_setImage(with: URL.init(string: entity.avatarUrl), placeholderImage: #imageLiteral(resourceName: "AvaDefaut.png"))
     lbName.text = entity.fullname
-    lbJob.text = entity.jobTitle
+    lbJob.text = entity.jobTitle + " - Bệnh Viện E"
   }
 }

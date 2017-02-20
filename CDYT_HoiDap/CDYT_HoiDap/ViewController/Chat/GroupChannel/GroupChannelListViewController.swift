@@ -23,7 +23,6 @@ class GroupChannelListViewController: UIViewController, UITableViewDelegate, UIT
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         self.tableView.delegate = self
         self.tableView.dataSource = self

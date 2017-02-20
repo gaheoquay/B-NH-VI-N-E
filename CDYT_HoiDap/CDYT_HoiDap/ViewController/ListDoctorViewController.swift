@@ -32,8 +32,8 @@ class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableVi
   func initTableView(){
     tbDoctor.delegate = self
     tbDoctor.dataSource = self
-    tbDoctor.estimatedRowHeight = 9999
-    tbDoctor.rowHeight = UITableViewAutomaticDimension
+//    tbDoctor.estimatedRowHeight = 9999
+//    tbDoctor.rowHeight = UITableViewAutomaticDimension
     tbDoctor.register(UINib.init(nibName: "DoctorTableViewCell", bundle: nil), forCellReuseIdentifier: "DoctorTableViewCell")
   }
 
@@ -94,6 +94,9 @@ class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableVi
   }
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return 50
+  }
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 77
   }
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let entity = listDoctor[section]
