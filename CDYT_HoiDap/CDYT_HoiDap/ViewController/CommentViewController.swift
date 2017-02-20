@@ -350,6 +350,7 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         asset.fetchOriginalImage(true) { (image, info) in
             cell.imageView.image = image
         }
+        cell.deleteBtn.isHidden = true
         return cell
     }
     
