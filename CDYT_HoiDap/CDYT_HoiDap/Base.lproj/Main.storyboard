@@ -2008,14 +2008,79 @@
                         <viewControllerLayoutGuide type="bottom" id="3RV-yr-ahr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Bfs-gD-R4Y">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="2568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cgy-Db-zZO">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="2568"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LH5-zi-fln">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" id="EB3-qG-LM5"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LỜI GIỚI THIỆU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbD-CS-coX">
+                                        <rect key="frame" x="16" y="16" width="123.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" red="0.074509803920000006" green="0.57647058819999997" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19m-RQ-F54">
+                                        <rect key="frame" x="12" y="45" width="296" height="419"/>
+                                        <mutableString key="text">Bệnh viện E là bệnh viện đa khoa trung ương hạng 1 trực thuộc Bộ Y tế. Bệnh viện có hai cơ sở khám chữa bệnh: cơ sở chính tại Nghĩa tân, Cầu giấy và một phòng khám tại 13 Phan Huy Chú. Có 900 cán bộ viên chức trong đó có 1 Giáo sư, 2 Phó giáo sư, 8 Tiến sĩ, 34 bác sĩ CKII, 32 thạc sĩ; gần 1.000 giường bệnh với 11 phòng chức năng, 27 khoa lâm sàng, 8 khoa cận lâm sàng, 4 trung tâm thế mạnh: tim mạch, tiêu hóa, cơ xương khớp và sọ não. Hiện nay, nhu cầu của bệnh nhân đến khám chữa bệnh tại các bệnh viện và cơ sở y tế rất cao, dịch vụ tư vấn sức khỏe trực tuyến, khám bệnh và lấy mẫu xét nghiệm tại nhà đặc biệt phù hợp với những người bệnh không có điều kiện đến bệnh viện, người già và trẻ nhỏ - sẽ không mất thời gian chờ đợi mệt mỏi, áp lực từ bệnh viện.  Bệnh viện có đủ cơ sở vật chất và nhân lực đáp ứng nhu cầu chính đáng của người dân về dịch vụ tư vấn sức khỏe trực tuyến, khám bệnh và lấy mẫu xét nghiệm tại nhà. Bệnh viện E là cơ sở y tế công lập đầu tiên trên địa bàn Thủ đô Hà Nội và phía Bắc triển khai mô hình này, đem lại lợi ích thiết thực cho người dân trong việc chăm sóc sức khỏe toàn diện.</mutableString>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vien2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VjJ-Sa-Nx0">
+                                        <rect key="frame" x="8" y="472" width="304" height="197"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="VjJ-Sa-Nx0" secondAttribute="height" multiplier="600:389" id="zfI-0Y-3Tc"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="viene1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zG8-H7-Cl1">
+                                        <rect key="frame" x="8" y="677" width="304" height="228"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="zG8-H7-Cl1" secondAttribute="height" multiplier="700:525" id="BSX-mc-0DT"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="VjJ-Sa-Nx0" firstAttribute="top" secondItem="19m-RQ-F54" secondAttribute="bottom" constant="8" id="Ajs-KV-ywk"/>
+                                    <constraint firstItem="19m-RQ-F54" firstAttribute="top" secondItem="sbD-CS-coX" secondAttribute="bottom" constant="8" id="Hf0-bT-XKv"/>
+                                    <constraint firstAttribute="trailing" secondItem="19m-RQ-F54" secondAttribute="trailing" constant="12" id="KVx-5T-NVR"/>
+                                    <constraint firstItem="sbD-CS-coX" firstAttribute="leading" secondItem="Cgy-Db-zZO" secondAttribute="leading" constant="16" id="QiZ-sC-DO4"/>
+                                    <constraint firstItem="19m-RQ-F54" firstAttribute="leading" secondItem="Cgy-Db-zZO" secondAttribute="leading" constant="12" id="Von-he-MiF"/>
+                                    <constraint firstItem="zG8-H7-Cl1" firstAttribute="top" secondItem="VjJ-Sa-Nx0" secondAttribute="bottom" constant="8" id="WbL-Fz-SL7"/>
+                                    <constraint firstAttribute="trailing" secondItem="LH5-zi-fln" secondAttribute="trailing" id="cfu-qa-yAE"/>
+                                    <constraint firstItem="sbD-CS-coX" firstAttribute="top" secondItem="LH5-zi-fln" secondAttribute="bottom" constant="16" id="fsf-o2-6Yl"/>
+                                    <constraint firstItem="LH5-zi-fln" firstAttribute="leading" secondItem="Cgy-Db-zZO" secondAttribute="leading" id="ndF-ZG-D62"/>
+                                    <constraint firstAttribute="trailing" secondItem="zG8-H7-Cl1" secondAttribute="trailing" constant="8" id="qMB-j4-EKg"/>
+                                    <constraint firstItem="LH5-zi-fln" firstAttribute="top" secondItem="Cgy-Db-zZO" secondAttribute="top" id="qid-Rc-I1b"/>
+                                    <constraint firstItem="zG8-H7-Cl1" firstAttribute="leading" secondItem="Cgy-Db-zZO" secondAttribute="leading" constant="8" id="s7f-ne-1VO"/>
+                                    <constraint firstAttribute="bottom" secondItem="zG8-H7-Cl1" secondAttribute="bottom" constant="8" id="uTc-XM-fZR"/>
+                                    <constraint firstItem="VjJ-Sa-Nx0" firstAttribute="leading" secondItem="Cgy-Db-zZO" secondAttribute="leading" constant="8" id="uhB-Vw-Can"/>
+                                    <constraint firstAttribute="trailing" secondItem="VjJ-Sa-Nx0" secondAttribute="trailing" constant="8" id="uoj-xX-aLA"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="3RV-yr-ahr" firstAttribute="top" secondItem="Cgy-Db-zZO" secondAttribute="bottom" id="B0R-De-JMb"/>
+                            <constraint firstAttribute="trailing" secondItem="Cgy-Db-zZO" secondAttribute="trailing" id="Cco-D2-iqM"/>
+                            <constraint firstItem="LH5-zi-fln" firstAttribute="width" secondItem="Bfs-gD-R4Y" secondAttribute="width" id="VQ2-f5-uda"/>
+                            <constraint firstItem="Cgy-Db-zZO" firstAttribute="leading" secondItem="Bfs-gD-R4Y" secondAttribute="leading" id="kaF-Mk-jgp"/>
+                            <constraint firstItem="Cgy-Db-zZO" firstAttribute="top" secondItem="Bfs-gD-R4Y" secondAttribute="top" id="rlu-13-YfP"/>
+                        </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="2568"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="06m-Mb-oOe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3563" y="316"/>
+            <point key="canvasLocation" x="3562.5" y="315.84507042253523"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="oVa-8B-0Hr">
@@ -2163,5 +2228,7 @@
         <image name="TaiKhoan.png" width="100" height="100"/>
         <image name="Thongbao.png" width="100" height="100"/>
         <image name="TinNhan.png" width="100" height="100"/>
+        <image name="vien2.jpg" width="600" height="389"/>
+        <image name="viene1.jpg" width="700" height="525"/>
     </resources>
 </document>

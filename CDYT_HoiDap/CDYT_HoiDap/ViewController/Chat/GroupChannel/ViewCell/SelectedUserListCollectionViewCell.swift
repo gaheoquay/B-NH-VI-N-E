@@ -26,8 +26,15 @@ class SelectedUserListCollectionViewCell: UICollectionViewCell {
     
     func setModel(aUser: SBDUser) {
         self.user = aUser
+      let profileUrl = URL(string: (self.user.profileUrl!))
+      if profileUrl != nil {
+        self.profileImageView.af_setImage(withURL: profileUrl!, placeholderImage: UIImage(named: "img_profile"))
+      }else{
+        self.profileImageView.image = UIImage(named: "img_profile")
         
-        self.profileImageView.af_setImage(withURL: URL(string: self.user.profileUrl!)!, placeholderImage: UIImage(named: "img_profile"))
+      }
+
+//        self.profileImageView.af_setImage(withURL: URL(string: self.user.profileUrl!)!, placeholderImage: UIImage(named: "img_profile"))
         self.nicknameLabel.text = self.user.nickname
     }
 }

@@ -66,6 +66,8 @@
 		8B79D0E61E5A9B350010C5C0 /* DoctorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B79D0E41E5A9B350010C5C0 /* DoctorTableViewCell.xib */; };
 		8B79D0E81E5AA7D20010C5C0 /* DetailEdit.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B79D0E71E5AA7D20010C5C0 /* DetailEdit.png */; };
 		8B79D0EA1E5AAB1A0010C5C0 /* DetailEditUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B79D0E91E5AAB1A0010C5C0 /* DetailEditUp.png */; };
+		8B79D0ED1E5AC0F50010C5C0 /* vien2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8B79D0EB1E5AC0F50010C5C0 /* vien2.jpg */; };
+		8B79D0EE1E5AC0F50010C5C0 /* viene1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8B79D0EC1E5AC0F50010C5C0 /* viene1.jpg */; };
 		8B7AB6BE1E1211E20015DFBE /* KeywordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7AB6BC1E1211E20015DFBE /* KeywordCollectionViewCell.swift */; };
 		8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B7AB6BD1E1211E20015DFBE /* KeywordCollectionViewCell.xib */; };
 		8B813CB31E15052E0043F7EF /* Home.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B813CB01E15052E0043F7EF /* Home.png */; };
@@ -278,6 +280,8 @@
 		8B79D0E41E5A9B350010C5C0 /* DoctorTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoctorTableViewCell.xib; sourceTree = "<group>"; };
 		8B79D0E71E5AA7D20010C5C0 /* DetailEdit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DetailEdit.png; sourceTree = "<group>"; };
 		8B79D0E91E5AAB1A0010C5C0 /* DetailEditUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DetailEditUp.png; sourceTree = "<group>"; };
+		8B79D0EB1E5AC0F50010C5C0 /* vien2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vien2.jpg; sourceTree = "<group>"; };
+		8B79D0EC1E5AC0F50010C5C0 /* viene1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = viene1.jpg; sourceTree = "<group>"; };
 		8B7AB6BC1E1211E20015DFBE /* KeywordCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordCollectionViewCell.swift; sourceTree = "<group>"; };
 		8B7AB6BD1E1211E20015DFBE /* KeywordCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeywordCollectionViewCell.xib; sourceTree = "<group>"; };
 		8B813CB01E15052E0043F7EF /* Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home.png; sourceTree = "<group>"; };
@@ -484,6 +488,8 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8B79D0EB1E5AC0F50010C5C0 /* vien2.jpg */,
+				8B79D0EC1E5AC0F50010C5C0 /* viene1.jpg */,
 				8B79D0E91E5AAB1A0010C5C0 /* DetailEditUp.png */,
 				8B79D0E71E5AA7D20010C5C0 /* DetailEdit.png */,
 				8BC3806C1E58481600DF154A /* SplashLogo.png */,
@@ -1012,8 +1018,10 @@
 				8BF1497C1E14BF9C00766F8F /* TaiKhoan.png in Resources */,
 				8BF149721E14BF9C00766F8F /* GiaiPhap_Mark_hide.png in Resources */,
 				8BD49F2C1E482C1500C98E74 /* IncomingImageFileMessageTableViewCell.xib in Resources */,
+				8B79D0EE1E5AC0F50010C5C0 /* viene1.jpg in Resources */,
 				8BD49F6C1E482D1100C98E74 /* OpenChannelListTableViewCell.xib in Resources */,
 				A68A94FC1E14CA240067736E /* DangKi_Right.png in Resources */,
+				8B79D0ED1E5AC0F50010C5C0 /* vien2.jpg in Resources */,
 				8B3A136B1E10F454005DBC6E /* Tinnhan_button01.png in Resources */,
 				8B3A135C1E10F454005DBC6E /* photo-camera.png in Resources */,
 				8BD49F661E482D1100C98E74 /* OpenChannelChattingViewController.xib in Resources */,
@@ -1443,7 +1451,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "904740d2-15c9-4801-a76e-eeed84da8495";
+				PROVISIONING_PROFILE = "ced0ef06-f7b1-4929-bcea-b77c232288c0";
 				PROVISIONING_PROFILE_SPECIFIER = "new development benh vien e";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
@@ -1464,7 +1472,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "904740d2-15c9-4801-a76e-eeed84da8495";
+				PROVISIONING_PROFILE = "ced0ef06-f7b1-4929-bcea-b77c232288c0";
 				PROVISIONING_PROFILE_SPECIFIER = "new development benh vien e";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
