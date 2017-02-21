@@ -1354,6 +1354,13 @@
                                                             <constraint firstAttribute="width" secondItem="erR-50-0n1" secondAttribute="height" multiplier="1:1" id="ZtW-tw-BPk"/>
                                                         </constraints>
                                                     </imageView>
+                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 0 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ku-hR-OOI">
+                                                        <rect key="frame" x="35" y="11" width="14" height="14"/>
+                                                        <color key="backgroundColor" red="0.97924929859999998" green="0.29259371760000003" blue="0.42360758780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <gestureRecognizers/>
@@ -1361,8 +1368,10 @@
                                                     <constraint firstItem="erR-50-0n1" firstAttribute="height" secondItem="1Wi-35-cSl" secondAttribute="height" multiplier="1:2" id="QHi-gc-1a8"/>
                                                     <constraint firstAttribute="trailing" secondItem="Etp-yr-sjn" secondAttribute="trailing" constant="8" id="Rhb-Sv-62e"/>
                                                     <constraint firstItem="Etp-yr-sjn" firstAttribute="leading" secondItem="erR-50-0n1" secondAttribute="trailing" constant="5" id="TCj-cj-XUf"/>
+                                                    <constraint firstItem="1ku-hR-OOI" firstAttribute="leading" secondItem="Etp-yr-sjn" secondAttribute="leading" constant="-5" id="W53-qK-ehs"/>
                                                     <constraint firstAttribute="bottom" secondItem="erR-50-0n1" secondAttribute="bottom" constant="8" id="dSJ-MO-nkb"/>
                                                     <constraint firstItem="erR-50-0n1" firstAttribute="leading" secondItem="1Wi-35-cSl" secondAttribute="leading" constant="8" id="hmk-GW-H8G"/>
+                                                    <constraint firstItem="Etp-yr-sjn" firstAttribute="top" secondItem="1ku-hR-OOI" secondAttribute="bottom" constant="1" id="xnm-fP-ICi"/>
                                                     <constraint firstItem="Etp-yr-sjn" firstAttribute="centerY" secondItem="erR-50-0n1" secondAttribute="centerY" id="zKI-uB-AHy"/>
                                                 </constraints>
                                                 <connections>
@@ -1625,6 +1634,7 @@
                     <connections>
                         <outlet property="avaImg" destination="FTO-Ub-M9d" id="ccA-bC-OCC"/>
                         <outlet property="layoutWidthViewFollowingQuestion" destination="sf4-mu-7xX" id="bge-E0-CHO"/>
+                        <outlet property="messageCountLb" destination="1ku-hR-OOI" id="SjU-V6-bsH"/>
                         <outlet property="nicknameLbl" destination="pPI-lF-9UV" id="Kei-w9-CUt"/>
                         <outlet property="notiCountLb" destination="Mu0-Si-7T7" id="Mea-dP-Ij3"/>
                         <outlet property="questionTableView" destination="LTl-aA-3Pz" id="p3U-Ae-cYp"/>
@@ -2029,7 +2039,10 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19m-RQ-F54">
                                         <rect key="frame" x="12" y="45" width="296" height="419"/>
-                                        <mutableString key="text">Bệnh viện E là bệnh viện đa khoa trung ương hạng 1 trực thuộc Bộ Y tế. Bệnh viện có hai cơ sở khám chữa bệnh: cơ sở chính tại Nghĩa tân, Cầu giấy và một phòng khám tại 13 Phan Huy Chú. Có 900 cán bộ viên chức trong đó có 1 Giáo sư, 2 Phó giáo sư, 8 Tiến sĩ, 34 bác sĩ CKII, 32 thạc sĩ; gần 1.000 giường bệnh với 11 phòng chức năng, 27 khoa lâm sàng, 8 khoa cận lâm sàng, 4 trung tâm thế mạnh: tim mạch, tiêu hóa, cơ xương khớp và sọ não. Hiện nay, nhu cầu của bệnh nhân đến khám chữa bệnh tại các bệnh viện và cơ sở y tế rất cao, dịch vụ tư vấn sức khỏe trực tuyến, khám bệnh và lấy mẫu xét nghiệm tại nhà đặc biệt phù hợp với những người bệnh không có điều kiện đến bệnh viện, người già và trẻ nhỏ - sẽ không mất thời gian chờ đợi mệt mỏi, áp lực từ bệnh viện.  Bệnh viện có đủ cơ sở vật chất và nhân lực đáp ứng nhu cầu chính đáng của người dân về dịch vụ tư vấn sức khỏe trực tuyến, khám bệnh và lấy mẫu xét nghiệm tại nhà. Bệnh viện E là cơ sở y tế công lập đầu tiên trên địa bàn Thủ đô Hà Nội và phía Bắc triển khai mô hình này, đem lại lợi ích thiết thực cho người dân trong việc chăm sóc sức khỏe toàn diện.</mutableString>
+                                        <string key="text">Bệnh viện E là bệnh viện đa khoa trung ương hạng 1 trực thuộc Bộ Y tế. Bệnh viện có hai cơ sở khám chữa bệnh: cơ sở chính tại Nghĩa tân, Cầu giấy và một phòng khám tại 13 Phan Huy Chú. Có 900 cán bộ viên chức trong đó có 1 Giáo sư, 2 Phó giáo sư, 8 Tiến sĩ, 34 bác sĩ CKII, 32 thạc sĩ; gần 1.000 giường bệnh với 11 phòng chức năng, 27 khoa lâm sàng, 8 khoa cận lâm sàng, 4 trung tâm thế mạnh: tim mạch, tiêu hóa, cơ xương khớp và sọ não. 
+Hiện nay, nhu cầu của bệnh nhân đến khám chữa bệnh tại các bệnh viện và cơ sở y tế rất cao, dịch vụ tư vấn sức khỏe trực tuyến, khám bệnh và lấy mẫu xét nghiệm tại nhà đặc biệt phù hợp với những người bệnh không có điều kiện đến bệnh viện, người già và trẻ nhỏ - sẽ không mất thời gian chờ đợi mệt mỏi, áp lực từ bệnh viện.  
+Bệnh viện có đủ cơ sở vật chất và nhân lực đáp ứng nhu cầu chính đáng của người dân về dịch vụ tư vấn sức khỏe trực tuyến, khám bệnh và lấy mẫu xét nghiệm tại nhà. Bệnh viện E là cơ sở y tế công lập đầu tiên trên địa bàn Thủ đô Hà Nội và phía Bắc triển khai mô hình này, đem lại lợi ích thiết thực cho người dân trong việc chăm sóc sức khỏe toàn diện.
+</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
