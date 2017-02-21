@@ -13,7 +13,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
   override func viewDidLoad() {
     super.viewDidLoad()
     NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
-    
+//    UPDATE_BADGE
+    NotificationCenter.default.addObserver(self, selector: #selector(setUpBadge), name: Notification.Name.init(UPDATE_BADGE), object: nil)
+
     setupUI()
     initTableView()
     Until.showLoading()
@@ -27,10 +29,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         Until.sendAndSetTracer(value: HOME)
     }
 
-    func setupUI() {
-        searchView.layer.cornerRadius = 4
-        searchView.clipsToBounds = true
-    }
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
@@ -39,11 +37,25 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     super.viewWillAppear(animated)
     self.navigationController?.setNavigationBarHidden(true, animated: true)
   }
-    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+  
+  
+  func setUpBadge(){
+    let tabbar = self.tabBarController as? RAMAnimatedTabBarController
+    if unreadMessageCount + notificationCount != 0 {
+      tabbar?.tabBar.items![4].badgeValue = "\(unreadMessageCount + notificationCount)"
+    }else{
+      tabbar?.tabBar.items![4].badgeValue = nil
+    }
+  }
+  
+  func setupUI() {
+    searchView.layer.cornerRadius = 4
+    searchView.clipsToBounds = true
+  }
+
   //MARK: init table view
   func initTableView(){
     tbQuestion.dataSource = self
@@ -54,13 +66,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     tbQuestion.register(UINib.init(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
     tbQuestion.addPullToRefreshHandler {
       DispatchQueue.main.async {
-//        self.tbQuestion.pullToRefreshView?.startAnimating()
         self.reloadData()
       }
     }
     tbQuestion.addInfiniteScrollingWithHandler {
       DispatchQueue.main.async {
-//        self.tbQuestion.infiniteScrollingView?.startAnimating()
         self.loadMore()
       }
     }
@@ -93,7 +103,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
       "Size": 10,
       "RequestedUserId" : Until.getCurrentId()
     ]
-//    Until.showLoading()
     Alamofire.request(HOTEST_TAG, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
         if status == 200{
@@ -112,7 +121,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
       }else{
         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
       }
-//      Until.hideLoading()
     }
   }
 
@@ -123,7 +131,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
       "Size": 10,
       "RequestedUserId" : Until.getCurrentId()
     ]
-//    Until.showLoading()
     print(JSON.init(hotParam))
     Alamofire.request(GET_FEEDS, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {

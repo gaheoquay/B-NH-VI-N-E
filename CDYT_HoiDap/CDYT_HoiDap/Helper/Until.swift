@@ -155,7 +155,36 @@ class Until{
       })
     }
   }
+  class func getBagValue(){
+    let param : [String : Any] = [
+      "Auth": Until.getAuthKey(),
+      "RequestedUserId": Until.getCurrentId()
+    ]
+    var count = 0
+    SBDGroupChannel.getTotalUnreadMessageCount { (number, error) in
+      unreadMessageCount = Int(number)
+      count += 1
+      if count == 2{
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: UPDATE_BADGE), object: nil)
+      }
+    }
 
+    Alamofire.request(GET_UNREAD_NOTIFICATION, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+      if let status = response.response?.statusCode {
+        if status == 200{
+          if let result = response.result.value {
+            let jsonData = result as! NSDictionary
+            notificationCount = jsonData["Count"] as! Int
+            
+          }
+        }
+      }
+      count += 1
+      if count == 2{
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: UPDATE_BADGE), object: nil)
+      }
+    }
+  }
   class func gotoLogin(_self : UIViewController, cannotBack:Bool ){
     let storyBoard = UIStoryboard.init(name: "User", bundle: nil)
     let viewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController

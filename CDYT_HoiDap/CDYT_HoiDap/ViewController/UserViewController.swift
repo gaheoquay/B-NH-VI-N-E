@@ -235,9 +235,9 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 if status == 200{
                     if let result = response.result.value {
                         let jsonData = result as! NSDictionary
-                        let count = jsonData["Count"] as! Int
-                        if count != 0 {
-                            self.notiCountLb.text = " \(count) "
+                        notificationCount = jsonData["Count"] as! Int
+                        if notificationCount != 0 {
+                            self.notiCountLb.text = " \(notificationCount) "
                             self.notiCountLb.isHidden = false
                         }else{
                             self.notiCountLb.text = ""
