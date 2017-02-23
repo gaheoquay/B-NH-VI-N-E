@@ -14,7 +14,7 @@ protocol CommentViewControllerDelegate {
 
 }
 
-class CommentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CommentTableViewCellDelegate, EditCommentViewControllerDelegate, WYPopoverControllerDelegate {
+class CommentViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CommentTableViewCellDelegate, EditCommentViewControllerDelegate, WYPopoverControllerDelegate {
 
     @IBOutlet weak var commentTbl: UITableView!
     @IBOutlet weak var keyboardViewHeight: NSLayoutConstraint!
@@ -37,6 +37,7 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
     var feedEntity = FeedsEntity()
     var commentId = ""
   var notification : ListNotificationEntity!
+  var notificationId = ""
   var delegate:CommentViewControllerDelegate?
 
     var popupViewController:WYPopoverController!
@@ -54,7 +55,7 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
         if commentId != "" {
             getCommentFromNotification()
         }
-      if notification != nil && !(notification.notificaiton?.isRead)! {
+      if (notification != nil && !(notification.notificaiton?.isRead)!) || !notificationId.isEmpty {
         setReadNotification()
       }
 
@@ -233,14 +234,15 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
   //MARk: set read notification
   func setReadNotification(){
     Until.showLoading()
-    
+    if notificationId == ""{
+      notificationId = notification!.notificaiton!.id
+    }
     let getPostParam : [String : Any] = [
       "Auth": Until.getAuthKey(),
       "RequestedUserId" : Until.getCurrentId(),
-      "NotificationId": notification!.notificaiton!.id
+      "NotificationId": notificationId
     ]
     
-    print(JSON.init(getPostParam))
     
     Alamofire.request(SET_READ_NOTIFICATION, method: .post, parameters: getPostParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
@@ -249,7 +251,9 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
             if result is NSDictionary {
                 let realm = try! Realm()
                 try! realm.write {
+                  if self.notification != nil {
                     self.notification.notificaiton?.isRead = true
+                  }
                     self.delegate?.reloadTable()
                 }
             }
@@ -274,7 +278,6 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
             "Size": "10"
         ]
         
-        print(JSON.init(commentParam))
         Until.showLoading()
         
         Alamofire.request(GET_LIST_SUBCOMMENT, method: .post, parameters: commentParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -434,7 +437,6 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
             "CommentId": mainComment.comment.id
         ]
         
-        print(JSON.init(commentParam))
         Until.showLoading()
         
         Alamofire.request(POST_COMMENT_ON_COMMENT, method: .post, parameters: commentParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -490,7 +492,6 @@ class CommentViewController: UIViewController, UITableViewDelegate, UITableViewD
             "DeletedObjectId": objID
         ]
         
-        print(JSON.init(param))
         
         Alamofire.request(DELETE_ALL, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {

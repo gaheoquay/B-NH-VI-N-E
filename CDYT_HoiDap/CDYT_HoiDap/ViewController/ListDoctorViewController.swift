@@ -43,7 +43,6 @@ class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableVi
       "Auth": Until.getAuthKey(),
     ]
     
-    print(JSON.init(hotParam))
     
     Until.showLoading()
     Alamofire.request(GET_LIST_DOCTOR, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in

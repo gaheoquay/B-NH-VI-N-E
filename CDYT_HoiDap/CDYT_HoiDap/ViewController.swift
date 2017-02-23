@@ -8,12 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,KeyWordTableViewCellDelegate, QuestionTableViewCellDelegate {
+class ViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,KeyWordTableViewCellDelegate, QuestionTableViewCellDelegate {
 
   override func viewDidLoad() {
     super.viewDidLoad()
     NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
-//    UPDATE_BADGE
     NotificationCenter.default.addObserver(self, selector: #selector(setUpBadge), name: Notification.Name.init(UPDATE_BADGE), object: nil)
 
     setupUI()
@@ -131,7 +130,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
       "Size": 10,
       "RequestedUserId" : Until.getCurrentId()
     ]
-    print(JSON.init(hotParam))
     Alamofire.request(GET_FEEDS, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
         if status == 200{

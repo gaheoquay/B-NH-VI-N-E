@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OtherUserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, QuestionTableViewCellDelegate {
+class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, QuestionTableViewCellDelegate {
 
     @IBOutlet weak var avaImg: UIImageView!
     @IBOutlet weak var nameLbl: UILabel!
@@ -85,7 +85,6 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
             "RequestedUserId" : Until.getCurrentId()
         ]
         
-        print(JSON.init(param))
         Alamofire.request(GET_QUESTION_BY_ID, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{

@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-class SettingViewController: UIViewController, MFMailComposeViewControllerDelegate {
+class SettingViewController: BaseViewController, MFMailComposeViewControllerDelegate {
     
     @IBOutlet weak var versionLbl: UILabel!
     @IBOutlet weak var updateVersionBtn: UIButton!

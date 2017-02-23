@@ -163,7 +163,6 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable {
             "Device": device
         ]
         
-        print(JSON.init(registerParam))
         
         Until.showLoading()
         Alamofire.request(REGISTER_USER, method: .post, parameters: registerParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in

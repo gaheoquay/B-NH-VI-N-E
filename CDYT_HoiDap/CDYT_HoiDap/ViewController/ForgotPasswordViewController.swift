@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ForgotPasswordViewController: UIViewController {
+class ForgotPasswordViewController: BaseViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -25,7 +25,7 @@ class ForgotPasswordViewController: UIViewController {
   }
   
   @IBAction func actionBack(_ sender: Any) {
-    self.navigationController?.popViewController(animated: true)
+    _ = self.navigationController?.popViewController(animated: true)
   }
   @IBAction func actionSend(_ sender: Any) {
   }

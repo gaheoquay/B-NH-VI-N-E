@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class SearchViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()

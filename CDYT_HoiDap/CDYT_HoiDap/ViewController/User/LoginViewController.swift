@@ -90,8 +90,7 @@ class LoginViewController: UIViewController {
         ]
         
         
-        print(JSON.init(loginParam))
-        
+      
         Until.showLoading()
         Alamofire.request(LOGIN_EMAIL_NICKNAME, method: .post, parameters: loginParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
@@ -131,7 +130,6 @@ class LoginViewController: UIViewController {
             "Size": 20,
             "RequestedUserId" : Until.getCurrentId()
         ]
-        print(JSON.init(hotParam))
         
         Alamofire.request(GET_LIST_NOTIFICATION, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {

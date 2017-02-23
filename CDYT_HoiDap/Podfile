@@ -4,7 +4,6 @@ target “CDYT_HoiDap” do
 
 pod 'Alamofire', '~> 4.0’
 pod 'RealmSwift'
-pod 'SwiftyJSON'
 pod 'SDWebImage'
 pod 'SKPhotoBrowser', :git => 'https://github.com/suzuki-0000/SKPhotoBrowser.git', :branch => 'swift3'
 pod 'DKImagePickerController'
@@ -19,5 +18,5 @@ pod 'SendBirdSDK'
 pod 'AlamofireImage'
 pod 'MGSwipeTableCell'
 pod 'Google/Analytics'
-
+pod 'RNNotificationView'
 end

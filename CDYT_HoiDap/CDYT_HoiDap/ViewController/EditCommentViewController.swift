@@ -10,7 +10,7 @@ import UIKit
 protocol EditCommentViewControllerDelegate {
     func cancelEditComment()
 }
-class EditCommentViewController: UIViewController {
+class EditCommentViewController: BaseViewController {
 
     @IBOutlet weak var contentTxt: UITextView!
     var delegate : EditCommentViewControllerDelegate?
@@ -72,8 +72,7 @@ class EditCommentViewController: UIViewController {
             "Comment": comment
         ]
         
-        print(JSON.init(param))
-        
+      
         Until.showLoading()
         Alamofire.request(UPDATE_COMMENT, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
@@ -121,7 +120,6 @@ class EditCommentViewController: UIViewController {
             "SubComment": comment
         ]
         
-        print(JSON.init(param))
         
         Until.showLoading()
         Alamofire.request(UPDATE_SUBCOMMENT, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in

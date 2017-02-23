@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AboutViewController: UIViewController,CAPSPageMenuDelegate,ListDoctorViewControllerDelegate {
+class AboutViewController: BaseViewController,CAPSPageMenuDelegate,ListDoctorViewControllerDelegate {
 
   @IBOutlet weak var viewAboutHospital: UIView!
   @IBOutlet weak var viewListDoctor: UIView!
