@@ -18,6 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     registerNotification(application: application)
+    if (launchOptions != nil) { //launchOptions is not nil
+      let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as! NSDictionary
+      if let apsInfo = userInfo["aps"] as? NSDictionary{
+        let data = apsInfo["data"] as! NSDictionary
+          self.perform(#selector(self.callToGoDetail(notificationDic:)), with: data, afterDelay: 2)
+      }
+    }
     SBDMain.initWithApplicationId(SENDBIRD_APPKEY)
     initSendBird()
     requestCate()
@@ -35,7 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     gai.trackUncaughtExceptions = true  // report uncaught exceptions
     return true
   }
-    
+  
+  func callToGoDetail(notificationDic:NSDictionary){
+    NotificationCenter.default.post(name: NSNotification.Name(rawValue:GO_TO_DETAIL_WHEN_TAP_NOTIFICATION), object: notificationDic)
+  }
   func initSendBird(){
     let realm = try! Realm()
     let userEntity = realm.objects(UserEntity.self).first
@@ -102,6 +112,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         }
     }
+    
+    func requestServer(){
+        let hotParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            ]
+        
+        
+        Until.showLoading()
+        Alamofire.request(GET_LIST_DOCTOR, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! [NSDictionary]
+                        
+                        for item in jsonData {
+                            let entity = ListDoctorEntity.init(dictionary: item)
+                            listAllDoctor.append(entity)
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+
     
   func applicationWillResignActive(_ application: UIApplication) {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -179,6 +214,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
       }
     }
   }
-  
+  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    print(userInfo)
+    let state = application.applicationState
+    if state == UIApplicationState.active {
+      NotificationCenter.default.post(name: NSNotification.Name(rawValue:SHOW_NOTIFICAION), object: userInfo)
+    }else{
+      if let apsInfo = userInfo["aps"] as? NSDictionary{
+        let data = apsInfo["data"] as! NSDictionary
+        callToGoDetail(notificationDic: data)
+      }
+    }
+  }
+
 }
 

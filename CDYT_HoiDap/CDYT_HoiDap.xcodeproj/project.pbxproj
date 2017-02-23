@@ -12,6 +12,8 @@
 		0F17AB191E51BAC2008BA308 /* CateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17AB181E51BAC2008BA308 /* CateEntity.swift */; };
 		0F36980D1E54013C004B028D /* Ask copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F36980B1E54013C004B028D /* Ask copy.png */; };
 		0F36980E1E54013C004B028D /* LogoMarker.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F36980C1E54013C004B028D /* LogoMarker.png */; };
+		0F9ED83A1E5BEB38001F2FC2 /* DaDuyet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */; };
+		0F9ED83B1E5BEB38001F2FC2 /* Duyet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */; };
 		792444BAFCB405C2DBAC9872 /* Pods_CDYT_HoiDap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */; };
 		8B0D35F51E56EB2D002CF784 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0D35F41E56EB2D002CF784 /* BookingViewController.swift */; };
 		8B1AD45B1E1B828500D55543 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AD45A1E1B828500D55543 /* SearchViewController.swift */; };
@@ -59,6 +61,7 @@
 		8B3A138A1E10FD58005DBC6E /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A13891E10FD58005DBC6E /* QuestionViewController.swift */; };
 		8B3A13901E112129005DBC6E /* KeyWordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A138E1E112129005DBC6E /* KeyWordTableViewCell.swift */; };
 		8B3A13911E112129005DBC6E /* KeyWordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B3A138F1E112129005DBC6E /* KeyWordTableViewCell.xib */; };
+		8B6E19971E5EC9080078558D /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B6E19961E5EC9080078558D /* Logo.png */; };
 		8B79D0DE1E5A8E2C0010C5C0 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79D0DD1E5A8E2C0010C5C0 /* AboutViewController.swift */; };
 		8B79D0E01E5A91C80010C5C0 /* ListDoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79D0DF1E5A91C80010C5C0 /* ListDoctorViewController.swift */; };
 		8B79D0E21E5A91F30010C5C0 /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79D0E11E5A91F30010C5C0 /* DescriptionViewController.swift */; };
@@ -154,6 +157,7 @@
 		8BF1497C1E14BF9C00766F8F /* TaiKhoan.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF149691E14BF9C00766F8F /* TaiKhoan.png */; };
 		8BF1497D1E14BF9C00766F8F /* Thongbao.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1496A1E14BF9C00766F8F /* Thongbao.png */; };
 		8BF1497E1E14BF9C00766F8F /* TinNhan.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1496B1E14BF9C00766F8F /* TinNhan.png */; };
+		8BFE666C1E5D423700E1138B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFE666B1E5D423700E1138B /* BaseViewController.swift */; };
 		A6005BCF1E13722B00095FB7 /* NotifyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6005BCD1E13722B00095FB7 /* NotifyTableViewCell.swift */; };
 		A6005BD01E13722B00095FB7 /* NotifyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6005BCE1E13722B00095FB7 /* NotifyTableViewCell.xib */; };
 		A60430F61E232D49000216FB /* Change_Ava.png in Resources */ = {isa = PBXBuildFile; fileRef = A60430F51E232D49000216FB /* Change_Ava.png */; };
@@ -215,6 +219,8 @@
 		0F17AB181E51BAC2008BA308 /* CateEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CateEntity.swift; sourceTree = "<group>"; };
 		0F36980B1E54013C004B028D /* Ask copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ask copy.png"; sourceTree = "<group>"; };
 		0F36980C1E54013C004B028D /* LogoMarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoMarker.png; sourceTree = "<group>"; };
+		0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DaDuyet_1.png; sourceTree = "<group>"; };
+		0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Duyet_1.png; sourceTree = "<group>"; };
 		4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CDYT_HoiDap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54350AF3B96C58CE38450098 /* Pods-CDYT_HoiDap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYT_HoiDap.release.xcconfig"; path = "Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap.release.xcconfig"; sourceTree = "<group>"; };
 		8B0D35F41E56EB2D002CF784 /* BookingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
@@ -273,6 +279,7 @@
 		8B3A13891E10FD58005DBC6E /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		8B3A138E1E112129005DBC6E /* KeyWordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyWordTableViewCell.swift; sourceTree = "<group>"; };
 		8B3A138F1E112129005DBC6E /* KeyWordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyWordTableViewCell.xib; sourceTree = "<group>"; };
+		8B6E19961E5EC9080078558D /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
 		8B79D0DD1E5A8E2C0010C5C0 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		8B79D0DF1E5A91C80010C5C0 /* ListDoctorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDoctorViewController.swift; sourceTree = "<group>"; };
 		8B79D0E11E5A91F30010C5C0 /* DescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
@@ -368,6 +375,7 @@
 		8BF149691E14BF9C00766F8F /* TaiKhoan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TaiKhoan.png; sourceTree = "<group>"; };
 		8BF1496A1E14BF9C00766F8F /* Thongbao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thongbao.png; sourceTree = "<group>"; };
 		8BF1496B1E14BF9C00766F8F /* TinNhan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TinNhan.png; sourceTree = "<group>"; };
+		8BFE666B1E5D423700E1138B /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A6005BCD1E13722B00095FB7 /* NotifyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyTableViewCell.swift; sourceTree = "<group>"; };
 		A6005BCE1E13722B00095FB7 /* NotifyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotifyTableViewCell.xib; sourceTree = "<group>"; };
 		A60430F51E232D49000216FB /* Change_Ava.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Change_Ava.png; sourceTree = "<group>"; };
@@ -488,6 +496,9 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8B6E19961E5EC9080078558D /* Logo.png */,
+				0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */,
+				0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */,
 				8B79D0EB1E5AC0F50010C5C0 /* vien2.jpg */,
 				8B79D0EC1E5AC0F50010C5C0 /* viene1.jpg */,
 				8B79D0E91E5AAB1A0010C5C0 /* DetailEditUp.png */,
@@ -687,6 +698,7 @@
 				8B79D0DD1E5A8E2C0010C5C0 /* AboutViewController.swift */,
 				8B79D0DF1E5A91C80010C5C0 /* ListDoctorViewController.swift */,
 				8B79D0E11E5A91F30010C5C0 /* DescriptionViewController.swift */,
+				8BFE666B1E5D423700E1138B /* BaseViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1039,6 +1051,7 @@
 				8BC380691E583D8D00DF154A /* DatKham.png in Resources */,
 				A60430F61E232D49000216FB /* Change_Ava.png in Resources */,
 				8B79D0E81E5AA7D20010C5C0 /* DetailEdit.png in Resources */,
+				0F9ED83B1E5BEB38001F2FC2 /* Duyet_1.png in Resources */,
 				A67311D51E164FC400BCE308 /* MoreCommentTableViewCell.xib in Resources */,
 				8B79D0EA1E5AAB1A0010C5C0 /* DetailEditUp.png in Resources */,
 				8BD49EF61E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.xib in Resources */,
@@ -1056,6 +1069,7 @@
 				A6CD32D01E4C2C9400FA2B21 /* GoogleService-Info.plist in Resources */,
 				8BC3806D1E58481600DF154A /* SplashLogo.png in Resources */,
 				8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */,
+				8B6E19971E5EC9080078558D /* Logo.png in Resources */,
 				8B3A13651E10F454005DBC6E /* tag_mark.png in Resources */,
 				0F17AB151E51A682008BA308 /* CheckList.png in Resources */,
 				8BF149791E14BF9C00766F8F /* Tab.png in Resources */,
@@ -1066,6 +1080,7 @@
 				8B3A13471E10F454005DBC6E /* caidat_button0.png in Resources */,
 				8BF1496C1E14BF9C00766F8F /* Answer0.png in Resources */,
 				8BD49F051E48215500C98E74 /* CreateGroupChannelUserListTableViewCell.xib in Resources */,
+				0F9ED83A1E5BEB38001F2FC2 /* DaDuyet_1.png in Resources */,
 				8BD49F351E482C1600C98E74 /* OutgoingImageFileMessageTableViewCell.xib in Resources */,
 				A6E4C2FA1E1102BA00C2C871 /* User.storyboard in Resources */,
 				8BD49F261E482C1500C98E74 /* ChattingView.xib in Resources */,
@@ -1235,6 +1250,7 @@
 				8B3A13741E10F454005DBC6E /* TPKeyboardAvoidingScrollView.m in Sources */,
 				8B1AD45E1E1B97F000D55543 /* SearchTableViewCell.swift in Sources */,
 				8B3A136E1E10F454005DBC6E /* CAPSPageMenu.swift in Sources */,
+				8BFE666C1E5D423700E1138B /* BaseViewController.swift in Sources */,
 				8B813CB71E1510500043F7EF /* QuestionByTagViewController.swift in Sources */,
 				A6417E1F1E13B56C00BD2D75 /* SettingViewController.swift in Sources */,
 				8BD49F2D1E482C1500C98E74 /* IncomingUserMessageTableViewCell.swift in Sources */,
@@ -1444,14 +1460,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CDYT_HoiDap/CDYT_HoiDap.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anh Ta (R24Y486KUK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Anh Ta (R24Y486KUK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = BY2N2SG836;
 				INFOPLIST_FILE = CDYT_HoiDap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "904740d2-15c9-4801-a76e-eeed84da8495";
+				PROVISIONING_PROFILE = "3c944da8-5406-469a-aaac-a4030d1d1683";
 				PROVISIONING_PROFILE_SPECIFIER = "new development benh vien e";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
@@ -1465,15 +1481,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CDYT_HoiDap/CDYT_HoiDap.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anh Ta (R24Y486KUK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Anh Ta (R24Y486KUK)";
-				DEVELOPMENT_TEAM = BY2N2SG836;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CDYT_HoiDap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "904740d2-15c9-4801-a76e-eeed84da8495";
-				PROVISIONING_PROFILE_SPECIFIER = "new development benh vien e";
+				PROVISIONING_PROFILE = "00db885a-468e-49e5-904d-bb3c1a84178b";
+				PROVISIONING_PROFILE_SPECIFIER = "new distribution benh vien e";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};

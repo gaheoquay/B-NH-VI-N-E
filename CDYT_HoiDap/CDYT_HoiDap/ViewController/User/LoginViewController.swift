@@ -8,7 +8,9 @@
 
 import UIKit
 
+
 class LoginViewController: UIViewController {
+    
 
     @IBOutlet weak var emailNickTxt: UITextField!
     @IBOutlet weak var passTxt: UITextField!
@@ -18,6 +20,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var registerBtn: UIButton!
     var cannotBack = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,6 +63,8 @@ class LoginViewController: UIViewController {
         if validateDataLogin() == "" {
             errLb.isHidden = true
             requestLogin()
+            
+
         }else{
             errLb.isHidden = false
             errLb.text = validateDataLogin()
@@ -90,8 +95,7 @@ class LoginViewController: UIViewController {
         ]
         
         
-        print(JSON.init(loginParam))
-        
+      
         Until.showLoading()
         Alamofire.request(LOGIN_EMAIL_NICKNAME, method: .post, parameters: loginParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
@@ -131,7 +135,6 @@ class LoginViewController: UIViewController {
             "Size": 20,
             "RequestedUserId" : Until.getCurrentId()
         ]
-        print(JSON.init(hotParam))
         
         Alamofire.request(GET_LIST_NOTIFICATION, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {

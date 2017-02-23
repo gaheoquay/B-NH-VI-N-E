@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UpdateInfoViewController: UIViewController {
+class UpdateInfoViewController: BaseViewController {
     
     @IBOutlet weak var avaImg1: UIImageView!
     @IBOutlet weak var avaImg2: UIImageView!
@@ -95,8 +95,7 @@ class UpdateInfoViewController: UIViewController {
             "RequestedUserId": otherUserId
         ]
         
-        print(JSON.init(param))
-        
+      
         Until.showLoading()
         Alamofire.request(GET_USER_BY_ID, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
@@ -278,16 +277,57 @@ class UpdateInfoViewController: UIViewController {
     }
     
     @IBAction func logoutBtnTapAction(_ sender: Any) {
+        requestLogOut()
+    }
+    
+    func requestLogOut(){
+        
         let realm = try! Realm()
         let user = realm.objects(UserEntity.self)
-//        let notification = realm.objects(ListNotificationEntity.self)
-        try! realm.write {
-            realm.delete(user)
-//            realm.delete(notification)
-            _ = self.navigationController?.popViewController(animated: true)
+        
+
+        
+        let uuid = NSUUID().uuidString
+        var token = ""
+        if let value = UserDefaults.standard.object(forKey: NOTIFICATION_TOKEN) as? String {
+            token = value
+        }
+        let device : [String : Any] = [
+            "OS": 0,
+            "DeviceId": uuid,
+            "Token": token
+        ]
+        
+        let logoutParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "NicknameOrEmail": user[0].email,
+            "Device": device
+        ]
+//        print(JSON.init(logoutParam))
+
+        
+        Until.showLoading()
+        Alamofire.request(LOG_OUT, method: .post, parameters: logoutParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    Until.hideLoading()
+                    try! realm.write {
+                        realm.delete(user)
+                        _ = self.navigationController?.popViewController(animated: true)
+                    }
+                    listNotification.removeAll()
+                }else if status == 400 {
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Sai du", cancelBtnTitle: "Đóng")
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+            Until.hideLoading()
         }
         
-        listNotification.removeAll()
+        
     }
     
     func initDkImagePicker(){
@@ -381,8 +421,6 @@ class UpdateInfoViewController: UIViewController {
             "DOB" : dobDate,
             "Phone": phoneTxt.text!
         ]
-        
-        print(JSON.init(updateParam))
         
         Until.showLoading()
         Alamofire.request(UPDATE_PROFILE, method: .post, parameters: updateParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in

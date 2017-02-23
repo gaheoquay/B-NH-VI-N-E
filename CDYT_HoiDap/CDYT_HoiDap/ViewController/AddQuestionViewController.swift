@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,UIPickerViewDelegate,UIPickerViewDataSource, AddImageCollectionViewCellDelegate {
+class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,UIPickerViewDelegate,UIPickerViewDataSource, AddImageCollectionViewCellDelegate {
 
     @IBOutlet weak var titleTxt: UITextField!
     @IBOutlet weak var contentTxt: UITextView!
@@ -341,7 +341,6 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
             "Tags": tagString
         ]
         
-        print(JSON.init(questionParam))
         
         Until.showLoading()
         Alamofire.request(UPDATE_POST, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -419,7 +418,6 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
             "Tags": tagTrimmed
         ]
         
-        print(JSON.init(questionParam))
         
         Until.showLoading()
         Alamofire.request(POST_QUESTION, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -452,9 +450,11 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func creatAlert(){
-        let alertView = UIAlertController(title: "Category", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: UIAlertControllerStyle.alert)
+        let alertView = UIAlertController(title: "Category", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         
         let pickerView = UIPickerView(frame: pickerFrame)
+        
+        
         
         alertView.view.addSubview(pickerView)
         

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class SearchViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +77,8 @@ class SearchViewController: UIViewController,UITableViewDelegate,UITableViewData
     tbResult.delegate = self
     tbResult.dataSource = self
     tbResult.register(UINib.init(nibName: "SearchTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
+    txtSearch.becomeFirstResponder()
+    
   }
   //MARK:UITableViewDelegate,UITableViewDataSource
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

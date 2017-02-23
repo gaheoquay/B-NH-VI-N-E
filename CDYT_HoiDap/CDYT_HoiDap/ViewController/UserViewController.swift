@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, QuestionTableViewCellDelegate {
+class UserViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, QuestionTableViewCellDelegate {
   
   @IBOutlet weak var viewFollowingQuestion: UIView!
   @IBOutlet weak var layoutWidthViewFollowingQuestion: NSLayoutConstraint!
@@ -224,8 +224,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
             "Size": 20,
             "RequestedUserId" : Until.getCurrentId()
         ]
-        print(JSON.init(hotParam))
-        
+      
         Alamofire.request(GET_LIST_NOTIFICATION, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
@@ -249,7 +248,6 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
             "RequestedUserId": Until.getCurrentId()
         ]
         
-        print(JSON.init(param))
         Alamofire.request(GET_UNREAD_NOTIFICATION, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
@@ -285,7 +283,6 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
       "RequestedUserId" : Until.getCurrentId()
     ]
     
-    print(JSON.init(hotParam))
     //    Until.showLoading()
     Alamofire.request(GET_QUESTION_BY_ID, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
@@ -323,7 +320,6 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
       "RequestedUserId" : Until.getCurrentId()
     ]
     
-    print(JSON.init(hotParam))
     //    Until.showLoading()
     Alamofire.request(GET_QUESTION_FOLLOWED, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
@@ -360,7 +356,6 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
       "RequestedUserId" : Until.getCurrentId()
     ]
     
-    print(JSON.init(hotParam))
     //    Until.showLoading()
     Alamofire.request(GET_QUESTION_ASSIGN, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
@@ -405,20 +400,21 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
     cell.indexPath = indexPath
     cell.delegate = self
+
     if isMyFeed {
       if listMyFeed.count > 0 {
         cell.feedEntity = listMyFeed[indexPath.row]
-        cell.setData()
+        cell.setData(isHiddenCateAndDoctor: false)
       }
     }else if isFollowing {
       if listQuestionFollowing.count > 0 {
         cell.feedEntity = listQuestionFollowing[indexPath.row]
-        cell.setData()
+        cell.setData(isHiddenCateAndDoctor: false)
       }
     }else{
       if listQuestionWaitingToAnwser.count > 0 {
         cell.feedEntity = listQuestionWaitingToAnwser[indexPath.row]
-        cell.setData()
+        cell.setData(isHiddenCateAndDoctor: false)
       }
     }
     return cell
@@ -488,6 +484,17 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
   func reloadDataFromServer(notification : Notification){
     reloadData()
   }
+    func selectDoctor(indexPath: IndexPath) {
+        
+    }
+    
+    func selectSpecialist(indexPath: IndexPath) {
+        
+    }
+    
+    func approVal() {
+        
+    }
   
   func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
     //khong can phai thuc hien ham nay vi dang trong trang profile cua chinh minh

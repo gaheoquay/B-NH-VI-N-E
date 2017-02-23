@@ -14,14 +14,12 @@ protocol ListDoctorViewControllerDelegate {
 
 class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
   var delegate:ListDoctorViewControllerDelegate?
-  var listDoctor = [ListDoctorEntity]()
   
   @IBOutlet weak var tbDoctor: UITableView!
   
     override func viewDidLoad() {
         super.viewDidLoad()
       initTableView()
-      requestServer()
         // Do any additional setup after loading the view.
     }
 
@@ -37,13 +35,14 @@ class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableVi
     tbDoctor.register(UINib.init(nibName: "DoctorTableViewCell", bundle: nil), forCellReuseIdentifier: "DoctorTableViewCell")
   }
 
+  
+//  MARK: UITableViewDelegate +
   //  MARK: request server
   func requestServer(){
     let hotParam : [String : Any] = [
       "Auth": Until.getAuthKey(),
     ]
     
-    print(JSON.init(hotParam))
     
     Until.showLoading()
     Alamofire.request(GET_LIST_DOCTOR, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -54,7 +53,7 @@ class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableVi
             
             for item in jsonData {
               let entity = ListDoctorEntity.init(dictionary: item)
-              self.listDoctor.append(entity)
+              listAllDoctor.append(entity)
             }
             
             self.tbDoctor.reloadData()
@@ -72,15 +71,15 @@ class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableVi
   }
 //  MARK: UITableViewDelegate + 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let entity = listDoctor[indexPath.section]
+    let entity = listAllDoctor[indexPath.section]
     delegate?.gotoProfile(authorEntity: entity.doctors[indexPath.row])
   }
   func numberOfSections(in tableView: UITableView) -> Int {
-    return listDoctor.count
+    return listAllDoctor.count
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    let entity = listDoctor[section]
+    let entity = listAllDoctor[section]
     if !entity.isExpand {
       return 0
     }
@@ -88,7 +87,7 @@ class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableVi
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "DoctorTableViewCell") as! DoctorTableViewCell
-    let entity = listDoctor[indexPath.section]
+    let entity = listAllDoctor[indexPath.section]
     cell.setData(entity: entity.doctors[indexPath.row])
     return cell
   }
@@ -99,7 +98,7 @@ class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableVi
     return 77
   }
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let entity = listDoctor[section]
+    let entity = listAllDoctor[section]
     let vw = UIView()
     vw.backgroundColor = UIColor.white
     let lbCateName = UILabel.init()
@@ -132,7 +131,7 @@ class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableVi
   }
   func clickHeader(button:UIButton){
     print(button.tag)
-    let entity = listDoctor[button.tag]
+    let entity = listAllDoctor[button.tag]
     entity.isExpand = !entity.isExpand
     tbDoctor.beginUpdates()
     tbDoctor.reloadSections(IndexSet.init(integer: button.tag), with: UITableViewRowAnimation.automatic)

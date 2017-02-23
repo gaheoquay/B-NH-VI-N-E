@@ -51,6 +51,8 @@ let GET_UNREAD_NOTIFICATION = BASE_URL + "/Notification/GetUnreadNotificationCou
 let GET_QUESTION_FOLLOWED = BASE_URL + "/Post/GetQuestionFollowedByUserId"
 let GET_QUESTION_ASSIGN = BASE_URL + "/Post/GetQuestionAssignToUser"
 let GET_LIST_DOCTOR = BASE_URL + "/category/getListDoctors"
+let GET_LASTED_POST = BASE_URL + "/Post/Classify"
+let LOG_OUT = BASE_URL + "/User/Logout"
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
 let NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"
@@ -62,6 +64,8 @@ let RELOAD_QUESTION_DETAIL = "RELOAD_QUESTION_DETAIL"
 let RELOAD_COMMENT_DETAIL = "RELOAD_COMMENT_DETAIL"
 let RELOAD_SUBCOMMENT_DETAIL = "RELOAD_SUBCOMMENT_DETAIL"
 let UPDATE_BADGE = "UPDATE_BADGE"
+let GO_TO_DETAIL_WHEN_TAP_NOTIFICATION = "GO_TO_DETAIL_WHEN_TAP_NOTIFICATION"
+let SHOW_NOTIFICAION = "SHOW_NOTIFICAION"
 
 let SENDBIRD_APPKEY = "537AC4A8-39A9-4DF6-8D3F-03559A226AD2"
 
@@ -90,5 +94,8 @@ let SEARCHS = "ScreenSearch"
 
 var listNotification = [ListNotificationEntity]()
 var listCate = [CateEntity]()
+var listAllDoctor = [ListDoctorEntity]()
+var isHiddent = false
+
 var notificationCount = 0
 var unreadMessageCount = 0

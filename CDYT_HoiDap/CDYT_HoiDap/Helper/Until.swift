@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+
+
+
 extension UIColor {
     convenience init(netHex:Int) {
         self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
@@ -105,6 +108,8 @@ extension UIAlertController {
         alert.addAction(actionOk)
         vc.present(alert, animated: true, completion: nil)
     }
+    
+    
 }
 
 class Until{
@@ -234,4 +239,7 @@ class Until{
         let tracker = GAI.sharedInstance().defaultTracker
         tracker?.send(GAIDictionaryBuilder.createEvent(withCategory: category, action: action, label: label, value: nil).build() as [NSObject : AnyObject])
     }
+    
+    
+
 }

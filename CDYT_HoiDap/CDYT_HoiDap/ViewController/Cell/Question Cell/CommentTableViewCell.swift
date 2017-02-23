@@ -89,8 +89,7 @@ class CommentTableViewCell: UITableViewCell {
                 "CommentId": commentID
             ]
             
-            print(JSON.init(likeParam))
-            
+          
             Until.showLoading()
             Alamofire.request(param, method: .post, parameters: likeParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
                 if let status = response.response?.statusCode {
@@ -205,6 +204,7 @@ class CommentTableViewCell: UITableViewCell {
         }
         
         if mainComment.author.role == 1 {
+            nameLbl.text = mainComment.author.fullname
             departmantLb.text = mainComment.author.jobTitle + " - Bệnh viện E"
             verifyIconHeight.constant = 20
             nameLbl.textColor = UIColor().hexStringToUIColor(hex: "01A7FA")
@@ -256,6 +256,8 @@ class CommentTableViewCell: UITableViewCell {
         avaImgHeight.constant = 30
         
         if mainComment.author.role == 1 {
+            nameLbl.text = mainComment.author.fullname
+
             departmantLb.text = mainComment.author.jobTitle + " - Bệnh viện E"
             verifyIconHeight.constant = 20
             nameLbl.textColor = UIColor().hexStringToUIColor(hex: "01A7FA")
@@ -280,7 +282,6 @@ class CommentTableViewCell: UITableViewCell {
                 "CommentId": mainComment.comment.id
             ]
             
-            print(JSON.init(markParam))
             
             Until.showLoading()
             Alamofire.request(MARK_AS_SOLUTION, method: .post, parameters: markParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in

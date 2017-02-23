@@ -11,7 +11,7 @@ protocol QuestionDetailViewControllerDelegate {
   func reloadTable()
 }
 
-class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MoreCommentTableViewCellDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CommentTableViewCellDelegate, DetailQuestionTableViewCellDelegate, WYPopoverControllerDelegate,EditCommentViewControllerDelegate, CommentViewControllerDelegate {
+class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, MoreCommentTableViewCellDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CommentTableViewCellDelegate, DetailQuestionTableViewCellDelegate, WYPopoverControllerDelegate,EditCommentViewControllerDelegate, CommentViewControllerDelegate {
 
     @IBOutlet weak var detailTbl: UITableView!
     @IBOutlet weak var imgCollectionView: UICollectionView!
@@ -38,7 +38,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     var questionID = ""
   var notification : ListNotificationEntity!
   var delegate:QuestionDetailViewControllerDelegate?
-  
+  var notificationId = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         registerNotification()
@@ -50,7 +50,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             setupMarkerForQuestion()
             getListCommentByPostID(postId: feedObj.postEntity.id)
         }
-        if notification != nil && !(notification.notificaiton?.isRead)! {
+        if (notification != nil && !(notification.notificaiton?.isRead)!) || !notificationId.isEmpty {
             setReadNotification()
         }
         configInputBar()
@@ -211,14 +211,15 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
   //MARk: set read notification
   func setReadNotification(){
     Until.showLoading()
-    
+    if notificationId == "" {
+      notificationId = notification!.notificaiton!.id
+    }
     let getPostParam : [String : Any] = [
       "Auth": Until.getAuthKey(),
       "RequestedUserId" : Until.getCurrentId(),
-      "NotificationId": notification!.notificaiton!.id
+      "NotificationId": notificationId
     ]
     
-    print(JSON.init(getPostParam))
     
     Alamofire.request(SET_READ_NOTIFICATION, method: .post, parameters: getPostParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
@@ -227,7 +228,9 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             if result is NSDictionary {
                 let realm = try! Realm()
                 try! realm.write {
+                  if self.notification != nil {
                     self.notification.notificaiton?.isRead = true
+                  }
                     self.delegate?.reloadTable()
                 }
             }
@@ -304,8 +307,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             "PostId": postId
         ]
         
-        print(JSON.init(getPostParam))
-        
+      
         Alamofire.request(GET_POST_BY_ID, method: .post, parameters: getPostParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
@@ -348,7 +350,6 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             "RequestedUserId" : Until.getCurrentId(),
             "PostId": postId
         ]
-        print(JSON.init(postParam))
         Alamofire.request(GET_LIST_COMMENT_BY_POSTID, method: .post, parameters: postParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
@@ -414,7 +415,6 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             "PostId": feedObj.postEntity.id
         ]
         
-        print(JSON.init(commentParam))
         Until.showLoading()
         
         Alamofire.request(POST_COMMENT, method: .post, parameters: commentParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -661,8 +661,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             "DeletedObjectId": objID
         ]
         
-        print(JSON.init(param))
-        
+      
         Alamofire.request(DELETE_ALL, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
@@ -713,7 +712,6 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
             "DeletedObjectId": feedObj.postEntity.id
         ]
         
-        print(JSON.init(param))
         
         Alamofire.request(DELETE_ALL, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
