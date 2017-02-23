@@ -58,6 +58,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
         
         imgCollectionViewHeight.constant = 0
         currentUserId = Until.getCurrentId()
+        textInputBar.textView.becomeFirstResponder()
     }
     
     override func viewDidAppear(_ animated: Bool) {
