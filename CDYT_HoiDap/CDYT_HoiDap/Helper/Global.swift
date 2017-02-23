@@ -52,6 +52,7 @@ let GET_QUESTION_FOLLOWED = BASE_URL + "/Post/GetQuestionFollowedByUserId"
 let GET_QUESTION_ASSIGN = BASE_URL + "/Post/GetQuestionAssignToUser"
 let GET_LIST_DOCTOR = BASE_URL + "/category/getListDoctors"
 let GET_LASTED_POST = BASE_URL + "/Post/Classify"
+let LOG_OUT = BASE_URL + "/User/Logout"
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
 let NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"

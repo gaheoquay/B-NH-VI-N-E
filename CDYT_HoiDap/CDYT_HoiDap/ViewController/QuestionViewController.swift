@@ -14,7 +14,6 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
     super.viewDidLoad()
     NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
     
-    requestServer()
     initTableView()
     Until.showLoading()
     getFeeds()
@@ -190,37 +189,7 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
         present(alertView, animated: true, completion: nil)
     }
     
-    func requestServer(){
-        let hotParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            ]
-        
-        print(JSON.init(hotParam))
-        
-        Until.showLoading()
-        Alamofire.request(GET_LIST_DOCTOR, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! [NSDictionary]
-                        
-                        for item in jsonData {
-                            let entity = ListDoctorEntity.init(dictionary: item)
-                            listAllDoctor.append(entity)
-                        }
-                        self.tbQuestion.reloadData()
-                    }
-                }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-                }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-            }
-            Until.hideLoading()
-            
-        }
-    }
-    
+
      
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
