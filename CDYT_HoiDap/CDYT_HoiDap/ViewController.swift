@@ -181,11 +181,22 @@ class ViewController: BaseViewController,UITableViewDelegate,UITableViewDataSour
         if listFedds.count > 0 {
             cell.feedEntity = listFedds[indexPath.row]
         }
+        cell.setData(isHiddenCateAndDoctor: false)
       
-      cell.setData()
-      return cell
+    return cell
     }
   }
+    
+    func selectSpecialist(indexPath: IndexPath) {
+        
+    }
+    func selectDoctor(indexPath: IndexPath) {
+        
+    }
+    
+    func approVal() {
+        
+    }
     
     //MARK: QuestionTableViewCellDelegate
     func showQuestionDetail(indexPath: IndexPath) {
@@ -231,6 +242,8 @@ class ViewController: BaseViewController,UITableViewDelegate,UITableViewDataSour
     func reloadDataFromServer(notification : Notification){
         reloadData()
     }
+    
+    
     
 //MARK: Outlet
   @IBOutlet weak var tbQuestion: UITableView!

@@ -16,6 +16,10 @@ class FeedsEntity: NSObject {
   var isLiked = false
     var isFollowed = false
   var tags = [TagEntity]()
+    var cateGory = CateEntity()
+    var assigneeEntity = AuthorEntity()
+    var ischeck = false
+    
   
   override init(){
     super.init()
@@ -45,6 +49,13 @@ class FeedsEntity: NSObject {
         tags.insert(entity, at: 0)
       }
     }
+    if let value = dictionary["Category"] as? NSDictionary {
+        cateGory = CateEntity.init(dictionary: value)
+    }
+    if let value = dictionary["Assignee"] as? NSDictionary {
+        assigneeEntity = AuthorEntity.init(dictionary: value)
+    }
+   
     
   }
 }

@@ -8,12 +8,13 @@
 
 import UIKit
 
-class QuestionViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource, QuestionTableViewCellDelegate {
+class QuestionViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource, QuestionTableViewCellDelegate ,UIPickerViewDelegate,UIPickerViewDataSource {
   
   override func viewDidLoad() {
     super.viewDidLoad()
     NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
-
+    
+    requestServer()
     initTableView()
     Until.showLoading()
     getFeeds()
@@ -22,6 +23,12 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     
     override func viewDidAppear(_ animated: Bool) {
         Until.sendAndSetTracer(value: SLECT_QUESTION_NO_ANSWER)
+        isHiddent = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        tbQuestion.reloadData()
+        
     }
   
     deinit {
@@ -108,8 +115,8 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     cell.indexPath = indexPath
     if listFedds.count > 0 {
         cell.feedEntity = listFedds[indexPath.row]
-        cell.setData()
     }
+    cell.setData(isHiddenCateAndDoctor: true)
     return cell
   }
   
@@ -143,8 +150,183 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
         reloadData()
     }
     
+    func selectSpecialist(indexPath: IndexPath) {
+        creatAlert(title: "Special List",picker: pickerViewCate)
+        indexPathOfCell = indexPath
+
+    }
+    
+    func selectDoctor(indexPath: IndexPath) {
+        if listDoctorInCate.count > 0 {
+            indexPathOfCell = indexPath
+            creatAlert(title: "Select Doctor",picker: pickerViewDoctor)
+            
+        }else {
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn khoa trước", cancelBtnTitle: "Đóng")
+            
+        }
+
+    }
+    
+    func creatAlert(title: String, picker: UIPickerView){
+        let alertView = UIAlertController(title: title, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+        
+        
+        
+        
+        alertView.view.addSubview(picker)
+        
+        picker.delegate = self
+        picker.dataSource = self
+        
+        
+        let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            self.listFedds[self.indexPathOfCell.row].ischeck = true
+            self.tbQuestion.reloadRows(at: [self.indexPathOfCell], with: .automatic)
+            
+        })
+        
+        alertView.addAction(action)
+        present(alertView, animated: true, completion: nil)
+    }
+    
+    func requestServer(){
+        let hotParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            ]
+      
+        Until.showLoading()
+        Alamofire.request(GET_LIST_DOCTOR, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! [NSDictionary]
+                        
+                        for item in jsonData {
+                            let entity = ListDoctorEntity.init(dictionary: item)
+                            listAllDoctor.append(entity)
+                        }
+                        self.tbQuestion.reloadData()
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+            Until.hideLoading()
+            
+        }
+    }
+    
+     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == pickerViewCate {
+            return listCate.count
+        }else {
+            return listDoctorInCate.count
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == pickerViewCate {
+            return listCate[row].name
+        }else {
+            
+            return listDoctorInCate[row].fullname
+        }
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == pickerViewCate {
+            idCate = listCate[row].id
+            nameCate = listCate[row].name
+            listFedds[indexPathOfCell.row].cateGory.id = idCate
+            listFedds[indexPathOfCell.row].cateGory.name = nameCate
+            
+            for item in listAllDoctor {
+                if item.category.id == idCate {
+                    listDoctorInCate = item.doctors
+                }
+            }
+            
+        }else{
+            idDoc = listDoctorInCate[row].id
+            nameDoc = listDoctorInCate[row].fullname
+            listFedds[indexPathOfCell.row].assigneeEntity.id = idDoc
+            listFedds[indexPathOfCell.row].assigneeEntity.fullname = nameDoc
+        }
+        
+    }
+    
+    func requestApproval(){
+        
+        let post : [String : Any] = [
+            "Id" : listFedds[indexPathOfCell.row].postEntity.id,
+            "Title" : listFedds[indexPathOfCell.row].postEntity.title,
+            "Content" : listFedds[indexPathOfCell.row].postEntity.content,
+            "ImageUrls" : listFedds[indexPathOfCell.row].postEntity.imageUrls,
+            "ThumbnailImageUrls" : listFedds[indexPathOfCell.row].postEntity.thumbnailImageUrls,
+            "Status" : 0,
+            "Rating" : 0,
+            "UpdatedDate" : 0,
+            "CategoryId": idCate,
+            "IsPrivate": listFedds[indexPathOfCell.row].postEntity.isPrivate,
+            "IsClassified": false,
+            "CreatedDate" : 0
+        ]
+        
+        let questionParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId": Until.getCurrentId(),
+            "Post": post,
+            "AssignToUserId": idDoc
+        ]
+        Alamofire.request(GET_LASTED_POST, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    self.listFedds[self.indexPathOfCell.row].ischeck = false
+                    self.tbQuestion.reloadData()
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+        }
+        
+        
+    }
+    
+    func approVal() {
+        if listDoctorInCate.count > 0 && nameDoc != "" {
+            requestApproval()
+        }else{
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn khoa và bác sĩ", cancelBtnTitle: "Đóng")
+        }
+    }
+    
+    
+    
   //  MARK: Outlet
   @IBOutlet weak var tbQuestion: UITableView!
   var listFedds = [FeedsEntity]()
   var page = 1
+    let pickerViewDoctor = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
+    let pickerViewCate = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
+    
+    var indexPathOfCell = IndexPath()
+    var idCate = ""
+    var idDoc = ""
+    var nameCate = ""
+    var nameDoc = ""
+    var ischeckHide = true
+    var listDoctorInCate = [AuthorEntity]()
+  
+    
 }

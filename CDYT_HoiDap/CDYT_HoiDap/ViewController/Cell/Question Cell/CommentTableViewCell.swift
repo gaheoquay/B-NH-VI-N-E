@@ -167,7 +167,6 @@ class CommentTableViewCell: UITableViewCell {
         }
         
         avaImg.sd_setImage(with: URL.init(string: mainComment.author.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
-        nameLbl.text = mainComment.author.nickname
         timeLbl.text = String().convertTimeStampWithDateFormat(timeStamp: mainComment.comment.createdDate, dateFormat: "dd/MM/yy HH:mm")
         
         if mainComment.comment.imageUrls.count > 0 {
@@ -205,16 +204,15 @@ class CommentTableViewCell: UITableViewCell {
         }
         
         if mainComment.author.role == 1 {
-            for item in listCate {
-                if mainComment.author.departmentId == item.id {
-                    departmantLb.text = item.name
-                }
-            }
+            nameLbl.text = mainComment.author.fullname
+            departmantLb.text = mainComment.author.jobTitle + " - Bệnh viện E"
             verifyIconHeight.constant = 20
             nameLbl.textColor = UIColor().hexStringToUIColor(hex: "01A7FA")
+            nameLbl.text = mainComment.author.fullname
         }else{
             departmantLb.text = ""
             verifyIconHeight.constant = 0
+            nameLbl.text = mainComment.author.nickname
         }
     }
     
@@ -227,7 +225,6 @@ class CommentTableViewCell: UITableViewCell {
         solutionLbl.text = ""
         
         avaImg.sd_setImage(with: URL.init(string: subComment.author.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
-        nameLbl.text = subComment.author.nickname
         timeLbl.text = String().convertTimeStampWithDateFormat(timeStamp: subComment.comment.createdDate, dateFormat: "dd/MM/yy HH:mm")
         
         if subComment.comment.imageUrls.count > 0 {
@@ -259,18 +256,17 @@ class CommentTableViewCell: UITableViewCell {
         avaImgHeight.constant = 30
         
         if mainComment.author.role == 1 {
-            for item in listCate {
-                if mainComment.author.departmentId == item.id {
-                    departmantLb.text = item.name
-                }
-            }
+            nameLbl.text = mainComment.author.fullname
+
+            departmantLb.text = mainComment.author.jobTitle + " - Bệnh viện E"
             verifyIconHeight.constant = 20
             nameLbl.textColor = UIColor().hexStringToUIColor(hex: "01A7FA")
+            nameLbl.text = mainComment.author.fullname
         }else{
             departmantLb.text = ""
             verifyIconHeight.constant = 0
+            nameLbl.text = mainComment.author.nickname
         }
-        
     }
     
     //MARK: Mark a comment is solution
