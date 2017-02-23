@@ -385,20 +385,21 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
     cell.indexPath = indexPath
     cell.delegate = self
+
     if isMyFeed {
       if listMyFeed.count > 0 {
         cell.feedEntity = listMyFeed[indexPath.row]
-        cell.setData()
+        cell.setData(isHiddenCateAndDoctor: false)
       }
     }else if isFollowing {
       if listQuestionFollowing.count > 0 {
         cell.feedEntity = listQuestionFollowing[indexPath.row]
-        cell.setData()
+        cell.setData(isHiddenCateAndDoctor: false)
       }
     }else{
       if listQuestionWaitingToAnwser.count > 0 {
         cell.feedEntity = listQuestionWaitingToAnwser[indexPath.row]
-        cell.setData()
+        cell.setData(isHiddenCateAndDoctor: false)
       }
     }
     return cell
@@ -468,6 +469,17 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
   func reloadDataFromServer(notification : Notification){
     reloadData()
   }
+    func selectDoctor(indexPath: IndexPath) {
+        
+    }
+    
+    func selectSpecialist(indexPath: IndexPath) {
+        
+    }
+    
+    func approVal() {
+        
+    }
   
   func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
     //khong can phai thuc hien ham nay vi dang trong trang profile cua chinh minh

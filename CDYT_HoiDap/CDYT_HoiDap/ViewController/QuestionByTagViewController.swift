@@ -114,8 +114,8 @@ class QuestionByTagViewController: UIViewController,UITableViewDelegate,UITableV
     cell.delegate = self
     if listFedds.count > 0 {
         cell.feedEntity = listFedds[indexPath.row]
-        cell.setData()
     }
+    cell.setData(isHiddenCateAndDoctor: false)
     return cell
   }
 
@@ -143,6 +143,17 @@ class QuestionByTagViewController: UIViewController,UITableViewDelegate,UITableV
             viewController.user = user
             self.navigationController?.pushViewController(viewController, animated: true)
         }
+    }
+    
+    func selectSpecialist(indexPath: IndexPath) {
+        
+    }
+    func selectDoctor(indexPath: IndexPath) {
+        
+    }
+    
+    func approVal() {
+        
     }
     
 //  MARK: Outlet

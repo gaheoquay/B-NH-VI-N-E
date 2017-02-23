@@ -452,9 +452,11 @@ class AddQuestionViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func creatAlert(){
-        let alertView = UIAlertController(title: "Category", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: UIAlertControllerStyle.alert)
+        let alertView = UIAlertController(title: "Category", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         
         let pickerView = UIPickerView(frame: pickerFrame)
+        
+        
         
         alertView.view.addSubview(pickerView)
         

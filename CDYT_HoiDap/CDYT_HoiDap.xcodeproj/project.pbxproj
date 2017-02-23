@@ -12,6 +12,8 @@
 		0F17AB191E51BAC2008BA308 /* CateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17AB181E51BAC2008BA308 /* CateEntity.swift */; };
 		0F36980D1E54013C004B028D /* Ask copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F36980B1E54013C004B028D /* Ask copy.png */; };
 		0F36980E1E54013C004B028D /* LogoMarker.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F36980C1E54013C004B028D /* LogoMarker.png */; };
+		0F9ED83A1E5BEB38001F2FC2 /* DaDuyet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */; };
+		0F9ED83B1E5BEB38001F2FC2 /* Duyet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */; };
 		792444BAFCB405C2DBAC9872 /* Pods_CDYT_HoiDap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */; };
 		8B0D35F51E56EB2D002CF784 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0D35F41E56EB2D002CF784 /* BookingViewController.swift */; };
 		8B1AD45B1E1B828500D55543 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AD45A1E1B828500D55543 /* SearchViewController.swift */; };
@@ -215,6 +217,8 @@
 		0F17AB181E51BAC2008BA308 /* CateEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CateEntity.swift; sourceTree = "<group>"; };
 		0F36980B1E54013C004B028D /* Ask copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ask copy.png"; sourceTree = "<group>"; };
 		0F36980C1E54013C004B028D /* LogoMarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoMarker.png; sourceTree = "<group>"; };
+		0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DaDuyet_1.png; sourceTree = "<group>"; };
+		0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Duyet_1.png; sourceTree = "<group>"; };
 		4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CDYT_HoiDap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54350AF3B96C58CE38450098 /* Pods-CDYT_HoiDap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYT_HoiDap.release.xcconfig"; path = "Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap.release.xcconfig"; sourceTree = "<group>"; };
 		8B0D35F41E56EB2D002CF784 /* BookingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
@@ -488,6 +492,8 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */,
+				0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */,
 				8B79D0EB1E5AC0F50010C5C0 /* vien2.jpg */,
 				8B79D0EC1E5AC0F50010C5C0 /* viene1.jpg */,
 				8B79D0E91E5AAB1A0010C5C0 /* DetailEditUp.png */,
@@ -1039,6 +1045,7 @@
 				8BC380691E583D8D00DF154A /* DatKham.png in Resources */,
 				A60430F61E232D49000216FB /* Change_Ava.png in Resources */,
 				8B79D0E81E5AA7D20010C5C0 /* DetailEdit.png in Resources */,
+				0F9ED83B1E5BEB38001F2FC2 /* Duyet_1.png in Resources */,
 				A67311D51E164FC400BCE308 /* MoreCommentTableViewCell.xib in Resources */,
 				8B79D0EA1E5AAB1A0010C5C0 /* DetailEditUp.png in Resources */,
 				8BD49EF61E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.xib in Resources */,
@@ -1066,6 +1073,7 @@
 				8B3A13471E10F454005DBC6E /* caidat_button0.png in Resources */,
 				8BF1496C1E14BF9C00766F8F /* Answer0.png in Resources */,
 				8BD49F051E48215500C98E74 /* CreateGroupChannelUserListTableViewCell.xib in Resources */,
+				0F9ED83A1E5BEB38001F2FC2 /* DaDuyet_1.png in Resources */,
 				8BD49F351E482C1600C98E74 /* OutgoingImageFileMessageTableViewCell.xib in Resources */,
 				A6E4C2FA1E1102BA00C2C871 /* User.storyboard in Resources */,
 				8BD49F261E482C1500C98E74 /* ChattingView.xib in Resources */,

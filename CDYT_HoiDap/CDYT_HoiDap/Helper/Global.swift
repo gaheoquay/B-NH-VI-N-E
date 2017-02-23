@@ -51,6 +51,7 @@ let GET_UNREAD_NOTIFICATION = BASE_URL + "/Notification/GetUnreadNotificationCou
 let GET_QUESTION_FOLLOWED = BASE_URL + "/Post/GetQuestionFollowedByUserId"
 let GET_QUESTION_ASSIGN = BASE_URL + "/Post/GetQuestionAssignToUser"
 let GET_LIST_DOCTOR = BASE_URL + "/category/getListDoctors"
+let GET_LASTED_POST = BASE_URL + "/Post/Classify"
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
 let NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"
@@ -89,3 +90,6 @@ let SEARCHS = "ScreenSearch"
 
 var listNotification = [ListNotificationEntity]()
 var listCate = [CateEntity]()
+var listAllDoctor = [ListDoctorEntity]()
+var isHiddent = false
+

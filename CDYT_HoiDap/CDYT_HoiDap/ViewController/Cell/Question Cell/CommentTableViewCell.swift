@@ -206,11 +206,8 @@ class CommentTableViewCell: UITableViewCell {
         }
         
         if mainComment.author.role == 1 {
-            for item in listCate {
-                if mainComment.author.departmentId == item.id {
-                    departmantLb.text = item.name
-                }
-            }
+            nameLbl.text = mainComment.author.fullname
+            departmantLb.text = mainComment.author.jobTitle + " - Bệnh viện E"
             verifyIconHeight.constant = 20
             nameLbl.textColor = UIColor().hexStringToUIColor(hex: "01A7FA")
         }else{
@@ -260,11 +257,8 @@ class CommentTableViewCell: UITableViewCell {
         avaImgHeight.constant = 30
         
         if mainComment.author.role == 1 {
-            for item in listCate {
-                if mainComment.author.departmentId == item.id {
-                    departmantLb.text = item.name
-                }
-            }
+            nameLbl.text = mainComment.author.fullname
+            departmantLb.text = mainComment.author.jobTitle + " - Bệnh viện E"
             verifyIconHeight.constant = 20
             nameLbl.textColor = UIColor().hexStringToUIColor(hex: "01A7FA")
         }else{

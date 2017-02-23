@@ -8,7 +8,9 @@
 
 import UIKit
 
+
 class LoginViewController: UIViewController {
+    
 
     @IBOutlet weak var emailNickTxt: UITextField!
     @IBOutlet weak var passTxt: UITextField!
@@ -18,6 +20,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var registerBtn: UIButton!
     var cannotBack = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,6 +63,8 @@ class LoginViewController: UIViewController {
         if validateDataLogin() == "" {
             errLb.isHidden = true
             requestLogin()
+            
+
         }else{
             errLb.isHidden = false
             errLb.text = validateDataLogin()

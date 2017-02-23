@@ -132,7 +132,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.indexPath = indexPath
             cell.delegate = self
             cell.feedEntity = listFeeds[indexPath.row - 1]
-            cell.setData()
+            cell.setData(isHiddenCateAndDoctor: false)
             return cell
         }
     }
@@ -228,6 +228,16 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
         //ko can thiet thuc hien ham nay vi dang o trong trang profile cua nguoi dung nay roi
     }
     
+    func selectDoctor(indexPath: IndexPath) {
+        
+    }
+    func selectSpecialist(indexPath: IndexPath) {
+        
+    }
+    
+    func approVal() {
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
