@@ -20,6 +20,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
   @IBOutlet weak var avaImg: UIImageView!
   @IBOutlet weak var nicknameLbl: UILabel!
   @IBOutlet weak var questionTableView: UITableView!
+    @IBOutlet weak var messageCountLb: UILabel!
   var pageMyFeed = 1
   var listMyFeed = [FeedsEntity]()
   var isMyFeed = false
@@ -62,6 +63,8 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
       viewUnLogin.isHidden = false
     }
     notiCountLb.isHidden = true
+    messageCountLb.isHidden = true
+    
     getNotificationCount()
   }
   
@@ -73,6 +76,8 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadView), name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.setupUserInfo), name: NSNotification.Name(rawValue: UPDATE_USERINFO), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateMessageCountLabel), name: Notification.Name.init(UPDATE_BADGE), object: nil)
+
     }
     
   func reloadView(){
@@ -101,7 +106,12 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     setBackgroundView(view: viewCreatedQuestion, check: isMyFeed)
     setBackgroundView(view: viewQuestionWaitingToAnwser, check: isWaiting)
     questionTableView.reloadData()
+    
+    messageCountLb.layer.cornerRadius = 5
+    messageCountLb.layer.masksToBounds = true
+
   }
+    
   func setBackgroundView(view:UIView,check:Bool){
     if check {
       view.backgroundColor = UIColor.init(netHex: 0xECEDEF)
@@ -196,6 +206,16 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
   }
     
+    func updateMessageCountLabel(){
+        if unreadMessageCount != 0 {
+            messageCountLb.text = " \(unreadMessageCount) "
+            messageCountLb.isHidden = false
+        }else{
+            messageCountLb.text = ""
+            messageCountLb.isHidden = true
+        }
+    }
+    
     func getListNotification(){
         
         let hotParam : [String : Any] = [
@@ -235,9 +255,9 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 if status == 200{
                     if let result = response.result.value {
                         let jsonData = result as! NSDictionary
-                        let count = jsonData["Count"] as! Int
-                        if count != 0 {
-                            self.notiCountLb.text = " \(count) "
+                        notificationCount = jsonData["Count"] as! Int
+                        if notificationCount != 0 {
+                            self.notiCountLb.text = " \(notificationCount) "
                             self.notiCountLb.isHidden = false
                         }else{
                             self.notiCountLb.text = ""

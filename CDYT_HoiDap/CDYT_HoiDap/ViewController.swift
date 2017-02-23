@@ -9,176 +9,185 @@
 import UIKit
 
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,KeyWordTableViewCellDelegate, QuestionTableViewCellDelegate {
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
+//    UPDATE_BADGE
+    NotificationCenter.default.addObserver(self, selector: #selector(setUpBadge), name: Notification.Name.init(UPDATE_BADGE), object: nil)
+
+    setupUI()
+    initTableView()
+    Until.showLoading()
+    getFeeds()
+    getHotTagFromServer()
+    // Do any additional setup after loading the view, typically from a nib.
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
-        
-        setupUI()
-        initTableView()
-        Until.showLoading()
-        getFeeds()
-        getHotTagFromServer()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-    }
-    
+  }
     
     override func viewDidAppear(_ animated: Bool) {
         Until.sendAndSetTracer(value: HOME)
     }
-    
-    func setupUI() {
-        searchView.layer.cornerRadius = 4
-        searchView.clipsToBounds = true
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
+
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.navigationController?.setNavigationBarHidden(true, animated: true)
+  }
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+  
+  
+  func setUpBadge(){
+    let tabbar = self.tabBarController as? RAMAnimatedTabBarController
+    if unreadMessageCount + notificationCount != 0 {
+      tabbar?.tabBar.items![4].badgeValue = "\(unreadMessageCount + notificationCount)"
+    }else{
+      tabbar?.tabBar.items![4].badgeValue = nil
+    }
+  }
+  
+  func setupUI() {
+    searchView.layer.cornerRadius = 4
+    searchView.clipsToBounds = true
+  }
+
+  //MARK: init table view
+  func initTableView(){
+    tbQuestion.dataSource = self
+    tbQuestion.delegate = self
+    tbQuestion.estimatedRowHeight = 999
+    tbQuestion.rowHeight = UITableViewAutomaticDimension
+    tbQuestion.register(UINib.init(nibName: "KeyWordTableViewCell", bundle: nil), forCellReuseIdentifier: "KeyWordTableViewCell")
+    tbQuestion.register(UINib.init(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
+    tbQuestion.addPullToRefreshHandler {
+      DispatchQueue.main.async {
+        self.reloadData()
+      }
+    }
+    tbQuestion.addInfiniteScrollingWithHandler {
+      DispatchQueue.main.async {
+        self.loadMore()
+      }
+    }
+  }
+  func reloadData(){
+    page = 1
+    listHotTag.removeAll()
+    listFedds.removeAll()
+    getHotTagFromServer()
+    getFeeds()
+  }
+  func loadMore(){
+    page += 1
+    getFeeds()
+  }
     
-    //MARK: init table view
-    func initTableView(){
-        tbQuestion.dataSource = self
-        tbQuestion.delegate = self
-        tbQuestion.estimatedRowHeight = 999
-        tbQuestion.rowHeight = UITableViewAutomaticDimension
-        tbQuestion.register(UINib.init(nibName: "KeyWordTableViewCell", bundle: nil), forCellReuseIdentifier: "KeyWordTableViewCell")
-        tbQuestion.register(UINib.init(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
-        tbQuestion.addPullToRefreshHandler {
-            DispatchQueue.main.async {
-                //        self.tbQuestion.pullToRefreshView?.startAnimating()
-                self.reloadData()
+//  MARK: KeyWordTableViewCellDelegate
+  func gotoListQuestionByTag(hotTagId: String) {
+    let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
+    viewController.hotTagId = hotTagId
+    self.navigationController?.pushViewController(viewController, animated: true)
+  }
+  
+//  MARK: request server
+  func getHotTagFromServer(){
+    
+    let hotParam : [String : Any] = [
+      "Auth": Until.getAuthKey(),
+      "Page": 1,
+      "Size": 10,
+      "RequestedUserId" : Until.getCurrentId()
+    ]
+    Alamofire.request(HOTEST_TAG, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+      if let status = response.response?.statusCode {
+        if status == 200{
+          if let result = response.result.value {
+            let jsonData = result as! [NSDictionary]
+            
+            for item in jsonData {
+              let hotTag = HotTagEntity.init(dictionary: item)
+              self.listHotTag.append(hotTag)
             }
-        }
-        tbQuestion.addInfiniteScrollingWithHandler {
-            DispatchQueue.main.async {
-                //        self.tbQuestion.infiniteScrollingView?.startAnimating()
-                self.loadMore()
-            }
-        }
-    }
-    func reloadData(){
-        page = 1
-        listHotTag.removeAll()
-        listFedds.removeAll()
-        getHotTagFromServer()
-        getFeeds()
-    }
-    func loadMore(){
-        page += 1
-        getFeeds()
-    }
-    
-    //  MARK: KeyWordTableViewCellDelegate
-    func gotoListQuestionByTag(hotTagId: String) {
-        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
-        viewController.hotTagId = hotTagId
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    //  MARK: request server
-    func getHotTagFromServer(){
-        
-        let hotParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "Page": 1,
-            "Size": 10,
-            "RequestedUserId" : Until.getCurrentId()
-        ]
-        Alamofire.request(HOTEST_TAG, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! [NSDictionary]
-                        
-                        for item in jsonData {
-                            let hotTag = HotTagEntity.init(dictionary: item)
-                            self.listHotTag.append(hotTag)
-                        }
-                    }
-                    self.tbQuestion.reloadData()
-                }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-                }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-            }
-        }
-    }
-    
-    func getFeeds(){
-        let hotParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "Page": page,
-            "Size": 10,
-            "RequestedUserId" : Until.getCurrentId()
-        ]
-        //    Until.showLoading()
-        print(JSON.init(hotParam))
-        Alamofire.request(GET_FEEDS, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! [NSDictionary]
-                        
-                        for item in jsonData {
-                            let entity = FeedsEntity.init(dictionary: item)
-                            self.listFedds.append(entity)
-                        }
-                        
-                        self.tbQuestion.reloadData()
-                        
-                    }
-                }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-                }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-            }
-            Until.hideLoading()
-            self.tbQuestion.pullToRefreshView?.stopAnimating()
-            self.tbQuestion.infiniteScrollingView?.stopAnimating()
-        }
-        
-    }
-    
-    //MARK: UIViewController,UITableViewDelegate
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        }
-        return listFedds.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "KeyWordTableViewCell") as! KeyWordTableViewCell
-            cell.listTag = listHotTag
-            cell.delegate = self
-            cell.clvKeyword.reloadData()
-            return cell
+          }
+          self.tbQuestion.reloadData()
         }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
-            cell.delegate = self
-            cell.indexPath = indexPath
-            if listFedds.count > 0 {
-                cell.feedEntity = listFedds[indexPath.row]
-            }
-            cell.setData(isHiddenCateAndDoctor: false)
-            return cell
+          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
         }
+      }else{
+        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+      }
     }
+  }
+
+  func getFeeds(){
+    let hotParam : [String : Any] = [
+      "Auth": Until.getAuthKey(),
+      "Page": page,
+      "Size": 10,
+      "RequestedUserId" : Until.getCurrentId()
+    ]
+    print(JSON.init(hotParam))
+    Alamofire.request(GET_FEEDS, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+      if let status = response.response?.statusCode {
+        if status == 200{
+          if let result = response.result.value {
+            let jsonData = result as! [NSDictionary]
+            
+            for item in jsonData {
+              let entity = FeedsEntity.init(dictionary: item)
+              self.listFedds.append(entity)
+            }
+            
+            self.tbQuestion.reloadData()
+            
+          }
+        }else{
+          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        }
+      }else{
+        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+      }
+      Until.hideLoading()
+      self.tbQuestion.pullToRefreshView?.stopAnimating()
+      self.tbQuestion.infiniteScrollingView?.stopAnimating()
+    }
+
+  }
+  
+//MARK: UIViewController,UITableViewDelegate
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return 2
+  }
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if section == 0 {
+      return 1
+    }
+    return listFedds.count
+  }
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    if indexPath.section == 0 {
+      let cell = tableView.dequeueReusableCell(withIdentifier: "KeyWordTableViewCell") as! KeyWordTableViewCell
+      cell.listTag = listHotTag
+      cell.delegate = self
+      cell.clvKeyword.reloadData()
+      return cell
+    }else{
+      let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
+        cell.delegate = self
+        cell.indexPath = indexPath
+        if listFedds.count > 0 {
+            cell.feedEntity = listFedds[indexPath.row]
+        }
+      
+      cell.setData()
+      return cell
+    }
+  }
     
     //MARK: QuestionTableViewCellDelegate
     func showQuestionDetail(indexPath: IndexPath) {
@@ -189,9 +198,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
         if user.id == Until.getCurrentId() {
-            //            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-            //            let viewController = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
-            //            self.navigationController?.pushViewController(viewController, animated: true)
+//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//            let viewController = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+//            self.navigationController?.pushViewController(viewController, animated: true)
         }else{
             let storyboard = UIStoryboard.init(name: "User", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
@@ -199,13 +208,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             self.navigationController?.pushViewController(viewController, animated: true)
         }
     }
-    
-    //    MARK: Action
-    
-    @IBAction func gotoSearch(_ sender: Any) {
-        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
+     
+//    MARK: Action
+  
+  @IBAction func gotoSearch(_ sender: Any) {
+    let viewController = self.storyboard?.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
+    self.navigationController?.pushViewController(viewController, animated: true)
+  }
     @IBAction func addQuestionTapAction(_ sender: Any) {
         if Until.getCurrentId() != "" {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddQuestionViewController") as! AddQuestionViewController
@@ -215,39 +224,22 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
         
     }
-    @IBAction func gotoAbout(_ sender: Any) {
-        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AboutViewController") as! AboutViewController
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
+  @IBAction func gotoAbout(_ sender: Any) {
+    let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AboutViewController") as! AboutViewController
+    self.navigationController?.pushViewController(viewController, animated: true)
+  }
     
     //MARK: receive notifiy when mark an comment is solution
     func reloadDataFromServer(notification : Notification){
         reloadData()
     }
     
-    func approVal() {
-        
-    }
-    
-    func selectDoctor(indexPath: IndexPath) {
-        
-    }
-    func selectSpecialist(indexPath: IndexPath) {
-        
-    }
-    
-    
-    
-    //MARK: Outlet
-    @IBOutlet weak var tbQuestion: UITableView!
+//MARK: Outlet
+  @IBOutlet weak var tbQuestion: UITableView!
     @IBOutlet weak var searchView: UIView!
-    var listFedds = [FeedsEntity]()
-    var listHotTag = [HotTagEntity]()
-    var page = 1
-    var canLoadMore = true
-    var ischeckPick = true
-    
-    
-    var listDoctorInCate = [AuthorEntity]()
+  var listFedds = [FeedsEntity]()
+  var listHotTag = [HotTagEntity]()
+  var page = 1
+  var canLoadMore = true
 }
 

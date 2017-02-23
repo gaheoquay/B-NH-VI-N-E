@@ -178,7 +178,7 @@ class QuestionDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     //MARK: Receive notify when have new comment 
     func reloadCommentData() {
-        getListCommentByPostID(postId: feedObj.postEntity.id)
+        reloadData()
     }
     
     func configInputBar(){

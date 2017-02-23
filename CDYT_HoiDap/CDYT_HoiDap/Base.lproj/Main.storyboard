@@ -1364,6 +1364,13 @@
                                                             <constraint firstAttribute="width" secondItem="erR-50-0n1" secondAttribute="height" multiplier="1:1" id="ZtW-tw-BPk"/>
                                                         </constraints>
                                                     </imageView>
+                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 0 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ku-hR-OOI">
+                                                        <rect key="frame" x="35" y="11" width="14" height="14"/>
+                                                        <color key="backgroundColor" red="0.97924929859999998" green="0.29259371760000003" blue="0.42360758780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <gestureRecognizers/>
@@ -1371,8 +1378,10 @@
                                                     <constraint firstItem="erR-50-0n1" firstAttribute="height" secondItem="1Wi-35-cSl" secondAttribute="height" multiplier="1:2" id="QHi-gc-1a8"/>
                                                     <constraint firstAttribute="trailing" secondItem="Etp-yr-sjn" secondAttribute="trailing" constant="8" id="Rhb-Sv-62e"/>
                                                     <constraint firstItem="Etp-yr-sjn" firstAttribute="leading" secondItem="erR-50-0n1" secondAttribute="trailing" constant="5" id="TCj-cj-XUf"/>
+                                                    <constraint firstItem="1ku-hR-OOI" firstAttribute="leading" secondItem="Etp-yr-sjn" secondAttribute="leading" constant="-5" id="W53-qK-ehs"/>
                                                     <constraint firstAttribute="bottom" secondItem="erR-50-0n1" secondAttribute="bottom" constant="8" id="dSJ-MO-nkb"/>
                                                     <constraint firstItem="erR-50-0n1" firstAttribute="leading" secondItem="1Wi-35-cSl" secondAttribute="leading" constant="8" id="hmk-GW-H8G"/>
+                                                    <constraint firstItem="Etp-yr-sjn" firstAttribute="top" secondItem="1ku-hR-OOI" secondAttribute="bottom" constant="1" id="xnm-fP-ICi"/>
                                                     <constraint firstItem="Etp-yr-sjn" firstAttribute="centerY" secondItem="erR-50-0n1" secondAttribute="centerY" id="zKI-uB-AHy"/>
                                                 </constraints>
                                                 <connections>
@@ -1635,6 +1644,7 @@
                     <connections>
                         <outlet property="avaImg" destination="FTO-Ub-M9d" id="ccA-bC-OCC"/>
                         <outlet property="layoutWidthViewFollowingQuestion" destination="sf4-mu-7xX" id="bge-E0-CHO"/>
+                        <outlet property="messageCountLb" destination="1ku-hR-OOI" id="SjU-V6-bsH"/>
                         <outlet property="nicknameLbl" destination="pPI-lF-9UV" id="Kei-w9-CUt"/>
                         <outlet property="notiCountLb" destination="Mu0-Si-7T7" id="Mea-dP-Ij3"/>
                         <outlet property="questionTableView" destination="LTl-aA-3Pz" id="p3U-Ae-cYp"/>
