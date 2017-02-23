@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, QuestionTableViewCellDelegate ,UIPickerViewDelegate,UIPickerViewDataSource {
+class QuestionViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource, QuestionTableViewCellDelegate ,UIPickerViewDelegate,UIPickerViewDataSource {
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -190,6 +190,35 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     
 
+    func requestServer(){
+        let hotParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            ]
+      
+        Until.showLoading()
+        Alamofire.request(GET_LIST_DOCTOR, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! [NSDictionary]
+                        
+                        for item in jsonData {
+                            let entity = ListDoctorEntity.init(dictionary: item)
+                            listAllDoctor.append(entity)
+                        }
+                        self.tbQuestion.reloadData()
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+            Until.hideLoading()
+            
+        }
+    }
+    
      
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -258,10 +287,6 @@ class QuestionViewController: UIViewController,UITableViewDelegate,UITableViewDa
             "Post": post,
             "AssignToUserId": idDoc
         ]
-        
-        print(JSON.init(questionParam))
-        
-        
         Alamofire.request(GET_LASTED_POST, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{

@@ -15,7 +15,6 @@
 @import RealmSwift;
 @import SDWebImage;
 @import SKPhotoBrowser;
-@import SwiftyJSON;
 @import TTTAttributedLabel;
 #import "TPKeyboardAvoidingScrollView.h"
 @import UICollectionViewLeftAlignedLayout;
@@ -27,5 +26,5 @@
 @import WYPopoverController;
 @import SendBirdSDK;
 #import <Google/Analytics.h>
-
+@import RNNotificationView;
 #endif /* HoiDap_Header_h */

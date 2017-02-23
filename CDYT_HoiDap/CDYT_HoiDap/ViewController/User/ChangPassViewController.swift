@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChangPassViewController: UIViewController {
+class ChangPassViewController: BaseViewController {
 
     @IBOutlet weak var curentPass: UITextField!
     @IBOutlet weak var newPass: UITextField!
@@ -66,7 +66,6 @@ class ChangPassViewController: UIViewController {
             "NewPassWord": DataEncryption.getMD5(from: newPass.text)
         ]
         
-        print(JSON.init(param))
         
         Alamofire.request(CHANGE_PASSWORD, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TagListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, QuestionTagTableViewCellDelegate {
+class TagListViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, QuestionTagTableViewCellDelegate {
 
     @IBOutlet weak var tagTableView: UITableView!
     var listHotTag = [HotTagEntity]()
@@ -93,7 +93,6 @@ class TagListViewController: UIViewController, UITableViewDataSource, UITableVie
             "RequestedUserId" : Until.getCurrentId()
         ]
         
-        print(JSON.init(hotParam))
         
         Until.showLoading()
         Alamofire.request(HOTEST_TAG, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in

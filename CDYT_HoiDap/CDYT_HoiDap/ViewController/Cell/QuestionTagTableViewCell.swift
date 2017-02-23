@@ -54,7 +54,6 @@ class QuestionTagTableViewCell: UITableViewCell {
             "Tag": hotTag.tag.id
         ]
         
-        print(JSON.init(followParam))
         
         Until.showLoading()
         Alamofire.request(FOLLOW_TAG, method: .post, parameters: followParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in

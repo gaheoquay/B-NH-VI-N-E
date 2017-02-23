@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UpdateInfoViewController: UIViewController {
+class UpdateInfoViewController: BaseViewController {
     
     @IBOutlet weak var avaImg1: UIImageView!
     @IBOutlet weak var avaImg2: UIImageView!
@@ -95,8 +95,7 @@ class UpdateInfoViewController: UIViewController {
             "RequestedUserId": otherUserId
         ]
         
-        print(JSON.init(param))
-        
+      
         Until.showLoading()
         Alamofire.request(GET_USER_BY_ID, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
@@ -422,8 +421,6 @@ class UpdateInfoViewController: UIViewController {
             "DOB" : dobDate,
             "Phone": phoneTxt.text!
         ]
-        
-        print(JSON.init(updateParam))
         
         Until.showLoading()
         Alamofire.request(UPDATE_PROFILE, method: .post, parameters: updateParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in

@@ -81,8 +81,7 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
                 "PostId": feed.postEntity.id
             ]
             
-            print(JSON.init(followParam))
-            
+          
             Until.showLoading()
             Alamofire.request(LIKE_POST, method: .post, parameters: followParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
                 if let status = response.response?.statusCode {
@@ -232,7 +231,6 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
                 "PostId": feed.postEntity.id
             ]
             
-            print(JSON.init(followParam))
             
             Until.showLoading()
             Alamofire.request(FOLLOW_POST, method: .post, parameters: followParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in

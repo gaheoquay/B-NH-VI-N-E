@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PolicyAndRuleViewController: UIViewController {
+class PolicyAndRuleViewController: BaseViewController {
 
     @IBOutlet weak var titleLb: UILabel!
     @IBOutlet weak var webView: UIWebView!

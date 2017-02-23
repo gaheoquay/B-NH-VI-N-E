@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QuestionByTagViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, QuestionTableViewCellDelegate {
+class QuestionByTagViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource, QuestionTableViewCellDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
