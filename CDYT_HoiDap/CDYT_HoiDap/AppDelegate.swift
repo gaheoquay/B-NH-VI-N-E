@@ -124,9 +124,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let hotParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
             ]
-        
-      
-        Until.showLoading()
         Alamofire.request(GET_LIST_DOCTOR, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{

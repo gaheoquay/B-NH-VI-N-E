@@ -303,8 +303,6 @@ class UpdateInfoViewController: BaseViewController {
             "NicknameOrEmail": user[0].email,
             "Device": device
         ]
-
-        
         Until.showLoading()
         Alamofire.request(LOG_OUT, method: .post, parameters: logoutParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
