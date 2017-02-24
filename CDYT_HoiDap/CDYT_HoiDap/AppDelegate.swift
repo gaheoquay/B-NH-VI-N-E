@@ -20,9 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     registerNotification(application: application)
     if (launchOptions != nil) { //launchOptions is not nil
       let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as! NSDictionary
-      if let apsInfo = userInfo["aps"] as? NSDictionary{
-        let data = apsInfo["data"] as! NSDictionary
+      if let sendBird = userInfo["sendbird"] as? NSDictionary {
+        let sender = sendBird["sender"] as! NSDictionary
+        self.perform(#selector(self.callGotoChat(notificationDic:)), with: sender, afterDelay: 2)
+      }else{
+        if let apsInfo = userInfo["aps"] as? NSDictionary{
+          let data = apsInfo["data"] as! NSDictionary
           self.perform(#selector(self.callToGoDetail(notificationDic:)), with: data, afterDelay: 2)
+        }
       }
     }
     SBDMain.initWithApplicationId(SENDBIRD_APPKEY)
@@ -42,7 +47,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     gai.trackUncaughtExceptions = true  // report uncaught exceptions
     return true
   }
-  
+  func callGotoChat(notificationDic:NSDictionary){
+    NotificationCenter.default.post(name: NSNotification.Name(rawValue:GO_TO_CHAT), object: notificationDic)
+  }
   func callToGoDetail(notificationDic:NSDictionary){
     NotificationCenter.default.post(name: NSNotification.Name(rawValue:GO_TO_DETAIL_WHEN_TAP_NOTIFICATION), object: notificationDic)
   }
@@ -118,8 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             "Auth": Until.getAuthKey(),
             ]
         
-        print(JSON.init(hotParam))
-        
+      
         Until.showLoading()
         Alamofire.request(GET_LIST_DOCTOR, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
@@ -219,11 +225,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     print(userInfo)
     let state = application.applicationState
     if state == UIApplicationState.active {
-      NotificationCenter.default.post(name: NSNotification.Name(rawValue:SHOW_NOTIFICAION), object: userInfo)
+      Until.getBagValue()
+      if (userInfo["sendbird"] as? NSDictionary) != nil {
+      }else{
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue:SHOW_NOTIFICAION), object: userInfo)
+      }
     }else{
-      if let apsInfo = userInfo["aps"] as? NSDictionary{
-        let data = apsInfo["data"] as! NSDictionary
-        callToGoDetail(notificationDic: data)
+      if let sendBird = userInfo["sendbird"] as? NSDictionary {
+        let sender = sendBird["sender"] as! NSDictionary
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue:GO_TO_CHAT), object: sender)
+      }else{
+        if let apsInfo = userInfo["aps"] as? NSDictionary{
+          let data = apsInfo["data"] as! NSDictionary
+          callToGoDetail(notificationDic: data)
+        }
       }
     }
   }

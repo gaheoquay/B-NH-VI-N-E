@@ -64,7 +64,8 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     }
     notiCountLb.isHidden = true
     messageCountLb.isHidden = true
-    
+    Until.getBagValue()
+
     getNotificationCount()
   }
   

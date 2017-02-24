@@ -303,7 +303,6 @@ class UpdateInfoViewController: BaseViewController {
             "NicknameOrEmail": user[0].email,
             "Device": device
         ]
-        print(JSON.init(logoutParam))
 
         
         Until.showLoading()
