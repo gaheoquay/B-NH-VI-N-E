@@ -8,11 +8,10 @@
 
 import UIKit
 
-class CreateCvViewController: UIViewController {
+class CreateCvViewController: BaseViewController {
     
     @IBOutlet weak var lbGender: UILabel!
     @IBOutlet weak var lbDateOfYear: UILabel!
-    @IBOutlet weak var mainScrollView: UIScrollView!
     
     
     
