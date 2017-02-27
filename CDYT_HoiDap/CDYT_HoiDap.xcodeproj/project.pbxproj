@@ -7,13 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F0EFD311E62771C0036C860 /* HistoryUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0EFD301E62771C0036C860 /* HistoryUserViewController.swift */; };
+		0F0EFD331E627FFA0036C860 /* HoSoRong_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F0EFD321E627FFA0036C860 /* HoSoRong_1.png */; };
 		0F17AB151E51A682008BA308 /* CheckList.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F17AB141E51A682008BA308 /* CheckList.png */; };
 		0F17AB171E51ACFF008BA308 /* Private.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F17AB161E51ACFF008BA308 /* Private.png */; };
 		0F17AB191E51BAC2008BA308 /* CateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17AB181E51BAC2008BA308 /* CateEntity.swift */; };
 		0F36980D1E54013C004B028D /* Ask copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F36980B1E54013C004B028D /* Ask copy.png */; };
 		0F36980E1E54013C004B028D /* LogoMarker.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F36980C1E54013C004B028D /* LogoMarker.png */; };
+		0F52D2891E634889006C57E2 /* FileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F52D2871E634889006C57E2 /* FileCell.swift */; };
+		0F52D28A1E634889006C57E2 /* FileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F52D2881E634889006C57E2 /* FileCell.xib */; };
+		0F9471441E5F5E3C00EE7C2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F9471431E5F5E3C00EE7C2A /* Main.storyboard */; };
+		0F9AD59C1E63CE0F00981D7B /* SearchFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9AD59B1E63CE0F00981D7B /* SearchFileViewController.swift */; };
+		0F9C46171E5FE24500DCFE46 /* ChoiceServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C46161E5FE24500DCFE46 /* ChoiceServiceViewController.swift */; };
+		0F9C46191E5FF22A00DCFE46 /* ListServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C46181E5FF22A00DCFE46 /* ListServiceViewController.swift */; };
+		0F9C461D1E60055200DCFE46 /* ServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C461B1E60055200DCFE46 /* ServiceCell.swift */; };
+		0F9C461E1E60055200DCFE46 /* ServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C461C1E60055200DCFE46 /* ServiceCell.xib */; };
+		0F9C46231E60084A00DCFE46 /* Check0-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C461F1E60084A00DCFE46 /* Check0-2.png */; };
+		0F9C46241E60084A00DCFE46 /* DatKham0.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C46201E60084A00DCFE46 /* DatKham0.png */; };
+		0F9C46251E60084A00DCFE46 /* DichVu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C46211E60084A00DCFE46 /* DichVu.png */; };
+		0F9C46261E60084A00DCFE46 /* Profile1_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C46221E60084A00DCFE46 /* Profile1_1.png */; };
+		0F9C46281E6008A200DCFE46 /* ChonNgay.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C46271E6008A200DCFE46 /* ChonNgay.png */; };
+		0F9C462B1E600D6100DCFE46 /* Add.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C46291E600D6100DCFE46 /* Add.png */; };
+		0F9C462C1E600D6100DCFE46 /* Delete2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C462A1E600D6100DCFE46 /* Delete2.png */; };
+		0F9C462E1E600E3700DCFE46 /* Delete1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C462D1E600E3700DCFE46 /* Delete1.png */; };
+		0F9C46341E602A2700DCFE46 /* Check1-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C46331E602A2700DCFE46 /* Check1-2.png */; };
+		0F9C463A1E603F4200DCFE46 /* HoSoRong.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C46351E603F4200DCFE46 /* HoSoRong.png */; };
+		0F9C463B1E603F4200DCFE46 /* LichKham.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C46361E603F4200DCFE46 /* LichKham.png */; };
+		0F9C463C1E603F4200DCFE46 /* LichSu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C46371E603F4200DCFE46 /* LichSu.png */; };
+		0F9C463D1E603F4200DCFE46 /* LichSuGrey   .png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C46381E603F4200DCFE46 /* LichSuGrey   .png */; };
+		0F9C463E1E603F4200DCFE46 /* Profile_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C46391E603F4200DCFE46 /* Profile_1.png */; };
+		0F9C46401E60462700DCFE46 /* FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C463F1E60462700DCFE46 /* FileViewController.swift */; };
 		0F9ED83A1E5BEB38001F2FC2 /* DaDuyet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */; };
 		0F9ED83B1E5BEB38001F2FC2 /* Duyet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */; };
+		0FABDC331E61C2EC004DD98D /* CreateCvViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FABDC321E61C2EC004DD98D /* CreateCvViewController.swift */; };
+		0FCFD9A61E5EEDB700EE2F89 /* BookingCalenderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFD9A51E5EEDB700EE2F89 /* BookingCalenderController.swift */; };
+		0FCFD9A81E5EEDDD00EE2F89 /* ManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFD9A71E5EEDDD00EE2F89 /* ManagerViewController.swift */; };
+		0FF753391E62F267001450B7 /* ExamScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF753381E62F267001450B7 /* ExamScheduleViewController.swift */; };
+		0FF7533D1E62F3A9001450B7 /* ExamScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7533B1E62F3A9001450B7 /* ExamScheduleCell.swift */; };
+		0FF7533E1E62F3A9001450B7 /* ExamScheduleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FF7533C1E62F3A9001450B7 /* ExamScheduleCell.xib */; };
+		0FF753401E62F52C001450B7 /* Profile2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF7533F1E62F52C001450B7 /* Profile2.png */; };
 		792444BAFCB405C2DBAC9872 /* Pods_CDYT_HoiDap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */; };
 		8B0D35F51E56EB2D002CF784 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0D35F41E56EB2D002CF784 /* BookingViewController.swift */; };
 		8B1AD45B1E1B828500D55543 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AD45A1E1B828500D55543 /* SearchViewController.swift */; };
@@ -21,7 +53,6 @@
 		8B1AD45F1E1B97F000D55543 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1AD45D1E1B97F000D55543 /* SearchTableViewCell.xib */; };
 		8B3A12DF1E10F399005DBC6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A12DE1E10F399005DBC6E /* AppDelegate.swift */; };
 		8B3A12E11E10F399005DBC6E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A12E01E10F399005DBC6E /* ViewController.swift */; };
-		8B3A12E41E10F399005DBC6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B3A12E21E10F399005DBC6E /* Main.storyboard */; };
 		8B3A12E61E10F399005DBC6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B3A12E51E10F399005DBC6E /* Assets.xcassets */; };
 		8B3A12E91E10F399005DBC6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B3A12E71E10F399005DBC6E /* LaunchScreen.storyboard */; };
 		8B3A13411E10F454005DBC6E /* AvaDefaut.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B3A12F11E10F454005DBC6E /* AvaDefaut.png */; };
@@ -214,13 +245,45 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F0EFD301E62771C0036C860 /* HistoryUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryUserViewController.swift; sourceTree = "<group>"; };
+		0F0EFD321E627FFA0036C860 /* HoSoRong_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HoSoRong_1.png; sourceTree = "<group>"; };
 		0F17AB141E51A682008BA308 /* CheckList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckList.png; sourceTree = "<group>"; };
 		0F17AB161E51ACFF008BA308 /* Private.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Private.png; sourceTree = "<group>"; };
 		0F17AB181E51BAC2008BA308 /* CateEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CateEntity.swift; sourceTree = "<group>"; };
 		0F36980B1E54013C004B028D /* Ask copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ask copy.png"; sourceTree = "<group>"; };
 		0F36980C1E54013C004B028D /* LogoMarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoMarker.png; sourceTree = "<group>"; };
+		0F52D2871E634889006C57E2 /* FileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCell.swift; sourceTree = "<group>"; };
+		0F52D2881E634889006C57E2 /* FileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileCell.xib; sourceTree = "<group>"; };
+		0F9471431E5F5E3C00EE7C2A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		0F9AD59B1E63CE0F00981D7B /* SearchFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFileViewController.swift; sourceTree = "<group>"; };
+		0F9C46161E5FE24500DCFE46 /* ChoiceServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceServiceViewController.swift; sourceTree = "<group>"; };
+		0F9C46181E5FF22A00DCFE46 /* ListServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListServiceViewController.swift; sourceTree = "<group>"; };
+		0F9C461B1E60055200DCFE46 /* ServiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
+		0F9C461C1E60055200DCFE46 /* ServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceCell.xib; sourceTree = "<group>"; };
+		0F9C461F1E60084A00DCFE46 /* Check0-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Check0-2.png"; sourceTree = "<group>"; };
+		0F9C46201E60084A00DCFE46 /* DatKham0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DatKham0.png; sourceTree = "<group>"; };
+		0F9C46211E60084A00DCFE46 /* DichVu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DichVu.png; sourceTree = "<group>"; };
+		0F9C46221E60084A00DCFE46 /* Profile1_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Profile1_1.png; sourceTree = "<group>"; };
+		0F9C46271E6008A200DCFE46 /* ChonNgay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChonNgay.png; sourceTree = "<group>"; };
+		0F9C46291E600D6100DCFE46 /* Add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Add.png; sourceTree = "<group>"; };
+		0F9C462A1E600D6100DCFE46 /* Delete2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Delete2.png; sourceTree = "<group>"; };
+		0F9C462D1E600E3700DCFE46 /* Delete1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Delete1.png; sourceTree = "<group>"; };
+		0F9C46331E602A2700DCFE46 /* Check1-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Check1-2.png"; sourceTree = "<group>"; };
+		0F9C46351E603F4200DCFE46 /* HoSoRong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HoSoRong.png; sourceTree = "<group>"; };
+		0F9C46361E603F4200DCFE46 /* LichKham.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LichKham.png; sourceTree = "<group>"; };
+		0F9C46371E603F4200DCFE46 /* LichSu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LichSu.png; sourceTree = "<group>"; };
+		0F9C46381E603F4200DCFE46 /* LichSuGrey   .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LichSuGrey   .png"; sourceTree = "<group>"; };
+		0F9C46391E603F4200DCFE46 /* Profile_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Profile_1.png; sourceTree = "<group>"; };
+		0F9C463F1E60462700DCFE46 /* FileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileViewController.swift; sourceTree = "<group>"; };
 		0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DaDuyet_1.png; sourceTree = "<group>"; };
 		0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Duyet_1.png; sourceTree = "<group>"; };
+		0FABDC321E61C2EC004DD98D /* CreateCvViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCvViewController.swift; sourceTree = "<group>"; };
+		0FCFD9A51E5EEDB700EE2F89 /* BookingCalenderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BookingCalenderController.swift; path = User/BookingCalenderController.swift; sourceTree = "<group>"; };
+		0FCFD9A71E5EEDDD00EE2F89 /* ManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerViewController.swift; sourceTree = "<group>"; };
+		0FF753381E62F267001450B7 /* ExamScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamScheduleViewController.swift; sourceTree = "<group>"; };
+		0FF7533B1E62F3A9001450B7 /* ExamScheduleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamScheduleCell.swift; sourceTree = "<group>"; };
+		0FF7533C1E62F3A9001450B7 /* ExamScheduleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExamScheduleCell.xib; sourceTree = "<group>"; };
+		0FF7533F1E62F52C001450B7 /* Profile2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Profile2.png; sourceTree = "<group>"; };
 		4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CDYT_HoiDap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54350AF3B96C58CE38450098 /* Pods-CDYT_HoiDap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYT_HoiDap.release.xcconfig"; path = "Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap.release.xcconfig"; sourceTree = "<group>"; };
 		8B0D35F41E56EB2D002CF784 /* BookingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
@@ -231,7 +294,6 @@
 		8B3A12DB1E10F399005DBC6E /* CDYT_HoiDap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CDYT_HoiDap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B3A12DE1E10F399005DBC6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B3A12E01E10F399005DBC6E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8B3A12E31E10F399005DBC6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B3A12E51E10F399005DBC6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B3A12E81E10F399005DBC6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B3A12EA1E10F399005DBC6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -445,6 +507,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F9C461A1E60053000DCFE46 /* Service Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0F9C461B1E60055200DCFE46 /* ServiceCell.swift */,
+				0F9C461C1E60055200DCFE46 /* ServiceCell.xib */,
+				0F52D2871E634889006C57E2 /* FileCell.swift */,
+				0F52D2881E634889006C57E2 /* FileCell.xib */,
+			);
+			name = "Service Cell";
+			sourceTree = "<group>";
+		};
+		0FF7533A1E62F385001450B7 /* ScheduleCell */ = {
+			isa = PBXGroup;
+			children = (
+				0FF7533B1E62F3A9001450B7 /* ExamScheduleCell.swift */,
+				0FF7533C1E62F3A9001450B7 /* ExamScheduleCell.xib */,
+			);
+			name = ScheduleCell;
+			sourceTree = "<group>";
+		};
 		2E6EC2FF9E2B31F4C0E029F7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,8 +567,8 @@
 				8B3A131E1E10F454005DBC6E /* Libaries */,
 				8B3A12DE1E10F399005DBC6E /* AppDelegate.swift */,
 				8B3A12E01E10F399005DBC6E /* ViewController.swift */,
-				8B3A12E21E10F399005DBC6E /* Main.storyboard */,
 				8B3A12E51E10F399005DBC6E /* Assets.xcassets */,
+				0F9471431E5F5E3C00EE7C2A /* Main.storyboard */,
 				8B3A12E71E10F399005DBC6E /* LaunchScreen.storyboard */,
 				8B3A12EA1E10F399005DBC6E /* Info.plist */,
 			);
@@ -496,6 +578,22 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0FF7533F1E62F52C001450B7 /* Profile2.png */,
+				0F0EFD321E627FFA0036C860 /* HoSoRong_1.png */,
+				0F9C46351E603F4200DCFE46 /* HoSoRong.png */,
+				0F9C46361E603F4200DCFE46 /* LichKham.png */,
+				0F9C46371E603F4200DCFE46 /* LichSu.png */,
+				0F9C46381E603F4200DCFE46 /* LichSuGrey   .png */,
+				0F9C46391E603F4200DCFE46 /* Profile_1.png */,
+				0F9C46331E602A2700DCFE46 /* Check1-2.png */,
+				0F9C462D1E600E3700DCFE46 /* Delete1.png */,
+				0F9C46291E600D6100DCFE46 /* Add.png */,
+				0F9C462A1E600D6100DCFE46 /* Delete2.png */,
+				0F9C46271E6008A200DCFE46 /* ChonNgay.png */,
+				0F9C461F1E60084A00DCFE46 /* Check0-2.png */,
+				0F9C46201E60084A00DCFE46 /* DatKham0.png */,
+				0F9C46211E60084A00DCFE46 /* DichVu.png */,
+				0F9C46221E60084A00DCFE46 /* Profile1_1.png */,
 				8B6E19961E5EC9080078558D /* Logo.png */,
 				0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */,
 				0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */,
@@ -685,6 +783,7 @@
 				8B3A138D1E111FA5005DBC6E /* Cell */,
 				A6E4C2F61E11022B00C2C871 /* User */,
 				8B3A13851E10FD1B005DBC6E /* TagListViewController.swift */,
+				0FCFD9A51E5EEDB700EE2F89 /* BookingCalenderController.swift */,
 				8B3A13871E10FD2A005DBC6E /* UserViewController.swift */,
 				8B3A13891E10FD58005DBC6E /* QuestionViewController.swift */,
 				A6417E241E13C78D00BD2D75 /* AddQuestionViewController.swift */,
@@ -699,6 +798,14 @@
 				8B79D0DF1E5A91C80010C5C0 /* ListDoctorViewController.swift */,
 				8B79D0E11E5A91F30010C5C0 /* DescriptionViewController.swift */,
 				8BFE666B1E5D423700E1138B /* BaseViewController.swift */,
+				0FCFD9A71E5EEDDD00EE2F89 /* ManagerViewController.swift */,
+				0F9C46161E5FE24500DCFE46 /* ChoiceServiceViewController.swift */,
+				0F9C46181E5FF22A00DCFE46 /* ListServiceViewController.swift */,
+				0F9C463F1E60462700DCFE46 /* FileViewController.swift */,
+				0FABDC321E61C2EC004DD98D /* CreateCvViewController.swift */,
+				0F0EFD301E62771C0036C860 /* HistoryUserViewController.swift */,
+				0FF753381E62F267001450B7 /* ExamScheduleViewController.swift */,
+				0F9AD59B1E63CE0F00981D7B /* SearchFileViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -706,6 +813,8 @@
 		8B3A138D1E111FA5005DBC6E /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				0FF7533A1E62F385001450B7 /* ScheduleCell */,
+				0F9C461A1E60053000DCFE46 /* Service Cell */,
 				A68A95011E14ECE10067736E /* Question Cell */,
 				A6005BCC1E13721200095FB7 /* User Cell */,
 				8B3A138E1E112129005DBC6E /* KeyWordTableViewCell.swift */,
@@ -1011,20 +1120,25 @@
 				8BF149701E14BF9C00766F8F /* Camera.png in Resources */,
 				8BD49F0D1E48215500C98E74 /* SelectedUserListCollectionViewCell.xib in Resources */,
 				8B3A13911E112129005DBC6E /* KeyWordTableViewCell.xib in Resources */,
+				0F9C461E1E60055200DCFE46 /* ServiceCell.xib in Resources */,
 				8B3A134A1E10F454005DBC6E /* copyright.png in Resources */,
 				8BF1496F1E14BF9C00766F8F /* CaiDat.png in Resources */,
 				8BB92DD81E24884E007C5516 /* MoreDetail.png in Resources */,
 				8BD49F6E1E482D1100C98E74 /* ParticipantListTableViewCell.xib in Resources */,
 				8BF149731E14BF9C00766F8F /* GiaiPhap_Mark.png in Resources */,
+				0F9C463A1E603F4200DCFE46 /* HoSoRong.png in Resources */,
 				A6C463DD1E26493A0046A367 /* Edit.png in Resources */,
 				8BD49F6A1E482D1100C98E74 /* BlockedUserListTableViewCell.xib in Resources */,
 				8BD49F0B1E48215500C98E74 /* MemberListTableViewCell.xib in Resources */,
 				A6D083C71E12747D007EA4D9 /* QuestionTagTableViewCell.xib in Resources */,
 				8BD49F5E1E482D1100C98E74 /* ParticipantListViewController.xib in Resources */,
+				0F9C46281E6008A200DCFE46 /* ChonNgay.png in Resources */,
 				8B3A134D1E10F454005DBC6E /* DaHoi_Button0.png in Resources */,
 				0F36980D1E54013C004B028D /* Ask copy.png in Resources */,
 				8BF149781E14BF9C00766F8F /* Search_Inbox.png in Resources */,
 				8BD49EF91E48215500C98E74 /* MemberListViewController.xib in Resources */,
+				0F0EFD331E627FFA0036C860 /* HoSoRong_1.png in Resources */,
+				0F9C462E1E600E3700DCFE46 /* Delete1.png in Resources */,
 				8BD49F5C1E482D1100C98E74 /* CreateOpenChannelViewController.xib in Resources */,
 				8BD49EFD1E48215500C98E74 /* GroupChannelChattingViewController.xib in Resources */,
 				8BF1497C1E14BF9C00766F8F /* TaiKhoan.png in Resources */,
@@ -1043,8 +1157,11 @@
 				0F17AB171E51ACFF008BA308 /* Private.png in Resources */,
 				A67311D11E160F3400BCE308 /* placeholder_wide.png in Resources */,
 				8BD49F5D1E482D1100C98E74 /* OpenChannelListViewController.xib in Resources */,
+				0F9C46251E60084A00DCFE46 /* DichVu.png in Resources */,
+				0F9C463C1E603F4200DCFE46 /* LichSu.png in Resources */,
 				8BF1497D1E14BF9C00766F8F /* Thongbao.png in Resources */,
 				8BD49F071E48215500C98E74 /* GroupChannelListEditableTableViewCell.xib in Resources */,
+				0F9C46341E602A2700DCFE46 /* Check1-2.png in Resources */,
 				A60430FD1E2344DA000216FB /* dropdownicon.png in Resources */,
 				A6417E231E13B68D00BD2D75 /* SettingTableViewCell.xib in Resources */,
 				A6C463DB1E25DB910046A367 /* RecentFeedTableViewCell.xib in Resources */,
@@ -1053,18 +1170,23 @@
 				8B79D0E81E5AA7D20010C5C0 /* DetailEdit.png in Resources */,
 				0F9ED83B1E5BEB38001F2FC2 /* Duyet_1.png in Resources */,
 				A67311D51E164FC400BCE308 /* MoreCommentTableViewCell.xib in Resources */,
+				0F9C46231E60084A00DCFE46 /* Check0-2.png in Resources */,
 				8B79D0EA1E5AAB1A0010C5C0 /* DetailEditUp.png in Resources */,
 				8BD49EF61E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.xib in Resources */,
+				0F9471441E5F5E3C00EE7C2A /* Main.storyboard in Resources */,
 				8BD49F5B1E482D1100C98E74 /* BlockedUserListViewController.xib in Resources */,
 				8B3A13441E10F454005DBC6E /* Back.png in Resources */,
 				8BD49F371E482C1600C98E74 /* OutgoingUserMessageTableViewCell.xib in Resources */,
+				0F9C462B1E600D6100DCFE46 /* Add.png in Resources */,
 				8B813CB41E15052E0043F7EF /* Profile.png in Resources */,
 				8B3A13831E10F484005DBC6E /* Podfile in Resources */,
 				8B3A12E91E10F399005DBC6E /* LaunchScreen.storyboard in Resources */,
 				8B3A135F1E10F454005DBC6E /* Splash.png in Resources */,
 				8B3A13681E10F454005DBC6E /* Tinnhan_button01 Copy.png in Resources */,
+				0F9C463D1E603F4200DCFE46 /* LichSuGrey   .png in Resources */,
 				A68A95091E14ED1C0067736E /* CommentTableViewCell.xib in Resources */,
 				A663AB621E56B7C000A5AD4A /* Verified.png in Resources */,
+				0FF7533E1E62F3A9001450B7 /* ExamScheduleCell.xib in Resources */,
 				8B3A13411E10F454005DBC6E /* AvaDefaut.png in Resources */,
 				A6CD32D01E4C2C9400FA2B21 /* GoogleService-Info.plist in Resources */,
 				8BC3806D1E58481600DF154A /* SplashLogo.png in Resources */,
@@ -1072,6 +1194,7 @@
 				8B6E19971E5EC9080078558D /* Logo.png in Resources */,
 				8B3A13651E10F454005DBC6E /* tag_mark.png in Resources */,
 				0F17AB151E51A682008BA308 /* CheckList.png in Resources */,
+				0F9C463E1E603F4200DCFE46 /* Profile_1.png in Resources */,
 				8BF149791E14BF9C00766F8F /* Tab.png in Resources */,
 				A6C463D71E25DB7D0046A367 /* Recent.png in Resources */,
 				8B813CB31E15052E0043F7EF /* Home.png in Resources */,
@@ -1081,7 +1204,9 @@
 				8BF1496C1E14BF9C00766F8F /* Answer0.png in Resources */,
 				8BD49F051E48215500C98E74 /* CreateGroupChannelUserListTableViewCell.xib in Resources */,
 				0F9ED83A1E5BEB38001F2FC2 /* DaDuyet_1.png in Resources */,
+				0F52D28A1E634889006C57E2 /* FileCell.xib in Resources */,
 				8BD49F351E482C1600C98E74 /* OutgoingImageFileMessageTableViewCell.xib in Resources */,
+				0F9C46241E60084A00DCFE46 /* DatKham0.png in Resources */,
 				A6E4C2FA1E1102BA00C2C871 /* User.storyboard in Resources */,
 				8BD49F261E482C1500C98E74 /* ChattingView.xib in Resources */,
 				8B813CB51E15052E0043F7EF /* Tag.png in Resources */,
@@ -1090,6 +1215,7 @@
 				8BF149711E14BF9C00766F8F /* DangNhap_BG.png in Resources */,
 				8BD49F091E48215500C98E74 /* GroupChannelListTableViewCell.xib in Resources */,
 				8B3A13591E10F454005DBC6E /* Like1.png in Resources */,
+				0F9C463B1E603F4200DCFE46 /* LichKham.png in Resources */,
 				8BD49EF81E48215500C98E74 /* GroupChannelListViewController.xib in Resources */,
 				8BF1497E1E14BF9C00766F8F /* TinNhan.png in Resources */,
 				8B87CD2A1E135C7A00DA8A33 /* QuestionTableViewCell.xib in Resources */,
@@ -1100,10 +1226,12 @@
 				8BD49F2E1E482C1500C98E74 /* IncomingUserMessageTableViewCell.xib in Resources */,
 				8B3A12E61E10F399005DBC6E /* Assets.xcassets in Resources */,
 				8BD49F311E482C1500C98E74 /* NeutralMessageTableViewCell.xib in Resources */,
-				8B3A12E41E10F399005DBC6E /* Main.storyboard in Resources */,
 				A68A94FE1E14CA480067736E /* DangKi_Left.png in Resources */,
 				A68A950F1E150CF80067736E /* Clover1.png in Resources */,
 				A6E431F41E14A6510092EF85 /* AddImageCollectionViewCell.xib in Resources */,
+				0F9C46261E60084A00DCFE46 /* Profile1_1.png in Resources */,
+				0FF753401E62F52C001450B7 /* Profile2.png in Resources */,
+				0F9C462C1E600D6100DCFE46 /* Delete2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1167,6 +1295,8 @@
 				8B3A13701E10F454005DBC6E /* DataEncryption.m in Sources */,
 				8BD49F6D1E482D1100C98E74 /* ParticipantListTableViewCell.swift in Sources */,
 				A62F58601E2CA78100459408 /* EditCommentViewController.swift in Sources */,
+				0FCFD9A61E5EEDB700EE2F89 /* BookingCalenderController.swift in Sources */,
+				0F9AD59C1E63CE0F00981D7B /* SearchFileViewController.swift in Sources */,
 				8B3A13751E10F454005DBC6E /* TPKeyboardAvoidingTableView.m in Sources */,
 				8B79D0E21E5A91F30010C5C0 /* DescriptionViewController.swift in Sources */,
 				A68A95081E14ED1C0067736E /* CommentTableViewCell.swift in Sources */,
@@ -1180,6 +1310,8 @@
 				A6D083C91E127F9F007EA4D9 /* TagEntity.swift in Sources */,
 				A6C463DA1E25DB910046A367 /* RecentFeedTableViewCell.swift in Sources */,
 				A625AD2D1E24CC5700953B0B /* CommentViewController.swift in Sources */,
+				0FF7533D1E62F3A9001450B7 /* ExamScheduleCell.swift in Sources */,
+				0F9C46191E5FF22A00DCFE46 /* ListServiceViewController.swift in Sources */,
 				8BD49F2F1E482C1500C98E74 /* MessageDelegate.swift in Sources */,
 				A6E4C2F81E1102A500C2C871 /* RegisterViewController.swift in Sources */,
 				8B3A13881E10FD2A005DBC6E /* UserViewController.swift in Sources */,
@@ -1211,12 +1343,14 @@
 				8BD49F0F1E4824EA00C98E74 /* Constants.swift in Sources */,
 				8B3A13781E10F454005DBC6E /* RAMFrameItemAnimation.swift in Sources */,
 				8B3A136F1E10F454005DBC6E /* DatePickerDialog.swift in Sources */,
+				0F9C46401E60462700DCFE46 /* FileViewController.swift in Sources */,
 				A68A95151E151B490067736E /* MainCommentEntity.swift in Sources */,
 				A6F980A01E48607E0007CD63 /* LinkedUser.swift in Sources */,
 				8BD49F691E482D1100C98E74 /* BlockedUserListTableViewCell.swift in Sources */,
 				8BD49F321E482C1500C98E74 /* OutgoingFileMessageTableViewCell.swift in Sources */,
 				8BD49F361E482C1600C98E74 /* OutgoingUserMessageTableViewCell.swift in Sources */,
 				A6E9D8911E11169600E31886 /* UpdateInfoViewController.swift in Sources */,
+				0F9C461D1E60055200DCFE46 /* ServiceCell.swift in Sources */,
 				8BD49F3A1E482C4F00C98E74 /* ReusableViewFromXib.swift in Sources */,
 				8BD49F681E482D1100C98E74 /* ParticipantListViewController.swift in Sources */,
 				A6D083CB1E12803C007EA4D9 /* HotTagEntity.swift in Sources */,
@@ -1236,11 +1370,15 @@
 				8B3A13791E10F454005DBC6E /* RAMFumeAnimation.swift in Sources */,
 				8BD49F341E482C1600C98E74 /* OutgoingImageFileMessageTableViewCell.swift in Sources */,
 				8B79D0E01E5A91C80010C5C0 /* ListDoctorViewController.swift in Sources */,
+				0F9C46171E5FE24500DCFE46 /* ChoiceServiceViewController.swift in Sources */,
+				0FABDC331E61C2EC004DD98D /* CreateCvViewController.swift in Sources */,
 				0F17AB191E51BAC2008BA308 /* CateEntity.swift in Sources */,
 				8B0D35F51E56EB2D002CF784 /* BookingViewController.swift in Sources */,
 				8BD49F651E482D1100C98E74 /* OpenChannelChattingViewController.swift in Sources */,
 				8BD49F3C1E482C9900C98E74 /* Utils.swift in Sources */,
+				0FF753391E62F267001450B7 /* ExamScheduleViewController.swift in Sources */,
 				8B3A13861E10FD1B005DBC6E /* TagListViewController.swift in Sources */,
+				0F52D2891E634889006C57E2 /* FileCell.swift in Sources */,
 				8B3A13721E10F454005DBC6E /* NSString+URLEncode.m in Sources */,
 				A68A95041E14ECFB0067736E /* DetailQuestionTableViewCell.swift in Sources */,
 				8BD49F271E482C1500C98E74 /* ChattingView.swift in Sources */,
@@ -1251,7 +1389,9 @@
 				8B1AD45E1E1B97F000D55543 /* SearchTableViewCell.swift in Sources */,
 				8B3A136E1E10F454005DBC6E /* CAPSPageMenu.swift in Sources */,
 				8BFE666C1E5D423700E1138B /* BaseViewController.swift in Sources */,
+				0FCFD9A81E5EEDDD00EE2F89 /* ManagerViewController.swift in Sources */,
 				8B813CB71E1510500043F7EF /* QuestionByTagViewController.swift in Sources */,
+				0F0EFD311E62771C0036C860 /* HistoryUserViewController.swift in Sources */,
 				A6417E1F1E13B56C00BD2D75 /* SettingViewController.swift in Sources */,
 				8BD49F2D1E482C1500C98E74 /* IncomingUserMessageTableViewCell.swift in Sources */,
 				8BD49F0C1E48215500C98E74 /* SelectedUserListCollectionViewCell.swift in Sources */,
@@ -1271,14 +1411,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8B3A12E21E10F399005DBC6E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8B3A12E31E10F399005DBC6E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8B3A12E71E10F399005DBC6E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

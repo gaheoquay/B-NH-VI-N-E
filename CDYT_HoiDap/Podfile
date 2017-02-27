@@ -19,4 +19,5 @@ pod 'AlamofireImage'
 pod 'MGSwipeTableCell'
 pod 'Google/Analytics'
 pod 'RNNotificationView'
+pod 'FSCalendar'
 end

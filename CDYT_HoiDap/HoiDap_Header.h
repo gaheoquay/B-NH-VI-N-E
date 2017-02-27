@@ -27,4 +27,5 @@
 @import SendBirdSDK;
 #import <Google/Analytics.h>
 @import RNNotificationView;
+@import FSCalendar;
 #endif /* HoiDap_Header_h */
