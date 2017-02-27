@@ -15,6 +15,7 @@ protocol BookingCalenderControllerDelegate {
 class BookingCalenderController: UIViewController {
 
    
+    @IBOutlet weak var btnSendBooking: UIButton!
     @IBOutlet weak var btnService: UIButton!
     @IBOutlet weak var btnBrifUser: UIButton!
     
@@ -24,6 +25,8 @@ class BookingCalenderController: UIViewController {
         super.viewDidLoad()
         btnService.layer.borderWidth = 0
         btnBrifUser.layer.borderWidth = 0
+        btnSendBooking.layer.cornerRadius = 5
+        btnSendBooking.clipsToBounds = true
 
         // Do any additional setup after loading the view.
     }
@@ -39,5 +42,9 @@ class BookingCalenderController: UIViewController {
     @IBAction func btnSelectFileUser(_ sender: Any) {
         delegate?.gotoFile()
     }
+    
+    @IBAction func btnSendBooking(_ sender: Any) {
+    }
+    
 
 }

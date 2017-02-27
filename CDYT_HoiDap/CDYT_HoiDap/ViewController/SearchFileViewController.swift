@@ -15,6 +15,8 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     @IBOutlet weak var tbHeight: NSLayoutConstraint!
     @IBOutlet weak var tbListFile: UITableView!
     @IBOutlet weak var btnCreateCv: UIButton!
+    @IBOutlet weak var txtSearch: UITextField!
+    @IBOutlet weak var viewSearch: UIView!
     
     let arrayName = [String]()
     
@@ -51,6 +53,7 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     
     
     func setUpUIView(){
+         viewSearch.layer.cornerRadius = 3
         if arrayName.count > 0 {
             tbListFile.delegate = self
             tbListFile.dataSource = self
@@ -77,8 +80,13 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     }
 
     @IBAction func btnCreateCv(_ sender: Any) {
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        let viewcontroller = main.instantiateViewController(withIdentifier: "CreateCvViewController") as! CreateCvViewController
+        self.navigationController?.pushViewController(viewcontroller, animated: true)
+        
     }
     @IBAction func btnBack(_ sender: Any) {
+        _ = self.navigationController?.popViewController(animated: true)
     }
 
 }

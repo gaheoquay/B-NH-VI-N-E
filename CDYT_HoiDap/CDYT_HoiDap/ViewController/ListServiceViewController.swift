@@ -7,6 +7,9 @@
 //
 
 import UIKit
+protocol ListServiceViewControllerDelegate {
+    func gotoListChoiceService()
+}
 
 class ListServiceViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
@@ -18,6 +21,7 @@ class ListServiceViewController: UIViewController,UITableViewDelegate,UITableVie
     var name = ""
     var price = 0
     var indexPath = IndexPath()
+    var delegate: ListServiceViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +52,9 @@ class ListServiceViewController: UIViewController,UITableViewDelegate,UITableVie
         return cell
     }
     
+    @IBAction func btnDone(_ sender: Any) {
+        delegate?.gotoListChoiceService()
+    }
     
 
 }

@@ -54,6 +54,11 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
         _ = self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func btnGotoListFile(_ sender: Any) {
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        let viewcontroller = main.instantiateViewController(withIdentifier: "SearchFileViewController") as! SearchFileViewController
+        self.navigationController?.pushViewController(viewcontroller, animated: true)
+    }
     
     
     func setupTable(){
