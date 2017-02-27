@@ -13,7 +13,6 @@ class ViewController: BaseViewController,UITableViewDelegate,UITableViewDataSour
   override func viewDidLoad() {
     super.viewDidLoad()
     NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(setUpBadge), name: Notification.Name.init(UPDATE_BADGE), object: nil)
 
     setupUI()
     initTableView()
@@ -41,14 +40,6 @@ class ViewController: BaseViewController,UITableViewDelegate,UITableViewDataSour
     }
   
   
-  func setUpBadge(){
-    let tabbar = self.tabBarController as? RAMAnimatedTabBarController
-    if unreadMessageCount + notificationCount != 0 {
-      tabbar?.tabBar.items![4].badgeValue = "\(unreadMessageCount + notificationCount)"
-    }else{
-      tabbar?.tabBar.items![4].badgeValue = nil
-    }
-  }
   
   func setupUI() {
     searchView.layer.cornerRadius = 4
@@ -194,7 +185,7 @@ class ViewController: BaseViewController,UITableViewDelegate,UITableViewDataSour
         
     }
     
-    func approVal() {
+    func approVal(indexPath: IndexPath) {
         
     }
     

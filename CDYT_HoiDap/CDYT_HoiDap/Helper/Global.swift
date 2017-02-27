@@ -23,7 +23,8 @@ let HOTEST_TAG = BASE_URL + "/Post/GetHotestTags"
 let GET_FEEDS = BASE_URL + "/Post/GetFeed"
 let SEARCH = BASE_URL + "/Post/Search"
 let GET_QUESTION_BY_ID = BASE_URL + "/Post/GetQuestionCreatedByUserId"
-
+let GET_QUESTIONS_UNCOMMENTED_BY_ANY_DOCTOR_AND_ASSIGNED = BASE_URL + "/Post/GetQuestionsUncommentedByAnyDoctorAndAssigned"
+let GET_QUESTIONS_UNCOMMENTED_BY_ANY_DOCTOR_AND_NOT_ASSIGNED_YET = BASE_URL + "/Post/GetQuestionsUncommentedByAnyDoctorAndNotAssignedYet"
 let GET_UNANSWER = BASE_URL + "/Post/GetUnansweredList"
 let GET_QUESTION = BASE_URL + "/Post/GetQuestionByTag"
 let POST_QUESTION = BASE_URL + "/Post/Insert"
@@ -66,6 +67,7 @@ let RELOAD_SUBCOMMENT_DETAIL = "RELOAD_SUBCOMMENT_DETAIL"
 let UPDATE_BADGE = "UPDATE_BADGE"
 let GO_TO_DETAIL_WHEN_TAP_NOTIFICATION = "GO_TO_DETAIL_WHEN_TAP_NOTIFICATION"
 let SHOW_NOTIFICAION = "SHOW_NOTIFICAION"
+let GO_TO_CHAT = "GO_TO_CHAT"
 
 let SENDBIRD_APPKEY = "537AC4A8-39A9-4DF6-8D3F-03559A226AD2"
 
@@ -95,7 +97,6 @@ let SEARCHS = "ScreenSearch"
 var listNotification = [ListNotificationEntity]()
 var listCate = [CateEntity]()
 var listAllDoctor = [ListDoctorEntity]()
-var isHiddent = false
 
 var notificationCount = 0
 var unreadMessageCount = 0

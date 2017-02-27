@@ -234,7 +234,7 @@ class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableV
         
     }
     
-    func approVal() {
+    func approVal(indexPath: IndexPath) {
         
     }
     override func didReceiveMemoryWarning() {

@@ -46,7 +46,6 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
         requestCate()
         registerNotification()
         configImageCollectionView()
-//        imgClvheight.constant = 0
         keyboardViewHeight.constant = 0
         configUI()
 
@@ -111,11 +110,6 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
             postBtn.setTitle("Cập nhật", for: .normal)
             titleNaviBarLbl.text = "Sửa câu hỏi"
             titleTxt.isEnabled = false
-//            imgClvheight.constant = 0
-//            addImgView.isHidden = true
-//            addImgViewHeight.constant = 0
-            
-//            setupDataForUpdateQuestion()
         }else{
             postBtn.setTitle("Đăng", for: .normal)
             titleNaviBarLbl.text = "Đặt câu hỏi"
@@ -139,6 +133,7 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
             for item in listCate {
                 if item.id == feedObj.postEntity.categoryId {
                     lbCate.text = item.name
+                  id = item.id
                 }
         }
         
@@ -450,7 +445,10 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
     }
     
     func creatAlert(){
-        let alertView = UIAlertController(title: "Category", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+      if feedObj.postEntity.isClassified {
+        return
+      }
+        let alertView = UIAlertController(title: "Chuyên khoa", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         
         let pickerView = UIPickerView(frame: pickerFrame)
         

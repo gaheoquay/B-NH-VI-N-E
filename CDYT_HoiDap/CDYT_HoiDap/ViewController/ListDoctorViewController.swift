@@ -30,46 +30,11 @@ class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableVi
   func initTableView(){
     tbDoctor.delegate = self
     tbDoctor.dataSource = self
-//    tbDoctor.estimatedRowHeight = 9999
-//    tbDoctor.rowHeight = UITableViewAutomaticDimension
     tbDoctor.register(UINib.init(nibName: "DoctorTableViewCell", bundle: nil), forCellReuseIdentifier: "DoctorTableViewCell")
   }
 
   
-//  MARK: UITableViewDelegate +
-  //  MARK: request server
-  func requestServer(){
-    let hotParam : [String : Any] = [
-      "Auth": Until.getAuthKey(),
-    ]
-    
-    
-    Until.showLoading()
-    Alamofire.request(GET_LIST_DOCTOR, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-      if let status = response.response?.statusCode {
-        if status == 200{
-          if let result = response.result.value {
-            let jsonData = result as! [NSDictionary]
-            
-            for item in jsonData {
-              let entity = ListDoctorEntity.init(dictionary: item)
-              listAllDoctor.append(entity)
-            }
-            
-            self.tbDoctor.reloadData()
-          }
-        }else{
-          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-        }
-      }else{
-        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-      }
-      Until.hideLoading()
-      self.tbDoctor.pullToRefreshView?.stopAnimating()
-      self.tbDoctor.infiniteScrollingView?.stopAnimating()
-    }
-  }
-//  MARK: UITableViewDelegate + 
+//  MARK: UITableViewDelegate + UITableViewDataSource
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let entity = listAllDoctor[indexPath.section]
     delegate?.gotoProfile(authorEntity: entity.doctors[indexPath.row])
@@ -95,7 +60,7 @@ class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableVi
     return 50
   }
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 77
+    return 80
   }
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let entity = listAllDoctor[section]

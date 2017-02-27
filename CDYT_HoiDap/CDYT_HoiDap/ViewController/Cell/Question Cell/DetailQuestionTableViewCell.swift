@@ -101,10 +101,8 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
                             
                         }
                     }else{
-                        //                    UIAlertController().showAlertWith(title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
                 }else{
-                    //                UIAlertController().showAlertWith(title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
                 Until.hideLoading()
             }
@@ -148,13 +146,19 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
         
         tagCollectionView.reloadData()
         imgCollectionView.reloadData()
-        
-        if Until.getCurrentId() == feed.authorEntity.id {
-            moreActionBtn.isHidden = false
+      
+      let realm = try! Realm()
+      
+      if let user = realm.objects(UserEntity.self).first {
+        if user.id == feed.authorEntity.id || user.role == 2 {
+          moreActionBtn.isHidden = false
         }else{
-            moreActionBtn.isHidden = true
+          moreActionBtn.isHidden = true
         }
-        
+      }else{
+        moreActionBtn.isHidden = true
+      }
+      
         if feed.isFollowed {
             followBtn.setTitleColor(UIColor().hexStringToUIColor(hex: "3A3A3A"), for: UIControlState.normal)
             followBtn.setTitle("Bỏ theo dõi", for: UIControlState.normal)

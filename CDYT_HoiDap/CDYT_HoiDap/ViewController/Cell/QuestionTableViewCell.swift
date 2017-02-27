@@ -13,7 +13,7 @@ protocol QuestionTableViewCellDelegate {
     func gotoUserProfileFromQuestionCell(user : AuthorEntity)
     func selectSpecialist(indexPath : IndexPath)
     func selectDoctor(indexPath : IndexPath)
-    func approVal()
+    func approVal(indexPath : IndexPath)
 }
 class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDelegateLeftAlignedLayout {
     
@@ -84,7 +84,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
                 viewDoctor.isHidden = false
                 imgApproval.isHidden = false
                 btnApproval.isHidden = false
-                if feedEntity.cateGory.id != "" && feedEntity.assigneeEntity.id != "" && feedEntity.ischeck == false {
+                if feedEntity.postEntity.isClassified {
                     lbCate.text = feedEntity.cateGory.name
                     lbDoctor.text = feedEntity.assigneeEntity.fullname
                     btnApproval.setTitle("Đã \nduyệt", for: .normal)
@@ -93,7 +93,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
                     btnCate.isEnabled = false
                     btnDoctor.isEnabled = false
                     imgApproval.image = UIImage(named: "DaDuyet_1.png")
-                }else if feedEntity.cateGory.id != "" && feedEntity.ischeck {
+                }else if feedEntity.cateGory.id != "" {
                     if feedEntity.assigneeEntity.id == "" {
                         lbDoctor.text = "---Bác sĩ(Tất cả)---"
                     }else {
@@ -203,7 +203,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
     }
     
     @IBAction func btnAproval(_ sender: Any) {
-        delegate?.approVal()
+        delegate?.approVal(indexPath: indexPath)
     }
     
     
