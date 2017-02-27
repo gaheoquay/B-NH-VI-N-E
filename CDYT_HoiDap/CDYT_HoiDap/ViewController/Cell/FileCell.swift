@@ -7,6 +7,9 @@
 //
 
 import UIKit
+protocol FileCellDelegate {
+    func setupButton()
+}
 
 class FileCell: UITableViewCell {
 
@@ -14,8 +17,9 @@ class FileCell: UITableViewCell {
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var lbPrice: UILabel!
     
-    var isCheckListService = Bool()
-    
+    var delegate : FileCellDelegate?
+    var isCheckListService = false
+    var isCheckLists = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,18 +46,21 @@ class FileCell: UITableViewCell {
     }
     func checkListService(isCheckList: Bool){
         if isCheckList == false {
-            btnDelete.setImage(UIImage(named: "Check0.png"), for: .normal)
-            isCheckListService = isCheckList
+            btnDelete.setImage(UIImage(named: "Check0-2.png"), for: .normal)
+            isCheckLists = isCheckList
         }
     }
     
     @IBAction func btnEditOrDelete(_ sender: Any) {
-        if isCheckListService == false {
-            btnDelete.setImage(UIImage(named: "Check1-2.png"), for: .normal)
-            isCheckListService = true
-        }else {
-            btnDelete.setImage(UIImage(named: "Check0-2.png"), for: .normal)
-            isCheckListService = false
+        delegate?.setupButton()
+        if isCheckListService == true {
+            if isCheckLists == false {
+                btnDelete.setImage(UIImage(named: "Check1-2.png"), for: .normal)
+                isCheckLists = true
+            }else {
+                btnDelete.setImage(UIImage(named: "Check0-2.png"), for: .normal)
+                isCheckLists = false
+            }
         }
     }
     

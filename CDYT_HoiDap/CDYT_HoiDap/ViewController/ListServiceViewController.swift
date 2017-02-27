@@ -11,7 +11,7 @@ protocol ListServiceViewControllerDelegate {
     func gotoListChoiceService()
 }
 
-class ListServiceViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class ListServiceViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,FileCellDelegate {
     
     @IBOutlet weak var tbListService: UITableView!
     
@@ -46,9 +46,12 @@ class ListServiceViewController: UIViewController,UITableViewDelegate,UITableVie
    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell") as! FileCell
+        cell.delegate = self
+        cell.isCheckListService = true
         cell.btnDelete.setImage(UIImage.init(named: "Check0-2.png"), for: .normal)
         cell.lbName.text = arrayName[indexPath.row]
         cell.lbPrice.text = String(arrayPrice[indexPath.row])
+        cell.checkListService(isCheckList: false)
         return cell
     }
     
@@ -56,5 +59,8 @@ class ListServiceViewController: UIViewController,UITableViewDelegate,UITableVie
         delegate?.gotoListChoiceService()
     }
     
+    func setupButton() {
+        
+    }
 
 }

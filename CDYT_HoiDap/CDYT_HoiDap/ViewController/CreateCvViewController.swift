@@ -8,11 +8,10 @@
 
 import UIKit
 
-class CreateCvViewController: UIViewController {
+class CreateCvViewController: BaseViewController {
     
     @IBOutlet weak var lbGender: UILabel!
     @IBOutlet weak var lbDateOfYear: UILabel!
-    @IBOutlet weak var mainScrollView: UIScrollView!
     
     
     
@@ -80,6 +79,13 @@ class CreateCvViewController: UIViewController {
     @IBAction func btnCreateCv(_ sender: Any) {
         
     }
+    
+    @IBAction func btnDistrict(_ sender: Any) {
+    }
+    
+    @IBAction func btnZones(_ sender: Any) {
+    }
+       
     
     @IBAction func btnBack(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)
