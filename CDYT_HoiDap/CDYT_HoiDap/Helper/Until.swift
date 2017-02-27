@@ -72,6 +72,13 @@ extension String {
         return dateFormatter.string(from: date)
     }
     
+    func convertDatetoString(date: Date, dateFormat: String) -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        
+        return dateFormatter.string(from: date)
+    }
+    
     
     func getPostDateDescription(timeToCalculate : Double) -> String{
         let timestampNow = NSDate().timeIntervalSince1970

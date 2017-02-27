@@ -8,18 +8,45 @@
 
 import UIKit
 
-class CreateCvViewController: BaseViewController {
+class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerViewDataSource {
     
     @IBOutlet weak var lbGender: UILabel!
     @IBOutlet weak var lbDateOfYear: UILabel!
+    @IBOutlet weak var txtName: UITextField!
+    @IBOutlet weak var txtCMT: UITextField!
+    @IBOutlet weak var txtPhoneNumber: UITextField!
+    @IBOutlet weak var lbJob: UILabel!
+    @IBOutlet weak var lbCountry: UILabel!
+    @IBOutlet weak var lbProvince: UILabel!
+    @IBOutlet weak var lbZone: UILabel!
+    @IBOutlet weak var txtAdress: UITextField!
+    @IBOutlet weak var lbDistric: UILabel!
+    @IBOutlet weak var txtPhoneGuardian: UITextField!
+    @IBOutlet weak var txtNameGuardian: UITextField!
+    @IBOutlet weak var txtCmtGuardian: UITextField!
     
+    
+    var listCountry = [CountryEntity]()
+    var listProvince = [ProvinceEntity]() // Tỉnh
+    var listDistric = [DistrictEntity]()
+    var listZone = [ZoneEntity]()
+    var listJob = [JobEntity]()
+    
+    let pickerlistCountry = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
+    let pickerlistProvince = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
+    let pickerlistDistric = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
+    let pickerlistZone = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
+    let pickerlistJob = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
+
     
     
     var genderType = ""
+    var timeStampDateOfBirt : Double = 0
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        RequestDataInfo()
         // Do any additional setup after loading the view.
     }
 
@@ -63,33 +90,133 @@ class CreateCvViewController: BaseViewController {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "dd/MM/yyyy"
                 self.lbDateOfYear.text = "\(dateFormatter.string(from: date! as Date))"
+                self.timeStampDateOfBirt = (date?.timeIntervalSince1970)!
             }
         }
     }
     
     @IBAction func btnJob(_ sender: Any) {
+        creatAlert(title: "Công việc", picker: pickerlistJob)
     }
     
     @IBAction func btnCitizenship(_ sender: Any) {
+        creatAlert(title: "Quốc tịch", picker: pickerlistCountry)
     }
     
     @IBAction func btnCity(_ sender: Any) {
+        creatAlert(title: "Thành phố", picker: pickerlistProvince)
     }
     
     @IBAction func btnCreateCv(_ sender: Any) {
+        requestCreateFileUser()
         
     }
     
     @IBAction func btnDistrict(_ sender: Any) {
+        creatAlert(title: "Huyện", picker: pickerlistDistric)
     }
     
     @IBAction func btnZones(_ sender: Any) {
+        creatAlert(title: "Phường", picker: pickerlistZone)
     }
-       
+    
     
     @IBAction func btnBack(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)
 
+    }
+    
+    //MARK: CollectionViewINfo
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == pickerlistZone {
+            return listZone.count
+        }else if pickerView == pickerlistDistric {
+            return listDistric.count
+        }else if pickerView == pickerlistProvince {
+            return listProvince.count
+        }else if pickerView == pickerlistCountry {
+            return listCountry.count
+        }else {
+            return listJob.count
+        }
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == pickerlistZone {
+            lbZone.text = listZone[row].name
+        }else if pickerView == pickerlistDistric {
+            lbDistric.text = listDistric[row].name
+        }else if pickerView == pickerlistProvince {
+            lbProvince.text = listProvince[row].name
+        }else if pickerView == pickerlistCountry {
+            lbCountry.text = listCountry[row].name
+        }else {
+            lbJob.text = listJob[row].name
+        }
+
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == pickerlistZone {
+            return listZone[row].name
+        }else if pickerView == pickerlistDistric {
+            return listDistric[row].name
+        }else if pickerView == pickerlistProvince {
+            return listProvince[row].name
+        }else if pickerView == pickerlistCountry {
+            return listCountry[row].name
+        }else {
+            return listJob[row].name
+        }
+    }
+    
+    //MARK: AddPicker
+    
+    func creatAlert(title: String, picker: UIPickerView){
+        let alertView = UIAlertController(title: title, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+        alertView.view.addSubview(picker)
+        
+        picker.delegate = self
+        picker.dataSource = self
+        
+        
+        let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            
+        })
+        
+        alertView.addAction(action)
+        present(alertView, animated: true, completion: nil)
+    }
+    
+    func RequestDataInfo(){
+        listJob = JobEntity().initListJob()
+        listZone = ZoneEntity().initListZone()
+        listCountry = CountryEntity().initListCountry()
+        listDistric = DistrictEntity().initListCountry()
+        listProvince = ProvinceEntity().initProvin()
+    }
+    
+    func requestCreateFileUser(){
+        let param : [String : Any] = [
+            "name" : txtName.text,
+            "gender" : genderType,
+            "dateofbirh": timeStampDateOfBirt,
+            "cmt" : txtCMT.text,
+            "phone": txtPhoneNumber.text,
+            "job": lbJob.text,
+            "contry": lbCountry.text,
+            "provin" : lbProvince.text,
+            "distric" : lbDistric.text,
+            "zone": lbZone.text,
+            "adress": txtAdress.text,
+            "nameGuardian" : txtNameGuardian.text,
+            "cmtGuardian": txtCmtGuardian.text,
+            "phoneGuardian": txtPhoneGuardian.text
+        ]
+        print(param)
     }
 
    

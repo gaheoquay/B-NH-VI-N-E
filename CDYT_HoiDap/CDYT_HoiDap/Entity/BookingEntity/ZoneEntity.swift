@@ -16,7 +16,7 @@ class ZoneEntity: NSObject {
   override init(){
     super.init()
   }
-  func initListCountry() -> [ZoneEntity] {
+  func initListZone() -> [ZoneEntity] {
     var listCountry = [ZoneEntity]()
     for i in 0..<10 {
       let entity = ZoneEntity.init()

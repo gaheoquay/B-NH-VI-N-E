@@ -8,7 +8,8 @@
 
 import UIKit
 
-class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCalenderControllerDelegate,ManagerViewControllerDelegate {
+
+class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCalenderControllerDelegate,ManagerViewControllerDelegate,WYPopoverControllerDelegate,ListServiceViewControllerDelegate,SearchFileViewControllerDelegate {
     var pageMenu : CAPSPageMenu?
 
     @IBOutlet weak var viewMain: UIView!
@@ -16,6 +17,7 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
     @IBOutlet weak var labelManager: UILabel!
     @IBOutlet weak var withLabelBooking: NSLayoutConstraint!
     
+    var popupViewController:WYPopoverController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,12 +93,31 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
         }
         self.view.layoutIfNeeded()
     }
-    
+    //MARK: Delegate
     func gotoService() {
-        let main = UIStoryboard(name: "Main", bundle: nil)
-        let viewcontroller = main.instantiateViewController(withIdentifier: "ChoiceServiceViewController") as! ChoiceServiceViewController
-        self.navigationController?.pushViewController(viewcontroller, animated: true)
+        if popupViewController == nil {
+            
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let popoverVC = mainStoryboard.instantiateViewController(withIdentifier: "ListServiceViewController") as! ListServiceViewController
+            popoverVC.preferredContentSize = CGSize.init(width: UIScreen.main.bounds.size.width - 32, height: UIScreen.main.bounds.size.height - 120 )
+            popoverVC.isModalInPopover = false
+            popoverVC.delegate = self
+            self.popupViewController = WYPopoverController(contentViewController: popoverVC)
+            self.popupViewController.delegate = self
+            self.popupViewController.wantsDefaultContentAppearance = false;
+            self.popupViewController.presentPopover(from: CGRect.init(x: 0, y: 0, width: 0, height: 0), in: self.view, permittedArrowDirections: WYPopoverArrowDirection.none, animated: true, options: WYPopoverAnimationOptions.fadeWithScale, completion: nil)
+            
+        }
+       
     }
+    func popoverControllerDidDismissPopover(_ popoverController: WYPopoverController!) {
+        if popupViewController != nil {
+            popupViewController.delegate = nil
+            popupViewController = nil
+        }
+    }
+    
+
     func gotoCalendar() {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "ExamScheduleViewController") as! ExamScheduleViewController
@@ -116,9 +137,26 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
     func gotoFile() {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "SearchFileViewController") as! SearchFileViewController
+        viewcontroller.delegate = self
         self.navigationController?.pushViewController(viewcontroller, animated: true)
 
     }
-
+    
+    func dissMisPopup() {
+        if popupViewController != nil {
+            popupViewController.delegate = nil
+            popupViewController = nil
+        }else {
+            popupViewController.dismissPopover(animated: true)
+        }
+    }
+    
+    func gotoBooking() {
+        _ = self.navigationController?.popViewController(animated: true)
+    }
+    
+    //MARK: Calendar
+    
+    
    
 }

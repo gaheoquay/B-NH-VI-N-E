@@ -16,6 +16,7 @@
 		0F36980E1E54013C004B028D /* LogoMarker.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F36980C1E54013C004B028D /* LogoMarker.png */; };
 		0F52D2891E634889006C57E2 /* FileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F52D2871E634889006C57E2 /* FileCell.swift */; };
 		0F52D28A1E634889006C57E2 /* FileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F52D2881E634889006C57E2 /* FileCell.xib */; };
+		0F765A3B1E644207001DF8ED /* FileUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F765A3A1E644207001DF8ED /* FileUserEntity.swift */; };
 		0F9471441E5F5E3C00EE7C2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F9471431E5F5E3C00EE7C2A /* Main.storyboard */; };
 		0F9AD59C1E63CE0F00981D7B /* SearchFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9AD59B1E63CE0F00981D7B /* SearchFileViewController.swift */; };
 		0F9AD5A01E63F34700981D7B /* BackWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9AD59D1E63F34700981D7B /* BackWhite.png */; };
@@ -261,6 +262,7 @@
 		0F36980C1E54013C004B028D /* LogoMarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoMarker.png; sourceTree = "<group>"; };
 		0F52D2871E634889006C57E2 /* FileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCell.swift; sourceTree = "<group>"; };
 		0F52D2881E634889006C57E2 /* FileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileCell.xib; sourceTree = "<group>"; };
+		0F765A3A1E644207001DF8ED /* FileUserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUserEntity.swift; sourceTree = "<group>"; };
 		0F9471431E5F5E3C00EE7C2A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0F9AD59B1E63CE0F00981D7B /* SearchFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFileViewController.swift; sourceTree = "<group>"; };
 		0F9AD59D1E63F34700981D7B /* BackWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackWhite.png; sourceTree = "<group>"; };
@@ -558,6 +560,7 @@
 				8B2AFF0F1E64269200415554 /* DistrictEntity.swift */,
 				8B2AFF111E642B5000415554 /* ZoneEntity.swift */,
 				8B2AFF131E642C4A00415554 /* ServiceEntity.swift */,
+				0F765A3A1E644207001DF8ED /* FileUserEntity.swift */,
 			);
 			path = BookingEntity;
 			sourceTree = "<group>";
@@ -1395,6 +1398,7 @@
 				8BD49F031E48215500C98E74 /* MemberListViewController.swift in Sources */,
 				A6417E251E13C78D00BD2D75 /* AddQuestionViewController.swift in Sources */,
 				8B3A137C1E10F454005DBC6E /* RAMAnimatedTabBarController.swift in Sources */,
+				0F765A3B1E644207001DF8ED /* FileUserEntity.swift in Sources */,
 				A6E9D88F1E1110CF00E31886 /* LoginViewController.swift in Sources */,
 				8BD49EFC1E48215500C98E74 /* GroupChannelChattingViewController.swift in Sources */,
 				8B1AD45B1E1B828500D55543 /* SearchViewController.swift in Sources */,

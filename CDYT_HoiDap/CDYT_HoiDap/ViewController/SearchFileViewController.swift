@@ -7,6 +7,9 @@
 //
 
 import UIKit
+protocol SearchFileViewControllerDelegate {
+    func gotoBooking()
+}
 
 class SearchFileViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
@@ -18,10 +21,13 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     @IBOutlet weak var txtSearch: UITextField!
     @IBOutlet weak var viewSearch: UIView!
     
-    let arrayName = [String]()
+    var listFileUser = [FileUserEntity]()
+    var delegate: SearchFileViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        requestListUser()
         setUpUIView()
         setupBtn()
         // Do any additional setup after loading the view.
@@ -36,40 +42,45 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayName.count
+        return listFileUser.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell") as! FileCell
-        if arrayName.count > 0{
-            cell.lbName.text = arrayName[indexPath.row]
-            cell.lbPrice.text = arrayName[indexPath.row]
-            cell.btnDelete.isHidden = true
-        }else {
-            
-        }
+        cell.setListUser(entity: listFileUser[indexPath.row])
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.gotoBooking()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: GET_LIST_FILE_USER), object: self.listFileUser[indexPath.row])
+    }
     
+    func requestListUser(){
+        listFileUser = FileUserEntity().initListUser()
+    }
+    
+    
+    //MARK: Setup UI
     func setUpUIView(){
          viewSearch.layer.cornerRadius = 3
-        if arrayName.count > 0 {
+        if listFileUser.count > 0 {
             tbListFile.delegate = self
             tbListFile.dataSource = self
             tbListFile.register(UINib.init(nibName: "FileCell", bundle: nil), forCellReuseIdentifier: "FileCell")
             tbListFile.estimatedRowHeight = 9999
             tbListFile.rowHeight = UITableViewAutomaticDimension
-            tbHeight.constant = 452
+            tbHeight.constant = UIScreen.main.bounds.size.height
             lbCv.isHidden = true
             imgCv.isHidden = true
+            btnCreateCv.isHidden = true
         }else {
             tbListFile.estimatedRowHeight = 0
             tbListFile.rowHeight = UITableViewAutomaticDimension
             tbHeight.constant = 0
             lbCv.isHidden = false
             imgCv.isHidden = false
-            
+            btnCreateCv.isHidden = false
         }
         view.layoutIfNeeded()
     }

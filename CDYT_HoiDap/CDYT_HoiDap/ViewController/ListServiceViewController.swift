@@ -8,26 +8,25 @@
 
 import UIKit
 protocol ListServiceViewControllerDelegate {
-    func gotoListChoiceService()
+    func dissMisPopup()
 }
+
 
 class ListServiceViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,FileCellDelegate {
     
     @IBOutlet weak var tbListService: UITableView!
     
-    let arrayName = ["abasdqdcsdfdfc","asdasdsadsadsadvcvsdf"]
-    let arrayPrice =  [10000,20000]
-    
-    var name = ""
-    var price = 0
-    var indexPath = IndexPath()
+    var listService = [ServiceEntity]()
     var delegate: ListServiceViewControllerDelegate?
+    
+    var indexPath = IndexPath()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tbListService.register(UINib.init(nibName: "FileCell", bundle: nil), forCellReuseIdentifier: "FileCell")
         tbListService.estimatedRowHeight = 9999
         tbListService.rowHeight = UITableViewAutomaticDimension
+        requestListService()
         // Do any additional setup after loading the view.
     }
 
@@ -41,26 +40,30 @@ class ListServiceViewController: UIViewController,UITableViewDelegate,UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayName.count
+        return listService.count
     }
    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell") as! FileCell
-        cell.delegate = self
-        cell.isCheckListService = true
-        cell.btnDelete.setImage(UIImage.init(named: "Check0-2.png"), for: .normal)
-        cell.lbName.text = arrayName[indexPath.row]
-        cell.lbPrice.text = String(arrayPrice[indexPath.row])
-        cell.checkListService(isCheckList: false)
+        cell.setData(entity: listService[indexPath.row])
         return cell
     }
     
-    @IBAction func btnDone(_ sender: Any) {
-        delegate?.gotoListChoiceService()
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("name:\(listService[indexPath.row].name),price\(listService[indexPath.row].priceService)")
+        delegate?.dissMisPopup()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: GET_LIST_SERVICE), object: self.listService[indexPath.row])
+
     }
+    
+    func requestListService(){
+        listService = ServiceEntity().initListCountry()
+    }
+    
     
     func setupButton() {
         
     }
+
 
 }

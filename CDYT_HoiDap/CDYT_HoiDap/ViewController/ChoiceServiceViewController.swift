@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChoiceServiceViewController: UIViewController,WYPopoverControllerDelegate,UITableViewDataSource,UITableViewDelegate,ListServiceViewControllerDelegate {
+class ChoiceServiceViewController: UIViewController,WYPopoverControllerDelegate,UITableViewDataSource,UITableViewDelegate {
 
     var popupViewController:WYPopoverController!
     @IBOutlet weak var tbListService: UITableView!
@@ -64,7 +64,7 @@ class ChoiceServiceViewController: UIViewController,WYPopoverControllerDelegate,
             let popoverVC = mainStoryboard.instantiateViewController(withIdentifier: "ListServiceViewController") as! ListServiceViewController
             popoverVC.preferredContentSize = CGSize.init(width: tbListService.frame.size.width - 16, height: tbListService.frame.size.height - 16 )
             popoverVC.isModalInPopover = false
-            popoverVC.delegate = self
+//            popoverVC.delegate = self
             self.popupViewController = WYPopoverController(contentViewController: popoverVC)
             self.popupViewController.delegate = self
             self.popupViewController.wantsDefaultContentAppearance = false;
