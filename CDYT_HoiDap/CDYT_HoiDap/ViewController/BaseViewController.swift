@@ -15,7 +15,7 @@ class BaseViewController: UIViewController {
       NotificationCenter.default.addObserver(self, selector: #selector(self.gotoDetail(notification:)), name: NSNotification.Name.init(GO_TO_DETAIL_WHEN_TAP_NOTIFICATION), object: nil)
       NotificationCenter.default.addObserver(self, selector: #selector(self.showNotification(notification:)), name: NSNotification.Name.init(SHOW_NOTIFICAION), object: nil)
       NotificationCenter.default.addObserver(self, selector: #selector(self.gotoChat(notification:)), name: NSNotification.Name.init(GO_TO_CHAT), object: nil)
-
+      NotificationCenter.default.addObserver(self, selector: #selector(setUpBadge), name: Notification.Name.init(UPDATE_BADGE), object: nil)
         // Do any additional setup after loading the view.
     }
 
@@ -23,7 +23,15 @@ class BaseViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-  
+  func setUpBadge(){
+    let tabbar = self.tabBarController as? RAMAnimatedTabBarController
+    if unreadMessageCount + notificationCount != 0 {
+      tabbar?.tabBar.items![4].badgeValue = "\(unreadMessageCount + notificationCount)"
+    }else{
+      tabbar?.tabBar.items![4].badgeValue = nil
+    }
+  }
+
   func gotoDetail(notification:Notification){
     let dicData = notification.object as! NSDictionary
     navigationNotificaton(dicData: dicData)

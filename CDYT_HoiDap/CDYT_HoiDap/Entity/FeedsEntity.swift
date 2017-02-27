@@ -17,9 +17,7 @@ class FeedsEntity: NSObject {
     var isFollowed = false
   var tags = [TagEntity]()
     var cateGory = CateEntity()
-    var assigneeEntity = AuthorEntity()
-    var ischeck = false
-    
+    var assigneeEntity = AuthorEntity()    
   
   override init(){
     super.init()

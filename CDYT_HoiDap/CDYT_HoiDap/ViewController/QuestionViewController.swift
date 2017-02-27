@@ -241,6 +241,45 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     }
     
   }
+  func requestApproval(){
+    
+    let post : [String : Any] = [
+      "Id" : listNotAssignedYet[indexPathOfCell.row].postEntity.id,
+      "Title" : listNotAssignedYet[indexPathOfCell.row].postEntity.title,
+      "Content" : listNotAssignedYet[indexPathOfCell.row].postEntity.content,
+      "ImageUrls" : listNotAssignedYet[indexPathOfCell.row].postEntity.imageUrls,
+      "ThumbnailImageUrls" : listNotAssignedYet[indexPathOfCell.row].postEntity.thumbnailImageUrls,
+      "Status" : 0,
+      "Rating" : 0,
+      "UpdatedDate" : 0,
+      "CategoryId": idCate,
+      "IsPrivate": listNotAssignedYet[indexPathOfCell.row].postEntity.isPrivate,
+      "IsClassified": false,
+      "CreatedDate" : 0
+    ]
+    
+    let questionParam : [String : Any] = [
+      "Auth": Until.getAuthKey(),
+      "RequestedUserId": Until.getCurrentId(),
+      "Post": post,
+      "AssignToUserId": idDoc
+    ]
+    Alamofire.request(GET_LASTED_POST, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+      if let status = response.response?.statusCode {
+        if status == 200{
+          let entity = self.listNotAssignedYet[self.indexPathOfCell.row]
+          entity.postEntity.isClassified = true
+          self.listNotAssignedYet.remove(at: self.indexPathOfCell.row)
+          self.tbQuestion.reloadData()
+        }else{
+          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        }
+      }else{
+        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+      }
+    }
+  }
+
   //MARK: UIViewController,UITableViewDelegate
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if isFeeds {
@@ -279,7 +318,13 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
   //MARK: QuestionTableViewCellDelegate
   func showQuestionDetail(indexPath: IndexPath) {
     let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
-    vc.feedObj = listFedds[indexPath.row]
+    if isFeeds {
+      vc.feedObj = listFedds[indexPath.row]
+    }else if isAssigned {
+      vc.feedObj = listAssigned[indexPath.row]
+    }else{
+      vc.feedObj = listNotAssignedYet[indexPath.row]
+    }
     self.navigationController?.pushViewController(vc, animated: true)
   }
   func gotoListQuestionByTag(hotTagId: String) {
@@ -304,14 +349,25 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
   }
   
   func selectSpecialist(indexPath: IndexPath) {
-    creatAlert(title: "Special List",picker: pickerViewCate)
+    creatAlert(title: "Chọn chuyên khoa",picker: pickerViewCate)
     indexPathOfCell = indexPath
   }
   
   func selectDoctor(indexPath: IndexPath) {
+    let entity = listNotAssignedYet[indexPath.row]
+    if !entity.cateGory.id.isEmpty {
+      idCate = entity.cateGory.id
+      nameCate = entity.cateGory.name
+      for item in listAllDoctor {
+        if item.category.id == idCate {
+          listDoctorInCate = item.doctors
+          break
+        }
+      }
+    }
     if listDoctorInCate.count > 0 {
       indexPathOfCell = indexPath
-      creatAlert(title: "Select Doctor",picker: pickerViewDoctor)
+      creatAlert(title: "Chọn bác sỹ",picker: pickerViewDoctor)
     }else {
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn khoa trước", cancelBtnTitle: "Đóng")
       
@@ -328,7 +384,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     
     
     let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-      self.listFedds[self.indexPathOfCell.row].ischeck = true
+//      self.listNotAssignedYet[self.indexPathOfCell.row].ischeck = true
       self.tbQuestion.reloadRows(at: [self.indexPathOfCell], with: .automatic)
       
     })
@@ -336,7 +392,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     alertView.addAction(action)
     present(alertView, animated: true, completion: nil)
   }
-  
+//  MARK: UIPickerViewDelegate + UIPickerViewDatasource
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
@@ -363,63 +419,34 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     if pickerView == pickerViewCate {
       idCate = listCate[row].id
       nameCate = listCate[row].name
-      listFedds[indexPathOfCell.row].cateGory.id = idCate
-      listFedds[indexPathOfCell.row].cateGory.name = nameCate
+      listNotAssignedYet[indexPathOfCell.row].cateGory.id = idCate
+      listNotAssignedYet[indexPathOfCell.row].cateGory.name = nameCate
       
       for item in listAllDoctor {
         if item.category.id == idCate {
           listDoctorInCate = item.doctors
+          break
         }
       }
       
     }else{
       idDoc = listDoctorInCate[row].id
       nameDoc = listDoctorInCate[row].fullname
-      listFedds[indexPathOfCell.row].assigneeEntity.id = idDoc
-      listFedds[indexPathOfCell.row].assigneeEntity.fullname = nameDoc
+      listNotAssignedYet[indexPathOfCell.row].assigneeEntity.id = idDoc
+      listNotAssignedYet[indexPathOfCell.row].assigneeEntity.fullname = nameDoc
     }
     
   }
   
-  func requestApproval(){
-    
-    let post : [String : Any] = [
-      "Id" : listFedds[indexPathOfCell.row].postEntity.id,
-      "Title" : listFedds[indexPathOfCell.row].postEntity.title,
-      "Content" : listFedds[indexPathOfCell.row].postEntity.content,
-      "ImageUrls" : listFedds[indexPathOfCell.row].postEntity.imageUrls,
-      "ThumbnailImageUrls" : listFedds[indexPathOfCell.row].postEntity.thumbnailImageUrls,
-      "Status" : 0,
-      "Rating" : 0,
-      "UpdatedDate" : 0,
-      "CategoryId": idCate,
-      "IsPrivate": listFedds[indexPathOfCell.row].postEntity.isPrivate,
-      "IsClassified": false,
-      "CreatedDate" : 0
-    ]
-    
-    let questionParam : [String : Any] = [
-      "Auth": Until.getAuthKey(),
-      "RequestedUserId": Until.getCurrentId(),
-      "Post": post,
-      "AssignToUserId": idDoc
-    ]
-    Alamofire.request(GET_LASTED_POST, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-      if let status = response.response?.statusCode {
-        if status == 200{
-          self.listFedds[self.indexPathOfCell.row].ischeck = false
-          self.tbQuestion.reloadData()
-        }else{
-          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-        }
-      }else{
-        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-      }
-    }
-  }
   
-  func approVal() {
-    if listDoctorInCate.count > 0 && nameDoc != "" {
+  func approVal(indexPath : IndexPath) {
+    let entity = listNotAssignedYet[indexPath.row]
+    if !entity.cateGory.id.isEmpty && !entity.assigneeEntity.id.isEmpty {
+      idCate = entity.cateGory.id
+      nameCate = entity.cateGory.name
+      idDoc = entity.assigneeEntity.id
+      nameDoc = entity.assigneeEntity.fullname
+      indexPathOfCell = indexPath
       requestApproval()
     }else{
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn khoa và bác sĩ", cancelBtnTitle: "Đóng")

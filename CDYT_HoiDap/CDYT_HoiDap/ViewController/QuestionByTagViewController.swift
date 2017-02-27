@@ -152,7 +152,7 @@ class QuestionByTagViewController: BaseViewController,UITableViewDelegate,UITabl
         
     }
     
-    func approVal() {
+    func approVal(indexPath: IndexPath) {
         
     }
     

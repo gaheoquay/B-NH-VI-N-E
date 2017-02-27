@@ -28,6 +28,7 @@ class ForgotPasswordViewController: BaseViewController {
     _ = self.navigationController?.popViewController(animated: true)
   }
   @IBAction func actionSend(_ sender: Any) {
+    
   }
   //MARK: Outlet
   @IBOutlet weak var txtEmail: UITextField!

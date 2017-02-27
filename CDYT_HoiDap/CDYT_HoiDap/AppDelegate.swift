@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     SBDMain.initWithApplicationId(SENDBIRD_APPKEY)
     initSendBird()
     requestCate()
+    requestListDoctor()
     Until.getBagValue()
     // Configure tracker from GoogleService-Info.plist.
     var configureError: NSError?
@@ -120,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
-    func requestServer(){
+    func requestListDoctor(){
         let hotParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
             ]
