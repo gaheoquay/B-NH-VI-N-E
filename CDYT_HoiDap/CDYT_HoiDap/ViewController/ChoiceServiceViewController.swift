@@ -112,7 +112,13 @@ class ChoiceServiceViewController: UIViewController,WYPopoverControllerDelegate,
     }
     
     func gotoListChoiceService() {
-        popupViewController.dismissPopover(animated: true)
+        if popupViewController != nil {
+            popupViewController.delegate = nil
+            popupViewController = nil
+        }else {
+            popupViewController.dismissPopover(animated: true)
+        }
+        
     }
     
    
