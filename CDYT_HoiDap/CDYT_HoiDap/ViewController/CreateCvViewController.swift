@@ -80,6 +80,13 @@ class CreateCvViewController: BaseViewController {
         
     }
     
+    @IBAction func btnDistrict(_ sender: Any) {
+    }
+    
+    @IBAction func btnZones(_ sender: Any) {
+    }
+       
+    
     @IBAction func btnBack(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)
 
