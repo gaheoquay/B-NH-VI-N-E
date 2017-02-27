@@ -14,6 +14,8 @@ class FileCell: UITableViewCell {
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var lbPrice: UILabel!
     
+    var isCheckListService = Bool()
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,5 +35,27 @@ class FileCell: UITableViewCell {
             btnDelete.setImage(UIImage(named: "Delete1.png"), for: .normal)
         }
     }
+    func checkService(isCheckService: Bool){
+        if isCheckService == false {
+            btnDelete.setImage(UIImage(named: "Delete1.png"), for: .normal)
+        }
+    }
+    func checkListService(isCheckList: Bool){
+        if isCheckList == false {
+            btnDelete.setImage(UIImage(named: "Check0.png"), for: .normal)
+            isCheckListService = isCheckList
+        }
+    }
+    
+    @IBAction func btnEditOrDelete(_ sender: Any) {
+        if isCheckListService == false {
+            btnDelete.setImage(UIImage(named: "Check1-2.png"), for: .normal)
+            isCheckListService = true
+        }else {
+            btnDelete.setImage(UIImage(named: "Check0-2.png"), for: .normal)
+            isCheckListService = false
+        }
+    }
+    
     
 }

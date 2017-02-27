@@ -29,10 +29,10 @@ class ChoiceServiceViewController: UIViewController,WYPopoverControllerDelegate,
         for price in arrayPrice {
             sumPrice = sumPrice + price
         }
-        tbListService.register(UINib.init(nibName: "ServiceCell", bundle: nil), forCellReuseIdentifier: "ServiceCell")
+        tbListService.register(UINib.init(nibName: "FileCell", bundle: nil), forCellReuseIdentifier: "FileCell")
         tbListService.delegate = self
         tbListService.dataSource = self
-        tbListService.estimatedRowHeight = 44
+        tbListService.estimatedRowHeight = 9999
         tbListService.rowHeight = UITableViewAutomaticDimension
 //        setUpSumPrice()
                 // Do any additional setup after loading the view.
@@ -78,44 +78,21 @@ class ChoiceServiceViewController: UIViewController,WYPopoverControllerDelegate,
         viewTopbar.layer.cornerRadius = 4
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if(selectedIndex == indexPath.row) {
-            selectedIndex = -1
-        } else {
-            selectedIndex = indexPath.row
-        }
-        self.tbListService.beginUpdates()
-//        self.tbListService.reloadData()
-        self.tbListService.endUpdates()
-    }
+ 
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return arrayName.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCell") as! ServiceCell
-        if (selectedIndex == indexPath.row) {
-//            cell.isCheckCell = false
-            cell.viewBottom.isHidden = false
-        }else {
-//            cell.isCheckCell = true
-            cell.viewBottom.isHidden = true
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell") as! FileCell
+        cell.lbName.text = arrayName[indexPath.row]
+        cell.checkService(isCheckService: false)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if(selectedIndex == indexPath.row) {
-            
-            return 272
-        } else {
-            
-            return 44
-        }
-    }
     
         
     func setUpSumPrice(){

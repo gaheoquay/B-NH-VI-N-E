@@ -18,6 +18,7 @@
 		0F52D28A1E634889006C57E2 /* FileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F52D2881E634889006C57E2 /* FileCell.xib */; };
 		0F9471441E5F5E3C00EE7C2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F9471431E5F5E3C00EE7C2A /* Main.storyboard */; };
 		0F9AD59C1E63CE0F00981D7B /* SearchFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9AD59B1E63CE0F00981D7B /* SearchFileViewController.swift */; };
+		0F9AD5A01E63F34700981D7B /* BackWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9AD59D1E63F34700981D7B /* BackWhite.png */; };
 		0F9C46171E5FE24500DCFE46 /* ChoiceServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C46161E5FE24500DCFE46 /* ChoiceServiceViewController.swift */; };
 		0F9C46191E5FF22A00DCFE46 /* ListServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C46181E5FF22A00DCFE46 /* ListServiceViewController.swift */; };
 		0F9C461D1E60055200DCFE46 /* ServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C461B1E60055200DCFE46 /* ServiceCell.swift */; };
@@ -256,6 +257,7 @@
 		0F52D2881E634889006C57E2 /* FileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileCell.xib; sourceTree = "<group>"; };
 		0F9471431E5F5E3C00EE7C2A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0F9AD59B1E63CE0F00981D7B /* SearchFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFileViewController.swift; sourceTree = "<group>"; };
+		0F9AD59D1E63F34700981D7B /* BackWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackWhite.png; sourceTree = "<group>"; };
 		0F9C46161E5FE24500DCFE46 /* ChoiceServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceServiceViewController.swift; sourceTree = "<group>"; };
 		0F9C46181E5FF22A00DCFE46 /* ListServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListServiceViewController.swift; sourceTree = "<group>"; };
 		0F9C461B1E60055200DCFE46 /* ServiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
@@ -578,6 +580,7 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0F9AD59D1E63F34700981D7B /* BackWhite.png */,
 				0FF7533F1E62F52C001450B7 /* Profile2.png */,
 				0F0EFD321E627FFA0036C860 /* HoSoRong_1.png */,
 				0F9C46351E603F4200DCFE46 /* HoSoRong.png */,
@@ -1155,6 +1158,7 @@
 				8B3A13561E10F454005DBC6E /* Like0.png in Resources */,
 				A68A950E1E150CF80067736E /* Clover0.png in Resources */,
 				0F17AB171E51ACFF008BA308 /* Private.png in Resources */,
+				0F9AD5A01E63F34700981D7B /* BackWhite.png in Resources */,
 				A67311D11E160F3400BCE308 /* placeholder_wide.png in Resources */,
 				8BD49F5D1E482D1100C98E74 /* OpenChannelListViewController.xib in Resources */,
 				0F9C46251E60084A00DCFE46 /* DichVu.png in Resources */,

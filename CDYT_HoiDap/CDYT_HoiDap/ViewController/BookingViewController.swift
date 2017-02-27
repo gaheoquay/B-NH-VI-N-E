@@ -112,6 +112,13 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
         let viewcontroller = main.instantiateViewController(withIdentifier: "FileViewController") as! FileViewController
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
+    
+    func gotoFile() {
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        let viewcontroller = main.instantiateViewController(withIdentifier: "SearchFileViewController") as! SearchFileViewController
+        self.navigationController?.pushViewController(viewcontroller, animated: true)
+
+    }
 
    
 }

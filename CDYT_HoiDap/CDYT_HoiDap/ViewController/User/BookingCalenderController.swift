@@ -9,6 +9,7 @@
 import UIKit
 protocol BookingCalenderControllerDelegate {
     func gotoService()
+    func gotoFile()
 }
 
 class BookingCalenderController: UIViewController {
@@ -34,6 +35,9 @@ class BookingCalenderController: UIViewController {
     
     @IBAction func tapService(_ sender: Any) {
         delegate?.gotoService()
+    }
+    @IBAction func btnSelectFileUser(_ sender: Any) {
+        delegate?.gotoFile()
     }
 
 }

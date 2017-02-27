@@ -28,8 +28,41 @@ class ForgotPasswordViewController: BaseViewController {
     _ = self.navigationController?.popViewController(animated: true)
   }
   @IBAction func actionSend(_ sender: Any) {
-    
+        validateData()
   }
+    
+   func validateData(){
+        let emailString = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+    
+        if emailString == "" {
+            txtEmail.becomeFirstResponder()
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Email không được để trống", cancelBtnTitle: "Đóng")
+        }else if !Until.isValidEmail(email: emailString!){
+            txtEmail.becomeFirstResponder()
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Sai định dạng Email", cancelBtnTitle: "Đóng")
+        }else {
+            requestForgotPassword()
+        }
+    }
+    
+    func requestForgotPassword(){
+        let hotParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "Email": txtEmail.text!
+        ]
+        Until.showLoading()
+        Alamofire.request(FOR_GOT_PASSWORD, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Mật khẩu mới của bạn đã được gửi về Email đăng kí . Xin hãy kiểm tra lại", cancelBtnTitle: "Đóng")
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Xin kiểm tra lại đường truyền", cancelBtnTitle: "Đóng")
+                }
+                Until.hideLoading()
+            }
+        }
+    }
+    
   //MARK: Outlet
   @IBOutlet weak var txtEmail: UITextField!
   
