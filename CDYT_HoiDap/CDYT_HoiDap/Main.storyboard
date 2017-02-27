@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1195,7 +1195,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hKq-4y-tCO"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="d0b-Tf-VMt">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="750"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6LD-NL-pVC">
@@ -1253,10 +1253,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RzO-kE-tX9">
-                                <rect key="frame" x="0.0" y="66" width="320" height="684"/>
+                                <rect key="frame" x="0.0" y="66" width="320" height="502"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWQ-El-reC" customClass="TPKeyboardAvoidingCollectionView">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="684"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="502"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yaF-mA-on7">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="684"/>
@@ -2043,8 +2043,6 @@
                             <constraint firstItem="6LD-NL-pVC" firstAttribute="top" secondItem="d0b-Tf-VMt" secondAttribute="top" id="zJc-9m-Kci"/>
                         </constraints>
                     </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="750"/>
                     <connections>
                         <outlet property="lbDateOfYear" destination="djv-4O-326" id="awu-zg-m5o"/>
                         <outlet property="lbGender" destination="uCO-vZ-vZb" id="BLI-27-VZu"/>

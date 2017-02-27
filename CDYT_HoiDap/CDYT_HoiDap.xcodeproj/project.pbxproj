@@ -52,6 +52,12 @@
 		8B1AD45B1E1B828500D55543 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AD45A1E1B828500D55543 /* SearchViewController.swift */; };
 		8B1AD45E1E1B97F000D55543 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AD45C1E1B97F000D55543 /* SearchTableViewCell.swift */; };
 		8B1AD45F1E1B97F000D55543 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1AD45D1E1B97F000D55543 /* SearchTableViewCell.xib */; };
+		8B2AFF0A1E64223A00415554 /* JobEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2AFF091E64223A00415554 /* JobEntity.swift */; };
+		8B2AFF0C1E64253200415554 /* CountryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2AFF0B1E64253200415554 /* CountryEntity.swift */; };
+		8B2AFF0E1E6425C100415554 /* ProvinceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2AFF0D1E6425C100415554 /* ProvinceEntity.swift */; };
+		8B2AFF101E64269200415554 /* DistrictEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2AFF0F1E64269200415554 /* DistrictEntity.swift */; };
+		8B2AFF121E642B5000415554 /* ZoneEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2AFF111E642B5000415554 /* ZoneEntity.swift */; };
+		8B2AFF141E642C4A00415554 /* ServiceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2AFF131E642C4A00415554 /* ServiceEntity.swift */; };
 		8B3A12DF1E10F399005DBC6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A12DE1E10F399005DBC6E /* AppDelegate.swift */; };
 		8B3A12E11E10F399005DBC6E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3A12E01E10F399005DBC6E /* ViewController.swift */; };
 		8B3A12E61E10F399005DBC6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B3A12E51E10F399005DBC6E /* Assets.xcassets */; };
@@ -293,6 +299,12 @@
 		8B1AD45C1E1B97F000D55543 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		8B1AD45D1E1B97F000D55543 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		8B296BAC1E5557BA00170879 /* CDYT_HoiDap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CDYT_HoiDap.entitlements; sourceTree = "<group>"; };
+		8B2AFF091E64223A00415554 /* JobEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobEntity.swift; sourceTree = "<group>"; };
+		8B2AFF0B1E64253200415554 /* CountryEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryEntity.swift; sourceTree = "<group>"; };
+		8B2AFF0D1E6425C100415554 /* ProvinceEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProvinceEntity.swift; sourceTree = "<group>"; };
+		8B2AFF0F1E64269200415554 /* DistrictEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistrictEntity.swift; sourceTree = "<group>"; };
+		8B2AFF111E642B5000415554 /* ZoneEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoneEntity.swift; sourceTree = "<group>"; };
+		8B2AFF131E642C4A00415554 /* ServiceEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceEntity.swift; sourceTree = "<group>"; };
 		8B3A12DB1E10F399005DBC6E /* CDYT_HoiDap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CDYT_HoiDap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B3A12DE1E10F399005DBC6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B3A12E01E10F399005DBC6E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -535,6 +547,19 @@
 				4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8B2AFF081E64222C00415554 /* BookingEntity */ = {
+			isa = PBXGroup;
+			children = (
+				8B2AFF091E64223A00415554 /* JobEntity.swift */,
+				8B2AFF0B1E64253200415554 /* CountryEntity.swift */,
+				8B2AFF0D1E6425C100415554 /* ProvinceEntity.swift */,
+				8B2AFF0F1E64269200415554 /* DistrictEntity.swift */,
+				8B2AFF111E642B5000415554 /* ZoneEntity.swift */,
+				8B2AFF131E642C4A00415554 /* ServiceEntity.swift */,
+			);
+			path = BookingEntity;
 			sourceTree = "<group>";
 		};
 		8B3A12D21E10F399005DBC6E = {
@@ -1002,6 +1027,7 @@
 		A6D083C11E121A1C007EA4D9 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				8B2AFF081E64222C00415554 /* BookingEntity */,
 				A6F9809E1E4860660007CD63 /* Realm Object */,
 				A6D083C81E127F9F007EA4D9 /* TagEntity.swift */,
 				A6D083CA1E12803C007EA4D9 /* HotTagEntity.swift */,
@@ -1316,6 +1342,7 @@
 				A625AD2D1E24CC5700953B0B /* CommentViewController.swift in Sources */,
 				0FF7533D1E62F3A9001450B7 /* ExamScheduleCell.swift in Sources */,
 				0F9C46191E5FF22A00DCFE46 /* ListServiceViewController.swift in Sources */,
+				8B2AFF141E642C4A00415554 /* ServiceEntity.swift in Sources */,
 				8BD49F2F1E482C1500C98E74 /* MessageDelegate.swift in Sources */,
 				A6E4C2F81E1102A500C2C871 /* RegisterViewController.swift in Sources */,
 				8B3A13881E10FD2A005DBC6E /* UserViewController.swift in Sources */,
@@ -1359,6 +1386,7 @@
 				8BD49F681E482D1100C98E74 /* ParticipantListViewController.swift in Sources */,
 				A6D083CB1E12803C007EA4D9 /* HotTagEntity.swift in Sources */,
 				8B3A13811E10F46B005DBC6E /* Global.swift in Sources */,
+				8B2AFF0C1E64253200415554 /* CountryEntity.swift in Sources */,
 				8B79D0DE1E5A8E2C0010C5C0 /* AboutViewController.swift in Sources */,
 				A68A95131E1518E10067736E /* SubCommentEntity.swift in Sources */,
 				8BD49F601E482D1100C98E74 /* CreateOpenChannelViewController.swift in Sources */,
@@ -1376,6 +1404,8 @@
 				8B79D0E01E5A91C80010C5C0 /* ListDoctorViewController.swift in Sources */,
 				0F9C46171E5FE24500DCFE46 /* ChoiceServiceViewController.swift in Sources */,
 				0FABDC331E61C2EC004DD98D /* CreateCvViewController.swift in Sources */,
+				8B2AFF0A1E64223A00415554 /* JobEntity.swift in Sources */,
+				8B2AFF121E642B5000415554 /* ZoneEntity.swift in Sources */,
 				0F17AB191E51BAC2008BA308 /* CateEntity.swift in Sources */,
 				8B0D35F51E56EB2D002CF784 /* BookingViewController.swift in Sources */,
 				8BD49F651E482D1100C98E74 /* OpenChannelChattingViewController.swift in Sources */,
@@ -1395,6 +1425,7 @@
 				8BFE666C1E5D423700E1138B /* BaseViewController.swift in Sources */,
 				0FCFD9A81E5EEDDD00EE2F89 /* ManagerViewController.swift in Sources */,
 				8B813CB71E1510500043F7EF /* QuestionByTagViewController.swift in Sources */,
+				8B2AFF101E64269200415554 /* DistrictEntity.swift in Sources */,
 				0F0EFD311E62771C0036C860 /* HistoryUserViewController.swift in Sources */,
 				A6417E1F1E13B56C00BD2D75 /* SettingViewController.swift in Sources */,
 				8BD49F2D1E482C1500C98E74 /* IncomingUserMessageTableViewCell.swift in Sources */,
@@ -1408,6 +1439,7 @@
 				8B87CD2E1E13665500DA8A33 /* PostEntity.swift in Sources */,
 				8B3A137E1E10F454005DBC6E /* RAMItemAnimationProtocol.swift in Sources */,
 				A67311D41E164FC400BCE308 /* MoreCommentTableViewCell.swift in Sources */,
+				8B2AFF0E1E6425C100415554 /* ProvinceEntity.swift in Sources */,
 				8BD49EFA1E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -28,9 +28,9 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>Bệnh Viện E muốn truy cập vào camera của bạn</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+	<string>Bệnh Viện E muốn truy cập vào Photo của bạn</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

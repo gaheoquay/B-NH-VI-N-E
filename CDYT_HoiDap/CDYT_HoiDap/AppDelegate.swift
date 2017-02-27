@@ -35,6 +35,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     requestCate()
     requestListDoctor()
     Until.getBagValue()
+    if #available(iOS 10.0, *) {
+      Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { (timer) in
+        Until.getBagValue()
+      }
+    } else {
+      Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.reloadBadge), userInfo: nil, repeats: true)
+    }
     // Configure tracker from GoogleService-Info.plist.
     var configureError: NSError?
     GGLContext.sharedInstance().configureWithError(&configureError)
@@ -54,6 +61,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   func callToGoDetail(notificationDic:NSDictionary){
     NotificationCenter.default.post(name: NSNotification.Name(rawValue:GO_TO_DETAIL_WHEN_TAP_NOTIFICATION), object: notificationDic)
   }
+  
+  func reloadBadge(){
+    Until.getBagValue()
+  }
+  
   func initSendBird(){
     let realm = try! Realm()
     let userEntity = realm.objects(UserEntity.self).first

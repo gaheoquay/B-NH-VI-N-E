@@ -215,12 +215,6 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
             messageCountLb.text = ""
             messageCountLb.isHidden = true
         }
-      let tabbar = self.tabBarController as? RAMAnimatedTabBarController
-      if unreadMessageCount + notificationCount != 0 {
-        tabbar?.tabBar.items![4].badgeValue = "\(unreadMessageCount + notificationCount)"
-      }else{
-        tabbar?.tabBar.items![4].badgeValue = nil
-      }
     }
     
     func getListNotification(){
