@@ -20,13 +20,6 @@ class ExamScheduleCell: UITableViewCell {
     
     var delegate: ExamScheduleCellDelegate?
     var indexPath = IndexPath()
-    var profileUser = FileUserEntity()
-    var listBooking = BookingEntity()
-    
-    
-    
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -44,8 +37,12 @@ class ExamScheduleCell: UITableViewCell {
         delegate?.gotoDetailUser(index: indexPath)
     }
     
-    func setData(){
-        
+  func setData(entity: AllUserEntity){
+        var profileUser = entity.profile
+    
+//          cell.listBooking = listallUSer[indexPath.row].booking[indexPath.row]
+//    cell.profileUser = listallUSer[indexPath.row].profile
+
         let creteDate = String().convertTimeStampWithDateFormat(timeStamp: profileUser.createdDate, dateFormat: "dd/MM/YYYY")
         let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
         let fontRegular = [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
@@ -56,19 +53,19 @@ class ExamScheduleCell: UITableViewCell {
 
         lbName.text = profileUser.patientName
         
-        if listBooking.status == 0 {
-        let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
-            myAttrString.append(NSMutableAttributedString(string: "đã có mã số khám", attributes: fontRegular))
-            lbStatus.attributedText = myAttrString
-        }else if listBooking.status == 1 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
-            myAttrString.append(NSMutableAttributedString(string: "đang chò xử lý", attributes: fontRegular))
-            lbStatus.attributedText = myAttrString
-        }else if listBooking.status == 2 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
-            myAttrString.append(NSMutableAttributedString(string: "đã thanh toán", attributes: fontRegular))
-            lbStatus.attributedText = myAttrString
-        }
+//        if listBooking.status == 0 {
+//        let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
+//            myAttrString.append(NSMutableAttributedString(string: "đã có mã số khám", attributes: fontRegular))
+//            lbStatus.attributedText = myAttrString
+//        }else if listBooking.status == 1 {
+//            let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
+//            myAttrString.append(NSMutableAttributedString(string: "đang chò xử lý", attributes: fontRegular))
+//            lbStatus.attributedText = myAttrString
+//        }else if listBooking.status == 2 {
+//            let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
+//            myAttrString.append(NSMutableAttributedString(string: "đã thanh toán", attributes: fontRegular))
+//            lbStatus.attributedText = myAttrString
+//        }
     }
     
 }
