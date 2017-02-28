@@ -42,13 +42,13 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExamScheduleCell" ) as! ExamScheduleCell
+      cell.indexPath = indexPath
+      cell.delegate = self
+      if listallUSer.count > 0 {
         cell.listBooking = listallUSer[indexPath.row].booking[indexPath.row]
         cell.profileUser = listallUSer[indexPath.row].profile
-        cell.indexPath = indexPath
-        if listallUSer.count > 0{
         cell.setData()
-        }
-        cell.delegate = self
+      }
         return cell
     }
     
