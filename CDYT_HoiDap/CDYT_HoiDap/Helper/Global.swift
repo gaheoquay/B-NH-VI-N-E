@@ -19,6 +19,7 @@ let UPDATE_PROFILE = BASE_URL + "/User/UpdateProfile"
 let FOLLOW_TAG = BASE_URL + "/User/FollowTag"
 let GET_CATE = BASE_URL + "/Category/GetList"
 let FOR_GOT_PASSWORD = BASE_URL + "/User/ForgotPassword"
+let GET_PROFILE_USER = BASE_URL + "/Booking/GetProfilesByUserId"
 
 let HOTEST_TAG = BASE_URL + "/Post/GetHotestTags"
 let GET_FEEDS = BASE_URL + "/Post/GetFeed"
