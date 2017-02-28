@@ -56,6 +56,13 @@ class ListServiceViewController: UIViewController,UITableViewDelegate,UITableVie
     func setupButton() {
         
     }
-
+    
+    func gotoDetailFileUser() {
+        
+    }
+    
+    func deleteFileUser() {
+        
+    }
 
 }

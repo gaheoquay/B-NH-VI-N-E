@@ -90,7 +90,6 @@ class ChoiceServiceViewController: UIViewController,WYPopoverControllerDelegate,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell") as! FileCell
         cell.lbName.text = arrayName[indexPath.row]
-        cell.checkService(isCheckService: false)
         return cell
     }
     

@@ -42,6 +42,9 @@
 		0F9ED83A1E5BEB38001F2FC2 /* DaDuyet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */; };
 		0F9ED83B1E5BEB38001F2FC2 /* Duyet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */; };
 		0FABDC331E61C2EC004DD98D /* CreateCvViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FABDC321E61C2EC004DD98D /* CreateCvViewController.swift */; };
+		0FC431701E65185B003F7F31 /* DetailsFileUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC4316F1E65185B003F7F31 /* DetailsFileUsersViewController.swift */; };
+		0FC431721E65283D003F7F31 /* ChuaCoLichKham.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC431711E65283D003F7F31 /* ChuaCoLichKham.png */; };
+		0FC431741E6534FD003F7F31 /* Ketqua.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC431731E6534FD003F7F31 /* Ketqua.png */; };
 		0FCFD9A61E5EEDB700EE2F89 /* BookingCalenderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFD9A51E5EEDB700EE2F89 /* BookingCalenderController.swift */; };
 		0FCFD9A81E5EEDDD00EE2F89 /* ManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFD9A71E5EEDDD00EE2F89 /* ManagerViewController.swift */; };
 		0FF753391E62F267001450B7 /* ExamScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF753381E62F267001450B7 /* ExamScheduleViewController.swift */; };
@@ -288,6 +291,9 @@
 		0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DaDuyet_1.png; sourceTree = "<group>"; };
 		0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Duyet_1.png; sourceTree = "<group>"; };
 		0FABDC321E61C2EC004DD98D /* CreateCvViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCvViewController.swift; sourceTree = "<group>"; };
+		0FC4316F1E65185B003F7F31 /* DetailsFileUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsFileUsersViewController.swift; sourceTree = "<group>"; };
+		0FC431711E65283D003F7F31 /* ChuaCoLichKham.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChuaCoLichKham.png; sourceTree = "<group>"; };
+		0FC431731E6534FD003F7F31 /* Ketqua.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ketqua.png; sourceTree = "<group>"; };
 		0FCFD9A51E5EEDB700EE2F89 /* BookingCalenderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BookingCalenderController.swift; path = User/BookingCalenderController.swift; sourceTree = "<group>"; };
 		0FCFD9A71E5EEDDD00EE2F89 /* ManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerViewController.swift; sourceTree = "<group>"; };
 		0FF753381E62F267001450B7 /* ExamScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamScheduleViewController.swift; sourceTree = "<group>"; };
@@ -608,6 +614,8 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0FC431731E6534FD003F7F31 /* Ketqua.png */,
+				0FC431711E65283D003F7F31 /* ChuaCoLichKham.png */,
 				0F9AD59D1E63F34700981D7B /* BackWhite.png */,
 				0FF7533F1E62F52C001450B7 /* Profile2.png */,
 				0F0EFD321E627FFA0036C860 /* HoSoRong_1.png */,
@@ -837,6 +845,7 @@
 				0F0EFD301E62771C0036C860 /* HistoryUserViewController.swift */,
 				0FF753381E62F267001450B7 /* ExamScheduleViewController.swift */,
 				0F9AD59B1E63CE0F00981D7B /* SearchFileViewController.swift */,
+				0FC4316F1E65185B003F7F31 /* DetailsFileUsersViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1185,10 +1194,12 @@
 				8BD49F661E482D1100C98E74 /* OpenChannelChattingViewController.xib in Resources */,
 				8BD49F331E482C1600C98E74 /* OutgoingFileMessageTableViewCell.xib in Resources */,
 				8B3A13561E10F454005DBC6E /* Like0.png in Resources */,
+				0FC431741E6534FD003F7F31 /* Ketqua.png in Resources */,
 				A68A950E1E150CF80067736E /* Clover0.png in Resources */,
 				0F17AB171E51ACFF008BA308 /* Private.png in Resources */,
 				0F9AD5A01E63F34700981D7B /* BackWhite.png in Resources */,
 				A67311D11E160F3400BCE308 /* placeholder_wide.png in Resources */,
+				0FC431721E65283D003F7F31 /* ChuaCoLichKham.png in Resources */,
 				8BD49F5D1E482D1100C98E74 /* OpenChannelListViewController.xib in Resources */,
 				0F9C46251E60084A00DCFE46 /* DichVu.png in Resources */,
 				0F9C463C1E603F4200DCFE46 /* LichSu.png in Resources */,
@@ -1406,6 +1417,7 @@
 				8B3A13791E10F454005DBC6E /* RAMFumeAnimation.swift in Sources */,
 				8BD49F341E482C1600C98E74 /* OutgoingImageFileMessageTableViewCell.swift in Sources */,
 				8B79D0E01E5A91C80010C5C0 /* ListDoctorViewController.swift in Sources */,
+				0FC431701E65185B003F7F31 /* DetailsFileUsersViewController.swift in Sources */,
 				0F9C46171E5FE24500DCFE46 /* ChoiceServiceViewController.swift in Sources */,
 				0FABDC331E61C2EC004DD98D /* CreateCvViewController.swift in Sources */,
 				8B2AFF0A1E64223A00415554 /* JobEntity.swift in Sources */,
