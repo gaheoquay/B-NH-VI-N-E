@@ -138,6 +138,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     setupUI()
     tbQuestion.reloadData()
   }
+  
   @IBAction func actionNotAssignedYet(_ sender: Any) {
     isAssigned = false
     isNotAssignedYet = true
