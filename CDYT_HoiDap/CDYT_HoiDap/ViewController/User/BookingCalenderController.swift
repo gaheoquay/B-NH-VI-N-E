@@ -22,7 +22,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     var listService = ServiceEntity()
     var listFileUser = FileUserEntity()
     
-    var timeStamp: Double = 0
+    var dateBook: Double = 0
     var delegate: BookingCalenderControllerDelegate?
     
     override func viewDidLoad() {
@@ -81,8 +81,8 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     //MARK: SetupDate
         func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
             print("calendar did select date \(String().convertDatetoString(date: date, dateFormat: "dd/MM/YYYY"))")
-            timeStamp = date.timeIntervalSince1970
-            print(timeStamp)
+            dateBook = date.timeIntervalSince1970
+            print(dateBook)
             if monthPosition == .previous || monthPosition == .next {
                 calendar.setCurrentPage(date, animated: true)
             }
@@ -94,14 +94,24 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     //MARK: request Api
     func requestBoking(){
         let param : [String : Any] = [
-            "serviceId" : listService.serviceId,
-            "serName" : listService.name,
-            "date" : timeStamp,
-            "idUSer" : listFileUser.id,
-            "nameUser" : listFileUser.patientName
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId" : Until.getCurrentId(),
+            "ProfileId" : listFileUser.id,
+            "ServiceId" : listService.serviceId,
+            "BookingDate" : dateBook
         ]
         
-        print(param)
+        Alamofire.request(ADD_BOOKING, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Gửi đặt lịch thành công", cancelBtnTitle: "Đóng")
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+        }
         
     }
     

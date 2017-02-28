@@ -27,9 +27,8 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        requestListUser()
-        setUpUIView()
-        setupBtn()
+        requestUSer()
+                setupBtn()
         // Do any additional setup after loading the view.
     }
 
@@ -56,10 +55,36 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: GET_LIST_FILE_USER), object: self.listFileUser[indexPath.row])
     }
     
-    func requestListUser(){
-//        listFileUser = FileUserEntity().initListUser()
+    func requestUSer(){
+        Until.showLoading()
+        let Param : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId" : Until.getCurrentId()
+        ]
+        print(Param)
+        Alamofire.request(GET_PROFILE_USER, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! [NSDictionary]
+                        for item in jsonData {
+                            let entity = FileUserEntity.init(dictionary: item)
+                            self.listFileUser.append(entity)
+                        }
+                    }
+                    self.setUpUIView()
+                    self.tbListFile.reloadData()
+                   
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+                Until.hideLoading()
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+        }
+        
     }
-    
     
     //MARK: Setup UI
     func setUpUIView(){
