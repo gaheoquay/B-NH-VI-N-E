@@ -45,7 +45,9 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         cell.listBooking = listallUSer[indexPath.row].booking[indexPath.row]
         cell.profileUser = listallUSer[indexPath.row].profile
         cell.indexPath = indexPath
+        if listallUSer.count > 0{
         cell.setData()
+        }
         cell.delegate = self
         return cell
     }
