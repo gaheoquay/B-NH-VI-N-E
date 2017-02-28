@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CreateCvViewControllerDelegate {
+  func reloadData()
+}
+
 class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerViewDataSource {
   
   @IBOutlet weak var lbGender: UILabel!
@@ -45,9 +49,9 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
   lazy var pickerlistZone = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
   lazy var pickerlistJob = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
   
+  var delegate:CreateCvViewControllerDelegate?
   
-  
-  var genderType = ""
+  var genderType = 1
   var timeStampDateOfBirt : Double = 0
   
   
@@ -68,13 +72,13 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     let manTap = UIAlertAction(title: "Nam", style: .default, handler: {
       (alert: UIAlertAction!) -> Void in
-      self.genderType = "1"
+      self.genderType = 1
       self.lbGender.text = "Nam"
     })
     
     let femaleTap = UIAlertAction(title: "Nữ", style: .default, handler: {
       (alert: UIAlertAction!) -> Void in
-      self.genderType = "0"
+      self.genderType = 0
       self.lbGender.text = "Nữ"
     })
     
@@ -360,9 +364,67 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
   }
   
   func requestCreateFileUser(){
-    let main = UIStoryboard(name: "Main", bundle: nil)
-    let viewcontroller = main.instantiateViewController(withIdentifier: "FileViewController") as! FileViewController
-    self.navigationController?.pushViewController(viewcontroller, animated: true)
+    let name = txtName.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+    let passPortId = txtCMT.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+    let phone = txtPhoneNumber.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+    if name.isEmpty || timeStampDateOfBirt == 0 || passPortId.isEmpty || phone.isEmpty || selectedJob == nil || selectedCountry == nil || selectedProvince == nil || selectedDistrict == nil || selectedZone == nil {
+      UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nhập đầy đủ thông tin", cancelBtnTitle: "Đóng")
+      return
+    }
+    let userEntity = FileUserEntity()
+    userEntity.patientName = txtName.text!
+    userEntity.gender = genderType
+    userEntity.dOB = timeStampDateOfBirt
+    let birthDate = Date(timeIntervalSince1970: userEntity.dOB)
+    let calendar : Calendar = Calendar.current
+    let dateComponent = calendar.dateComponents([.year], from: birthDate)
+    userEntity.age = (calendar.date(from: dateComponent)?.age)!
+    if userEntity.age < 6 {
+      let bailsmanName = txtNameGuardian.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+      let bailsmanPhoneNumber = txtPhoneGuardian.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+      let bailsmanPassportId = txtCmtGuardian.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+      if bailsmanName.isEmpty || bailsmanPhoneNumber.isEmpty || bailsmanPassportId.isEmpty {
+        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nhập đầy đủ thông tin", cancelBtnTitle: "Đóng")
+        return
+      }
+    }
+    userEntity.passportId = txtCMT.text!
+    userEntity.phoneNumber = txtPhoneNumber.text!
+    userEntity.jobId = String(selectedJob.jobId)
+    userEntity.jobName = selectedJob.name
+    userEntity.countryId = String(selectedCountry.countryId)
+    userEntity.countryName = selectedCountry.name
+    userEntity.provinceId = String(selectedProvince.provinceId)
+    userEntity.provinceName = selectedProvince.name
+    userEntity.dictrictId = String(selectedDistrict.districtId)
+    userEntity.dictrictName = selectedDistrict.name
+    userEntity.zoneId = String(selectedZone.zoneId)
+    userEntity.zoneName = selectedZone.name
+    userEntity.bailsmanName = txtNameGuardian.text!
+    userEntity.bailsmanPhoneNumber = txtPhoneGuardian.text!
+    userEntity.bailsmanPassportId = txtCmtGuardian.text!
+    
+    let profile : [String:Any] = FileUserEntity().toDictionary(entity: userEntity)
+    let param : [String:Any] = [
+      "Auth": Until.getAuthKey(),
+      "RequestedUserId" : Until.getCurrentId(),
+      "Profile" : profile
+    ]
+    Alamofire.request(BOOKING_ADDING_PROFILE, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+      if let status = response.response?.statusCode {
+        if status == 200{
+          if response.result.value != nil {
+            self.delegate?.reloadData()
+          }
+        }else{
+          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        }
+      }else{
+        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+      }
+    }
+
+    
   }
   
   

@@ -62,6 +62,7 @@ let BOOKING_GET_LIST_COUNTRY = BASE_URL + "/Booking/GetContries"
 let BOOKING_GET_LIST_PROVICE = BASE_URL + "/Booking/GetProvinces"
 let BOOKING_GET_LIST_DISTRICT = BASE_URL + "/Booking/GetDictricts"
 let BOOKING_GET_LIST_ZONE_BY_ID = BASE_URL + "/Booking/GetZoneByDictrictId/"
+let BOOKING_ADDING_PROFILE = BASE_URL + "/Booking/AddProfile"
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
 let NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"
