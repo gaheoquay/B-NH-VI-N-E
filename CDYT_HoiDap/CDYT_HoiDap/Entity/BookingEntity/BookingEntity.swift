@@ -15,6 +15,9 @@ class BookingEntity: NSObject {
     var bookingDate: Double = 0
     var updateDate: Double = 0
     var createDate: Double = 0
+    var status = 0
+    var checkInResult = ""
+    var paymentResult = ""
     
     override init() {
         super.init()
@@ -34,6 +37,15 @@ class BookingEntity: NSObject {
         }
         if let value = dictionary["CreatedDate"] as? Double {
             createDate = value
+        }
+        if let value = dictionary["Status"] as? Int {
+            status = value
+        }
+        if let value = dictionary["CheckInResult"] as? String {
+            checkInResult = value
+        }
+        if let value = dictionary["PaymentResult"] as? String {
+            paymentResult = value
         }
 
     }

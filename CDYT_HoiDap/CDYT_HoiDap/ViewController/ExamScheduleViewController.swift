@@ -16,11 +16,11 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet weak var heightTbListUser: NSLayoutConstraint!
     @IBOutlet weak var viewHiddent: UIView!
     
-    var listBooking = [AllUserEntity]()
+    var listallUSer = [AllUserEntity]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTable()
+        requestBooking()
         // Do any additional setup after loading the view.
     }
 
@@ -38,12 +38,14 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listBooking.count
+        return listallUSer.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExamScheduleCell" ) as! ExamScheduleCell
-        
+        cell.listBooking = listallUSer[indexPath.row].booking[indexPath.row]
+        cell.profileUser = listallUSer[indexPath.row].profile
         cell.indexPath = indexPath
+        cell.setData()
         cell.delegate = self
         return cell
     }
@@ -55,7 +57,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     }
     
     func setupTable(){
-        if listBooking.count > 0 {
+        if listallUSer.count > 0 {
         tbListExamSchedule.delegate = self
         tbListExamSchedule.dataSource = self
         tbListExamSchedule.estimatedRowHeight = 9999
@@ -65,7 +67,6 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         imageCalendar.isHidden = true
         lbCalendar.isHidden = true
         }else {
-            
             tbListExamSchedule.estimatedRowHeight = 0
             tbListExamSchedule.rowHeight = UITableViewAutomaticDimension
             heightTbListUser.constant = 0
@@ -76,7 +77,30 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     
     //MARK: REQUEST API
     func requestBooking(){
-    
+        let Param : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId" : Until.getCurrentId()
+        ]
+        
+        Alamofire.request(GET_BOOKING, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! [NSDictionary]
+                        for item in jsonData {
+                            let entity = AllUserEntity.init(dictionary: item)
+                            self.listallUSer.append(entity)
+                        }
+                    }
+                    self.setupTable()
+                    self.tbListExamSchedule.reloadData()
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+        }
     }
     
     

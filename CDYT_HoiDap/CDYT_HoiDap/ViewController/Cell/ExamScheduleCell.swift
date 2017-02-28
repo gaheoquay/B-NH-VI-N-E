@@ -20,6 +20,11 @@ class ExamScheduleCell: UITableViewCell {
     
     var delegate: ExamScheduleCellDelegate?
     var indexPath = IndexPath()
+    var profileUser = FileUserEntity()
+    var listBooking = BookingEntity()
+    
+    
+    
     
     
     override func awakeFromNib() {
@@ -39,8 +44,31 @@ class ExamScheduleCell: UITableViewCell {
         delegate?.gotoDetailUser(index: indexPath)
     }
     
-    func setData(entity: BookingEntity){
+    func setData(){
         
+        let creteDate = String().convertTimeStampWithDateFormat(timeStamp: profileUser.createdDate, dateFormat: "dd/MM/YYYY")
+        let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
+        let fontRegular = [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
+        
+        let myAttrString = NSMutableAttributedString(string: "Ngày khám:", attributes: fontRegular)
+        myAttrString.append(NSAttributedString(string: "\(creteDate)", attributes: fontBold))
+        lbCreateDate.attributedText = myAttrString
+
+        lbName.text = profileUser.patientName
+        
+        if listBooking.status == 0 {
+        let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
+            myAttrString.append(NSMutableAttributedString(string: "đã có mã số khám", attributes: fontRegular))
+            lbStatus.attributedText = myAttrString
+        }else if listBooking.status == 1 {
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
+            myAttrString.append(NSMutableAttributedString(string: "đang chò xử lý", attributes: fontRegular))
+            lbStatus.attributedText = myAttrString
+        }else if listBooking.status == 2 {
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
+            myAttrString.append(NSMutableAttributedString(string: "đã thanh toán", attributes: fontRegular))
+            lbStatus.attributedText = myAttrString
+        }
     }
     
 }

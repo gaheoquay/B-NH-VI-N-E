@@ -11,7 +11,7 @@ protocol SearchFileViewControllerDelegate {
     func gotoBooking()
 }
 
-class SearchFileViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class SearchFileViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,CreateCvViewControllerDelegate {
 
     @IBOutlet weak var lbCv: UILabel!
     @IBOutlet weak var imgCv: UIImageView!
@@ -118,11 +118,17 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     @IBAction func btnCreateCv(_ sender: Any) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "CreateCvViewController") as! CreateCvViewController
+        viewcontroller.delegate = self
         self.navigationController?.pushViewController(viewcontroller, animated: true)
         
     }
     @IBAction func btnBack(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)
+    }
+    
+    func reloadData() {
+        listFileUser.removeAll()
+        requestUSer()
     }
 
 }

@@ -23,6 +23,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     var listFileUser = FileUserEntity()
     
     var dateBook: Double = 0
+    let currentDate = Date()
     var delegate: BookingCalenderControllerDelegate?
     
     override func viewDidLoad() {
@@ -36,11 +37,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     }
     
     
-    fileprivate let formatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
-        return formatter
-    }()
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -55,7 +52,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     }
     
     @IBAction func btnSendBooking(_ sender: Any) {
-        requestBoking()
+        isvalidCheck()
     }
     
     
@@ -98,7 +95,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
             "RequestedUserId" : Until.getCurrentId(),
             "ProfileId" : listFileUser.id,
             "ServiceId" : listService.serviceId,
-            "BookingDate" : dateBook
+            "BookingDate" : dateBook*1000
         ]
         
         Alamofire.request(ADD_BOOKING, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -113,6 +110,63 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
             }
         }
         
+    }
+    
+    func requestCheckin(){
+        var param : [String : Any] = [:]
+        
+            param["Auth"] = Until.getAuthKey()
+            param["RequestedUserId"] = Until.getCurrentId()
+            param["TimeCheckIn"] = dateBook
+            param["CountryId"] = listFileUser.countryId
+            param["ProfileId"] = listFileUser.id
+            param["DictrictId"] = listFileUser.dictrictId
+            param["ZoneId"] = listFileUser.zoneId
+            param["ServiceId"] = listService.serviceId
+            param["Age"] = listFileUser.age
+            param["PatientName"] = listFileUser.patientName
+            param["GenderId"] = listFileUser.gender == 1 ? "M":"F"
+            param["DepartmentId"] = listService.roomId
+            param["Birthday"] = listFileUser.dOB
+            param["PhoneNumber"] = listFileUser.phoneNumber
+            param["Address"] = listFileUser.address
+            param["Cmt"] = listFileUser.passportId
+            param["GuardianName"] = listFileUser.bailsmanName
+            param["CmtGuardian"] = listFileUser.bailsmanPassportId
+            param["JobId"] = listFileUser.jobId
+        
+        Alamofire.request(CHECK_IN, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Check in", cancelBtnTitle: "Đóng")
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+        }
+    }
+    
+    func isvalidCheck(){
+        if listService.name == "" {
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn dịch vụ", cancelBtnTitle: "Đóng")
+        }else if listFileUser.patientName  == "" {
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn hồ sơ", cancelBtnTitle: "Đóng")
+        }else if dateBook == 0 {
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn ngày tháng", cancelBtnTitle: "Đóng")
+        }else {
+            let timeStampCurenDate = currentDate.timeIntervalSince1970
+            let dateNow = String().convertTimeStampWithDateFormat(timeStamp: timeStampCurenDate, dateFormat: "dd/MM/YYYY")
+            let dateBooking = String().convertTimeStampWithDateFormat(timeStamp: dateBook, dateFormat: "dd/MM/YYYY")
+            if dateNow == dateBooking {
+                requestBoking()
+                requestCheckin()
+            }else {
+                requestBoking()
+            }
+        
+        }
     }
     
 }

@@ -29,7 +29,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
   @IBOutlet weak var txtNameGuardian: UITextField!
   @IBOutlet weak var txtCmtGuardian: UITextField!
   
-  
+  var infoUser = FileUserEntity()
   var listCountry = [CountryEntity]()
   var listProvince = [ProvinceEntity]() // Tỉnh
   var listCurrentProvince : [ProvinceEntity]!
@@ -428,5 +428,8 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     
   }
   
+    func setupUi(){
+    
+    }
   
 }

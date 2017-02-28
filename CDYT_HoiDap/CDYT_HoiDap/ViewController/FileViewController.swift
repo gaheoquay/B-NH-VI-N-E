@@ -142,6 +142,7 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "CreateCvViewController") as! CreateCvViewController
         viewcontroller.delegate = self
+        viewcontroller.infoUser = listFileUser[0]
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     
