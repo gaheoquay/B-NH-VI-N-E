@@ -1273,7 +1273,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hKq-4y-tCO"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="d0b-Tf-VMt">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="577"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6LD-NL-pVC">
@@ -1331,10 +1331,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RzO-kE-tX9">
-                                <rect key="frame" x="0.0" y="66" width="320" height="502"/>
+                                <rect key="frame" x="0.0" y="66" width="320" height="511"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWQ-El-reC" customClass="TPKeyboardAvoidingScrollView">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="502"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="511"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3VG-dL-Wgz">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2165,6 +2165,8 @@
                             <constraint firstItem="6LD-NL-pVC" firstAttribute="top" secondItem="d0b-Tf-VMt" secondAttribute="top" id="zJc-9m-Kci"/>
                         </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="577"/>
                     <connections>
                         <outlet property="lbCountry" destination="WC0-CO-Rqg" id="z8h-dL-c7y"/>
                         <outlet property="lbDateOfYear" destination="djv-4O-326" id="awu-zg-m5o"/>
