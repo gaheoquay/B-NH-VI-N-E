@@ -107,6 +107,11 @@ extension String {
         
     }
 }
+extension Date {
+  var age: Int {
+    return Calendar.current.dateComponents([.year], from: self, to: Date()).year!
+  }
+}
 
 extension UIAlertController {
     func showAlertWith(vc: UIViewController, title: String, message: String, cancelBtnTitle: String){

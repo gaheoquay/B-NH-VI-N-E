@@ -31,21 +31,12 @@ class FileUserEntity: NSObject {
   var bailsmanPassportId = ""
   var updatedDate : Double = 0
   var createdDate : Double = 0
+  var age = 0
   
   override init(){
     super.init()
   }
   
-  func initListUser() -> [FileUserEntity] {
-    var listJob = [FileUserEntity]()
-    for i in 0..<10 {
-      let entity = FileUserEntity.init()
-      //            entity.id = Double(i)
-      //            entity.name = "Name \(i)"
-      //            listJob.append(entity)
-    }
-    return listJob
-  }
   init(dictionary:NSDictionary) {
     if let value = dictionary["Id"] as? String {
       id = value
@@ -58,6 +49,10 @@ class FileUserEntity: NSObject {
     }
     if let value = dictionary["DOB"] as? Double {
       dOB = value
+      let birthDate = Date(timeIntervalSince1970: dOB)
+      let calendar : Calendar = Calendar.current
+      let dateComponent = calendar.dateComponents([.year], from: birthDate)
+      age = (calendar.date(from: dateComponent)?.age)!
     }
     if let value = dictionary["PassportId"] as? String {
       passportId = value
