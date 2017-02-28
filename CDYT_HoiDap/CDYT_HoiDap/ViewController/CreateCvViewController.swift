@@ -414,6 +414,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
       if let status = response.response?.statusCode {
         if status == 200{
           if response.result.value != nil {
+            _ = self.navigationController?.popViewController(animated: true)
             self.delegate?.reloadData()
           }
         }else{

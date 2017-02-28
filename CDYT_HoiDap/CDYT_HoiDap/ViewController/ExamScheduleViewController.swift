@@ -16,7 +16,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet weak var heightTbListUser: NSLayoutConstraint!
     @IBOutlet weak var viewHiddent: UIView!
     
-    var arrayName = ["Quang","Anh"]
+    var listBooking = [AllUserEntity]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,11 +38,11 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayName.count
+        return listBooking.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExamScheduleCell" ) as! ExamScheduleCell
-        cell.lbName.text = arrayName[indexPath.row]
+        
         cell.indexPath = indexPath
         cell.delegate = self
         return cell
@@ -55,7 +55,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     }
     
     func setupTable(){
-        if arrayName.count > 0 {
+        if listBooking.count > 0 {
         tbListExamSchedule.delegate = self
         tbListExamSchedule.dataSource = self
         tbListExamSchedule.estimatedRowHeight = 9999
@@ -74,6 +74,10 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         }
     }
     
+    //MARK: REQUEST API
+    func requestBooking(){
+    
+    }
     
     
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FileViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,FileCellDelegate {
+class FileViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,FileCellDelegate,CreateCvViewControllerDelegate {
 
     @IBOutlet weak var tbListFile: UITableView!
     @IBOutlet weak var tbHeight: NSLayoutConstraint!
@@ -119,6 +119,7 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
     @IBAction func btnCreateCV(_ sender: Any) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "CreateCvViewController") as! CreateCvViewController
+        viewcontroller.delegate = self
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     
@@ -140,11 +141,18 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
     func gotoDetailFileUser() {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "CreateCvViewController") as! CreateCvViewController
+        viewcontroller.delegate = self
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     
     func deleteFileUser() {
         print("delete")
+    }
+    
+    func reloadData() {
+        listFileUser.removeAll()
+        requestUSer()
+        
     }
     
     

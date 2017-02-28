@@ -56,6 +56,7 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     func requestUSer(){
+        Until.showLoading()
         let Param : [String : Any] = [
             "Auth": Until.getAuthKey(),
             "RequestedUserId" : Until.getCurrentId()
@@ -73,9 +74,11 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
                     }
                     self.setUpUIView()
                     self.tbListFile.reloadData()
+                   
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
+                Until.hideLoading()
             }else{
                 UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
             }

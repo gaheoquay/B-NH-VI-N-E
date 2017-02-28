@@ -39,4 +39,8 @@ class ExamScheduleCell: UITableViewCell {
         delegate?.gotoDetailUser(index: indexPath)
     }
     
+    func setData(entity: BookingEntity){
+        
+    }
+    
 }

@@ -46,6 +46,7 @@
 		0FC431721E65283D003F7F31 /* ChuaCoLichKham.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC431711E65283D003F7F31 /* ChuaCoLichKham.png */; };
 		0FC431741E6534FD003F7F31 /* Ketqua.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC431731E6534FD003F7F31 /* Ketqua.png */; };
 		0FC431761E657E51003F7F31 /* AllUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC431751E657E51003F7F31 /* AllUserEntity.swift */; };
+		0FC431781E658680003F7F31 /* BookingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC431771E658680003F7F31 /* BookingEntity.swift */; };
 		0FCFD9A61E5EEDB700EE2F89 /* BookingCalenderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFD9A51E5EEDB700EE2F89 /* BookingCalenderController.swift */; };
 		0FCFD9A81E5EEDDD00EE2F89 /* ManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFD9A71E5EEDDD00EE2F89 /* ManagerViewController.swift */; };
 		0FF753391E62F267001450B7 /* ExamScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF753381E62F267001450B7 /* ExamScheduleViewController.swift */; };
@@ -296,6 +297,7 @@
 		0FC431711E65283D003F7F31 /* ChuaCoLichKham.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChuaCoLichKham.png; sourceTree = "<group>"; };
 		0FC431731E6534FD003F7F31 /* Ketqua.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ketqua.png; sourceTree = "<group>"; };
 		0FC431751E657E51003F7F31 /* AllUserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllUserEntity.swift; sourceTree = "<group>"; };
+		0FC431771E658680003F7F31 /* BookingEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingEntity.swift; sourceTree = "<group>"; };
 		0FCFD9A51E5EEDB700EE2F89 /* BookingCalenderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BookingCalenderController.swift; path = User/BookingCalenderController.swift; sourceTree = "<group>"; };
 		0FCFD9A71E5EEDDD00EE2F89 /* ManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerViewController.swift; sourceTree = "<group>"; };
 		0FF753381E62F267001450B7 /* ExamScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamScheduleViewController.swift; sourceTree = "<group>"; };
@@ -570,6 +572,7 @@
 				8B2AFF131E642C4A00415554 /* ServiceEntity.swift */,
 				0F765A3A1E644207001DF8ED /* FileUserEntity.swift */,
 				0FC431751E657E51003F7F31 /* AllUserEntity.swift */,
+				0FC431771E658680003F7F31 /* BookingEntity.swift */,
 			);
 			path = BookingEntity;
 			sourceTree = "<group>";
@@ -1356,6 +1359,7 @@
 				A60430FB1E233431000216FB /* SSRadioButtonsController.swift in Sources */,
 				A6D083C91E127F9F007EA4D9 /* TagEntity.swift in Sources */,
 				A6C463DA1E25DB910046A367 /* RecentFeedTableViewCell.swift in Sources */,
+				0FC431781E658680003F7F31 /* BookingEntity.swift in Sources */,
 				A625AD2D1E24CC5700953B0B /* CommentViewController.swift in Sources */,
 				0FF7533D1E62F3A9001450B7 /* ExamScheduleCell.swift in Sources */,
 				0F9C46191E5FF22A00DCFE46 /* ListServiceViewController.swift in Sources */,
