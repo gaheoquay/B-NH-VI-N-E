@@ -394,9 +394,9 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     userEntity.jobName = selectedJob.name
     userEntity.countryId = String(selectedCountry.countryId)
     userEntity.countryName = selectedCountry.name
-    userEntity.provinceId = String(selectedProvince.provinceId)
+    userEntity.provinceId = Int(selectedProvince.provinceId)
     userEntity.provinceName = selectedProvince.name
-    userEntity.dictrictId = String(selectedDistrict.districtId)
+    userEntity.dictrictId = Int(selectedDistrict.districtId)
     userEntity.dictrictName = selectedDistrict.name
     userEntity.zoneId = String(selectedZone.zoneId)
     userEntity.zoneName = selectedZone.name

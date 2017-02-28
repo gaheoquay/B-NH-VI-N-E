@@ -16,7 +16,7 @@ class BookingEntity: NSObject {
     var updateDate: Double = 0
     var createDate: Double = 0
     var status = 0
-    var checkInResult = ""
+    var checkInResult = CheckInResultEntity()
     var paymentResult = ""
     
     override init() {
@@ -41,8 +41,8 @@ class BookingEntity: NSObject {
         if let value = dictionary["Status"] as? Int {
             status = value
         }
-        if let value = dictionary["CheckInResult"] as? String {
-            checkInResult = value
+        if let value = dictionary["CheckInResult"] as? NSDictionary {
+            checkInResult = CheckInResultEntity.init(dictionary: value)
         }
         if let value = dictionary["PaymentResult"] as? String {
             paymentResult = value

@@ -19,9 +19,9 @@ class FileUserEntity: NSObject {
   var jobName  = ""
   var countryId = ""
   var countryName = ""
-  var provinceId = ""
+  var provinceId = 0
   var provinceName = ""
-  var dictrictId = ""
+  var dictrictId = 0
   var dictrictName = ""
   var zoneId = ""
   var zoneName = ""
@@ -72,13 +72,13 @@ class FileUserEntity: NSObject {
     if let value = dictionary["CountryName"] as? String {
       countryName = value
     }
-    if let value = dictionary["ProvinceId"] as? String {
+    if let value = dictionary["ProvinceId"] as? Int {
       provinceId = value
     }
     if let value = dictionary["ProvinceName"] as? String {
       provinceName = value
     }
-    if let value = dictionary["DictrictId"] as? String {
+    if let value = dictionary["DictrictId"] as? Int {
       dictrictId = value
     }
     if let value = dictionary["DictrictName"] as? String {

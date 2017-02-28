@@ -23,6 +23,7 @@ let GET_PROFILE_USER = BASE_URL + "/Booking/GetProfilesByUserId"
 let ADD_BOOKING = BASE_URL + "/Booking/AddBooking"
 let GET_BOOKING = BASE_URL + "/Booking/GetBookingByUserId"
 let CHECK_IN = BASE_URL + "/Booking/CheckIn"
+let GET_BOOKING_ONLY = BASE_URL + "/Booking/GetBookingRecordByUserId"
 
 let HOTEST_TAG = BASE_URL + "/Post/GetHotestTags"
 let GET_FEEDS = BASE_URL + "/Post/GetFeed"

@@ -11,7 +11,7 @@ import UIKit
 class AllUserEntity: NSObject {
     
     var profile = FileUserEntity()
-    var booking = [BookingEntity]()
+    var booking = BookingEntity()
     
     override init() {
         super.init()
@@ -21,12 +21,9 @@ class AllUserEntity: NSObject {
         if let value = dictionary["Profile"] as? NSDictionary {
             profile = FileUserEntity.init(dictionary: value)
         }
-        if let value = dictionary["Bookings"] as? [NSDictionary] {
-            for element in value {
-                let entity = BookingEntity.init(dictionary: element)
-                booking.append(entity)
-            }
+        if let value = dictionary["Bookings"] as? NSDictionary {
+            
+            booking = BookingEntity.init(dictionary: value)
         }
     }
-
 }

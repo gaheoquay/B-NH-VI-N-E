@@ -41,6 +41,7 @@
 		0F9C46401E60462700DCFE46 /* FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C463F1E60462700DCFE46 /* FileViewController.swift */; };
 		0F9ED83A1E5BEB38001F2FC2 /* DaDuyet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */; };
 		0F9ED83B1E5BEB38001F2FC2 /* Duyet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */; };
+		0FA5806A1E65D5D4001B4E3C /* CheckInResultEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA580691E65D5D4001B4E3C /* CheckInResultEntity.swift */; };
 		0FABDC331E61C2EC004DD98D /* CreateCvViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FABDC321E61C2EC004DD98D /* CreateCvViewController.swift */; };
 		0FC431701E65185B003F7F31 /* DetailsFileUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC4316F1E65185B003F7F31 /* DetailsFileUsersViewController.swift */; };
 		0FC431721E65283D003F7F31 /* ChuaCoLichKham.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC431711E65283D003F7F31 /* ChuaCoLichKham.png */; };
@@ -292,6 +293,7 @@
 		0F9C463F1E60462700DCFE46 /* FileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileViewController.swift; sourceTree = "<group>"; };
 		0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DaDuyet_1.png; sourceTree = "<group>"; };
 		0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Duyet_1.png; sourceTree = "<group>"; };
+		0FA580691E65D5D4001B4E3C /* CheckInResultEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInResultEntity.swift; sourceTree = "<group>"; };
 		0FABDC321E61C2EC004DD98D /* CreateCvViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCvViewController.swift; sourceTree = "<group>"; };
 		0FC4316F1E65185B003F7F31 /* DetailsFileUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsFileUsersViewController.swift; sourceTree = "<group>"; };
 		0FC431711E65283D003F7F31 /* ChuaCoLichKham.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChuaCoLichKham.png; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 				0F765A3A1E644207001DF8ED /* FileUserEntity.swift */,
 				0FC431751E657E51003F7F31 /* AllUserEntity.swift */,
 				0FC431771E658680003F7F31 /* BookingEntity.swift */,
+				0FA580691E65D5D4001B4E3C /* CheckInResultEntity.swift */,
 			);
 			path = BookingEntity;
 			sourceTree = "<group>";
@@ -1431,6 +1434,7 @@
 				8B2AFF121E642B5000415554 /* ZoneEntity.swift in Sources */,
 				0F17AB191E51BAC2008BA308 /* CateEntity.swift in Sources */,
 				8B0D35F51E56EB2D002CF784 /* BookingViewController.swift in Sources */,
+				0FA5806A1E65D5D4001B4E3C /* CheckInResultEntity.swift in Sources */,
 				8BD49F651E482D1100C98E74 /* OpenChannelChattingViewController.swift in Sources */,
 				8BD49F3C1E482C9900C98E74 /* Utils.swift in Sources */,
 				0FF753391E62F267001450B7 /* ExamScheduleViewController.swift in Sources */,

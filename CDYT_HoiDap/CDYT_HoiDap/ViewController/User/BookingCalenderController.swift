@@ -21,7 +21,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     
     var listService = ServiceEntity()
     var listFileUser = FileUserEntity()
-    
+    var listBook = BookingEntity()
     var dateBook: Double = 0
     let currentDate = Date()
     var delegate: BookingCalenderControllerDelegate?
@@ -101,6 +101,11 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
         Alamofire.request(ADD_BOOKING, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! NSDictionary
+                        self.listBook = BookingEntity.init(dictionary: jsonData)
+                        self.requestCheckin()
+                    }
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Gửi đặt lịch thành công", cancelBtnTitle: "Đóng")
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -116,28 +121,33 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
         var param : [String : Any] = [:]
         
             param["Auth"] = Until.getAuthKey()
-            param["RequestedUserId"] = Until.getCurrentId()
-            param["TimeCheckIn"] = dateBook
-            param["CountryId"] = listFileUser.countryId
-            param["ProfileId"] = listFileUser.id
-            param["DictrictId"] = listFileUser.dictrictId
-            param["ZoneId"] = listFileUser.zoneId
-            param["ServiceId"] = listService.serviceId
+//            param["RequestedUserId"] = Until.getCurrentId()
+            param["BookingId"] = listBook.id
+            param["TimeCheckIn"] = String(format: "%.0f", dateBook)
+            param["CountryId"] = String(format: "%.0f",listFileUser.countryId)
+            param["ProvinceId"] = String(listFileUser.provinceId)
+            param["DictrictId"] =  String(listFileUser.dictrictId)
+            param["ZoneId"] = String(format: "%.0f",listFileUser.zoneId)
+            param["ServiceId"] = String(format: "%.0f",listService.serviceId)
             param["Age"] = listFileUser.age
             param["PatientName"] = listFileUser.patientName
             param["GenderId"] = listFileUser.gender == 1 ? "M":"F"
-            param["DepartmentId"] = listService.roomId
-            param["Birthday"] = listFileUser.dOB
+            param["DepartmentId"] = String(format: "%.0f",listService.roomId)
+            param["Birthday"] = String(format: "%.0f",listFileUser.dOB)
             param["PhoneNumber"] = listFileUser.phoneNumber
             param["Address"] = listFileUser.address
             param["Cmt"] = listFileUser.passportId
             param["GuardianName"] = listFileUser.bailsmanName
             param["CmtGuardian"] = listFileUser.bailsmanPassportId
-            param["JobId"] = listFileUser.jobId
+            param["JobId"] = String(format: "%.0f",listFileUser.jobId)
         
+        print(param)
         Alamofire.request(CHECK_IN, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
+                print(status)
                 if status == 200{
+                    
+                   
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Check in", cancelBtnTitle: "Đóng")
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -156,17 +166,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
         }else if dateBook == 0 {
             UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn ngày tháng", cancelBtnTitle: "Đóng")
         }else {
-            let timeStampCurenDate = currentDate.timeIntervalSince1970
-            let dateNow = String().convertTimeStampWithDateFormat(timeStamp: timeStampCurenDate, dateFormat: "dd/MM/YYYY")
-            let dateBooking = String().convertTimeStampWithDateFormat(timeStamp: dateBook, dateFormat: "dd/MM/YYYY")
-            if dateNow == dateBooking {
-                requestBoking()
-                requestCheckin()
-            }else {
-                requestBoking()
-            }
-        
-        }
+            requestBoking()
     }
-    
+    }
 }

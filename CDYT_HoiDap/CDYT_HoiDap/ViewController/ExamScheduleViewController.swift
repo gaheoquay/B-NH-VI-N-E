@@ -45,7 +45,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
       cell.indexPath = indexPath
       cell.delegate = self
       if listallUSer.count > 0 {
-        cell.listBooking = listallUSer[indexPath.row].booking[indexPath.row]
+        cell.listBooking = listallUSer[indexPath.row].booking
         cell.profileUser = listallUSer[indexPath.row].profile
         cell.setData()
       }
@@ -55,7 +55,11 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     func gotoDetailUser(index: IndexPath) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "DetailsFileUsersViewController") as! DetailsFileUsersViewController
+        viewcontroller.name = listallUSer[index.row].profile.patientName
+        viewcontroller.listCheckin = listallUSer[index.row].booking.checkInResult
+        viewcontroller.dateExam = listallUSer[index.row].profile.createdDate
         self.navigationController?.pushViewController(viewcontroller, animated: true)
+
     }
     
     func setupTable(){
@@ -84,7 +88,9 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
             "RequestedUserId" : Until.getCurrentId()
         ]
         
-        Alamofire.request(GET_BOOKING, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+        print(Param)
+        
+        Alamofire.request(GET_BOOKING_ONLY, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
                     if let result = response.result.value {
