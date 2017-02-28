@@ -31,7 +31,7 @@ class FileUserEntity: NSObject {
   var bailsmanPassportId = ""
   var updatedDate : Double = 0
   var createdDate : Double = 0
-
+  
   override init(){
     super.init()
   }
@@ -113,7 +113,31 @@ class FileUserEntity: NSObject {
     if let value = dictionary["CreatedDate"] as? Double {
       createdDate = value
     }
-
   }
-  
+  func toDictionary(entity:FileUserEntity) -> [String:Any]{
+    var param = [String:Any]()
+    param["Id"] = entity.id
+    param["PatientName"] = entity.patientName
+    param["Gender"] = entity.gender
+    param["DOB"] = entity.dOB
+    param["PassportId"] = entity.passportId
+    param["PhoneNumber"] = entity.phoneNumber
+    param["JobId"] = entity.jobId
+    param["JobName"] = entity.jobName
+    param["CountryId"] = entity.countryId
+    param["CountryName"] = entity.countryName
+    param["ProvinceId"] = entity.provinceId
+    param["ProvinceName"] = entity.provinceName
+    param["DictrictId"] = entity.dictrictId
+    param["DictrictName"] = entity.dictrictName
+    param["ZoneId"] = entity.zoneId
+    param["ZoneName"] = entity.zoneName
+    param["Address"] = entity.address
+    param["BailsmanName"] = entity.bailsmanName
+    param["BailsmanPhoneNumber"] = entity.bailsmanPhoneNumber
+    param["BailsmanPassportId"] = entity.bailsmanPassportId
+    param["UpdatedDate"] = entity.updatedDate
+    param["CreatedDate"] = entity.createdDate
+    return param
+  }
 }
