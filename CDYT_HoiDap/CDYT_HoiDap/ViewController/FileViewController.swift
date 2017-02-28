@@ -20,11 +20,12 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
     var listFileUser = [FileUserEntity]()
     var ischeckDelete = false
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         requestUSer()
-        setUpUIView()
         setupBtn()
+        
                 // Do any additional setup after loading the view.
     }
 
@@ -44,8 +45,7 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell") as! FileCell
         if listFileUser.count > 0{
         cell.isCheck(ischeckDelete: ischeckDelete)
-        cell.lbName.text = listFileUser[indexPath.row].patientName
-        cell.lbPrice.text = String(listFileUser[indexPath.row].dOB)
+        cell.setListUser(entity: listFileUser[indexPath.row])
         cell.delegate = self
         }else {
             
@@ -55,6 +55,36 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
     @IBAction func btnBack(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)
     }
+    
+    //MARK: Request API
+    func requestUSer(){
+        let Param : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId" : Until.getCurrentId()
+        ]
+        print(Param)
+        Alamofire.request(GET_PROFILE_USER, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! [NSDictionary]
+                        for item in jsonData {
+                            let entity = FileUserEntity.init(dictionary: item)
+                            self.listFileUser.append(entity)
+                        }
+                    }
+                    self.setUpUIView()
+                    self.tbListFile.reloadData()
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+        }
+        
+    }
+    
     
     //MARK: Setup UI
     
@@ -115,10 +145,6 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     func deleteFileUser() {
         print("delete")
-    }
-    //MARK: Request API
-    func requestUSer(){
-        listFileUser = FileUserEntity().initListUser()
     }
     
     

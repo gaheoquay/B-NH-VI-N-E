@@ -40,7 +40,7 @@ class FileCell: UITableViewCell {
     
     func setListUser(entity: FileUserEntity){
         lbName.text = entity.patientName
-//        lbPrice.text = String((entity.age))
+        lbPrice.text = String(entity.dOB)
     }
     
     func isCheck(ischeckDelete: Bool){
