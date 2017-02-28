@@ -37,8 +37,8 @@ class FileCell: UITableViewCell {
     }
     
     func setListUser(entity: FileUserEntity){
-        lbName.text = entity.name
-        lbPrice.text = String((entity.age))
+        lbName.text = entity.patientName
+//        lbPrice.text = String((entity.age))
     }
     
     func isCheck(ischeckDelete: Bool){

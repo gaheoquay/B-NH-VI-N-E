@@ -75,7 +75,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
         if notification.object != nil {
             let fileUser = notification.object as! FileUserEntity
             listFileUser = fileUser
-            btnBrifUser.setTitle(fileUser.name, for: .normal)
+            btnBrifUser.setTitle(fileUser.patientName, for: .normal)
         }
     }
     //MARK: SetupDate
@@ -89,15 +89,12 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
         }
     //MARK: request Api
     func requestBoking(){
-        
-       
-        
         let param : [String : Any] = [
             "serviceId" : listService.serviceId,
             "serName" : listService.name,
             "date" : timeStamp,
-            "idUSer" : listFileUser.nameId,
-            "nameUser" : listFileUser.name
+            "idUSer" : listFileUser.id,
+            "nameUser" : listFileUser.patientName
         ]
         
         print(param)

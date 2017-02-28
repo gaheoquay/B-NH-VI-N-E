@@ -41,15 +41,15 @@ class BaseViewController: UIViewController {
     if let apsInfo = userInfo["aps"] as? NSDictionary{
       let dicData = apsInfo["data"] as! NSDictionary
       let alert = apsInfo["alert"] as! String
-      RNNotificationView.show(withImage: UIImage(named: "Logo.png"),
-                              title: "BỆNH VIỆN E",
-                              message: alert,
-                              duration: 2,
-                              iconSize: CGSize(width: 22, height: 22), // Optional setup
-        onTap: {
-          print("Did tap notification")
-          self.navigationNotificaton(dicData: dicData)
-      })
+//      RNNotificationView.show(withImage: UIImage(named: "Logo.png"),
+//                              title: "BỆNH VIỆN E",
+//                              message: alert,
+//                              duration: 2,
+//                              iconSize: CGSize(width: 22, height: 22), // Optional setup
+//        onTap: {
+//          print("Did tap notification")
+//          self.navigationNotificaton(dicData: dicData)
+//      })
 
     }
   }

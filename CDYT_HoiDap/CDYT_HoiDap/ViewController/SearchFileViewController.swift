@@ -57,7 +57,7 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     func requestListUser(){
-        listFileUser = FileUserEntity().initListUser()
+//        listFileUser = FileUserEntity().initListUser()
     }
     
     

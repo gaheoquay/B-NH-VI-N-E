@@ -23,10 +23,7 @@ class ListServiceViewController: UIViewController,UITableViewDelegate,UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tbListService.register(UINib.init(nibName: "FileCell", bundle: nil), forCellReuseIdentifier: "FileCell")
-        tbListService.estimatedRowHeight = 9999
-        tbListService.rowHeight = UITableViewAutomaticDimension
-        requestListService()
+      setupTable()
         // Do any additional setup after loading the view.
     }
 
@@ -34,11 +31,13 @@ class ListServiceViewController: UIViewController,UITableViewDelegate,UITableVie
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
+//  MARK: SETUP TABLE
+  func setupTable(){
+    tbListService.register(UINib.init(nibName: "FileCell", bundle: nil), forCellReuseIdentifier: "FileCell")
+    tbListService.estimatedRowHeight = 9999
+    tbListService.rowHeight = UITableViewAutomaticDimension
+  }
+//    MARK: UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listService.count
     }
@@ -53,14 +52,7 @@ class ListServiceViewController: UIViewController,UITableViewDelegate,UITableVie
         print("name:\(listService[indexPath.row].name),price\(listService[indexPath.row].priceService)")
         delegate?.dissMisPopup()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: GET_LIST_SERVICE), object: self.listService[indexPath.row])
-
     }
-    
-    func requestListService(){
-        listService = ServiceEntity().initListCountry()
-    }
-    
-    
     func setupButton() {
         
     }

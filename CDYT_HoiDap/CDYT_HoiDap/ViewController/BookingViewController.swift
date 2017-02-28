@@ -16,19 +16,19 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
     @IBOutlet weak var labelBook: UILabel!
     @IBOutlet weak var labelManager: UILabel!
     @IBOutlet weak var withLabelBooking: NSLayoutConstraint!
-    
+  
+  lazy var listService = [ServiceEntity]()
     var popupViewController:WYPopoverController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      requestListService()
         addPagingMenu()
         withLabelBooking.constant = UIScreen.main.bounds.size.width / 2
         labelManager.isHidden = true
-        
-        
         // Do any additional setup after loading the view.
     }
-    
+//    MARK: ADDING PAGE MENU
     func addPagingMenu() {
         // Array to keep track of controllers in page menu
         var controllerArray : [UIViewController] = []
@@ -70,7 +70,28 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-   
+//  MARK: GET LIST SERVICE
+  func requestListService(){
+      Alamofire.request(BOOKING_GET_LIST_SERVICE, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+        if let status = response.response?.statusCode {
+          if status == 200{
+            if let result = response.result.value {
+              let jsonData = result as! [NSDictionary]
+              
+              for item in jsonData {
+                let entity = ServiceEntity.init(dictionary: item)
+                self.listService.append(entity)
+              }
+            }
+          }else{
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+          }
+        }else{
+          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        }
+      }
+  }
+//   MARK: ACTION
     @IBAction func tapBookCalender(_ sender: Any) {
         labelManager.isHidden = true
         labelBook.isHidden = false
@@ -96,11 +117,11 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
     //MARK: Delegate
     func gotoService() {
         if popupViewController == nil {
-            
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let popoverVC = mainStoryboard.instantiateViewController(withIdentifier: "ListServiceViewController") as! ListServiceViewController
             popoverVC.preferredContentSize = CGSize.init(width: UIScreen.main.bounds.size.width - 32, height: UIScreen.main.bounds.size.height - 120 )
             popoverVC.isModalInPopover = false
+          popoverVC.listService = self.listService
             popoverVC.delegate = self
             self.popupViewController = WYPopoverController(contentViewController: popoverVC)
             self.popupViewController.delegate = self

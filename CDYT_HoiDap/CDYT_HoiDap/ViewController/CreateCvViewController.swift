@@ -46,7 +46,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        RequestDataInfo()
+        requestData()
         // Do any additional setup after loading the view.
     }
 
@@ -191,32 +191,132 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         present(alertView, animated: true, completion: nil)
     }
     
-    func RequestDataInfo(){
-        listJob = JobEntity().initListJob()
-        listZone = ZoneEntity().initListZone()
-        listCountry = CountryEntity().initListCountry()
-        listDistric = DistrictEntity().initListCountry()
-        listProvince = ProvinceEntity().initProvin()
+    func requestData(){
+      requestListJob()
+      requestListCountry()
+      requestListProvice()
+      requestListDistrict()
     }
-    
+  
+  func requestListJob(){
+    Alamofire.request(BOOKING_GET_LIST_JOB, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+      if let status = response.response?.statusCode {
+        if status == 200{
+          if let result = response.result.value {
+            let jsonData = result as! [NSDictionary]
+            
+            for item in jsonData {
+              let entity = JobEntity.init(dictionary: item)
+              self.listJob.append(entity)
+            }
+          }
+        }else{
+          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        }
+      }else{
+        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+      }
+    }
+  }
+  func requestListCountry(){
+    Alamofire.request(BOOKING_GET_LIST_COUNTRY, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+      if let status = response.response?.statusCode {
+        if status == 200{
+          if let result = response.result.value {
+            let jsonData = result as! [NSDictionary]
+            
+            for item in jsonData {
+              let entity = CountryEntity.init(dictionary: item)
+              self.listCountry.append(entity)
+            }
+          }
+        }else{
+          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        }
+      }else{
+        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+      }
+    }
+  }
+  func requestListProvice(){
+    Alamofire.request(BOOKING_GET_LIST_PROVICE, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+      if let status = response.response?.statusCode {
+        if status == 200{
+          if let result = response.result.value {
+            let jsonData = result as! [NSDictionary]
+            
+            for item in jsonData {
+              let entity = ProvinceEntity.init(dictionary: item)
+              self.listProvince.append(entity)
+            }
+          }
+        }else{
+          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        }
+      }else{
+        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+      }
+    }
+  }
+  func requestListDistrict(){
+    Alamofire.request(BOOKING_GET_LIST_DISTRICT, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+      if let status = response.response?.statusCode {
+        if status == 200{
+          if let result = response.result.value {
+            let jsonData = result as! [NSDictionary]
+            
+            for item in jsonData {
+              let entity = DistrictEntity.init(dictionary: item)
+              self.listDistric.append(entity)
+            }
+          }
+        }else{
+          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        }
+      }else{
+        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+      }
+    }
+  }
+  func requestListZonesById(districtId:String){
+    Alamofire.request(BOOKING_GET_LIST_DISTRICT + districtId, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+      if let status = response.response?.statusCode {
+        if status == 200{
+          if let result = response.result.value {
+            let jsonData = result as! [NSDictionary]
+            
+            for item in jsonData {
+              let entity = ZoneEntity.init(dictionary: item)
+              self.listZone.append(entity)
+            }
+          }
+        }else{
+          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        }
+      }else{
+        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+      }
+    }
+  }
+
     func requestCreateFileUser(){
-        let param : [String : Any] = [
-            "name" : txtName.text,
-            "gender" : genderType,
-            "dateofbirh": timeStampDateOfBirt,
-            "cmt" : txtCMT.text,
-            "phone": txtPhoneNumber.text,
-            "job": lbJob.text,
-            "contry": lbCountry.text,
-            "provin" : lbProvince.text,
-            "distric" : lbDistric.text,
-            "zone": lbZone.text,
-            "adress": txtAdress.text,
-            "nameGuardian" : txtNameGuardian.text,
-            "cmtGuardian": txtCmtGuardian.text,
-            "phoneGuardian": txtPhoneGuardian.text
-        ]
-        print(param)
+//        let param : [String : Any] = [
+//            "name" : txtName.text,
+//            "gender" : genderType,
+//            "dateofbirh": timeStampDateOfBirt,
+//            "cmt" : txtCMT.text,
+//            "phone": txtPhoneNumber.text,
+//            "job": lbJob.text,
+//            "contry": lbCountry.text,
+//            "provin" : lbProvince.text,
+//            "distric" : lbDistric.text,
+//            "zone": lbZone.text,
+//            "adress": txtAdress.text,
+//            "nameGuardian" : txtNameGuardian.text,
+//            "cmtGuardian": txtCmtGuardian.text,
+//            "phoneGuardian": txtPhoneGuardian.text
+//        ]
+//        print(param)
     }
 
    

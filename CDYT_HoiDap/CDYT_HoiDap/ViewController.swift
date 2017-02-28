@@ -242,6 +242,5 @@ class ViewController: BaseViewController,UITableViewDelegate,UITableViewDataSour
   var listFedds = [FeedsEntity]()
   var listHotTag = [HotTagEntity]()
   var page = 1
-  var canLoadMore = true
 }
 
