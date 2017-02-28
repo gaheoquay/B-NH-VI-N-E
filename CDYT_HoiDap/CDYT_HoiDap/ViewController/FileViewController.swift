@@ -44,8 +44,8 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell") as! FileCell
         if listFileUser.count > 0{
         cell.isCheck(ischeckDelete: ischeckDelete)
-        cell.lbName.text = listFileUser[indexPath.row].name
-        cell.lbPrice.text = String(listFileUser[indexPath.row].age)
+        cell.lbName.text = listFileUser[indexPath.row].patientName
+        cell.lbPrice.text = String(listFileUser[indexPath.row].dOB)
         cell.delegate = self
         }else {
             

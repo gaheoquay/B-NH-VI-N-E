@@ -31,6 +31,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     var listDistric = [DistrictEntity]()
     var listZone = [ZoneEntity]()
     var listJob = [JobEntity]()
+    var date = Date()
     
     let pickerlistCountry = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
     let pickerlistProvince = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
@@ -47,6 +48,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     override func viewDidLoad() {
         super.viewDidLoad()
         requestData()
+    
         // Do any additional setup after loading the view.
     }
 
@@ -84,7 +86,8 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         self.present(optionMenu, animated: true, completion: nil)
     }
     @IBAction func btnDateOfBirth(_ sender: Any) {
-        DatePickerDialog().show(title: "Ngày sinh", doneButtonTitle: "Xong", cancelButtonTitle: "Hủy", datePickerMode: .date) {
+        
+        DatePickerDialog().show(title: "Ngày sinh", doneButtonTitle: "Xong", cancelButtonTitle: "Hủy", minimumDate: date as NSDate?, datePickerMode: .date) {
             (date) -> Void in
             if date != nil {
                 let dateFormatter = DateFormatter()

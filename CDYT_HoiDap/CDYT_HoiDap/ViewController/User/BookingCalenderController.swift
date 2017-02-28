@@ -87,6 +87,10 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
                 calendar.setCurrentPage(date, animated: true)
             }
         }
+    func minimumDate(for calendar: FSCalendar) -> Date {
+        let date = Date()
+        return date
+    }
     //MARK: request Api
     func requestBoking(){
         let param : [String : Any] = [
