@@ -252,6 +252,19 @@ class Until{
         tracker?.send(GAIDictionaryBuilder.createEvent(withCategory: category, action: action, label: label, value: nil).build() as [NSObject : AnyObject])
     }
     
+  class func generateBarcode(from string: String) -> UIImage? {
+    let data = string.data(using: String.Encoding.ascii)
     
+    if let filter = CIFilter(name: "CICode128BarcodeGenerator") {
+      filter.setValue(data, forKey: "inputMessage")
+      let transform = CGAffineTransform(scaleX: 3, y: 3)
+      
+      if let output = filter.outputImage?.applying(transform) {
+        return UIImage(ciImage: output)
+      }
+    }
+    
+    return nil
+  }
 
 }
