@@ -10,8 +10,7 @@ import UIKit
 
 class DetailsFileUsersViewController: UIViewController {
     
-    @IBOutlet weak var lbBillCode: UILabel!
-    @IBOutlet weak var lbPrice: UILabel!
+    
     @IBOutlet weak var lbHistoryCode: UILabel!
     @IBOutlet weak var lbNumberWait: UILabel!
     @IBOutlet weak var lbAdress: UILabel!
@@ -19,16 +18,16 @@ class DetailsFileUsersViewController: UIViewController {
     @IBOutlet weak var lbProvisionalPrice: UILabel!
     @IBOutlet weak var lbExamDate: UILabel!
     @IBOutlet weak var lbName: UILabel!
+    @IBOutlet weak var viewBarCode: UIView!
+    @IBOutlet weak var imgBarCode: UIImageView!
     
     var listCheckin = CheckInResultEntity()
-    var listService = ServiceEntity()
     var name = ""
     var dateExam: Double = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        registerNotification()
         // Do any additional setup after loading the view.
     }
 
@@ -41,26 +40,24 @@ class DetailsFileUsersViewController: UIViewController {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    
+        
     func setupView(){
         lbName.text = name
         lbHistoryCode.text = String(listCheckin.patientHistory)
         lbNumberWait.text = String(listCheckin.sequence)
-        lbAdress.text = listService.roomName
-        lbSickName.text = listService.name
-        lbSickName.text = String(listService.priceService)
+        lbAdress.text = "Test"
+        lbSickName.text = "Khám bệnh theo yêu cầu"
+        lbProvisionalPrice.text = "250000"
         lbExamDate.text = String().convertTimeStampWithDateFormat(timeStamp: dateExam, dateFormat: "dd/MM/YYYY")
+        
+        let image = Until.generateBarcode(from: "\(listCheckin.patientHistory)")
+        imgBarCode.image = image
     }
     
-    func registerNotification(){
-        NotificationCenter.default.addObserver(self, selector: #selector(setDataListService(notification:)), name: NSNotification.Name(rawValue: GET_LIST_SERVICE), object: nil)
-    }
-    //MARK: Notificaiton
-    func setDataListService(notification : Notification){
-        if notification.object != nil {
-            let listServ = notification.object as! ServiceEntity
-            listService = listServ
-        }
+        //MARK: Notificaiton
+   
+    @IBAction func btnShowBill(_ sender: Any) {
+        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Hiện bạn chưa thanh toán! \n Xin vui lòng thử lại sau", cancelBtnTitle: "Đóng")
     }
     
 }
