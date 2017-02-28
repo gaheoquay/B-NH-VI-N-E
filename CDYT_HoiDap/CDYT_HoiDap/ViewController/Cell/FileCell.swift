@@ -8,13 +8,16 @@
 
 import UIKit
 protocol FileCellDelegate {
-    func setupButton()
+    func gotoDetailFileUser()
+    func deleteFileUser()
 }
 
 class FileCell: UITableViewCell {
 
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var lbPrice: UILabel!
+    @IBOutlet weak var imgDelete: UIImageView!
+    @IBOutlet weak var viewGotoCreateCV: UIView!
     
     var delegate : FileCellDelegate?
     var isCheckListService = false
@@ -27,7 +30,6 @@ class FileCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
     
@@ -42,24 +44,22 @@ class FileCell: UITableViewCell {
     }
     
     func isCheck(ischeckDelete: Bool){
-//        if ischeckDelete == false {
-//            btnDelete.setImage(UIImage(named: "Edit.png"), for: .normal)
-//        }else {
-//            btnDelete.setImage(UIImage(named: "Delete1.png"), for: .normal)
-//        }
-    }
-    func checkService(isCheckService: Bool){
-//        if isCheckService == false {
-//            btnDelete.setImage(UIImage(named: "Delete1.png"), for: .normal)
-//        }
-    }
-    func checkListService(isCheckList: Bool){
-//        if isCheckList == false {
-//            btnDelete.setImage(UIImage(named: "Check0-2.png"), for: .normal)
-//            isCheckLists = isCheckList
-//        }
+        if ischeckDelete == false {
+            imgDelete.image = UIImage(named: "DetailEditUp.png")
+            viewGotoCreateCV.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(gotoDetailFileUser)))
+        }else {
+            imgDelete.image = UIImage(named: "Delete1.png")
+            viewGotoCreateCV.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(deleteFile)))
+        }
     }
     
+    func gotoDetailFileUser(){
+        delegate?.gotoDetailFileUser()
+    }
     
-    
+    func deleteFile(){
+        delegate?.deleteFileUser()
+        
+    }
+
 }

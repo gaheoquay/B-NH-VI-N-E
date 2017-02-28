@@ -200,23 +200,9 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     }
     
     func requestCreateFileUser(){
-        let param : [String : Any] = [
-            "name" : txtName.text,
-            "gender" : genderType,
-            "dateofbirh": timeStampDateOfBirt,
-            "cmt" : txtCMT.text,
-            "phone": txtPhoneNumber.text,
-            "job": lbJob.text,
-            "contry": lbCountry.text,
-            "provin" : lbProvince.text,
-            "distric" : lbDistric.text,
-            "zone": lbZone.text,
-            "adress": txtAdress.text,
-            "nameGuardian" : txtNameGuardian.text,
-            "cmtGuardian": txtCmtGuardian.text,
-            "phoneGuardian": txtPhoneGuardian.text
-        ]
-        print(param)
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        let viewcontroller = main.instantiateViewController(withIdentifier: "FileViewController") as! FileViewController
+        self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
 
    

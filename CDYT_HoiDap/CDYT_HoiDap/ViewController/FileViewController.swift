@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FileViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class FileViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,FileCellDelegate {
 
     @IBOutlet weak var tbListFile: UITableView!
     @IBOutlet weak var tbHeight: NSLayoutConstraint!
@@ -17,12 +17,12 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
     @IBOutlet weak var btnCreateCv: UIButton!
     @IBOutlet weak var btnDelete: UIButton!
     
-    let arrayName = ["123","123"]
-    let arrayPrice =  [1,2]
+    var listFileUser = [FileUserEntity]()
     var ischeckDelete = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        requestUSer()
         setUpUIView()
         setupBtn()
                 // Do any additional setup after loading the view.
@@ -37,15 +37,16 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayName.count
+        return listFileUser.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell") as! FileCell
-        if arrayName.count > 0{
+        if listFileUser.count > 0{
         cell.isCheck(ischeckDelete: ischeckDelete)
-        cell.lbName.text = arrayName[indexPath.row]
-        cell.lbPrice.text = String(arrayPrice[indexPath.row])
+        cell.lbName.text = listFileUser[indexPath.row].name
+        cell.lbPrice.text = String(listFileUser[indexPath.row].age)
+        cell.delegate = self
         }else {
             
         }
@@ -58,7 +59,7 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
     //MARK: Setup UI
     
     func setUpUIView(){
-        if arrayName.count > 0 {
+        if listFileUser.count > 0 {
             tbListFile.delegate = self
             tbListFile.dataSource = self
             tbListFile.register(UINib.init(nibName: "FileCell", bundle: nil), forCellReuseIdentifier: "FileCell")
@@ -106,7 +107,19 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
         tbListFile.reloadData()
     }
     
+    func gotoDetailFileUser() {
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        let viewcontroller = main.instantiateViewController(withIdentifier: "CreateCvViewController") as! CreateCvViewController
+        self.navigationController?.pushViewController(viewcontroller, animated: true)
+    }
     
+    func deleteFileUser() {
+        print("delete")
+    }
+    //MARK: Request API
+    func requestUSer(){
+        listFileUser = FileUserEntity().initListUser()
+    }
     
     
 }
