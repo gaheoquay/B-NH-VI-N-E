@@ -122,7 +122,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
         
             param["Auth"] = Until.getAuthKey()
             param["BookingId"] = listBook.id
-            param["TimeCheckIn"] = String(format: "%.0f", dateBook)
+            param["TimeCheckIn"] = String(format: "%.0f", dateBook*1000)
             param["CountryId"] = listFileUser.countryId
             param["ProvinceId"] = listFileUser.provinceId
             param["DictrictId"] =  listFileUser.dictrictId

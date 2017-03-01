@@ -140,10 +140,14 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
     
 
     func gotoCalendar() {
+        if Until.getCurrentId().isEmpty {
+            Until.gotoLogin(_self: self, cannotBack: true)
+        }else{
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "ExamScheduleViewController") as! ExamScheduleViewController
       viewcontroller.listService = listService
         self.navigationController?.pushViewController(viewcontroller, animated: true)
+        }
     }
     func gotoHistory() {
 //        let main = UIStoryboard(name: "Main", bundle: nil)
