@@ -115,8 +115,6 @@
 		8B79D0E61E5A9B350010C5C0 /* DoctorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B79D0E41E5A9B350010C5C0 /* DoctorTableViewCell.xib */; };
 		8B79D0E81E5AA7D20010C5C0 /* DetailEdit.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B79D0E71E5AA7D20010C5C0 /* DetailEdit.png */; };
 		8B79D0EA1E5AAB1A0010C5C0 /* DetailEditUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B79D0E91E5AAB1A0010C5C0 /* DetailEditUp.png */; };
-		8B79D0ED1E5AC0F50010C5C0 /* vien2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8B79D0EB1E5AC0F50010C5C0 /* vien2.jpg */; };
-		8B79D0EE1E5AC0F50010C5C0 /* viene1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8B79D0EC1E5AC0F50010C5C0 /* viene1.jpg */; };
 		8B7AB6BE1E1211E20015DFBE /* KeywordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7AB6BC1E1211E20015DFBE /* KeywordCollectionViewCell.swift */; };
 		8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B7AB6BD1E1211E20015DFBE /* KeywordCollectionViewCell.xib */; };
 		8B813CB31E15052E0043F7EF /* Home.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B813CB01E15052E0043F7EF /* Home.png */; };
@@ -257,6 +255,8 @@
 		A6E9D8911E11169600E31886 /* UpdateInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E9D8901E11169600E31886 /* UpdateInfoViewController.swift */; };
 		A6E9D8931E111F3100E31886 /* Until.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E9D8921E111F3100E31886 /* Until.swift */; };
 		A6F980A01E48607E0007CD63 /* LinkedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F9809F1E48607E0007CD63 /* LinkedUser.swift */; };
+		EF38340F1E66ABAD0042C2E7 /* about1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF38340D1E66ABAD0042C2E7 /* about1.jpg */; };
+		EF3834101E66ABAD0042C2E7 /* about2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF38340E1E66ABAD0042C2E7 /* about2.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -379,8 +379,6 @@
 		8B79D0E41E5A9B350010C5C0 /* DoctorTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoctorTableViewCell.xib; sourceTree = "<group>"; };
 		8B79D0E71E5AA7D20010C5C0 /* DetailEdit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DetailEdit.png; sourceTree = "<group>"; };
 		8B79D0E91E5AAB1A0010C5C0 /* DetailEditUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DetailEditUp.png; sourceTree = "<group>"; };
-		8B79D0EB1E5AC0F50010C5C0 /* vien2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vien2.jpg; sourceTree = "<group>"; };
-		8B79D0EC1E5AC0F50010C5C0 /* viene1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = viene1.jpg; sourceTree = "<group>"; };
 		8B7AB6BC1E1211E20015DFBE /* KeywordCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordCollectionViewCell.swift; sourceTree = "<group>"; };
 		8B7AB6BD1E1211E20015DFBE /* KeywordCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeywordCollectionViewCell.xib; sourceTree = "<group>"; };
 		8B813CB01E15052E0043F7EF /* Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home.png; sourceTree = "<group>"; };
@@ -522,6 +520,8 @@
 		A6E9D8901E11169600E31886 /* UpdateInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateInfoViewController.swift; sourceTree = "<group>"; };
 		A6E9D8921E111F3100E31886 /* Until.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Until.swift; sourceTree = "<group>"; };
 		A6F9809F1E48607E0007CD63 /* LinkedUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedUser.swift; sourceTree = "<group>"; };
+		EF38340D1E66ABAD0042C2E7 /* about1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = about1.jpg; sourceTree = "<group>"; };
+		EF38340E1E66ABAD0042C2E7 /* about2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = about2.jpg; sourceTree = "<group>"; };
 		FDD88BA19051C23DD96B53FB /* Pods-CDYT_HoiDap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYT_HoiDap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -626,6 +626,8 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EF38340D1E66ABAD0042C2E7 /* about1.jpg */,
+				EF38340E1E66ABAD0042C2E7 /* about2.jpg */,
 				0FC431731E6534FD003F7F31 /* Ketqua.png */,
 				0FC431711E65283D003F7F31 /* ChuaCoLichKham.png */,
 				0F9AD59D1E63F34700981D7B /* BackWhite.png */,
@@ -648,8 +650,6 @@
 				8B6E19961E5EC9080078558D /* Logo.png */,
 				0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */,
 				0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */,
-				8B79D0EB1E5AC0F50010C5C0 /* vien2.jpg */,
-				8B79D0EC1E5AC0F50010C5C0 /* viene1.jpg */,
 				8B79D0E91E5AAB1A0010C5C0 /* DetailEditUp.png */,
 				8B79D0E71E5AA7D20010C5C0 /* DetailEdit.png */,
 				8BC3806C1E58481600DF154A /* SplashLogo.png */,
@@ -1197,10 +1197,8 @@
 				8BF1497C1E14BF9C00766F8F /* TaiKhoan.png in Resources */,
 				8BF149721E14BF9C00766F8F /* GiaiPhap_Mark_hide.png in Resources */,
 				8BD49F2C1E482C1500C98E74 /* IncomingImageFileMessageTableViewCell.xib in Resources */,
-				8B79D0EE1E5AC0F50010C5C0 /* viene1.jpg in Resources */,
 				8BD49F6C1E482D1100C98E74 /* OpenChannelListTableViewCell.xib in Resources */,
 				A68A94FC1E14CA240067736E /* DangKi_Right.png in Resources */,
-				8B79D0ED1E5AC0F50010C5C0 /* vien2.jpg in Resources */,
 				8B3A136B1E10F454005DBC6E /* Tinnhan_button01.png in Resources */,
 				8B3A135C1E10F454005DBC6E /* photo-camera.png in Resources */,
 				8BD49F661E482D1100C98E74 /* OpenChannelChattingViewController.xib in Resources */,
@@ -1230,6 +1228,7 @@
 				8B79D0EA1E5AAB1A0010C5C0 /* DetailEditUp.png in Resources */,
 				8BD49EF61E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.xib in Resources */,
 				0F9471441E5F5E3C00EE7C2A /* Main.storyboard in Resources */,
+				EF38340F1E66ABAD0042C2E7 /* about1.jpg in Resources */,
 				8BD49F5B1E482D1100C98E74 /* BlockedUserListViewController.xib in Resources */,
 				8B3A13441E10F454005DBC6E /* Back.png in Resources */,
 				8BD49F371E482C1600C98E74 /* OutgoingUserMessageTableViewCell.xib in Resources */,
@@ -1261,6 +1260,7 @@
 				8BD49F051E48215500C98E74 /* CreateGroupChannelUserListTableViewCell.xib in Resources */,
 				0F9ED83A1E5BEB38001F2FC2 /* DaDuyet_1.png in Resources */,
 				0F52D28A1E634889006C57E2 /* FileCell.xib in Resources */,
+				EF3834101E66ABAD0042C2E7 /* about2.jpg in Resources */,
 				8BD49F351E482C1600C98E74 /* OutgoingImageFileMessageTableViewCell.xib in Resources */,
 				0F9C46241E60084A00DCFE46 /* DatKham0.png in Resources */,
 				A6E4C2FA1E1102BA00C2C871 /* User.storyboard in Resources */,
