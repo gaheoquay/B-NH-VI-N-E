@@ -18,4 +18,17 @@ class CheckInvoiceEntity: NSObject {
         super.init()
     }
     
+    init(dictionary: NSDictionary) {
+        if let value = dictionary["PatientHistory"] as? Int {
+            patientHistory = value
+        }
+        if let value = dictionary["InvoiceNo"] as? String {
+            invoiceNo = value
+        }
+        if let value = dictionary["Amount"] as? Int {
+            amount = value
+        }
+        
+    }
+    
 }

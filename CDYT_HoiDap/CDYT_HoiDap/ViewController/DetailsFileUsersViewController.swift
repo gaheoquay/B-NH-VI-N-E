@@ -23,6 +23,7 @@ class DetailsFileUsersViewController: UIViewController {
     var listService = [ServiceEntity]()
     var listCheckin = CheckInResultEntity()
     var listBooking = BookingEntity()
+    var checkInvoice : CheckInvoiceEntity!
     var name = ""
     var dateExam: Double = 0
 
@@ -44,20 +45,19 @@ class DetailsFileUsersViewController: UIViewController {
         
     func setupView(){
         
-//        for item in listService {
-//            if listBooking.serviceId == String(item.serviceId) {
-//                lbSickName.text = item.name
-//                lbProvisionalPrice.text = String(item.priceService)
-//                lbAdress.text = item.roomName
-//            }
-//        }
+        let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
+        let fontWithColor = [ NSFontAttributeName: UIFont.systemFont(ofSize: 12),NSForegroundColorAttributeName: UIColor.init(netHex: 0x878787)]
+        
+        let myAttrString = NSMutableAttributedString(string: "\(listService[0].priceService)", attributes: fontBold)
+        myAttrString.append(NSAttributedString(string: "(giá tạm tính)", attributes: fontWithColor))
+        lbProvisionalPrice.attributedText = myAttrString
+
         
         lbName.text = name
         lbHistoryCode.text = String(listCheckin.patientHistory)
         lbNumberWait.text = String(listCheckin.sequence)
         lbAdress.text = listService[0].roomName
         lbSickName.text = listService[0].name
-        lbProvisionalPrice.text = "\(listService[0].priceService)"
         lbExamDate.text = String().convertTimeStampWithDateFormat(timeStamp: dateExam, dateFormat: "dd/MM/YYYY")
         
         let image = Until.generateBarcode(from: "\(listCheckin.patientHistory)")
@@ -67,7 +67,35 @@ class DetailsFileUsersViewController: UIViewController {
         //MARK: Notificaiton
    
     @IBAction func btnShowBill(_ sender: Any) {
-        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Hiện bạn chưa thanh toán! \n Xin vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        requesCheckinVoice()
+    }
+    
+    func requesCheckinVoice(){
+        let Param : [String : Any] = [
+            "PatientHistoryId" : listCheckin.patientHistory
+        ]
+        Alamofire.request(CHECKIN_VOICE, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! NSDictionary
+                        self.checkInvoice = CheckInvoiceEntity.init(dictionary: jsonData)
+                        if self.checkInvoice.amount != 0 {
+                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Mã hoá đơn của bạn : \(self.checkInvoice.invoiceNo) \n Số tiền đóng thực tế : \(self.checkInvoice.amount)", cancelBtnTitle: "Đóng")
+                        }else{
+                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Hiện tại chưa thanh toán! \n Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                        }
+                        
+                    }
+                }
+                else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+        }
+
     }
     
    
