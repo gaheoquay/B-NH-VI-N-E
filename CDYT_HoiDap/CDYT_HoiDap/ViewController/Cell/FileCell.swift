@@ -9,7 +9,7 @@
 import UIKit
 protocol FileCellDelegate {
     func gotoDetailFileUser()
-    func deleteFileUser()
+    func deleteFileUser(listUser: FileUserEntity)
 }
 
 class FileCell: UITableViewCell {
@@ -22,6 +22,7 @@ class FileCell: UITableViewCell {
     var delegate : FileCellDelegate?
     var isCheckListService = false
     var isCheckLists = false
+    var listUser = FileUserEntity()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,9 +39,9 @@ class FileCell: UITableViewCell {
         lbPrice.text = String(entity.priceService)
     }
     
-    func setListUser(entity: FileUserEntity){
-        lbName.text = entity.patientName
-        lbPrice.text = String(entity.age)
+    func setListUser(){
+        lbName.text = listUser.patientName
+        lbPrice.text = "\(listUser.age) tuổi"
     }
     
     func isCheck(ischeckDelete: Bool){
@@ -58,7 +59,7 @@ class FileCell: UITableViewCell {
     }
     
     func deleteFile(){
-        delegate?.deleteFileUser()
+        delegate?.deleteFileUser(listUser: listUser)
         
     }
 

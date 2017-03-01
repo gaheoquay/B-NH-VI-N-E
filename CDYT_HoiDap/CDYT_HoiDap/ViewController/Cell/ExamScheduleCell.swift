@@ -55,15 +55,25 @@ class ExamScheduleCell: UITableViewCell {
       
         if listBooking.status == 0 {
         let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
-            myAttrString.append(NSMutableAttributedString(string: "đang chờ xử lý", attributes: fontRegular))
+            myAttrString.append(NSMutableAttributedString(string: "chờ xác nhận khám", attributes: fontRegular))
             lbStatus.attributedText = myAttrString
         }else if listBooking.status == 1 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
-            myAttrString.append(NSMutableAttributedString(string: "đã có số khám", attributes: fontRegular))
+            myAttrString.append(NSMutableAttributedString(string: "chờ xử lý", attributes: fontRegular))
             lbStatus.attributedText = myAttrString
         }else if listBooking.status == 2 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
+            myAttrString.append(NSMutableAttributedString(string: "đã có số khám", attributes: fontRegular))
+            lbStatus.attributedText = myAttrString
+        }
+        else if listBooking.status == 3 {
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
             myAttrString.append(NSMutableAttributedString(string: "đã thanh toán", attributes: fontRegular))
+            lbStatus.attributedText = myAttrString
+        }
+        else if listBooking.status == 4 {
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
+            myAttrString.append(NSMutableAttributedString(string: "đã có kết quả khám", attributes: fontRegular))
             lbStatus.attributedText = myAttrString
         }
     }

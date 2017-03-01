@@ -13,6 +13,8 @@ protocol ListServiceViewControllerDelegate {
 
 
 class ListServiceViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,FileCellDelegate {
+   
+
     
     @IBOutlet weak var tbListService: UITableView!
     
@@ -61,7 +63,7 @@ class ListServiceViewController: UIViewController,UITableViewDelegate,UITableVie
         
     }
     
-    func deleteFileUser() {
+    func deleteFileUser(listUser: FileUserEntity) {
         
     }
 

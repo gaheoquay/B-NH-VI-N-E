@@ -47,7 +47,7 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell") as! FileCell
-        cell.setListUser(entity: listFileUser[indexPath.row])
+        cell.setListUser()
         return cell
     }
     

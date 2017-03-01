@@ -143,8 +143,7 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
         if Until.getCurrentId().isEmpty {
             Until.gotoLogin(_self: self, cannotBack: true)
         }else{
-        let main = UIStoryboard(name: "Main", bundle: nil)
-        let viewcontroller = main.instantiateViewController(withIdentifier: "ExamScheduleViewController") as! ExamScheduleViewController
+        let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "ExamScheduleViewController") as! ExamScheduleViewController
       viewcontroller.listService = listService
         self.navigationController?.pushViewController(viewcontroller, animated: true)
         }
@@ -156,11 +155,13 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
     }
     func gotoCvUser() {
         
-      
-        
-        let main = UIStoryboard(name: "Main", bundle: nil)
-        let viewcontroller = main.instantiateViewController(withIdentifier: "FileViewController") as! FileViewController
-        self.navigationController?.pushViewController(viewcontroller, animated: true)
+        if Until.getCurrentId().isEmpty {
+            Until.gotoLogin(_self: self, cannotBack: true)
+        }else{
+            let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "FileViewController")
+            self.navigationController?.pushViewController(viewcontroller!, animated: true)
+        }
+
     }
     
     func gotoFile() {

@@ -19,12 +19,14 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     var listFileUser = [FileUserEntity]()
     var ischeckDelete = false
+    var listUsers = FileUserEntity()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         requestUSer()
         setupBtn()
+        
         
                 // Do any additional setup after loading the view.
     }
@@ -45,7 +47,8 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell") as! FileCell
         if listFileUser.count > 0{
         cell.isCheck(ischeckDelete: ischeckDelete)
-        cell.setListUser(entity: listFileUser[indexPath.row])
+        cell.listUser = listFileUser[indexPath.row]
+        cell.setListUser()
         cell.delegate = self
         }else {
             
@@ -146,14 +149,39 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     
-    func deleteFileUser() {
-        print("delete")
+    func deleteFileUser(listUser: FileUserEntity) {
+        listUsers = listUser
+        requestDeleteProfile()
     }
-    
     func reloadData() {
         listFileUser.removeAll()
         requestUSer()
         
+    }
+    
+    func requestDeleteProfile(){
+        let Param : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId" : Until.getCurrentId(),
+            "ListProfileId" : [listUsers.id]
+        ]
+        print(Param)
+        Alamofire.request(DELELTE_PROFILE, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                        self.listFileUser.removeAll()
+                        self.requestUSer()
+                    self.tbListFile.reloadData()
+
+                }
+                else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+        }
+
     }
     
     
