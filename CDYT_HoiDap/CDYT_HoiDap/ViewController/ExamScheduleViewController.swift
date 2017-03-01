@@ -15,7 +15,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet weak var lbCalendar: UILabel!
     @IBOutlet weak var heightTbListUser: NSLayoutConstraint!
     @IBOutlet weak var viewHiddent: UIView!
-    
+    var listService = [ServiceEntity]()
     var listallUSer = [AllUserEntity]()
     
     override func viewDidLoad() {
@@ -55,6 +55,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     func gotoDetailUser(index: IndexPath) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "DetailsFileUsersViewController") as! DetailsFileUsersViewController
+      viewcontroller.listService = listService
         viewcontroller.name = listallUSer[index.row].profile.patientName
         viewcontroller.listCheckin = listallUSer[index.row].booking.checkInResult
         viewcontroller.dateExam = listallUSer[index.row].profile.createdDate

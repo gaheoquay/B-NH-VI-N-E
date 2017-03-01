@@ -41,8 +41,11 @@ class BookingEntity: NSObject {
         if let value = dictionary["Status"] as? Int {
             status = value
         }
-        if let value = dictionary["CheckInResult"] as? NSDictionary {
-            checkInResult = CheckInResultEntity.init(dictionary: value)
+        if let value = dictionary["CheckInResult"] as? String {
+          if !value.isEmpty {
+            let dic = value.convertStringToDictionary()
+            checkInResult = CheckInResultEntity.init(dictionary: dic!)
+          }
         }
         if let value = dictionary["PaymentResult"] as? String {
             paymentResult = value

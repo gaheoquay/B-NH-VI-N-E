@@ -142,6 +142,7 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
     func gotoCalendar() {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "ExamScheduleViewController") as! ExamScheduleViewController
+      viewcontroller.listService = listService
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     func gotoHistory() {

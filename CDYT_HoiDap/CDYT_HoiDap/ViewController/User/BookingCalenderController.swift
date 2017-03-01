@@ -146,8 +146,6 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
             if let status = response.response?.statusCode {
                 print(status)
                 if status == 200{
-                    
-                   
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Check in", cancelBtnTitle: "Đóng")
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")

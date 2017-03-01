@@ -48,6 +48,12 @@ extension UIColor {
 }
 
 extension String {
+    func convertStringToDictionary() -> [String:Any]? {
+      if let data = self.data(using: String.Encoding.utf8) {
+        return try! JSONSerialization.jsonObject(with: data, options: []) as? [String:AnyObject]
+      }
+      return nil
+    }
   func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
     let constraintRect = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
     

@@ -21,7 +21,7 @@ class AllUserEntity: NSObject {
         if let value = dictionary["Profile"] as? NSDictionary {
             profile = FileUserEntity.init(dictionary: value)
         }
-        if let value = dictionary["Bookings"] as? NSDictionary {
+        if let value = dictionary["BookingRecord"] as? NSDictionary {
             
             booking = BookingEntity.init(dictionary: value)
         }

@@ -153,6 +153,10 @@ class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableV
       if currentUser.count == 0 {
         Until.gotoLogin(_self: self, cannotBack: false)
       }else{
+        if currentUser.first?.role == 0 {
+          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nấp cấp để sử dủng chức năng này", cancelBtnTitle: "Đồng ý")
+          return
+        }
         SBDGroupChannel.createChannel(with: self.selectedUser, isDistinct: true) { (channel, error) in
           if error != nil {
             let vc = UIAlertController(title: "Lỗi", message: error?.domain, preferredStyle: UIAlertControllerStyle.alert)

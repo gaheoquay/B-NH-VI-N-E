@@ -20,7 +20,7 @@ class DetailsFileUsersViewController: UIViewController {
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var viewBarCode: UIView!
     @IBOutlet weak var imgBarCode: UIImageView!
-    
+    var listService = [ServiceEntity]()
     var listCheckin = CheckInResultEntity()
     var name = ""
     var dateExam: Double = 0
@@ -45,9 +45,9 @@ class DetailsFileUsersViewController: UIViewController {
         lbName.text = name
         lbHistoryCode.text = String(listCheckin.patientHistory)
         lbNumberWait.text = String(listCheckin.sequence)
-        lbAdress.text = "Test"
-        lbSickName.text = "Khám bệnh theo yêu cầu"
-        lbProvisionalPrice.text = "250000"
+        lbAdress.text = listService[0].roomName
+        lbSickName.text = listService[0].name
+        lbProvisionalPrice.text = "\(listService[0].priceService)"
         lbExamDate.text = String().convertTimeStampWithDateFormat(timeStamp: dateExam, dateFormat: "dd/MM/YYYY")
         
         let image = Until.generateBarcode(from: "\(listCheckin.patientHistory)")
