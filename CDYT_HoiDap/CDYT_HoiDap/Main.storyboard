@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -3619,10 +3619,10 @@
                                 <rect key="frame" x="0.0" y="60" width="160" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JwK-cf-ZGz">
-                                        <rect key="frame" x="32" y="35" width="96" height="5"/>
+                                        <rect key="frame" x="32" y="38" width="96" height="2"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="5" id="YYJ-Xe-T8L"/>
+                                            <constraint firstAttribute="height" constant="2" id="YYJ-Xe-T8L"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3654,10 +3654,10 @@
                                 <rect key="frame" x="160" y="60" width="160" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sth-QC-wOp">
-                                        <rect key="frame" x="32" y="35" width="96" height="5"/>
+                                        <rect key="frame" x="32" y="38" width="96" height="2"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="5" id="L6E-HE-84s"/>
+                                            <constraint firstAttribute="height" constant="2" id="L6E-HE-84s"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4730,11 +4730,11 @@
                         <viewControllerLayoutGuide type="bottom" id="3RV-yr-ahr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Bfs-gD-R4Y">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="2568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cgy-Db-zZO">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="2568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LH5-zi-fln">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
@@ -4744,50 +4744,65 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LỜI GIỚI THIỆU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbD-CS-coX">
-                                        <rect key="frame" x="16" y="16" width="123.5" height="21"/>
+                                        <rect key="frame" x="16" y="16" width="124" height="21"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" red="0.074509803920000006" green="0.57647058819999997" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19m-RQ-F54">
-                                        <rect key="frame" x="12" y="45" width="296" height="419"/>
-                                        <string key="text">Bệnh viện E là bệnh viện đa khoa trung ương hạng 1 trực thuộc Bộ Y tế. Bệnh viện có hai cơ sở khám chữa bệnh: cơ sở chính tại Nghĩa tân, Cầu giấy và một phòng khám tại 13 Phan Huy Chú. Có 900 cán bộ viên chức trong đó có 1 Giáo sư, 2 Phó giáo sư, 8 Tiến sĩ, 34 bác sĩ CKII, 32 thạc sĩ; gần 1.000 giường bệnh với 11 phòng chức năng, 27 khoa lâm sàng, 8 khoa cận lâm sàng, 4 trung tâm thế mạnh: tim mạch, tiêu hóa, cơ xương khớp và sọ não. 
-Hiện nay, nhu cầu của bệnh nhân đến khám chữa bệnh tại các bệnh viện và cơ sở y tế rất cao, dịch vụ tư vấn sức khỏe trực tuyến, khám bệnh và lấy mẫu xét nghiệm tại nhà đặc biệt phù hợp với những người bệnh không có điều kiện đến bệnh viện, người già và trẻ nhỏ - sẽ không mất thời gian chờ đợi mệt mỏi, áp lực từ bệnh viện.  
-Bệnh viện có đủ cơ sở vật chất và nhân lực đáp ứng nhu cầu chính đáng của người dân về dịch vụ tư vấn sức khỏe trực tuyến, khám bệnh và lấy mẫu xét nghiệm tại nhà. Bệnh viện E là cơ sở y tế công lập đầu tiên trên địa bàn Thủ đô Hà Nội và phía Bắc triển khai mô hình này, đem lại lợi ích thiết thực cho người dân trong việc chăm sóc sức khỏe toàn diện.
-</string>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19m-RQ-F54">
+                                        <rect key="frame" x="12" y="45" width="296" height="1257"/>
+                                        <mutableString key="text">Bệnh viện E là bệnh viện đa khoa trung ương hạng I trực thuộc Bộ Y tế, được thành lập từ năm 1967. Đến nay, bệnh viện đã phát triển với quy mô hơn 900 giường bệnh (gồm 4 trung tâm, 37 khoa lâm sàng và cận lâm sàng, 11 phòng chức năng) trên diện tích 41.000 m2 với khuôn viên rộng rãi, thoáng mát, xanh, sạch đẹp. Với truyền thống 50 năm thành lập - phát triển, bệnh viện E có đội ngũ cán bộ giàu kinh nghiệm, các bác sĩ có có trình độ sau đại học chiếm 70% gồm các Giáo sư, Phó giáo sư, Tiến sĩ, Thạc sĩ... Phương châm hành động của đội ngũ thầy thuốc Bệnh viện E là: “Chăm sóc người bệnh toàn diện bằng những phương pháp khoa học kỹ thuật tiên tiến và hiệu quả nhất với tấm lòng thầy thuốc như mẹ hiền”.PHẠM VI HOẠT ĐỘNG VÀ CÁC DỊCH VỤ•	Khám chữa bệnh đa khoa (nội, ngoại, sản, nhi, ung bướu, y học cổ truyền, phục hồi chức năng) chuyên khoa (tai mũi họng, răng hàm mặt, mắt) cho người bệnh BHYT và khám theo yêu cầu. Đặc biệt tiếp nhận bệnh nhân BHYT tuyến cuối từ khắp cả nước.•	Khám và cấp giấy chứng nhận sức khỏe cho người Việt Nam đi học tập lao động tại nước ngoài, người nước ngoài làm việc tại Việt Nam. Khám tuyển lái xe, khám tuyển dụng và định kỳ cho các cơ quan, trường học theo hợp đồng.•	Điều trị tuyến cuối các bệnh lý phức tạp về tim mạch (ngoại và nội khoa), tiêu hóa, chấn thương chỉnh hình, cơ xương khớp, ung bướu, sản phụ khoa.•	Tiêm vaccin phòng bệnh cho tất cả các đối tượng.•	Tư vấn sức khỏe trực tuyến, đặt khám online tại bệnh viện.•	Khám và lấy máu xét nghiệm tại cộng đồng.•	Cở sở đào tạo và thực hành của một số trường đại học, cao đẳng chuyên ngành y, dược khoa: Đại học Y Hà Nội, Đại học Quốc gia, Học viện Y học cổ truyền TW, Cao đẳng y tế Hà Nội.CÁC KỸ THUẬT CAO ĐÃ THỰC HIỆN	Phẫu thuật tim kín, phẫu thuật tim hở với nội soi hỗ trợ các bệnh tim bẩm sinh phức tạp; bắc cầu động mạch chủ vành.	Can thiệp mạch, tim qua da.	Phẫu thuật nội soi bụng, ngực; các phẫu thuật loại đặc biệt về ung thư, nội tiết, tai mũi họng...	Phẫu thuật sọ não, cột sống. Tạo hình thân đốt sống bằng  xi măng. Thay khớp háng, khớp gối; đo mật độ xương bằng máy Dexa; hệ thống phục hồi chức năng tiên tiến.	Sản phụ khoa: phẫu thuật nội soi cắt tử cung, chẩn đoán trước sinh, giảm đau trong đẻ bằng phương pháp gây tê ngoài màng cứng.	Phẫu thuật PHACO, vi phẫu, chỉnh hình hàm mặt.	Nội soi - Siêu âm hệ tiêu hóa phát hiện sớm ung thư, nội soi dạ dày đường mũi, nội soi dạ dày gây mê, nội soi ruột non bóng kép, nội soi viên nang.	Nội soi mật - tụy ngược dòng (ERCP) lấy sỏi, giun, đặt Stent đường mật…	Tán sỏi tiết niệu bằng Laser, sóng cao tần. Lọc máu nhân tạo, lọc màng bụng, siêu lọc máu.	Điều trị nội khoa tiên tiến với phác đồ cập nhật.	Chụp cộng hưởng từ 1,5 Tesla, cắt lớp vi tính 64 dãy, X-quang kỹ thuật số, chụp X-quang tuyến vú, X-quang can thiệp.	Các xét nghiệm chẩn đoán sớm ung thư (Marker ung thư).CÁC THÀNH TÍCH ĐÃ ĐẠT ĐƯỢC	Huân chương Độc lập hạng Nhất, Nhì, Ba	Huân chương Lao động hạng Nhất.	Huân chương Kháng chiến hạng Nhì.</mutableString>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vien2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VjJ-Sa-Nx0">
-                                        <rect key="frame" x="8" y="472" width="304" height="197"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="about1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VjJ-Sa-Nx0">
+                                        <rect key="frame" x="8" y="1310" width="304" height="228"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="VjJ-Sa-Nx0" secondAttribute="height" multiplier="600:389" id="zfI-0Y-3Tc"/>
+                                            <constraint firstAttribute="width" secondItem="VjJ-Sa-Nx0" secondAttribute="height" multiplier="400:300" id="zfI-0Y-3Tc"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="viene1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zG8-H7-Cl1">
-                                        <rect key="frame" x="8" y="677" width="304" height="228"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="about2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zG8-H7-Cl1">
+                                        <rect key="frame" x="8" y="1578" width="304" height="203"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="zG8-H7-Cl1" secondAttribute="height" multiplier="700:525" id="BSX-mc-0DT"/>
+                                            <constraint firstAttribute="width" secondItem="zG8-H7-Cl1" secondAttribute="height" multiplier="400:267" id="BSX-mc-0DT"/>
                                         </constraints>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trung tâm tim mạch - Bệnh viện E" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skS-WP-HA1">
+                                        <rect key="frame" x="8" y="1546" width="304" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Khai trương phòng khám Nhi - Bệnh viện E" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6f-Og-arG">
+                                        <rect key="frame" x="8" y="1789" width="304" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="S6f-Og-arG" firstAttribute="leading" secondItem="Cgy-Db-zZO" secondAttribute="leading" constant="8" id="0gK-5G-aaY"/>
+                                    <constraint firstItem="skS-WP-HA1" firstAttribute="top" secondItem="VjJ-Sa-Nx0" secondAttribute="bottom" constant="8" id="1pL-wM-mww"/>
+                                    <constraint firstItem="zG8-H7-Cl1" firstAttribute="top" secondItem="skS-WP-HA1" secondAttribute="bottom" constant="16" id="4nh-jn-i2u"/>
+                                    <constraint firstItem="S6f-Og-arG" firstAttribute="top" secondItem="zG8-H7-Cl1" secondAttribute="bottom" constant="8" id="5b1-y4-LcZ"/>
                                     <constraint firstItem="VjJ-Sa-Nx0" firstAttribute="top" secondItem="19m-RQ-F54" secondAttribute="bottom" constant="8" id="Ajs-KV-ywk"/>
+                                    <constraint firstAttribute="bottom" secondItem="S6f-Og-arG" secondAttribute="bottom" constant="8" id="GTf-AJ-mnA"/>
                                     <constraint firstItem="19m-RQ-F54" firstAttribute="top" secondItem="sbD-CS-coX" secondAttribute="bottom" constant="8" id="Hf0-bT-XKv"/>
                                     <constraint firstAttribute="trailing" secondItem="19m-RQ-F54" secondAttribute="trailing" constant="12" id="KVx-5T-NVR"/>
                                     <constraint firstItem="sbD-CS-coX" firstAttribute="leading" secondItem="Cgy-Db-zZO" secondAttribute="leading" constant="16" id="QiZ-sC-DO4"/>
                                     <constraint firstItem="19m-RQ-F54" firstAttribute="leading" secondItem="Cgy-Db-zZO" secondAttribute="leading" constant="12" id="Von-he-MiF"/>
-                                    <constraint firstItem="zG8-H7-Cl1" firstAttribute="top" secondItem="VjJ-Sa-Nx0" secondAttribute="bottom" constant="8" id="WbL-Fz-SL7"/>
+                                    <constraint firstAttribute="trailing" secondItem="skS-WP-HA1" secondAttribute="trailing" constant="8" id="XCA-2B-MzF"/>
                                     <constraint firstAttribute="trailing" secondItem="LH5-zi-fln" secondAttribute="trailing" id="cfu-qa-yAE"/>
                                     <constraint firstItem="sbD-CS-coX" firstAttribute="top" secondItem="LH5-zi-fln" secondAttribute="bottom" constant="16" id="fsf-o2-6Yl"/>
+                                    <constraint firstAttribute="trailing" secondItem="S6f-Og-arG" secondAttribute="trailing" constant="8" id="hUE-xt-mbc"/>
                                     <constraint firstItem="LH5-zi-fln" firstAttribute="leading" secondItem="Cgy-Db-zZO" secondAttribute="leading" id="ndF-ZG-D62"/>
                                     <constraint firstAttribute="trailing" secondItem="zG8-H7-Cl1" secondAttribute="trailing" constant="8" id="qMB-j4-EKg"/>
                                     <constraint firstItem="LH5-zi-fln" firstAttribute="top" secondItem="Cgy-Db-zZO" secondAttribute="top" id="qid-Rc-I1b"/>
                                     <constraint firstItem="zG8-H7-Cl1" firstAttribute="leading" secondItem="Cgy-Db-zZO" secondAttribute="leading" constant="8" id="s7f-ne-1VO"/>
-                                    <constraint firstAttribute="bottom" secondItem="zG8-H7-Cl1" secondAttribute="bottom" constant="8" id="uTc-XM-fZR"/>
                                     <constraint firstItem="VjJ-Sa-Nx0" firstAttribute="leading" secondItem="Cgy-Db-zZO" secondAttribute="leading" constant="8" id="uhB-Vw-Can"/>
                                     <constraint firstAttribute="trailing" secondItem="VjJ-Sa-Nx0" secondAttribute="trailing" constant="8" id="uoj-xX-aLA"/>
+                                    <constraint firstItem="skS-WP-HA1" firstAttribute="leading" secondItem="Cgy-Db-zZO" secondAttribute="leading" constant="8" id="wRn-gA-ofH"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -4800,6 +4815,8 @@ Bệnh viện có đủ cơ sở vật chất và nhân lực đáp ứng nhu c�
                             <constraint firstItem="Cgy-Db-zZO" firstAttribute="top" secondItem="Bfs-gD-R4Y" secondAttribute="top" id="rlu-13-YfP"/>
                         </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="2568"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="06m-Mb-oOe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -4965,8 +4982,8 @@ Bệnh viện có đủ cơ sở vật chất và nhân lực đáp ứng nhu c�
         <image name="TaiKhoan.png" width="100" height="100"/>
         <image name="Thongbao.png" width="100" height="100"/>
         <image name="TinNhan.png" width="100" height="100"/>
+        <image name="about1.jpg" width="400" height="300"/>
+        <image name="about2.jpg" width="400" height="267"/>
         <image name="dropdownicon.png" width="41" height="50"/>
-        <image name="vien2.jpg" width="600" height="389"/>
-        <image name="viene1.jpg" width="700" height="525"/>
     </resources>
 </document>
