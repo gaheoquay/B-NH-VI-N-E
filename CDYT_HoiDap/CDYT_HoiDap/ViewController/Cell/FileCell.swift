@@ -41,7 +41,16 @@ class FileCell: UITableViewCell {
     
     func setListUser(){
         lbName.text = listUser.patientName
-        lbPrice.text = "\(listUser.age) tuổi"
+        
+        let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
+        let fontWithColor = [ NSFontAttributeName: UIFont.systemFont(ofSize: 12),NSForegroundColorAttributeName: UIColor.init(netHex: 0x878787)]
+        
+        let myAttrString = NSMutableAttributedString(string: "\(listUser.age)", attributes: fontWithColor)
+        myAttrString.append(NSAttributedString(string: " tuổi", attributes: fontWithColor))
+        lbPrice.attributedText = myAttrString
+        
+        
+ 
     }
     
     func isCheck(ischeckDelete: Bool){
