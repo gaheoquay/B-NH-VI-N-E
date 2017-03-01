@@ -146,21 +146,27 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     func gotoHistory() {
-        let main = UIStoryboard(name: "Main", bundle: nil)
-        let viewcontroller = main.instantiateViewController(withIdentifier: "HistoryUserViewController") as! HistoryUserViewController
-        self.navigationController?.pushViewController(viewcontroller, animated: true)
+//        let main = UIStoryboard(name: "Main", bundle: nil)
+//        let viewcontroller = main.instantiateViewController(withIdentifier: "HistoryUserViewController") as! HistoryUserViewController
+//        self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     func gotoCvUser() {
+        
+      
+        
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "FileViewController") as! FileViewController
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     
     func gotoFile() {
-        let main = UIStoryboard(name: "Main", bundle: nil)
-        let viewcontroller = main.instantiateViewController(withIdentifier: "SearchFileViewController") as! SearchFileViewController
-        viewcontroller.delegate = self
-        self.navigationController?.pushViewController(viewcontroller, animated: true)
+        if Until.getCurrentId().isEmpty {
+            Until.gotoLogin(_self: self, cannotBack: true)
+        }else{
+            let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "SearchFileViewController") as! SearchFileViewController
+            viewcontroller.delegate = self
+            self.navigationController?.pushViewController(viewcontroller, animated: true)
+        }
 
     }
     

@@ -114,7 +114,7 @@ class FileUserEntity: NSObject {
     param["Id"] = entity.id
     param["PatientName"] = entity.patientName
     param["Gender"] = entity.gender
-    param["DOB"] = entity.dOB
+    param["DOB"] = String(format : "%.0f",entity.dOB)
     param["PassportId"] = entity.passportId
     param["PhoneNumber"] = entity.phoneNumber
     param["JobId"] = entity.jobId

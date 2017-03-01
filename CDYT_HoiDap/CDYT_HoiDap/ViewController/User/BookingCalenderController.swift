@@ -131,14 +131,15 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
             param["Age"] = listFileUser.age
             param["PatientName"] = listFileUser.patientName
             param["GenderId"] = listFileUser.gender == 1 ? "M":"F"
-            param["DepartmentId"] = listService.roomId
-            param["Birthday"] = listFileUser.dOB
+        param["Birthday"] = String(format: "%.0f",listFileUser.dOB)
             param["PhoneNumber"] = listFileUser.phoneNumber
             param["Address"] = listFileUser.address
             param["Cmt"] = listFileUser.passportId
             param["GuardianName"] = listFileUser.bailsmanName
             param["CmtGuardian"] = listFileUser.bailsmanPassportId
             param["JobId"] = listFileUser.jobId
+        param["DepartmentId"] = String(format: "%0.f", listService.roomId)
+
         
         print(param)
         Alamofire.request(CHECK_IN, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in

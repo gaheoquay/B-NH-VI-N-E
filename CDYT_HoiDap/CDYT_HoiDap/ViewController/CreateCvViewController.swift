@@ -390,16 +390,17 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     }
     userEntity.passportId = txtCMT.text!
     userEntity.phoneNumber = txtPhoneNumber.text!
-    userEntity.jobId = String(selectedJob.jobId)
+    userEntity.jobId = String(format: "%.0f",selectedJob.jobId)
     userEntity.jobName = selectedJob.name
-    userEntity.countryId = String(selectedCountry.countryId)
+    userEntity.countryId = String(format: "%.0f",selectedCountry.countryId)
     userEntity.countryName = selectedCountry.name
-    userEntity.provinceId = String(selectedProvince.provinceId)
+    userEntity.provinceId = String(format: "%.0f",selectedProvince.provinceId)
     userEntity.provinceName = selectedProvince.name
-    userEntity.dictrictId = String(selectedDistrict.districtId)
+    userEntity.dictrictId = String(format: "%.0f",selectedDistrict.districtId)
     userEntity.dictrictName = selectedDistrict.name
-    userEntity.zoneId = String(selectedZone.zoneId)
+    userEntity.zoneId = String(format: "%.0f",selectedZone.zoneId)
     userEntity.zoneName = selectedZone.name
+    userEntity.address = selectedCountry.name + " " + selectedProvince.name + " " + selectedDistrict.name + " " + selectedZone.name
     userEntity.bailsmanName = txtNameGuardian.text!
     userEntity.bailsmanPhoneNumber = txtPhoneGuardian.text!
     userEntity.bailsmanPassportId = txtCmtGuardian.text!
