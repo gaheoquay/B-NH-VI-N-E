@@ -22,6 +22,7 @@ class DetailsFileUsersViewController: UIViewController {
     @IBOutlet weak var imgBarCode: UIImageView!
     
     var listCheckin = CheckInResultEntity()
+    var listBooking = BookingEntity()
     var name = ""
     var dateExam: Double = 0
 
@@ -42,12 +43,18 @@ class DetailsFileUsersViewController: UIViewController {
     
         
     func setupView(){
+        
+        for item in listService {
+            if listBooking.serviceId == String(item.serviceId) {
+                lbSickName.text = item.name
+                lbProvisionalPrice.text = String(item.priceService)
+                lbAdress.text = item.roomName
+            }
+        }
+        
         lbName.text = name
         lbHistoryCode.text = String(listCheckin.patientHistory)
         lbNumberWait.text = String(listCheckin.sequence)
-        lbAdress.text = "Test"
-        lbSickName.text = "Khám bệnh theo yêu cầu"
-        lbProvisionalPrice.text = "250000"
         lbExamDate.text = String().convertTimeStampWithDateFormat(timeStamp: dateExam, dateFormat: "dd/MM/YYYY")
         
         let image = Until.generateBarcode(from: "\(listCheckin.patientHistory)")
@@ -59,5 +66,7 @@ class DetailsFileUsersViewController: UIViewController {
     @IBAction func btnShowBill(_ sender: Any) {
         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Hiện bạn chưa thanh toán! \n Xin vui lòng thử lại sau", cancelBtnTitle: "Đóng")
     }
+    
+   
     
 }

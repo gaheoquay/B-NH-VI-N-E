@@ -52,15 +52,15 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         return cell
     }
     
-    func gotoDetailUser(index: IndexPath) {
+    func gotoDetailUser(index: IndexPath, listBook: BookingEntity) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "DetailsFileUsersViewController") as! DetailsFileUsersViewController
         viewcontroller.name = listallUSer[index.row].profile.patientName
-        viewcontroller.listCheckin = listallUSer[index.row].booking.checkInResult
+        viewcontroller.listCheckin = listBook.checkInResult
+        viewcontroller.listBooking = listBook
         viewcontroller.dateExam = listallUSer[index.row].profile.createdDate
         self.navigationController?.pushViewController(viewcontroller, animated: true)
-
-    }
+    } 
     
     func setupTable(){
         if listallUSer.count > 0 {

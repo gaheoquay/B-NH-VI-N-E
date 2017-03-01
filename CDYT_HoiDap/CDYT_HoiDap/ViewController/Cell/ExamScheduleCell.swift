@@ -8,7 +8,7 @@
 
 import UIKit
 protocol ExamScheduleCellDelegate {
-    func gotoDetailUser(index: IndexPath)
+    func gotoDetailUser(index: IndexPath, listBook: BookingEntity)
 }
 
 class ExamScheduleCell: UITableViewCell {
@@ -41,7 +41,7 @@ class ExamScheduleCell: UITableViewCell {
     }
     
     func showDetailsUsers(){
-        delegate?.gotoDetailUser(index: indexPath)
+        delegate?.gotoDetailUser(index: indexPath, listBook: listBooking)
     }
     
     func setData(){

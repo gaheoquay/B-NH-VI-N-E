@@ -9,7 +9,7 @@
 import UIKit
 
 class ServiceEntity: NSObject {
-  var serviceId:Double = 0
+  var serviceId = 0
   var priceService:Double = 0
   var name = ""
   var roomId : Double = 0
@@ -18,21 +18,9 @@ class ServiceEntity: NSObject {
   override init(){
     super.init()
   }
-  func initListCountry() -> [ServiceEntity] {
-    var listCountry = [ServiceEntity]()
-    for i in 0..<10 {
-      let entity = ServiceEntity.init()
-      entity.priceService = Double(i)
-      entity.serviceId = Double(i) * 1000
-      entity.roomId = Double(i)
-      entity.roomName = "Room \(i)"
-      entity.name = "Service \(i)"
-      listCountry.append(entity)
-    }
-    return listCountry
-  }
+    
   init(dictionary:NSDictionary) {
-    if let value = dictionary["HIS_Service_ID"] as? Double {
+    if let value = dictionary["HIS_Service_ID"] as? Int {
       serviceId = value
     }
     if let value = dictionary["PriceService"] as? Double {

@@ -121,25 +121,24 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
         var param : [String : Any] = [:]
         
             param["Auth"] = Until.getAuthKey()
-//            param["RequestedUserId"] = Until.getCurrentId()
             param["BookingId"] = listBook.id
             param["TimeCheckIn"] = String(format: "%.0f", dateBook)
-            param["CountryId"] = String(format: "%.0f",listFileUser.countryId)
-            param["ProvinceId"] = String(listFileUser.provinceId)
-            param["DictrictId"] =  String(listFileUser.dictrictId)
-            param["ZoneId"] = String(format: "%.0f",listFileUser.zoneId)
-            param["ServiceId"] = String(format: "%.0f",listService.serviceId)
+            param["CountryId"] = listFileUser.countryId
+            param["ProvinceId"] = listFileUser.provinceId
+            param["DictrictId"] =  listFileUser.dictrictId
+            param["ZoneId"] = listFileUser.zoneId
+            param["ServiceId"] = listService.serviceId
             param["Age"] = listFileUser.age
             param["PatientName"] = listFileUser.patientName
             param["GenderId"] = listFileUser.gender == 1 ? "M":"F"
-            param["DepartmentId"] = String(format: "%.0f",listService.roomId)
-            param["Birthday"] = String(format: "%.0f",listFileUser.dOB)
+            param["DepartmentId"] = listService.roomId
+            param["Birthday"] = listFileUser.dOB
             param["PhoneNumber"] = listFileUser.phoneNumber
             param["Address"] = listFileUser.address
             param["Cmt"] = listFileUser.passportId
             param["GuardianName"] = listFileUser.bailsmanName
             param["CmtGuardian"] = listFileUser.bailsmanPassportId
-            param["JobId"] = String(format: "%.0f",listFileUser.jobId)
+            param["JobId"] = listFileUser.jobId
         
         print(param)
         Alamofire.request(CHECK_IN, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
