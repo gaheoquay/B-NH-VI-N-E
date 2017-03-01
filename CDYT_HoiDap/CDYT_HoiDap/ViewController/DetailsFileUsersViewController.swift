@@ -20,7 +20,7 @@ class DetailsFileUsersViewController: UIViewController {
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var viewBarCode: UIView!
     @IBOutlet weak var imgBarCode: UIImageView!
-    
+    var listService = [ServiceEntity]()
     var listCheckin = CheckInResultEntity()
     var listBooking = BookingEntity()
     var name = ""
@@ -44,17 +44,20 @@ class DetailsFileUsersViewController: UIViewController {
         
     func setupView(){
         
-        for item in listService {
-            if listBooking.serviceId == String(item.serviceId) {
-                lbSickName.text = item.name
-                lbProvisionalPrice.text = String(item.priceService)
-                lbAdress.text = item.roomName
-            }
-        }
+//        for item in listService {
+//            if listBooking.serviceId == String(item.serviceId) {
+//                lbSickName.text = item.name
+//                lbProvisionalPrice.text = String(item.priceService)
+//                lbAdress.text = item.roomName
+//            }
+//        }
         
         lbName.text = name
         lbHistoryCode.text = String(listCheckin.patientHistory)
         lbNumberWait.text = String(listCheckin.sequence)
+        lbAdress.text = listService[0].roomName
+        lbSickName.text = listService[0].name
+        lbProvisionalPrice.text = "\(listService[0].priceService)"
         lbExamDate.text = String().convertTimeStampWithDateFormat(timeStamp: dateExam, dateFormat: "dd/MM/YYYY")
         
         let image = Until.generateBarcode(from: "\(listCheckin.patientHistory)")

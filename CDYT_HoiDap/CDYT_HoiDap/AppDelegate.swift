@@ -34,7 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     initSendBird()
     requestCate()
     requestListDoctor()
-    requestListService()
     Until.getBagValue()
     if #available(iOS 10.0, *) {
       Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { (timer) in
@@ -155,22 +154,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
-    func requestListService(){
-        Alamofire.request(BOOKING_GET_LIST_SERVICE, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! [NSDictionary]
-                        
-                        for item in jsonData {
-                            let entity = ServiceEntity.init(dictionary: item)
-                            listService.append(entity)
-                        }
-                    }
-                }
-            }
-        }
-    }
 
     
   func applicationWillResignActive(_ application: UIApplication) {

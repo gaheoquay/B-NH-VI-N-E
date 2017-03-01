@@ -22,11 +22,7 @@ class ExamScheduleCell: UITableViewCell {
     var indexPath = IndexPath()
     var profileUser = FileUserEntity()
     var listBooking = BookingEntity()
-    
-    
-    
-    
-    
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -45,8 +41,9 @@ class ExamScheduleCell: UITableViewCell {
     }
     
     func setData(){
-        
-        let creteDate = String().convertTimeStampWithDateFormat(timeStamp: profileUser.createdDate, dateFormat: "dd/MM/YYYY")
+      lbName.text = profileUser.patientName
+
+        let creteDate = String().convertTimeStampWithDateFormat(timeStamp: listBooking.bookingDate/1000, dateFormat: "dd/MM/YYYY")
         let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
         let fontRegular = [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
         
@@ -54,8 +51,8 @@ class ExamScheduleCell: UITableViewCell {
         myAttrString.append(NSAttributedString(string: "\(creteDate)", attributes: fontBold))
         lbCreateDate.attributedText = myAttrString
 
-        lbName.text = profileUser.patientName
-        
+
+      
         if listBooking.status == 0 {
         let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
             myAttrString.append(NSMutableAttributedString(string: "đang chờ xử lý", attributes: fontRegular))

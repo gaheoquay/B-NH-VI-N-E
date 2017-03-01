@@ -14,13 +14,13 @@ class CheckInResultEntity: NSObject {
     var checkUpId = 0
     var patientHistory = 0
     var values = 0
-    var sequence = 0
+    var sequence = ""
     
     override init() {
         super.init()
     }
     
-    init(dictionary: NSDictionary) {
+  init(dictionary: [String:Any]) {
         if let value = dictionary["HIS_Patient_ID"] as? Int {
             patinentId = value
         }
@@ -33,7 +33,7 @@ class CheckInResultEntity: NSObject {
         if let value = dictionary["Value"] as? Int {
             values = value
         }
-        if let value = dictionary["SequenceNo"] as? Int {
+        if let value = dictionary["SequenceNo"] as? String {
             sequence = value
         }
         

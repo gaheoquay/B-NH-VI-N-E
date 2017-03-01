@@ -112,7 +112,6 @@ let SEARCHS = "ScreenSearch"
 var listNotification = [ListNotificationEntity]()
 var listCate = [CateEntity]()
 var listAllDoctor = [ListDoctorEntity]()
-var listService = [ServiceEntity]()
 
 
 var notificationCount = 0

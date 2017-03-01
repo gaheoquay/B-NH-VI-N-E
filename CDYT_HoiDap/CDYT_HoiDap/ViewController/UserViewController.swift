@@ -428,6 +428,12 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
   }
   
   @IBAction func messageTapAction(_ sender: Any) {
+    let realm = try! Realm()
+    let currentUser = realm.objects(UserEntity.self).first
+    if currentUser?.role == 0 {
+      UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nấp cấp để sử dủng chức năng này", cancelBtnTitle: "Đồng ý")
+      return
+    }
     self.gotoInbox()
   }
   
