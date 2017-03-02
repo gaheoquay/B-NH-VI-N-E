@@ -131,7 +131,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     param["Age"] = listFileUser.age
     param["PatientName"] = listFileUser.patientName
     param["GenderId"] = listFileUser.gender == 1 ? "M":"F"
-    param["Birthday"] = String(format: "%.0f",listFileUser.dOB)
+    param["Birthday"] = String(format: "%.0f",listFileUser.dOB*1000)
     param["PhoneNumber"] = listFileUser.phoneNumber
     param["Address"] = listFileUser.address
     param["Cmt"] = listFileUser.passportId

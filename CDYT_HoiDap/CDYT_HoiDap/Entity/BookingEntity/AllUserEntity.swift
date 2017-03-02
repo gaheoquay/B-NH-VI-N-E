@@ -12,6 +12,7 @@ class AllUserEntity: NSObject {
     
     var profile = FileUserEntity()
     var booking = BookingEntity()
+    var isCheckSelect = false
     
     override init() {
         super.init()

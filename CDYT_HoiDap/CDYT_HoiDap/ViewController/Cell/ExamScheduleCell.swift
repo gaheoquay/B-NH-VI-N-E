@@ -27,16 +27,15 @@ class ExamScheduleCell: UITableViewCell {
     
     var delegate: ExamScheduleCellDelegate?
     var indexPath = IndexPath()
-    var isCheckShow = false
-  
+    
+    //test
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         viewDetails.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showDetailsUsers)))
         viewStatus.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showDetailStatus)))
-        viewShowDetail.isHidden = true
-        marginBottomViewDetail.constant = 0
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -52,6 +51,16 @@ class ExamScheduleCell: UITableViewCell {
   func setData(entity:AllUserEntity){
     let profileUser = entity.profile
     let listBooking = entity.booking
+    
+    if entity.isCheckSelect == false {
+        viewShowDetail.isHidden = true
+        marginBottomViewDetail.constant = 0
+        entity.isCheckSelect = true
+    }else {
+        viewShowDetail.isHidden = false
+        marginBottomViewDetail.constant = 90
+        entity.isCheckSelect = false
+    }
     
       lbName.text = profileUser.patientName
     
@@ -89,6 +98,7 @@ class ExamScheduleCell: UITableViewCell {
             myAttrString.append(NSMutableAttributedString(string: "Đã có kết quả khám", attributes: fontRegularWithColor))
             lbStatus.attributedText = myAttrString
         }
+        contentView.layoutIfNeeded()
     }
     
     @IBAction func btnCancelExam(_ sender: Any) {
@@ -100,21 +110,6 @@ class ExamScheduleCell: UITableViewCell {
     }
     
     func showDetailStatus(){
-        if isCheckShow == false {
-            viewShowDetail.isHidden = true
-            marginBottomViewDetail.constant = 0
-            isCheckShow = true
-            print(isCheckShow)
-            
-        }else {
-            viewShowDetail.isHidden = false
-            marginBottomViewDetail.constant = 90
-            isCheckShow = false
-            print(isCheckShow)
-
-        }
-        contentView.layoutIfNeeded()
-        
         delegate?.showDetailStatus(index: indexPath)
     }
     

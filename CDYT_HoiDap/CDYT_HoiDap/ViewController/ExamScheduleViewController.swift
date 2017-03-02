@@ -18,7 +18,6 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     
     var listService = [ServiceEntity]()
     var listallUSer = [AllUserEntity]()
-    var isCheckShow = false
     var indexBooking = IndexPath()
     
     override func viewDidLoad() {
@@ -68,6 +67,14 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     func showDetailStatus(index: IndexPath) {
         tbListExamSchedule.reloadRows(at: [index], with: .automatic)
         indexBooking = index
+        if listallUSer[index.row].isCheckSelect == false {
+            listallUSer[index.row].isCheckSelect = true
+            print(listallUSer[index.row].isCheckSelect)
+        }else {
+            listallUSer[index.row].isCheckSelect = false
+            print(listallUSer[index.row].isCheckSelect)
+        }
+        listallUSer[index.row].isCheckSelect = !listallUSer[index.row].isCheckSelect
     }
     
     func deleteBooking() {
@@ -107,6 +114,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         
         print(Param)
         
+        Until.showLoading()
         Alamofire.request(GET_BOOKING_ONLY, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
@@ -119,6 +127,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
                     }
                     self.setupTable()
                     self.tbListExamSchedule.reloadData()
+                    Until.hideLoading()
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
@@ -135,12 +144,15 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
             "RequestedUserId" : Until.getCurrentId(),
             "BookingId" : listallUSer[indexBooking.row].booking.id
         ]
-        
+        Until.showLoading()
+
         Alamofire.request(DELETE_BOOKING, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
                     self.listallUSer.removeAll()
                     self.requestBooking()
+                    Until.hideLoading()
+
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
