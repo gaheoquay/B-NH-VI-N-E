@@ -48,20 +48,19 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
       cell.indexPath = indexPath
       cell.delegate = self
       if listallUSer.count > 0 {
-        cell.listBooking = listallUSer[indexPath.row].booking
-        cell.profileUser = listallUSer[indexPath.row].profile
-        cell.setData()
+        cell.setData(entity: listallUSer[indexPath.row])
       }
         return cell
     }
-    //MARK: delegate
-    func gotoDetailUser(index: IndexPath, listBook: BookingEntity) {
+   
+    
+    func gotoDetailUser(index: IndexPath) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "DetailsFileUsersViewController") as! DetailsFileUsersViewController
       viewcontroller.listService = listService
         viewcontroller.name = listallUSer[index.row].profile.patientName
-        viewcontroller.listCheckin = listBook.checkInResult
-        viewcontroller.listBooking = listBook
+        viewcontroller.listCheckin = listallUSer[index.row].booking.checkInResult
+        viewcontroller.listBooking = listallUSer[index.row].booking
         viewcontroller.dateExam = listallUSer[index.row].profile.createdDate
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }

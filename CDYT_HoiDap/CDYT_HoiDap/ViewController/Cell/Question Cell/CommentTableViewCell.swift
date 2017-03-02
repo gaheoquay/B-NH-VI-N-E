@@ -255,17 +255,17 @@ class CommentTableViewCell: UITableViewCell {
         leftViewWidth.constant = 60
         avaImgHeight.constant = 30
         
-        if mainComment.author.role == 1 {
-            nameLbl.text = mainComment.author.fullname
+        if subComment.author.role == 1 {
+            nameLbl.text = subComment.author.fullname
 
             departmantLb.text = mainComment.author.jobTitle + " - Bệnh viện E"
             verifyIconHeight.constant = 20
             nameLbl.textColor = UIColor().hexStringToUIColor(hex: "01A7FA")
-            nameLbl.text = mainComment.author.fullname
+            nameLbl.text = subComment.author.fullname
         }else{
             departmantLb.text = ""
             verifyIconHeight.constant = 0
-            nameLbl.text = mainComment.author.nickname
+            nameLbl.text = subComment.author.nickname
         }
     }
     
