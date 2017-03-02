@@ -10,6 +10,7 @@ import UIKit
 protocol FileCellDelegate {
     func gotoDetailFileUser()
     func deleteFileUser(listUser: FileUserEntity)
+    func gotoDetailHistory(index: IndexPath)
 }
 
 class FileCell: UITableViewCell {
@@ -23,6 +24,7 @@ class FileCell: UITableViewCell {
     var isCheckListService = false
     var isCheckLists = false
     var listUser = FileUserEntity()
+    var indexPath = IndexPath()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,13 +41,21 @@ class FileCell: UITableViewCell {
         lbPrice.text = String(entity.priceService)
     }
     
+    func setDataHistory(entity: BookingEntity){
+        viewGotoCreateCV.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(gotoDetailHistoryUser)))
+        lbName.text = String().convertTimeStampWithDateFormat(timeStamp: entity.createDate, dateFormat: "dd/MM/YYYY")
+        lbPrice.isHidden = true
+        imgDelete.image = UIImage(named: "DetailEditUp.png")
+        lbPrice.frame.size.height = 0
+    }
+    
     func setListUser(){
         lbName.text = listUser.patientName
         
         let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
         let fontWithColor = [ NSFontAttributeName: UIFont.systemFont(ofSize: 12),NSForegroundColorAttributeName: UIColor.init(netHex: 0x878787)]
         
-        let myAttrString = NSMutableAttributedString(string: "\(listUser.age)", attributes: fontWithColor)
+        let myAttrString = NSMutableAttributedString(string: "\(listUser.age)", attributes: fontBold)
         myAttrString.append(NSAttributedString(string: " tuổi", attributes: fontWithColor))
         lbPrice.attributedText = myAttrString
         
@@ -70,6 +80,10 @@ class FileCell: UITableViewCell {
     func deleteFile(){
         delegate?.deleteFileUser(listUser: listUser)
         
+    }
+    
+    func gotoDetailHistoryUser(){
+        delegate?.gotoDetailHistory(index: indexPath)
     }
 
 }

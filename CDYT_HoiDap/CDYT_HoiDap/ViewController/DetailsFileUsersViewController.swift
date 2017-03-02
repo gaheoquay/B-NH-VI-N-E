@@ -97,6 +97,8 @@ class DetailsFileUsersViewController: UIViewController {
         }
 
     }
+    //MARK: delegate
+    
     
    
     
