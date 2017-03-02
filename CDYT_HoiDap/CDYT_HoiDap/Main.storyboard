@@ -1287,17 +1287,17 @@
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0G-X3-QKc">
-                                        <rect key="frame" x="8" y="9.5" width="25" height="25"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="25" id="hvE-MS-rjE"/>
-                                            <constraint firstAttribute="height" constant="25" id="rOA-S3-i5A"/>
+                                            <constraint firstAttribute="width" secondItem="B0G-X3-QKc" secondAttribute="height" multiplier="1:1" id="dnz-KW-0hV"/>
                                         </constraints>
-                                        <state key="normal" image="BackWhite.png"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" title=" " image="BackWhite.png"/>
                                         <connections>
                                             <action selector="btnBack:" destination="5TB-gf-BNG" eventType="touchUpInside" id="vzT-gC-Hf9"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tạo hồ sơ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jbr-xr-bW2">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tạo hồ sơ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jbr-xr-bW2">
                                         <rect key="frame" x="41" y="13" width="230" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1322,12 +1322,13 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="8NG-QH-ctY" secondAttribute="trailing" constant="8" id="Dgv-he-lwK"/>
                                     <constraint firstItem="Jbr-xr-bW2" firstAttribute="leading" secondItem="B0G-X3-QKc" secondAttribute="trailing" constant="8" id="HyY-9E-htJ"/>
-                                    <constraint firstItem="B0G-X3-QKc" firstAttribute="leading" secondItem="MWf-zH-BNx" secondAttribute="leading" constant="8" id="SYQ-dr-Zzl"/>
+                                    <constraint firstItem="B0G-X3-QKc" firstAttribute="leading" secondItem="MWf-zH-BNx" secondAttribute="leading" id="SYQ-dr-Zzl"/>
                                     <constraint firstAttribute="height" constant="44" id="bky-Vh-s9K"/>
+                                    <constraint firstAttribute="bottom" secondItem="B0G-X3-QKc" secondAttribute="bottom" id="dHh-wW-KSj"/>
                                     <constraint firstItem="8NG-QH-ctY" firstAttribute="centerY" secondItem="MWf-zH-BNx" secondAttribute="centerY" id="mRb-N2-zfD"/>
                                     <constraint firstItem="8NG-QH-ctY" firstAttribute="leading" secondItem="Jbr-xr-bW2" secondAttribute="trailing" constant="8" id="mXD-ds-Nsl"/>
                                     <constraint firstItem="Jbr-xr-bW2" firstAttribute="centerY" secondItem="B0G-X3-QKc" secondAttribute="centerY" id="nvy-9W-6mE"/>
-                                    <constraint firstItem="B0G-X3-QKc" firstAttribute="centerY" secondItem="MWf-zH-BNx" secondAttribute="centerY" id="xAt-cT-6EV"/>
+                                    <constraint firstItem="B0G-X3-QKc" firstAttribute="top" secondItem="MWf-zH-BNx" secondAttribute="top" id="uOh-Eu-iip"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RzO-kE-tX9">
@@ -2246,18 +2247,18 @@
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1H5-2e-SlV">
-                                        <rect key="frame" x="8" y="10" width="25" height="25"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="COC-nF-VlG"/>
-                                            <constraint firstAttribute="width" constant="25" id="k2J-ae-2W2"/>
+                                            <constraint firstAttribute="width" secondItem="1H5-2e-SlV" secondAttribute="height" multiplier="1:1" id="6kf-he-1vR"/>
                                         </constraints>
-                                        <state key="normal" image="BackWhite.png"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" title=" " image="BackWhite.png"/>
                                         <connections>
                                             <action selector="btnBack:" destination="Ogf-WO-Lro" eventType="touchUpInside" id="CT6-3g-yqA"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hồ sơ khám bệnh" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZt-1b-Vbd">
-                                        <rect key="frame" x="41" y="13.5" width="230" height="19.5"/>
+                                        <rect key="frame" x="52" y="12.5" width="219" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -2278,12 +2279,13 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.63329190099999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="1H5-2e-SlV" secondAttribute="bottom" id="0yQ-rF-P5q"/>
                                     <constraint firstItem="IZt-1b-Vbd" firstAttribute="leading" secondItem="1H5-2e-SlV" secondAttribute="trailing" constant="8" id="4Nw-zy-Ek4"/>
                                     <constraint firstItem="fGh-nA-nxz" firstAttribute="leading" secondItem="IZt-1b-Vbd" secondAttribute="trailing" constant="8" id="6xG-2x-Crd"/>
                                     <constraint firstAttribute="height" constant="44" id="75v-I7-vCg"/>
                                     <constraint firstItem="IZt-1b-Vbd" firstAttribute="centerY" secondItem="1H5-2e-SlV" secondAttribute="centerY" id="AF6-u4-zwW"/>
-                                    <constraint firstItem="1H5-2e-SlV" firstAttribute="centerY" secondItem="hlO-jL-TcI" secondAttribute="centerY" id="fZ1-3u-NRf"/>
-                                    <constraint firstItem="1H5-2e-SlV" firstAttribute="leading" secondItem="hlO-jL-TcI" secondAttribute="leading" constant="8" id="jEJ-kL-Cer"/>
+                                    <constraint firstItem="1H5-2e-SlV" firstAttribute="top" secondItem="hlO-jL-TcI" secondAttribute="top" id="W8b-AJ-Rgw"/>
+                                    <constraint firstItem="1H5-2e-SlV" firstAttribute="leading" secondItem="hlO-jL-TcI" secondAttribute="leading" id="jEJ-kL-Cer"/>
                                     <constraint firstItem="fGh-nA-nxz" firstAttribute="centerY" secondItem="hlO-jL-TcI" secondAttribute="centerY" id="nvN-XO-lru"/>
                                     <constraint firstAttribute="trailing" secondItem="fGh-nA-nxz" secondAttribute="trailing" constant="8" id="sFq-Bz-TkC"/>
                                 </constraints>
@@ -4751,7 +4753,36 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19m-RQ-F54">
                                         <rect key="frame" x="12" y="45" width="296" height="1257"/>
-                                        <mutableString key="text">Bệnh viện E là bệnh viện đa khoa trung ương hạng I trực thuộc Bộ Y tế, được thành lập từ năm 1967. Đến nay, bệnh viện đã phát triển với quy mô hơn 900 giường bệnh (gồm 4 trung tâm, 37 khoa lâm sàng và cận lâm sàng, 11 phòng chức năng) trên diện tích 41.000 m2 với khuôn viên rộng rãi, thoáng mát, xanh, sạch đẹp. Với truyền thống 50 năm thành lập - phát triển, bệnh viện E có đội ngũ cán bộ giàu kinh nghiệm, các bác sĩ có có trình độ sau đại học chiếm 70% gồm các Giáo sư, Phó giáo sư, Tiến sĩ, Thạc sĩ... Phương châm hành động của đội ngũ thầy thuốc Bệnh viện E là: “Chăm sóc người bệnh toàn diện bằng những phương pháp khoa học kỹ thuật tiên tiến và hiệu quả nhất với tấm lòng thầy thuốc như mẹ hiền”.PHẠM VI HOẠT ĐỘNG VÀ CÁC DỊCH VỤ•	Khám chữa bệnh đa khoa (nội, ngoại, sản, nhi, ung bướu, y học cổ truyền, phục hồi chức năng) chuyên khoa (tai mũi họng, răng hàm mặt, mắt) cho người bệnh BHYT và khám theo yêu cầu. Đặc biệt tiếp nhận bệnh nhân BHYT tuyến cuối từ khắp cả nước.•	Khám và cấp giấy chứng nhận sức khỏe cho người Việt Nam đi học tập lao động tại nước ngoài, người nước ngoài làm việc tại Việt Nam. Khám tuyển lái xe, khám tuyển dụng và định kỳ cho các cơ quan, trường học theo hợp đồng.•	Điều trị tuyến cuối các bệnh lý phức tạp về tim mạch (ngoại và nội khoa), tiêu hóa, chấn thương chỉnh hình, cơ xương khớp, ung bướu, sản phụ khoa.•	Tiêm vaccin phòng bệnh cho tất cả các đối tượng.•	Tư vấn sức khỏe trực tuyến, đặt khám online tại bệnh viện.•	Khám và lấy máu xét nghiệm tại cộng đồng.•	Cở sở đào tạo và thực hành của một số trường đại học, cao đẳng chuyên ngành y, dược khoa: Đại học Y Hà Nội, Đại học Quốc gia, Học viện Y học cổ truyền TW, Cao đẳng y tế Hà Nội.CÁC KỸ THUẬT CAO ĐÃ THỰC HIỆN	Phẫu thuật tim kín, phẫu thuật tim hở với nội soi hỗ trợ các bệnh tim bẩm sinh phức tạp; bắc cầu động mạch chủ vành.	Can thiệp mạch, tim qua da.	Phẫu thuật nội soi bụng, ngực; các phẫu thuật loại đặc biệt về ung thư, nội tiết, tai mũi họng...	Phẫu thuật sọ não, cột sống. Tạo hình thân đốt sống bằng  xi măng. Thay khớp háng, khớp gối; đo mật độ xương bằng máy Dexa; hệ thống phục hồi chức năng tiên tiến.	Sản phụ khoa: phẫu thuật nội soi cắt tử cung, chẩn đoán trước sinh, giảm đau trong đẻ bằng phương pháp gây tê ngoài màng cứng.	Phẫu thuật PHACO, vi phẫu, chỉnh hình hàm mặt.	Nội soi - Siêu âm hệ tiêu hóa phát hiện sớm ung thư, nội soi dạ dày đường mũi, nội soi dạ dày gây mê, nội soi ruột non bóng kép, nội soi viên nang.	Nội soi mật - tụy ngược dòng (ERCP) lấy sỏi, giun, đặt Stent đường mật…	Tán sỏi tiết niệu bằng Laser, sóng cao tần. Lọc máu nhân tạo, lọc màng bụng, siêu lọc máu.	Điều trị nội khoa tiên tiến với phác đồ cập nhật.	Chụp cộng hưởng từ 1,5 Tesla, cắt lớp vi tính 64 dãy, X-quang kỹ thuật số, chụp X-quang tuyến vú, X-quang can thiệp.	Các xét nghiệm chẩn đoán sớm ung thư (Marker ung thư).CÁC THÀNH TÍCH ĐÃ ĐẠT ĐƯỢC	Huân chương Độc lập hạng Nhất, Nhì, Ba	Huân chương Lao động hạng Nhất.	Huân chương Kháng chiến hạng Nhì.</mutableString>
+                                        <string key="text">Bệnh viện E là bệnh viện đa khoa trung ương hạng I trực thuộc Bộ Y tế, được thành lập từ năm 1967. Đến nay, bệnh viện đã phát triển với quy mô hơn 900 giường bệnh (gồm 4 trung tâm, 37 khoa lâm sàng và cận lâm sàng, 11 phòng chức năng) trên diện tích 41.000 m2 với khuôn viên rộng rãi, thoáng mát, xanh, sạch đẹp. Với truyền thống 50 năm thành lập - phát triển, bệnh viện E có đội ngũ cán bộ giàu kinh nghiệm, các bác sĩ có có trình độ sau đại học chiếm 70% gồm các Giáo sư, Phó giáo sư, Tiến sĩ, Thạc sĩ... Phương châm hành động của đội ngũ thầy thuốc Bệnh viện E là: “Chăm sóc người bệnh toàn diện bằng những phương pháp khoa học kỹ thuật tiên tiến và hiệu quả nhất với tấm lòng thầy thuốc như mẹ hiền”.
+PHẠM VI HOẠT ĐỘNG VÀ CÁC DỊCH VỤ
+•	Khám chữa bệnh đa khoa (nội, ngoại, sản, nhi, ung bướu, y học cổ truyền, phục hồi chức năng) chuyên khoa (tai mũi họng, răng hàm mặt, mắt) cho người bệnh BHYT và khám theo yêu cầu. Đặc biệt tiếp nhận bệnh nhân BHYT tuyến cuối từ khắp cả nước.
+•	Khám và cấp giấy chứng nhận sức khỏe cho người Việt Nam đi học tập lao động tại nước ngoài, người nước ngoài làm việc tại Việt Nam. Khám tuyển lái xe, khám tuyển dụng và định kỳ cho các cơ quan, trường học theo hợp đồng.
+•	Điều trị tuyến cuối các bệnh lý phức tạp về tim mạch (ngoại và nội khoa), tiêu hóa, chấn thương chỉnh hình, cơ xương khớp, ung bướu, sản phụ khoa.
+•	Tiêm vaccin phòng bệnh cho tất cả các đối tượng.
+•	Tư vấn sức khỏe trực tuyến, đặt khám online tại bệnh viện.
+•	Khám và lấy máu xét nghiệm tại cộng đồng.
+•	Cở sở đào tạo và thực hành của một số trường đại học, cao đẳng chuyên ngành y, dược khoa: Đại học Y Hà Nội, Đại học Quốc gia, Học viện Y học cổ truyền TW, Cao đẳng y tế Hà Nội.
+
+
+
+CÁC KỸ THUẬT CAO ĐÃ THỰC HIỆN
+	Phẫu thuật tim kín, phẫu thuật tim hở với nội soi hỗ trợ các bệnh tim bẩm sinh phức tạp; bắc cầu động mạch chủ vành.
+	Can thiệp mạch, tim qua da.
+	Phẫu thuật nội soi bụng, ngực; các phẫu thuật loại đặc biệt về ung thư, nội tiết, tai mũi họng...
+	Phẫu thuật sọ não, cột sống. Tạo hình thân đốt sống bằng  xi măng. Thay khớp háng, khớp gối; đo mật độ xương bằng máy Dexa; hệ thống phục hồi chức năng tiên tiến.
+	Sản phụ khoa: phẫu thuật nội soi cắt tử cung, chẩn đoán trước sinh, giảm đau trong đẻ bằng phương pháp gây tê ngoài màng cứng.
+	Phẫu thuật PHACO, vi phẫu, chỉnh hình hàm mặt.
+	Nội soi - Siêu âm hệ tiêu hóa phát hiện sớm ung thư, nội soi dạ dày đường mũi, nội soi dạ dày gây mê, nội soi ruột non bóng kép, nội soi viên nang.
+	Nội soi mật - tụy ngược dòng (ERCP) lấy sỏi, giun, đặt Stent đường mật…
+	Tán sỏi tiết niệu bằng Laser, sóng cao tần. Lọc máu nhân tạo, lọc màng bụng, siêu lọc máu.
+	Điều trị nội khoa tiên tiến với phác đồ cập nhật.
+	Chụp cộng hưởng từ 1,5 Tesla, cắt lớp vi tính 64 dãy, X-quang kỹ thuật số, chụp X-quang tuyến vú, X-quang can thiệp.
+	Các xét nghiệm chẩn đoán sớm ung thư (Marker ung thư).
+CÁC THÀNH TÍCH ĐÃ ĐẠT ĐƯỢC
+	Huân chương Độc lập hạng Nhất, Nhì, Ba
+	Huân chương Lao động hạng Nhất.
+	Huân chương Kháng chiến hạng Nhì.
+</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
