@@ -15,8 +15,11 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     @IBOutlet weak var lbCalendar: UILabel!
     @IBOutlet weak var heightTbListUser: NSLayoutConstraint!
     @IBOutlet weak var viewHiddent: UIView!
+    
     var listService = [ServiceEntity]()
     var listallUSer = [AllUserEntity]()
+    var isCheckShow = false
+    var indexBooking = IndexPath()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +54,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
       }
         return cell
     }
-    
+    //MARK: delegate
     func gotoDetailUser(index: IndexPath, listBook: BookingEntity) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "DetailsFileUsersViewController") as! DetailsFileUsersViewController
@@ -61,15 +64,29 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         viewcontroller.listBooking = listBook
         viewcontroller.dateExam = listallUSer[index.row].profile.createdDate
         self.navigationController?.pushViewController(viewcontroller, animated: true)
-    } 
+    }
     
+    func showDetailStatus(index: IndexPath) {
+        tbListExamSchedule.reloadRows(at: [index], with: .automatic)
+        indexBooking = index
+    }
+    
+    func deleteBooking() {
+        reuqestDeleteBooking()
+    }
+    
+    func accepBooking() {
+        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Chức năng đang hoàn thiện \n Vui lòng thử lại sau", cancelBtnTitle: "Huỷ")
+    }
+    
+    //MARK: setupUI
     func setupTable(){
         if listallUSer.count > 0 {
         tbListExamSchedule.delegate = self
         tbListExamSchedule.dataSource = self
-        tbListExamSchedule.estimatedRowHeight = 9999
+        tbListExamSchedule.estimatedRowHeight = 999
         tbListExamSchedule.rowHeight = UITableViewAutomaticDimension
-        heightTbListUser.constant = 502
+        heightTbListUser.constant = UIScreen.main.bounds.size.height - 80
         tbListExamSchedule.register(UINib.init(nibName: "ExamScheduleCell", bundle: nil), forCellReuseIdentifier: "ExamScheduleCell")
         imageCalendar.isHidden = true
         lbCalendar.isHidden = true
@@ -103,6 +120,28 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
                     }
                     self.setupTable()
                     self.tbListExamSchedule.reloadData()
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+        }
+    }
+    
+    func reuqestDeleteBooking(){
+        
+        let Param : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId" : Until.getCurrentId(),
+            "BookingId" : listallUSer[indexBooking.row].booking.id
+        ]
+        
+        Alamofire.request(DELETE_BOOKING, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    self.listallUSer.removeAll()
+                    self.requestBooking()
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }

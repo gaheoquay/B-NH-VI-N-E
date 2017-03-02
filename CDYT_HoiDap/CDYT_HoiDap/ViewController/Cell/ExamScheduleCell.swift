@@ -9,6 +9,9 @@
 import UIKit
 protocol ExamScheduleCellDelegate {
     func gotoDetailUser(index: IndexPath, listBook: BookingEntity)
+    func showDetailStatus(index: IndexPath)
+    func deleteBooking()
+    func accepBooking()
 }
 
 class ExamScheduleCell: UITableViewCell {
@@ -17,17 +20,24 @@ class ExamScheduleCell: UITableViewCell {
     @IBOutlet weak var lbCreateDate: UILabel!
     @IBOutlet weak var lbStatus: UILabel!
     @IBOutlet weak var viewDetails: UIView!
+    @IBOutlet weak var viewStatus: UIView!
+    @IBOutlet weak var viewShowDetail: UIView!
+    @IBOutlet weak var heightViewDetail: NSLayoutConstraint!
+    @IBOutlet weak var marginBottomViewDetail: NSLayoutConstraint!
     
     var delegate: ExamScheduleCellDelegate?
     var indexPath = IndexPath()
     var profileUser = FileUserEntity()
     var listBooking = BookingEntity()
+    var isCheckShow = false
   
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         viewDetails.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showDetailsUsers)))
-
+        viewStatus.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showDetailStatus)))
+        viewShowDetail.isHidden = true
+        marginBottomViewDetail.constant = 0
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -77,5 +87,33 @@ class ExamScheduleCell: UITableViewCell {
             lbStatus.attributedText = myAttrString
         }
     }
+    
+    @IBAction func btnCancelExam(_ sender: Any) {
+            delegate?.deleteBooking()
+    }
+    
+    @IBAction func btnAccept(_ sender: Any) {
+            delegate?.accepBooking()
+    }
+    
+    func showDetailStatus(){
+        if isCheckShow == false {
+            viewShowDetail.isHidden = true
+            marginBottomViewDetail.constant = 0
+            isCheckShow = true
+            print(isCheckShow)
+            
+        }else {
+            viewShowDetail.isHidden = false
+            marginBottomViewDetail.constant = 90
+            isCheckShow = false
+            print(isCheckShow)
+
+        }
+        contentView.layoutIfNeeded()
+        
+        delegate?.showDetailStatus(index: indexPath)
+    }
+    
     
 }

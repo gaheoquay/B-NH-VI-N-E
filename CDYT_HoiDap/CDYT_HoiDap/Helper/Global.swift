@@ -25,6 +25,7 @@ let GET_BOOKING_BY_USERID = BASE_URL + "/Booking/GetBookingByUserId"
 let CHECK_IN = BASE_URL + "/Booking/CheckIn"
 let GET_BOOKING_ONLY = BASE_URL + "/Booking/GetBookingRecordByUserId"
 let FINISH_CHECKUP = BASE_URL + "/Booking/FinishCheckup"
+let DELETE_BOOKING = BASE_URL + "/Booking/RemoveBooking"
 
 let HOTEST_TAG = BASE_URL + "/Post/GetHotestTags"
 let GET_FEEDS = BASE_URL + "/Post/GetFeed"
