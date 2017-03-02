@@ -9,7 +9,7 @@
 import UIKit
 
 
-class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCalenderControllerDelegate,ManagerViewControllerDelegate,WYPopoverControllerDelegate,ListServiceViewControllerDelegate,SearchFileViewControllerDelegate {
+class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCalenderControllerDelegate,ManagerViewControllerDelegate,WYPopoverControllerDelegate,ListServiceViewControllerDelegate {
     var pageMenu : CAPSPageMenu?
 
     @IBOutlet weak var viewMain: UIView!
@@ -149,9 +149,8 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
         }
     }
     func gotoHistory() {
-//        let main = UIStoryboard(name: "Main", bundle: nil)
-//        let viewcontroller = main.instantiateViewController(withIdentifier: "HistoryUserViewController") as! HistoryUserViewController
-//        self.navigationController?.pushViewController(viewcontroller, animated: true)
+        let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "HistoryUserViewController") as! HistoryUserViewController
+        self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     func gotoCvUser() {
         
@@ -169,7 +168,6 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
             Until.gotoLogin(_self: self, cannotBack: true)
         }else{
             let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "SearchFileViewController") as! SearchFileViewController
-            viewcontroller.delegate = self
             self.navigationController?.pushViewController(viewcontroller, animated: true)
         }
 
@@ -184,12 +182,7 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
         }
     }
     
-    func gotoBooking() {
-        _ = self.navigationController?.popViewController(animated: true)
-    }
-    
-    //MARK: Calendar
-    
+
     
    
 }

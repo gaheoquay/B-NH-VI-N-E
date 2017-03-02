@@ -18,6 +18,10 @@
 		0F52D28A1E634889006C57E2 /* FileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F52D2881E634889006C57E2 /* FileCell.xib */; };
 		0F765A3B1E644207001DF8ED /* FileUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F765A3A1E644207001DF8ED /* FileUserEntity.swift */; };
 		0F81E4AA1E66813B00A7C18F /* CheckInvoiceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4A91E66813B00A7C18F /* CheckInvoiceEntity.swift */; };
+		0F81E4AC1E672CE800A7C18F /* BookingUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4AB1E672CE800A7C18F /* BookingUserEntity.swift */; };
+		0F81E4AE1E67399700A7C18F /* DetailResultUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4AD1E67399700A7C18F /* DetailResultUserViewController.swift */; };
+		0F81E4B01E6747DB00A7C18F /* ResultUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4AF1E6747DB00A7C18F /* ResultUserEntity.swift */; };
+		0F81E4B21E674F6F00A7C18F /* DetailSickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4B11E674F6F00A7C18F /* DetailSickViewController.swift */; };
 		0F9471441E5F5E3C00EE7C2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F9471431E5F5E3C00EE7C2A /* Main.storyboard */; };
 		0F9AD59C1E63CE0F00981D7B /* SearchFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9AD59B1E63CE0F00981D7B /* SearchFileViewController.swift */; };
 		0F9AD5A01E63F34700981D7B /* BackWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9AD59D1E63F34700981D7B /* BackWhite.png */; };
@@ -271,6 +275,10 @@
 		0F52D2881E634889006C57E2 /* FileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileCell.xib; sourceTree = "<group>"; };
 		0F765A3A1E644207001DF8ED /* FileUserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUserEntity.swift; sourceTree = "<group>"; };
 		0F81E4A91E66813B00A7C18F /* CheckInvoiceEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInvoiceEntity.swift; sourceTree = "<group>"; };
+		0F81E4AB1E672CE800A7C18F /* BookingUserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingUserEntity.swift; sourceTree = "<group>"; };
+		0F81E4AD1E67399700A7C18F /* DetailResultUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailResultUserViewController.swift; sourceTree = "<group>"; };
+		0F81E4AF1E6747DB00A7C18F /* ResultUserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultUserEntity.swift; sourceTree = "<group>"; };
+		0F81E4B11E674F6F00A7C18F /* DetailSickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailSickViewController.swift; sourceTree = "<group>"; };
 		0F9471431E5F5E3C00EE7C2A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0F9AD59B1E63CE0F00981D7B /* SearchFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFileViewController.swift; sourceTree = "<group>"; };
 		0F9AD59D1E63F34700981D7B /* BackWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackWhite.png; sourceTree = "<group>"; };
@@ -579,6 +587,8 @@
 				0FC431771E658680003F7F31 /* BookingEntity.swift */,
 				0FA580691E65D5D4001B4E3C /* CheckInResultEntity.swift */,
 				0F81E4A91E66813B00A7C18F /* CheckInvoiceEntity.swift */,
+				0F81E4AB1E672CE800A7C18F /* BookingUserEntity.swift */,
+				0F81E4AF1E6747DB00A7C18F /* ResultUserEntity.swift */,
 			);
 			path = BookingEntity;
 			sourceTree = "<group>";
@@ -858,6 +868,8 @@
 				0FF753381E62F267001450B7 /* ExamScheduleViewController.swift */,
 				0F9AD59B1E63CE0F00981D7B /* SearchFileViewController.swift */,
 				0FC4316F1E65185B003F7F31 /* DetailsFileUsersViewController.swift */,
+				0F81E4AD1E67399700A7C18F /* DetailResultUserViewController.swift */,
+				0F81E4B11E674F6F00A7C18F /* DetailSickViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1401,6 +1413,7 @@
 				8BD49F0F1E4824EA00C98E74 /* Constants.swift in Sources */,
 				8B3A13781E10F454005DBC6E /* RAMFrameItemAnimation.swift in Sources */,
 				8B3A136F1E10F454005DBC6E /* DatePickerDialog.swift in Sources */,
+				0F81E4AE1E67399700A7C18F /* DetailResultUserViewController.swift in Sources */,
 				0F9C46401E60462700DCFE46 /* FileViewController.swift in Sources */,
 				A68A95151E151B490067736E /* MainCommentEntity.swift in Sources */,
 				A6F980A01E48607E0007CD63 /* LinkedUser.swift in Sources */,
@@ -1415,6 +1428,7 @@
 				8B3A13811E10F46B005DBC6E /* Global.swift in Sources */,
 				8B2AFF0C1E64253200415554 /* CountryEntity.swift in Sources */,
 				8B79D0DE1E5A8E2C0010C5C0 /* AboutViewController.swift in Sources */,
+				0F81E4B01E6747DB00A7C18F /* ResultUserEntity.swift in Sources */,
 				A68A95131E1518E10067736E /* SubCommentEntity.swift in Sources */,
 				8BD49F601E482D1100C98E74 /* CreateOpenChannelViewController.swift in Sources */,
 				A6417E221E13B68D00BD2D75 /* SettingTableViewCell.swift in Sources */,
@@ -1433,6 +1447,7 @@
 				0FC431701E65185B003F7F31 /* DetailsFileUsersViewController.swift in Sources */,
 				0F9C46171E5FE24500DCFE46 /* ChoiceServiceViewController.swift in Sources */,
 				0FABDC331E61C2EC004DD98D /* CreateCvViewController.swift in Sources */,
+				0F81E4AC1E672CE800A7C18F /* BookingUserEntity.swift in Sources */,
 				8B2AFF0A1E64223A00415554 /* JobEntity.swift in Sources */,
 				8B2AFF121E642B5000415554 /* ZoneEntity.swift in Sources */,
 				0F17AB191E51BAC2008BA308 /* CateEntity.swift in Sources */,
@@ -1456,6 +1471,7 @@
 				8B3A136E1E10F454005DBC6E /* CAPSPageMenu.swift in Sources */,
 				8BFE666C1E5D423700E1138B /* BaseViewController.swift in Sources */,
 				0FCFD9A81E5EEDDD00EE2F89 /* ManagerViewController.swift in Sources */,
+				0F81E4B21E674F6F00A7C18F /* DetailSickViewController.swift in Sources */,
 				8B813CB71E1510500043F7EF /* QuestionByTagViewController.swift in Sources */,
 				8B2AFF101E64269200415554 /* DistrictEntity.swift in Sources */,
 				0F0EFD311E62771C0036C860 /* HistoryUserViewController.swift in Sources */,

@@ -141,6 +141,7 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
         tbListFile.reloadData()
     }
     
+    //MARK: Delegate
     func gotoDetailFileUser() {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "CreateCvViewController") as! CreateCvViewController
@@ -156,9 +157,11 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
     func reloadData() {
         listFileUser.removeAll()
         requestUSer()
+    }
+    func gotoDetailHistory(index: IndexPath) {
         
     }
-    
+    //MARK: request API
     func requestDeleteProfile(){
         let Param : [String : Any] = [
             "Auth": Until.getAuthKey(),
@@ -183,6 +186,8 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
         }
 
     }
+    
+    
     
     
 }

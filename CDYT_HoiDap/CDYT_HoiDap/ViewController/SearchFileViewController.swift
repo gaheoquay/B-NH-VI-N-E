@@ -8,7 +8,7 @@
 
 import UIKit
 protocol SearchFileViewControllerDelegate {
-    func gotoBooking()
+    func gotoHistory(indexPath: IndexPath)
 }
 
 class SearchFileViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,CreateCvViewControllerDelegate {
@@ -22,8 +22,8 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     @IBOutlet weak var txtSearch: UITextField!
     @IBOutlet weak var viewSearch: UIView!
     
+    var delegate : SearchFileViewControllerDelegate?
     var listFileUser = [FileUserEntity]()
-    var delegate: SearchFileViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,8 +53,9 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.gotoBooking()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: GET_LIST_FILE_USER), object: self.listFileUser[indexPath.row])
+        delegate?.gotoHistory(indexPath: indexPath)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     func requestUSer(){

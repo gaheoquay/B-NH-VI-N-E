@@ -55,6 +55,8 @@ class ListServiceViewController: UIViewController,UITableViewDelegate,UITableVie
         delegate?.dissMisPopup()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: GET_LIST_SERVICE), object: self.listService[indexPath.row])
     }
+    
+    //MARK: Delegate
     func setupButton() {
         
     }
@@ -64,6 +66,9 @@ class ListServiceViewController: UIViewController,UITableViewDelegate,UITableVie
     }
     
     func deleteFileUser(listUser: FileUserEntity) {
+        
+    }
+    func gotoDetailHistory(index: IndexPath) {
         
     }
 

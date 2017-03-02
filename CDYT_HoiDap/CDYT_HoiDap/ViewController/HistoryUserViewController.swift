@@ -8,20 +8,21 @@
 
 import UIKit
 
-class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,SearchFileViewControllerDelegate,FileCellDelegate {
 
     @IBOutlet weak var tbListHistory: UITableView!
     @IBOutlet weak var heightTbListHistory: NSLayoutConstraint!
     @IBOutlet weak var imgCV: UIImageView!
     @IBOutlet weak var lbCV: UILabel!
+    @IBOutlet weak var btnListProfile: UIButton!
     
-     var arrayPrice =  [Int]()
+    
+    var listBookingUser = [BookingUserEntity]()
+    var listBooking = [BookingEntity]()
+    var indexProfile = IndexPath()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        for a in 1...20 {
-//            arrayPrice.append(a)
-//        }
         setupTable()
         // Do any additional setup after loading the view.
     }
@@ -35,13 +36,14 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayPrice.count
+        return listBookingUser.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell") as! FileCell
-        if arrayPrice.count > 0 {
-        cell.lbName.text = String(arrayPrice[indexPath.row])
-        cell.lbPrice.text = String(arrayPrice[indexPath.row])
+        cell.delegate = self
+        cell.indexPath = indexPath
+        if listBooking.count > 0 {
+            cell.setDataHistory(entity: listBooking[indexPath.row])
         }
         return cell
     }
@@ -57,13 +59,14 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
     @IBAction func btnGotoListFile(_ sender: Any) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "SearchFileViewController") as! SearchFileViewController
+        viewcontroller.delegate = self
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     
     
     func setupTable(){
         
-        if arrayPrice.count > 0 {
+        if listBooking.count > 0 {
             tbListHistory.register(UINib.init(nibName: "FileCell", bundle: nil), forCellReuseIdentifier: "FileCell")
             heightTbListHistory.constant = UIScreen.main.bounds.size.height - 185
             tbListHistory.estimatedRowHeight = 9999
@@ -82,6 +85,62 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
             imgCV.isHidden = false
         }
         self.view.layoutIfNeeded()
+        tbListHistory.reloadData()
     }
-   
+    //MARK: RequestData
+    
+    func requestBookingUser(){
+        let Param : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId" : Until.getCurrentId()
+        ]
+        
+        print(Param)
+        Until.showLoading()
+        Alamofire.request(GET_BOOKING_BY_USERID, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! [NSDictionary]
+                        for item in jsonData {
+                            let entity = BookingUserEntity.init(dictionary: item)
+                            self.listBookingUser.append(entity)
+                        }
+                        self.btnListProfile.setTitle(self.listBookingUser[self.indexProfile.row].profile.patientName, for: .normal)
+                        self.listBooking = self.listBookingUser[self.indexProfile.row].booking
+                    }
+                    self.tbListHistory.reloadData()
+                    self.setupTable()
+                    Until.hideLoading()
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+        }
+    }
+    //MARK: Delegate
+    func gotoHistory(indexPath: IndexPath) {
+        indexProfile = indexPath
+        listBookingUser.removeAll()
+        requestBookingUser()
+    }
+    func gotoDetailFileUser() {
+        
+    }
+    
+    
+    func gotoDetailHistory(index: IndexPath) {
+        let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailResultUserViewController") as! DetailResultUserViewController
+        viewcontroller.listBooking = listBooking[index.row]
+        viewcontroller.date = String().convertTimeStampWithDateFormat(timeStamp: listBooking[index.row].createDate, dateFormat: "dd/MM/YYYY")
+        self.navigationController?.pushViewController(viewcontroller, animated: true)
+    }
+    
+    func deleteFileUser(listUser: FileUserEntity) {
+        
+    }
+
+
 }
