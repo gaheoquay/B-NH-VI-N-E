@@ -8,7 +8,7 @@
 
 import UIKit
 protocol ExamScheduleCellDelegate {
-    func gotoDetailUser(index: IndexPath, listBook: BookingEntity)
+    func gotoDetailUser(index: IndexPath)
 }
 
 class ExamScheduleCell: UITableViewCell {
@@ -20,9 +20,6 @@ class ExamScheduleCell: UITableViewCell {
     
     var delegate: ExamScheduleCellDelegate?
     var indexPath = IndexPath()
-    var profileUser = FileUserEntity()
-    var listBooking = BookingEntity()
-  
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -37,43 +34,47 @@ class ExamScheduleCell: UITableViewCell {
     }
     
     func showDetailsUsers(){
-        delegate?.gotoDetailUser(index: indexPath, listBook: listBooking)
+        delegate?.gotoDetailUser(index: indexPath)
     }
     
-    func setData(){
+  func setData(entity:AllUserEntity){
+    let profileUser = entity.profile
+    let listBooking = entity.booking
+    
       lbName.text = profileUser.patientName
-
+    
         let creteDate = String().convertTimeStampWithDateFormat(timeStamp: listBooking.bookingDate/1000, dateFormat: "dd/MM/YYYY")
         let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
         let fontRegular = [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
-        
-        let myAttrString = NSMutableAttributedString(string: "Ngày khám:", attributes: fontRegular)
+      let fontRegularWithColor = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor.init(netHex: 0xa0b3bc)]
+
+        let myAttrString = NSMutableAttributedString(string: "Ngày khám : ", attributes: fontRegular)
         myAttrString.append(NSAttributedString(string: "\(creteDate)", attributes: fontBold))
         lbCreateDate.attributedText = myAttrString
 
 
       
         if listBooking.status == 0 {
-        let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
-            myAttrString.append(NSMutableAttributedString(string: "chờ xác nhận khám", attributes: fontRegular))
+        let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontRegular)
+            myAttrString.append(NSMutableAttributedString(string: "Chờ xác nhận khám", attributes: fontRegularWithColor))
             lbStatus.attributedText = myAttrString
         }else if listBooking.status == 1 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
-            myAttrString.append(NSMutableAttributedString(string: "chờ xử lý", attributes: fontRegular))
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontRegular)
+            myAttrString.append(NSMutableAttributedString(string: "Chờ xử lý", attributes: fontRegularWithColor))
             lbStatus.attributedText = myAttrString
         }else if listBooking.status == 2 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
-            myAttrString.append(NSMutableAttributedString(string: "đã có số khám", attributes: fontRegular))
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontRegular)
+            myAttrString.append(NSMutableAttributedString(string: "Đã có số khám", attributes: fontRegularWithColor))
             lbStatus.attributedText = myAttrString
         }
         else if listBooking.status == 3 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
-            myAttrString.append(NSMutableAttributedString(string: "đã thanh toán", attributes: fontRegular))
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontRegular)
+            myAttrString.append(NSMutableAttributedString(string: "Đã thanh toán", attributes: fontRegularWithColor))
             lbStatus.attributedText = myAttrString
         }
         else if listBooking.status == 4 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái:", attributes: fontBold)
-            myAttrString.append(NSMutableAttributedString(string: "đã có kết quả khám", attributes: fontRegular))
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontRegular)
+            myAttrString.append(NSMutableAttributedString(string: "Đã có kết quả khám", attributes: fontRegularWithColor))
             lbStatus.attributedText = myAttrString
         }
     }

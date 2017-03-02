@@ -57,6 +57,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    updateUI()
     requestData()
     // Do any additional setup after loading the view.
   }
@@ -65,10 +66,18 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-  
+  func updateUI(){
+    lbCountry.text = "Việt Nam"
+    timeStampDateOfBirt = Date().timeIntervalSince1970
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd/MM/yyyy"
+    self.lbDateOfYear.text = "\(dateFormatter.string(from: Date()))"
+
+  }
   //MARK: Button
   
   @IBAction func btnGender(_ sender: Any) {
+    self.view.endEditing(true)
     let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     let manTap = UIAlertAction(title: "Nam", style: .default, handler: {
       (alert: UIAlertAction!) -> Void in
@@ -95,6 +104,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     self.present(optionMenu, animated: true, completion: nil)
   }
   @IBAction func btnDateOfBirth(_ sender: Any) {
+    self.view.endEditing(true)
     DatePickerDialog().show(title: "Ngày sinh", doneButtonTitle: "Xong", cancelButtonTitle: "Hủy", datePickerMode: .date) {
       (date) -> Void in
       if date != nil {
@@ -107,6 +117,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
   }
   
   @IBAction func btnJob(_ sender: Any) {
+    self.view.endEditing(true)
     if listJob.count == 0 {
       return
     }
@@ -114,6 +125,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
   }
   
   @IBAction func btnCitizenship(_ sender: Any) {
+    self.view.endEditing(true)
     if listCountry.count == 0 {
       return
     }
@@ -121,6 +133,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
   }
   
   @IBAction func btnCity(_ sender: Any) {
+    self.view.endEditing(true)
     if selectedCountry == nil {
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn quốc tịch", cancelBtnTitle: "Đồng ý")
       return
@@ -129,11 +142,13 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
   }
   
   @IBAction func btnCreateCv(_ sender: Any) {
+    self.view.endEditing(true)
     requestCreateFileUser()
     
   }
   
   @IBAction func btnDistrict(_ sender: Any) {
+    self.view.endEditing(true)
     if selectedProvince == nil {
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn Tỉnh/Thành phố", cancelBtnTitle: "Đồng ý")
       return
@@ -142,6 +157,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
   }
   
   @IBAction func btnZones(_ sender: Any) {
+    self.view.endEditing(true)
     if selectedDistrict == nil {
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn Tỉnh/Thành phố", cancelBtnTitle: "Đồng ý")
       return
@@ -154,6 +170,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
   
   
   @IBAction func btnBack(_ sender: Any) {
+    self.view.endEditing(true)
     _ = self.navigationController?.popViewController(animated: true)
     
   }
@@ -221,11 +238,13 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
           self.selectedJob = self.listJob[0]
         }
         self.lbJob.text = self.selectedJob.name
+        self.lbJob.textColor = UIColor.init(netHex: 0x61abfa)
       }else if picker == self.pickerlistCountry {
         if self.selectedCountry == nil {
           self.selectedCountry = self.listCountry[0]
         }
         self.lbCountry.text = self.selectedCountry.name
+        self.lbCountry.textColor = UIColor.init(netHex: 0x61abfa)
         self.listCurrentProvince = self.listProvince.filter({ (entity) -> Bool in
           entity.countryId == self.selectedCountry.countryId
         })
@@ -234,6 +253,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
           self.selectedProvince = self.listCurrentProvince[0]
         }
         self.lbProvince.text = self.selectedProvince.name
+        self.lbProvince.textColor = UIColor.init(netHex: 0x61abfa)
         self.listCurrentDistric = self.listDistric.filter({ (entity) -> Bool in
           entity.provinceId == self.selectedProvince.provinceId
         })
@@ -242,26 +262,28 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
           self.selectedDistrict = self.listCurrentDistric[0]
         }
         self.lbDistric.text = self.selectedDistrict.name
+        self.lbDistric.textColor = UIColor.init(netHex: 0x61abfa)
         self.requestListZonesById(districtId: String(Int(self.selectedDistrict.districtId)))
       }else if picker == self.pickerlistZone {
         if self.selectedZone == nil {
           self.selectedZone = self.listZone[0]
         }
         self.lbZone.text = self.selectedZone.name
+        self.lbZone.textColor = UIColor.init(netHex: 0x61abfa)
       }
     })
     
     alertView.addAction(action)
     present(alertView, animated: true, completion: nil)
   }
-  
+//  MARK: request to server
   func requestData(){
     requestListJob()
     requestListCountry()
     requestListProvice()
     requestListDistrict()
   }
-  
+
   func requestListJob(){
     Alamofire.request(BOOKING_GET_LIST_JOB, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
@@ -288,10 +310,15 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         if status == 200{
           if let result = response.result.value {
             let jsonData = result as! [NSDictionary]
-            
             for item in jsonData {
               let entity = CountryEntity.init(dictionary: item)
               self.listCountry.append(entity)
+              if entity.name.lowercased() == "việt nam"{
+                self.selectedCountry = entity
+                self.listCurrentProvince = self.listProvince.filter({ (proviceEntity) -> Bool in
+                  proviceEntity.countryId == self.selectedCountry.countryId
+                })
+              }
             }
           }
         }else{
@@ -384,7 +411,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
       let bailsmanPhoneNumber = txtPhoneGuardian.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
       let bailsmanPassportId = txtCmtGuardian.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
       if bailsmanName.isEmpty || bailsmanPhoneNumber.isEmpty || bailsmanPassportId.isEmpty {
-        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nhập đầy đủ thông tin", cancelBtnTitle: "Đóng")
+        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa nhập thông tin Người bảo lãnh đối với hồ sơ dưới 6 tuổi.", cancelBtnTitle: "Đóng")
         return
       }
     }
@@ -428,9 +455,4 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
 
     
   }
-  
-    func setupUi(){
-    
-    }
-  
 }

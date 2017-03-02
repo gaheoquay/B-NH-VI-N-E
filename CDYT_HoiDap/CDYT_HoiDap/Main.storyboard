@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -2845,7 +2845,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tLx-jG-3kK">
-                                <rect key="frame" x="16" y="28" width="288" height="50"/>
+                                <rect key="frame" x="16" y="86" width="288" height="50"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ketqua.png" translatesAutoresizingMaskIntoConstraints="NO" id="nbf-Wk-ZCX">
                                         <rect key="frame" x="8" y="12.5" width="25" height="25"/>
@@ -2885,7 +2885,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="our-Te-bup">
-                                <rect key="frame" x="16" y="86" width="288" height="50"/>
+                                <rect key="frame" x="16" y="144" width="288" height="50"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="P3Q-Nt-cdf">
                                         <rect key="frame" x="8" y="12.5" width="25" height="25"/>
@@ -2925,7 +2925,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nJQ-YO-axw">
-                                <rect key="frame" x="16" y="144" width="288" height="50"/>
+                                <rect key="frame" x="16" y="28" width="288" height="50"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LichKham.png" translatesAutoresizingMaskIntoConstraints="NO" id="bJg-Pl-d4L">
                                         <rect key="frame" x="8" y="12.5" width="25" height="25"/>
@@ -2967,14 +2967,14 @@
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="tLx-jG-3kK" firstAttribute="top" secondItem="nJQ-YO-axw" secondAttribute="bottom" constant="8" id="3gx-Qu-ezo"/>
                             <constraint firstItem="our-Te-bup" firstAttribute="trailing" secondItem="tLx-jG-3kK" secondAttribute="trailing" id="51y-e6-5Pm"/>
                             <constraint firstItem="nJQ-YO-axw" firstAttribute="trailing" secondItem="our-Te-bup" secondAttribute="trailing" id="7Qe-7Z-XGr"/>
                             <constraint firstItem="nJQ-YO-axw" firstAttribute="leading" secondItem="our-Te-bup" secondAttribute="leading" id="Bla-BQ-Oiw"/>
                             <constraint firstItem="our-Te-bup" firstAttribute="top" secondItem="tLx-jG-3kK" secondAttribute="bottom" constant="8" id="HPp-AH-fM4"/>
                             <constraint firstAttribute="trailing" secondItem="tLx-jG-3kK" secondAttribute="trailing" constant="16" id="LOn-Jd-3SV"/>
                             <constraint firstItem="our-Te-bup" firstAttribute="leading" secondItem="tLx-jG-3kK" secondAttribute="leading" id="Uyr-Ay-Pod"/>
-                            <constraint firstItem="tLx-jG-3kK" firstAttribute="top" secondItem="DQp-um-qBO" secondAttribute="bottom" constant="8" id="aEe-ae-cF2"/>
-                            <constraint firstItem="nJQ-YO-axw" firstAttribute="top" secondItem="our-Te-bup" secondAttribute="bottom" constant="8" id="fKh-yJ-A95"/>
+                            <constraint firstItem="nJQ-YO-axw" firstAttribute="top" secondItem="DQp-um-qBO" secondAttribute="bottom" constant="8" id="YIg-VZ-2Q0"/>
                             <constraint firstItem="tLx-jG-3kK" firstAttribute="leading" secondItem="uu3-ah-leW" secondAttribute="leading" constant="16" id="tds-lH-gMB"/>
                         </constraints>
                     </view>
