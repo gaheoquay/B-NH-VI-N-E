@@ -30,9 +30,14 @@ class MoreCommentTableViewCell: UITableViewCell {
         let fontName = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor().hexStringToUIColor(hex: "4A4A4A")]
         let fontAnswer = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor.lightGray]
         let fontCount = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor().hexStringToUIColor(hex: "61abfa")]
-        
-        let myAttrString = NSMutableAttributedString(string: commentEntity.subComment[0].author.nickname, attributes: fontName)
-        myAttrString.append(NSAttributedString(string: " đã trả lời ", attributes: fontAnswer))
+      var myAttrString = NSMutableAttributedString()
+      if commentEntity.subComment[0].author.role != 1 {
+        myAttrString = NSMutableAttributedString(string: commentEntity.subComment[0].author.nickname, attributes: fontName)
+      }else{
+        myAttrString = NSMutableAttributedString(string: commentEntity.subComment[0].author.fullname, attributes: fontName)
+      }
+      
+        myAttrString.append(NSAttributedString(string: "\n đã trả lời ", attributes: fontAnswer))
         myAttrString.append(NSAttributedString.init(string: "+\(commentEntity.subComment.count)", attributes: fontCount))
         nameLbl.attributedText = myAttrString
         
