@@ -23,7 +23,7 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     @IBOutlet weak var viewSearch: UIView!
     
     var delegate : SearchFileViewControllerDelegate?
-    var listFileUser = [FileUserEntity]()
+    var listFileUser = [BookingUserEntity]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +47,7 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell") as! FileCell
-        cell.listUser = listFileUser[indexPath.row]
+        cell.listBooking = listFileUser[indexPath.row]
         cell.setListUser()
         return cell
     }
@@ -65,13 +65,13 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
             "RequestedUserId" : Until.getCurrentId()
         ]
         print(Param)
-        Alamofire.request(GET_PROFILE_USER, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+        Alamofire.request(GET_BOOKING_BY_USERID, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
                     if let result = response.result.value {
                         let jsonData = result as! [NSDictionary]
                         for item in jsonData {
-                            let entity = FileUserEntity.init(dictionary: item)
+                            let entity = BookingUserEntity.init(dictionary: item)
                             self.listFileUser.append(entity)
                         }
                     }

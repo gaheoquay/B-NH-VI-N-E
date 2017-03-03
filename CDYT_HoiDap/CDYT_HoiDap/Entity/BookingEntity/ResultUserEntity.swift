@@ -21,7 +21,7 @@ class ResultUserEntity: NSObject {
     override init() {
         super.init()
     }
-    init(dictionary: NSDictionary) {
+    init(dictionary: [String:Any]) {
         if let value = dictionary["HIS_PatientHistory_ID"] as? Int {
             patienHistoryId = value
         }

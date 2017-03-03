@@ -24,6 +24,7 @@ class FileCell: UITableViewCell {
     var isCheckListService = false
     var isCheckLists = false
     var listUser = FileUserEntity()
+    var listBooking = BookingUserEntity()
     var indexPath = IndexPath()
     
     override func awakeFromNib() {
@@ -50,17 +51,24 @@ class FileCell: UITableViewCell {
     }
     
     func setListUser(){
-        lbName.text = listUser.patientName
+        lbName.text = listBooking.profile.patientName
         
-        let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
         let fontWithColor = [ NSFontAttributeName: UIFont.systemFont(ofSize: 12),NSForegroundColorAttributeName: UIColor.init(netHex: 0x878787)]
         
-        let myAttrString = NSMutableAttributedString(string: "\(listUser.age)", attributes: fontBold)
+        let myAttrString = NSMutableAttributedString(string: "\(listBooking.profile.age)", attributes: fontWithColor)
         myAttrString.append(NSAttributedString(string: " tuổi", attributes: fontWithColor))
         lbPrice.attributedText = myAttrString
         
+    }
+    
+    func setSearchListUser(){
+        lbName.text = listUser.patientName
         
- 
+        let fontWithColor = [ NSFontAttributeName: UIFont.systemFont(ofSize: 12),NSForegroundColorAttributeName: UIColor.init(netHex: 0x878787)]
+        
+        let myAttrString = NSMutableAttributedString(string: "\(listUser.age)", attributes: fontWithColor)
+        myAttrString.append(NSAttributedString(string: " tuổi", attributes: fontWithColor))
+        lbPrice.attributedText = myAttrString
     }
     
     func isCheck(ischeckDelete: Bool){

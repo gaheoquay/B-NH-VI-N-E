@@ -48,7 +48,7 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
         if listFileUser.count > 0{
         cell.isCheck(ischeckDelete: ischeckDelete)
         cell.listUser = listFileUser[indexPath.row]
-        cell.setListUser()
+        cell.setSearchListUser()
         cell.delegate = self
         }else {
             

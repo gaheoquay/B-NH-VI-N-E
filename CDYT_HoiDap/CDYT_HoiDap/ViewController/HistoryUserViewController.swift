@@ -125,6 +125,8 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
         indexProfile = indexPath
         listBookingUser.removeAll()
         requestBookingUser()
+        print(indexProfile.row)
+
     }
     func gotoDetailFileUser() {
         
