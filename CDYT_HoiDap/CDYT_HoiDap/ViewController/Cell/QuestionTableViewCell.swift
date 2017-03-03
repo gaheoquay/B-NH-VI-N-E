@@ -80,18 +80,14 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
         }else {
             layoutBottomViewCate.constant = 8
             if isHiddenCateAndDoctor {
-                viewCate.isHidden = false
-                viewDoctor.isHidden = false
-                imgApproval.isHidden = false
-                btnApproval.isHidden = false
                 if feedEntity.postEntity.isClassified {
                     lbCate.text = feedEntity.cateGory.name
                     lbDoctor.text = feedEntity.assigneeEntity.fullname
                     btnApproval.setTitle("Đã \nduyệt", for: .normal)
                     btnApproval.setTitleColor(colorbtnUnapproval, for: .normal)
-                    btnApproval.isEnabled = false
-                    btnCate.isEnabled = false
-                    btnDoctor.isEnabled = false
+//                    btnApproval.isEnabled = false
+//                    btnCate.isEnabled = false
+//                    btnDoctor.isEnabled = false
                     imgApproval.image = UIImage(named: "DaDuyet_1.png")
                 }else if feedEntity.cateGory.id != "" {
                     if feedEntity.assigneeEntity.id == "" {
@@ -116,7 +112,10 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
                     btnApproval.setTitleColor(colorbtnApproval, for: .normal)
                     imgApproval.image = UIImage(named: "Duyet_1.png")
                 }
-                
+              viewCate.isHidden = false
+              viewDoctor.isHidden = false
+              imgApproval.isHidden = false
+              btnApproval.isHidden = false
             }else {
                 viewCate.isHidden = true
                 viewDoctor.isHidden = true
