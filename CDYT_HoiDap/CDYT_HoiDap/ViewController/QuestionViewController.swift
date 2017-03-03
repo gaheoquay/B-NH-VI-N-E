@@ -477,7 +477,18 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
       idDoc = entity.assigneeEntity.id
       nameDoc = entity.assigneeEntity.fullname
       indexPathOfCell = indexPath
-      requestApproval()
+      if isAssigned {
+        let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có muốn duyệt lại không?", preferredStyle: UIAlertControllerStyle.alert)
+        let actionOk = UIAlertAction.init(title: "Đồng ý", style: UIAlertActionStyle.default, handler: { (action) in
+          self.requestApproval()
+        })
+        let actionNo = UIAlertAction.init(title: "Không", style: UIAlertActionStyle.cancel, handler: nil)
+        alert.addAction(actionOk)
+        alert.addAction(actionNo)
+        self.present(alert, animated: true, completion: nil)
+      }else{
+        requestApproval()
+      }
     }else{
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn khoa và bác sĩ", cancelBtnTitle: "Đóng")
     }
