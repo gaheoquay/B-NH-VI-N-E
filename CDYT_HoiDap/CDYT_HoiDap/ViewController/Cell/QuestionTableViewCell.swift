@@ -138,7 +138,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
         lbCommentCount.text = String(feedEntity.commentCount)
         let fontRegular = [NSFontAttributeName: UIFont.systemFont(ofSize: 12)]
         let fontWithColor = [ NSFontAttributeName: UIFont.systemFont(ofSize: 12),NSForegroundColorAttributeName: UIColor.init(netHex: 0x87baef)]
-        let myAttrString = NSMutableAttributedString(string: "Hỏi bởi : ", attributes: fontRegular)
+        let myAttrString = NSMutableAttributedString(string: "Hỏi bởi ", attributes: fontRegular)
         myAttrString.append(NSAttributedString(string: feedEntity.authorEntity.nickname, attributes: fontWithColor))
         lbAuthor.attributedText = myAttrString
         lbCreateDate.text = String().convertTimeStampWithDateFormat(timeStamp: feedEntity.postEntity.createdDate, dateFormat: "dd/MM/yy HH:mm")

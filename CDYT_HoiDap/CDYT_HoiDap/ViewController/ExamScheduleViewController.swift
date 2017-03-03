@@ -62,7 +62,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         viewcontroller.name = listallUSer[index.row].profile.patientName
         viewcontroller.listCheckin = listallUSer[index.row].booking.checkInResult
         viewcontroller.listBooking = listallUSer[index.row].booking
-        viewcontroller.dateExam = listallUSer[index.row].profile.createdDate
+        viewcontroller.dateExam = listallUSer[index.row].booking.bookingDate
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     

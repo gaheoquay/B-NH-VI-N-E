@@ -26,6 +26,9 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5dM-OZ-4EX">
                         <rect key="frame" x="8" y="32" width="254" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="O4h-9W-NZd"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.49411764705882355" green="0.82745098039215681" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -62,9 +65,11 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="heightLbPrice" destination="O4h-9W-NZd" id="82K-fw-xzm"/>
                 <outlet property="imgDelete" destination="2ls-Qv-njc" id="bc5-xM-nnD"/>
                 <outlet property="lbName" destination="zif-Q6-tvB" id="fKZ-MX-H68"/>
                 <outlet property="lbPrice" destination="5dM-OZ-4EX" id="Q7H-D2-q2y"/>
+                <outlet property="marginToplbName" destination="SFC-bQ-t0v" id="YiB-gn-5MC"/>
                 <outlet property="viewGotoCreateCV" destination="duf-2N-xWR" id="TLx-eh-Kic"/>
             </connections>
             <point key="canvasLocation" x="-71" y="-29"/>

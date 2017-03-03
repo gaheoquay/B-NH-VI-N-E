@@ -44,8 +44,6 @@
 		0F9C463D1E603F4200DCFE46 /* LichSuGrey   .png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C46381E603F4200DCFE46 /* LichSuGrey   .png */; };
 		0F9C463E1E603F4200DCFE46 /* Profile_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C46391E603F4200DCFE46 /* Profile_1.png */; };
 		0F9C46401E60462700DCFE46 /* FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C463F1E60462700DCFE46 /* FileViewController.swift */; };
-		0F9CDAFF1E69180F007F0E6C /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9CDAFD1E69180F007F0E6C /* HistoryCell.swift */; };
-		0F9CDB001E69180F007F0E6C /* HistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F9CDAFE1E69180F007F0E6C /* HistoryCell.xib */; };
 		0F9ED83A1E5BEB38001F2FC2 /* DaDuyet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */; };
 		0F9ED83B1E5BEB38001F2FC2 /* Duyet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */; };
 		0FA5806A1E65D5D4001B4E3C /* CheckInResultEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA580691E65D5D4001B4E3C /* CheckInResultEntity.swift */; };
@@ -303,8 +301,6 @@
 		0F9C46381E603F4200DCFE46 /* LichSuGrey   .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LichSuGrey   .png"; sourceTree = "<group>"; };
 		0F9C46391E603F4200DCFE46 /* Profile_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Profile_1.png; sourceTree = "<group>"; };
 		0F9C463F1E60462700DCFE46 /* FileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileViewController.swift; sourceTree = "<group>"; };
-		0F9CDAFD1E69180F007F0E6C /* HistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
-		0F9CDAFE1E69180F007F0E6C /* HistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryCell.xib; sourceTree = "<group>"; };
 		0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DaDuyet_1.png; sourceTree = "<group>"; };
 		0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Duyet_1.png; sourceTree = "<group>"; };
 		0FA580691E65D5D4001B4E3C /* CheckInResultEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInResultEntity.swift; sourceTree = "<group>"; };
@@ -556,8 +552,6 @@
 				0F9C461C1E60055200DCFE46 /* ServiceCell.xib */,
 				0F52D2871E634889006C57E2 /* FileCell.swift */,
 				0F52D2881E634889006C57E2 /* FileCell.xib */,
-				0F9CDAFD1E69180F007F0E6C /* HistoryCell.swift */,
-				0F9CDAFE1E69180F007F0E6C /* HistoryCell.xib */,
 			);
 			name = "Service Cell";
 			sourceTree = "<group>";
@@ -1203,7 +1197,6 @@
 				8BD49F0B1E48215500C98E74 /* MemberListTableViewCell.xib in Resources */,
 				A6D083C71E12747D007EA4D9 /* QuestionTagTableViewCell.xib in Resources */,
 				8BD49F5E1E482D1100C98E74 /* ParticipantListViewController.xib in Resources */,
-				0F9CDB001E69180F007F0E6C /* HistoryCell.xib in Resources */,
 				0F9C46281E6008A200DCFE46 /* ChonNgay.png in Resources */,
 				8B3A134D1E10F454005DBC6E /* DaHoi_Button0.png in Resources */,
 				0F36980D1E54013C004B028D /* Ask copy.png in Resources */,
@@ -1419,7 +1412,6 @@
 				A6D083C31E121A2E007EA4D9 /* UserEntity.swift in Sources */,
 				8BD49F0F1E4824EA00C98E74 /* Constants.swift in Sources */,
 				8B3A13781E10F454005DBC6E /* RAMFrameItemAnimation.swift in Sources */,
-				0F9CDAFF1E69180F007F0E6C /* HistoryCell.swift in Sources */,
 				8B3A136F1E10F454005DBC6E /* DatePickerDialog.swift in Sources */,
 				0F81E4AE1E67399700A7C18F /* DetailResultUserViewController.swift in Sources */,
 				0F9C46401E60462700DCFE46 /* FileViewController.swift in Sources */,

@@ -19,6 +19,8 @@ class FileCell: UITableViewCell {
     @IBOutlet weak var lbPrice: UILabel!
     @IBOutlet weak var imgDelete: UIImageView!
     @IBOutlet weak var viewGotoCreateCV: UIView!
+    @IBOutlet weak var marginToplbName: NSLayoutConstraint!
+    @IBOutlet weak var heightLbPrice: NSLayoutConstraint!
     
     var delegate : FileCellDelegate?
     var isCheckListService = false
@@ -47,6 +49,8 @@ class FileCell: UITableViewCell {
         lbName.text = String().convertTimeStampWithDateFormat(timeStamp: entity.createDate, dateFormat: "dd/MM/YYYY")
         lbPrice.isHidden = true
         imgDelete.image = UIImage(named: "DetailEditUp.png")
+        heightLbPrice.constant = 0
+        marginToplbName.constant = 24
     }
     
     func setListUser(){
