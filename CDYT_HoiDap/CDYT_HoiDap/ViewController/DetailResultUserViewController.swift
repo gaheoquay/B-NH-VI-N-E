@@ -21,7 +21,7 @@ class DetailResultUserViewController: UIViewController {
         super.viewDidLoad()
         requestFinishCheckup()
         setupTable()
-        lbCodeHospital.text = String(listBooking.checkInResult.patientHistory)
+        lbCodeHospital.text = String(listBooking.checkInResult.patinentId)
         // Do any additional setup after loading the view.
     }
 
@@ -47,7 +47,7 @@ class DetailResultUserViewController: UIViewController {
                 if status == 200{
                     if let result = response.result.value {
                         let jsonData = result as! NSDictionary
-                        self.listReult = ResultUserEntity.init(dictionary: jsonData)
+                        self.listReult = ResultUserEntity.init(dictionary: jsonData as! [String : Any])
                     }
                 }
                 else{
@@ -63,19 +63,19 @@ class DetailResultUserViewController: UIViewController {
     @IBAction func btnInitialDiagnosis(_ sender: Any) {
         let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailSickViewController") as! DetailSickViewController
         viewcontroller.titleUser = "Chuẩn đoán ban đầu"
-        viewcontroller.content = listReult.diseaseDiagnostic_ID
+        viewcontroller.content = listReult.firt_diagnostic
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     @IBAction func btnAmount(_ sender: Any) {
         let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailSickViewController") as! DetailSickViewController
         viewcontroller.titleUser = "Tiên lượng"
-        viewcontroller.content = listReult.diseaseDiagnostic_ID
+        viewcontroller.content = listReult.prognosis
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     @IBAction func btnEvolutionSick(_ sender: Any) {
         let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailSickViewController") as! DetailSickViewController
         viewcontroller.titleUser = "Diễn biến bệnh"
-        viewcontroller.content = listReult.diseaseDiagnostic_ID
+        viewcontroller.content = listReult.diseaseProgress
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     @IBAction func btnDiagnosisSick(_ sender: Any) {
@@ -87,14 +87,14 @@ class DetailResultUserViewController: UIViewController {
     @IBAction func btnAdvice(_ sender: Any) {
         let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailSickViewController") as! DetailSickViewController
         viewcontroller.titleUser = "Lời dặn"
-        viewcontroller.content = listReult.diseaseDiagnostic_ID
+        viewcontroller.content = listReult.doctorAdvice_ID
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     
     @IBAction func btnDianosisDiffreent(_ sender: Any) {
         let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailSickViewController") as! DetailSickViewController
         viewcontroller.titleUser = "Chuẩn đoán khác"
-        viewcontroller.content = listReult.diseaseDiagnostic_ID
+        viewcontroller.content = listReult.other_DiseaseDiagnostic_ID
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     
@@ -102,5 +102,7 @@ class DetailResultUserViewController: UIViewController {
     @IBAction func btnBack(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)
     }
+    
+   
 
 }

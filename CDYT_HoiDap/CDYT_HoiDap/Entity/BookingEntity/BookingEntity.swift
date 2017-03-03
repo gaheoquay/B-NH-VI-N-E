@@ -18,6 +18,7 @@ class BookingEntity: NSObject {
     var status = 0
     var checkInResult = CheckInResultEntity()
     var paymentResult = ""
+    var checkupResult = ResultUserEntity()
     
     override init() {
         super.init()
@@ -49,6 +50,12 @@ class BookingEntity: NSObject {
         }
         if let value = dictionary["PaymentResult"] as? String {
             paymentResult = value
+        }
+        if let value = dictionary["CheckupResult"] as? String {
+            if !value.isEmpty {
+                let dic = value.convertStringToDictionary()
+                checkupResult = ResultUserEntity.init(dictionary: dic!)
+            }
         }
 
     }
