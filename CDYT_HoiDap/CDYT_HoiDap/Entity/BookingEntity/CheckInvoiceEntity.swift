@@ -18,7 +18,7 @@ class CheckInvoiceEntity: NSObject {
         super.init()
     }
     
-    init(dictionary: NSDictionary) {
+    init(dictionary: [String: Any]) {
         if let value = dictionary["PatientHistory"] as? Int {
             patientHistory = value
         }

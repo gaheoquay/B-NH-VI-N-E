@@ -9,7 +9,7 @@
 import UIKit
 protocol ExamScheduleCellDelegate {
     func showDetailStatus(index: IndexPath)
-    func deleteBooking()
+    func deleteBooking(index: IndexPath)
     func accepBooking()
     func gotoDetailUser(index: IndexPath)
 }
@@ -18,23 +18,26 @@ class ExamScheduleCell: UITableViewCell {
 
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var lbCreateDate: UILabel!
-    @IBOutlet weak var lbStatus: UILabel!
     @IBOutlet weak var viewDetails: UIView!
-    @IBOutlet weak var viewStatus: UIView!
     @IBOutlet weak var viewShowDetail: UIView!
     @IBOutlet weak var heightViewDetail: NSLayoutConstraint!
     @IBOutlet weak var marginBottomViewDetail: NSLayoutConstraint!
+    @IBOutlet weak var btnCancelBooking: UIButton!
+    @IBOutlet weak var btnAccepBooking: UIButton!
+    @IBOutlet weak var centerCanCel: NSLayoutConstraint!
+    @IBOutlet weak var centerAccep: NSLayoutConstraint!
+    @IBOutlet weak var btnStatus: UIButton!
     
     var delegate: ExamScheduleCellDelegate?
     var indexPath = IndexPath()
-    
+    var userEntity = AllUserEntity()
     //test
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         viewDetails.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showDetailsUsers)))
-        viewStatus.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showDetailStatus)))
+        
         
     }
 
@@ -48,23 +51,23 @@ class ExamScheduleCell: UITableViewCell {
         delegate?.gotoDetailUser(index: indexPath)
     }
     
-  func setData(entity:AllUserEntity){
-    let profileUser = entity.profile
-    let listBooking = entity.booking
+  func setData(){
+    let curentDate = Date()
     
-    if entity.isCheckSelect == false {
+    if userEntity.isCheckSelect == false {
         viewShowDetail.isHidden = true
         marginBottomViewDetail.constant = 0
-        entity.isCheckSelect = true
+        print(userEntity.isCheckSelect)
     }else {
         viewShowDetail.isHidden = false
         marginBottomViewDetail.constant = 90
-        entity.isCheckSelect = false
+        print(userEntity.isCheckSelect)
     }
     
-      lbName.text = profileUser.patientName
+   
+      lbName.text = userEntity.profile.patientName
     
-        let creteDate = String().convertTimeStampWithDateFormat(timeStamp: listBooking.bookingDate/1000, dateFormat: "dd/MM/YYYY")
+        let creteDate = String().convertTimeStampWithDateFormat(timeStamp: userEntity.booking.bookingDate/1000, dateFormat: "dd/MM/YYYY")
         let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
         let fontRegular = [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
       let fontRegularWithColor = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor.init(netHex: 0xa0b3bc)]
@@ -75,43 +78,61 @@ class ExamScheduleCell: UITableViewCell {
 
 
       
-        if listBooking.status == 0 {
+        if userEntity.booking.status == 0 {
         let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontRegular)
             myAttrString.append(NSMutableAttributedString(string: "Chờ xác nhận khám", attributes: fontRegularWithColor))
-            lbStatus.attributedText = myAttrString
-        }else if listBooking.status == 1 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontRegular)
+            btnStatus.setTitle(myAttrString.string, for: .normal)
+            let stringCurentDate = String().convertDatetoString(date: curentDate, dateFormat: "dd/MM/YYYY")
+            let stringBookingDate = String().convertTimeStampWithDateFormat(timeStamp: userEntity.booking.bookingDate / 1000, dateFormat: "dd/MM/YYYY")
+            print(stringBookingDate)
+            if stringBookingDate > stringCurentDate || stringBookingDate < stringCurentDate {
+                btnAccepBooking.isHidden = true
+                centerCanCel.constant = 0
+            }else  {
+                btnAccepBooking.isHidden = false
+                centerCanCel.constant = -50
+            }
+            btnStatus.isEnabled = true
+        }else if userEntity.booking.status == 1 {
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontBold)
             myAttrString.append(NSMutableAttributedString(string: "Chờ xử lý", attributes: fontRegularWithColor))
-            lbStatus.attributedText = myAttrString
-        }else if listBooking.status == 2 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontRegular)
+            btnStatus.setTitle(myAttrString.string, for: .normal)
+            btnStatus.isEnabled = false
+           
+        }else if userEntity.booking.status == 2 {
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontBold)
             myAttrString.append(NSMutableAttributedString(string: "Đã có số khám", attributes: fontRegularWithColor))
-            lbStatus.attributedText = myAttrString
+            btnStatus.setTitle(myAttrString.string, for: .normal)
+            btnStatus.isEnabled = false
+
         }
-        else if listBooking.status == 3 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontRegular)
+        else if userEntity.booking.status == 3 {
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontBold)
             myAttrString.append(NSMutableAttributedString(string: "Đã thanh toán", attributes: fontRegularWithColor))
-            lbStatus.attributedText = myAttrString
+            btnStatus.setTitle(myAttrString.string, for: .normal)
+            btnStatus.isEnabled = false
+
         }
-        else if listBooking.status == 4 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontRegular)
+        else if userEntity.booking.status == 4 {
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontBold)
             myAttrString.append(NSMutableAttributedString(string: "Đã có kết quả khám", attributes: fontRegularWithColor))
-            lbStatus.attributedText = myAttrString
+            btnStatus.titleLabel?.attributedText = myAttrString
         }
         contentView.layoutIfNeeded()
     }
     
     @IBAction func btnCancelExam(_ sender: Any) {
-            delegate?.deleteBooking()
+            delegate?.deleteBooking(index: indexPath)
     }
     
     @IBAction func btnAccept(_ sender: Any) {
             delegate?.accepBooking()
     }
     
-    func showDetailStatus(){
+  
+    @IBAction func btnShowDeitailStatus(_ sender: Any) {
         delegate?.showDetailStatus(index: indexPath)
+        
     }
-    
     
 }

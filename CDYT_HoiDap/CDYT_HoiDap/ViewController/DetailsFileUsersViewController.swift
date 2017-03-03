@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol DetailsFileUsersViewControllerDelegate {
+    func reloadDataExam()
+}
+
+
 class DetailsFileUsersViewController: UIViewController {
     
     
@@ -26,6 +31,7 @@ class DetailsFileUsersViewController: UIViewController {
     var checkInvoice : CheckInvoiceEntity!
     var name = ""
     var dateExam: Double = 0
+    var delegate: DetailsFileUsersViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +46,11 @@ class DetailsFileUsersViewController: UIViewController {
     
     @IBAction func btnBack(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)
+        delegate?.reloadDataExam()
+        self.requestUpatePaymen()
     }
     
-        
+    
     func setupView(){
         
         let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
@@ -79,7 +87,7 @@ class DetailsFileUsersViewController: UIViewController {
                 if status == 200{
                     if let result = response.result.value {
                         let jsonData = result as! NSDictionary
-                        self.checkInvoice = CheckInvoiceEntity.init(dictionary: jsonData)
+                        self.checkInvoice = CheckInvoiceEntity.init(dictionary: jsonData as! [String : Any])
                         if self.checkInvoice.amount != 0 {
                             UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Mã hoá đơn của bạn : \(self.checkInvoice.invoiceNo) \n Số tiền đóng thực tế : \(self.checkInvoice.amount)", cancelBtnTitle: "Đóng")
                         }else{
@@ -96,6 +104,32 @@ class DetailsFileUsersViewController: UIViewController {
             }
         }
 
+    }
+    
+    func requestUpatePaymen(){
+        
+        let Param : [String : Any] = [
+            "Auth" : Until.getAuthKey(),
+            "PatientHistoryId" : listCheckin.patientHistory,
+            "BookingId" : listBooking.id,
+            "PaymentResult": listBooking.jsonStringPaymentResult
+        ]
+        print(Param)
+        Alamofire.request(UPDATE_BOOKING_AFTER_PAYMEN, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! NSDictionary
+                        self.checkInvoice = CheckInvoiceEntity.init(dictionary: jsonData as! [String : Any])
+                    }
+                }
+                else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+        }
     }
         
 }

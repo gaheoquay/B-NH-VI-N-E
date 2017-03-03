@@ -1755,7 +1755,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hKq-4y-tCO"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="d0b-Tf-VMt">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6LD-NL-pVC">
@@ -1814,10 +1814,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RzO-kE-tX9">
-                                <rect key="frame" x="0.0" y="66" width="320" height="502"/>
+                                <rect key="frame" x="0.0" y="66" width="320" height="734"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWQ-El-reC" customClass="TPKeyboardAvoidingScrollView">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="502"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="734"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3VG-dL-Wgz">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2648,6 +2648,8 @@
                             <constraint firstItem="6LD-NL-pVC" firstAttribute="top" secondItem="d0b-Tf-VMt" secondAttribute="top" id="zJc-9m-Kci"/>
                         </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="800"/>
                     <connections>
                         <outlet property="lbCountry" destination="WC0-CO-Rqg" id="z8h-dL-c7y"/>
                         <outlet property="lbDateOfYear" destination="djv-4O-326" id="awu-zg-m5o"/>
@@ -2663,6 +2665,9 @@
                         <outlet property="txtNameGuardian" destination="VoB-1q-2l2" id="mAy-JP-8dq"/>
                         <outlet property="txtPhoneGuardian" destination="ENk-Lo-DR8" id="NdA-Z0-xML"/>
                         <outlet property="txtPhoneNumber" destination="9pp-LG-0a2" id="67U-je-0bu"/>
+                        <outlet property="viewCmtGuardian" destination="gFJ-aO-FbK" id="BNm-dn-rwB"/>
+                        <outlet property="viewNameGuardian" destination="PyQ-kf-Y2n" id="Oxv-Mu-0Hk"/>
+                        <outlet property="viewPhoneGuardian" destination="U1Z-2s-q7K" id="cqx-YI-FTL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PbP-A1-fNm" userLabel="First Responder" sceneMemberID="firstResponder"/>

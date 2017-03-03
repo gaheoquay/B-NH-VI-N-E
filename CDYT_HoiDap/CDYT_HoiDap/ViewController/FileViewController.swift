@@ -141,11 +141,11 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
     }
     
     //MARK: Delegate
-    func gotoDetailFileUser() {
+    func gotoDetailFileUser(indexPath: IndexPath) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "CreateCvViewController") as! CreateCvViewController
         viewcontroller.delegate = self
-        viewcontroller.infoUser = listFileUser[0]
+        viewcontroller.infoUser = listFileUser[indexPath.row]
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     
@@ -167,20 +167,24 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
             "RequestedUserId" : Until.getCurrentId(),
             "ListProfileId" : [entity.id]
         ]
+        Until.showLoading()
         print(Param)
         Alamofire.request(DELELTE_PROFILE, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
                         self.listFileUser.remove(at: index)
+                        self.tbListFile.reloadData()
                         self.setUpUIView()
                 }
                 else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
+                Until.hideLoading()
             }else{
                 UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
             }
         }
+        
 
     }
     

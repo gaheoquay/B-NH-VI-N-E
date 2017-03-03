@@ -21,7 +21,7 @@ class DetailResultUserViewController: UIViewController {
         super.viewDidLoad()
         requestFinishCheckup()
         setupTable()
-        lbCodeHospital.text = String(listBooking.checkInResult.patinentId)
+        lbCodeHospital.text = String(listBooking.checkInResult.patientHistory)
         // Do any additional setup after loading the view.
     }
 

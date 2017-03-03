@@ -130,10 +130,9 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
         print(indexProfile.row)
 
     }
-    func gotoDetailFileUser() {
+    func gotoDetailFileUser(indexPath: IndexPath) {
         
-    }
-    
+    } 
     
     func gotoDetailHistory(index: IndexPath) {
         let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailResultUserViewController") as! DetailResultUserViewController

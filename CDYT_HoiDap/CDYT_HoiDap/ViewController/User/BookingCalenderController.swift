@@ -99,16 +99,15 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
       "RequestedUserId" : Until.getCurrentId(),
       "ProfileId" : listBooking.profile.id,
       "ServiceId" : listService.serviceId,
-      "BookingDate" : String(format:"%.0f",dateBook*1000)
+      "BookingDate" : String(format:"%.0f",dateBook * 1000)
     ]
-    
+    print(param)
     Alamofire.request(ADD_BOOKING, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
         if status == 200{
           if let result = response.result.value {
             let jsonData = result as! NSDictionary
             self.listBook = BookingEntity.init(dictionary: jsonData)
-            self.requestCheckin()
           }
           UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Gửi đặt lịch thành công", cancelBtnTitle: "Đóng")
         }else{
@@ -145,6 +144,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     param["DepartmentId"] = String(format: "%0.f", listService.roomId)
     param["PhoneGuardian"] = listBooking.profile.bailsmanPhoneNumber
     print(param)
+    Until.showLoading()
     Alamofire.request(CHECK_IN, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
         print(status)
@@ -153,6 +153,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
         }else{
           UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
         }
+        Until.hideLoading()
       }else{
         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
       }
@@ -167,7 +168,14 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     }else if dateBook == 0 {
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn ngày tháng", cancelBtnTitle: "Đóng")
     }else {
-      requestBoking()
+       let currentDateString = String().convertDatetoString(date: currentDate, dateFormat: "dd/MM/YYYY")
+       let dateBookingString = String().convertTimeStampWithDateFormat(timeStamp: dateBook, dateFormat: "dd/MM/YYYY")
+        if currentDateString == dateBookingString {
+           requestBoking()
+            requestCheckin()
+        }else {
+            requestBoking()
+        }
     }
   }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 protocol FileCellDelegate {
-    func gotoDetailFileUser()
+    func gotoDetailFileUser(indexPath: IndexPath)
     func deleteFileUser(indexPath: IndexPath)
     func gotoDetailHistory(index: IndexPath)
 }
@@ -85,7 +85,7 @@ class FileCell: UITableViewCell {
     }
     
     func gotoDetailFileUser(){
-        delegate?.gotoDetailFileUser()
+        delegate?.gotoDetailFileUser(indexPath: indexPath)
     }
     
     func deleteFile(){

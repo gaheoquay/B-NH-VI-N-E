@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ExamScheduleCellDelegate{
+class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,ExamScheduleCellDelegate,DetailsFileUsersViewControllerDelegate{
 
     @IBOutlet weak var tbListExamSchedule: UITableView!
     @IBOutlet weak var imageCalendar: UIImageView!
@@ -49,11 +49,14 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
       cell.indexPath = indexPath
       cell.delegate = self
       if listallUSer.count > 0 {
-        cell.setData(entity: listallUSer[indexPath.row])
+        cell.userEntity = listallUSer[indexPath.row]
+
       }
+        cell.setData()
         return cell
     }
-   
+    
+   //MARK: delegate
     
     func gotoDetailUser(index: IndexPath) {
         let main = UIStoryboard(name: "Main", bundle: nil)
@@ -62,31 +65,33 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         viewcontroller.name = listallUSer[index.row].profile.patientName
         viewcontroller.listCheckin = listallUSer[index.row].booking.checkInResult
         viewcontroller.listBooking = listallUSer[index.row].booking
-        viewcontroller.dateExam = listallUSer[index.row].booking.bookingDate
+        viewcontroller.dateExam = listallUSer[index.row].booking.bookingDate / 1000
+        viewcontroller.delegate = self
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     
     func showDetailStatus(index: IndexPath) {
-        tbListExamSchedule.reloadRows(at: [index], with: .automatic)
-        indexBooking = index
         if listallUSer[index.row].isCheckSelect == false {
             listallUSer[index.row].isCheckSelect = true
-            print(listallUSer[index.row].isCheckSelect)
-        }else {
+        }else{
             listallUSer[index.row].isCheckSelect = false
-            print(listallUSer[index.row].isCheckSelect)
         }
-        listallUSer[index.row].isCheckSelect = !listallUSer[index.row].isCheckSelect
+//         listallUSer[index.row].isCheckSelect = !listallUSer[index.row].isCheckSelect
+        tbListExamSchedule.reloadRows(at: [index], with: .automatic)
+        print(1)
     }
     
-    func deleteBooking() {
-        reuqestDeleteBooking()
+    func deleteBooking(index: IndexPath) {
+        reuqestDeleteBooking(index: index)
     }
     
     func accepBooking() {
         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Chức năng đang hoàn thiện \n Vui lòng thử lại sau", cancelBtnTitle: "Huỷ")
     }
     
+    func reloadDataExam() {
+        tbListExamSchedule.reloadData()
+    }
     //MARK: setupUI
     
     func reloadData(){
@@ -131,7 +136,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
             lbCalendar.isHidden = false
         }
         
-        
+        self.tbListExamSchedule.reloadData()
 
     }
     
@@ -169,20 +174,20 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         self.tbListExamSchedule.infiniteScrollingView?.stopAnimating()
     }
     
-    func reuqestDeleteBooking(){
+    func reuqestDeleteBooking(index: IndexPath){
         
         let Param : [String : Any] = [
             "Auth": Until.getAuthKey(),
             "RequestedUserId" : Until.getCurrentId(),
-            "BookingId" : listallUSer[indexBooking.row].booking.id
+            "BookingId" : listallUSer[index.row].booking.id
         ]
         Until.showLoading()
 
         Alamofire.request(DELETE_BOOKING, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
-                    self.listallUSer.removeAll()
-                    self.requestBooking()
+                    self.listallUSer.remove(at: index.row)
+                    self.tbListExamSchedule.reloadData()
                     Until.hideLoading()
 
                 }else{
