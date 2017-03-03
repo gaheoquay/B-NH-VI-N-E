@@ -138,6 +138,9 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn quốc tịch", cancelBtnTitle: "Đồng ý")
       return
     }
+    if listCurrentProvince.count == 0 {
+      return
+    }
     creatAlert(title: "Tỉnh/Thành phố", picker: pickerlistProvince)
   }
   
@@ -151,6 +154,9 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     self.view.endEditing(true)
     if selectedProvince == nil {
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn Tỉnh/Thành phố", cancelBtnTitle: "Đồng ý")
+      return
+    }
+    if listCurrentDistric.count == 0 {
       return
     }
     creatAlert(title: "Quận huyện", picker: pickerlistDistric)
@@ -427,7 +433,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     userEntity.dictrictName = selectedDistrict.name
     userEntity.zoneId = String(format: "%.0f",selectedZone.zoneId)
     userEntity.zoneName = selectedZone.name
-    userEntity.address = selectedCountry.name + " " + selectedProvince.name + " " + selectedDistrict.name + " " + selectedZone.name
+    userEntity.address = selectedZone.name + " " + selectedDistrict.name + " " + selectedProvince.name + " " + selectedCountry.name
     userEntity.bailsmanName = txtNameGuardian.text!
     userEntity.bailsmanPhoneNumber = txtPhoneGuardian.text!
     userEntity.bailsmanPassportId = txtCmtGuardian.text!

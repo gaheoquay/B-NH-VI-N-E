@@ -69,7 +69,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
         let realm = try! Realm()
         let users = realm.objects(UserEntity.self).first
         
-        if users?.role == 0 || users?.role == 1  {
+        if users == nil || users?.role == 0 || users?.role == 1  {
             viewCate.isHidden = true
             viewDoctor.isHidden = true
             imgApproval.isHidden = true

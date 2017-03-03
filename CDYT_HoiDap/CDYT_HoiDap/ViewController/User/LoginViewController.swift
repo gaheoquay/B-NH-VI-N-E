@@ -19,8 +19,7 @@ class LoginViewController: UIViewController {
   @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var registerBtn: UIButton!
-    var cannotBack = false
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,11 +31,6 @@ class LoginViewController: UIViewController {
     }
     
     func setupUI(){
-      if cannotBack {
-        btnBack.isHidden = true
-      }else{
-        btnBack.isHidden = false
-      }
         loginBtn.layer.cornerRadius = 5
         loginBtn.clipsToBounds = true
         

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  TỪ KHÓA NỔI BẬT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ug-LF-M2W">
-                        <rect key="frame" x="22" y="22" width="134" height="24"/>
+                        <rect key="frame" x="8" y="22" width="134" height="24"/>
                         <color key="backgroundColor" red="0.96470588235294119" green="0.65098039215686276" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="lLz-6S-cVk"/>
@@ -30,7 +30,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qde-fw-m5O">
-                        <rect key="frame" x="22" y="63" width="276" height="53"/>
+                        <rect key="frame" x="8" y="63" width="304" height="53"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="53" id="OEw-lD-z0B"/>
@@ -42,10 +42,10 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="qde-fw-m5O" secondAttribute="bottom" constant="18" id="0Ip-dB-GlT"/>
                     <constraint firstItem="qde-fw-m5O" firstAttribute="top" secondItem="3Ug-LF-M2W" secondAttribute="bottom" constant="17" id="3lj-5q-1hS"/>
-                    <constraint firstItem="3Ug-LF-M2W" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="22" id="I4Q-T9-oVa"/>
+                    <constraint firstItem="3Ug-LF-M2W" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="I4Q-T9-oVa"/>
                     <constraint firstItem="3Ug-LF-M2W" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="22" id="WJf-Es-hkU"/>
                     <constraint firstItem="qde-fw-m5O" firstAttribute="leading" secondItem="3Ug-LF-M2W" secondAttribute="leading" id="YXh-QU-sUN"/>
-                    <constraint firstAttribute="trailing" secondItem="qde-fw-m5O" secondAttribute="trailing" constant="22" id="kM5-Bv-bPJ"/>
+                    <constraint firstAttribute="trailing" secondItem="qde-fw-m5O" secondAttribute="trailing" constant="8" id="kM5-Bv-bPJ"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
