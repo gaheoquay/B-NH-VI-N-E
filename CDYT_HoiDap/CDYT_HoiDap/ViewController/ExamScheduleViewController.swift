@@ -19,6 +19,8 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     var listService = [ServiceEntity]()
     var listallUSer = [AllUserEntity]()
     var indexBooking = IndexPath()
+    var pageIndex = 1
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,6 +88,18 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     }
     
     //MARK: setupUI
+    
+    func reloadData(){
+        pageIndex = 1
+        requestBooking()
+    }
+    
+    func loadMore(){
+        pageIndex += 1
+        requestBooking()
+    }
+
+    
     func setupTable(){
         if listallUSer.count > 0 {
         tbListExamSchedule.delegate = self
@@ -96,6 +110,19 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         tbListExamSchedule.register(UINib.init(nibName: "ExamScheduleCell", bundle: nil), forCellReuseIdentifier: "ExamScheduleCell")
         imageCalendar.isHidden = true
         lbCalendar.isHidden = true
+            
+            tbListExamSchedule.addPullToRefreshHandler {
+                DispatchQueue.main.async {
+                    self.reloadData()
+                    
+                }
+            }
+            
+            tbListExamSchedule.addInfiniteScrollingWithHandler {
+                DispatchQueue.main.async {
+                    self.loadMore()
+                }
+            }
         }else {
             tbListExamSchedule.estimatedRowHeight = 0
             tbListExamSchedule.rowHeight = UITableViewAutomaticDimension
@@ -103,6 +130,9 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
             imageCalendar.isHidden = false
             lbCalendar.isHidden = false
         }
+        
+        
+
     }
     
     //MARK: REQUEST API
@@ -113,7 +143,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         ]
         
         print(Param)
-        
+        listallUSer.removeAll()
         Until.showLoading()
         Alamofire.request(GET_BOOKING_ONLY, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
@@ -135,6 +165,8 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
                 UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
             }
         }
+        self.tbListExamSchedule.pullToRefreshView?.stopAnimating()
+        self.tbListExamSchedule.infiniteScrollingView?.stopAnimating()
     }
     
     func reuqestDeleteBooking(){

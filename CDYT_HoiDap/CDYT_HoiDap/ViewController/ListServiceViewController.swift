@@ -65,7 +65,7 @@ class ListServiceViewController: UIViewController,UITableViewDelegate,UITableVie
         
     }
     
-    func deleteFileUser(listUser: FileUserEntity) {
+    func deleteFileUser(indexPath: IndexPath) {
         
     }
     func gotoDetailHistory(index: IndexPath) {

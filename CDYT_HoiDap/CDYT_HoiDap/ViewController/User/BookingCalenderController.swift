@@ -143,6 +143,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     param["CmtGuardian"] = listBooking.profile.bailsmanPassportId
     param["JobId"] = listBooking.profile.jobId
     param["DepartmentId"] = String(format: "%0.f", listService.roomId)
+    param["PhoneGuardian"] = listBooking.profile.bailsmanPhoneNumber
     print(param)
     Alamofire.request(CHECK_IN, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {

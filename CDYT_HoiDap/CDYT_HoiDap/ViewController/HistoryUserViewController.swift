@@ -20,6 +20,7 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
     var listBookingUser = [BookingUserEntity]()
     var listBooking = [BookingEntity]()
     var indexProfile = IndexPath()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +63,6 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
         viewcontroller.delegate = self
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
-    
     
     func setupTable(){
         
@@ -118,6 +118,8 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
             }else{
                 UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
             }
+            self.tbListHistory.pullToRefreshView?.stopAnimating()
+            self.tbListHistory.infiniteScrollingView?.stopAnimating()
         }
     }
     //MARK: Delegate
@@ -140,7 +142,7 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     
-    func deleteFileUser(listUser: FileUserEntity) {
+    func deleteFileUser(indexPath: IndexPath) {
         
     }
 

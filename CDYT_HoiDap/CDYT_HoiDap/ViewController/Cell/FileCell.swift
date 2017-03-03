@@ -9,7 +9,7 @@
 import UIKit
 protocol FileCellDelegate {
     func gotoDetailFileUser()
-    func deleteFileUser(listUser: FileUserEntity)
+    func deleteFileUser(indexPath: IndexPath)
     func gotoDetailHistory(index: IndexPath)
 }
 
@@ -47,7 +47,6 @@ class FileCell: UITableViewCell {
         lbName.text = String().convertTimeStampWithDateFormat(timeStamp: entity.createDate, dateFormat: "dd/MM/YYYY")
         lbPrice.isHidden = true
         imgDelete.image = UIImage(named: "DetailEditUp.png")
-        lbPrice.frame.size.height = 0
     }
     
     func setListUser(){
@@ -64,7 +63,7 @@ class FileCell: UITableViewCell {
     func setSearchListUser(){
         lbName.text = listUser.patientName
         
-        let fontWithColor = [ NSFontAttributeName: UIFont.systemFont(ofSize: 12),NSForegroundColorAttributeName: UIColor.init(netHex: 0x878787)]
+        let fontWithColor = [ NSFontAttributeName: UIFont.systemFont(ofSize: 12),NSForegroundColorAttributeName: UIColor.init(netHex: 999999)]
         
         let myAttrString = NSMutableAttributedString(string: "\(listUser.age)", attributes: fontWithColor)
         myAttrString.append(NSAttributedString(string: " tuổi", attributes: fontWithColor))
@@ -86,7 +85,7 @@ class FileCell: UITableViewCell {
     }
     
     func deleteFile(){
-        delegate?.deleteFileUser(listUser: listUser)
+        delegate?.deleteFileUser(indexPath: indexPath)
         
     }
     

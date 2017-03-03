@@ -37,7 +37,7 @@ class ResultUserEntity: NSObject {
         if let value = dictionary["DiseaseDiagnostic_ID"] as? String {
             diseaseDiagnostic_ID = value
         }
-        if let value = dictionary["HIS_DoctorAdvice_ID"] as? String {
+        if let value = dictionary["Other_DiseaseDiagnostic_ID"] as? String {
             other_DiseaseDiagnostic_ID = value
         }
         if let value = dictionary["HIS_DoctorAdvice_ID"] as? String {

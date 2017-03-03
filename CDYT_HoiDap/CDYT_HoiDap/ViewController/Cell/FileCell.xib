@@ -19,47 +19,46 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zif-Q6-tvB">
-                        <rect key="frame" x="8" y="8" width="33" height="16"/>
+                        <rect key="frame" x="8" y="8" width="254" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5dM-OZ-4EX">
-                        <rect key="frame" x="8" y="32" width="33" height="16"/>
+                        <rect key="frame" x="8" y="32" width="254" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" red="0.13600317319999999" green="1" blue="0.26490181969999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.49411764705882355" green="0.82745098039215681" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="duf-2N-xWR">
-                        <rect key="frame" x="292" y="19" width="20" height="20"/>
+                        <rect key="frame" x="270" y="0.0" width="50" height="57.5"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2ls-Qv-njc">
-                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                <rect key="frame" x="22" y="19" width="20" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="xbf-1G-dbT"/>
-                                    <constraint firstAttribute="width" constant="20" id="ype-z8-rrb"/>
+                                    <constraint firstAttribute="height" constant="20" id="COg-hR-Xxm"/>
+                                    <constraint firstAttribute="width" constant="20" id="lTZ-ci-1Kn"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="2ls-Qv-njc" secondAttribute="trailing" id="23F-D7-a7a"/>
-                            <constraint firstItem="2ls-Qv-njc" firstAttribute="top" secondItem="duf-2N-xWR" secondAttribute="top" id="B7G-NP-zXX"/>
-                            <constraint firstAttribute="bottom" secondItem="2ls-Qv-njc" secondAttribute="bottom" id="JbS-10-hgx"/>
-                            <constraint firstItem="2ls-Qv-njc" firstAttribute="leading" secondItem="duf-2N-xWR" secondAttribute="leading" id="Z6m-eN-7Ny"/>
-                            <constraint firstAttribute="width" constant="20" id="hLq-fG-2VO"/>
-                            <constraint firstAttribute="height" constant="20" id="kmi-BD-WYm"/>
+                            <constraint firstAttribute="width" constant="50" id="4sm-1c-Xp8"/>
+                            <constraint firstAttribute="trailing" secondItem="2ls-Qv-njc" secondAttribute="trailing" constant="8" id="9PQ-N3-ir3"/>
+                            <constraint firstItem="2ls-Qv-njc" firstAttribute="centerY" secondItem="duf-2N-xWR" secondAttribute="centerY" id="V2V-Cv-lPh"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="duf-2N-xWR" secondAttribute="bottom" id="0cA-Go-oHa"/>
                     <constraint firstItem="zif-Q6-tvB" firstAttribute="leading" secondItem="bcg-20-aZg" secondAttribute="leading" constant="8" id="0qS-Ea-yw3"/>
+                    <constraint firstAttribute="trailing" secondItem="duf-2N-xWR" secondAttribute="trailing" id="3gh-W2-XWs"/>
                     <constraint firstItem="5dM-OZ-4EX" firstAttribute="top" secondItem="zif-Q6-tvB" secondAttribute="bottom" constant="8" id="Kwh-if-K6F"/>
                     <constraint firstItem="5dM-OZ-4EX" firstAttribute="leading" secondItem="zif-Q6-tvB" secondAttribute="leading" id="MtE-Tu-ghi"/>
                     <constraint firstItem="zif-Q6-tvB" firstAttribute="top" secondItem="bcg-20-aZg" secondAttribute="top" constant="8" id="SFC-bQ-t0v"/>
                     <constraint firstAttribute="bottom" secondItem="5dM-OZ-4EX" secondAttribute="bottom" constant="9.5" id="cxu-IA-t8o"/>
-                    <constraint firstItem="5dM-OZ-4EX" firstAttribute="trailing" secondItem="zif-Q6-tvB" secondAttribute="trailing" id="gqx-HB-KdR"/>
-                    <constraint firstAttribute="trailing" secondItem="duf-2N-xWR" secondAttribute="trailing" constant="8" id="qMY-C1-afQ"/>
-                    <constraint firstItem="duf-2N-xWR" firstAttribute="centerY" secondItem="bcg-20-aZg" secondAttribute="centerY" id="rY4-qn-0H0"/>
+                    <constraint firstItem="5dM-OZ-4EX" firstAttribute="trailing" secondItem="zif-Q6-tvB" secondAttribute="trailing" id="iDY-yp-OQR"/>
+                    <constraint firstItem="duf-2N-xWR" firstAttribute="top" secondItem="bcg-20-aZg" secondAttribute="top" id="qmd-KB-fCh"/>
+                    <constraint firstItem="duf-2N-xWR" firstAttribute="leading" secondItem="zif-Q6-tvB" secondAttribute="trailing" constant="8" id="wgq-1O-kIc"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

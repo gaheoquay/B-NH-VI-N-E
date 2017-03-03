@@ -444,6 +444,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
       "RequestedUserId" : Until.getCurrentId(),
       "Profile" : profile
     ]
+    print(param)
     Alamofire.request(BOOKING_ADDING_PROFILE, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
         if status == 200{

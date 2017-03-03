@@ -19,8 +19,6 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     var listFileUser = [FileUserEntity]()
     var ischeckDelete = false
-    var listUsers = FileUserEntity()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +43,7 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell") as! FileCell
+        cell.indexPath = indexPath
         if listFileUser.count > 0{
         cell.isCheck(ischeckDelete: ischeckDelete)
         cell.listUser = listFileUser[indexPath.row]
@@ -98,7 +97,7 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
             tbListFile.register(UINib.init(nibName: "FileCell", bundle: nil), forCellReuseIdentifier: "FileCell")
             tbListFile.estimatedRowHeight = 9999
             tbListFile.rowHeight = UITableViewAutomaticDimension
-            tbHeight.constant = 452
+            tbHeight.constant = UIScreen.main.bounds.size.height - 126
             lbCv.isHidden = true
             imgCv.isHidden = true
         }else {
@@ -150,9 +149,8 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     
-    func deleteFileUser(listUser: FileUserEntity) {
-        listUsers = listUser
-        requestDeleteProfile()
+    func deleteFileUser(indexPath: IndexPath) {
+        requestDeleteProfile(index: indexPath.row)
     }
     func reloadData() {
         listFileUser.removeAll()
@@ -162,20 +160,19 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
         
     }
     //MARK: request API
-    func requestDeleteProfile(){
+    func requestDeleteProfile(index:Int){
+        let entity = listFileUser[index]
         let Param : [String : Any] = [
             "Auth": Until.getAuthKey(),
             "RequestedUserId" : Until.getCurrentId(),
-            "ListProfileId" : [listUsers.id]
+            "ListProfileId" : [entity.id]
         ]
         print(Param)
         Alamofire.request(DELELTE_PROFILE, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
-                        self.listFileUser.removeAll()
-                        self.requestUSer()
-                    self.tbListFile.reloadData()
-
+                        self.listFileUser.remove(at: index)
+                        self.setUpUIView()
                 }
                 else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
