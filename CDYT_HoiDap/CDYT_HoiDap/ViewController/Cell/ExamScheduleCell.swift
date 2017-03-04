@@ -27,6 +27,7 @@ class ExamScheduleCell: UITableViewCell {
     @IBOutlet weak var centerCanCel: NSLayoutConstraint!
     @IBOutlet weak var centerAccep: NSLayoutConstraint!
     @IBOutlet weak var btnStatus: UIButton!
+    @IBOutlet weak var viewCell: UIView!
     
     var delegate: ExamScheduleCellDelegate?
     var indexPath = IndexPath()
@@ -57,11 +58,9 @@ class ExamScheduleCell: UITableViewCell {
     if userEntity.isCheckSelect == false {
         viewShowDetail.isHidden = true
         marginBottomViewDetail.constant = 0
-        print(userEntity.isCheckSelect)
     }else {
         viewShowDetail.isHidden = false
         marginBottomViewDetail.constant = 90
-        print(userEntity.isCheckSelect)
     }
     
    
@@ -84,7 +83,6 @@ class ExamScheduleCell: UITableViewCell {
             btnStatus.setTitle(myAttrString.string, for: .normal)
             let stringCurentDate = String().convertDatetoString(date: curentDate, dateFormat: "dd/MM/YYYY")
             let stringBookingDate = String().convertTimeStampWithDateFormat(timeStamp: userEntity.booking.bookingDate / 1000, dateFormat: "dd/MM/YYYY")
-            print(stringBookingDate)
             if stringBookingDate > stringCurentDate || stringBookingDate < stringCurentDate {
                 btnAccepBooking.isHidden = true
                 centerCanCel.constant = 0
@@ -93,30 +91,29 @@ class ExamScheduleCell: UITableViewCell {
                 centerCanCel.constant = -50
             }
             btnStatus.isEnabled = true
+            viewCell.isHidden = false
         }else if userEntity.booking.status == 1 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontBold)
             myAttrString.append(NSMutableAttributedString(string: "Chờ xử lý", attributes: fontRegularWithColor))
             btnStatus.setTitle(myAttrString.string, for: .normal)
             btnStatus.isEnabled = false
-           
+            viewCell.isHidden = false
         }else if userEntity.booking.status == 2 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontBold)
             myAttrString.append(NSMutableAttributedString(string: "Đã có số khám", attributes: fontRegularWithColor))
             btnStatus.setTitle(myAttrString.string, for: .normal)
             btnStatus.isEnabled = false
-
+            viewCell.isHidden = false
         }
         else if userEntity.booking.status == 3 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontBold)
             myAttrString.append(NSMutableAttributedString(string: "Đã thanh toán", attributes: fontRegularWithColor))
             btnStatus.setTitle(myAttrString.string, for: .normal)
             btnStatus.isEnabled = false
-
+            viewCell.isHidden = false
         }
         else if userEntity.booking.status == 4 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontBold)
-            myAttrString.append(NSMutableAttributedString(string: "Đã có kết quả khám", attributes: fontRegularWithColor))
-            btnStatus.titleLabel?.attributedText = myAttrString
+            viewCell.isHidden = true
         }
         contentView.layoutIfNeeded()
     }

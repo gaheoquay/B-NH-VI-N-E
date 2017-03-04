@@ -50,7 +50,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
       cell.delegate = self
       if listallUSer.count > 0 {
         cell.userEntity = listallUSer[indexPath.row]
-
+        
       }
         cell.setData()
         return cell
@@ -147,7 +147,6 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
             "RequestedUserId" : Until.getCurrentId()
         ]
         
-        print(Param)
         listallUSer.removeAll()
         Until.showLoading()
         Alamofire.request(GET_BOOKING_ONLY, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in

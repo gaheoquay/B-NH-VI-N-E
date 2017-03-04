@@ -31,6 +31,14 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     @IBOutlet weak var viewNameGuardian: UIView!
     @IBOutlet weak var viewPhoneGuardian: UIView!
     @IBOutlet weak var viewCmtGuardian: UIView!
+    @IBOutlet var tapJob: UITapGestureRecognizer!
+    @IBOutlet var tapCountry: UITapGestureRecognizer!
+    @IBOutlet var tapDistric: UITapGestureRecognizer!
+    @IBOutlet var tapProvince: UITapGestureRecognizer!
+    @IBOutlet var tapZone: UITapGestureRecognizer!
+    @IBOutlet weak var btnDone: UIButton!
+    @IBOutlet var tapGender: UITapGestureRecognizer!
+    @IBOutlet var tapDob: UITapGestureRecognizer!
     
   
   var infoUser = FileUserEntity()
@@ -104,6 +112,20 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         txtPhoneNumber.isEnabled = false
         txtCmtGuardian.isEnabled = false
         txtNameGuardian.isEnabled = false
+        tapJob.isEnabled = false
+        tapZone.isEnabled = false
+        tapCountry.isEnabled = false
+        tapDistric.isEnabled = false
+        tapProvince.isEnabled = false
+        btnDone.isHidden = true
+        txtAdress.isEnabled = false
+        txtCmtGuardian.isEnabled = false
+        txtNameGuardian.isEnabled = false
+        txtPhoneGuardian.isEnabled = false
+        tapDob.isEnabled = false
+        tapGender.isEnabled = false
+        
+        
         txtCMT.isEnabled = false
         txtName.isEnabled = false
         
@@ -117,12 +139,25 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     viewNameGuardian.isHidden = false
     viewPhoneGuardian.isHidden = false
         
+        txtNameGuardian.isEnabled = true
+        tapJob.isEnabled = true
+        tapZone.isEnabled = true
+        tapCountry.isEnabled = true
+        tapDistric.isEnabled = true
+        tapProvince.isEnabled = true
+        btnDone.isHidden = false
         txtPhoneGuardian.isEnabled = true
         txtPhoneNumber.isEnabled = true
         txtCmtGuardian.isEnabled = true
         txtNameGuardian.isEnabled = true
         txtCMT.isEnabled = true
         txtName.isEnabled = true
+        txtAdress.isEnabled = true
+        txtCmtGuardian.isEnabled = true
+        txtNameGuardian.isEnabled = true
+        txtPhoneGuardian.isEnabled = true
+        tapDob.isEnabled = true
+        tapGender.isEnabled = true
     }
 
   }

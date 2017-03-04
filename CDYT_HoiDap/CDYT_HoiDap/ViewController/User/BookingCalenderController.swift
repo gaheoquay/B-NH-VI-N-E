@@ -10,6 +10,7 @@ import UIKit
 protocol BookingCalenderControllerDelegate {
   func gotoService()
   func gotoFile()
+    func gotoExamSchudel()
 }
 
 class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalendarDelegate {
@@ -56,7 +57,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
   }
   
   @IBAction func btnSendBooking(_ sender: Any) {
-    isvalidCheck()
+        isvalidCheck()
   }
   
   
@@ -109,7 +110,8 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
             let jsonData = result as! NSDictionary
             self.listBook = BookingEntity.init(dictionary: jsonData)
           }
-          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Gửi đặt lịch thành công", cancelBtnTitle: "Đóng")
+            
+                self.delegate?.gotoExamSchudel()
         }else{
           UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
         }
@@ -149,7 +151,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
       if let status = response.response?.statusCode {
         print(status)
         if status == 200{
-          
+            
         }else{
           UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
         }

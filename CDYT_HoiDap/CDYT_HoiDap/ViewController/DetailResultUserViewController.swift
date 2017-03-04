@@ -19,7 +19,6 @@ class DetailResultUserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        requestFinishCheckup()
         setupTable()
         lbCodeHospital.text = String(listBooking.checkInResult.patientHistory)
         // Do any additional setup after loading the view.

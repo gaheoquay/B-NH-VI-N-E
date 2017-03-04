@@ -178,10 +178,11 @@
                 <outlet property="lbCreateDate" destination="02f-nx-J0D" id="CSV-1A-dd2"/>
                 <outlet property="lbName" destination="QGu-wb-sko" id="u5F-F4-MSt"/>
                 <outlet property="marginBottomViewDetail" destination="Zxi-Qx-5zM" id="t6P-tz-ZYi"/>
+                <outlet property="viewCell" destination="H2p-sc-9uM" id="Gzc-jN-MaE"/>
                 <outlet property="viewDetails" destination="wtx-SE-JFZ" id="3jp-dH-Wn7"/>
                 <outlet property="viewShowDetail" destination="Vek-ZW-RzU" id="E2z-e8-wK8"/>
             </connections>
-            <point key="canvasLocation" x="34" y="136.5"/>
+            <point key="canvasLocation" x="1630" y="210"/>
         </tableViewCell>
     </objects>
     <resources>
