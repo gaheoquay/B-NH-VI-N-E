@@ -69,11 +69,16 @@ class DetailsFileUsersViewController: UIViewController {
         lbProvisionalPrice.attributedText = myAttrString
         lbExamDate.text = String().convertTimeStampWithDateFormat(timeStamp: dateExam, dateFormat: "dd/MM/YYYY")
         lbName.text = name
+        lbSickName.text = listService[0].name
+
 
         if listBooking.status == 0 {
             viewBarCode.isHidden = true
             viewParameter.isHidden = true
             viewBill.isHidden = true
+            heightViewBill.constant = 0
+            heightViewParam.constant = 0
+            heightViewHeader.constant = 0
         }else {
             viewBarCode.isHidden = false
             viewParameter.isHidden = false
@@ -81,7 +86,6 @@ class DetailsFileUsersViewController: UIViewController {
             lbHistoryCode.text = String(listCheckin.patientHistory)
             lbNumberWait.text = String(listCheckin.sequence)
             lbAdress.text = listService[0].roomName
-            lbSickName.text = listService[0].name
             let image = Until.generateBarcode(from: "\(listCheckin.patientHistory)")
             imgBarCode.image = image
         }

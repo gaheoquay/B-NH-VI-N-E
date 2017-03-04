@@ -76,7 +76,6 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         }else{
             listallUSer[index.row].isCheckSelect = false
         }
-//         listallUSer[index.row].isCheckSelect = !listallUSer[index.row].isCheckSelect
         tbListExamSchedule.reloadRows(at: [index], with: .automatic)
         print(1)
     }

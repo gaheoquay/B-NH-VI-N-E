@@ -199,14 +199,10 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         dateFormatter.dateFormat = "dd/MM/yyyy"
         self.lbDateOfYear.text = "\(dateFormatter.string(from: date! as Date))"
         self.timeStampDateOfBirt = (date?.timeIntervalSince1970)!
-      }
         
         let calendar : Calendar = Calendar.current
         let dateComponent = calendar.dateComponents([.year], from: date as! Date)
         self.age = (calendar.date(from: dateComponent)?.age)!
-       
-        
-        
         if self.age < 6 {
             self.viewCmtGuardian.isHidden = false
             self.viewNameGuardian.isHidden = false
@@ -216,6 +212,9 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
             self.viewNameGuardian.isHidden = true
             self.viewPhoneGuardian.isHidden = true
         }
+
+      }
+        
         
     }
   }
