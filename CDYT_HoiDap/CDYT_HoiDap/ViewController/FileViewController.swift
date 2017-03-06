@@ -175,6 +175,7 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
                         self.listFileUser.remove(at: index)
                         self.tbListFile.reloadData()
                         self.setUpUIView()
+                  NotificationCenter.default.post(name: NSNotification.Name(rawValue:RELOAD_BOOKING), object: nil)
                 }
                 else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")

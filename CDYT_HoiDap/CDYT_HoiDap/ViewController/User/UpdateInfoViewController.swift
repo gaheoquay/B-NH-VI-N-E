@@ -326,7 +326,8 @@ class UpdateInfoViewController: BaseViewController {
             unreadMessageCount = 0
             notificationCount = 0
             tabbar?.tabBar.items![4].badgeValue = nil
-            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue:RELOAD_BOOKING), object: nil)
+
             _ = self.navigationController?.popViewController(animated: true)
           }
           listNotification.removeAll()

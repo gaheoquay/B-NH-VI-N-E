@@ -450,7 +450,6 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
   @IBAction func accountTapAction(_ sender: Any) {
     let storyboard = UIStoryboard.init(name: "User", bundle: nil)
     let vc = storyboard.instantiateViewController(withIdentifier: "UpdateInfoViewController") as! UpdateInfoViewController
-    
     self.navigationController?.pushViewController(vc, animated: true)
   }
   

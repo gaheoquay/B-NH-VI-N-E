@@ -34,6 +34,8 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    NotificationCenter.default.addObserver(self, selector: #selector(reloadBooking), name: Notification.Name.init(RELOAD_BOOKING), object: nil)
+
     btnService.layer.borderWidth = 0
     btnBrifUser.layer.borderWidth = 0
     btnSendBooking.layer.cornerRadius = 5
@@ -44,7 +46,10 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    print("aaaa")
+    self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
+    self.listService = ServiceEntity()
+    self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
+    self.listBooking = BookingUserEntity()
   }
   
   
@@ -52,7 +57,12 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-  
+  func reloadBooking(){
+    self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
+    self.listService = ServiceEntity()
+    self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
+    self.listBooking = BookingUserEntity()
+  }
   @IBAction func tapService(_ sender: Any) {
     delegate?.gotoService()
   }
