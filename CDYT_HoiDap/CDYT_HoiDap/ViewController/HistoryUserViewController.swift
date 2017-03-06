@@ -45,11 +45,23 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
         cell.indexPath = indexPath
         if listBooking.count > 0 {
             cell.setDataHistory(entity: listBooking[indexPath.row])
+            if listBooking[indexPath.row].checkInResult.patientHistory == 0 {
+                cell.isHidden = true
+            }else {
+                cell.isHidden = false
+            }
         }
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("abc")
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if listBooking[indexPath.row].checkInResult.patientHistory == 0 {
+            return 0
+        }else {
+            return 58
+            }
     }
     
     

@@ -57,7 +57,6 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     
     var age = 0
     var dateNow = Date()
-    var ageNow = 0
   
   lazy var pickerlistCountry = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
   lazy var pickerlistProvince = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
@@ -194,7 +193,9 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     self.view.endEditing(true)
     DatePickerDialog().show(title: "Ngày sinh", doneButtonTitle: "Xong", cancelButtonTitle: "Hủy", datePickerMode: .date) {
       (date) -> Void in
+        
       if date != nil {
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
         self.lbDateOfYear.text = "\(dateFormatter.string(from: date! as Date))"
@@ -203,6 +204,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         let calendar : Calendar = Calendar.current
         let dateComponent = calendar.dateComponents([.year], from: date as! Date)
         self.age = (calendar.date(from: dateComponent)?.age)!
+        
         if self.age < 6 {
             self.viewCmtGuardian.isHidden = false
             self.viewNameGuardian.isHidden = false
@@ -212,6 +214,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
             self.viewNameGuardian.isHidden = true
             self.viewPhoneGuardian.isHidden = true
         }
+        
 
       }
         
