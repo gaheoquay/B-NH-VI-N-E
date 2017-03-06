@@ -69,9 +69,15 @@ class DetailsFileUsersViewController: UIViewController {
         let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
         let fontWithColor = [ NSFontAttributeName: UIFont.systemFont(ofSize: 12),NSForegroundColorAttributeName: UIColor.init(netHex: 0x878787)]
         
-        let myAttrString = NSMutableAttributedString(string: "\(listService[0].priceService)", attributes: fontBold)
-        myAttrString.append(NSAttributedString(string: "(giá tạm tính)", attributes: fontWithColor))
+        
+        let price = String().replaceNSnumber(doublePrice: serVice[0].priceService)
+        
+        
+        let myAttrString = NSMutableAttributedString(string: "\(price)", attributes: fontBold)
+        myAttrString.append(NSAttributedString(string: " (giá tạm tính)", attributes: fontWithColor))
         lbProvisionalPrice.attributedText = myAttrString
+        
+        
         lbExamDate.text = String().convertTimeStampWithDateFormat(timeStamp: dateExam, dateFormat: "dd/MM/YYYY")
         lbName.text = name
         lbSickName.text = serVice[0].name

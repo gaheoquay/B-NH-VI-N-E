@@ -26,17 +26,17 @@ class ExamScheduleCell: UITableViewCell {
     @IBOutlet weak var centerCanCel: NSLayoutConstraint!
     @IBOutlet weak var centerAccep: NSLayoutConstraint!
     @IBOutlet weak var btnStatus: UIButton!
+    @IBOutlet weak var btnCancel: UIButton!
+
     
     var delegate: ExamScheduleCellDelegate?
     var indexPath = IndexPath()
     var userEntity = AllUserEntity()
-    //test
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-        
+        viewDetails.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showDetailsUsers)))
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -50,14 +50,23 @@ class ExamScheduleCell: UITableViewCell {
     }
     
   func setData(){
-    let curentDate = Date()
     
-    if userEntity.booking.status == 3 || userEntity.booking.status == 2 {
+    let curentDate = Date()
+    let stringCurentDate = String().convertDatetoString(date: curentDate, dateFormat: "dd/MM/YYYY")
+    let stringBookingDate = String().convertTimeStampWithDateFormat(timeStamp: userEntity.booking.bookingDate / 1000, dateFormat: "dd/MM/YYYY")
+    
+    if userEntity.booking.status == 2 || userEntity.booking.status == 3 {
         viewShowDetail.isHidden = true
         marginBottomViewDetail.constant = 0
-    }else {
+        btnCancel.isHidden = true
+    }else if stringCurentDate == stringBookingDate {
         viewShowDetail.isHidden = false
         marginBottomViewDetail.constant = 90
+        btnCancel.isHidden = true
+    }else {
+        viewShowDetail.isHidden = true
+        marginBottomViewDetail.constant = 0
+        btnCancel.isHidden = false
     }
     
    
@@ -78,32 +87,21 @@ class ExamScheduleCell: UITableViewCell {
         let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontRegular)
             myAttrString.append(NSMutableAttributedString(string: "Chờ xác nhận khám", attributes: fontRegularWithColor))
             btnStatus.setTitle(myAttrString.string, for: .normal)
-            let stringCurentDate = String().convertDatetoString(date: curentDate, dateFormat: "dd/MM/YYYY")
-            let stringBookingDate = String().convertTimeStampWithDateFormat(timeStamp: userEntity.booking.bookingDate / 1000, dateFormat: "dd/MM/YYYY")
-            if stringBookingDate > stringCurentDate || stringBookingDate < stringCurentDate {
-                btnAccepBooking.isHidden = true
-                centerCanCel.constant = 0
-            }else  {
-                btnAccepBooking.isHidden = false
-                centerCanCel.constant = -50
-            }
-            btnStatus.isEnabled = true
+            
+            
         }else if userEntity.booking.status == 1 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontBold)
             myAttrString.append(NSMutableAttributedString(string: "Chờ xử lý", attributes: fontRegularWithColor))
             btnStatus.setTitle(myAttrString.string, for: .normal)
-            btnStatus.isEnabled = false
         }else if userEntity.booking.status == 2 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontBold)
             myAttrString.append(NSMutableAttributedString(string: "Đã có số khám", attributes: fontRegularWithColor))
             btnStatus.setTitle(myAttrString.string, for: .normal)
-            btnStatus.isEnabled = false
         }
         else if userEntity.booking.status == 3 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontBold)
             myAttrString.append(NSMutableAttributedString(string: "Đã thanh toán", attributes: fontRegularWithColor))
             btnStatus.setTitle(myAttrString.string, for: .normal)
-            btnStatus.isEnabled = false
         }
     
         contentView.layoutIfNeeded()
@@ -117,6 +115,14 @@ class ExamScheduleCell: UITableViewCell {
             delegate?.accepBooking(index: indexPath)
     }
     
+    @IBAction func btnCancelBooking(_ sender: Any) {
+            delegate?.deleteBooking(index: indexPath)
+    }
+    
+    
   
-       
+    @IBAction func btnShowDeitailStatus(_ sender: Any) {
+        
+    }
+    
 }

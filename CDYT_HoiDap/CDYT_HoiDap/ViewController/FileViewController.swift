@@ -150,7 +150,9 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
     }
     
     func deleteFileUser(indexPath: IndexPath) {
-        requestDeleteProfile(index: indexPath.row)
+       
+        self.requestDeleteProfile(index: indexPath.row)
+
     }
     func reloadData() {
         listFileUser.removeAll()

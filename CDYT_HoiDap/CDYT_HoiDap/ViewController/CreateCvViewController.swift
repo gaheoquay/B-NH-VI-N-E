@@ -14,6 +14,7 @@ protocol CreateCvViewControllerDelegate {
 
 class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerViewDataSource {
   
+    @IBOutlet weak var lbTittle: UILabel!
   @IBOutlet weak var lbGender: UILabel!
   @IBOutlet weak var lbDateOfYear: UILabel!
   @IBOutlet weak var txtName: UITextField!
@@ -56,6 +57,8 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
   var selectedZone : ZoneEntity!
     
     var age = 0
+    
+    var datePicker = Date()
     var dateNow = Date()
   
   lazy var pickerlistCountry = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
@@ -91,6 +94,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         }else {
             lbGender.text = "Nữ"
         }
+        lbTittle.text = "Hồ sơ"
         txtCMT.text = infoUser.passportId
         txtPhoneNumber.text = infoUser.phoneNumber
         lbJob.text = infoUser.jobName
@@ -129,6 +133,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         txtName.isEnabled = false
         
     }else {
+    lbTittle.text = "Tạo hồ sơ"
     lbCountry.text = "Việt Nam"
     timeStampDateOfBirt = Date().timeIntervalSince1970
     let dateFormatter = DateFormatter()
@@ -193,8 +198,10 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     self.view.endEditing(true)
     DatePickerDialog().show(title: "Ngày sinh", doneButtonTitle: "Xong", cancelButtonTitle: "Hủy", datePickerMode: .date) {
       (date) -> Void in
+      
         
       if date != nil {
+        self.datePicker = date as! Date
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
@@ -203,19 +210,22 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         
         let calendar : Calendar = Calendar.current
         let dateComponent = calendar.dateComponents([.year], from: date as! Date)
+        
         self.age = (calendar.date(from: dateComponent)?.age)!
         
         if self.age < 6 {
             self.viewCmtGuardian.isHidden = false
             self.viewNameGuardian.isHidden = false
             self.viewPhoneGuardian.isHidden = false
-        }else {
+        }
+            
+        else {
             self.viewCmtGuardian.isHidden = true
             self.viewNameGuardian.isHidden = true
             self.viewPhoneGuardian.isHidden = true
         }
         
-
+        
       }
         
         
@@ -506,9 +516,12 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     let name = txtName.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     let passPortId = txtCMT.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     let phone = txtPhoneNumber.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-    if name.isEmpty || timeStampDateOfBirt == 0 || passPortId.isEmpty || phone.isEmpty || selectedJob == nil || selectedCountry == nil || selectedProvince == nil || selectedDistrict == nil || selectedZone == nil {
+        if name.isEmpty || timeStampDateOfBirt == 0 || passPortId.isEmpty || phone.isEmpty || selectedJob == nil || selectedCountry == nil || selectedProvince == nil || selectedDistrict == nil || selectedZone == nil {
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nhập đầy đủ thông tin", cancelBtnTitle: "Đóng")
       return
+    }
+    else if datePicker > dateNow {
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Ngày sinh không được lớn hơn ngày hiện tại", cancelBtnTitle: "Đóng")
     }
     let userEntity = FileUserEntity()
     userEntity.patientName = txtName.text!
