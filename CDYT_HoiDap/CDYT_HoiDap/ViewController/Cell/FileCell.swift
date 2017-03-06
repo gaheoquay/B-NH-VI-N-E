@@ -45,12 +45,14 @@ class FileCell: UITableViewCell {
     }
     
     func setDataHistory(entity: BookingEntity){
+        
         viewGotoCreateCV.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(gotoDetailHistoryUser)))
         lbName.text = String().convertTimeStampWithDateFormat(timeStamp: entity.createDate, dateFormat: "dd/MM/YYYY")
         lbPrice.isHidden = true
         imgDelete.image = UIImage(named: "DetailEditUp.png")
         heightLbPrice.constant = 0
         marginToplbName.constant = 24
+        
     }
     
     func setListUser(){

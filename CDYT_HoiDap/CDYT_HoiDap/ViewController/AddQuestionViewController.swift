@@ -30,6 +30,7 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
     var imageAssets = [DKAsset]()
     var id = ""
     var name = ""
+    var indexPathCate = 0
     
     var imageDic = [String]()
     var thumImgDic = [String]()
@@ -461,7 +462,12 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
         
         
         let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            if self.name == "" {
+                self.lbCate.text = listCate[self.indexPathCate].name
+                self.id = listCate[self.indexPathCate].id
+            }else {
                 self.lbCate.text = self.name
+            }
         })
         
         alertView.addAction(action)

@@ -50,11 +50,26 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
       cell.delegate = self
       if listallUSer.count > 0 {
         cell.userEntity = listallUSer[indexPath.row]
-        
+        if listallUSer[indexPath.row].booking.status == 4 {
+            cell.isHidden = true
+        }
       }
         cell.setData()
         return cell
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if listallUSer.count > 0 {
+            if listallUSer[indexPath.row].booking.status == 4 {
+                return 0
+            }else if listallUSer[indexPath.row].booking.status == 3 || listallUSer[indexPath.row].booking.status == 2 {
+                return 119
+            }else {
+                return 209
+            }
+        }
+        return 209
+    }
+    
     
    //MARK: delegate
     
@@ -70,22 +85,13 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     
-    func showDetailStatus(index: IndexPath) {
-        if listallUSer[index.row].isCheckSelect == false {
-            listallUSer[index.row].isCheckSelect = true
-        }else{
-            listallUSer[index.row].isCheckSelect = false
-        }
-        tbListExamSchedule.reloadRows(at: [index], with: .automatic)
-        print(1)
-    }
-    
+        
     func deleteBooking(index: IndexPath) {
         reuqestDeleteBooking(index: index)
     }
     
-    func accepBooking() {
-        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Chức năng đang hoàn thiện \n Vui lòng thử lại sau", cancelBtnTitle: "Huỷ")
+    func accepBooking(index: IndexPath) {
+        requestCheckin(index: index)
     }
     
     func reloadDataExam() {
@@ -191,6 +197,52 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+        }
+    }
+    
+    func requestCheckin(index: IndexPath){
+        
+        let serVice = listService.filter { (serViceEntiy) -> Bool in
+            String(serViceEntiy.serviceId) == listallUSer[index.row].booking.serviceId
+        }
+        
+        var param : [String : Any] = [:]
+        
+        param["Auth"] = Until.getAuthKey()
+        param["BookingId"] = listallUSer[index.row].booking.id
+        param["TimeCheckIn"] = String(format: "%.0f", listallUSer[index.row].booking.bookingDate)
+        param["CountryId"] = listallUSer[index.row].profile.countryId
+        param["ProvinceId"] = listallUSer[index.row].profile.provinceId
+        param["DictrictId"] =  listallUSer[index.row].profile.dictrictId
+        param["ZoneId"] = listallUSer[index.row].profile.zoneId
+        param["ServiceId"] = serVice[0].serviceId
+        param["Age"] = listallUSer[index.row].profile.age
+        param["PatientName"] = listallUSer[index.row].profile.patientName
+        param["GenderId"] = listallUSer[index.row].profile.gender == 1 ? "M":"F"
+        param["Birthday"] = String(format: "%.0f",listallUSer[index.row].profile.dOB)
+        param["PhoneNumber"] = listallUSer[index.row].profile.phoneNumber
+        param["Address"] = listallUSer[index.row].profile.address
+        param["Cmt"] = listallUSer[index.row].profile.passportId
+        param["GuardianName"] = listallUSer[index.row].profile.bailsmanName
+        param["CmtGuardian"] = listallUSer[index.row].profile.bailsmanPassportId
+        param["JobId"] = listallUSer[index.row].profile.jobId
+        param["DepartmentId"] = String(format: "%0.f", serVice[0].roomId)
+        param["PhoneGuardian"] = listallUSer[index.row].profile.bailsmanPhoneNumber
+        print(param)
+        Until.showLoading()
+        Alamofire.request(CHECK_IN, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                print(status)
+                if status == 200{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Đặt lịch khám thành công", cancelBtnTitle: "Đóng")
+                    self.tbListExamSchedule.reloadData()
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+                Until.hideLoading()
             }else{
                 UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
             }

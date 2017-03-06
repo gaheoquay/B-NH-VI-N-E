@@ -36,7 +36,7 @@ class DetailsFileUsersViewController: UIViewController {
     
     var listService = [ServiceEntity]()
     var listCheckin = CheckInResultEntity()
-    var listBooking = BookingEntity()
+    var listBooking = BookingEntity() // BookingRecord
     var checkInvoice : CheckInvoiceEntity!
     var name = ""
     var dateExam: Double = 0
@@ -61,6 +61,11 @@ class DetailsFileUsersViewController: UIViewController {
     
     func setupView(){
         
+        let serVice = listService.filter { (serViceEntiy) -> Bool in
+             String(serViceEntiy.serviceId) == listBooking.serviceId
+        }
+        
+        
         let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
         let fontWithColor = [ NSFontAttributeName: UIFont.systemFont(ofSize: 12),NSForegroundColorAttributeName: UIColor.init(netHex: 0x878787)]
         
@@ -69,7 +74,8 @@ class DetailsFileUsersViewController: UIViewController {
         lbProvisionalPrice.attributedText = myAttrString
         lbExamDate.text = String().convertTimeStampWithDateFormat(timeStamp: dateExam, dateFormat: "dd/MM/YYYY")
         lbName.text = name
-        lbSickName.text = listService[0].name
+        lbSickName.text = serVice[0].name
+        lbAdress.text = serVice[0].roomName
 
 
         if listBooking.status == 0 {
@@ -85,7 +91,6 @@ class DetailsFileUsersViewController: UIViewController {
             viewBill.isHidden = false
             lbHistoryCode.text = String(listCheckin.patientHistory)
             lbNumberWait.text = String(listCheckin.sequence)
-            lbAdress.text = listService[0].roomName
             let image = Until.generateBarcode(from: "\(listCheckin.patientHistory)")
             imgBarCode.image = image
         }

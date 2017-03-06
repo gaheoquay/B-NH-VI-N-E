@@ -158,13 +158,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     Alamofire.request(CHECK_IN, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
         print(status)
-        if status == 200{
-//            if let result = response.result.value {
-//                let json = result as! NSDictionary
-//                self.checkIn = CheckInResultEntity.init(dictionary: json as! [String : Any])
-//                print(self.checkIn.sequence)
-//            }
-            
+        if status == 200{            
         }else{
           UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
         }

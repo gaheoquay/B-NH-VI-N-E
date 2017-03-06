@@ -8,9 +8,8 @@
 
 import UIKit
 protocol ExamScheduleCellDelegate {
-    func showDetailStatus(index: IndexPath)
     func deleteBooking(index: IndexPath)
-    func accepBooking()
+    func accepBooking(index: IndexPath)
     func gotoDetailUser(index: IndexPath)
 }
 
@@ -27,7 +26,6 @@ class ExamScheduleCell: UITableViewCell {
     @IBOutlet weak var centerCanCel: NSLayoutConstraint!
     @IBOutlet weak var centerAccep: NSLayoutConstraint!
     @IBOutlet weak var btnStatus: UIButton!
-    @IBOutlet weak var viewCell: UIView!
     
     var delegate: ExamScheduleCellDelegate?
     var indexPath = IndexPath()
@@ -37,7 +35,6 @@ class ExamScheduleCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        viewDetails.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showDetailsUsers)))
         
         
     }
@@ -55,7 +52,7 @@ class ExamScheduleCell: UITableViewCell {
   func setData(){
     let curentDate = Date()
     
-    if userEntity.isCheckSelect == false {
+    if userEntity.booking.status == 3 || userEntity.booking.status == 2 {
         viewShowDetail.isHidden = true
         marginBottomViewDetail.constant = 0
     }else {
@@ -91,30 +88,24 @@ class ExamScheduleCell: UITableViewCell {
                 centerCanCel.constant = -50
             }
             btnStatus.isEnabled = true
-            viewCell.isHidden = false
         }else if userEntity.booking.status == 1 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontBold)
             myAttrString.append(NSMutableAttributedString(string: "Chờ xử lý", attributes: fontRegularWithColor))
             btnStatus.setTitle(myAttrString.string, for: .normal)
             btnStatus.isEnabled = false
-            viewCell.isHidden = false
         }else if userEntity.booking.status == 2 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontBold)
             myAttrString.append(NSMutableAttributedString(string: "Đã có số khám", attributes: fontRegularWithColor))
             btnStatus.setTitle(myAttrString.string, for: .normal)
             btnStatus.isEnabled = false
-            viewCell.isHidden = false
         }
         else if userEntity.booking.status == 3 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontBold)
             myAttrString.append(NSMutableAttributedString(string: "Đã thanh toán", attributes: fontRegularWithColor))
             btnStatus.setTitle(myAttrString.string, for: .normal)
             btnStatus.isEnabled = false
-            viewCell.isHidden = false
         }
-        else if userEntity.booking.status == 4 {
-            viewCell.isHidden = true
-        }
+    
         contentView.layoutIfNeeded()
     }
     
@@ -123,13 +114,9 @@ class ExamScheduleCell: UITableViewCell {
     }
     
     @IBAction func btnAccept(_ sender: Any) {
-            delegate?.accepBooking()
+            delegate?.accepBooking(index: indexPath)
     }
     
   
-    @IBAction func btnShowDeitailStatus(_ sender: Any) {
-        delegate?.showDetailStatus(index: indexPath)
-        
-    }
-    
+       
 }
