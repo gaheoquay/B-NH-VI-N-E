@@ -647,7 +647,9 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
             commentTbl.reloadData()
         }
     }
-    
+  func showImageFromDetailPost(skBrowser: SKPhotoBrowser) {
+    self.present(skBrowser, animated: true, completion: nil)
+  }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
