@@ -41,7 +41,7 @@ class FileCell: UITableViewCell {
     
     func setData(entity: ServiceEntity){
         lbName.text = entity.name
-        lbPrice.text = String(entity.priceService)
+        lbPrice.text = String().replaceNSnumber(doublePrice: entity.priceService)
     }
     
     func setDataHistory(entity: BookingEntity){

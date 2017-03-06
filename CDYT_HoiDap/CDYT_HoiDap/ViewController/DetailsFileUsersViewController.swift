@@ -70,9 +70,11 @@ class DetailsFileUsersViewController: UIViewController {
         let fontWithColor = [ NSFontAttributeName: UIFont.systemFont(ofSize: 12),NSForegroundColorAttributeName: UIColor.init(netHex: 0x878787)]
         
         
+        let price = String().replaceNSnumber(doublePrice: serVice[0].priceService)
         
-        let myAttrString = NSMutableAttributedString(string: "\(listService[0].priceService)", attributes: fontBold)
-        myAttrString.append(NSAttributedString(string: "(giá tạm tính)", attributes: fontWithColor))
+        
+        let myAttrString = NSMutableAttributedString(string: "\(price)", attributes: fontBold)
+        myAttrString.append(NSAttributedString(string: " (giá tạm tính)", attributes: fontWithColor))
         lbProvisionalPrice.attributedText = myAttrString
         
         
