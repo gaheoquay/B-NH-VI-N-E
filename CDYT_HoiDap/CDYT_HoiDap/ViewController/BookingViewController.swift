@@ -70,6 +70,13 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+  }
+  
+  
+  
   //  MARK: GET LIST SERVICE
   func requestListService(){
     Alamofire.request(BOOKING_GET_LIST_SERVICE, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in

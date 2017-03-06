@@ -20,17 +20,22 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
   @IBOutlet weak var btnService: UIButton!
   @IBOutlet weak var btnBrifUser: UIButton!
   
-  var service = ServiceEntity()
-  var booking = BookingEntity()
+  var listService = ServiceEntity()
+  var listBook = BookingEntity()
   var dateBook: Double = Date().timeIntervalSince1970
   let currentDate = Date()
   var delegate: BookingCalenderControllerDelegate?
     
+    //test
+    var checkIn = CheckInResultEntity()
+    //endtest
     
-var bookingUser = BookingUserEntity()
+    var listBooking = BookingUserEntity()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    NotificationCenter.default.addObserver(self, selector: #selector(reloadBooking), name: Notification.Name.init(RELOAD_BOOKING), object: nil)
+
     btnService.layer.borderWidth = 0
     btnBrifUser.layer.borderWidth = 0
     btnSendBooking.layer.cornerRadius = 5
@@ -41,6 +46,10 @@ var bookingUser = BookingUserEntity()
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
+    self.listService = ServiceEntity()
+    self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
+    self.listBooking = BookingUserEntity()
   }
   
   
@@ -48,7 +57,12 @@ var bookingUser = BookingUserEntity()
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-  
+  func reloadBooking(){
+    self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
+    self.listService = ServiceEntity()
+    self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
+    self.listBooking = BookingUserEntity()
+  }
   @IBAction func tapService(_ sender: Any) {
     delegate?.gotoService()
   }
@@ -69,14 +83,14 @@ var bookingUser = BookingUserEntity()
   func setDataListService(notification : Notification){
     if notification.object != nil {
       let listServ = notification.object as! ServiceEntity
-      service = listServ
+      listService = listServ
       btnService.setTitle(listServ.name, for: .normal)
     }
   }
   func setDataFileUser(notification: Notification){
     if notification.object != nil {
       let fileUser = notification.object as! BookingUserEntity
-      bookingUser = fileUser
+      listBooking = fileUser
       btnBrifUser.setTitle(fileUser.profile.patientName, for: .normal)
     }
   }
@@ -98,8 +112,8 @@ var bookingUser = BookingUserEntity()
     let param : [String : Any] = [
       "Auth": Until.getAuthKey(),
       "RequestedUserId" : Until.getCurrentId(),
-      "ProfileId" : bookingUser.profile.id,
-      "ServiceId" : service.serviceId,
+      "ProfileId" : listBooking.profile.id,
+      "ServiceId" : listService.serviceId,
       "BookingDate" : String(format:"%.0f",dateBook * 1000)
     ]
     print(param)
@@ -108,11 +122,11 @@ var bookingUser = BookingUserEntity()
         if status == 200{
           if let result = response.result.value {
             let jsonData = result as! NSDictionary
-            self.booking = BookingEntity.init(dictionary: jsonData)
+            self.listBook = BookingEntity.init(dictionary: jsonData)
             self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
-            self.service = ServiceEntity()
+            self.listService = ServiceEntity()
             self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
-            self.bookingUser = BookingUserEntity()
+            self.listBooking = BookingUserEntity()
           }
             let currentDateString = String().convertDatetoString(date: self.currentDate, dateFormat: "dd/MM/YYYY")
             let dateBookingString = String().convertTimeStampWithDateFormat(timeStamp: self.dateBook, dateFormat: "dd/MM/YYYY")
@@ -147,25 +161,25 @@ var bookingUser = BookingUserEntity()
     var param : [String : Any] = [:]
     
     param["Auth"] = Until.getAuthKey()
-    param["BookingId"] = booking.id
+    param["BookingId"] = listBook.id
     param["TimeCheckIn"] = String(format: "%.0f", dateBook*1000)
-    param["CountryId"] = bookingUser.profile.countryId
-    param["ProvinceId"] = bookingUser.profile.provinceId
-    param["DictrictId"] =  bookingUser.profile.dictrictId
-    param["ZoneId"] = bookingUser.profile.zoneId
-    param["ServiceId"] = service.serviceId
-    param["Age"] = bookingUser.profile.age
-    param["PatientName"] = bookingUser.profile.patientName
-    param["GenderId"] = bookingUser.profile.gender == 1 ? "M":"F"
-    param["Birthday"] = String(format: "%.0f",bookingUser.profile.dOB*1000)
-    param["PhoneNumber"] = bookingUser.profile.phoneNumber
-    param["Address"] = bookingUser.profile.address
-    param["Cmt"] = bookingUser.profile.passportId
-    param["GuardianName"] = bookingUser.profile.bailsmanName
-    param["CmtGuardian"] = bookingUser.profile.bailsmanPassportId
-    param["JobId"] = bookingUser.profile.jobId
-    param["DepartmentId"] = String(format: "%0.f", service.roomId)
-    param["PhoneGuardian"] = bookingUser.profile.bailsmanPhoneNumber
+    param["CountryId"] = listBooking.profile.countryId
+    param["ProvinceId"] = listBooking.profile.provinceId
+    param["DictrictId"] =  listBooking.profile.dictrictId
+    param["ZoneId"] = listBooking.profile.zoneId
+    param["ServiceId"] = listService.serviceId
+    param["Age"] = listBooking.profile.age
+    param["PatientName"] = listBooking.profile.patientName
+    param["GenderId"] = listBooking.profile.gender == 1 ? "M":"F"
+    param["Birthday"] = String(format: "%.0f",listBooking.profile.dOB*1000)
+    param["PhoneNumber"] = listBooking.profile.phoneNumber
+    param["Address"] = listBooking.profile.address
+    param["Cmt"] = listBooking.profile.passportId
+    param["GuardianName"] = listBooking.profile.bailsmanName
+    param["CmtGuardian"] = listBooking.profile.bailsmanPassportId
+    param["JobId"] = listBooking.profile.jobId
+    param["DepartmentId"] = String(format: "%0.f", listService.roomId)
+    param["PhoneGuardian"] = listBooking.profile.bailsmanPhoneNumber
     print(param)
     Until.showLoading()
     Alamofire.request(CHECK_IN, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -183,9 +197,9 @@ var bookingUser = BookingUserEntity()
   }
   
   func isvalidCheck(){
-    if service.name == "" {
+    if listService.name == "" {
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn dịch vụ", cancelBtnTitle: "Đóng")
-    }else if bookingUser.profile.patientName  == "" {
+    }else if listBooking.profile.patientName  == "" {
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn hồ sơ", cancelBtnTitle: "Đóng")
     }else if dateBook == 0 {
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn ngày tháng", cancelBtnTitle: "Đóng")
