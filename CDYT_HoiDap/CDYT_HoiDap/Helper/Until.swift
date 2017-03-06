@@ -220,7 +220,36 @@ class Until{
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: email)
     }
-    
+  class func getSchedule(){
+    let param : [String : Any] = [
+      "Auth": Until.getAuthKey(),
+      "RequestedUserId": Until.getCurrentId()
+    ]
+    Alamofire.request(GET_SCHEDULE, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+      if let status = response.response?.statusCode {
+        if status == 200{
+          if let result = response.result.value {
+            let jsonData = result as! [NSDictionary]
+            for item in jsonData{
+              let entity = AllUserEntity.init(dictionary: item)
+              let localNotification = UILocalNotification()
+              let dateFormat = DateFormatter()
+              dateFormat.dateFormat = "dd/MM/yyyy"
+              let datePick = dateFormat.string(from: NSDate(timeIntervalSince1970: entity.booking.bookingDate) as Date)
+              let dateString = "06:00 " + datePick
+              dateFormat.dateFormat = "HH:mm dd/MM/yyyy"
+              localNotification.fireDate = dateFormat.date(from: dateString)
+              localNotification.alertBody = ""
+              localNotification.alertAction = ""
+              localNotification.timeZone = NSTimeZone.default
+//              localNotification.applicationIconBadgeNumber = 1
+              UIApplication.shared.scheduledLocalNotifications?.append(localNotification)
+            }
+          }
+        }
+      }
+    }
+  }
     class func getAuthKey() -> NSDictionary{
         let keyString = String(format: "%.0f", NSDate().timeIntervalSince1970)
         let tokenString = DataEncryption.getMD5(from: "\(keyString)\(KEY_AUTH_DEFAULT)")

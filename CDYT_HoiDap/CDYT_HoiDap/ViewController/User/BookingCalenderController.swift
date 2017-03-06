@@ -21,7 +21,6 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
   @IBOutlet weak var btnBrifUser: UIButton!
   
   var listService = ServiceEntity()
-//  var listFileUser = FileUserEntity()
   var listBook = BookingEntity()
   var dateBook: Double = Date().timeIntervalSince1970
   let currentDate = Date()
@@ -43,7 +42,10 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     // Do any additional setup after loading the view.
   }
   
-  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    print("aaaa")
+  }
   
   
   override func didReceiveMemoryWarning() {
@@ -111,13 +113,28 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
           if let result = response.result.value {
             let jsonData = result as! NSDictionary
             self.listBook = BookingEntity.init(dictionary: jsonData)
+            self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
+            self.listService = ServiceEntity()
+            self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
+            self.listBooking = BookingUserEntity()
           }
-            
             let currentDateString = String().convertDatetoString(date: self.currentDate, dateFormat: "dd/MM/YYYY")
             let dateBookingString = String().convertTimeStampWithDateFormat(timeStamp: self.dateBook, dateFormat: "dd/MM/YYYY")
             if currentDateString == dateBookingString {
                 self.requestCheckin()
-            }
+            }else{
+              let localNotification = UILocalNotification()
+              let dateFormat = DateFormatter()
+              dateFormat.dateFormat = "dd/MM/yyyy"
+              let datePick = dateFormat.string(from: NSDate(timeIntervalSince1970: self.dateBook) as Date)
+              let dateString = "06:00 " + datePick
+              dateFormat.dateFormat = "HH:mm dd/MM/yyyy"
+              localNotification.fireDate = dateFormat.date(from: dateString)
+              localNotification.alertBody = ""
+              localNotification.alertAction = ""
+              localNotification.timeZone = NSTimeZone.default
+              UIApplication.shared.scheduledLocalNotifications?.append(localNotification)
+          }
             self.delegate?.gotoExamSchudel()
             
         }else{
@@ -159,12 +176,6 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
       if let status = response.response?.statusCode {
         print(status)
         if status == 200{
-//            if let result = response.result.value {
-//                let json = result as! NSDictionary
-//                self.checkIn = CheckInResultEntity.init(dictionary: json as! [String : Any])
-//                print(self.checkIn.sequence)
-//            }
-            
         }else{
           UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
         }

@@ -16,6 +16,8 @@ class BaseViewController: UIViewController {
       NotificationCenter.default.addObserver(self, selector: #selector(self.showNotification(notification:)), name: NSNotification.Name.init(SHOW_NOTIFICAION), object: nil)
       NotificationCenter.default.addObserver(self, selector: #selector(self.gotoChat(notification:)), name: NSNotification.Name.init(GO_TO_CHAT), object: nil)
       NotificationCenter.default.addObserver(self, selector: #selector(setUpBadge), name: Notification.Name.init(UPDATE_BADGE), object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(gotoSchedule), name: Notification.Name.init(GO_TO_SCHEDULE), object: nil)
+
         // Do any additional setup after loading the view.
     }
 
@@ -41,15 +43,14 @@ class BaseViewController: UIViewController {
     if let apsInfo = userInfo["aps"] as? NSDictionary{
       let dicData = apsInfo["data"] as! NSDictionary
       let alert = apsInfo["alert"] as! String
-//      RNNotificationView.show(withImage: UIImage(named: "Logo.png"),
-//                              title: "BỆNH VIỆN E",
-//                              message: alert,
-//                              duration: 2,
-//                              iconSize: CGSize(width: 22, height: 22), // Optional setup
-//        onTap: {
-//          print("Did tap notification")
-//          self.navigationNotificaton(dicData: dicData)
-//      })
+      RNNotificationView.show(withImage: UIImage(named: "Logo.png"),
+                              title: "BỆNH VIỆN E",
+                              message: alert,
+                              duration: 2,
+                              iconSize: CGSize(width: 22, height: 22), // Optional setup
+        onTap: {
+          self.navigationNotificaton(dicData: dicData)
+      })
 
     }
   }
@@ -101,14 +102,10 @@ class BaseViewController: UIViewController {
       }
     })
   }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+  
+  func gotoSchedule(){
+    let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+    let viewController = storyBoard.instantiateViewController(withIdentifier: "ExamScheduleViewController") as! ExamScheduleViewController
+    self.navigationController?.pushViewController(viewController, animated: true)
+  }
 }

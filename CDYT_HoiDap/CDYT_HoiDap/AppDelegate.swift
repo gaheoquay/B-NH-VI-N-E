@@ -19,17 +19,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // Override point for customization after application launch.
     registerNotification(application: application)
     if (launchOptions != nil) { //launchOptions is not nil
-      let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as! NSDictionary
-      if let sendBird = userInfo["sendbird"] as? NSDictionary {
-        let sender = sendBird["sender"] as! NSDictionary
-        self.perform(#selector(self.callGotoChat(notificationDic:)), with: sender, afterDelay: 2)
+      if (launchOptions?[UIApplicationLaunchOptionsKey.localNotification]) != nil {
+        self.perform(#selector(self.callToSchedule), with: nil, afterDelay: 2)
       }else{
-        if let apsInfo = userInfo["aps"] as? NSDictionary{
-          let data = apsInfo["data"] as! NSDictionary
-          self.perform(#selector(self.callToGoDetail(notificationDic:)), with: data, afterDelay: 2)
+        let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as! NSDictionary
+        if let sendBird = userInfo["sendbird"] as? NSDictionary {
+          let sender = sendBird["sender"] as! NSDictionary
+          self.perform(#selector(self.callGotoChat(notificationDic:)), with: sender, afterDelay: 2)
+        }else{
+          if let apsInfo = userInfo["aps"] as? NSDictionary{
+            let data = apsInfo["data"] as! NSDictionary
+            self.perform(#selector(self.callToGoDetail(notificationDic:)), with: data, afterDelay: 2)
+          }
         }
       }
     }
+    application.scheduledLocalNotifications?.removeAll()
+    Until.getSchedule()
     SBDMain.initWithApplicationId(SENDBIRD_APPKEY)
     initSendBird()
     requestCate()
@@ -61,7 +67,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   func callToGoDetail(notificationDic:NSDictionary){
     NotificationCenter.default.post(name: NSNotification.Name(rawValue:GO_TO_DETAIL_WHEN_TAP_NOTIFICATION), object: notificationDic)
   }
-  
+  func callToSchedule(){
+    NotificationCenter.default.post(name: NSNotification.Name(rawValue:GO_TO_SCHEDULE), object: nil)
+  }
   func reloadBadge(){
     Until.getBagValue()
   }
@@ -232,6 +240,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
       }
     }
   }
+  
+  func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+    let state = application.applicationState
+    if state == UIApplicationState.active {
+      
+    }else{
+      callToSchedule()
+    }
+  }
+  
   func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
     print(userInfo)
     let state = application.applicationState

@@ -102,6 +102,7 @@ class LoginViewController: UIViewController {
                         try! reaml.write {
                             reaml.add(entity, update: true)
                           Until.initSendBird()
+                          Until.getSchedule()
                           NotificationCenter.default.post(name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
                           _ = self.navigationController?.popToRootViewController(animated: true)
                         }
