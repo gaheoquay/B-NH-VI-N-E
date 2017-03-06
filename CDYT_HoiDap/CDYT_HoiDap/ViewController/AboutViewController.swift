@@ -76,13 +76,18 @@ class AboutViewController: BaseViewController,CAPSPageMenuDelegate,ListDoctorVie
       viewAboutHospital.backgroundColor = UIColor.init(netHex: 0xf0f1f2)
     }else{
       viewAboutHospital.backgroundColor = UIColor.white
-      viewListDoctor.backgroundColor = UIColor.init(netHex: 0xf0f1f2)    }
+      viewListDoctor.backgroundColor = UIColor.init(netHex: 0xf0f1f2)
+    }
   }
   
   @IBAction func gotoAbout(_ sender: Any) {
+    viewListDoctor.backgroundColor = UIColor.white
+    viewAboutHospital.backgroundColor = UIColor.init(netHex: 0xf0f1f2)
       pageMenu?.moveToPage(0)
   }
   @IBAction func gotoListDoctor(_ sender: Any) {
+    viewAboutHospital.backgroundColor = UIColor.white
+    viewListDoctor.backgroundColor = UIColor.init(netHex: 0xf0f1f2)
     pageMenu?.moveToPage(1)
   }
   
