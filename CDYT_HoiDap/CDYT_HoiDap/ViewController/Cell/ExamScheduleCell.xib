@@ -39,16 +39,16 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wtx-SE-JFZ">
-                        <rect key="frame" x="182" y="91" width="130" height="28"/>
+                        <rect key="frame" x="202" y="91" width="110" height="28"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chi tiết" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Qn-GC-D9y">
-                                <rect key="frame" x="8" y="5.5" width="94" height="17"/>
+                                <rect key="frame" x="8" y="5.5" width="74" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DetailEditUp.png" translatesAutoresizingMaskIntoConstraints="NO" id="q9c-fC-ofK">
-                                <rect key="frame" x="110" y="8" width="12" height="12"/>
+                                <rect key="frame" x="90" y="8" width="12" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="q9c-fC-ofK" secondAttribute="height" multiplier="1:1" id="Kk7-vp-BGD"/>
                                 </constraints>
@@ -56,7 +56,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="130" id="5rn-di-zwC"/>
+                            <constraint firstAttribute="width" constant="110" id="5rn-di-zwC"/>
                             <constraint firstAttribute="bottom" secondItem="q9c-fC-ofK" secondAttribute="bottom" constant="8" id="IYe-nC-vDh"/>
                             <constraint firstAttribute="trailing" secondItem="q9c-fC-ofK" secondAttribute="trailing" constant="8" id="Lpx-eN-EJv"/>
                             <constraint firstAttribute="height" constant="28" id="Pz2-4H-Ir0"/>
@@ -148,6 +148,19 @@
                             <action selector="btnShowDeitailStatus:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="LzR-dS-52T"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNb-ha-9Dv">
+                        <rect key="frame" x="102" y="91" width="100" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="d18-3v-Tep"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="Huỷ khám">
+                            <color key="titleColor" red="1" green="0.094410053480000006" blue="0.13706858899999999" alpha="0.96522090520000003" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="btnCancelBooking:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="XpJ-bE-254"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="02f-nx-J0D" firstAttribute="top" secondItem="QGu-wb-sko" secondAttribute="bottom" constant="12" id="4fa-Ku-q9S"/>
@@ -156,10 +169,13 @@
                     <constraint firstItem="wtx-SE-JFZ" firstAttribute="top" secondItem="y8L-Ut-91M" secondAttribute="bottom" id="Jwh-x9-F9q"/>
                     <constraint firstItem="Vek-ZW-RzU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="KJX-FV-frB"/>
                     <constraint firstAttribute="trailing" secondItem="wtx-SE-JFZ" secondAttribute="trailing" constant="8" id="PLI-6O-pIG"/>
+                    <constraint firstItem="gNb-ha-9Dv" firstAttribute="bottom" secondItem="wtx-SE-JFZ" secondAttribute="bottom" id="Rok-0a-qdS"/>
                     <constraint firstAttribute="trailing" secondItem="y8L-Ut-91M" secondAttribute="trailing" constant="87" id="SUh-2o-sAY"/>
+                    <constraint firstItem="wtx-SE-JFZ" firstAttribute="leading" secondItem="gNb-ha-9Dv" secondAttribute="trailing" id="Sn1-cn-YMq"/>
                     <constraint firstItem="Vek-ZW-RzU" firstAttribute="top" secondItem="wtx-SE-JFZ" secondAttribute="bottom" id="TNi-hr-EpR"/>
                     <constraint firstItem="02f-nx-J0D" firstAttribute="leading" secondItem="QGu-wb-sko" secondAttribute="leading" id="Wpq-27-Qzo"/>
                     <constraint firstItem="y8L-Ut-91M" firstAttribute="leading" secondItem="02f-nx-J0D" secondAttribute="leading" id="XkY-kR-zWn"/>
+                    <constraint firstItem="gNb-ha-9Dv" firstAttribute="top" secondItem="wtx-SE-JFZ" secondAttribute="top" id="YTh-1s-ky5"/>
                     <constraint firstItem="02f-nx-J0D" firstAttribute="trailing" secondItem="QGu-wb-sko" secondAttribute="trailing" id="ZJZ-5N-dQZ"/>
                     <constraint firstAttribute="bottom" secondItem="wtx-SE-JFZ" secondAttribute="bottom" constant="90" id="Zxi-Qx-5zM"/>
                     <constraint firstItem="QGu-wb-sko" firstAttribute="leading" secondItem="n4P-a6-lfN" secondAttribute="trailing" constant="8" id="Zzr-a3-48C"/>
@@ -171,7 +187,8 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="btnAccepBooking" destination="B6Y-Y9-c0G" id="HVF-pg-ffQ"/>
-                <outlet property="btnCancelBooking" destination="WJg-FU-ynp" id="bCK-D8-Eeo"/>
+                <outlet property="btnCancel" destination="gNb-ha-9Dv" id="zb2-IB-wGS"/>
+                <outlet property="btnCancelBooking" destination="gNb-ha-9Dv" id="IWk-po-G7I"/>
                 <outlet property="btnStatus" destination="y8L-Ut-91M" id="5J3-hV-oXI"/>
                 <outlet property="centerAccep" destination="Fot-fs-0yb" id="5An-Sb-zW5"/>
                 <outlet property="centerCanCel" destination="JD5-BG-JBI" id="JU6-cW-6OT"/>
@@ -181,7 +198,7 @@
                 <outlet property="viewDetails" destination="wtx-SE-JFZ" id="3jp-dH-Wn7"/>
                 <outlet property="viewShowDetail" destination="Vek-ZW-RzU" id="E2z-e8-wK8"/>
             </connections>
-            <point key="canvasLocation" x="1630" y="210"/>
+            <point key="canvasLocation" x="1630" y="209.5"/>
         </tableViewCell>
     </objects>
     <resources>

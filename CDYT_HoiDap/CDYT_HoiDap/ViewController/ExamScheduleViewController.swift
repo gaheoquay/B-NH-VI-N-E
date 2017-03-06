@@ -25,6 +25,9 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         requestBooking()
+        let a = "200000,0"
+        let b = a.replacingOccurrences(of: ",", with: "")
+        print(b)
         // Do any additional setup after loading the view.
     }
 
@@ -58,13 +61,18 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let curentDate = Date()
+        let stringCurentDate = String().convertDatetoString(date: curentDate, dateFormat: "dd/MM/YYYY")
         if listallUSer.count > 0 {
-            if listallUSer[indexPath.row].booking.status == 4 {
-                return 0
-            }else if listallUSer[indexPath.row].booking.status == 3 || listallUSer[indexPath.row].booking.status == 2 {
-                return 119
-            }else {
-                return 209
+        let stringBookingDate = String().convertTimeStampWithDateFormat(timeStamp: listallUSer[indexPath.row].booking.bookingDate / 1000, dateFormat: "dd/MM/YYYY")
+        
+        if listallUSer[indexPath.row].booking.status == 4 {
+            return 0
+        }else if listallUSer[indexPath.row].booking.status == 3 || listallUSer[indexPath.row].booking.status == 2 || (listallUSer[indexPath.row].booking.status == 0 && stringBookingDate > stringCurentDate) {
+            return 119
+        }else {
+            return 209
             }
         }
         return 209
@@ -87,7 +95,18 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     
         
     func deleteBooking(index: IndexPath) {
-        reuqestDeleteBooking(index: index)
+        
+        let alert = UIAlertController(title: "Thông báo", message: "Bạn có muốn huỷ khám?", preferredStyle: .alert)
+        let alertActionOk = UIAlertAction(title: "Huỷ Khám", style: .default) { (UIAlertAction) in
+            self.reuqestDeleteBooking(index: index)
+        }
+        let alertActionCancel = UIAlertAction(title: "Bỏ qua", style: .cancel) { (UIAlertAction) in
+            
+        }
+        alert.addAction(alertActionOk)
+        alert.addAction(alertActionCancel)
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
     func accepBooking(index: IndexPath) {

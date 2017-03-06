@@ -2658,6 +2658,7 @@
                         <outlet property="lbGender" destination="uCO-vZ-vZb" id="BLI-27-VZu"/>
                         <outlet property="lbJob" destination="KhN-Ld-JKP" id="CBq-PJ-rCa"/>
                         <outlet property="lbProvince" destination="8Xe-4l-A0f" id="4FW-j0-bBP"/>
+                        <outlet property="lbTittle" destination="Jbr-xr-bW2" id="K03-E3-nrf"/>
                         <outlet property="lbZone" destination="A0e-Et-4tD" id="0sW-2D-50z"/>
                         <outlet property="tapCountry" destination="hId-SX-GVV" id="M9E-YJ-2RE"/>
                         <outlet property="tapDistric" destination="hdN-rM-4as" id="Var-ac-1uC"/>
