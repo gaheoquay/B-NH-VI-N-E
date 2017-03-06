@@ -10,6 +10,7 @@ import UIKit
 protocol BookingCalenderControllerDelegate {
   func gotoService()
   func gotoFile()
+    func gotoExamSchudel()
 }
 
 class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalendarDelegate {
@@ -27,6 +28,8 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
   var delegate: BookingCalenderControllerDelegate?
     
     //test
+    var checkIn = CheckInResultEntity()
+    //endtest
     
     var listBooking = BookingUserEntity()
   
@@ -56,7 +59,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
   }
   
   @IBAction func btnSendBooking(_ sender: Any) {
-    isvalidCheck()
+        isvalidCheck()
   }
   
   
@@ -99,18 +102,24 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
       "RequestedUserId" : Until.getCurrentId(),
       "ProfileId" : listBooking.profile.id,
       "ServiceId" : listService.serviceId,
-      "BookingDate" : String(format:"%.0f",dateBook*1000)
+      "BookingDate" : String(format:"%.0f",dateBook * 1000)
     ]
-    
+    print(param)
     Alamofire.request(ADD_BOOKING, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
         if status == 200{
           if let result = response.result.value {
             let jsonData = result as! NSDictionary
             self.listBook = BookingEntity.init(dictionary: jsonData)
-            self.requestCheckin()
           }
-          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Gửi đặt lịch thành công", cancelBtnTitle: "Đóng")
+            
+            let currentDateString = String().convertDatetoString(date: self.currentDate, dateFormat: "dd/MM/YYYY")
+            let dateBookingString = String().convertTimeStampWithDateFormat(timeStamp: self.dateBook, dateFormat: "dd/MM/YYYY")
+            if currentDateString == dateBookingString {
+                self.requestCheckin()
+            }
+            self.delegate?.gotoExamSchudel()
+            
         }else{
           UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
         }
@@ -145,14 +154,21 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     param["DepartmentId"] = String(format: "%0.f", listService.roomId)
     param["PhoneGuardian"] = listBooking.profile.bailsmanPhoneNumber
     print(param)
+    Until.showLoading()
     Alamofire.request(CHECK_IN, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
         print(status)
         if status == 200{
-          
+//            if let result = response.result.value {
+//                let json = result as! NSDictionary
+//                self.checkIn = CheckInResultEntity.init(dictionary: json as! [String : Any])
+//                print(self.checkIn.sequence)
+//            }
+            
         }else{
           UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
         }
+        Until.hideLoading()
       }else{
         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
       }
@@ -167,7 +183,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     }else if dateBook == 0 {
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn ngày tháng", cancelBtnTitle: "Đóng")
     }else {
-      requestBoking()
+        requestBoking()
     }
   }
 }

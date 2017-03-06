@@ -61,7 +61,7 @@ class ListServiceViewController: UIViewController,UITableViewDelegate,UITableVie
         
     }
     
-    func gotoDetailFileUser() {
+    func gotoDetailFileUser(indexPath: IndexPath) {
         
     }
     

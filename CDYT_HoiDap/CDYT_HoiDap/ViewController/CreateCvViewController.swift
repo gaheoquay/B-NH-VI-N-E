@@ -28,6 +28,18 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
   @IBOutlet weak var txtPhoneGuardian: UITextField!
   @IBOutlet weak var txtNameGuardian: UITextField!
   @IBOutlet weak var txtCmtGuardian: UITextField!
+    @IBOutlet weak var viewNameGuardian: UIView!
+    @IBOutlet weak var viewPhoneGuardian: UIView!
+    @IBOutlet weak var viewCmtGuardian: UIView!
+    @IBOutlet var tapJob: UITapGestureRecognizer!
+    @IBOutlet var tapCountry: UITapGestureRecognizer!
+    @IBOutlet var tapDistric: UITapGestureRecognizer!
+    @IBOutlet var tapProvince: UITapGestureRecognizer!
+    @IBOutlet var tapZone: UITapGestureRecognizer!
+    @IBOutlet weak var btnDone: UIButton!
+    @IBOutlet var tapGender: UITapGestureRecognizer!
+    @IBOutlet var tapDob: UITapGestureRecognizer!
+    
   
   var infoUser = FileUserEntity()
   var listCountry = [CountryEntity]()
@@ -42,6 +54,10 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
   var selectedProvince : ProvinceEntity!
   var selectedDistrict : DistrictEntity!
   var selectedZone : ZoneEntity!
+    
+    var age = 0
+    var dateNow = Date()
+    var ageNow = 0
   
   lazy var pickerlistCountry = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
   lazy var pickerlistProvince = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
@@ -53,6 +69,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
   
   var genderType = 1
   var timeStampDateOfBirt : Double = 0
+    
   
   
   override func viewDidLoad() {
@@ -67,11 +84,81 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     // Dispose of any resources that can be recreated.
   }
   func updateUI(){
+    if infoUser.zoneId != "" {
+        txtName.text = infoUser.patientName
+        genderType = infoUser.gender
+        if genderType == 1 {
+            lbGender.text = "Nam"
+        }else {
+            lbGender.text = "Nữ"
+        }
+        txtCMT.text = infoUser.passportId
+        txtPhoneNumber.text = infoUser.phoneNumber
+        lbJob.text = infoUser.jobName
+        lbCountry.text = infoUser.countryName
+        lbProvince.text = infoUser.provinceName
+        lbDistric.text = infoUser.dictrictName
+        lbZone.text = infoUser.zoneName
+        txtCmtGuardian.text = infoUser.bailsmanPassportId
+        txtNameGuardian.text = infoUser.bailsmanName
+        txtPhoneGuardian.text = infoUser.bailsmanPhoneNumber
+        let dOb = infoUser.dOB
+        lbDateOfYear.text = String().convertTimeStampWithDateFormat(timeStamp: dOb, dateFormat: "dd/MM/YYYY")
+        viewCmtGuardian.isHidden = false
+        viewNameGuardian.isHidden = false
+        viewPhoneGuardian.isHidden = false
+        
+        txtPhoneGuardian.isEnabled = false
+        txtPhoneNumber.isEnabled = false
+        txtCmtGuardian.isEnabled = false
+        txtNameGuardian.isEnabled = false
+        tapJob.isEnabled = false
+        tapZone.isEnabled = false
+        tapCountry.isEnabled = false
+        tapDistric.isEnabled = false
+        tapProvince.isEnabled = false
+        btnDone.isHidden = true
+        txtAdress.isEnabled = false
+        txtCmtGuardian.isEnabled = false
+        txtNameGuardian.isEnabled = false
+        txtPhoneGuardian.isEnabled = false
+        tapDob.isEnabled = false
+        tapGender.isEnabled = false
+        
+        
+        txtCMT.isEnabled = false
+        txtName.isEnabled = false
+        
+    }else {
     lbCountry.text = "Việt Nam"
     timeStampDateOfBirt = Date().timeIntervalSince1970
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "dd/MM/yyyy"
     self.lbDateOfYear.text = "\(dateFormatter.string(from: Date()))"
+    viewCmtGuardian.isHidden = false
+    viewNameGuardian.isHidden = false
+    viewPhoneGuardian.isHidden = false
+        
+        txtNameGuardian.isEnabled = true
+        tapJob.isEnabled = true
+        tapZone.isEnabled = true
+        tapCountry.isEnabled = true
+        tapDistric.isEnabled = true
+        tapProvince.isEnabled = true
+        btnDone.isHidden = false
+        txtPhoneGuardian.isEnabled = true
+        txtPhoneNumber.isEnabled = true
+        txtCmtGuardian.isEnabled = true
+        txtNameGuardian.isEnabled = true
+        txtCMT.isEnabled = true
+        txtName.isEnabled = true
+        txtAdress.isEnabled = true
+        txtCmtGuardian.isEnabled = true
+        txtNameGuardian.isEnabled = true
+        txtPhoneGuardian.isEnabled = true
+        tapDob.isEnabled = true
+        tapGender.isEnabled = true
+    }
 
   }
   //MARK: Button
@@ -112,7 +199,23 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         dateFormatter.dateFormat = "dd/MM/yyyy"
         self.lbDateOfYear.text = "\(dateFormatter.string(from: date! as Date))"
         self.timeStampDateOfBirt = (date?.timeIntervalSince1970)!
+        
+        let calendar : Calendar = Calendar.current
+        let dateComponent = calendar.dateComponents([.year], from: date as! Date)
+        self.age = (calendar.date(from: dateComponent)?.age)!
+        if self.age < 6 {
+            self.viewCmtGuardian.isHidden = false
+            self.viewNameGuardian.isHidden = false
+            self.viewPhoneGuardian.isHidden = false
+        }else {
+            self.viewCmtGuardian.isHidden = true
+            self.viewNameGuardian.isHidden = true
+            self.viewPhoneGuardian.isHidden = true
+        }
+
       }
+        
+        
     }
   }
   
@@ -420,6 +523,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa nhập thông tin Người bảo lãnh đối với hồ sơ dưới 6 tuổi.", cancelBtnTitle: "Đóng")
         return
       }
+        
     }
     userEntity.passportId = txtCMT.text!
     userEntity.phoneNumber = txtPhoneNumber.text!
@@ -444,6 +548,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
       "RequestedUserId" : Until.getCurrentId(),
       "Profile" : profile
     ]
+    Until.showLoading()
     print(param)
     Alamofire.request(BOOKING_ADDING_PROFILE, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
@@ -455,6 +560,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         }else{
           UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
         }
+        Until.hideLoading()
       }else{
         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
       }

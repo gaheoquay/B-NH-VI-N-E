@@ -71,6 +71,7 @@ let BOOKING_ADDING_PROFILE = BASE_URL + "/Booking/AddProfile"
 let DELELTE_PROFILE = BASE_URL + "/Booking/RemoveProfile"
 let CHECKIN_VOICE = BASE_URL + "/Booking/CheckInvoice"
 let CHECK_UP = BASE_URL + "/Booking/FinishCheckup"
+let UPDATE_BOOKING_AFTER_PAYMEN = BASE_URL + "/Booking/UpdateBookingAfterPaymentSuccess"
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
 let NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"
