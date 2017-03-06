@@ -12,10 +12,15 @@ class DetailResultUserViewController: UIViewController {
 
     @IBOutlet weak var lbCodeHospital: UILabel!
     @IBOutlet weak var lbDate: UILabel!
+    @IBOutlet weak var heightViewDeanostic: NSLayoutConstraint!
+    @IBOutlet weak var centerLbDianostic: NSLayoutConstraint!
+    @IBOutlet weak var marginBotBtnDianostic: NSLayoutConstraint!
+    @IBOutlet weak var lbContentDianostic: UILabel!
     
     var listBooking = BookingEntity()
     var listReult = ResultUserEntity()
     var date = ""
+    var isCheckSelect = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,10 +66,7 @@ class DetailResultUserViewController: UIViewController {
     
     //MARK: Button
     @IBAction func btnInitialDiagnosis(_ sender: Any) {
-        let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailSickViewController") as! DetailSickViewController
-        viewcontroller.titleUser = "Chuẩn đoán ban đầu"
-        viewcontroller.content = listReult.firt_diagnostic
-        self.navigationController?.pushViewController(viewcontroller, animated: true)
+        
     }
     @IBAction func btnAmount(_ sender: Any) {
         let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailSickViewController") as! DetailSickViewController

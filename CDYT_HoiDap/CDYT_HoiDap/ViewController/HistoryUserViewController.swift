@@ -121,7 +121,6 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
                         self.btnListProfile.setTitle(self.listBookingUser[self.indexProfile.row].profile.patientName, for: .normal)
                         self.listBooking = self.listBookingUser[self.indexProfile.row].booking
                     }
-//                    self.tbListHistory.reloadData()
                     self.setupTable()
                     Until.hideLoading()
                 }else{
