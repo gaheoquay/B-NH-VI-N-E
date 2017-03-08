@@ -77,15 +77,16 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     
     let sonDay = String().convertTimeStampWithDateFormat(timeStamp: dateBook, dateFormat: "EEEE")
     let isSunday = "Sunday"
+    let isSundays = "Chủ Nhật"
     
-    if currentDateString == dateBookingString {
+    if currentDateString == dateBookingString  {
         if currentDate > fourty_today {
             UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không thể đặt lịch vào ngày này! Bệnh viện ngưng đặt lịch khám sau 16h hàng ngày và chủ nhật.", cancelBtnTitle: "Đóng")
         }else {
             isvalidCheck()
         }
     }else {
-        if sonDay == isSunday {
+        if sonDay == isSunday || sonDay == isSundays {
             UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không thể đặt lịch vào ngày này! Bệnh viện ngưng đặt lịch khám sau 16h hàng ngày và chủ nhật.", cancelBtnTitle: "Đóng")
         }else {
             isvalidCheck()
