@@ -84,7 +84,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
             btnApproval.isHidden = true
             heightViewCate.constant = 0
             layoutBottomViewCate.constant = 0
-            
+            layoutBottomCreateDate.constant = 50
         }else {
             layoutBottomViewCate.constant = 8
             if isHiddenCateAndDoctor {
@@ -151,8 +151,18 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
         }else{
             myAttrString.append(NSAttributedString(string: "Ẩn danh", attributes: fontWithColor))
         }
+        
+        if feedEntity.firstCommentedDoctor.id != "" {
+            let myAttrStringDoctor = NSMutableAttributedString(string: "Trả lời bởi : ", attributes: fontRegular)
+            myAttrStringDoctor.append(NSAttributedString(string: feedEntity.firstCommentedDoctor.fullname, attributes: fontWithColor))
+            lbNameDoctor.attributedText = myAttrStringDoctor
+            lbTimeAnswerDoctor.text = String().convertTimeStampWithDateFormat(timeStamp: feedEntity.firstCommentTime, dateFormat: "dd/MM/yy HH:mm")
+        }else {
+            layoutBottomCreateDate.constant = 0
+            
+        }
+        
         lbAuthor.attributedText = myAttrString
-
         lbCreateDate.text = String().convertTimeStampWithDateFormat(timeStamp: feedEntity.postEntity.createdDate, dateFormat: "dd/MM/yy HH:mm")
         if feedEntity.tags.count == 0 {
             layoutHeighTag.constant = 0
@@ -243,6 +253,9 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
     @IBOutlet weak var btnDoctor: UIButton!
     @IBOutlet weak var heightViewCate: NSLayoutConstraint!
     @IBOutlet weak var layoutBottomViewCate: NSLayoutConstraint!
+    @IBOutlet weak var lbTimeAnswerDoctor: UILabel!
+    @IBOutlet weak var lbNameDoctor: UILabel!
+    @IBOutlet weak var layoutBottomCreateDate: NSLayoutConstraint!
     
     
     var delegate : QuestionTableViewCellDelegate?
