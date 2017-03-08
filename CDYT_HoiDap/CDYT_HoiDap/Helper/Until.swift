@@ -248,7 +248,7 @@ class Until{
               let dateString = "06:00 " + datePick
               dateFormat.dateFormat = "HH:mm dd/MM/yyyy"
               localNotification.fireDate = dateFormat.date(from: dateString)
-              localNotification.alertBody = ""
+              localNotification.alertBody = "Xác định đi khám cho lịch đã đặt"
               localNotification.alertAction = ""
               localNotification.timeZone = NSTimeZone.default
 //              localNotification.applicationIconBadgeNumber = 1
