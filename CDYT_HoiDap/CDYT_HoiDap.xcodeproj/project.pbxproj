@@ -1681,10 +1681,10 @@
 				INFOPLIST_FILE = CDYT_HoiDap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.tuvanonline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b1528856-2dc9-4b45-92f1-91543be6fbb8";
-				PROVISIONING_PROFILE_SPECIFIER = "new development benh vien e";
+				PROVISIONING_PROFILE = "7379ca26-f688-40a9-805e-d333097ab5ae";
+				PROVISIONING_PROFILE_SPECIFIER = "tu van online development";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1702,10 +1702,10 @@
 				INFOPLIST_FILE = CDYT_HoiDap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.tuvanonline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "afc66459-0fd9-40b0-a333-fc5fc166b849";
-				PROVISIONING_PROFILE_SPECIFIER = "ad hoc distribuition bve";
+				PROVISIONING_PROFILE = "2ba201f8-3dc0-4e42-ab17-a67d3ee7dfac";
+				PROVISIONING_PROFILE_SPECIFIER = "tu van online distribution";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};
