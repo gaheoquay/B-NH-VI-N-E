@@ -58,7 +58,11 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
     }
 
     func showUserProfile(){
+        let realm = try! Realm()
+        let user = realm.objects(UserEntity.self)
+        if feed.postEntity.isPrivate != true || feed.authorEntity.id == user[0].id {
         delegate?.gotoUserProfileFromDetailQuestion(user: feed.authorEntity)
+        }
     }
     
     @IBAction func moreActionBtnTap(_ sender: Any) {

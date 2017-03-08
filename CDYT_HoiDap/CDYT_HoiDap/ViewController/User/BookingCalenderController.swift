@@ -75,6 +75,9 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     let currentDateString = String().convertDatetoString(date: self.currentDate, dateFormat: "dd/MM/YYYY")
     let dateBookingString = String().convertTimeStampWithDateFormat(timeStamp: self.dateBook, dateFormat: "dd/MM/YYYY")
     
+    let sonDay = String().convertTimeStampWithDateFormat(timeStamp: dateBook, dateFormat: "EEEE")
+    let isSunday = "Sunday"
+    
     if currentDateString == dateBookingString {
         if currentDate > fourty_today {
             UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không thể đặt lịch vào ngày này! Bệnh viện ngưng đặt lịch khám sau 16h hàng ngày và chủ nhật.", cancelBtnTitle: "Đóng")
@@ -82,8 +85,15 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
             isvalidCheck()
         }
     }else {
-        isvalidCheck()
+        if sonDay == isSunday {
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không thể đặt lịch vào ngày này! Bệnh viện ngưng đặt lịch khám sau 16h hàng ngày và chủ nhật.", cancelBtnTitle: "Đóng")
+        }else {
+            isvalidCheck()
+        }
+
     }
+    
+    
     
   }
   
@@ -109,7 +119,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
   }
   //MARK: SetupDate
   func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-    print("calendar did select date \(String().convertDatetoString(date: date, dateFormat: "dd/MM/YYYY"))")
+    print("calendar did select date \(String().convertDatetoString(date: date, dateFormat: "dd/MM/YYYY :EEEE"))")
     dateBook = date.timeIntervalSince1970
     
     print(dateBook)
