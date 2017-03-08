@@ -121,7 +121,6 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
                         self.btnListProfile.setTitle(self.listBookingUser[self.indexProfile.row].profile.patientName, for: .normal)
                         self.listBooking = self.listBookingUser[self.indexProfile.row].booking
                     }
-//                    self.tbListHistory.reloadData()
                     self.setupTable()
                     Until.hideLoading()
                 }else{
@@ -147,7 +146,7 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
     } 
     
     func gotoDetailHistory(index: IndexPath) {
-        let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailResultUserViewController") as! DetailResultUserViewController
+        let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailsHistoryUserViewController") as! DetailsHistoryUserViewController
         viewcontroller.listBooking = listBooking[index.row]
         viewcontroller.date = String().convertTimeStampWithDateFormat(timeStamp: listBooking[index.row].createDate, dateFormat: "dd/MM/YYYY")
         self.navigationController?.pushViewController(viewcontroller, animated: true)

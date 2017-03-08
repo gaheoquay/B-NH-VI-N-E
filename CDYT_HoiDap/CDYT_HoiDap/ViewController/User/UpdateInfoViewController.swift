@@ -312,7 +312,7 @@ class UpdateInfoViewController: BaseViewController {
     
     let logoutParam : [String : Any] = [
       "Auth": Until.getAuthKey(),
-      "NicknameOrEmail": user[0].email,
+      "NicknameOrEmail": user[0].nickname,
       "Device": device
     ]
     Until.showLoading()

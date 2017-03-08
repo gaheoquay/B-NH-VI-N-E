@@ -40,14 +40,22 @@ class FileCell: UITableViewCell {
     }
     
     func setData(entity: ServiceEntity){
+        
+        let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
+        let fontRegularWithColor = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor.init(netHex: 0xa0b3bc)]
+
+        
+        let myAttrString = NSMutableAttributedString(string: "\(String().replaceNSnumber(doublePrice: entity.priceService))", attributes: fontBold)
+        myAttrString.append(NSAttributedString(string: " đ", attributes: fontRegularWithColor))
+        lbPrice.attributedText = myAttrString
+
         lbName.text = entity.name
-        lbPrice.text = String().replaceNSnumber(doublePrice: entity.priceService)
     }
     
     func setDataHistory(entity: BookingEntity){
         
         viewGotoCreateCV.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(gotoDetailHistoryUser)))
-        lbName.text = String().convertTimeStampWithDateFormat(timeStamp: entity.createDate, dateFormat: "dd/MM/YYYY")
+        lbName.text = String().convertTimeStampWithDateFormat(timeStamp: entity.bookingDate / 1000, dateFormat: "dd/MM/YYYY")
         lbPrice.isHidden = true
         imgDelete.image = UIImage(named: "DetailEditUp.png")
         heightLbPrice.constant = 0

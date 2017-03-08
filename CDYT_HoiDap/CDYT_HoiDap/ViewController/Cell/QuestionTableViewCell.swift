@@ -17,6 +17,8 @@ protocol QuestionTableViewCellDelegate {
 }
 class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDelegateLeftAlignedLayout {
     
+    var isPrivate = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -53,7 +55,12 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
     }
     
     func showUserProfile(){
-        delegate?.gotoUserProfileFromQuestionCell(user: feedEntity.authorEntity)
+        let realm = try! Realm()
+        let users = realm.objects(UserEntity.self).first
+
+        if !feedEntity.postEntity.isPrivate || users?.id == feedEntity.authorEntity.id {
+            delegate?.gotoUserProfileFromQuestionCell(user: feedEntity.authorEntity)
+        }
     }
     
     @IBAction func showDetail(_ sender: Any) {
@@ -68,6 +75,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
         
         let realm = try! Realm()
         let users = realm.objects(UserEntity.self).first
+        
         
         if users == nil || users?.role == 0 || users?.role == 1  {
             viewCate.isHidden = true
@@ -85,9 +93,6 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
                     lbDoctor.text = feedEntity.assigneeEntity.fullname
                     btnApproval.setTitle("Đã \nduyệt", for: .normal)
                     btnApproval.setTitleColor(colorbtnUnapproval, for: .normal)
-//                    btnApproval.isEnabled = false
-//                    btnCate.isEnabled = false
-//                    btnDoctor.isEnabled = false
                     imgApproval.image = UIImage(named: "DaDuyet_1.png")
                 }else if feedEntity.cateGory.id != "" {
                     if feedEntity.assigneeEntity.id == "" {
@@ -132,6 +137,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
         }else{
             leftView.backgroundColor = UIColor().hexStringToUIColor(hex: "C7ECA1")
         }
+        
         lbTitle.text = feedEntity.postEntity.title
         lbContent.text = feedEntity.postEntity.content
         lbLikeCount.text = String(feedEntity.likeCount)
@@ -139,8 +145,14 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
         let fontRegular = [NSFontAttributeName: UIFont.systemFont(ofSize: 12)]
         let fontWithColor = [ NSFontAttributeName: UIFont.systemFont(ofSize: 12),NSForegroundColorAttributeName: UIColor.init(netHex: 0x87baef)]
         let myAttrString = NSMutableAttributedString(string: "Hỏi bởi ", attributes: fontRegular)
-        myAttrString.append(NSAttributedString(string: feedEntity.authorEntity.nickname, attributes: fontWithColor))
+        if feedEntity.postEntity.isPrivate != true || users?.id == feedEntity.authorEntity.id {
+            myAttrString.append(NSAttributedString(string: feedEntity.authorEntity.nickname, attributes: fontWithColor))
+            
+        }else{
+            myAttrString.append(NSAttributedString(string: "Ẩn danh", attributes: fontWithColor))
+        }
         lbAuthor.attributedText = myAttrString
+
         lbCreateDate.text = String().convertTimeStampWithDateFormat(timeStamp: feedEntity.postEntity.createdDate, dateFormat: "dd/MM/yy HH:mm")
         if feedEntity.tags.count == 0 {
             layoutHeighTag.constant = 0

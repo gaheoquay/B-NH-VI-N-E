@@ -67,7 +67,6 @@ class LoginViewController: UIViewController {
 
     func requestLogin(){
         
-        let emailString = emailNickTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let passString = passTxt.text
         
         let uuid = NSUUID().uuidString
@@ -83,7 +82,7 @@ class LoginViewController: UIViewController {
         
         let loginParam : [String : Any] = [
             "Auth": Until.getAuthKey(),
-            "NicknameOrEmail": emailString!,
+            "NicknameOrEmail": emailNickTxt.text!,
             "Password": DataEncryption.getMD5(from: passString),
             "Device": device
         ]

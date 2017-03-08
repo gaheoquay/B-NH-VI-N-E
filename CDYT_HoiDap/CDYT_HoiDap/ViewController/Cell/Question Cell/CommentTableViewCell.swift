@@ -38,6 +38,7 @@ class CommentTableViewCell: UITableViewCell {
   var delegate : CommentTableViewCellDelegate?
   var mainComment = MainCommentEntity()
   var subComment = SubCommentEntity()
+  var isPrivate = false
   
   var isSubcomment = false
   let appDel: AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -152,6 +153,8 @@ class CommentTableViewCell: UITableViewCell {
   func setDataForMainComment() {
     isSubcomment = false
     
+    
+    
     if mainComment.comment.isSolution {
       self.contentView.backgroundColor = UIColor().hexStringToUIColor(hex: "F1FDEA")
       solutionLbl.isHidden = false
@@ -222,6 +225,7 @@ class CommentTableViewCell: UITableViewCell {
     }else{
       moreActionBtn.isHidden = true
     }
+    
     
     if mainComment.author.role == 1 {
       nameLbl.text = mainComment.author.fullname

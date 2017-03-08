@@ -25,9 +25,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         requestBooking()
-        let a = "200000,0"
-        let b = a.replacingOccurrences(of: ",", with: "")
-        print(b)
+        
         // Do any additional setup after loading the view.
     }
 
@@ -181,6 +179,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
                         for item in jsonData {
                             let entity = AllUserEntity.init(dictionary: item)
                             self.listallUSer.append(entity)
+                            
                         }
                     }
                     self.setupTable()
@@ -257,7 +256,8 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
                 print(status)
                 if status == 200{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Đặt lịch khám thành công", cancelBtnTitle: "Đóng")
-                    self.tbListExamSchedule.reloadData()
+                    self.listallUSer[index.row].booking.status = 2
+                    self.tbListExamSchedule.reloadRows(at: [index], with: .automatic)
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }

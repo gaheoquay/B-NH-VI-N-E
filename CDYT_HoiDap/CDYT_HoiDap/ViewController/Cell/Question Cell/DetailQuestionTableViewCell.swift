@@ -58,7 +58,11 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
     }
 
     func showUserProfile(){
+        let realm = try! Realm()
+        let user = realm.objects(UserEntity.self)
+        if feed.postEntity.isPrivate != true || feed.authorEntity.id == user[0].id {
         delegate?.gotoUserProfileFromDetailQuestion(user: feed.authorEntity)
+        }
     }
     
     @IBAction func moreActionBtnTap(_ sender: Any) {
@@ -110,8 +114,19 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
     }
     
     func setData(){
-        avaImg.sd_setImage(with: URL.init(string: feed.authorEntity.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
-        nameLbl.text = feed.authorEntity.nickname
+        
+        let realm = try! Realm()
+        let user = realm.objects(UserEntity.self)
+        
+        if feed.postEntity.isPrivate != true || feed.authorEntity.id == user[0].id {
+            avaImg.sd_setImage(with: URL.init(string: feed.authorEntity.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
+            nameLbl.text = feed.authorEntity.nickname
+
+        }else {
+            nameLbl.text = "Ẩn Danh"
+            avaImg.image = UIImage(named: "AvaDefaut.png")
+        }
+        
         timeLbl.text = String().convertTimeStampWithDateFormat(timeStamp: feed.postEntity.createdDate, dateFormat: "dd/MM/yy HH:mm")
         
         if feed.tags.count > 0 {
@@ -147,10 +162,9 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
         tagCollectionView.reloadData()
         imgCollectionView.reloadData()
       
-      let realm = try! Realm()
       
-      if let user = realm.objects(UserEntity.self).first {
-        if user.id == feed.authorEntity.id || user.role == 2 {
+      if let users = realm.objects(UserEntity.self).first {
+        if users.id == feed.authorEntity.id || users.role == 2 {
           moreActionBtn.isHidden = false
         }else{
           moreActionBtn.isHidden = true

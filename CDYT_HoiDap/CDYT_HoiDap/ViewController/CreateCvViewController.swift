@@ -24,7 +24,6 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
   @IBOutlet weak var lbCountry: UILabel!
   @IBOutlet weak var lbProvince: UILabel!
   @IBOutlet weak var lbZone: UILabel!
-  @IBOutlet weak var txtAdress: UITextField!
   @IBOutlet weak var lbDistric: UILabel!
   @IBOutlet weak var txtPhoneGuardian: UITextField!
   @IBOutlet weak var txtNameGuardian: UITextField!
@@ -121,7 +120,6 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         tapDistric.isEnabled = false
         tapProvince.isEnabled = false
         btnDone.isHidden = true
-        txtAdress.isEnabled = false
         txtCmtGuardian.isEnabled = false
         txtNameGuardian.isEnabled = false
         txtPhoneGuardian.isEnabled = false
@@ -156,7 +154,6 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         txtNameGuardian.isEnabled = true
         txtCMT.isEnabled = true
         txtName.isEnabled = true
-        txtAdress.isEnabled = true
         txtCmtGuardian.isEnabled = true
         txtNameGuardian.isEnabled = true
         txtPhoneGuardian.isEnabled = true
