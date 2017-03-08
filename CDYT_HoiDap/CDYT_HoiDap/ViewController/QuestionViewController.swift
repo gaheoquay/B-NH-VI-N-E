@@ -343,13 +343,13 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
   }
   
   func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
-    if user.id == Until.getCurrentId() {
-    }else{
+//    if user.id == Until.getCurrentId() {
+//    }else{
       let storyboard = UIStoryboard.init(name: "User", bundle: nil)
       let viewController = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
       viewController.user = user
       self.navigationController?.pushViewController(viewController, animated: true)
-    }
+//    }
   }
   
   //MARK: receive notifiy when mark an comment is solution

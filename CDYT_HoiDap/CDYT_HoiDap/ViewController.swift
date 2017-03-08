@@ -171,6 +171,7 @@ class ViewController: BaseViewController,UITableViewDelegate,UITableViewDataSour
         cell.indexPath = indexPath
         if listFedds.count > 0 {
             cell.feedEntity = listFedds[indexPath.row]
+            cell.isPrivate = listFedds[indexPath.row].postEntity.isPrivate
         }
         cell.setData(isHiddenCateAndDoctor: false)
       
@@ -197,16 +198,16 @@ class ViewController: BaseViewController,UITableViewDelegate,UITableViewDataSour
     }
     
     func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
-        if user.id == Until.getCurrentId() {
+//        if user.id == Until.getCurrentId() {
 //            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
 //            let viewController = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
 //            self.navigationController?.pushViewController(viewController, animated: true)
-        }else{
+//        }else{
             let storyboard = UIStoryboard.init(name: "User", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
             viewController.user = user
             self.navigationController?.pushViewController(viewController, animated: true)
-        }
+//        }
     }
      
 //    MARK: Action

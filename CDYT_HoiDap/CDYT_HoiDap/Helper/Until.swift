@@ -126,6 +126,51 @@ extension Date {
   var age: Int {
     return Calendar.current.dateComponents([.year], from: self, to: Date()).year!
   }
+    
+    func dateAt(hours: Int, minutes: Int, days: Int) -> Date
+    {
+        let calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+        
+        //get the month/day/year componentsfor today's date.
+        
+        
+        var date_components = calendar.components(
+            [NSCalendar.Unit.year,
+             NSCalendar.Unit.month,
+             NSCalendar.Unit.day],
+            from: self)
+        
+        //Create an NSDate for the specified time today.
+        date_components.hour = hours
+        date_components.minute = minutes
+        date_components.weekday = days
+        date_components.second = 0
+        
+        let newDate = calendar.date(from: date_components)!
+        return newDate
+    }
+    
+    func weekDayAt(days: Int) -> Date
+    {
+        let calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+        
+        //get the month/day/year componentsfor today's date.
+        
+        
+        var date_components = calendar.components(
+            [NSCalendar.Unit.year,
+             NSCalendar.Unit.month,
+             NSCalendar.Unit.day],
+            from: self)
+        
+        //Create an NSDate for the specified time today.
+        
+        date_components.weekday = days
+        
+        let newDate = calendar.date(from: date_components)!
+        return newDate
+    }
+    
 }
 
 extension UIAlertController {

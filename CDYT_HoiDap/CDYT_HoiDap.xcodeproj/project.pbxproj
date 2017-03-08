@@ -19,7 +19,6 @@
 		0F765A3B1E644207001DF8ED /* FileUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F765A3A1E644207001DF8ED /* FileUserEntity.swift */; };
 		0F81E4AA1E66813B00A7C18F /* CheckInvoiceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4A91E66813B00A7C18F /* CheckInvoiceEntity.swift */; };
 		0F81E4AC1E672CE800A7C18F /* BookingUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4AB1E672CE800A7C18F /* BookingUserEntity.swift */; };
-		0F81E4AE1E67399700A7C18F /* DetailResultUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4AD1E67399700A7C18F /* DetailResultUserViewController.swift */; };
 		0F81E4B01E6747DB00A7C18F /* ResultUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4AF1E6747DB00A7C18F /* ResultUserEntity.swift */; };
 		0F81E4B21E674F6F00A7C18F /* DetailSickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4B11E674F6F00A7C18F /* DetailSickViewController.swift */; };
 		0F9471441E5F5E3C00EE7C2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F9471431E5F5E3C00EE7C2A /* Main.storyboard */; };
@@ -55,6 +54,7 @@
 		0FC431781E658680003F7F31 /* BookingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC431771E658680003F7F31 /* BookingEntity.swift */; };
 		0FCFD9A61E5EEDB700EE2F89 /* BookingCalenderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFD9A51E5EEDB700EE2F89 /* BookingCalenderController.swift */; };
 		0FCFD9A81E5EEDDD00EE2F89 /* ManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFD9A71E5EEDDD00EE2F89 /* ManagerViewController.swift */; };
+		0FD3D7351E6E65CB0083A0BF /* DetailsHistoryUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD3D7341E6E65CB0083A0BF /* DetailsHistoryUserViewController.swift */; };
 		0FF753391E62F267001450B7 /* ExamScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF753381E62F267001450B7 /* ExamScheduleViewController.swift */; };
 		0FF7533D1E62F3A9001450B7 /* ExamScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7533B1E62F3A9001450B7 /* ExamScheduleCell.swift */; };
 		0FF7533E1E62F3A9001450B7 /* ExamScheduleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FF7533C1E62F3A9001450B7 /* ExamScheduleCell.xib */; };
@@ -276,7 +276,6 @@
 		0F765A3A1E644207001DF8ED /* FileUserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUserEntity.swift; sourceTree = "<group>"; };
 		0F81E4A91E66813B00A7C18F /* CheckInvoiceEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInvoiceEntity.swift; sourceTree = "<group>"; };
 		0F81E4AB1E672CE800A7C18F /* BookingUserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingUserEntity.swift; sourceTree = "<group>"; };
-		0F81E4AD1E67399700A7C18F /* DetailResultUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailResultUserViewController.swift; sourceTree = "<group>"; };
 		0F81E4AF1E6747DB00A7C18F /* ResultUserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultUserEntity.swift; sourceTree = "<group>"; };
 		0F81E4B11E674F6F00A7C18F /* DetailSickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailSickViewController.swift; sourceTree = "<group>"; };
 		0F9471431E5F5E3C00EE7C2A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -312,6 +311,7 @@
 		0FC431771E658680003F7F31 /* BookingEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingEntity.swift; sourceTree = "<group>"; };
 		0FCFD9A51E5EEDB700EE2F89 /* BookingCalenderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BookingCalenderController.swift; path = User/BookingCalenderController.swift; sourceTree = "<group>"; };
 		0FCFD9A71E5EEDDD00EE2F89 /* ManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerViewController.swift; sourceTree = "<group>"; };
+		0FD3D7341E6E65CB0083A0BF /* DetailsHistoryUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsHistoryUserViewController.swift; sourceTree = "<group>"; };
 		0FF753381E62F267001450B7 /* ExamScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamScheduleViewController.swift; sourceTree = "<group>"; };
 		0FF7533B1E62F3A9001450B7 /* ExamScheduleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamScheduleCell.swift; sourceTree = "<group>"; };
 		0FF7533C1E62F3A9001450B7 /* ExamScheduleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExamScheduleCell.xib; sourceTree = "<group>"; };
@@ -868,8 +868,8 @@
 				0FF753381E62F267001450B7 /* ExamScheduleViewController.swift */,
 				0F9AD59B1E63CE0F00981D7B /* SearchFileViewController.swift */,
 				0FC4316F1E65185B003F7F31 /* DetailsFileUsersViewController.swift */,
-				0F81E4AD1E67399700A7C18F /* DetailResultUserViewController.swift */,
 				0F81E4B11E674F6F00A7C18F /* DetailSickViewController.swift */,
+				0FD3D7341E6E65CB0083A0BF /* DetailsHistoryUserViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1413,7 +1413,6 @@
 				8BD49F0F1E4824EA00C98E74 /* Constants.swift in Sources */,
 				8B3A13781E10F454005DBC6E /* RAMFrameItemAnimation.swift in Sources */,
 				8B3A136F1E10F454005DBC6E /* DatePickerDialog.swift in Sources */,
-				0F81E4AE1E67399700A7C18F /* DetailResultUserViewController.swift in Sources */,
 				0F9C46401E60462700DCFE46 /* FileViewController.swift in Sources */,
 				A68A95151E151B490067736E /* MainCommentEntity.swift in Sources */,
 				A6F980A01E48607E0007CD63 /* LinkedUser.swift in Sources */,
@@ -1465,6 +1464,7 @@
 				8B3A12DF1E10F399005DBC6E /* AppDelegate.swift in Sources */,
 				A60430FA1E233431000216FB /* SSRadioButton.swift in Sources */,
 				8B3A137B1E10F454005DBC6E /* RAMTransitionItemAnimations.swift in Sources */,
+				0FD3D7351E6E65CB0083A0BF /* DetailsHistoryUserViewController.swift in Sources */,
 				8B3A13741E10F454005DBC6E /* TPKeyboardAvoidingScrollView.m in Sources */,
 				0F81E4AA1E66813B00A7C18F /* CheckInvoiceEntity.swift in Sources */,
 				8B1AD45E1E1B97F000D55543 /* SearchTableViewCell.swift in Sources */,
@@ -1697,15 +1697,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CDYT_HoiDap/CDYT_HoiDap.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anh Ta (R24Y486KUK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = BY2N2SG836;
 				INFOPLIST_FILE = CDYT_HoiDap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "afc66459-0fd9-40b0-a333-fc5fc166b849";
+				PROVISIONING_PROFILE_SPECIFIER = "ad hoc distribuition bve";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};

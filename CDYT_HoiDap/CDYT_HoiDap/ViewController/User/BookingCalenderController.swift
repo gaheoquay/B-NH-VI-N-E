@@ -71,7 +71,20 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
   }
   
   @IBAction func btnSendBooking(_ sender: Any) {
+    let fourty_today = currentDate.dateAt(hours: 16, minutes: 0, days : 0)
+    let currentDateString = String().convertDatetoString(date: self.currentDate, dateFormat: "dd/MM/YYYY")
+    let dateBookingString = String().convertTimeStampWithDateFormat(timeStamp: self.dateBook, dateFormat: "dd/MM/YYYY")
+    
+    if currentDateString == dateBookingString {
+        if currentDate > fourty_today {
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không thể đặt lịch vào ngày này! Bệnh viện ngưng đặt lịch khám sau 16h hàng ngày và chủ nhật.", cancelBtnTitle: "Đóng")
+        }else {
+            isvalidCheck()
+        }
+    }else {
         isvalidCheck()
+    }
+    
   }
   
   
@@ -98,6 +111,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
   func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
     print("calendar did select date \(String().convertDatetoString(date: date, dateFormat: "dd/MM/YYYY"))")
     dateBook = date.timeIntervalSince1970
+    
     print(dateBook)
     if monthPosition == .previous || monthPosition == .next {
       calendar.setCurrentPage(date, animated: true)
@@ -123,16 +137,13 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
           if let result = response.result.value {
             let jsonData = result as! NSDictionary
             self.listBook = BookingEntity.init(dictionary: jsonData)
-            self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
-            self.listService = ServiceEntity()
-            self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
-            self.listBooking = BookingUserEntity()
           }
             let currentDateString = String().convertDatetoString(date: self.currentDate, dateFormat: "dd/MM/YYYY")
             let dateBookingString = String().convertTimeStampWithDateFormat(timeStamp: self.dateBook, dateFormat: "dd/MM/YYYY")
             if currentDateString == dateBookingString {
                 self.requestCheckin()
             }else{
+                
               let localNotification = UILocalNotification()
               let dateFormat = DateFormatter()
               dateFormat.dateFormat = "dd/MM/yyyy"
@@ -145,6 +156,11 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
               localNotification.timeZone = NSTimeZone.default
               UIApplication.shared.scheduledLocalNotifications?.append(localNotification)
           }
+            self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
+            self.listService = ServiceEntity()
+            self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
+            self.listBooking = BookingUserEntity()
+
             self.delegate?.gotoExamSchudel()
             
         }else{

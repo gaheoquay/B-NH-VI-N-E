@@ -146,7 +146,7 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
     } 
     
     func gotoDetailHistory(index: IndexPath) {
-        let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailResultUserViewController") as! DetailResultUserViewController
+        let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailsHistoryUserViewController") as! DetailsHistoryUserViewController
         viewcontroller.listBooking = listBooking[index.row]
         viewcontroller.date = String().convertTimeStampWithDateFormat(timeStamp: listBooking[index.row].createDate, dateFormat: "dd/MM/YYYY")
         self.navigationController?.pushViewController(viewcontroller, animated: true)
