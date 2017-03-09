@@ -54,6 +54,15 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        let viewcontroller = main.instantiateViewController(withIdentifier: "CreateCvViewController") as! CreateCvViewController
+        viewcontroller.delegate = self
+        viewcontroller.infoUser = listFileUser[indexPath.row]
+        self.navigationController?.pushViewController(viewcontroller, animated: true)
+    }
+    
     @IBAction func btnBack(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)
     }

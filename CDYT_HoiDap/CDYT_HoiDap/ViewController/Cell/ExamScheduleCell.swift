@@ -63,7 +63,8 @@ class ExamScheduleCell: UITableViewCell {
         viewShowDetail.isHidden = false
         marginBottomViewDetail.constant = 90
         btnCancel.isHidden = true
-    }else {
+    }
+    else {
         viewShowDetail.isHidden = true
         marginBottomViewDetail.constant = 0
         btnCancel.isHidden = false
