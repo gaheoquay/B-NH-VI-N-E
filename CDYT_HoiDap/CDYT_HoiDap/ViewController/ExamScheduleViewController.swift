@@ -64,16 +64,18 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         let stringCurentDate = String().convertDatetoString(date: curentDate, dateFormat: "dd/MM/YYYY")
         if listallUSer.count > 0 {
         let stringBookingDate = String().convertTimeStampWithDateFormat(timeStamp: listallUSer[indexPath.row].booking.bookingDate / 1000, dateFormat: "dd/MM/YYYY")
-        
-        if listallUSer[indexPath.row].booking.status == 4 {
-            return 0
-        }else if listallUSer[indexPath.row].booking.status == 3 || listallUSer[indexPath.row].booking.status == 2 || (listallUSer[indexPath.row].booking.status == 0 && stringBookingDate > stringCurentDate) {
+        if (listallUSer[indexPath.row].booking.status == 3 || listallUSer[indexPath.row].booking.status == 2 || (listallUSer[indexPath.row].booking.status == 0) && ((stringBookingDate > stringCurentDate)) || (stringBookingDate < stringCurentDate)) {
             return 119
         }else {
             return 209
             }
         }
-        return 209
+        return 119
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+                print(listallUSer[indexPath.row].booking.status)
+        print(listallUSer[indexPath.row].booking.bookingDate)
     }
     
     
