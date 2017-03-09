@@ -324,7 +324,8 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     }
     return cell
   }
-  
+    
+     
   //MARK: QuestionTableViewCellDelegate
   func showQuestionDetail(indexPath: IndexPath) {
     let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController

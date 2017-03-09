@@ -164,15 +164,17 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
             lbNameDoctor.attributedText = myAttrStringDoctor
             lbTimeAnswerDoctor.text = String().convertTimeStampWithDateFormat(timeStamp: feedEntity.firstCommentTime, dateFormat: "dd/MM/yy HH:mm")
             layoutBottomCreateDate.constant = 60
+            lbNameDoctor.isHidden = false
+            lbTimeAnswerDoctor.isHidden = false
         }else {
-            if users?.role == 2 {
-                lbNameDoctor.isHidden = true
-                lbTimeAnswerDoctor.isHidden = true
-                layoutBottomCreateDate.constant = 60
-            }else {
+            lbNameDoctor.text = ""
+            lbTimeAnswerDoctor.text = ""
             lbNameDoctor.isHidden = true
             lbTimeAnswerDoctor.isHidden = true
-            layoutBottomCreateDate.constant = 16
+            if users?.role == 2 {
+                layoutBottomCreateDate.constant = 60
+            }else {
+                layoutBottomCreateDate.constant = 16
             }
         }
         

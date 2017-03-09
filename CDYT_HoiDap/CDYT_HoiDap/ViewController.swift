@@ -179,6 +179,13 @@ class ViewController: BaseViewController,UITableViewDelegate,UITableViewDataSour
     }
   }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(listFedds[indexPath.row].firstCommentedDoctor.fullname)
+        print(listFedds[indexPath.row].firstCommentTime)
+        print(indexPath.row)
+    }
+
+    
     func selectSpecialist(indexPath: IndexPath) {
         
     }

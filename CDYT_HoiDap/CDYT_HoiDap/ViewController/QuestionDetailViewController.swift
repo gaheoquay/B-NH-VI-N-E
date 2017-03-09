@@ -36,6 +36,8 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     var currentUserId = ""
     var pageIndex = 1
     var questionID = ""
+    var commentEntity = CommentEntity()
+    
   var notification : ListNotificationEntity!
   var delegate:QuestionDetailViewControllerDelegate?
   var notificationId = ""
@@ -518,7 +520,8 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     //MARK: receive notifiy when mark an comment is solution
     func markACommentToSolution(notification : Notification){
         if notification.object != nil {
-            let commentEntity = notification.object as! CommentEntity
+            let commentEntitys = notification.object as! CommentEntity
+            self.commentEntity = commentEntitys
             
             if commentEntity.isSolution == true {
                 markImg.image = UIImage.init(named: "GiaiPhap_Mark.png")
@@ -762,6 +765,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     func showMoreActionFromDetailQuestion() {
+        
         self.view.endEditing(true)
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let editTap = UIAlertAction(title: "Chỉnh sửa", style: .default, handler: {
@@ -844,7 +848,9 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     
     func showMoreActionCommentFromCommentCell(isSubcomment: Bool, subComment: SubCommentEntity, mainComment: MainCommentEntity, indexPath: IndexPath) {
         self.view.endEditing(true)
-        
+        if mainComment.comment.isSolution == true {
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn không thể xoá được bình luận này", cancelBtnTitle: "Đóng")
+        }else {
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let editTap = UIAlertAction(title: "Chỉnh sửa", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
@@ -893,6 +899,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
         optionMenu.addAction(cancelTap)
         
         self.present(optionMenu, animated: true, completion: nil)
+        }
     }
     
     //  MARK: WYPopoverControllerDelegate

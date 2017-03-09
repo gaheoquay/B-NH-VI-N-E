@@ -555,7 +555,6 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     func showMoreActionCommentFromCommentCell(isSubcomment : Bool, subComment: SubCommentEntity, mainComment : MainCommentEntity, indexPath : IndexPath){
         self.view.endEditing(true)
-        
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let editTap = UIAlertAction(title: "Chỉnh sửa", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
