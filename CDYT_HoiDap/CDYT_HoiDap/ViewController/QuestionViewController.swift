@@ -307,7 +307,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
       if listFedds.count > 0 {
         cell.feedEntity = listFedds[indexPath.row]
         cell.setData(isHiddenCateAndDoctor: true)
-        cell.layoutBottomCreateDate.constant = 0
+//        cell.layoutBottomCreateDate.constant = 0
       }
     }else{
       if isAssigned {

@@ -40,6 +40,9 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
         
         lbAuthor.isUserInteractionEnabled = true
         lbAuthor.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showUserProfile)))
+        
+        lbNameDoctor.isUserInteractionEnabled = true
+        lbNameDoctor.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showUserProfile)))
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -61,6 +64,8 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
         if !feedEntity.postEntity.isPrivate || users?.id == feedEntity.authorEntity.id {
             delegate?.gotoUserProfileFromQuestionCell(user: feedEntity.authorEntity)
         }
+        
+        
     }
     
     @IBAction func showDetail(_ sender: Any) {
@@ -127,6 +132,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
                 imgApproval.isHidden = true
                 btnApproval.isHidden = true
                 heightViewCate.constant = 0
+                layoutBottomCreateDate.constant = 40
             }
         }
         
@@ -144,7 +150,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
         lbCommentCount.text = String(feedEntity.commentCount)
         let fontRegular = [NSFontAttributeName: UIFont.systemFont(ofSize: 12)]
         let fontWithColor = [ NSFontAttributeName: UIFont.systemFont(ofSize: 12),NSForegroundColorAttributeName: UIColor.init(netHex: 0x87baef)]
-        let myAttrString = NSMutableAttributedString(string: "Hỏi bởi ", attributes: fontRegular)
+        let myAttrString = NSMutableAttributedString(string: "Hỏi bởi :     ", attributes: fontRegular)
         if feedEntity.postEntity.isPrivate != true || users?.id == feedEntity.authorEntity.id {
             myAttrString.append(NSAttributedString(string: feedEntity.authorEntity.nickname, attributes: fontWithColor))
             
@@ -157,9 +163,11 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
             myAttrStringDoctor.append(NSAttributedString(string: feedEntity.firstCommentedDoctor.fullname, attributes: fontWithColor))
             lbNameDoctor.attributedText = myAttrStringDoctor
             lbTimeAnswerDoctor.text = String().convertTimeStampWithDateFormat(timeStamp: feedEntity.firstCommentTime, dateFormat: "dd/MM/yy HH:mm")
+            layoutBottomCreateDate.constant = 50
         }else {
-            layoutBottomCreateDate.constant = 0
-            
+            lbNameDoctor.isHidden = true
+            lbTimeAnswerDoctor.isHidden = true
+            layoutBottomCreateDate.constant = 50
         }
         
         lbAuthor.attributedText = myAttrString

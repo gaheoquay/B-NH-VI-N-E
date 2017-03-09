@@ -154,8 +154,13 @@ class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableV
         Until.gotoLogin(_self: self, cannotBack: false)
       }else{
         if currentUser.first?.role == 0 {
-          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nấp cấp để sử dủng chức năng này", cancelBtnTitle: "Đồng ý")
+          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nâng cấp để sử dủng chức năng này", cancelBtnTitle: "Đồng ý")
           return
+        }else if currentUser.first?.role == 1 || currentUser.first?.role == 2 {
+            if user.role == 0 {
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn không thể chat với người này", cancelBtnTitle: "Đồng ý")
+                return
+            }
         }
         SBDGroupChannel.createChannel(with: self.selectedUser, isDistinct: true) { (channel, error) in
           if error != nil {
