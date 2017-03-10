@@ -12,7 +12,7 @@ class CheckInvoiceEntity: NSObject {
     
     var patientHistory = 0
     var invoiceNo = ""
-    var amount = 0
+    var amount:Double = 0
     
     override init() {
         super.init()
@@ -25,7 +25,7 @@ class CheckInvoiceEntity: NSObject {
         if let value = dictionary["InvoiceNo"] as? String {
             invoiceNo = value
         }
-        if let value = dictionary["Amount"] as? Int {
+        if let value = dictionary["Amount"] as? Double {
             amount = value
         }
         

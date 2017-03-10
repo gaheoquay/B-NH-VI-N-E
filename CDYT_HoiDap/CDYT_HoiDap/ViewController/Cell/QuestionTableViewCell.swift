@@ -91,8 +91,13 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
             layoutBottomViewCate.constant = 0
             layoutBottomCreateDate.constant = 50
         }else {
-            layoutBottomViewCate.constant = 8
             if isHiddenCateAndDoctor {
+//                            layoutBottomViewCate.constant = 8
+
+                viewCate.isHidden = false
+                viewDoctor.isHidden = false
+                imgApproval.isHidden = false
+                btnApproval.isHidden = false
                 if feedEntity.postEntity.isClassified {
                     lbCate.text = feedEntity.cateGory.name
                     lbDoctor.text = feedEntity.assigneeEntity.fullname
@@ -122,10 +127,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
                     btnApproval.setTitleColor(colorbtnApproval, for: .normal)
                     imgApproval.image = UIImage(named: "Duyet_1.png")
                 }
-              viewCate.isHidden = false
-              viewDoctor.isHidden = false
-              imgApproval.isHidden = false
-              btnApproval.isHidden = false
+             
             }else {
                 viewCate.isHidden = true
                 viewDoctor.isHidden = true

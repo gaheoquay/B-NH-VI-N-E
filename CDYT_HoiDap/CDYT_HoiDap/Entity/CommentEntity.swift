@@ -16,7 +16,7 @@ class CommentEntity: NSObject {
     var isSolution = false
     var updatedDate : Double = 0
     var createdDate : Double = 0
-    
+    var idSolution = ""
     override init(){
         super.init()
     }
