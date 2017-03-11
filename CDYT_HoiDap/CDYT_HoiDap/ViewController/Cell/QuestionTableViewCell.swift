@@ -89,7 +89,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
             btnApproval.isHidden = true
             heightViewCate.constant = 0
             layoutBottomViewCate.constant = 0
-            layoutBottomCreateDate.constant = 50
+            layoutBottomCreateDate.constant = 40
         }else {
             if isHiddenCateAndDoctor {
 //                            layoutBottomViewCate.constant = 8
@@ -127,7 +127,8 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
                     btnApproval.setTitleColor(colorbtnApproval, for: .normal)
                     imgApproval.image = UIImage(named: "Duyet_1.png")
                 }
-             
+                
+                
             }else {
                 viewCate.isHidden = true
                 viewDoctor.isHidden = true
@@ -174,7 +175,15 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
             lbNameDoctor.isHidden = true
             lbTimeAnswerDoctor.isHidden = true
             if users?.role == 2 {
-                layoutBottomCreateDate.constant = 60
+                if feedEntity.firstCommentedDoctor.id  != "" {
+                    layoutBottomCreateDate.constant = 60
+                    lbCreateDate.isHidden = false
+                    lbNameDoctor.isHidden = false
+                }else {
+                    layoutBottomCreateDate.constant = 30
+                    lbCreateDate.isHidden = true
+                    lbNameDoctor.isHidden = true
+                }
             }else {
                 layoutBottomCreateDate.constant = 16
             }
