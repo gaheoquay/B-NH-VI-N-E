@@ -710,14 +710,13 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     
     //MARK: Delete post
     func deleteQuestion(){
+      
         Until.showLoading()
         let param : [String : Any] = [
             "Auth": Until.getAuthKey(),
             "RequestedUserId": currentUserId,
             "DeletedObjectId": feedObj.postEntity.id
         ]
-        
-        
         Alamofire.request(DELETE_ALL, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
@@ -822,6 +821,48 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     //MARK: CommentTableViewCellDelegate
+  func markOrUnmarkSolution(mainComment: MainCommentEntity) {
+    let solution = listComment.first { (entity) -> Bool in
+      entity.comment.isSolution == true
+    }
+    if solution != nil && solution?.comment.id != mainComment.comment.id {
+      let alert = UIAlertController.init(title: "Thông báo", message: "Bạn chỉ được chọn duy nhất một giải pháp. Bạn có muốn chọn lại không?", preferredStyle: UIAlertControllerStyle.alert)
+      let actionOK = UIAlertAction.init(title: "Đồng ý", style: UIAlertActionStyle.default, handler: { (alert) in
+        solution?.comment.isSolution = false
+        self.requestMarkOrUnMarkSolution(mainComment: mainComment)
+      })
+      let actionCancel = UIAlertAction.init(title: "Hủy", style: UIAlertActionStyle.cancel, handler: nil)
+      alert.addAction(actionOK)
+      alert.addAction(actionCancel)
+      self.present(alert, animated: true, completion: nil)
+    }else{
+      requestMarkOrUnMarkSolution(mainComment: mainComment)
+    }
+  }
+  func requestMarkOrUnMarkSolution(mainComment: MainCommentEntity){
+    let markParam : [String : Any] = [
+      "Auth": Until.getAuthKey(),
+      "RequestedUserId": Until.getCurrentId(),
+      "CommentId": mainComment.comment.id
+    ]
+    Until.showLoading()
+    Alamofire.request(MARK_AS_SOLUTION, method: .post, parameters: markParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+      if let status = response.response?.statusCode {
+        if status == 200{
+          if let result = response.result.value {
+            let jsonData = result as! NSDictionary
+            let comment = CommentEntity.init(dictionary: jsonData)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: comment)
+          }
+        }else{
+          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra, vui lòng thử lai sau", cancelBtnTitle: "Đóng")
+        }
+      }else{
+        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lai sau", cancelBtnTitle: "Đóng")
+      }
+      Until.hideLoading()
+    }
+  }
     func replyCommentAction(mainComment: MainCommentEntity) {
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController

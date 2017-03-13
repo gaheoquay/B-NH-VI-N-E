@@ -8,8 +8,8 @@
 
 import UIKit
 
-//let BASE_URL = "http://ihealthlabs.vn:38192"    //RELEASE
-let BASE_URL = "http://123.24.206.9:38192"     //DEV
+let BASE_URL = "http://ihealthlabs.vn:38192"    //RELEASE
+//let BASE_URL = "http://123.24.206.9:38192"     //DEV
 
 let REGISTER_USER = BASE_URL + "/User/Register"
 let UPLOAD_IMAGE = BASE_URL + "/Image/UploadImage"

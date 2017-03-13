@@ -13,6 +13,7 @@ protocol CommentTableViewCellDelegate {
   func gotoUserProfileFromCommentCell(user : AuthorEntity)
   func showMoreActionCommentFromCommentCell(isSubcomment : Bool, subComment: SubCommentEntity, mainComment : MainCommentEntity, indexPath : IndexPath)
   func showImageFromDetailPost(skBrowser : SKPhotoBrowser )
+  func markOrUnmarkSolution(mainComment : MainCommentEntity)
 }
 class CommentTableViewCell: UITableViewCell {
   
@@ -152,9 +153,6 @@ class CommentTableViewCell: UITableViewCell {
   //MARK: set data for main comment
   func setDataForMainComment() {
     isSubcomment = false
-    
-    
-    
     if mainComment.comment.isSolution {
       self.contentView.backgroundColor = UIColor().hexStringToUIColor(hex: "F1FDEA")
       solutionLbl.isHidden = false
@@ -299,35 +297,8 @@ class CommentTableViewCell: UITableViewCell {
     if userID == "" {
       delegate?.gotoLoginFromCommentTableCell()
     }else{
-      
-      let markParam : [String : Any] = [
-        "Auth": Until.getAuthKey(),
-        "RequestedUserId": userID,
-        "CommentId": mainComment.comment.id
-      ]
-      
-      
-      Until.showLoading()
-      Alamofire.request(MARK_AS_SOLUTION, method: .post, parameters: markParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-        if let status = response.response?.statusCode {
-          if status == 200{
-            if let result = response.result.value {
-              let jsonData = result as! NSDictionary
-              let comment = CommentEntity.init(dictionary: jsonData)
-              
-              NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: comment)
-            }
-          }else{
-            UIAlertController().showAlertWith(vc: self.appDel.window!.rootViewController!, title: "Thông báo", message: "Có lỗi xảy ra, vui lòng thử lai sau", cancelBtnTitle: "Đóng")
-          }
-        }else{
-          UIAlertController().showAlertWith(vc: self.appDel.window!.rootViewController!, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lai sau", cancelBtnTitle: "Đóng")
-        }
-        Until.hideLoading()
-      }
-      
+      delegate?.markOrUnmarkSolution(mainComment: mainComment)
     }
-    
   }
   
   //MARK: Show more action (delete/edit) comment

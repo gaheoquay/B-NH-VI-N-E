@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -5265,14 +5265,63 @@
                                             <constraint firstAttribute="height" id="EB3-qG-LM5"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LỜI GIỚI THIỆU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbD-CS-coX">
-                                        <rect key="frame" x="16" y="16" width="124" height="21"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                        <color key="textColor" red="0.074509803920000006" green="0.57647058819999997" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbD-CS-coX">
+                                        <rect key="frame" x="8" y="16" width="304" height="89.5"/>
+                                        <attributedString key="attributedText">
+                                            <fragment>
+                                                <string key="content">BỘ Y TẾ
+</string>
+                                                <attributes>
+                                                    <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="16" name="TimesNewRomanPS-BoldMT"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="432" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                        <tabStops/>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">BỆNH VIỆN E
+</string>
+                                                <attributes>
+                                                    <color key="NSColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="16" name="TimesNewRomanPS-BoldMT"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="432" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                        <tabStops/>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">87-89 Trần Cung, Cầu Giấy, Hà Nội
+Tel: 04. 37543650  Hotline: 086 889 1318 -  Fax: 04. 37561351
+</string>
+                                                <attributes>
+                                                    <font key="NSFont" size="16" name="TimesNewRomanPS-BoldMT"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="432" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                        <tabStops/>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="Giám đốc Bệnh viện">
+                                                <attributes>
+                                                    <font key="NSFont" size="16" name="Helvetica-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="432" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                        <tabStops/>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=": GS.TS.TTND. Lê Ngọc Thành ">
+                                                <attributes>
+                                                    <font key="NSFont" size="16" name="TimesNewRomanPS-BoldMT"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="432" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                        <tabStops/>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19m-RQ-F54">
-                                        <rect key="frame" x="12" y="45" width="296" height="1257"/>
+                                        <rect key="frame" x="12" y="113.5" width="296" height="1352.5"/>
                                         <string key="text">Bệnh viện E là bệnh viện đa khoa trung ương hạng I trực thuộc Bộ Y tế, được thành lập từ năm 1967. Đến nay, bệnh viện đã phát triển với quy mô hơn 900 giường bệnh (gồm 4 trung tâm, 37 khoa lâm sàng và cận lâm sàng, 11 phòng chức năng) trên diện tích 41.000 m2 với khuôn viên rộng rãi, thoáng mát, xanh, sạch đẹp. Với truyền thống 50 năm thành lập - phát triển, bệnh viện E có đội ngũ cán bộ giàu kinh nghiệm, các bác sĩ có có trình độ sau đại học chiếm 70% gồm các Giáo sư, Phó giáo sư, Tiến sĩ, Thạc sĩ... Phương châm hành động của đội ngũ thầy thuốc Bệnh viện E là: “Chăm sóc người bệnh toàn diện bằng những phương pháp khoa học kỹ thuật tiên tiến và hiệu quả nhất với tấm lòng thầy thuốc như mẹ hiền”.
 PHẠM VI HOẠT ĐỘNG VÀ CÁC DỊCH VỤ
 •	Khám chữa bệnh đa khoa (nội, ngoại, sản, nhi, ung bướu, y học cổ truyền, phục hồi chức năng) chuyên khoa (tai mũi họng, răng hàm mặt, mắt) cho người bệnh BHYT và khám theo yêu cầu. Đặc biệt tiếp nhận bệnh nhân BHYT tuyến cuối từ khắp cả nước.
@@ -5286,47 +5335,45 @@ PHẠM VI HOẠT ĐỘNG VÀ CÁC DỊCH VỤ
 
 
 CÁC KỸ THUẬT CAO ĐÃ THỰC HIỆN
-	Phẫu thuật tim kín, phẫu thuật tim hở với nội soi hỗ trợ các bệnh tim bẩm sinh phức tạp; bắc cầu động mạch chủ vành.
-	Can thiệp mạch, tim qua da.
-	Phẫu thuật nội soi bụng, ngực; các phẫu thuật loại đặc biệt về ung thư, nội tiết, tai mũi họng...
-	Phẫu thuật sọ não, cột sống. Tạo hình thân đốt sống bằng  xi măng. Thay khớp háng, khớp gối; đo mật độ xương bằng máy Dexa; hệ thống phục hồi chức năng tiên tiến.
-	Sản phụ khoa: phẫu thuật nội soi cắt tử cung, chẩn đoán trước sinh, giảm đau trong đẻ bằng phương pháp gây tê ngoài màng cứng.
-	Phẫu thuật PHACO, vi phẫu, chỉnh hình hàm mặt.
-	Nội soi - Siêu âm hệ tiêu hóa phát hiện sớm ung thư, nội soi dạ dày đường mũi, nội soi dạ dày gây mê, nội soi ruột non bóng kép, nội soi viên nang.
-	Nội soi mật - tụy ngược dòng (ERCP) lấy sỏi, giun, đặt Stent đường mật…
-	Tán sỏi tiết niệu bằng Laser, sóng cao tần. Lọc máu nhân tạo, lọc màng bụng, siêu lọc máu.
-	Điều trị nội khoa tiên tiến với phác đồ cập nhật.
-	Chụp cộng hưởng từ 1,5 Tesla, cắt lớp vi tính 64 dãy, X-quang kỹ thuật số, chụp X-quang tuyến vú, X-quang can thiệp.
+•	Phẫu thuật tim kín, phẫu thuật tim hở với nội soi hỗ trợ các bệnh tim bẩm sinh phức tạp; bắc cầu động mạch chủ vành.
+•	Can thiệp mạch, tim qua da.
+•	Phẫu thuật nội soi bụng, ngực; các phẫu thuật loại đặc biệt về ung thư, nội tiết, tai mũi họng...
+•	Phẫu thuật sọ não, cột sống. Tạo hình thân đốt sống bằng  xi măng. Thay khớp háng, khớp gối; đo mật độ xương bằng máy Dexa; hệ thống phục hồi chức năng tiên tiến.
+•	Sản phụ khoa: phẫu thuật nội soi cắt tử cung, chẩn đoán trước sinh, giảm đau trong đẻ bằng phương pháp gây tê ngoài màng cứng.
+•	Phẫu thuật PHACO, vi phẫu, chỉnh hình hàm mặt.
+•	Nội soi - Siêu âm hệ tiêu hóa phát hiện sớm ung thư, nội soi dạ dày đường mũi, nội soi dạ dày gây mê, nội soi ruột non bóng kép, nội soi viên nang.
+•	Nội soi mật - tụy ngược dòng (ERCP) lấy sỏi, giun, đặt Stent đường mật…
+•	Tán sỏi tiết niệu bằng Laser, sóng cao tần. Lọc máu nhân tạo, lọc màng bụng, siêu lọc máu.
+•	Điều trị nội khoa tiên tiến với phác đồ cập nhật.
+•	Chụp cộng hưởng từ 1,5 Tesla, cắt lớp vi tính 64 dãy, X-quang kỹ thuật số, chụp X-quang tuyến vú, X-quang can thiệp.
 	Các xét nghiệm chẩn đoán sớm ung thư (Marker ung thư).
 CÁC THÀNH TÍCH ĐÃ ĐẠT ĐƯỢC
-	Huân chương Độc lập hạng Nhất, Nhì, Ba
-	Huân chương Lao động hạng Nhất.
-	Huân chương Kháng chiến hạng Nhì.
-</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <nil key="textColor"/>
+•	Huân chương Độc lập hạng Nhất, Nhì, Ba
+•	Huân chương Lao động hạng Nhất.
+•	Huân chương Kháng chiến hạng Nhì.</string>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="about1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VjJ-Sa-Nx0">
-                                        <rect key="frame" x="8" y="1310" width="304" height="228"/>
+                                        <rect key="frame" x="8" y="1474" width="304" height="228"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="VjJ-Sa-Nx0" secondAttribute="height" multiplier="400:300" id="zfI-0Y-3Tc"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="about2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zG8-H7-Cl1">
-                                        <rect key="frame" x="8" y="1578" width="304" height="203"/>
+                                        <rect key="frame" x="8" y="1742" width="304" height="203"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="zG8-H7-Cl1" secondAttribute="height" multiplier="400:267" id="BSX-mc-0DT"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trung tâm tim mạch - Bệnh viện E" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skS-WP-HA1">
-                                        <rect key="frame" x="8" y="1546" width="304" height="16"/>
+                                        <rect key="frame" x="8" y="1710" width="304" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Khai trương phòng khám Nhi - Bệnh viện E" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6f-Og-arG">
-                                        <rect key="frame" x="8" y="1789" width="304" height="16"/>
+                                        <rect key="frame" x="8" y="1953" width="304" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -5341,7 +5388,8 @@ CÁC THÀNH TÍCH ĐÃ ĐẠT ĐƯỢC
                                     <constraint firstAttribute="bottom" secondItem="S6f-Og-arG" secondAttribute="bottom" constant="8" id="GTf-AJ-mnA"/>
                                     <constraint firstItem="19m-RQ-F54" firstAttribute="top" secondItem="sbD-CS-coX" secondAttribute="bottom" constant="8" id="Hf0-bT-XKv"/>
                                     <constraint firstAttribute="trailing" secondItem="19m-RQ-F54" secondAttribute="trailing" constant="12" id="KVx-5T-NVR"/>
-                                    <constraint firstItem="sbD-CS-coX" firstAttribute="leading" secondItem="Cgy-Db-zZO" secondAttribute="leading" constant="16" id="QiZ-sC-DO4"/>
+                                    <constraint firstAttribute="trailing" secondItem="sbD-CS-coX" secondAttribute="trailing" constant="8" id="LLp-oy-TNf"/>
+                                    <constraint firstItem="sbD-CS-coX" firstAttribute="leading" secondItem="Cgy-Db-zZO" secondAttribute="leading" constant="8" id="QiZ-sC-DO4"/>
                                     <constraint firstItem="19m-RQ-F54" firstAttribute="leading" secondItem="Cgy-Db-zZO" secondAttribute="leading" constant="12" id="Von-he-MiF"/>
                                     <constraint firstAttribute="trailing" secondItem="skS-WP-HA1" secondAttribute="trailing" constant="8" id="XCA-2B-MzF"/>
                                     <constraint firstAttribute="trailing" secondItem="LH5-zi-fln" secondAttribute="trailing" id="cfu-qa-yAE"/>
