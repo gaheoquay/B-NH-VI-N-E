@@ -279,7 +279,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
                     self.listallUSer[index.row].booking.status = 2
                     self.tbListExamSchedule.reloadRows(at: [index], with: .automatic)
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Lỗi! Không thể xác nhận đặt khám này", cancelBtnTitle: "Đóng")
                 }
                 Until.hideLoading()
             }else{
