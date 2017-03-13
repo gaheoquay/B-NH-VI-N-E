@@ -11,6 +11,7 @@ protocol BookingCalenderControllerDelegate {
   func gotoService()
   func gotoFile()
     func gotoExamSchudel()
+    func gotoExamSchudelCheckin()
 }
 
 class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalendarDelegate {
@@ -166,13 +167,13 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
               localNotification.alertAction = ""
               localNotification.timeZone = NSTimeZone.default
               UIApplication.shared.scheduledLocalNotifications?.append(localNotification)
+                self.delegate?.gotoExamSchudel()
           }
             self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
             self.listService = ServiceEntity()
             self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
             self.listBooking = BookingUserEntity()
 
-            self.delegate?.gotoExamSchudel()
             
         }else{
           UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -213,6 +214,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
       if let status = response.response?.statusCode {
         print(status)
         if status == 200{
+            self.delegate?.gotoExamSchudelCheckin()
         }else{
           UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
         }
