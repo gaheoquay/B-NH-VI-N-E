@@ -24,6 +24,7 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     
     var delegate : SearchFileViewControllerDelegate?
     var listFileUser = [BookingUserEntity]()
+    var isCheckResult = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,8 +54,11 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: GET_LIST_FILE_USER), object: self.listFileUser[indexPath.row])
-        delegate?.gotoHistory(indexPath: indexPath)
+        if isCheckResult == false {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: GET_LIST_FILE_USER), object: self.listFileUser[indexPath.row])
+        }else {
+            delegate?.gotoHistory(indexPath: indexPath)
+        }
         _ = self.navigationController?.popViewController(animated: true)
     }
     

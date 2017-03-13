@@ -33,7 +33,7 @@ class DetailsHistoryUserViewController: UIViewController {
     @IBOutlet weak var marginBottomAdvice: NSLayoutConstraint!
     
     var listBooking = BookingEntity()
-    var listReult = ResultUserEntity()
+    var userResult = ResultUserEntity()
     var date = ""
     var isCheckSelect = false
     var isCheckSeletc1 = false
@@ -89,14 +89,14 @@ class DetailsHistoryUserViewController: UIViewController {
                 if status == 200{
                     if let result = response.result.value {
                         let jsonData = result as! NSDictionary
-                        self.listReult = ResultUserEntity.init(dictionary: jsonData as! [String : Any])
+                        self.userResult = ResultUserEntity.init(dictionary: jsonData as! [String : Any])
                     }
-                    self.contentDiseaseDiagnostic.text = self.listReult.diseaseDiagnostic_ID
-                    self.contentDianostic.text = self.listReult.firt_diagnostic
-                    self.contentMount.text = self.listReult.prognosis
-                    self.contentDeaseProgress.text = self.listReult.diseaseProgress
-                    self.contentDianosisDiffreent.text = self.listReult.other_DiseaseDiagnostic_ID
-                    self.contentAdvice.text = self.listReult.doctorAdvice_ID
+                    self.contentDiseaseDiagnostic.text = self.userResult.diseaseDiagnostic_ID
+                    self.contentDianostic.text = self.userResult.firt_diagnostic
+                    self.contentMount.text = self.userResult.prognosis
+                    self.contentDeaseProgress.text = self.userResult.diseaseProgress
+                    self.contentDianosisDiffreent.text = self.userResult.other_DiseaseDiagnostic_ID
+                    self.contentAdvice.text = self.userResult.doctorAdvice_ID
                 }
                 else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")

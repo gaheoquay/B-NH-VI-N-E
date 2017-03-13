@@ -73,6 +73,7 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
         let main = UIStoryboard(name: "Main", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "SearchFileViewController") as! SearchFileViewController
         viewcontroller.delegate = self
+        viewcontroller.isCheckResult = true
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     

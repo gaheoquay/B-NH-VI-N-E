@@ -35,8 +35,8 @@ class DetailsFileUsersViewController: UIViewController {
     
     
     var listService = [ServiceEntity]()
-    var listCheckin = CheckInResultEntity()
-    var listBooking = BookingEntity() // BookingRecord
+    var checkInResult = CheckInResultEntity()
+    var booKingRecord = BookingEntity() // BookingRecord
     var checkInvoice : CheckInvoiceEntity!
     var name = ""
     var dateExam: Double = 0
@@ -62,7 +62,7 @@ class DetailsFileUsersViewController: UIViewController {
     func setupView(){
         
         let serVice = listService.filter { (serViceEntiy) -> Bool in
-             String(serViceEntiy.serviceId) == listBooking.serviceId
+             String(serViceEntiy.serviceId) == booKingRecord.serviceId
         }
         
         
@@ -84,7 +84,7 @@ class DetailsFileUsersViewController: UIViewController {
         lbAdress.text = serVice[0].roomName
 
 
-        if listBooking.status == 0 {
+        if booKingRecord.status == 0 {
             viewBarCode.isHidden = true
             viewParameter.isHidden = true
             viewBill.isHidden = true
@@ -95,9 +95,9 @@ class DetailsFileUsersViewController: UIViewController {
             viewBarCode.isHidden = false
             viewParameter.isHidden = false
             viewBill.isHidden = false
-            lbHistoryCode.text = String(listCheckin.patientHistory)
-            lbNumberWait.text = String(listCheckin.sequence)
-            let image = Until.generateBarcode(from: "\(listCheckin.patientHistory)")
+            lbHistoryCode.text = String(checkInResult.patientHistory)
+            lbNumberWait.text = String(checkInResult.sequence)
+            let image = Until.generateBarcode(from: "\(checkInResult.patientHistory)")
             imgBarCode.image = image
         }
         
@@ -112,7 +112,7 @@ class DetailsFileUsersViewController: UIViewController {
     
     func requesCheckinVoice(){
         let Param : [String : Any] = [
-            "PatientHistoryId" : listCheckin.patientHistory
+            "PatientHistoryId" : checkInResult.patientHistory
         ]
         Alamofire.request(CHECKIN_VOICE, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
@@ -151,8 +151,8 @@ class DetailsFileUsersViewController: UIViewController {
         
         let Param : [String : Any] = [
             "Auth" : Until.getAuthKey(),
-            "PatientHistoryId" : listCheckin.patientHistory,
-            "BookingId" : listBooking.id,
+            "PatientHistoryId" : checkInResult.patientHistory,
+            "BookingId" : booKingRecord.id,
             "PaymentResult": payment
         ]
         print(Param)

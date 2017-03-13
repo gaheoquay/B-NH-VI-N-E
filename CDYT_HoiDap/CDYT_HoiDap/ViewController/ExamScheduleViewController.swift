@@ -87,8 +87,8 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         let viewcontroller = main.instantiateViewController(withIdentifier: "DetailsFileUsersViewController") as! DetailsFileUsersViewController
       viewcontroller.listService = listService
         viewcontroller.name = listallUSer[index.row].profile.patientName
-        viewcontroller.listCheckin = listallUSer[index.row].booking.checkInResult
-        viewcontroller.listBooking = listallUSer[index.row].booking
+        viewcontroller.checkInResult = listallUSer[index.row].booking.checkInResult
+        viewcontroller.booKingRecord = listallUSer[index.row].booking
         viewcontroller.dateExam = listallUSer[index.row].booking.bookingDate / 1000
         viewcontroller.delegate = self
         self.navigationController?.pushViewController(viewcontroller, animated: true)
