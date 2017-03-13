@@ -111,12 +111,24 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     tbQuestion.register(UINib.init(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
     tbQuestion.addPullToRefreshHandler {
       DispatchQueue.main.async {
-        self.reloadDataForUser()
+        if self.isFeeds{
+          self.reloadDataForUser()
+        }else if self.isAssigned{
+          self.reloadDataAssigned()
+        }else if self.isNotAssignedYet{
+          self.reloadDataNotAssignedYet()
+        }
       }
     }
     tbQuestion.addInfiniteScrollingWithHandler {
       DispatchQueue.main.async {
-        self.loadMoreForUser()
+        if self.isFeeds{
+          self.loadMoreForUser()
+        }else if self.isAssigned{
+          self.loadMoreAssigned()
+        }else if self.isNotAssignedYet{
+          self.loadMoreNotAssignedYet()
+        }
       }
     }
   }
