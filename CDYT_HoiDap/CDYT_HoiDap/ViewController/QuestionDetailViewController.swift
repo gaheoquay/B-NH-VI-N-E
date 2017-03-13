@@ -36,6 +36,8 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     var currentUserId = ""
     var pageIndex = 1
     var questionID = ""
+    var commentEntity = CommentEntity()
+    
   var notification : ListNotificationEntity!
   var delegate:QuestionDetailViewControllerDelegate?
   var notificationId = ""
@@ -518,7 +520,8 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     //MARK: receive notifiy when mark an comment is solution
     func markACommentToSolution(notification : Notification){
         if notification.object != nil {
-            let commentEntity = notification.object as! CommentEntity
+            let commentEntitys = notification.object as! CommentEntity
+            self.commentEntity = commentEntitys
             
             if commentEntity.isSolution == true {
                 markImg.image = UIImage.init(named: "GiaiPhap_Mark.png")
@@ -577,9 +580,11 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
                     let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
                     if currentUserId == feedObj.authorEntity.id {
                         cell.isMyPost = true
+                       
                     }else{
                         cell.isMyPost = false
                     }
+                    
                     cell.mainComment = listComment[indexPath.section - 1]
                     cell.setDataForMainComment()
                     cell.indexPath = indexPath
@@ -762,6 +767,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     func showMoreActionFromDetailQuestion() {
+        
         self.view.endEditing(true)
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let editTap = UIAlertAction(title: "Chỉnh sửa", style: .default, handler: {
@@ -844,7 +850,61 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     
     func showMoreActionCommentFromCommentCell(isSubcomment: Bool, subComment: SubCommentEntity, mainComment: MainCommentEntity, indexPath: IndexPath) {
         self.view.endEditing(true)
-        
+        if mainComment.comment.isSolution {
+            if subComment.comment.id != "" {
+                let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                let editTap = UIAlertAction(title: "Chỉnh sửa", style: .default, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                    if self.popupViewController == nil {
+                        
+                        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let popoverVC = mainStoryboard.instantiateViewController(withIdentifier: "EditCommentViewController") as! EditCommentViewController
+                        popoverVC.isSubComment = isSubcomment
+                        popoverVC.subComment = subComment
+                        popoverVC.mainComment = mainComment
+                        popoverVC.delegate = self
+                        popoverVC.preferredContentSize = CGSize.init(width: 320, height: 250)
+                        popoverVC.isModalInPopover = false
+                        self.popupViewController = WYPopoverController(contentViewController: popoverVC)
+                        self.popupViewController.delegate = self
+                        self.popupViewController.wantsDefaultContentAppearance = false;
+                        self.popupViewController.presentPopover(from: CGRect.init(x: 0, y: 0, width: 0, height: 0), in: self.view, permittedArrowDirections: WYPopoverArrowDirection.none, animated: true, options: WYPopoverAnimationOptions.fade, completion: nil)
+                        
+                    }
+                })
+                
+                let deleteTap = UIAlertAction(title: "Xoá", style: .destructive, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                    
+                    let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có chắc chắn xoá bình luận này?", preferredStyle: UIAlertControllerStyle.alert)
+                    let noAction = UIAlertAction.init(title: "Huỷ", style: UIAlertActionStyle.cancel, handler: nil)
+                    let yesAction = UIAlertAction.init(title: "Xoá", style: UIAlertActionStyle.destructive, handler: { (UIAlertAction) in
+                        if isSubcomment {
+                            self.deleteComment(objID: subComment.comment.id, isSubcomment: isSubcomment, indexPath: indexPath)
+                        }else{
+                            self.deleteComment(objID: mainComment.comment.id, isSubcomment: isSubcomment, indexPath: indexPath)
+                        }
+                    })
+                    
+                    alert.addAction(noAction)
+                    alert.addAction(yesAction)
+                    self.present(alert, animated: true, completion: nil)
+                })
+                
+                let cancelTap = UIAlertAction(title: "Huỷ bỏ", style: .cancel, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                })
+                
+                optionMenu.addAction(editTap)
+                optionMenu.addAction(deleteTap)
+                optionMenu.addAction(cancelTap)
+                
+                self.present(optionMenu, animated: true, completion: nil)
+                return
+            }
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn không thể xoá được bình luận này", cancelBtnTitle: "Đóng")
+            
+        }else {
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let editTap = UIAlertAction(title: "Chỉnh sửa", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
@@ -893,6 +953,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
         optionMenu.addAction(cancelTap)
         
         self.present(optionMenu, animated: true, completion: nil)
+        }
     }
     
     //  MARK: WYPopoverControllerDelegate

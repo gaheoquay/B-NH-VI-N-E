@@ -73,7 +73,7 @@ class DetailsFileUsersViewController: UIViewController {
         let price = String().replaceNSnumber(doublePrice: serVice[0].priceService)
         
         
-        let myAttrString = NSMutableAttributedString(string: "\(price)", attributes: fontBold)
+        let myAttrString = NSMutableAttributedString(string: "\(price) đ", attributes: fontBold)
         myAttrString.append(NSAttributedString(string: " (giá tạm tính)", attributes: fontWithColor))
         lbProvisionalPrice.attributedText = myAttrString
         
@@ -121,7 +121,8 @@ class DetailsFileUsersViewController: UIViewController {
                         let jsonData = result as! NSDictionary
                         self.checkInvoice = CheckInvoiceEntity.init(dictionary: jsonData as! [String : Any])
                         if self.checkInvoice.amount != 0 {
-                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Mã hoá đơn của bạn : \(self.checkInvoice.invoiceNo) \n Số tiền đóng thực tế : \(self.checkInvoice.amount)", cancelBtnTitle: "Đóng")
+                            let amount = String().replaceNSnumber(doublePrice: self.checkInvoice.amount)
+                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Mã hoá đơn của bạn : \(self.checkInvoice.invoiceNo) \n Số tiền đóng thực tế : \(amount)", cancelBtnTitle: "Đóng")
                             self.requestUpatePaymen()
                         }else{
                             UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Hiện tại chưa thanh toán! \n Vui lòng thử lại sau", cancelBtnTitle: "Đóng")

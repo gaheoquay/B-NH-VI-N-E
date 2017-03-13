@@ -187,7 +187,7 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
   }
   
   func gotoExamSchudel() {
-    let alert = UIAlertController(title: "Thông Báo", message: "Đăng kí khám thành công", preferredStyle: .alert)
+    let alert = UIAlertController(title: "Thông Báo", message: "Đăng ký khám thành công", preferredStyle: .alert)
     let arletAction = UIAlertAction(title: "Xem", style: .cancel) { (UIAlertAction) in
       let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "ExamScheduleViewController") as! ExamScheduleViewController
       viewcontroller.listService = self.listService

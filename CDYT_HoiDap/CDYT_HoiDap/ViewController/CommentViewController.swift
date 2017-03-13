@@ -555,55 +555,109 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     func showMoreActionCommentFromCommentCell(isSubcomment : Bool, subComment: SubCommentEntity, mainComment : MainCommentEntity, indexPath : IndexPath){
         self.view.endEditing(true)
-        
-        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let editTap = UIAlertAction(title: "Chỉnh sửa", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            if self.popupViewController == nil {
+        if mainComment.comment.isSolution {
+            if subComment.comment.id != "" {
+                let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                let editTap = UIAlertAction(title: "Chỉnh sửa", style: .default, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                    if self.popupViewController == nil {
+                        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let popoverVC = mainStoryboard.instantiateViewController(withIdentifier: "EditCommentViewController") as! EditCommentViewController
+                        popoverVC.isSubComment = isSubcomment
+                        popoverVC.subComment = subComment
+                        popoverVC.mainComment = mainComment
+                        popoverVC.delegate = self
+                        popoverVC.preferredContentSize = CGSize.init(width: 320, height: 250)
+                        popoverVC.isModalInPopover = false
+                        self.popupViewController = WYPopoverController(contentViewController: popoverVC)
+                        self.popupViewController.delegate = self
+                        self.popupViewController.wantsDefaultContentAppearance = false;
+                        self.popupViewController.presentPopover(from: CGRect.init(x: 0, y: 0, width: 0, height: 0), in: self.view, permittedArrowDirections: WYPopoverArrowDirection.none, animated: true, options: WYPopoverAnimationOptions.fade, completion: nil)
+                        
+                    }
+                })
                 
-                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let popoverVC = mainStoryboard.instantiateViewController(withIdentifier: "EditCommentViewController") as! EditCommentViewController
-                popoverVC.isSubComment = isSubcomment
-                popoverVC.subComment = subComment
-                popoverVC.mainComment = mainComment
-                popoverVC.delegate = self
-                popoverVC.preferredContentSize = CGSize.init(width: 320, height: 250)
-                popoverVC.isModalInPopover = false
-                self.popupViewController = WYPopoverController(contentViewController: popoverVC)
-                self.popupViewController.delegate = self
-                self.popupViewController.wantsDefaultContentAppearance = false;
-                self.popupViewController.presentPopover(from: CGRect.init(x: 0, y: 0, width: 0, height: 0), in: self.view, permittedArrowDirections: WYPopoverArrowDirection.none, animated: true, options: WYPopoverAnimationOptions.fade, completion: nil)
+                let deleteTap = UIAlertAction(title: "Xoá", style: .destructive, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                    
+                    let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có chắc chắn xoá bình luận này?", preferredStyle: UIAlertControllerStyle.alert)
+                    let noAction = UIAlertAction.init(title: "Huỷ", style: UIAlertActionStyle.cancel, handler: nil)
+                    let yesAction = UIAlertAction.init(title: "Xoá", style: UIAlertActionStyle.destructive, handler: { (UIAlertAction) in
+                        if isSubcomment {
+                            self.deleteComment(objID: subComment.comment.id, isSubcomment: isSubcomment, indexPath: indexPath, subComment: subComment)
+                        }else{
+                            self.deleteComment(objID: mainComment.comment.id, isSubcomment: isSubcomment, indexPath: indexPath, subComment: subComment)
+                        }
+                    })
+                    
+                    alert.addAction(noAction)
+                    alert.addAction(yesAction)
+                    self.present(alert, animated: true, completion: nil)
+                })
                 
+                let cancelTap = UIAlertAction(title: "Huỷ bỏ", style: .cancel, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                })
+                
+                optionMenu.addAction(editTap)
+                optionMenu.addAction(deleteTap)
+                optionMenu.addAction(cancelTap)
+                
+                self.present(optionMenu, animated: true, completion: nil)
+                return
             }
-        })
-        
-        let deleteTap = UIAlertAction(title: "Xoá", style: .destructive, handler: {
-            (alert: UIAlertAction!) -> Void in
-            
-            let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có chắc chắn xoá bình luận này?", preferredStyle: UIAlertControllerStyle.alert)
-            let noAction = UIAlertAction.init(title: "Huỷ", style: UIAlertActionStyle.cancel, handler: nil)
-            let yesAction = UIAlertAction.init(title: "Xoá", style: UIAlertActionStyle.destructive, handler: { (UIAlertAction) in
-                if isSubcomment {
-                    self.deleteComment(objID: subComment.comment.id, isSubcomment: isSubcomment, indexPath: indexPath, subComment: subComment)
-                }else{
-                    self.deleteComment(objID: mainComment.comment.id, isSubcomment: isSubcomment, indexPath: indexPath, subComment: subComment)
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn không thể xoá được bình luận này", cancelBtnTitle: "Đóng")
+
+        }else {
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let editTap = UIAlertAction(title: "Chỉnh sửa", style: .default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                if self.popupViewController == nil {
+                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let popoverVC = mainStoryboard.instantiateViewController(withIdentifier: "EditCommentViewController") as! EditCommentViewController
+                    popoverVC.isSubComment = isSubcomment
+                    popoverVC.subComment = subComment
+                    popoverVC.mainComment = mainComment
+                    popoverVC.delegate = self
+                    popoverVC.preferredContentSize = CGSize.init(width: 320, height: 250)
+                    popoverVC.isModalInPopover = false
+                    self.popupViewController = WYPopoverController(contentViewController: popoverVC)
+                    self.popupViewController.delegate = self
+                    self.popupViewController.wantsDefaultContentAppearance = false;
+                    self.popupViewController.presentPopover(from: CGRect.init(x: 0, y: 0, width: 0, height: 0), in: self.view, permittedArrowDirections: WYPopoverArrowDirection.none, animated: true, options: WYPopoverAnimationOptions.fade, completion: nil)
+                    
                 }
             })
             
-            alert.addAction(noAction)
-            alert.addAction(yesAction)
-            self.present(alert, animated: true, completion: nil)
-        })
+            let deleteTap = UIAlertAction(title: "Xoá", style: .destructive, handler: {
+                (alert: UIAlertAction!) -> Void in
+                
+                let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có chắc chắn xoá bình luận này?", preferredStyle: UIAlertControllerStyle.alert)
+                let noAction = UIAlertAction.init(title: "Huỷ", style: UIAlertActionStyle.cancel, handler: nil)
+                let yesAction = UIAlertAction.init(title: "Xoá", style: UIAlertActionStyle.destructive, handler: { (UIAlertAction) in
+                    if isSubcomment {
+                        self.deleteComment(objID: subComment.comment.id, isSubcomment: isSubcomment, indexPath: indexPath, subComment: subComment)
+                    }else{
+                        self.deleteComment(objID: mainComment.comment.id, isSubcomment: isSubcomment, indexPath: indexPath, subComment: subComment)
+                    }
+                })
+                
+                alert.addAction(noAction)
+                alert.addAction(yesAction)
+                self.present(alert, animated: true, completion: nil)
+            })
+            
+            let cancelTap = UIAlertAction(title: "Huỷ bỏ", style: .cancel, handler: {
+                (alert: UIAlertAction!) -> Void in
+            })
+            
+            optionMenu.addAction(editTap)
+            optionMenu.addAction(deleteTap)
+            optionMenu.addAction(cancelTap)
+            
+            self.present(optionMenu, animated: true, completion: nil)
+        }
         
-        let cancelTap = UIAlertAction(title: "Huỷ bỏ", style: .cancel, handler: {
-            (alert: UIAlertAction!) -> Void in
-        })
-        
-        optionMenu.addAction(editTap)
-        optionMenu.addAction(deleteTap)
-        optionMenu.addAction(cancelTap)
-        
-        self.present(optionMenu, animated: true, completion: nil)
 
     }
     

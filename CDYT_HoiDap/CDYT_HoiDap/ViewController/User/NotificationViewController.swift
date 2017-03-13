@@ -104,7 +104,7 @@ class NotificationViewController: BaseViewController, UITableViewDelegate, UITab
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
     let entity = listNotification[indexPath.row]
-    if entity.notificaiton?.type == 1 || entity.notificaiton?.type == 3 {
+    if entity.notificaiton?.type == 1 || entity.notificaiton?.type == 3 || entity.notificaiton?.type == 6 {
       let viewController = storyBoard.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
       viewController.questionID = (entity.notificaiton?.parentId)!
       viewController.notification = entity

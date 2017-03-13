@@ -20,6 +20,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     var listallUSer = [AllUserEntity]()
     var indexBooking = IndexPath()
     var pageIndex = 1
+    var currentDate = Date()
 
     
     override func viewDidLoad() {
@@ -110,7 +111,18 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     }
     
     func accepBooking(index: IndexPath) {
-        requestCheckin(index: index)
+        
+        let date_fourty = currentDate.dateAt(hours: 16, minutes: 0, days: 0)
+        
+        if currentDate > date_fourty {
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không thể đặt lịch vào ngày này! Bệnh viện ngưng đặt lịch khám sau 16h hàng ngày và chủ nhật.", cancelBtnTitle: "Đóng")
+        }else {
+            if listService.count > 0 {
+            requestCheckin(index: index)
+            }else{
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Lịch khám đang được tải về . Bạn vui lòng đợi trong giây lát", cancelBtnTitle: "Đóng")
+            }
+        }
     }
     
     func reloadDataExam() {
@@ -158,6 +170,12 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
             heightTbListUser.constant = 0
             imageCalendar.isHidden = false
             lbCalendar.isHidden = false
+        }
+        
+        if listService.count > 0 {
+            return
+        }else {
+            requestListService()
         }
         
         self.tbListExamSchedule.reloadData()
@@ -269,6 +287,28 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
             }
         }
     }
+    
+    func requestListService(){
+        Alamofire.request(BOOKING_GET_LIST_SERVICE, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! [NSDictionary]
+                        
+                        for item in jsonData {
+                            let entity = ServiceEntity.init(dictionary: item)
+                            self.listService.append(entity)
+                        }
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+        }
+    }
+
     
     
 }

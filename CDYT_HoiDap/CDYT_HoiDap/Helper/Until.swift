@@ -117,10 +117,11 @@ extension String {
         let numberFormatter = NumberFormatter()
         let myNumber = NSNumber(value: Double(doublePrice))
         numberFormatter.groupingSize = 3
-        numberFormatter.groupingSeparator = ","
+        numberFormatter.groupingSeparator = "."
         numberFormatter.usesGroupingSeparator = true
         return numberFormatter.string(from: myNumber)!
     }
+    
 }
 extension Date {
   var age: Int {

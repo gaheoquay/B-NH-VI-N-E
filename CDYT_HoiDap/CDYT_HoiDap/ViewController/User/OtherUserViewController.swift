@@ -154,7 +154,7 @@ class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableV
         Until.gotoLogin(_self: self, cannotBack: false)
       }else{
         if currentUser.first?.role == 0 {
-          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nâng cấp để sử dủng chức năng này", cancelBtnTitle: "Đồng ý")
+          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nâng cấp để sử dụng chức năng này", cancelBtnTitle: "Đồng ý")
           return
         }else if currentUser.first?.role == 1 || currentUser.first?.role == 2 {
             if user.role == 0 {

@@ -29,6 +29,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
         if isFeeds {
           reloadDataAssigned()
           reloadDataNotAssignedYet()
+
         }
       }
       
@@ -85,8 +86,6 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
   }
   
   func reloadDataAssigned(){
-    pageAssigned = 1
-    listAssigned.removeAll()
     getQuestionsUncommentedByAnyDoctorAndAssigned()
   }
   func loadMoreAssigned(){
@@ -160,7 +159,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
         if status == 200{
           if let result = response.result.value {
             let jsonData = result as! [NSDictionary]
-            
+            self.listAssigned.removeAll()
             for item in jsonData {
               let entity = FeedsEntity.init(dictionary: item)
               self.listAssigned.append(entity)
@@ -187,6 +186,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
       "Size": 10,
       "RequestedUserId" : Until.getCurrentId()
     ]
+    Until.showLoading()
     Alamofire.request(GET_QUESTIONS_UNCOMMENTED_BY_ANY_DOCTOR_AND_NOT_ASSIGNED_YET, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
         if status == 200{
@@ -199,6 +199,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
             }
           }
           self.tbQuestion.reloadData()
+          Until.hideLoading()
         }else{
           UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
         }
@@ -324,7 +325,8 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     }
     return cell
   }
-  
+    
+     
   //MARK: QuestionTableViewCellDelegate
   func showQuestionDetail(indexPath: IndexPath) {
     let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController

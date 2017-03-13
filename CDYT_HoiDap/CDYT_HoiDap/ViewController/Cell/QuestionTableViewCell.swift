@@ -89,10 +89,15 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
             btnApproval.isHidden = true
             heightViewCate.constant = 0
             layoutBottomViewCate.constant = 0
-            layoutBottomCreateDate.constant = 50
+            layoutBottomCreateDate.constant = 40
         }else {
-            layoutBottomViewCate.constant = 8
             if isHiddenCateAndDoctor {
+//                            layoutBottomViewCate.constant = 8
+
+                viewCate.isHidden = false
+                viewDoctor.isHidden = false
+                imgApproval.isHidden = false
+                btnApproval.isHidden = false
                 if feedEntity.postEntity.isClassified {
                     lbCate.text = feedEntity.cateGory.name
                     lbDoctor.text = feedEntity.assigneeEntity.fullname
@@ -122,10 +127,8 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
                     btnApproval.setTitleColor(colorbtnApproval, for: .normal)
                     imgApproval.image = UIImage(named: "Duyet_1.png")
                 }
-              viewCate.isHidden = false
-              viewDoctor.isHidden = false
-              imgApproval.isHidden = false
-              btnApproval.isHidden = false
+                
+                
             }else {
                 viewCate.isHidden = true
                 viewDoctor.isHidden = true
@@ -164,15 +167,25 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
             lbNameDoctor.attributedText = myAttrStringDoctor
             lbTimeAnswerDoctor.text = String().convertTimeStampWithDateFormat(timeStamp: feedEntity.firstCommentTime, dateFormat: "dd/MM/yy HH:mm")
             layoutBottomCreateDate.constant = 60
+            lbNameDoctor.isHidden = false
+            lbTimeAnswerDoctor.isHidden = false
         }else {
-            if users?.role == 2 {
-                lbNameDoctor.isHidden = true
-                lbTimeAnswerDoctor.isHidden = true
-                layoutBottomCreateDate.constant = 60
-            }else {
+            lbNameDoctor.text = ""
+            lbTimeAnswerDoctor.text = ""
             lbNameDoctor.isHidden = true
             lbTimeAnswerDoctor.isHidden = true
-            layoutBottomCreateDate.constant = 16
+            if users?.role == 2 {
+                if feedEntity.firstCommentedDoctor.id  != "" {
+                    layoutBottomCreateDate.constant = 60
+                    lbCreateDate.isHidden = false
+                    lbNameDoctor.isHidden = false
+                }else {
+                    layoutBottomCreateDate.constant = 30
+                    lbCreateDate.isHidden = true
+                    lbNameDoctor.isHidden = true
+                }
+            }else {
+                layoutBottomCreateDate.constant = 16
             }
         }
         

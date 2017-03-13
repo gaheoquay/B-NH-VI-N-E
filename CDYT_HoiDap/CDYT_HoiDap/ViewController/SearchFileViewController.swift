@@ -29,7 +29,7 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
         super.viewDidLoad()
         
         requestUSer()
-                setupBtn()
+        setupBtn()
         // Do any additional setup after loading the view.
     }
 
