@@ -58,9 +58,7 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
     }
 
     func showUserProfile(){
-        let realm = try! Realm()
-        let user = realm.objects(UserEntity.self)
-        if feed.postEntity.isPrivate != true || feed.authorEntity.id == user[0].id {
+        if feed.postEntity.isPrivate != true || feed.authorEntity.id == Until.getCurrentId() {
         delegate?.gotoUserProfileFromDetailQuestion(user: feed.authorEntity)
         }
     }
@@ -116,9 +114,7 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
     func setData(){
         
         let realm = try! Realm()
-        let user = realm.objects(UserEntity.self)
-        
-        if feed.postEntity.isPrivate != true || feed.authorEntity.id == user[0].id {
+        if feed.postEntity.isPrivate != true || feed.authorEntity.id == Until.getCurrentId() {
             avaImg.sd_setImage(with: URL.init(string: feed.authorEntity.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
             nameLbl.text = feed.authorEntity.nickname
 

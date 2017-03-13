@@ -5322,7 +5322,7 @@ Tel: 04. 37543650  Hotline: 086 889 1318 -  Fax: 04. 37561351
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19m-RQ-F54">
                                         <rect key="frame" x="12" y="113.5" width="296" height="1352.5"/>
-                                        <mutableString key="text">Bệnh viện E là bệnh viện đa khoa trung ương hạng I trực thuộc Bộ Y tế, được thành lập từ năm 1967. Đến nay, bệnh viện đã phát triển với quy mô hơn 900 giường bệnh (gồm 4 trung tâm, 37 khoa lâm sàng và cận lâm sàng, 11 phòng chức năng) trên diện tích 41.000 m2 với khuôn viên rộng rãi, thoáng mát, xanh, sạch đẹp. Với truyền thống 50 năm thành lập - phát triển, bệnh viện E có đội ngũ cán bộ giàu kinh nghiệm, các bác sĩ có có trình độ sau đại học chiếm 70% gồm các Giáo sư, Phó giáo sư, Tiến sĩ, Thạc sĩ... Phương châm hành động của đội ngũ thầy thuốc Bệnh viện E là: “Chăm sóc người bệnh toàn diện bằng những phương pháp khoa học kỹ thuật tiên tiến và hiệu quả nhất với tấm lòng thầy thuốc như mẹ hiền”.
+                                        <string key="text">Bệnh viện E là bệnh viện đa khoa trung ương hạng I trực thuộc Bộ Y tế, được thành lập từ năm 1967. Đến nay, bệnh viện đã phát triển với quy mô hơn 900 giường bệnh (gồm 4 trung tâm, 37 khoa lâm sàng và cận lâm sàng, 11 phòng chức năng) trên diện tích 41.000 m2 với khuôn viên rộng rãi, thoáng mát, xanh, sạch đẹp. Với truyền thống 50 năm thành lập - phát triển, bệnh viện E có đội ngũ cán bộ giàu kinh nghiệm, các bác sĩ có có trình độ sau đại học chiếm 70% gồm các Giáo sư, Phó giáo sư, Tiến sĩ, Thạc sĩ... Phương châm hành động của đội ngũ thầy thuốc Bệnh viện E là: “Chăm sóc người bệnh toàn diện bằng những phương pháp khoa học kỹ thuật tiên tiến và hiệu quả nhất với tấm lòng thầy thuốc như mẹ hiền”.
 PHẠM VI HOẠT ĐỘNG VÀ CÁC DỊCH VỤ
 •	Khám chữa bệnh đa khoa (nội, ngoại, sản, nhi, ung bướu, y học cổ truyền, phục hồi chức năng) chuyên khoa (tai mũi họng, răng hàm mặt, mắt) cho người bệnh BHYT và khám theo yêu cầu. Đặc biệt tiếp nhận bệnh nhân BHYT tuyến cuối từ khắp cả nước.
 •	Khám và cấp giấy chứng nhận sức khỏe cho người Việt Nam đi học tập lao động tại nước ngoài, người nước ngoài làm việc tại Việt Nam. Khám tuyển lái xe, khám tuyển dụng và định kỳ cho các cơ quan, trường học theo hợp đồng.
@@ -5350,7 +5350,7 @@ CÁC KỸ THUẬT CAO ĐÃ THỰC HIỆN
 CÁC THÀNH TÍCH ĐÃ ĐẠT ĐƯỢC
 •	Huân chương Độc lập hạng Nhất, Nhì, Ba
 •	Huân chương Lao động hạng Nhất.
-•	Huân chương Kháng chiến hạng Nhì.</mutableString>
+•	Huân chương Kháng chiến hạng Nhì.</string>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                         <nil key="highlightedColor"/>
                                     </label>
