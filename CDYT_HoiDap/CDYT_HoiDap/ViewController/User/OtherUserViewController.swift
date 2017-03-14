@@ -14,7 +14,7 @@ class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var feedTbl: UITableView!
   var selectedUser: [SBDUser] = []
-
+    
     var user = AuthorEntity()
     var page = 1
     var listFeeds = [FeedsEntity]()
@@ -40,7 +40,11 @@ class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableV
         avaImg.clipsToBounds = true
         avaImg.sd_setImage(with: URL.init(string: user.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
         
+        if user.role == 1 {
+        nameLbl.text = user.fullname
+        }else {
         nameLbl.text = user.nickname
+        }
     }
     
     func configTableView(){
@@ -82,10 +86,9 @@ class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableV
             "Page": page,
             "Size": 10,
             "UserId": user.id,
-            "RequestedUserId" : Until.getCurrentId()
         ]
         
-        Alamofire.request(GET_QUESTION_BY_ID, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+        Alamofire.request(GET_QUESTION_FOLLOW_BY_USER, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
                     if let result = response.result.value {
@@ -246,6 +249,11 @@ class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableV
     func approVal(indexPath: IndexPath) {
         
     }
+    
+    func gotoUserProfileFromQuestionDoctor(doctor: AuthorEntity) {
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

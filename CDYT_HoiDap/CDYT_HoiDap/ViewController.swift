@@ -216,6 +216,14 @@ class ViewController: BaseViewController,UITableViewDelegate,UITableViewDataSour
             self.navigationController?.pushViewController(viewController, animated: true)
 //        }
     }
+    
+    func gotoUserProfileFromQuestionDoctor(doctor: AuthorEntity) {
+        let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
+        viewController.user = doctor
+        self.navigationController?.pushViewController(viewController, animated: true)
+
+    }
      
 //    MARK: Action
   

@@ -297,7 +297,13 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
                         
                     }
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể lấy được dữ liệu Bình luận. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    let alert = UIAlertController.init(title: "Thông báo", message: "Có lỗi không thể lấy được dữ liệu bình luận", preferredStyle: UIAlertControllerStyle.alert)
+                    let actionOk = UIAlertAction.init(title: "Đóng", style: UIAlertActionStyle.default, handler: { (action) in
+                        _ = self.navigationController?.popViewController(animated: true)
+                    })
+                    alert.addAction(actionOk)
+                    self.present(alert, animated: true, completion: nil)
+
                 }
             }else{
                 UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")

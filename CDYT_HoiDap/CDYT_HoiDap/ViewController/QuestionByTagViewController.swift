@@ -156,6 +156,10 @@ class QuestionByTagViewController: BaseViewController,UITableViewDelegate,UITabl
         
     }
     
+    func gotoUserProfileFromQuestionDoctor(doctor: AuthorEntity) {
+        
+    }
+    
 //  MARK: Outlet
   @IBOutlet weak var lbTitle: UILabel!
   @IBOutlet weak var tbQuestion: UITableView!

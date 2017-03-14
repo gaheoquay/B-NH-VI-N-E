@@ -501,6 +501,10 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
   func approVal(indexPath:IndexPath) {
         
     }
+    
+    func gotoUserProfileFromQuestionDoctor(doctor: AuthorEntity) {
+        
+    }
   
   func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
     //khong can phai thuc hien ham nay vi dang trong trang profile cua chinh minh

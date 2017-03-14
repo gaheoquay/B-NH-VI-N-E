@@ -26,6 +26,7 @@ let GET_BOOKING_ONLY = BASE_URL + "/Booking/GetBookingRecordByUserId"
 let FINISH_CHECKUP = BASE_URL + "/Booking/FinishCheckup"
 let DELETE_BOOKING = BASE_URL + "/Booking/RemoveBooking"
 
+let GET_QUESTION_FOLLOW_BY_USER = BASE_URL + "/Post/GetQuestionFollowedByUserId"
 let HOTEST_TAG = BASE_URL + "/Post/GetHotestTags"
 let GET_FEEDS = BASE_URL + "/Post/GetFeed"
 let SEARCH = BASE_URL + "/Post/Search"

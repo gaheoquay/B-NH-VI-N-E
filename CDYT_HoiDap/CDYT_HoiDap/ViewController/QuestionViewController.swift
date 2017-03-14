@@ -354,6 +354,10 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
       self.navigationController?.pushViewController(viewController, animated: true)
 //    }
   }
+    
+    func gotoUserProfileFromQuestionDoctor(doctor: AuthorEntity) {
+        
+    }
   
   //MARK: receive notifiy when mark an comment is solution
   func reloadDataFromServer(notification : Notification){

@@ -11,6 +11,7 @@ protocol QuestionTableViewCellDelegate {
     func showQuestionDetail(indexPath : IndexPath)
     func gotoListQuestionByTag(hotTagId: String)
     func gotoUserProfileFromQuestionCell(user : AuthorEntity)
+    func gotoUserProfileFromQuestionDoctor(doctor: AuthorEntity)
     func selectSpecialist(indexPath : IndexPath)
     func selectDoctor(indexPath : IndexPath)
     func approVal(indexPath : IndexPath)
@@ -42,7 +43,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
         lbAuthor.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showUserProfile)))
         
         lbNameDoctor.isUserInteractionEnabled = true
-        lbNameDoctor.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showUserProfile)))
+        lbNameDoctor.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showDoctorProfile)))
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -66,6 +67,10 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
         }
         
         
+    }
+    
+    func showDoctorProfile(){
+        delegate?.gotoUserProfileFromQuestionDoctor(doctor: feedEntity.firstCommentedDoctor)
     }
     
     @IBAction func showDetail(_ sender: Any) {

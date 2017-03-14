@@ -5505,6 +5505,47 @@ CÁC THÀNH TÍCH ĐÃ ĐẠT ĐƯỢC
             </objects>
             <point key="canvasLocation" x="1170" y="1446"/>
         </scene>
+        <!--Choice Doctor View Controller-->
+        <scene sceneID="mcm-Jl-6IT">
+            <objects>
+                <viewController id="Tzv-0o-l5g" customClass="ChoiceDoctorViewController" customModule="CDYT_HoiDap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mIG-Qk-bJr"/>
+                        <viewControllerLayoutGuide type="bottom" id="H0d-Aj-gif"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="D6I-UG-qYg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chọn bác sĩ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZh-yv-b90">
+                                <rect key="frame" x="120.5" y="28" width="80" height="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2e1-pp-jEF">
+                                <rect key="frame" x="0.0" y="61" width="320" height="507"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="H0d-Aj-gif" firstAttribute="top" secondItem="2e1-pp-jEF" secondAttribute="bottom" id="9mt-Kd-eBk"/>
+                            <constraint firstItem="2e1-pp-jEF" firstAttribute="leading" secondItem="D6I-UG-qYg" secondAttribute="leading" id="Pf8-hJ-hk9"/>
+                            <constraint firstItem="XZh-yv-b90" firstAttribute="top" secondItem="mIG-Qk-bJr" secondAttribute="bottom" constant="8" id="dfH-Uf-WUB"/>
+                            <constraint firstItem="2e1-pp-jEF" firstAttribute="top" secondItem="XZh-yv-b90" secondAttribute="bottom" constant="16" id="i9l-Xy-hWp"/>
+                            <constraint firstAttribute="trailing" secondItem="2e1-pp-jEF" secondAttribute="trailing" id="rG6-oz-uYQ"/>
+                            <constraint firstItem="XZh-yv-b90" firstAttribute="centerX" secondItem="D6I-UG-qYg" secondAttribute="centerX" id="s5V-Wx-esD"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tbListDoctor" destination="2e1-pp-jEF" id="XQv-cA-1Wp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dya-0r-OUk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2893" y="60"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Alz-nQ-l3l">
             <objects>
