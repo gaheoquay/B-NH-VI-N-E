@@ -8,8 +8,8 @@
 
 import UIKit
 
-let BASE_URL = "http://ihealthlabs.vn:38192"    //RELEASE
-//let BASE_URL = "http://123.24.206.9:38192"     //DEV
+//let BASE_URL = "http://ihealthlabs.vn:38192"    //RELEASE
+let BASE_URL = "http://123.24.206.9:38192"     //DEV
 
 let REGISTER_USER = BASE_URL + "/User/Register"
 let UPLOAD_IMAGE = BASE_URL + "/Image/UploadImage"
@@ -59,7 +59,7 @@ let POLICY_RULE = BASE_URL + "/PolicyAndCondition"
 let GET_UNREAD_NOTIFICATION = BASE_URL + "/Notification/GetUnreadNotificationCount"
 let GET_QUESTION_FOLLOWED = BASE_URL + "/Post/GetQuestionFollowedByUserId"
 let GET_QUESTION_ASSIGN = BASE_URL + "/Post/GetQuestionAssignToUser"
-let GET_LIST_DOCTOR = BASE_URL + "/category/getListDoctors"
+let GET_LIST_DOCTOR = BASE_URL + "/category/GetListDoctorsPerCategory"
 let GET_LASTED_POST = BASE_URL + "/Post/Classify"
 let LOG_OUT = BASE_URL + "/User/Logout"
 let BOOKING_GET_LIST_SERVICE = BASE_URL + "/Booking/GetServicePricingDump"

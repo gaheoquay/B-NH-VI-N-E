@@ -7,13 +7,21 @@
 //
 
 import UIKit
+protocol ChoiceDoctorViewControllerDelegate {
+    func setDataDoctor(doctor: AuthorEntity)
+}
 
-class ChoiceDoctorViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class ChoiceDoctorViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
     @IBOutlet weak var tbListDoctor: UITableView!
+    
+    var listDoctors = [DoctorEntity]()
+    var delegate : ChoiceDoctorViewControllerDelegate?
+    
     override func viewDidLoad() {
+        setupUI()
         super.viewDidLoad()
-        setupUi()
+
         // Do any additional setup after loading the view.
     }
 
@@ -22,8 +30,10 @@ class ChoiceDoctorViewController: UIViewController,UITableViewDelegate,UITableVi
         // Dispose of any resources that can be recreated.
     }
     
-    
-    func setupUi(){
+
+    func setupUI(){
+        tbListDoctor.delegate = self
+        tbListDoctor.dataSource = self
         tbListDoctor.register(UINib.init(nibName: "DoctorCell", bundle: nil), forCellReuseIdentifier: "DoctorCell")
         tbListDoctor.estimatedRowHeight = 9999
         tbListDoctor.rowHeight = UITableViewAutomaticDimension
@@ -33,11 +43,17 @@ class ChoiceDoctorViewController: UIViewController,UITableViewDelegate,UITableVi
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return listDoctors.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DoctorCell") as! DoctorCell
+        if listDoctors.count > 0 {
+        cell.setData(entity: listDoctors[indexPath.row])
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.setDataDoctor(doctor: listDoctors[indexPath.row].doctorEntity)
     }
 }

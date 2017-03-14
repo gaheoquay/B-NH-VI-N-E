@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QuestionViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource, QuestionTableViewCellDelegate ,UIPickerViewDelegate,UIPickerViewDataSource {
+class QuestionViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource, QuestionTableViewCellDelegate ,UIPickerViewDelegate,UIPickerViewDataSource,WYPopoverControllerDelegate,ChoiceDoctorViewControllerDelegate{
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -29,7 +29,6 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
         if isFeeds {
           reloadDataAssigned()
           reloadDataNotAssignedYet()
-
         }
       }
       
@@ -399,13 +398,34 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     }
     if listDoctorInCate.count > 0 {
       indexPathOfCell = indexPath
-      creatAlert(title: "Chọn bác sỹ",picker: pickerViewDoctor)
+//      creatAlert(title: "Chọn bác sỹ",picker: pickerViewDoctor)
+        if popupViewController == nil {
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let popoverVC = mainStoryboard.instantiateViewController(withIdentifier: "ChoiceDoctorViewController") as! ChoiceDoctorViewController
+            popoverVC.preferredContentSize = CGSize.init(width: UIScreen.main.bounds.size.width - 32, height: UIScreen.main.bounds.size.height - 120 )
+            popoverVC.isModalInPopover = false
+            popoverVC.listDoctors = self.listDoctorInCate
+            popoverVC.delegate = self
+            self.popupViewController = WYPopoverController(contentViewController: popoverVC)
+            self.popupViewController.delegate = self
+            self.popupViewController.wantsDefaultContentAppearance = false;
+            self.popupViewController.presentPopover(from: CGRect.init(x: 0, y: 0, width: 0, height: 0), in: self.view, permittedArrowDirections: WYPopoverArrowDirection.none, animated: true, options: WYPopoverAnimationOptions.fadeWithScale, completion: nil)
+        }
+
     }else {
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn khoa trước", cancelBtnTitle: "Đóng")
       
     }
     
   }
+    
+    func popoverControllerDidDismissPopover(_ popoverController: WYPopoverController!) {
+        if popupViewController != nil {
+            popupViewController.delegate = nil
+            popupViewController = nil
+        }
+    }
+
   
   func creatAlert(title: String, picker: UIPickerView){
     let alertView = UIAlertController(title: title, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
@@ -441,8 +461,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     if pickerView == pickerViewCate {
       return listCate[row].name
     }else {
-      
-      return listDoctorInCate[row].fullname
+      return listDoctorInCate[row].doctorEntity.fullname
     }
     
   }
@@ -459,28 +478,36 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
         listAssigned[indexPathOfCell.row].cateGory.name = nameCate
         listAssigned[indexPathOfCell.row].postEntity.isClassified = false
       }
-      
-      for item in listAllDoctor {
-        if item.category.id == idCate {
-          listDoctorInCate = item.doctors
-          break
-        }
-      }
-      
-    }else{
-      idDoc = listDoctorInCate[row].id
-      nameDoc = listDoctorInCate[row].fullname
-      if isNotAssignedYet {
-        listNotAssignedYet[indexPathOfCell.row].assigneeEntity.id = idDoc
-        listNotAssignedYet[indexPathOfCell.row].assigneeEntity.fullname = nameDoc
-      }else if isAssigned {
-        listAssigned[indexPathOfCell.row].assigneeEntity.id = idDoc
-        listAssigned[indexPathOfCell.row].assigneeEntity.fullname = nameDoc
-        listAssigned[indexPathOfCell.row].postEntity.isClassified = false
-      }
     }
     
   }
+    
+    //MARK: Delegate PIck Doctor
+    
+    
+    func setDataDoctor(doctor: AuthorEntity) {
+        
+        idDoc = doctor.id
+        nameDoc = doctor.fullname
+        
+        if isNotAssignedYet {
+        listNotAssignedYet[indexPathOfCell.row].assigneeEntity.id = idDoc
+        listNotAssignedYet[indexPathOfCell.row].assigneeEntity.fullname = nameDoc
+        }else if isAssigned {
+        listAssigned[indexPathOfCell.row].assigneeEntity.id = idDoc
+        listAssigned[indexPathOfCell.row].assigneeEntity.fullname = nameDoc
+        listAssigned[indexPathOfCell.row].postEntity.isClassified = false
+        }
+
+        
+        popupViewController.dismissPopover(animated: true)
+        popupViewController.delegate = nil
+        popupViewController = nil
+        
+        self.tbQuestion.beginUpdates()
+        self.tbQuestion.reloadRows(at: [self.indexPathOfCell], with: .automatic)
+        self.tbQuestion.endUpdates()
+    }
   
   
   func approVal(indexPath : IndexPath) {
@@ -534,7 +561,9 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
   var nameCate = ""
   var nameDoc = ""
   var ischeckHide = true
-  var listDoctorInCate = [AuthorEntity]()
+  var listDoctorInCate = [DoctorEntity]()
+  var popupViewController:WYPopoverController!
+
   
   @IBOutlet weak var layoutHeightHeaderView: NSLayoutConstraint!
   @IBOutlet weak var viewHeader: UIView!

@@ -9,12 +9,12 @@
 import UIKit
 
 class DoctorCell: UITableViewCell {
-    
-    @IBOutlet weak var lbNameDoctor: UILabel!
-    @IBOutlet weak var lbUnAnwser: UILabel!
-    @IBOutlet weak var lbApproved: UILabel!
-    
 
+    @IBOutlet weak var lbNameDoctor: UILabel!
+    @IBOutlet weak var lbUnAnswer: UILabel!
+    @IBOutlet weak var lbApproval: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,6 +24,25 @@ class DoctorCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setData(entity: DoctorEntity){
+        
+        lbNameDoctor.text = entity.doctorEntity.fullname
+
+        let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
+        let fontRegular = [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
+        
+        
+        let myAttrString = NSMutableAttributedString(string: "Chưa trả lời : ", attributes: fontRegular)
+        myAttrString.append(NSAttributedString(string: "\(entity.unanswerPostCount)", attributes: fontBold))
+        lbUnAnswer.attributedText = myAttrString
+        
+        let myAttrStringPost = NSMutableAttributedString(string: "Đã duyệt : ", attributes: fontRegular)
+        myAttrStringPost.append(NSAttributedString(string: "\(entity.answerPostCount)", attributes: fontBold))
+        lbApproval.attributedText = myAttrStringPost
+        
+        
     }
     
 }

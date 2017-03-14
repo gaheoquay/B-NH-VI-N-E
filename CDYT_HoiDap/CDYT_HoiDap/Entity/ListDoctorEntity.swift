@@ -11,7 +11,9 @@ import UIKit
 class ListDoctorEntity: NSObject {
   var category = CateEntity()
   var count = 0
-  var doctors = [AuthorEntity]()
+  var doctors = [DoctorEntity]()
+  
+ 
   var isExpand = false
   override init() {
     super.init()
@@ -25,9 +27,9 @@ class ListDoctorEntity: NSObject {
     }
     if let value = dictionary["Doctors"] as? [NSDictionary] {
       for dic in value {
-        let entity = AuthorEntity.init(dictionary: dic)
+        let entity = DoctorEntity.init(dictionary: dic)
         doctors.append(entity)
       }
     }
-  }
+      }
 }

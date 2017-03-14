@@ -270,6 +270,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
     @IBOutlet weak var lbAuthor: UILabel!
     @IBOutlet weak var lbCreateDate: UILabel!
     var feedEntity = FeedsEntity()
+    
     @IBOutlet weak var imgTag: UIImageView!
     @IBOutlet weak var layoutHeighTag: NSLayoutConstraint!
     @IBOutlet weak var layoutTopTag: NSLayoutConstraint!

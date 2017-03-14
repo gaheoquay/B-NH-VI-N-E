@@ -37,7 +37,7 @@ class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableVi
 //  MARK: UITableViewDelegate + UITableViewDataSource
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let entity = listAllDoctor[indexPath.section]
-    delegate?.gotoProfile(authorEntity: entity.doctors[indexPath.row])
+    delegate?.gotoProfile(authorEntity: entity.doctors[indexPath.row].doctorEntity)
   }
   func numberOfSections(in tableView: UITableView) -> Int {
     return listAllDoctor.count
@@ -53,7 +53,7 @@ class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableVi
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "DoctorTableViewCell") as! DoctorTableViewCell
     let entity = listAllDoctor[indexPath.section]
-    cell.setData(entity: entity.doctors[indexPath.row])
+    cell.setData(entity: entity.doctors[indexPath.row].doctorEntity)
     return cell
   }
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
