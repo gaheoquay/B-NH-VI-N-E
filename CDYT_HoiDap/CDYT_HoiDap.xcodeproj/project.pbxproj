@@ -20,6 +20,10 @@
 		0F81E4AA1E66813B00A7C18F /* CheckInvoiceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4A91E66813B00A7C18F /* CheckInvoiceEntity.swift */; };
 		0F81E4AC1E672CE800A7C18F /* BookingUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4AB1E672CE800A7C18F /* BookingUserEntity.swift */; };
 		0F81E4B01E6747DB00A7C18F /* ResultUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4AF1E6747DB00A7C18F /* ResultUserEntity.swift */; };
+		0F9323E51E783DD300B56F39 /* ChoiceDoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9323E41E783DD300B56F39 /* ChoiceDoctorViewController.swift */; };
+		0F9323E81E783DE300B56F39 /* DoctorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9323E61E783DE300B56F39 /* DoctorCell.swift */; };
+		0F9323E91E783DE300B56F39 /* DoctorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F9323E71E783DE300B56F39 /* DoctorCell.xib */; };
+		0F9323EB1E783E3B00B56F39 /* DoctorEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9323EA1E783E3B00B56F39 /* DoctorEntity.swift */; };
 		0F9471441E5F5E3C00EE7C2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F9471431E5F5E3C00EE7C2A /* Main.storyboard */; };
 		0F9AD59C1E63CE0F00981D7B /* SearchFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9AD59B1E63CE0F00981D7B /* SearchFileViewController.swift */; };
 		0F9AD5A01E63F34700981D7B /* BackWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9AD59D1E63F34700981D7B /* BackWhite.png */; };
@@ -276,6 +280,10 @@
 		0F81E4A91E66813B00A7C18F /* CheckInvoiceEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInvoiceEntity.swift; sourceTree = "<group>"; };
 		0F81E4AB1E672CE800A7C18F /* BookingUserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingUserEntity.swift; sourceTree = "<group>"; };
 		0F81E4AF1E6747DB00A7C18F /* ResultUserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultUserEntity.swift; sourceTree = "<group>"; };
+		0F9323E41E783DD300B56F39 /* ChoiceDoctorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceDoctorViewController.swift; sourceTree = "<group>"; };
+		0F9323E61E783DE300B56F39 /* DoctorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorCell.swift; sourceTree = "<group>"; };
+		0F9323E71E783DE300B56F39 /* DoctorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoctorCell.xib; sourceTree = "<group>"; };
+		0F9323EA1E783E3B00B56F39 /* DoctorEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorEntity.swift; sourceTree = "<group>"; };
 		0F9471431E5F5E3C00EE7C2A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0F9AD59B1E63CE0F00981D7B /* SearchFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFileViewController.swift; sourceTree = "<group>"; };
 		0F9AD59D1E63F34700981D7B /* BackWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackWhite.png; sourceTree = "<group>"; };
@@ -838,6 +846,7 @@
 		8B3A13841E10FCB6005DBC6E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0F9323E41E783DD300B56F39 /* ChoiceDoctorViewController.swift */,
 				8BD49ED31E48215500C98E74 /* Chat */,
 				8B3A138D1E111FA5005DBC6E /* Cell */,
 				A6E4C2F61E11022B00C2C871 /* User */,
@@ -874,6 +883,8 @@
 		8B3A138D1E111FA5005DBC6E /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				0F9323E61E783DE300B56F39 /* DoctorCell.swift */,
+				0F9323E71E783DE300B56F39 /* DoctorCell.xib */,
 				0FF7533A1E62F385001450B7 /* ScheduleCell */,
 				0F9C461A1E60053000DCFE46 /* Service Cell */,
 				A68A95011E14ECE10067736E /* Question Cell */,
@@ -1060,6 +1071,7 @@
 		A6D083C11E121A1C007EA4D9 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				0F9323EA1E783E3B00B56F39 /* DoctorEntity.swift */,
 				8B2AFF081E64222C00415554 /* BookingEntity */,
 				A6F9809E1E4860660007CD63 /* Realm Object */,
 				A6D083C81E127F9F007EA4D9 /* TagEntity.swift */,
@@ -1220,6 +1232,7 @@
 				A67311D11E160F3400BCE308 /* placeholder_wide.png in Resources */,
 				0FC431721E65283D003F7F31 /* ChuaCoLichKham.png in Resources */,
 				8BD49F5D1E482D1100C98E74 /* OpenChannelListViewController.xib in Resources */,
+				0F9323E91E783DE300B56F39 /* DoctorCell.xib in Resources */,
 				0F9C46251E60084A00DCFE46 /* DichVu.png in Resources */,
 				0F9C463C1E603F4200DCFE46 /* LichSu.png in Resources */,
 				8BF1497D1E14BF9C00766F8F /* Thongbao.png in Resources */,
@@ -1399,6 +1412,7 @@
 				8BD49F301E482C1500C98E74 /* NeutralMessageTableViewCell.swift in Sources */,
 				8BD49F5F1E482D1100C98E74 /* BlockedUserListViewController.swift in Sources */,
 				A65FF1C91E13782C00A63C02 /* NotificationViewController.swift in Sources */,
+				0F9323EB1E783E3B00B56F39 /* DoctorEntity.swift in Sources */,
 				A6005BCF1E13722B00095FB7 /* NotifyTableViewCell.swift in Sources */,
 				8B3A137D1E10F454005DBC6E /* RAMBadge.swift in Sources */,
 				A68A95111E1517230067736E /* CommentEntity.swift in Sources */,
@@ -1445,6 +1459,7 @@
 				0FABDC331E61C2EC004DD98D /* CreateCvViewController.swift in Sources */,
 				0F81E4AC1E672CE800A7C18F /* BookingUserEntity.swift in Sources */,
 				8B2AFF0A1E64223A00415554 /* JobEntity.swift in Sources */,
+				0F9323E81E783DE300B56F39 /* DoctorCell.swift in Sources */,
 				8B2AFF121E642B5000415554 /* ZoneEntity.swift in Sources */,
 				0F17AB191E51BAC2008BA308 /* CateEntity.swift in Sources */,
 				8B0D35F51E56EB2D002CF784 /* BookingViewController.swift in Sources */,
@@ -1485,6 +1500,7 @@
 				A67311D41E164FC400BCE308 /* MoreCommentTableViewCell.swift in Sources */,
 				8B2AFF0E1E6425C100415554 /* ProvinceEntity.swift in Sources */,
 				8BD49EFA1E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.swift in Sources */,
+				0F9323E51E783DD300B56F39 /* ChoiceDoctorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1679,8 +1695,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e938f0a9-743b-4c71-ae2a-9b0d8ced2f5e";
-				PROVISIONING_PROFILE_SPECIFIER = "new development benh vien e";
+				PROVISIONING_PROFILE = "239183bf-b7d5-4a14-8cb8-a458fb6079df";
+				PROVISIONING_PROFILE_SPECIFIER = "new dev bve";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1700,8 +1716,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "715739d1-7b56-4fac-ae4b-2c77e0b6e826";
-				PROVISIONING_PROFILE_SPECIFIER = "new distribution benh vien e";
+				PROVISIONING_PROFILE = "fbfcfac7-ade3-4358-98ff-171e47d6a2b9";
+				PROVISIONING_PROFILE_SPECIFIER = "ad hoc distribuition bve";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};
