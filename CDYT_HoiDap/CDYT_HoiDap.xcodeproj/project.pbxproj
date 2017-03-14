@@ -1679,8 +1679,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "239183bf-b7d5-4a14-8cb8-a458fb6079df";
-				PROVISIONING_PROFILE_SPECIFIER = "new dev bve";
+				PROVISIONING_PROFILE = "e938f0a9-743b-4c71-ae2a-9b0d8ced2f5e";
+				PROVISIONING_PROFILE_SPECIFIER = "new development benh vien e";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1700,8 +1700,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fbfcfac7-ade3-4358-98ff-171e47d6a2b9";
-				PROVISIONING_PROFILE_SPECIFIER = "ad hoc distribuition bve";
+				PROVISIONING_PROFILE = "715739d1-7b56-4fac-ae4b-2c77e0b6e826";
+				PROVISIONING_PROFILE_SPECIFIER = "new distribution benh vien e";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};

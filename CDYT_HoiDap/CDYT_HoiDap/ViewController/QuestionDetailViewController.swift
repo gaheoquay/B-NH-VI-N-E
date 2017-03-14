@@ -434,8 +434,9 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
                         
                         self.feedObj.commentCount += 1
                         self.detailTbl.reloadData()
-                        
-                        self.textInputBar.textView.text = ""
+                      
+                      self.textInputBar.textView.text = ""
+                        self.textInputBar.text = ""
                         self.imgCommentDic = []
                         self.thumImgCommentDic = []
                         
