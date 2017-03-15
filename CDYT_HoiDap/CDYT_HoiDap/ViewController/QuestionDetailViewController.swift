@@ -100,7 +100,6 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
         detailTbl.addPullToRefreshHandler {
             DispatchQueue.main.async {
                 self.reloadData()
-                
             }
         }
         
@@ -1015,9 +1014,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     //MARK: CommentViewControllerDelegate
-  func reloadTable() {
-    
-  }
+  func reloadTable() {}
     func removeMainCommentFromCommentView(mainComment: MainCommentEntity) {
         if listComment.count > 0 {
             for (index,item) in listComment.enumerated() {

@@ -8,11 +8,16 @@
 
 import UIKit
 
-class ViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,KeyWordTableViewCellDelegate, QuestionTableViewCellDelegate {
+class ViewController: BaseViewController,KeyWordTableViewCellDelegate {
 
   override func viewDidLoad() {
     super.viewDidLoad()
     NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.gotoDetail(notification:)), name: NSNotification.Name.init(GO_TO_DETAIL_WHEN_TAP_NOTIFICATION), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.showNotification(notification:)), name: NSNotification.Name.init(SHOW_NOTIFICAION), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.gotoChat(notification:)), name: NSNotification.Name.init(GO_TO_CHAT), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(setUpBadge), name: Notification.Name.init(UPDATE_BADGE), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(gotoSchedule), name: Notification.Name.init(GO_TO_SCHEDULE), object: nil)
 
     setupUI()
     initTableView()
@@ -38,8 +43,6 @@ class ViewController: BaseViewController,UITableViewDelegate,UITableViewDataSour
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-  
-  
   
   func setupUI() {
     searchView.layer.cornerRadius = 4
@@ -147,84 +150,7 @@ class ViewController: BaseViewController,UITableViewDelegate,UITableViewDataSour
     }
 
   }
-  
-//MARK: UIViewController,UITableViewDelegate
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return 2
-  }
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if section == 0 {
-      return 1
-    }
-    return listFedds.count
-  }
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if indexPath.section == 0 {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "KeyWordTableViewCell") as! KeyWordTableViewCell
-      cell.listTag = listHotTag
-      cell.delegate = self
-      cell.clvKeyword.reloadData()
-      return cell
-    }else{
-      let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
-        cell.delegate = self
-        cell.indexPath = indexPath
-        if listFedds.count > 0 {
-            cell.feedEntity = listFedds[indexPath.row]
-            cell.isPrivate = listFedds[indexPath.row].postEntity.isPrivate
-        }
-        cell.setData(isHiddenCateAndDoctor: false)
-      
-    return cell
-    }
-  }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(listFedds[indexPath.row].firstCommentedDoctor.fullname)
-        print(listFedds[indexPath.row].firstCommentTime)
-        print(indexPath.row)
-    }
 
-    
-    func selectSpecialist(indexPath: IndexPath) {
-        
-    }
-    func selectDoctor(indexPath: IndexPath) {
-        
-    }
-    
-    func approVal(indexPath: IndexPath) {
-        
-    }
-    
-    //MARK: QuestionTableViewCellDelegate
-    func showQuestionDetail(indexPath: IndexPath) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
-        vc.feedObj = listFedds[indexPath.row]
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
-//        if user.id == Until.getCurrentId() {
-//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-//            let viewController = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
-//            self.navigationController?.pushViewController(viewController, animated: true)
-//        }else{
-            let storyboard = UIStoryboard.init(name: "User", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
-            viewController.user = user
-            self.navigationController?.pushViewController(viewController, animated: true)
-//        }
-    }
-    
-    func gotoUserProfileFromQuestionDoctor(doctor: AuthorEntity) {
-        let storyboard = UIStoryboard.init(name: "User", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
-        viewController.user = doctor
-        self.navigationController?.pushViewController(viewController, animated: true)
-
-    }
-     
 //    MARK: Action
   
   @IBAction func gotoSearch(_ sender: Any) {
@@ -258,5 +184,159 @@ class ViewController: BaseViewController,UITableViewDelegate,UITableViewDataSour
   var listFedds = [FeedsEntity]()
   var listHotTag = [HotTagEntity]()
   var page = 1
+}
+
+//MARK: QuestionTableViewCellDelegate
+extension ViewController : QuestionTableViewCellDelegate {
+  func showQuestionDetail(indexPath: IndexPath) {
+    let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
+    vc.feedObj = listFedds[indexPath.row]
+    self.navigationController?.pushViewController(vc, animated: true)
+  }
+  
+  func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
+    let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+    let viewController = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
+    viewController.user = user
+    self.navigationController?.pushViewController(viewController, animated: true)
+  }
+  
+  func gotoUserProfileFromQuestionDoctor(doctor: AuthorEntity) {
+    let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+    let viewController = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
+    viewController.user = doctor
+    self.navigationController?.pushViewController(viewController, animated: true)
+    
+  }
+  func selectSpecialist(indexPath: IndexPath) {}
+  func selectDoctor(indexPath: IndexPath) {}
+  
+  func approVal(indexPath: IndexPath) {}
+}
+//MARK: UIViewController,UITableViewDelegate
+extension ViewController : UITableViewDelegate,UITableViewDataSource {
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return 2
+  }
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if section == 0 {
+      return 1
+    }
+    return listFedds.count
+  }
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    if indexPath.section == 0 {
+      let cell = tableView.dequeueReusableCell(withIdentifier: "KeyWordTableViewCell") as! KeyWordTableViewCell
+      cell.listTag = listHotTag
+      cell.delegate = self
+      cell.clvKeyword.reloadData()
+      return cell
+    }else{
+      let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
+      cell.delegate = self
+      cell.indexPath = indexPath
+      if listFedds.count > 0 {
+        cell.feedEntity = listFedds[indexPath.row]
+        cell.isPrivate = listFedds[indexPath.row].postEntity.isPrivate
+      }
+      cell.setData(isHiddenCateAndDoctor: false)
+      
+      return cell
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    print(listFedds[indexPath.row].firstCommentedDoctor.fullname)
+    print(listFedds[indexPath.row].firstCommentTime)
+    print(indexPath.row)
+  }
+
+}
+
+extension ViewController {
+  func setUpBadge(){
+    let tabbar = self.tabBarController as? RAMAnimatedTabBarController
+    if unreadMessageCount + notificationCount != 0 {
+      tabbar?.tabBar.items![4].badgeValue = "\(unreadMessageCount + notificationCount)"
+    }else{
+      tabbar?.tabBar.items![4].badgeValue = nil
+    }
+  }
+  
+  func gotoDetail(notification:Notification){
+    let dicData = notification.object as! NSDictionary
+    navigationNotificaton(dicData: dicData)
+  }
+  func showNotification(notification:Notification){
+    let userInfo = notification.object as! NSDictionary
+    if let apsInfo = userInfo["aps"] as? NSDictionary{
+      let dicData = apsInfo["data"] as! NSDictionary
+      let alert = apsInfo["alert"] as! String
+      RNNotificationView.show(withImage: UIImage(named: "Logo.png"),
+                              title: "BỆNH VIỆN E",
+                              message: alert,
+                              duration: 2,
+                              iconSize: CGSize(width: 22, height: 22), // Optional setup
+        onTap: {
+          self.navigationNotificaton(dicData: dicData)
+      })
+      
+    }
+  }
+  
+  func navigationNotificaton(dicData:NSDictionary){
+    let type = dicData["Type"] as! String
+    let parentId = dicData["ParentId"] as! String
+    let notificationId = dicData["Id"] as! String
+    let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+    if type == "1" || type == "3" || type == "6" {
+      let viewController = storyBoard.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
+      viewController.questionID = parentId
+      viewController.notificationId = notificationId
+      self.navigationController?.pushViewController(viewController, animated: true)
+    }else{
+      let viewController = storyBoard.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController
+      viewController.commentId = parentId
+      viewController.notificationId = notificationId
+      self.navigationController?.pushViewController(viewController, animated: true)
+    }
+  }
+  
+  func gotoChat(notification:Notification){
+    let dicData = notification.object as! NSDictionary
+    var userListQuery = SBDMain.createAllUserListQuery()
+    userListQuery = SBDMain.createUserListQuery(withUserIds: [dicData["id"] as! String])
+    userListQuery?.limit = 25
+    if userListQuery?.hasNext == false {
+      return
+    }
+    
+    userListQuery?.loadNextPage(completionHandler: { (users, error) in
+      if error != nil {
+        return
+      }
+      var selectedUser = [SBDUser]()
+      for user in users! as [SBDUser] {
+        selectedUser.append(user)
+      }
+      SBDGroupChannel.createChannel(with: selectedUser, isDistinct: true) { (channel, error) in
+        if error != nil {
+          return
+        }
+        DispatchQueue.main.async {
+          let vc = GroupChannelChattingViewController()
+          vc.groupChannel = channel
+          self.present(vc, animated: false, completion: nil)
+        }
+      }
+    })
+  }
+  
+  func gotoSchedule(){
+    let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+    let viewController = storyBoard.instantiateViewController(withIdentifier: "ExamScheduleViewController") as! ExamScheduleViewController
+    self.navigationController?.pushViewController(viewController, animated: true)
+  }
+
 }
 

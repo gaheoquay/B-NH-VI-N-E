@@ -846,7 +846,6 @@
 		8B3A13841E10FCB6005DBC6E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				0F9323E41E783DD300B56F39 /* ChoiceDoctorViewController.swift */,
 				8BD49ED31E48215500C98E74 /* Chat */,
 				8B3A138D1E111FA5005DBC6E /* Cell */,
 				A6E4C2F61E11022B00C2C871 /* User */,
@@ -876,6 +875,7 @@
 				0F9AD59B1E63CE0F00981D7B /* SearchFileViewController.swift */,
 				0FC4316F1E65185B003F7F31 /* DetailsFileUsersViewController.swift */,
 				0FD3D7341E6E65CB0083A0BF /* DetailsHistoryUserViewController.swift */,
+				0F9323E41E783DD300B56F39 /* ChoiceDoctorViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1695,8 +1695,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "239183bf-b7d5-4a14-8cb8-a458fb6079df";
-				PROVISIONING_PROFILE_SPECIFIER = "new dev bve";
+				PROVISIONING_PROFILE = "995f14ba-46c4-453f-baab-7671036a14d8";
+				PROVISIONING_PROFILE_SPECIFIER = "new development benh vien e";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1716,8 +1716,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fbfcfac7-ade3-4358-98ff-171e47d6a2b9";
-				PROVISIONING_PROFILE_SPECIFIER = "ad hoc distribuition bve";
+				PROVISIONING_PROFILE = "715739d1-7b56-4fac-ae4b-2c77e0b6e826";
+				PROVISIONING_PROFILE_SPECIFIER = "new distribution benh vien e";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};

@@ -538,9 +538,7 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     //MARK: CommentTableViewCellDelegate
-  func markOrUnmarkSolution(mainComment: MainCommentEntity) {
-    
-  }
+  func markOrUnmarkSolution(mainComment: MainCommentEntity) {}
     func replyCommentAction(mainComment : MainCommentEntity){
         textInputBar.textView.becomeFirstResponder()
     }

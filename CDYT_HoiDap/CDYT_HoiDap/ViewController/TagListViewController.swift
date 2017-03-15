@@ -37,13 +37,11 @@ class TagListViewController: BaseViewController, UITableViewDataSource, UITableV
     tagTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     tagTableView.addPullToRefreshHandler {
       DispatchQueue.main.async {
-//        self.tagTableView.pullToRefreshView?.startAnimating()
         self.reloadData()
       }
     }
     tagTableView.addInfiniteScrollingWithHandler {
       DispatchQueue.main.async {
-//        self.tagTableView.infiniteScrollingView?.startAnimating()
         self.loadMore()
       }
     }

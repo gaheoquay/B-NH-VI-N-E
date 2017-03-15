@@ -127,12 +127,11 @@ class NotificationViewController: BaseViewController, UITableViewDelegate, UITab
   func reloadTable() {
     notifyTableView.reloadData()
   }
-  func removeSubCommentFromCommentView(subComment: SubCommentEntity) {
-    
-  }
-  func removeMainCommentFromCommentView(mainComment: MainCommentEntity) {
-    
-  }
+  //  MARK: CommentViewControllerDelegate
+  func removeSubCommentFromCommentView(subComment: SubCommentEntity) {}
+  
+  func removeMainCommentFromCommentView(mainComment: MainCommentEntity) {}
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.

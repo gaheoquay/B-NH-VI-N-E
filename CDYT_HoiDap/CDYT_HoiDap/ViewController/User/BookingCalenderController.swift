@@ -31,7 +31,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     var checkIn = CheckInResultEntity()
     //endtest
     
-    var listBooking = BookingUserEntity()
+    var userBooking = BookingUserEntity()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -50,7 +50,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
     self.serviceEntity = ServiceEntity()
     self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
-    self.listBooking = BookingUserEntity()
+    self.userBooking = BookingUserEntity()
   }
   
   
@@ -62,7 +62,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
     self.serviceEntity = ServiceEntity()
     self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
-    self.listBooking = BookingUserEntity()
+    self.userBooking = BookingUserEntity()
   }
   @IBAction func tapService(_ sender: Any) {
     delegate?.gotoService()
@@ -75,11 +75,6 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     let fourty_today = currentDate.dateAt(hours: 16, minutes: 0, days : 0)
     let currentDateString = String().convertDatetoString(date: self.currentDate, dateFormat: "dd/MM/YYYY")
     let dateBookingString = String().convertTimeStampWithDateFormat(timeStamp: self.dateBook, dateFormat: "dd/MM/YYYY")
-    
-    let sonDay = String().convertTimeStampWithDateFormat(timeStamp: dateBook, dateFormat: "EEEE")
-    let isSunday = "Sunday"
-    let isSundays = "Chủ Nhật"
-    
     if currentDateString == dateBookingString  {
         if currentDate > fourty_today {
             UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không thể đặt lịch vào ngày này! Bệnh viện ngưng đặt lịch khám sau 16h hàng ngày và chủ nhật.", cancelBtnTitle: "Đóng")
@@ -87,19 +82,18 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
             isvalidCheck()
         }
     }else {
-        if sonDay == isSunday || sonDay == isSundays {
+      let date = Date(timeIntervalSince1970: dateBook)
+      let myCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+      let myComponents = myCalendar.components(.weekday, from: date)
+      let bookingDay = myComponents.weekday
+        if bookingDay == 1 {
             UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không thể đặt lịch vào ngày này! Bệnh viện ngưng đặt lịch khám sau 16h hàng ngày và chủ nhật.", cancelBtnTitle: "Đóng")
         }else {
             isvalidCheck()
         }
 
     }
-    
-    
-    
   }
-  
-  
   func registerNotification(){
     NotificationCenter.default.addObserver(self, selector: #selector(setDataListService(notification:)), name: NSNotification.Name(rawValue: GET_LIST_SERVICE), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(setDataFileUser(notification:)), name: NSNotification.Name(rawValue: GET_LIST_FILE_USER), object: nil)
@@ -115,7 +109,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
   func setDataFileUser(notification: Notification){
     if notification.object != nil {
       let fileUser = notification.object as! BookingUserEntity
-      listBooking = fileUser
+      userBooking = fileUser
       btnBrifUser.setTitle(fileUser.profile.patientName, for: .normal)
     }
   }
@@ -124,7 +118,6 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     print("calendar did select date \(String().convertDatetoString(date: date, dateFormat: "dd/MM/YYYY :EEEE"))")
     dateBook = date.timeIntervalSince1970
     
-    print(dateBook)
     if monthPosition == .previous || monthPosition == .next {
       calendar.setCurrentPage(date, animated: true)
     }
@@ -138,7 +131,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     let param : [String : Any] = [
       "Auth": Until.getAuthKey(),
       "RequestedUserId" : Until.getCurrentId(),
-      "ProfileId" : listBooking.profile.id,
+      "ProfileId" : userBooking.profile.id,
       "ServiceId" : serviceEntity.serviceId,
       "BookingDate" : String(format:"%.0f",dateBook * 1000)
     ]
@@ -172,7 +165,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
             self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
             self.serviceEntity = ServiceEntity()
             self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
-            self.listBooking = BookingUserEntity()
+            self.userBooking = BookingUserEntity()
 
             
         }else{
@@ -191,23 +184,23 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     param["Auth"] = Until.getAuthKey()
     param["BookingId"] = booKingEntity.id
     param["TimeCheckIn"] = String(format: "%.0f", dateBook*1000)
-    param["CountryId"] = listBooking.profile.countryId
-    param["ProvinceId"] = listBooking.profile.provinceId
-    param["DictrictId"] =  listBooking.profile.dictrictId
-    param["ZoneId"] = listBooking.profile.zoneId
+    param["CountryId"] = userBooking.profile.countryId
+    param["ProvinceId"] = userBooking.profile.provinceId
+    param["DictrictId"] =  userBooking.profile.dictrictId
+    param["ZoneId"] = userBooking.profile.zoneId
     param["ServiceId"] = serviceEntity.serviceId
-    param["Age"] = listBooking.profile.age
-    param["PatientName"] = listBooking.profile.patientName
-    param["GenderId"] = listBooking.profile.gender == 1 ? "M":"F"
-    param["Birthday"] = String(format: "%.0f",listBooking.profile.dOB*1000)
-    param["PhoneNumber"] = listBooking.profile.phoneNumber
-    param["Address"] = listBooking.profile.address
-    param["Cmt"] = listBooking.profile.passportId
-    param["GuardianName"] = listBooking.profile.bailsmanName
-    param["CmtGuardian"] = listBooking.profile.bailsmanPassportId
-    param["JobId"] = listBooking.profile.jobId
+    param["Age"] = userBooking.profile.age
+    param["PatientName"] = userBooking.profile.patientName
+    param["GenderId"] = userBooking.profile.gender == 1 ? "M":"F"
+    param["Birthday"] = String(format: "%.0f",userBooking.profile.dOB*1000)
+    param["PhoneNumber"] = userBooking.profile.phoneNumber
+    param["Address"] = userBooking.profile.address
+    param["Cmt"] = userBooking.profile.passportId
+    param["GuardianName"] = userBooking.profile.bailsmanName
+    param["CmtGuardian"] = userBooking.profile.bailsmanPassportId
+    param["JobId"] = userBooking.profile.jobId
     param["DepartmentId"] = String(format: "%0.f", serviceEntity.roomId)
-    param["PhoneGuardian"] = listBooking.profile.bailsmanPhoneNumber
+    param["PhoneGuardian"] = userBooking.profile.bailsmanPhoneNumber
     print(param)
     Until.showLoading()
     Alamofire.request(CHECK_IN, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -228,7 +221,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
   func isvalidCheck(){
     if serviceEntity.name == "" {
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn dịch vụ", cancelBtnTitle: "Đóng")
-    }else if listBooking.profile.patientName  == "" {
+    }else if userBooking.profile.patientName  == "" {
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn hồ sơ", cancelBtnTitle: "Đóng")
     }else if dateBook == 0 {
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn ngày tháng", cancelBtnTitle: "Đóng")
