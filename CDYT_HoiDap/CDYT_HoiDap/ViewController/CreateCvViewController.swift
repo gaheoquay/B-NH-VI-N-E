@@ -516,9 +516,9 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         if name.isEmpty || timeStampDateOfBirt == 0 || passPortId.isEmpty || phone.isEmpty || selectedJob == nil || selectedCountry == nil || selectedProvince == nil || selectedDistrict == nil || selectedZone == nil {
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nhập đầy đủ thông tin", cancelBtnTitle: "Đóng")
       return
-    }
-    else if datePicker > dateNow {
+    }else if datePicker > dateNow {
             UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Ngày sinh không được lớn hơn ngày hiện tại", cancelBtnTitle: "Đóng")
+          return
     }
     let userEntity = FileUserEntity()
     userEntity.patientName = txtName.text!
