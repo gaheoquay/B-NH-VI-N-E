@@ -322,7 +322,7 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     ]
     
     //    Until.showLoading()
-    Alamofire.request(GET_QUESTION_FOLLOWED, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+    Alamofire.request(GET_QUESTION_FOLLOW_BY_USER, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
         if status == 200{
           if let result = response.result.value {

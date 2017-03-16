@@ -86,6 +86,8 @@ class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableV
             "Page": page,
             "Size": 10,
             "UserId": user.id,
+            "RequestedUserId" : Until.getCurrentId()
+
         ]
         
         Alamofire.request(GET_QUESTION_FOLLOW_BY_USER, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
