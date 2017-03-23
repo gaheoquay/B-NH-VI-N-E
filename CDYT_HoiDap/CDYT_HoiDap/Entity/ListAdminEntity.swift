@@ -22,6 +22,7 @@ class ListAdminEntity: NSObject {
     var isBlocked = false
     var phone = ""
     var adress = ""
+    var gender = 0
     var dob: Double = 0
     
     override init() {
@@ -29,6 +30,9 @@ class ListAdminEntity: NSObject {
     }
     
     init(dictionary: NSDictionary) {
+        if let value = dictionary["Gender"] as? Int {
+            gender = value
+        }
         if let value = dictionary["Id"] as? String {
             id = value
         }

@@ -96,6 +96,12 @@ class AdminUpdateProfileViewController: UIViewController,UIPickerViewDelegate,UI
             thumbnailUrl = admin.thumbnailAvatar
             btnDob.setTitle("\(String().convertTimeStampWithDateFormat(timeStamp: admin.dob, dateFormat: "dd/MM/YYYY"))", for: .normal)
             doB = admin.dob
+            if admin.gender == 1 {
+                btnGender.setTitle("Nam", for: .normal)
+            }else {
+                btnGender.setTitle("Nữ", for: .normal)
+            }
+
         }
         
     }
