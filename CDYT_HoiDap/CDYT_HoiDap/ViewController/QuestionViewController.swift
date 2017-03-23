@@ -176,6 +176,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
               self.listAssigned.append(entity)
             }
           }
+          self.requestListDoctor()
           self.tbQuestion.reloadData()
         }else{
           UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -210,6 +211,8 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
             }
           }
           self.tbQuestion.reloadData()
+            self.requestListDoctor()
+
           Until.hideLoading()
         }else{
           UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -271,7 +274,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
       "Status" : 0,
       "Rating" : 0,
       "UpdatedDate" : 0,
-      "CategoryId": idCate,
+      "CategoryId": entity.postEntity.categoryId,
       "IsPrivate": entity.postEntity.isPrivate,
       "IsClassified": false,
       "CreatedDate" : 0
@@ -281,7 +284,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
       "Auth": Until.getAuthKey(),
       "RequestedUserId": Until.getCurrentId(),
       "Post": post,
-      "AssignToUserId": idDoc
+      "AssignToUserId": entity.assigneeEntity.id
     ]
     Alamofire.request(GET_LASTED_POST, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
@@ -291,7 +294,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
           if self.isNotAssignedYet {
             self.listNotAssignedYet.remove(at: self.indexPathOfCell.row)
           }
-          self.tbQuestion.reloadData()
+        self.requestListDoctor()
         }else{
           UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
         }
@@ -300,7 +303,33 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
       }
     }
   }
-
+    
+  //MARK: reuqest Doctor
+    func requestListDoctor(){
+        let hotParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            ]
+        Alamofire.request(GET_LIST_DOCTOR, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    listAllDoctor.removeAll()
+                    if let result = response.result.value {
+                        let jsonData = result as! [NSDictionary]
+                        
+                        for item in jsonData {
+                            let entity = ListDoctorEntity.init(dictionary: item)
+                            listAllDoctor.append(entity)
+                        }
+                        
+                    }
+                    self.tbQuestion.reloadData()
+                }
+            }
+        }
+    }
+    
+    
+    
   //MARK: UIViewController,UITableViewDelegate
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if isFeeds {
@@ -389,10 +418,10 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     }
     
     if !entity.cateGory.id.isEmpty {
-      idCate = entity.cateGory.id
-      nameCate = entity.cateGory.name
+//      idCate = entity.cateGory.id
+//      nameCate = entity.cateGory.name
       let listDocWithCate = listAllDoctor.filter({ (doctorEntity) -> Bool in
-        doctorEntity.category.id == idCate
+        doctorEntity.category.id == entity.cateGory.id
       })
       listDoctorInCate = listDocWithCate[0].doctors
     }
@@ -468,14 +497,14 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     if pickerView == pickerViewCate {
-      idCate = listCate[row].id
-      nameCate = listCate[row].name
+//      idCate = listCate[row].id
+//      nameCate = listCate[row].name
       if isNotAssignedYet {
-        listNotAssignedYet[indexPathOfCell.row].cateGory.id = idCate
-        listNotAssignedYet[indexPathOfCell.row].cateGory.name = nameCate
+        listNotAssignedYet[indexPathOfCell.row].cateGory.id = listCate[row].id
+        listNotAssignedYet[indexPathOfCell.row].cateGory.name = listCate[row].name
       }else if isAssigned {
-        listAssigned[indexPathOfCell.row].cateGory.id = idCate
-        listAssigned[indexPathOfCell.row].cateGory.name = nameCate
+        listAssigned[indexPathOfCell.row].cateGory.id = listCate[row].id
+        listAssigned[indexPathOfCell.row].cateGory.name = listCate[row].name
         listAssigned[indexPathOfCell.row].postEntity.isClassified = false
       }
     }
@@ -487,15 +516,15 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     
     func setDataDoctor(doctor: AuthorEntity) {
         
-        idDoc = doctor.id
-        nameDoc = doctor.fullname
+//        idDoc = doctor.id
+//        nameDoc = doctor.fullname
         
         if isNotAssignedYet {
-        listNotAssignedYet[indexPathOfCell.row].assigneeEntity.id = idDoc
-        listNotAssignedYet[indexPathOfCell.row].assigneeEntity.fullname = nameDoc
+        listNotAssignedYet[indexPathOfCell.row].assigneeEntity.id = doctor.id
+        listNotAssignedYet[indexPathOfCell.row].assigneeEntity.fullname = doctor.fullname
         }else if isAssigned {
-        listAssigned[indexPathOfCell.row].assigneeEntity.id = idDoc
-        listAssigned[indexPathOfCell.row].assigneeEntity.fullname = nameDoc
+        listAssigned[indexPathOfCell.row].assigneeEntity.id = doctor.id
+        listAssigned[indexPathOfCell.row].assigneeEntity.fullname = doctor.fullname
         listAssigned[indexPathOfCell.row].postEntity.isClassified = false
         }
 
@@ -518,10 +547,10 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
       entity = listAssigned[indexPath.row]
     }
     if !entity.cateGory.id.isEmpty && !entity.assigneeEntity.id.isEmpty {
-      idCate = entity.cateGory.id
-      nameCate = entity.cateGory.name
-      idDoc = entity.assigneeEntity.id
-      nameDoc = entity.assigneeEntity.fullname
+//      idCate = entity.cateGory.id
+//      nameCate = entity.cateGory.name
+//      idDoc = entity.assigneeEntity.id
+//      nameDoc = entity.assigneeEntity.fullname
       indexPathOfCell = indexPath
       if isAssigned {
         let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có muốn duyệt lại không?", preferredStyle: UIAlertControllerStyle.alert)

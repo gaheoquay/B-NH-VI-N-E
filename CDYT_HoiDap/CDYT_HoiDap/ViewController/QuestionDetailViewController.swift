@@ -1043,6 +1043,29 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
         _ = self.navigationController?.popViewController(animated: true)
     }
     
+    func requestListDoctor(){
+        let hotParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            ]
+        Alamofire.request(GET_LIST_DOCTOR, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    listAllDoctor.removeAll()
+                    if let result = response.result.value {
+                        let jsonData = result as! [NSDictionary]
+                        
+                        for item in jsonData {
+                            let entity = ListDoctorEntity.init(dictionary: item)
+                            listAllDoctor.append(entity)
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

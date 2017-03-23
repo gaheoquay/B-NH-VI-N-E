@@ -53,7 +53,9 @@ class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableVi
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "DoctorTableViewCell") as! DoctorTableViewCell
     let entity = listAllDoctor[indexPath.section]
-    cell.setData(entity: entity.doctors[indexPath.row].doctorEntity)
+    cell.isBlock = true
+    cell.author = entity.doctors[indexPath.row].doctorEntity
+    cell.setData()
     return cell
   }
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

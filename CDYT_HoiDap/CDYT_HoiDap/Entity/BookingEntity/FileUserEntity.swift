@@ -52,7 +52,7 @@ class FileUserEntity: NSObject {
       let birthDate = Date(timeIntervalSince1970: dOB)
       let calendar : Calendar = Calendar.current
       let dateComponent = calendar.dateComponents([.year], from: birthDate)
-      age = (calendar.date(from: dateComponent)?.age)!
+      age = (calendar.date(from: dateComponent)?.age)! + 1
     }
     if let value = dictionary["PassportId"] as? String {
       passportId = value

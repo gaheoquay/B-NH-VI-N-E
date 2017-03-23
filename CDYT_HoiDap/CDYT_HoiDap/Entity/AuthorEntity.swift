@@ -30,10 +30,15 @@ class AuthorEntity: NSObject {
     var isVerified = false
     var updatedDate : Double = 0
     var createdDate : Double = 0
+    var isBlocked = false
+    var isBlock = false
     override init(){
         super.init()
     }
     init(dictionary:NSDictionary) {
+        if let value = dictionary["IsBlocked"] as? Bool {
+            isBlocked = value
+        }
         if let value = dictionary["Id"] as? String{
             id = value
         }

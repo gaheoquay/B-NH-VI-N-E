@@ -38,7 +38,7 @@ class DoctorCell: UITableViewCell {
         myAttrString.append(NSAttributedString(string: "\(entity.unanswerPostCount)", attributes: fontBold))
         lbUnAnswer.attributedText = myAttrString
         
-        let myAttrStringPost = NSMutableAttributedString(string: "Đã duyệt : ", attributes: fontRegular)
+        let myAttrStringPost = NSMutableAttributedString(string: "Đã trả lời : ", attributes: fontRegular)
         myAttrStringPost.append(NSAttributedString(string: "\(entity.answerPostCount)", attributes: fontBold))
         lbApproval.attributedText = myAttrStringPost
         

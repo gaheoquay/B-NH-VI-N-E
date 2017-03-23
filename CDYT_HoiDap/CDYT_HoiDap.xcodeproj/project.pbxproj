@@ -48,7 +48,15 @@
 		0F9C46401E60462700DCFE46 /* FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C463F1E60462700DCFE46 /* FileViewController.swift */; };
 		0F9ED83A1E5BEB38001F2FC2 /* DaDuyet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */; };
 		0F9ED83B1E5BEB38001F2FC2 /* Duyet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */; };
+		0FA535AD1E8211890004D329 /* KieuKham.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA535AC1E8211890004D329 /* KieuKham.png */; };
+		0FA535AF1E8221560004D329 /* ListAdminEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA535AE1E8221560004D329 /* ListAdminEntity.swift */; };
+		0FA535B11E82393A0004D329 /* AdminUpdateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA535B01E82393A0004D329 /* AdminUpdateProfileViewController.swift */; };
 		0FA5806A1E65D5D4001B4E3C /* CheckInResultEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA580691E65D5D4001B4E3C /* CheckInResultEntity.swift */; };
+		0FA8B1EA1E80E059000FF76B /* InsertAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA8B1E81E80E059000FF76B /* InsertAccountCell.swift */; };
+		0FA8B1EB1E80E059000FF76B /* InsertAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FA8B1E91E80E059000FF76B /* InsertAccountCell.xib */; };
+		0FA8B1EF1E80E261000FF76B /* Khoa.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA8B1EC1E80E261000FF76B /* Khoa.png */; };
+		0FA8B1F01E80E261000FF76B /* MoKhoa.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA8B1ED1E80E261000FF76B /* MoKhoa.png */; };
+		0FA8B1F11E80E261000FF76B /* Them.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA8B1EE1E80E261000FF76B /* Them.png */; };
 		0FABDC331E61C2EC004DD98D /* CreateCvViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FABDC321E61C2EC004DD98D /* CreateCvViewController.swift */; };
 		0FC431701E65185B003F7F31 /* DetailsFileUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC4316F1E65185B003F7F31 /* DetailsFileUsersViewController.swift */; };
 		0FC431721E65283D003F7F31 /* ChuaCoLichKham.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC431711E65283D003F7F31 /* ChuaCoLichKham.png */; };
@@ -308,7 +316,15 @@
 		0F9C463F1E60462700DCFE46 /* FileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileViewController.swift; sourceTree = "<group>"; };
 		0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DaDuyet_1.png; sourceTree = "<group>"; };
 		0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Duyet_1.png; sourceTree = "<group>"; };
+		0FA535AC1E8211890004D329 /* KieuKham.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KieuKham.png; sourceTree = "<group>"; };
+		0FA535AE1E8221560004D329 /* ListAdminEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListAdminEntity.swift; sourceTree = "<group>"; };
+		0FA535B01E82393A0004D329 /* AdminUpdateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminUpdateProfileViewController.swift; sourceTree = "<group>"; };
 		0FA580691E65D5D4001B4E3C /* CheckInResultEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInResultEntity.swift; sourceTree = "<group>"; };
+		0FA8B1E81E80E059000FF76B /* InsertAccountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertAccountCell.swift; sourceTree = "<group>"; };
+		0FA8B1E91E80E059000FF76B /* InsertAccountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InsertAccountCell.xib; sourceTree = "<group>"; };
+		0FA8B1EC1E80E261000FF76B /* Khoa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Khoa.png; sourceTree = "<group>"; };
+		0FA8B1ED1E80E261000FF76B /* MoKhoa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MoKhoa.png; sourceTree = "<group>"; };
+		0FA8B1EE1E80E261000FF76B /* Them.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Them.png; sourceTree = "<group>"; };
 		0FABDC321E61C2EC004DD98D /* CreateCvViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCvViewController.swift; sourceTree = "<group>"; };
 		0FC4316F1E65185B003F7F31 /* DetailsFileUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsFileUsersViewController.swift; sourceTree = "<group>"; };
 		0FC431711E65283D003F7F31 /* ChuaCoLichKham.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChuaCoLichKham.png; sourceTree = "<group>"; };
@@ -642,6 +658,10 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0FA535AC1E8211890004D329 /* KieuKham.png */,
+				0FA8B1EC1E80E261000FF76B /* Khoa.png */,
+				0FA8B1ED1E80E261000FF76B /* MoKhoa.png */,
+				0FA8B1EE1E80E261000FF76B /* Them.png */,
 				EF38340D1E66ABAD0042C2E7 /* about1.jpg */,
 				EF38340E1E66ABAD0042C2E7 /* about2.jpg */,
 				0FC431731E6534FD003F7F31 /* Ketqua.png */,
@@ -1042,6 +1062,8 @@
 				A6417E211E13B68D00BD2D75 /* SettingTableViewCell.xib */,
 				A6C463D81E25DB910046A367 /* RecentFeedTableViewCell.swift */,
 				A6C463D91E25DB910046A367 /* RecentFeedTableViewCell.xib */,
+				0FA8B1E81E80E059000FF76B /* InsertAccountCell.swift */,
+				0FA8B1E91E80E059000FF76B /* InsertAccountCell.xib */,
 			);
 			path = "User Cell";
 			sourceTree = "<group>";
@@ -1084,6 +1106,7 @@
 				A68A95141E151B490067736E /* MainCommentEntity.swift */,
 				0F17AB181E51BAC2008BA308 /* CateEntity.swift */,
 				8BC3806E1E58510E00DF154A /* ListDoctorEntity.swift */,
+				0FA535AE1E8221560004D329 /* ListAdminEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1100,6 +1123,7 @@
 				A676E7C21E2731F500DD57B2 /* ChangPassViewController.swift */,
 				A6E4C2F91E1102BA00C2C871 /* User.storyboard */,
 				A632043B1E49BB0A00B9152A /* PolicyAndRuleViewController.swift */,
+				0FA535B01E82393A0004D329 /* AdminUpdateProfileViewController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1201,6 +1225,7 @@
 				8BD49F6E1E482D1100C98E74 /* ParticipantListTableViewCell.xib in Resources */,
 				8BF149731E14BF9C00766F8F /* GiaiPhap_Mark.png in Resources */,
 				0F9C463A1E603F4200DCFE46 /* HoSoRong.png in Resources */,
+				0FA535AD1E8211890004D329 /* KieuKham.png in Resources */,
 				A6C463DD1E26493A0046A367 /* Edit.png in Resources */,
 				8BD49F6A1E482D1100C98E74 /* BlockedUserListTableViewCell.xib in Resources */,
 				8BD49F0B1E48215500C98E74 /* MemberListTableViewCell.xib in Resources */,
@@ -1211,6 +1236,7 @@
 				0F36980D1E54013C004B028D /* Ask copy.png in Resources */,
 				8BF149781E14BF9C00766F8F /* Search_Inbox.png in Resources */,
 				8BD49EF91E48215500C98E74 /* MemberListViewController.xib in Resources */,
+				0FA8B1F01E80E261000FF76B /* MoKhoa.png in Resources */,
 				0F0EFD331E627FFA0036C860 /* HoSoRong_1.png in Resources */,
 				0F9C462E1E600E3700DCFE46 /* Delete1.png in Resources */,
 				8BD49F5C1E482D1100C98E74 /* CreateOpenChannelViewController.xib in Resources */,
@@ -1269,6 +1295,7 @@
 				8BC3806D1E58481600DF154A /* SplashLogo.png in Resources */,
 				8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */,
 				8B6E19971E5EC9080078558D /* Logo.png in Resources */,
+				0FA8B1EF1E80E261000FF76B /* Khoa.png in Resources */,
 				8B3A13651E10F454005DBC6E /* tag_mark.png in Resources */,
 				0F17AB151E51A682008BA308 /* CheckList.png in Resources */,
 				0F9C463E1E603F4200DCFE46 /* Profile_1.png in Resources */,
@@ -1295,11 +1322,13 @@
 				8B3A13591E10F454005DBC6E /* Like1.png in Resources */,
 				0F9C463B1E603F4200DCFE46 /* LichKham.png in Resources */,
 				8BD49EF81E48215500C98E74 /* GroupChannelListViewController.xib in Resources */,
+				0FA8B1EB1E80E059000FF76B /* InsertAccountCell.xib in Resources */,
 				8BF1497E1E14BF9C00766F8F /* TinNhan.png in Resources */,
 				8B87CD2A1E135C7A00DA8A33 /* QuestionTableViewCell.xib in Resources */,
 				A67311CF1E1601DB00BCE308 /* comment_icon.png in Resources */,
 				8B3A13621E10F454005DBC6E /* star1.png in Resources */,
 				8B1AD45F1E1B97F000D55543 /* SearchTableViewCell.xib in Resources */,
+				0FA8B1F11E80E261000FF76B /* Them.png in Resources */,
 				A63C38DF1E120A7E00DAB016 /* DangKi3.png in Resources */,
 				8BD49F2E1E482C1500C98E74 /* IncomingUserMessageTableViewCell.xib in Resources */,
 				8B3A12E61E10F399005DBC6E /* Assets.xcassets in Resources */,
@@ -1396,6 +1425,7 @@
 				A6E4C2F81E1102A500C2C871 /* RegisterViewController.swift in Sources */,
 				8B3A13881E10FD2A005DBC6E /* UserViewController.swift in Sources */,
 				8BD49F0A1E48215500C98E74 /* MemberListTableViewCell.swift in Sources */,
+				0FA535AF1E8221560004D329 /* ListAdminEntity.swift in Sources */,
 				8B3A13901E112129005DBC6E /* KeyWordTableViewCell.swift in Sources */,
 				8BD49F081E48215500C98E74 /* GroupChannelListTableViewCell.swift in Sources */,
 				A676E7C31E2731F500DD57B2 /* ChangPassViewController.swift in Sources */,
@@ -1448,6 +1478,7 @@
 				8B3A137C1E10F454005DBC6E /* RAMAnimatedTabBarController.swift in Sources */,
 				0F765A3B1E644207001DF8ED /* FileUserEntity.swift in Sources */,
 				A6E9D88F1E1110CF00E31886 /* LoginViewController.swift in Sources */,
+				0FA8B1EA1E80E059000FF76B /* InsertAccountCell.swift in Sources */,
 				8BD49EFC1E48215500C98E74 /* GroupChannelChattingViewController.swift in Sources */,
 				8B1AD45B1E1B828500D55543 /* SearchViewController.swift in Sources */,
 				8B3A13761E10F454005DBC6E /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
@@ -1475,6 +1506,7 @@
 				8BD49F271E482C1500C98E74 /* ChattingView.swift in Sources */,
 				8B3A12DF1E10F399005DBC6E /* AppDelegate.swift in Sources */,
 				A60430FA1E233431000216FB /* SSRadioButton.swift in Sources */,
+				0FA535B11E82393A0004D329 /* AdminUpdateProfileViewController.swift in Sources */,
 				8B3A137B1E10F454005DBC6E /* RAMTransitionItemAnimations.swift in Sources */,
 				0FD3D7351E6E65CB0083A0BF /* DetailsHistoryUserViewController.swift in Sources */,
 				8B3A13741E10F454005DBC6E /* TPKeyboardAvoidingScrollView.m in Sources */,

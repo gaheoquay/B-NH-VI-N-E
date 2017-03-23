@@ -14,12 +14,14 @@ protocol BookingCalenderControllerDelegate {
     func gotoExamSchudelCheckin()
 }
 
-class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalendarDelegate {
+class BookingCalenderController: UIViewController {
   
   
+  @IBOutlet weak var btnAlanysis: UIButton!
   @IBOutlet weak var btnSendBooking: UIButton!
   @IBOutlet weak var btnService: UIButton!
   @IBOutlet weak var btnBrifUser: UIButton!
+  @IBOutlet weak var btnBookingDate: UIButton!
   
   var serviceEntity = ServiceEntity()
   var booKingEntity = BookingEntity()
@@ -41,6 +43,7 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     btnBrifUser.layer.borderWidth = 0
     btnSendBooking.layer.cornerRadius = 5
     btnSendBooking.clipsToBounds = true
+    btnBookingDate.setTitle("\(String().convertDatetoString(date: currentDate, dateFormat: "EEEE, dd/MM/YYYY "))", for: .normal)
     registerNotification()
     // Do any additional setup after loading the view.
   }
@@ -70,7 +73,22 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
   @IBAction func btnSelectFileUser(_ sender: Any) {
     delegate?.gotoFile()
   }
-  
+    
+  @IBAction func btnSelectDateBooking(_ sender: Any) {
+        self.view.endEditing(true)
+        DatePickerDialog().show(title: "Chọn ngày khám", doneButtonTitle: "Xong", cancelButtonTitle: "Hủy", datePickerMode: .date) {
+            (date) -> Void in
+            if date != nil {
+                self.btnBookingDate.setTitle("\(String().convertDatetoString(date: date as! Date, dateFormat: "EEEE, dd/MM/YYYY"))", for: .normal)
+                self.dateBook = (date?.timeIntervalSince1970)!
+            }
+        }
+    }
+    
+    @IBAction func btnAlanysis(_ sender: Any) {
+        
+    }
+     
   @IBAction func btnSendBooking(_ sender: Any) {
     let fourty_today = currentDate.dateAt(hours: 16, minutes: 0, days : 0)
     let currentDateString = String().convertDatetoString(date: self.currentDate, dateFormat: "dd/MM/YYYY")
@@ -114,18 +132,8 @@ class BookingCalenderController: UIViewController,FSCalendarDataSource,FSCalenda
     }
   }
   //MARK: SetupDate
-  func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-    print("calendar did select date \(String().convertDatetoString(date: date, dateFormat: "dd/MM/YYYY :EEEE"))")
-    dateBook = date.timeIntervalSince1970
+  
     
-    if monthPosition == .previous || monthPosition == .next {
-      calendar.setCurrentPage(date, animated: true)
-    }
-  }
-  func minimumDate(for calendar: FSCalendar) -> Date {
-    let date = Date()
-    return date
-  }
   //MARK: request Api
   func requestBoking(){
     let param : [String : Any] = [

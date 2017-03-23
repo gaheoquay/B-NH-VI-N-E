@@ -179,7 +179,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
             lbTimeAnswerDoctor.text = ""
             lbNameDoctor.isHidden = true
             lbTimeAnswerDoctor.isHidden = true
-            if users?.role == 2 {
+            if users?.role == 2 || users?.role == 3 {
                 if feedEntity.firstCommentedDoctor.id  != "" {
                     layoutBottomCreateDate.constant = 60
                     lbCreateDate.isHidden = false
