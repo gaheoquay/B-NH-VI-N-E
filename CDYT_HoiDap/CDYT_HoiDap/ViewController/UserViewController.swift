@@ -160,7 +160,8 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
       avaImg.sd_setImage(with: URL.init(string: userEntity.avatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut"))
       nicknameLbl.text = userEntity.nickname
       if userEntity.role == 1 {
-        
+        lbPage1.text = "Câu hỏi đang theo dõi"
+        lbPage2.text = "Câu hỏi đã tạo"
         layoutWidthViewFollowingQuestion.constant = UIScreen.main.bounds.width/3
       }else{
         layoutWidthViewFollowingQuestion.constant = UIScreen.main.bounds.width/2
