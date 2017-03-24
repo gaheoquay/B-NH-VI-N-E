@@ -125,7 +125,6 @@ class AdminUpdateProfileViewController: UIViewController,UIPickerViewDelegate,UI
                     if status == 200{
                         if let result = response.result.value {
                             let json = result as! [NSDictionary]
-                            print(json)
                             self.imageUrl = json[0]["ImageUrl"] as! String
                             self.thumbnailUrl = json[0]["ThumbnailUrl"] as! String
                             self.updateUserInfoToServer()
@@ -151,10 +150,12 @@ class AdminUpdateProfileViewController: UIViewController,UIPickerViewDelegate,UI
             role = author.role
             id = author.id
             nickName = author.nickname
+            genderType = author.gender
         }else {
             id = admin.id
             nickName = admin.nickName
             role = admin.role
+            genderType = admin.gender
         }
         
         user = [

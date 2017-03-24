@@ -106,11 +106,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         txtPhoneGuardian.text = infoUser.bailsmanPhoneNumber
         let dOb = infoUser.dOB
         lbDateOfYear.text = String().convertTimeStampWithDateFormat(timeStamp: dOb, dateFormat: "dd/MM/YYYY")
-        viewCmtGuardian.isHidden = false
-        viewNameGuardian.isHidden = false
-        viewPhoneGuardian.isHidden = false
-        
-        txtPhoneGuardian.isEnabled = false
+               txtPhoneGuardian.isEnabled = false
         txtPhoneNumber.isEnabled = false
         txtCmtGuardian.isEnabled = false
         txtNameGuardian.isEnabled = false
@@ -125,10 +121,19 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         txtPhoneGuardian.isEnabled = false
         tapDob.isEnabled = false
         tapGender.isEnabled = false
-        
-        
         txtCMT.isEnabled = false
         txtName.isEnabled = false
+        if infoUser.age > 6 {
+        viewCmtGuardian.isHidden = true
+        viewNameGuardian.isHidden = true
+        viewPhoneGuardian.isHidden = true
+        }else {
+        viewCmtGuardian.isHidden = false
+        viewNameGuardian.isHidden = false
+        viewPhoneGuardian.isHidden = false
+        }
+        
+        
         
     }else {
     lbTittle.text = "Tạo hồ sơ"
@@ -511,9 +516,9 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
   
   func requestCreateFileUser(){
     let name = txtName.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-    let passPortId = txtCMT.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-    let phone = txtPhoneNumber.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        if name.isEmpty || timeStampDateOfBirt == 0 || passPortId.isEmpty || phone.isEmpty || selectedJob == nil || selectedCountry == nil || selectedProvince == nil || selectedDistrict == nil || selectedZone == nil {
+//    let passPortId = txtCMT.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+//    let phone = txtPhoneNumber.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        if name.isEmpty || timeStampDateOfBirt == 0 || selectedCountry == nil || selectedProvince == nil || selectedDistrict == nil || selectedZone == nil {
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nhập đầy đủ thông tin", cancelBtnTitle: "Đóng")
       return
     }else if datePicker > dateNow {

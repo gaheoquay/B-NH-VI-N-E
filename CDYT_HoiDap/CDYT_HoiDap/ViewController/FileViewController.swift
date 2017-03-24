@@ -24,11 +24,9 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
         super.viewDidLoad()
         requestUSer()
         setupBtn()
-        
-        
                 // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -60,7 +58,11 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
         let viewcontroller = main.instantiateViewController(withIdentifier: "CreateCvViewController") as! CreateCvViewController
         viewcontroller.delegate = self
         viewcontroller.infoUser = listFileUser[indexPath.row]
-        self.navigationController?.pushViewController(viewcontroller, animated: true)
+        if ischeckDelete {
+        
+        }else {
+            self.navigationController?.pushViewController(viewcontroller, animated: true)
+        }
     }
     
     @IBAction func btnBack(_ sender: Any) {
