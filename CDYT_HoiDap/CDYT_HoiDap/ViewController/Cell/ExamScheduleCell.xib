@@ -12,11 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExamScheduleCell" rowHeight="209" id="KGk-i7-Jjw" customClass="ExamScheduleCell" customModule="CDYT_HoiDap" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="209"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExamScheduleCell" rowHeight="236" id="KGk-i7-Jjw" customClass="ExamScheduleCell" customModule="CDYT_HoiDap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="236"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="208"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="235"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile2.png" translatesAutoresizingMaskIntoConstraints="NO" id="n4P-a6-lfN">
@@ -39,7 +39,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wtx-SE-JFZ">
-                        <rect key="frame" x="202" y="91" width="110" height="28"/>
+                        <rect key="frame" x="202" y="117.5" width="110" height="28"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chi tiết" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Qn-GC-D9y">
                                 <rect key="frame" x="8" y="5.5" width="74" height="17"/>
@@ -67,7 +67,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vek-ZW-RzU">
-                        <rect key="frame" x="0.0" y="119" width="320" height="90"/>
+                        <rect key="frame" x="0.0" y="145.5" width="320" height="90"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZn-ME-jLB">
                                 <rect key="frame" x="8" y="0.0" width="304" height="1"/>
@@ -135,53 +135,55 @@
                             <constraint firstItem="B6Y-Y9-c0G" firstAttribute="bottom" secondItem="WJg-FU-ynp" secondAttribute="bottom" id="ziu-Fd-SR0"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y8L-Ut-91M">
-                        <rect key="frame" x="41" y="58" width="192" height="33"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="33" id="kDH-3e-nqk"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <state key="normal" title="Trạng thái : Chờ xác nhận khám">
-                            <color key="titleColor" red="0.67843137249999996" green="0.67843137249999996" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
-                        </state>
-                        <connections>
-                            <action selector="btnShowDeitailStatus:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="LzR-dS-52T"/>
-                        </connections>
-                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNb-ha-9Dv">
-                        <rect key="frame" x="102" y="91" width="100" height="28"/>
+                        <rect key="frame" x="102" y="117.5" width="100" height="28"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="d18-3v-Tep"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <state key="normal" title="Huỷ khám">
+                        <state key="normal" title="Huỷ dịch vụ">
                             <color key="titleColor" red="1" green="0.094410053480000006" blue="0.13706858899999999" alpha="0.96522090520000003" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
                             <action selector="btnCancelBooking:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="XpJ-bE-254"/>
                         </connections>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qp6-37-0jm">
+                        <rect key="frame" x="41" y="70" width="271" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2b-cg-d1d">
+                        <rect key="frame" x="41" y="99" width="271" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="02f-nx-J0D" firstAttribute="top" secondItem="QGu-wb-sko" secondAttribute="bottom" constant="12" id="4fa-Ku-q9S"/>
                     <constraint firstAttribute="trailing" secondItem="Vek-ZW-RzU" secondAttribute="trailing" id="CoC-Th-6G9"/>
                     <constraint firstItem="n4P-a6-lfN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Gwt-7m-DO7"/>
-                    <constraint firstItem="wtx-SE-JFZ" firstAttribute="top" secondItem="y8L-Ut-91M" secondAttribute="bottom" id="Jwh-x9-F9q"/>
                     <constraint firstItem="Vek-ZW-RzU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="KJX-FV-frB"/>
+                    <constraint firstItem="b2b-cg-d1d" firstAttribute="trailing" secondItem="Qp6-37-0jm" secondAttribute="trailing" id="Kyb-cg-fZb"/>
                     <constraint firstAttribute="trailing" secondItem="wtx-SE-JFZ" secondAttribute="trailing" constant="8" id="PLI-6O-pIG"/>
                     <constraint firstItem="gNb-ha-9Dv" firstAttribute="bottom" secondItem="wtx-SE-JFZ" secondAttribute="bottom" id="Rok-0a-qdS"/>
-                    <constraint firstAttribute="trailing" secondItem="y8L-Ut-91M" secondAttribute="trailing" constant="87" id="SUh-2o-sAY"/>
                     <constraint firstItem="wtx-SE-JFZ" firstAttribute="leading" secondItem="gNb-ha-9Dv" secondAttribute="trailing" id="Sn1-cn-YMq"/>
                     <constraint firstItem="Vek-ZW-RzU" firstAttribute="top" secondItem="wtx-SE-JFZ" secondAttribute="bottom" id="TNi-hr-EpR"/>
                     <constraint firstItem="02f-nx-J0D" firstAttribute="leading" secondItem="QGu-wb-sko" secondAttribute="leading" id="Wpq-27-Qzo"/>
-                    <constraint firstItem="y8L-Ut-91M" firstAttribute="leading" secondItem="02f-nx-J0D" secondAttribute="leading" id="XkY-kR-zWn"/>
                     <constraint firstItem="gNb-ha-9Dv" firstAttribute="top" secondItem="wtx-SE-JFZ" secondAttribute="top" id="YTh-1s-ky5"/>
                     <constraint firstItem="02f-nx-J0D" firstAttribute="trailing" secondItem="QGu-wb-sko" secondAttribute="trailing" id="ZJZ-5N-dQZ"/>
                     <constraint firstAttribute="bottom" secondItem="wtx-SE-JFZ" secondAttribute="bottom" constant="90" id="Zxi-Qx-5zM"/>
                     <constraint firstItem="QGu-wb-sko" firstAttribute="leading" secondItem="n4P-a6-lfN" secondAttribute="trailing" constant="8" id="Zzr-a3-48C"/>
-                    <constraint firstItem="y8L-Ut-91M" firstAttribute="top" secondItem="02f-nx-J0D" secondAttribute="bottom" id="dcE-OG-qlR"/>
+                    <constraint firstItem="Qp6-37-0jm" firstAttribute="top" secondItem="02f-nx-J0D" secondAttribute="bottom" constant="12" id="cnf-WX-2YW"/>
+                    <constraint firstItem="Qp6-37-0jm" firstAttribute="trailing" secondItem="02f-nx-J0D" secondAttribute="trailing" id="gwl-Pk-U39"/>
+                    <constraint firstItem="gNb-ha-9Dv" firstAttribute="top" secondItem="b2b-cg-d1d" secondAttribute="bottom" constant="1.5" id="nJS-lK-nbk"/>
                     <constraint firstAttribute="trailing" secondItem="QGu-wb-sko" secondAttribute="trailing" constant="8" id="r5C-KJ-aQX"/>
+                    <constraint firstItem="b2b-cg-d1d" firstAttribute="leading" secondItem="Qp6-37-0jm" secondAttribute="leading" id="ril-fZ-nO9"/>
                     <constraint firstItem="QGu-wb-sko" firstAttribute="centerY" secondItem="n4P-a6-lfN" secondAttribute="centerY" id="syY-bG-Fkw"/>
+                    <constraint firstItem="Qp6-37-0jm" firstAttribute="leading" secondItem="02f-nx-J0D" secondAttribute="leading" id="uM8-KZ-gKP"/>
+                    <constraint firstItem="b2b-cg-d1d" firstAttribute="top" secondItem="Qp6-37-0jm" secondAttribute="bottom" constant="12" id="vsI-l0-LHS"/>
                     <constraint firstItem="n4P-a6-lfN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="yMP-qP-BiZ"/>
                 </constraints>
             </tableViewCellContentView>
@@ -189,16 +191,18 @@
                 <outlet property="btnAccepBooking" destination="B6Y-Y9-c0G" id="HVF-pg-ffQ"/>
                 <outlet property="btnCancel" destination="gNb-ha-9Dv" id="zb2-IB-wGS"/>
                 <outlet property="btnCancelBooking" destination="gNb-ha-9Dv" id="IWk-po-G7I"/>
-                <outlet property="btnStatus" destination="y8L-Ut-91M" id="5J3-hV-oXI"/>
                 <outlet property="centerAccep" destination="Fot-fs-0yb" id="5An-Sb-zW5"/>
                 <outlet property="centerCanCel" destination="JD5-BG-JBI" id="JU6-cW-6OT"/>
+                <outlet property="imgAvatar" destination="n4P-a6-lfN" id="oOk-e6-Lgy"/>
                 <outlet property="lbCreateDate" destination="02f-nx-J0D" id="CSV-1A-dd2"/>
                 <outlet property="lbName" destination="QGu-wb-sko" id="u5F-F4-MSt"/>
+                <outlet property="lbServiceType" destination="Qp6-37-0jm" id="hKg-mM-YGv"/>
+                <outlet property="lbStatus" destination="b2b-cg-d1d" id="R8O-KM-egB"/>
                 <outlet property="marginBottomViewDetail" destination="Zxi-Qx-5zM" id="t6P-tz-ZYi"/>
                 <outlet property="viewDetails" destination="wtx-SE-JFZ" id="3jp-dH-Wn7"/>
                 <outlet property="viewShowDetail" destination="Vek-ZW-RzU" id="E2z-e8-wK8"/>
             </connections>
-            <point key="canvasLocation" x="1630" y="209.5"/>
+            <point key="canvasLocation" x="1630" y="223"/>
         </tableViewCell>
     </objects>
     <resources>

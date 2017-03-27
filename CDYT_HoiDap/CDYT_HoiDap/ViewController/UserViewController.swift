@@ -432,7 +432,6 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
                         }
                     }
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
             }else{
                 UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -451,7 +450,8 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
         if users.first?.role == 3 {
             if isFollowing {
                 return listAllDoctor.count
-            }else if isMyFeed {
+            }
+            if isMyFeed {
                 return 1
             }
             return 1
@@ -546,7 +546,8 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
                 return 0
             }
             return entity.doctors.count + 1
-        }else if isMyFeed {
+        }
+        if isMyFeed {
             return listAdmin.count + 1
         }
     }else {
@@ -584,7 +585,8 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
             if isFollowing {
                 cellSpAdmin.author = listAllDoctor[indexPath.section].doctors[indexPath.row - 1].doctorEntity
                 cellSpAdmin.setData()
-            }else if isMyFeed {
+            }
+            if isMyFeed {
                 cellSpAdmin.admin = listAdmin[indexPath.row - 1]
                 cellSpAdmin.setDataAdmin()
             }

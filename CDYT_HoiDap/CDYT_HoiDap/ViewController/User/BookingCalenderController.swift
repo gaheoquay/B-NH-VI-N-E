@@ -8,26 +8,33 @@
 
 import UIKit
 protocol BookingCalenderControllerDelegate {
-  func gotoService()
+    func gotoService(status: Int)
   func gotoFile()
     func gotoExamSchudel()
     func gotoExamSchudelCheckin()
 }
 
-class BookingCalenderController: UIViewController {
+class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,ServiceViewControllerDelegate{
   
   
+    @IBOutlet weak var viewBookingHome: UIView!
   @IBOutlet weak var btnAlanysis: UIButton!
   @IBOutlet weak var btnSendBooking: UIButton!
   @IBOutlet weak var btnService: UIButton!
   @IBOutlet weak var btnBrifUser: UIButton!
   @IBOutlet weak var btnBookingDate: UIButton!
+    @IBOutlet weak var heightViewBookingHome: NSLayoutConstraint!
+    @IBOutlet weak var txtPhoneNumber: UITextField!
+    @IBOutlet weak var txtAdress: UITextField!
+    @IBOutlet weak var txtNode: UITextField!
   
+   var popupViewController:WYPopoverController!
   var serviceEntity = ServiceEntity()
   var booKingEntity = BookingEntity()
   var dateBook: Double = Date().timeIntervalSince1970
   let currentDate = Date()
   var delegate: BookingCalenderControllerDelegate?
+    var status = 0 // 0: Benh vien , 1: TAI NHA , 2 : XN tai nha
     
     //test
     var checkIn = CheckInResultEntity()
@@ -38,14 +45,8 @@ class BookingCalenderController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     NotificationCenter.default.addObserver(self, selector: #selector(reloadBooking), name: Notification.Name.init(RELOAD_BOOKING), object: nil)
-
-    btnService.layer.borderWidth = 0
-    btnBrifUser.layer.borderWidth = 0
-    btnSendBooking.layer.cornerRadius = 5
-    btnSendBooking.clipsToBounds = true
-    btnBookingDate.setTitle("\(String().convertDatetoString(date: currentDate, dateFormat: "EEEE, dd/MM/YYYY "))", for: .normal)
-    registerNotification()
-    // Do any additional setup after loading the view.
+    setupUi()
+    
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +56,33 @@ class BookingCalenderController: UIViewController {
     self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
     self.userBooking = BookingUserEntity()
   }
+    
+    func setupUi(){
+        btnService.layer.borderWidth = 0
+        btnBrifUser.layer.borderWidth = 0
+        btnSendBooking.layer.cornerRadius = 5
+        btnSendBooking.clipsToBounds = true
+        btnBookingDate.setTitle("\(String().convertDatetoString(date: currentDate, dateFormat: "EEEE, dd/MM/YYYY "))", for: .normal)
+        registerNotification()
+        if status == 0 {
+            viewBookingHome.isHidden = true
+            heightViewBookingHome.constant = 0
+            btnAlanysis.setTitle("Khám tại viện E", for: .normal)
+        }else if status == 1{
+            self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
+            self.serviceEntity = ServiceEntity()
+            viewBookingHome.isHidden = false
+            heightViewBookingHome.constant = 370
+            btnAlanysis.setTitle("Khám tại nhà", for: .normal)
+        }else {
+            self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
+            self.serviceEntity = ServiceEntity()
+            viewBookingHome.isHidden = false
+            heightViewBookingHome.constant = 370
+            btnAlanysis.setTitle("Xét nghiệm tại nhà", for: .normal)
+        }
+
+    }
   
   
   override func didReceiveMemoryWarning() {
@@ -68,7 +96,7 @@ class BookingCalenderController: UIViewController {
     self.userBooking = BookingUserEntity()
   }
   @IBAction func tapService(_ sender: Any) {
-    delegate?.gotoService()
+    delegate?.gotoService(status: status)
   }
   @IBAction func btnSelectFileUser(_ sender: Any) {
     delegate?.gotoFile()
@@ -86,8 +114,35 @@ class BookingCalenderController: UIViewController {
     }
     
     @IBAction func btnAlanysis(_ sender: Any) {
+        if popupViewController == nil {
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let popoverVC = mainStoryboard.instantiateViewController(withIdentifier: "ServiceViewController") as! ServiceViewController
+            popoverVC.preferredContentSize = CGSize.init(width: UIScreen.main.bounds.size.width - 32, height: 220 )
+            popoverVC.isModalInPopover = false
+            popoverVC.delegate = self
+            self.popupViewController = WYPopoverController(contentViewController: popoverVC)
+            self.popupViewController.delegate = self
+            self.popupViewController.wantsDefaultContentAppearance = false;
+            self.popupViewController.presentPopover(from: CGRect.init(x: 0, y: 0, width: 0, height: 0), in: self.view, permittedArrowDirections: WYPopoverArrowDirection.none, animated: true, options: WYPopoverAnimationOptions.fadeWithScale, completion: nil)
+        }
         
     }
+    
+    func popoverControllerDidDismissPopover(_ popoverController: WYPopoverController!) {
+        if popupViewController != nil {
+            popupViewController.delegate = nil
+            popupViewController = nil
+        }
+    }
+    
+    func setIndexService(status: Int) {
+        popupViewController.dismissPopover(animated: true)
+        popupViewController.delegate = nil
+        popupViewController = nil
+        self.status = status
+        setupUi()
+    }
+
      
   @IBAction func btnSendBooking(_ sender: Any) {
     let fourty_today = currentDate.dateAt(hours: 16, minutes: 0, days : 0)

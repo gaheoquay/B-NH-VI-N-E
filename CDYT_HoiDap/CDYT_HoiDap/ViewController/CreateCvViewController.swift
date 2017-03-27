@@ -85,6 +85,8 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     // Dispose of any resources that can be recreated.
   }
   func updateUI(){
+    
+    
     if infoUser.zoneId != "" {
         txtName.text = infoUser.patientName
         genderType = infoUser.gender
@@ -97,16 +99,21 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         txtCMT.text = infoUser.passportId
         txtPhoneNumber.text = infoUser.phoneNumber
         lbJob.text = infoUser.jobName
+        lbJob.textColor = UIColor.black
         lbCountry.text = infoUser.countryName
+        lbCountry.textColor = UIColor.black
         lbProvince.text = infoUser.provinceName
+        lbProvince.textColor = UIColor.black
         lbDistric.text = infoUser.dictrictName
+        lbDistric.textColor = UIColor.black
         lbZone.text = infoUser.zoneName
+        lbZone.textColor = UIColor.black
         txtCmtGuardian.text = infoUser.bailsmanPassportId
         txtNameGuardian.text = infoUser.bailsmanName
         txtPhoneGuardian.text = infoUser.bailsmanPhoneNumber
         let dOb = infoUser.dOB
         lbDateOfYear.text = String().convertTimeStampWithDateFormat(timeStamp: dOb, dateFormat: "dd/MM/YYYY")
-               txtPhoneGuardian.isEnabled = false
+        txtPhoneGuardian.isEnabled = false
         txtPhoneNumber.isEnabled = false
         txtCmtGuardian.isEnabled = false
         txtNameGuardian.isEnabled = false
