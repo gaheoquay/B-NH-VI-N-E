@@ -15,6 +15,10 @@ class ServiceEntity: NSObject {
   var roomId : Double = 0
   var roomName = ""
   var updated : Double = 0
+  //test
+  var isCheckSelect = false
+  var isCheckShowDetail = false
+  //end test
   override init(){
     super.init()
   }

@@ -59,8 +59,23 @@ class FileCell: UITableViewCell {
         
     }
     
-    func setDataService(){
+    func setDataPackage(entity: PackagesEntity){
+        lbName.text = entity.pack.name
+        lbPrice.text = String().replaceNSnumber(doublePrice: entity.pack.pricePackage)
         imgDelete.image = UIImage(named: "Delete1.png")
+        viewGotoCreateCV.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(deleteFile)))
+    }
+    
+    func setDataService(entity: ServicesEntity){
+        lbName.text = entity.name
+        lbPrice.text = String().replaceNSnumber(doublePrice: entity.priceService)
+        imgDelete.image = UIImage(named: "Delete1.png")
+        viewGotoCreateCV.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(deleteFile)))
+    }
+    
+    func setDataDetailPackage(entity: ServicesEntity){
+        lbName.text = entity.name
+        lbPrice.text = String(entity.priceService)
     }
     
     func setListUser(){

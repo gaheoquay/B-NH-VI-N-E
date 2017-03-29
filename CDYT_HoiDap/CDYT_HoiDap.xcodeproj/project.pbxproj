@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0F09CEF01E88AA33003FD8B1 /* ServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F09CEEE1E88AA33003FD8B1 /* ServiceCell.swift */; };
 		0F09CEF11E88AA33003FD8B1 /* ServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F09CEEF1E88AA33003FD8B1 /* ServiceCell.xib */; };
+		0F09CEF51E88B1DC003FD8B1 /* SelectServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F09CEF41E88B1DC003FD8B1 /* SelectServiceViewController.swift */; };
 		0F0EFD311E62771C0036C860 /* HistoryUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0EFD301E62771C0036C860 /* HistoryUserViewController.swift */; };
 		0F0EFD331E627FFA0036C860 /* HoSoRong_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F0EFD321E627FFA0036C860 /* HoSoRong_1.png */; };
 		0F17AB151E51A682008BA308 /* CheckList.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F17AB141E51A682008BA308 /* CheckList.png */; };
@@ -18,6 +19,10 @@
 		0F36980E1E54013C004B028D /* LogoMarker.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F36980C1E54013C004B028D /* LogoMarker.png */; };
 		0F52D2891E634889006C57E2 /* FileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F52D2871E634889006C57E2 /* FileCell.swift */; };
 		0F52D28A1E634889006C57E2 /* FileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F52D2881E634889006C57E2 /* FileCell.xib */; };
+		0F54E1531E8A1AF6000AFE03 /* PackagesEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F54E1521E8A1AF6000AFE03 /* PackagesEntity.swift */; };
+		0F54E1551E8A1B10000AFE03 /* PackEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F54E1541E8A1B10000AFE03 /* PackEntity.swift */; };
+		0F54E1571E8A1B3D000AFE03 /* ServicesEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F54E1561E8A1B3D000AFE03 /* ServicesEntity.swift */; };
+		0F54E15A1E8A1B91000AFE03 /* PackServiceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F54E1591E8A1B91000AFE03 /* PackServiceEntity.swift */; };
 		0F765A3B1E644207001DF8ED /* FileUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F765A3A1E644207001DF8ED /* FileUserEntity.swift */; };
 		0F81E4AA1E66813B00A7C18F /* CheckInvoiceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4A91E66813B00A7C18F /* CheckInvoiceEntity.swift */; };
 		0F81E4AC1E672CE800A7C18F /* BookingUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4AB1E672CE800A7C18F /* BookingUserEntity.swift */; };
@@ -290,6 +295,7 @@
 /* Begin PBXFileReference section */
 		0F09CEEE1E88AA33003FD8B1 /* ServiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
 		0F09CEEF1E88AA33003FD8B1 /* ServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceCell.xib; sourceTree = "<group>"; };
+		0F09CEF41E88B1DC003FD8B1 /* SelectServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectServiceViewController.swift; sourceTree = "<group>"; };
 		0F0EFD301E62771C0036C860 /* HistoryUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryUserViewController.swift; sourceTree = "<group>"; };
 		0F0EFD321E627FFA0036C860 /* HoSoRong_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HoSoRong_1.png; sourceTree = "<group>"; };
 		0F17AB141E51A682008BA308 /* CheckList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckList.png; sourceTree = "<group>"; };
@@ -299,6 +305,10 @@
 		0F36980C1E54013C004B028D /* LogoMarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoMarker.png; sourceTree = "<group>"; };
 		0F52D2871E634889006C57E2 /* FileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCell.swift; sourceTree = "<group>"; };
 		0F52D2881E634889006C57E2 /* FileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileCell.xib; sourceTree = "<group>"; };
+		0F54E1521E8A1AF6000AFE03 /* PackagesEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackagesEntity.swift; sourceTree = "<group>"; };
+		0F54E1541E8A1B10000AFE03 /* PackEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackEntity.swift; sourceTree = "<group>"; };
+		0F54E1561E8A1B3D000AFE03 /* ServicesEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesEntity.swift; sourceTree = "<group>"; };
+		0F54E1591E8A1B91000AFE03 /* PackServiceEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackServiceEntity.swift; sourceTree = "<group>"; };
 		0F765A3A1E644207001DF8ED /* FileUserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUserEntity.swift; sourceTree = "<group>"; };
 		0F81E4A91E66813B00A7C18F /* CheckInvoiceEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInvoiceEntity.swift; sourceTree = "<group>"; };
 		0F81E4AB1E672CE800A7C18F /* BookingUserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingUserEntity.swift; sourceTree = "<group>"; };
@@ -593,6 +603,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F54E1581E8A1B4A000AFE03 /* Serivce */ = {
+			isa = PBXGroup;
+			children = (
+				0F54E1521E8A1AF6000AFE03 /* PackagesEntity.swift */,
+				0F54E1541E8A1B10000AFE03 /* PackEntity.swift */,
+				0F54E1561E8A1B3D000AFE03 /* ServicesEntity.swift */,
+				0F54E1591E8A1B91000AFE03 /* PackServiceEntity.swift */,
+			);
+			name = Serivce;
+			sourceTree = "<group>";
+		};
 		0F9C461A1E60053000DCFE46 /* Service Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -626,6 +647,7 @@
 		8B2AFF081E64222C00415554 /* BookingEntity */ = {
 			isa = PBXGroup;
 			children = (
+				0F54E1581E8A1B4A000AFE03 /* Serivce */,
 				8B2AFF091E64223A00415554 /* JobEntity.swift */,
 				8B2AFF0B1E64253200415554 /* CountryEntity.swift */,
 				8B2AFF0D1E6425C100415554 /* ProvinceEntity.swift */,
@@ -935,6 +957,7 @@
 				0FC0CBA41E876315009DA53C /* DetailHistoryAnalysisViewController.swift */,
 				0FC0CBA61E876C21009DA53C /* DetaiAnalysisViewController.swift */,
 				0F94FEE81E877F0A001884AD /* DetailAnalysisFormViewController.swift */,
+				0F09CEF41E88B1DC003FD8B1 /* SelectServiceViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1470,6 +1493,7 @@
 				8B2AFF141E642C4A00415554 /* ServiceEntity.swift in Sources */,
 				8BD49F2F1E482C1500C98E74 /* MessageDelegate.swift in Sources */,
 				A6E4C2F81E1102A500C2C871 /* RegisterViewController.swift in Sources */,
+				0F09CEF51E88B1DC003FD8B1 /* SelectServiceViewController.swift in Sources */,
 				8B3A13881E10FD2A005DBC6E /* UserViewController.swift in Sources */,
 				8BD49F0A1E48215500C98E74 /* MemberListTableViewCell.swift in Sources */,
 				0FA535AF1E8221560004D329 /* ListAdminEntity.swift in Sources */,
@@ -1533,6 +1557,7 @@
 				8B1AD45B1E1B828500D55543 /* SearchViewController.swift in Sources */,
 				0FC0CBA71E876C21009DA53C /* DetaiAnalysisViewController.swift in Sources */,
 				8B3A13761E10F454005DBC6E /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
+				0F54E1531E8A1AF6000AFE03 /* PackagesEntity.swift in Sources */,
 				8B3A13791E10F454005DBC6E /* RAMFumeAnimation.swift in Sources */,
 				8BD49F341E482C1600C98E74 /* OutgoingImageFileMessageTableViewCell.swift in Sources */,
 				8B79D0E01E5A91C80010C5C0 /* ListDoctorViewController.swift in Sources */,
@@ -1547,6 +1572,7 @@
 				8B0D35F51E56EB2D002CF784 /* BookingViewController.swift in Sources */,
 				0FA5806A1E65D5D4001B4E3C /* CheckInResultEntity.swift in Sources */,
 				8BD49F651E482D1100C98E74 /* OpenChannelChattingViewController.swift in Sources */,
+				0F54E1571E8A1B3D000AFE03 /* ServicesEntity.swift in Sources */,
 				8BD49F3C1E482C9900C98E74 /* Utils.swift in Sources */,
 				0FF753391E62F267001450B7 /* ExamScheduleViewController.swift in Sources */,
 				8B3A13861E10FD1B005DBC6E /* TagListViewController.swift in Sources */,
@@ -1575,11 +1601,13 @@
 				A68A95001E14EB540067736E /* QuestionDetailViewController.swift in Sources */,
 				8B3A13711E10F454005DBC6E /* NSData+Base64.m in Sources */,
 				8BD49F2B1E482C1500C98E74 /* IncomingImageFileMessageTableViewCell.swift in Sources */,
+				0F54E15A1E8A1B91000AFE03 /* PackServiceEntity.swift in Sources */,
 				8B3A137A1E10F454005DBC6E /* RAMRotationAnimation.swift in Sources */,
 				8BC2C30C1E2333A800B68F72 /* ForgotPasswordViewController.swift in Sources */,
 				0FE460711E8509260045DB84 /* ServiceViewController.swift in Sources */,
 				8BD49EFB1E48215500C98E74 /* CreateGroupChannelUserListViewController.swift in Sources */,
 				8B87CD2E1E13665500DA8A33 /* PostEntity.swift in Sources */,
+				0F54E1551E8A1B10000AFE03 /* PackEntity.swift in Sources */,
 				8B3A137E1E10F454005DBC6E /* RAMItemAnimationProtocol.swift in Sources */,
 				A67311D41E164FC400BCE308 /* MoreCommentTableViewCell.swift in Sources */,
 				8B2AFF0E1E6425C100415554 /* ProvinceEntity.swift in Sources */,
