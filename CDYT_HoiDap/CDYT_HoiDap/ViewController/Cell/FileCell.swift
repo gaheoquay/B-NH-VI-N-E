@@ -40,11 +40,8 @@ class FileCell: UITableViewCell {
     }
     
     func setData(entity: ServiceEntity){
-        
         let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
         let fontRegularWithColor = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor.init(netHex: 0xa0b3bc)]
-
-        
         let myAttrString = NSMutableAttributedString(string: "\(String().replaceNSnumber(doublePrice: entity.priceService))", attributes: fontBold)
         myAttrString.append(NSAttributedString(string: " đ", attributes: fontRegularWithColor))
         lbPrice.attributedText = myAttrString
@@ -53,7 +50,6 @@ class FileCell: UITableViewCell {
     }
     
     func setDataHistory(entity: BookingEntity){
-        
         viewGotoCreateCV.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(gotoDetailHistoryUser)))
         lbName.text = String().convertTimeStampWithDateFormat(timeStamp: entity.bookingDate / 1000, dateFormat: "dd/MM/YYYY")
         lbPrice.isHidden = true
@@ -61,6 +57,25 @@ class FileCell: UITableViewCell {
         heightLbPrice.constant = 0
         marginToplbName.constant = 24
         
+    }
+    
+    func setDataPackage(entity: PackagesEntity){
+        lbName.text = entity.pack.name
+        lbPrice.text = String().replaceNSnumber(doublePrice: entity.pack.pricePackage)
+        imgDelete.image = UIImage(named: "Delete1.png")
+        viewGotoCreateCV.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(deleteFile)))
+    }
+    
+    func setDataService(entity: ServicesEntity){
+        lbName.text = entity.name
+        lbPrice.text = String().replaceNSnumber(doublePrice: entity.priceService)
+        imgDelete.image = UIImage(named: "Delete1.png")
+        viewGotoCreateCV.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(deleteFile)))
+    }
+    
+    func setDataDetailPackage(entity: ServicesEntity){
+        lbName.text = entity.name
+        lbPrice.text = String(entity.priceService)
     }
     
     func setListUser(){

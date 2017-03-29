@@ -122,21 +122,25 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
     self.view.layoutIfNeeded()
   }
   //MARK: Delegate
-  func gotoService() {
-    if popupViewController == nil {
-      let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-      let popoverVC = mainStoryboard.instantiateViewController(withIdentifier: "ListServiceViewController") as! ListServiceViewController
-      popoverVC.preferredContentSize = CGSize.init(width: UIScreen.main.bounds.size.width - 32, height: UIScreen.main.bounds.size.height - 120 )
-      popoverVC.isModalInPopover = false
-      popoverVC.listService = self.listService
-      popoverVC.delegate = self
-      self.popupViewController = WYPopoverController(contentViewController: popoverVC)
-      self.popupViewController.delegate = self
-      self.popupViewController.wantsDefaultContentAppearance = false;
-      self.popupViewController.presentPopover(from: CGRect.init(x: 0, y: 0, width: 0, height: 0), in: self.view, permittedArrowDirections: WYPopoverArrowDirection.none, animated: true, options: WYPopoverAnimationOptions.fadeWithScale, completion: nil)
-      
+  func gotoService(status: Int) {
+    if status == 0 {
+        if popupViewController == nil {
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let popoverVC = mainStoryboard.instantiateViewController(withIdentifier: "ListServiceViewController") as! ListServiceViewController
+            popoverVC.preferredContentSize = CGSize.init(width: UIScreen.main.bounds.size.width - 32, height: UIScreen.main.bounds.size.height - 120 )
+            popoverVC.isModalInPopover = false
+            popoverVC.listService = self.listService
+            popoverVC.delegate = self
+            self.popupViewController = WYPopoverController(contentViewController: popoverVC)
+            self.popupViewController.delegate = self
+            self.popupViewController.wantsDefaultContentAppearance = false;
+            self.popupViewController.presentPopover(from: CGRect.init(x: 0, y: 0, width: 0, height: 0), in: self.view, permittedArrowDirections: WYPopoverArrowDirection.none, animated: true, options: WYPopoverAnimationOptions.fadeWithScale, completion: nil)
+            
+        }
+    }else {
+           let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "ExamInHomeViewController") as! ExamInHomeViewController
+            self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
-    
   }
   func popoverControllerDidDismissPopover(_ popoverController: WYPopoverController!) {
     if popupViewController != nil {
@@ -187,7 +191,7 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
   }
   
   func gotoExamSchudel() {
-    let alert = UIAlertController(title: "Thông Báo", message: "Gửi lịch đặt khám thành công . Bạn cần xác nhận lại khi đến ngày đặt", preferredStyle: .alert)
+    let alert = UIAlertController(title: "Thông Báo", message: "Gửi lịch đặt khám thành công. Bạn cần xác nhận lại khi đến ngày đặt", preferredStyle: .alert)
     let arletAction = UIAlertAction(title: "Xem", style: .cancel) { (UIAlertAction) in
       let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "ExamScheduleViewController") as! ExamScheduleViewController
       viewcontroller.listService = self.listService

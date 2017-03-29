@@ -33,11 +33,22 @@ class NotifyTableViewCell: UITableViewCell {
     }else{
       viewBound.backgroundColor = UIColor.init(netHex: 0xc7eca1)
     }
-    avaImg.sd_setImage(with: URL.init(string: (entity.linkedUser?.avatarUrl)!), placeholderImage: #imageLiteral(resourceName: "AvaDefaut.png"))
     let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor().hexStringToUIColor(hex: "4A4A4A")]
     let fontRegular = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor().hexStringToUIColor(hex: "4A4A4A")]
     let fontTitle = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor().hexStringToUIColor(hex: "01a7fa")]
-    let myAttrString = NSMutableAttributedString(string: (entity.linkedUser?.nickname)!, attributes: fontBold)
+    var myAttrString = NSMutableAttributedString()
+    if entity.content == "đã chọn giải pháp cho câu hỏi" {
+      if entity.isPrivatePost {
+        myAttrString = NSMutableAttributedString(string: "Ẩn danh", attributes: fontBold)
+        avaImg.image = #imageLiteral(resourceName: "AvaDefaut.png")
+      }else{
+        myAttrString = NSMutableAttributedString(string: (entity.linkedUser?.nickname)!, attributes: fontBold)
+        avaImg.sd_setImage(with: URL.init(string: (entity.linkedUser?.avatarUrl)!), placeholderImage: #imageLiteral(resourceName: "AvaDefaut.png"))
+      }
+    }else{
+      myAttrString = NSMutableAttributedString(string: (entity.linkedUser?.nickname)!, attributes: fontBold)
+      avaImg.sd_setImage(with: URL.init(string: (entity.linkedUser?.avatarUrl)!), placeholderImage: #imageLiteral(resourceName: "AvaDefaut.png"))
+    }
     myAttrString.append(NSAttributedString(string: " \(entity.content) ", attributes: fontRegular))
     myAttrString.append(NSAttributedString.init(string: entity.postTitle, attributes: fontTitle))
     titleLbl.attributedText = myAttrString

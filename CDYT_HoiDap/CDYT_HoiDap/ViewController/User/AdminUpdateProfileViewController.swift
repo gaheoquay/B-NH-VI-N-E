@@ -205,7 +205,7 @@ class AdminUpdateProfileViewController: UIViewController,UIPickerViewDelegate,UI
                         }
                     }
                     let alert = UIAlertController.init(title: "Thông báo", message: "Cập nhật thông tin tài khoản thành công", preferredStyle: UIAlertControllerStyle.alert)
-                    let actionOk = UIAlertAction.init(title: "Đóng", style: UIAlertActionStyle.destructive, handler: { (UIAlertAction) in
+                    let actionOk = UIAlertAction.init(title: "Đóng", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
                         self.delegate?.reloadDataUpdateProfile(author: self.author, admin: self.admin)
                         _ = self.navigationController?.popViewController(animated: true)
                     })

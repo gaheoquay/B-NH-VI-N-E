@@ -70,8 +70,8 @@ class SettingViewController: BaseViewController, MFMailComposeViewControllerDele
     
     @IBAction func feedbackTapAction(_ sender: Any) {
         if MFMailComposeViewController.canSendMail() {
-            let emailTitle = "Góp ý ứng dụng Hỏi đáp Y Tế"
-            let toRecipents = ["isorasoftvn@gmail.com"]
+            let emailTitle = "Góp ý ứng dụng Bệnh Viện E"
+            let toRecipents = ["bvetuvanonline@gmail.com"]
             let mc: MFMailComposeViewController = MFMailComposeViewController()
             mc.setSubject(emailTitle)
             mc.setToRecipients(toRecipents)

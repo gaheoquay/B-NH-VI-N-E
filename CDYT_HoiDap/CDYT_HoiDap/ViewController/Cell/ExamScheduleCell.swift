@@ -19,14 +19,15 @@ class ExamScheduleCell: UITableViewCell {
     @IBOutlet weak var lbCreateDate: UILabel!
     @IBOutlet weak var viewDetails: UIView!
     @IBOutlet weak var viewShowDetail: UIView!
-    @IBOutlet weak var heightViewDetail: NSLayoutConstraint!
     @IBOutlet weak var marginBottomViewDetail: NSLayoutConstraint!
     @IBOutlet weak var btnCancelBooking: UIButton!
     @IBOutlet weak var btnAccepBooking: UIButton!
     @IBOutlet weak var centerCanCel: NSLayoutConstraint!
     @IBOutlet weak var centerAccep: NSLayoutConstraint!
-    @IBOutlet weak var btnStatus: UIButton!
     @IBOutlet weak var btnCancel: UIButton!
+    @IBOutlet weak var lbServiceType: UILabel!
+    @IBOutlet weak var lbStatus: UILabel!
+    @IBOutlet weak var imgAvatar: UIImageView!
 
     
     var delegate: ExamScheduleCellDelegate?
@@ -54,6 +55,15 @@ class ExamScheduleCell: UITableViewCell {
     let curentDate = Date()
     let stringCurentDate = String().convertDatetoString(date: curentDate, dateFormat: "dd/MM/YYYY")
     let stringBookingDate = String().convertTimeStampWithDateFormat(timeStamp: userEntity.booking.bookingDate / 1000, dateFormat: "dd/MM/YYYY")
+    let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
+    let fontRegular = [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
+    let fontRegularWithColor = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor.init(netHex: 0xa0b3bc)]
+    
+    let myAttrStringSv = NSMutableAttributedString(string: "Kiểu dịch vụ: ", attributes: fontRegular)
+    myAttrStringSv.append(NSMutableAttributedString(string: "Khám tại viện E", attributes: fontBold))
+    lbServiceType.attributedText = myAttrStringSv
+    imgAvatar.image = UIImage(named: "KhamTaiVien.png")
+    
     
     if userEntity.booking.status == 2 || userEntity.booking.status == 3 {
         viewShowDetail.isHidden = true
@@ -74,35 +84,31 @@ class ExamScheduleCell: UITableViewCell {
       lbName.text = userEntity.profile.patientName
     
         let creteDate = String().convertTimeStampWithDateFormat(timeStamp: userEntity.booking.bookingDate/1000, dateFormat: "dd/MM/YYYY")
-        let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
-        let fontRegular = [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
-      let fontRegularWithColor = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor.init(netHex: 0xa0b3bc)]
+    
 
-        let myAttrString = NSMutableAttributedString(string: "Ngày khám : ", attributes: fontRegular)
+        let myAttrString = NSMutableAttributedString(string: "Ngày khám: ", attributes: fontRegular)
         myAttrString.append(NSAttributedString(string: "\(creteDate)", attributes: fontBold))
         lbCreateDate.attributedText = myAttrString
 
 
       
         if userEntity.booking.status == 0 {
-        let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontRegular)
+        let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
             myAttrString.append(NSMutableAttributedString(string: "Chờ xác nhận khám", attributes: fontRegularWithColor))
-            btnStatus.setTitle(myAttrString.string, for: .normal)
-            
-            
+            lbStatus.attributedText = myAttrString
         }else if userEntity.booking.status == 1 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontBold)
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
             myAttrString.append(NSMutableAttributedString(string: "Chờ xử lý", attributes: fontRegularWithColor))
-            btnStatus.setTitle(myAttrString.string, for: .normal)
+            lbStatus.attributedText = myAttrString
         }else if userEntity.booking.status == 2 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontBold)
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
             myAttrString.append(NSMutableAttributedString(string: "Đã có số khám", attributes: fontRegularWithColor))
-            btnStatus.setTitle(myAttrString.string, for: .normal)
+            lbStatus.attributedText = myAttrString
         }
         else if userEntity.booking.status == 3 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái : ", attributes: fontBold)
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
             myAttrString.append(NSMutableAttributedString(string: "Đã thanh toán", attributes: fontRegularWithColor))
-            btnStatus.setTitle(myAttrString.string, for: .normal)
+            lbStatus.attributedText = myAttrString
         }
     
         contentView.layoutIfNeeded()

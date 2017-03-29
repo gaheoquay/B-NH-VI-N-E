@@ -451,7 +451,8 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
         if users.first?.role == 3 {
             if isFollowing {
                 return listAllDoctor.count
-            }else if isMyFeed {
+            }
+            if isMyFeed {
                 return 1
             }
             return 1
@@ -546,7 +547,8 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
                 return 0
             }
             return entity.doctors.count + 1
-        }else if isMyFeed {
+        }
+        if isMyFeed {
             return listAdmin.count + 1
         }
     }else {
@@ -584,7 +586,8 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
             if isFollowing {
                 cellSpAdmin.author = listAllDoctor[indexPath.section].doctors[indexPath.row - 1].doctorEntity
                 cellSpAdmin.setData()
-            }else if isMyFeed {
+            }
+            if isMyFeed {
                 cellSpAdmin.admin = listAdmin[indexPath.row - 1]
                 cellSpAdmin.setDataAdmin()
             }
