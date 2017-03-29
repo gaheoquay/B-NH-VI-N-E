@@ -60,14 +60,16 @@ class SearchViewController: BaseViewController,UITableViewDelegate,UITableViewDa
               let entity = PostEntity.init(dictionary: item)
               self.listSearch.append(entity)
             }
-            self.tbResult.reloadData()
+//            self.tbResult.reloadData()
           }
         }else{
-          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+//          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
         }
       }else{
-        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+//        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
       }
+      self.tbResult.reloadData()
+
       Until.hideLoading()
     }
   }
