@@ -108,6 +108,7 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
    
     @IBAction func btnSuccess(_ sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: GET_LIST_SERIVCE_IN_HOME), object: self.listService)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: GET_LIST_PACKAGE_IN_HOME), object: self.listPacKage)
         _ = self.navigationController?.popViewController(animated: true)
     }
     

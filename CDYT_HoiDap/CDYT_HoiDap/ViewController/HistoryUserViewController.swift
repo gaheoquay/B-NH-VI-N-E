@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,SearchFileViewControllerDelegate,FileCellDelegate {
+class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,SearchFileViewControllerDelegate {
 
     @IBOutlet weak var tbListHistory: UITableView!
     @IBOutlet weak var heightTbListHistory: NSLayoutConstraint!
@@ -40,9 +40,7 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
         return listBooking.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell") as! FileCell
-        cell.delegate = self
-        cell.indexPath = indexPath
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell") as! HistoryCell
         if listBooking.count > 0 {
             cell.setDataHistory(entity: listBooking[indexPath.row])
             if listBooking[indexPath.row].checkInResult.patientHistory == 0 || listBooking[indexPath.row].paymentResult.amount == 0 {
@@ -54,13 +52,21 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("abc")
+        if listBooking[indexPath.row].bookType == 2 {
+            let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailAnalysisFormViewController") as! DetailAnalysisFormViewController
+            self.navigationController?.pushViewController(viewcontroller, animated: true)
+        }else {
+            let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailsHistoryUserViewController") as! DetailsHistoryUserViewController
+            viewcontroller.listBooking = listBooking[indexPath.row]
+            viewcontroller.date = String().convertTimeStampWithDateFormat(timeStamp: listBooking[indexPath.row].createDate, dateFormat: "dd/MM/YYYY")
+            self.navigationController?.pushViewController(viewcontroller, animated: true)
+        }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if listBooking[indexPath.row].checkInResult.patientHistory == 0 || listBooking[indexPath.row].paymentResult.amount == 0 {
             return 0
         }else {
-            return 58
+            return UITableViewAutomaticDimension
             }
     }
     
@@ -80,7 +86,7 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
     func setupTable(){
         
         if listBooking.count > 0 {
-            tbListHistory.register(UINib.init(nibName: "FileCell", bundle: nil), forCellReuseIdentifier: "FileCell")
+            tbListHistory.register(UINib.init(nibName: "HistoryCell", bundle: nil), forCellReuseIdentifier: "HistoryCell")
             heightTbListHistory.constant = UIScreen.main.bounds.size.height - 185
             tbListHistory.estimatedRowHeight = 9999
             tbListHistory.rowHeight = UITableViewAutomaticDimension
@@ -142,20 +148,7 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
         print(indexProfile.row)
 
     }
-    func gotoDetailFileUser(indexPath: IndexPath) {
-        
-    } 
     
-    func gotoDetailHistory(index: IndexPath) {
-        let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailsHistoryUserViewController") as! DetailsHistoryUserViewController
-        viewcontroller.listBooking = listBooking[index.row]
-        viewcontroller.date = String().convertTimeStampWithDateFormat(timeStamp: listBooking[index.row].createDate, dateFormat: "dd/MM/YYYY")
-        self.navigationController?.pushViewController(viewcontroller, animated: true)
-    }
-    
-    func deleteFileUser(indexPath: IndexPath) {
-        
-    }
-
+       
 
 }

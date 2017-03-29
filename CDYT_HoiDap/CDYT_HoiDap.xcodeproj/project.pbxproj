@@ -56,6 +56,7 @@
 		0F9C46401E60462700DCFE46 /* FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C463F1E60462700DCFE46 /* FileViewController.swift */; };
 		0F9ED83A1E5BEB38001F2FC2 /* DaDuyet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */; };
 		0F9ED83B1E5BEB38001F2FC2 /* Duyet_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */; };
+		0FA10C781E8B789400D1A11F /* XNTaiNha.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA10C771E8B789400D1A11F /* XNTaiNha.png */; };
 		0FA535AD1E8211890004D329 /* KieuKham.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA535AC1E8211890004D329 /* KieuKham.png */; };
 		0FA535AF1E8221560004D329 /* ListAdminEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA535AE1E8221560004D329 /* ListAdminEntity.swift */; };
 		0FA535B11E82393A0004D329 /* AdminUpdateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA535B01E82393A0004D329 /* AdminUpdateProfileViewController.swift */; };
@@ -75,6 +76,9 @@
 		0FC431741E6534FD003F7F31 /* Ketqua.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC431731E6534FD003F7F31 /* Ketqua.png */; };
 		0FC431761E657E51003F7F31 /* AllUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC431751E657E51003F7F31 /* AllUserEntity.swift */; };
 		0FC431781E658680003F7F31 /* BookingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC431771E658680003F7F31 /* BookingEntity.swift */; };
+		0FC751EB1E8BA44200B82553 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC751E91E8BA44200B82553 /* HistoryCell.swift */; };
+		0FC751EC1E8BA44200B82553 /* HistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FC751EA1E8BA44200B82553 /* HistoryCell.xib */; };
+		0FC751EE1E8BC20B00B82553 /* DistricHomeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC751ED1E8BC20B00B82553 /* DistricHomeEntity.swift */; };
 		0FCFD9A61E5EEDB700EE2F89 /* BookingCalenderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFD9A51E5EEDB700EE2F89 /* BookingCalenderController.swift */; };
 		0FCFD9A81E5EEDDD00EE2F89 /* ManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFD9A71E5EEDDD00EE2F89 /* ManagerViewController.swift */; };
 		0FD3D7351E6E65CB0083A0BF /* DetailsHistoryUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD3D7341E6E65CB0083A0BF /* DetailsHistoryUserViewController.swift */; };
@@ -342,6 +346,7 @@
 		0F9C463F1E60462700DCFE46 /* FileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileViewController.swift; sourceTree = "<group>"; };
 		0F9ED8381E5BEB38001F2FC2 /* DaDuyet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DaDuyet_1.png; sourceTree = "<group>"; };
 		0F9ED8391E5BEB38001F2FC2 /* Duyet_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Duyet_1.png; sourceTree = "<group>"; };
+		0FA10C771E8B789400D1A11F /* XNTaiNha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XNTaiNha.png; sourceTree = "<group>"; };
 		0FA535AC1E8211890004D329 /* KieuKham.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KieuKham.png; sourceTree = "<group>"; };
 		0FA535AE1E8221560004D329 /* ListAdminEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListAdminEntity.swift; sourceTree = "<group>"; };
 		0FA535B01E82393A0004D329 /* AdminUpdateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminUpdateProfileViewController.swift; sourceTree = "<group>"; };
@@ -361,6 +366,9 @@
 		0FC431731E6534FD003F7F31 /* Ketqua.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ketqua.png; sourceTree = "<group>"; };
 		0FC431751E657E51003F7F31 /* AllUserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllUserEntity.swift; sourceTree = "<group>"; };
 		0FC431771E658680003F7F31 /* BookingEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingEntity.swift; sourceTree = "<group>"; };
+		0FC751E91E8BA44200B82553 /* HistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
+		0FC751EA1E8BA44200B82553 /* HistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryCell.xib; sourceTree = "<group>"; };
+		0FC751ED1E8BC20B00B82553 /* DistricHomeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistricHomeEntity.swift; sourceTree = "<group>"; };
 		0FCFD9A51E5EEDB700EE2F89 /* BookingCalenderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BookingCalenderController.swift; path = User/BookingCalenderController.swift; sourceTree = "<group>"; };
 		0FCFD9A71E5EEDDD00EE2F89 /* ManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerViewController.swift; sourceTree = "<group>"; };
 		0FD3D7341E6E65CB0083A0BF /* DetailsHistoryUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsHistoryUserViewController.swift; sourceTree = "<group>"; };
@@ -610,6 +618,7 @@
 				0F54E1541E8A1B10000AFE03 /* PackEntity.swift */,
 				0F54E1561E8A1B3D000AFE03 /* ServicesEntity.swift */,
 				0F54E1591E8A1B91000AFE03 /* PackServiceEntity.swift */,
+				0FC751ED1E8BC20B00B82553 /* DistricHomeEntity.swift */,
 			);
 			name = Serivce;
 			sourceTree = "<group>";
@@ -632,6 +641,8 @@
 				0FF7533C1E62F3A9001450B7 /* ExamScheduleCell.xib */,
 				0F94FEEA1E878DDD001884AD /* FormAnalysisCell.swift */,
 				0F94FEEB1E878DDD001884AD /* FormAnalysisCell.xib */,
+				0FC751E91E8BA44200B82553 /* HistoryCell.swift */,
+				0FC751EA1E8BA44200B82553 /* HistoryCell.xib */,
 			);
 			name = ScheduleCell;
 			sourceTree = "<group>";
@@ -708,6 +719,7 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0FA10C771E8B789400D1A11F /* XNTaiNha.png */,
 				0FC0CB9E1E8760E0009DA53C /* KhamTaiNha.png */,
 				0FC0CB9F1E8760E0009DA53C /* KhamTaiVien.png */,
 				0FE460681E84F6D00045DB84 /* DiaChi.png */,
@@ -1323,6 +1335,7 @@
 				0F9AD5A01E63F34700981D7B /* BackWhite.png in Resources */,
 				A67311D11E160F3400BCE308 /* placeholder_wide.png in Resources */,
 				0FC431721E65283D003F7F31 /* ChuaCoLichKham.png in Resources */,
+				0FA10C781E8B789400D1A11F /* XNTaiNha.png in Resources */,
 				8BD49F5D1E482D1100C98E74 /* OpenChannelListViewController.xib in Resources */,
 				0F9323E91E783DE300B56F39 /* DoctorCell.xib in Resources */,
 				0F9C46251E60084A00DCFE46 /* DichVu.png in Resources */,
@@ -1382,6 +1395,7 @@
 				A6E4C2FA1E1102BA00C2C871 /* User.storyboard in Resources */,
 				8BD49F261E482C1500C98E74 /* ChattingView.xib in Resources */,
 				8B813CB51E15052E0043F7EF /* Tag.png in Resources */,
+				0FC751EC1E8BA44200B82553 /* HistoryCell.xib in Resources */,
 				0F36980E1E54013C004B028D /* LogoMarker.png in Resources */,
 				8B813CB91E1519150043F7EF /* SearchGrey.png in Resources */,
 				8BF149711E14BF9C00766F8F /* DangNhap_BG.png in Resources */,
@@ -1584,6 +1598,7 @@
 				8B3A12DF1E10F399005DBC6E /* AppDelegate.swift in Sources */,
 				A60430FA1E233431000216FB /* SSRadioButton.swift in Sources */,
 				0FA535B11E82393A0004D329 /* AdminUpdateProfileViewController.swift in Sources */,
+				0FC751EB1E8BA44200B82553 /* HistoryCell.swift in Sources */,
 				8B3A137B1E10F454005DBC6E /* RAMTransitionItemAnimations.swift in Sources */,
 				0FD3D7351E6E65CB0083A0BF /* DetailsHistoryUserViewController.swift in Sources */,
 				8B3A13741E10F454005DBC6E /* TPKeyboardAvoidingScrollView.m in Sources */,
@@ -1606,6 +1621,7 @@
 				8BC2C30C1E2333A800B68F72 /* ForgotPasswordViewController.swift in Sources */,
 				0FE460711E8509260045DB84 /* ServiceViewController.swift in Sources */,
 				8BD49EFB1E48215500C98E74 /* CreateGroupChannelUserListViewController.swift in Sources */,
+				0FC751EE1E8BC20B00B82553 /* DistricHomeEntity.swift in Sources */,
 				8B87CD2E1E13665500DA8A33 /* PostEntity.swift in Sources */,
 				0F54E1551E8A1B10000AFE03 /* PackEntity.swift in Sources */,
 				8B3A137E1E10F454005DBC6E /* RAMItemAnimationProtocol.swift in Sources */,

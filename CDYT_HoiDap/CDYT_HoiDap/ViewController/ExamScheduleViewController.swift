@@ -65,7 +65,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         let stringCurentDate = String().convertDatetoString(date: curentDate, dateFormat: "dd/MM/YYYY")
         if listallUSer.count > 0 {
         let stringBookingDate = String().convertTimeStampWithDateFormat(timeStamp: listallUSer[indexPath.row].booking.bookingDate / 1000, dateFormat: "dd/MM/YYYY")
-        if (listallUSer[indexPath.row].booking.status == 3 || listallUSer[indexPath.row].booking.status == 2 || (listallUSer[indexPath.row].booking.status == 0) && ((stringBookingDate > stringCurentDate)) || (stringBookingDate < stringCurentDate)) {
+        if (listallUSer[indexPath.row].booking.status == 3 || listallUSer[indexPath.row].booking.status == 2 || (listallUSer[indexPath.row].booking.status == 0) && ((stringBookingDate > stringCurentDate)) || (stringBookingDate < stringCurentDate) || listallUSer[indexPath.row].booking.bookType == 2) {
             return 152
         }else {
             return 242
@@ -83,15 +83,20 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
    //MARK: delegate
     
     func gotoDetailUser(index: IndexPath) {
-        let main = UIStoryboard(name: "Main", bundle: nil)
-        let viewcontroller = main.instantiateViewController(withIdentifier: "DetailsFileUsersViewController") as! DetailsFileUsersViewController
-      viewcontroller.listService = listService
-        viewcontroller.name = listallUSer[index.row].profile.patientName
-        viewcontroller.checkInResult = listallUSer[index.row].booking.checkInResult
-        viewcontroller.booKingRecord = listallUSer[index.row].booking
-        viewcontroller.dateExam = listallUSer[index.row].booking.bookingDate / 1000
-        viewcontroller.delegate = self
-        self.navigationController?.pushViewController(viewcontroller, animated: true)
+        if listallUSer[index.row].booking.bookType == 2 {
+            let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetaiAnalysisViewController") as! DetaiAnalysisViewController
+            self.navigationController?.pushViewController(viewcontroller, animated: true)
+        }else {
+            let main = UIStoryboard(name: "Main", bundle: nil)
+            let viewcontroller = main.instantiateViewController(withIdentifier: "DetailsFileUsersViewController") as! DetailsFileUsersViewController
+            viewcontroller.listService = listService
+            viewcontroller.name = listallUSer[index.row].profile.patientName
+            viewcontroller.checkInResult = listallUSer[index.row].booking.checkInResult
+            viewcontroller.booKingRecord = listallUSer[index.row].booking
+            viewcontroller.dateExam = listallUSer[index.row].booking.bookingDate / 1000
+            viewcontroller.delegate = self
+            self.navigationController?.pushViewController(viewcontroller, animated: true)
+        }
     }
     
         
@@ -188,7 +193,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
             "Auth": Until.getAuthKey(),
             "RequestedUserId" : Until.getCurrentId()
         ]
-        
+        print(Param)
         listallUSer.removeAll()
         Until.showLoading()
         Alamofire.request(GET_BOOKING_ONLY, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -309,6 +314,12 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         }
     }
 
+    func gotoDetailHistoryHospital(indexPatch: IndexPath) {
+        
+    }
     
+    func gotoDetailHistoryAtHome(indexPatch: IndexPath) {
+        
+    }
     
 }

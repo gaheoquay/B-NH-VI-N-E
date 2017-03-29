@@ -16,6 +16,7 @@ class BookingEntity: NSObject {
     var updateDate: Double = 0
     var createDate: Double = 0
     var status = 0
+    var bookType = 0
     var checkInResult = CheckInResultEntity()
     var paymentResult = CheckInvoiceEntity()
     var checkupResult = ResultUserEntity()
@@ -35,6 +36,9 @@ class BookingEntity: NSObject {
         }
         if let value = dictionary["UpdatedDate"] as? Double {
             updateDate = value
+        }
+        if let value = dictionary["BookType"] as? Int {
+            bookType = value
         }
         if let value = dictionary["CreatedDate"] as? Double {
             createDate = value

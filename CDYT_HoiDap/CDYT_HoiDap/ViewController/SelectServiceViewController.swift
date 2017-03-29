@@ -104,10 +104,10 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
 
     @IBAction func btnSearch(_ sender: Any) {
         let packSearch = service.listPack.filter { (packagesEntity) -> Bool in
-            return packagesEntity.pack.name.lowercased().contains(txtSearch.text!)
+            return (self.removeUTF8(frString: packagesEntity.pack.name.lowercased())).contains(self.removeUTF8(frString: txtSearch.text!.lowercased()))
         }
         let serviceSearch = service.listSer.filter { (serviceEntity) -> Bool in
-            return serviceEntity.name.lowercased().contains(txtSearch.text!)
+            return (self.removeUTF8(frString: serviceEntity.name.lowercased())).contains(self.removeUTF8(frString: txtSearch.text!.lowercased()))
         }
         self.listSearchService = serviceSearch
         self.listSearch = packSearch
@@ -138,6 +138,29 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
 
     }
     
+    func checkSelect(indexPatch: IndexPath) {
+//        if isPackage {
+//            let serVice = service.listSer.filter { (servicesEntity) -> Bool in
+//                servicesEntity.id == service.listPack[indexPatch.row].pack.id
+//            }
+//            if serVice.count > 0 {
+//                if serVice[0].id == service.listPack[indexPatch.row].pack.id && service.listPack[indexPatch.row].pack.isCheckSelect == true {
+//                    print("Đã có dịch vụ")
+//                }
+//            }
+//        }else {
+//            let pacKage = service.listPack.filter({ (packagesEntity) -> Bool in
+//                packagesEntity.pack.id == service.listSer[indexPatch.row].id
+//            })
+//            if pacKage.count > 0 {
+//                if pacKage[0].pack.id == service.listSer[indexPatch.row].id && service.listSer[indexPatch.row].isCheckSelect == true {
+//                    print("Đã chọn gói")
+//                }
+//            }
+//        }
+//        
+    }
+    
     func reloadDataCell(indexPatch: IndexPath) {
         tbListService.reloadRows(at: [indexPatch], with: .automatic)
     }
@@ -148,5 +171,14 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
         delegate?.getListService(listPackage: service.listPack, listSer: service.listSer)
         _ = self.navigationController?.popViewController(animated: true)
     }
-
+    
+    
 }
+
+
+extension SelectServiceViewController {
+    func removeUTF8(frString: String) -> String {
+        return frString.folding(options: .diacriticInsensitive, locale: .current)
+    }
+}
+

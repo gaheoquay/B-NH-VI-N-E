@@ -3461,6 +3461,9 @@
                                                 <state key="normal" title="Chọn quận / huyện">
                                                     <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="btnChoiceDistric:" destination="cQu-c7-cdl" eventType="touchUpInside" id="rpY-BR-cNK"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79f-dq-THZ">
                                                 <rect key="frame" x="41" y="133" width="271" height="1"/>
@@ -3668,6 +3671,7 @@
                         <outlet property="btnAlanysis" destination="q8U-jU-Jzl" id="88h-Ze-XQe"/>
                         <outlet property="btnBookingDate" destination="nyH-VL-g4Y" id="kMv-ad-9ff"/>
                         <outlet property="btnBrifUser" destination="agD-9v-uYC" id="YQk-BR-LEn"/>
+                        <outlet property="btnChoiceDistric" destination="wHY-7t-2EI" id="vHy-PC-MR7"/>
                         <outlet property="btnSendBooking" destination="p2Q-pm-Pt0" id="h8c-zs-zYN"/>
                         <outlet property="btnService" destination="FtP-uu-iuz" id="ikF-eh-6dg"/>
                         <outlet property="heightViewBookingHome" destination="6ID-zc-iW3" id="exe-h5-TMg"/>

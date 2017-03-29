@@ -21,6 +21,7 @@ class ServiceCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
     @IBOutlet weak var imgShowDetail: UIImageView!
     @IBOutlet weak var lbShowDetail: UILabel!
     @IBOutlet weak var marginLineBottom: NSLayoutConstraint!
+    @IBOutlet weak var heightTable: NSLayoutConstraint!
     
     var pacKage = PackagesEntity()
     var serVice = ServicesEntity()
@@ -83,7 +84,8 @@ class ServiceCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
             }else {
                 lbShowDetail.text = "Thu gọn"
                 imgShowDetail.image = UIImage(named: "Edit.png")
-                marginLineBottom.constant = 173
+                marginLineBottom.constant = CGFloat(pacKage.service.count * 58)
+                tbListServiceDetail.reloadData()
             }
         }
         contentView.layoutIfNeeded()

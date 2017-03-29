@@ -33,6 +33,7 @@ class DetaiAnalysisViewController: UIViewController {
     }
     
     @IBAction func btnBack(_ sender: Any) {
+        _ = self.navigationController?.popViewController(animated: true)
     }
 
     

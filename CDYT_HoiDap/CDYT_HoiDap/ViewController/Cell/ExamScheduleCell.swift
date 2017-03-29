@@ -11,6 +11,8 @@ protocol ExamScheduleCellDelegate {
     func deleteBooking(index: IndexPath)
     func accepBooking(index: IndexPath)
     func gotoDetailUser(index: IndexPath)
+    func gotoDetailHistoryAtHome(indexPatch: IndexPath)
+    func gotoDetailHistoryHospital(indexPatch: IndexPath)
 }
 
 class ExamScheduleCell: UITableViewCell {
@@ -46,6 +48,14 @@ class ExamScheduleCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func showDetailHistoryAtHome(){
+        delegate?.gotoDetailHistoryAtHome(indexPatch: indexPath)
+    }
+    
+    func showDetailHospital(){
+        delegate?.gotoDetailHistoryHospital(indexPatch: indexPath)
+    }
+    
     func showDetailsUsers(){
         delegate?.gotoDetailUser(index: indexPath)
     }
@@ -60,16 +70,22 @@ class ExamScheduleCell: UITableViewCell {
     let fontRegularWithColor = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor.init(netHex: 0xa0b3bc)]
     
     let myAttrStringSv = NSMutableAttributedString(string: "Kiểu dịch vụ: ", attributes: fontRegular)
-    myAttrStringSv.append(NSMutableAttributedString(string: "Khám tại viện E", attributes: fontBold))
+    
+    if userEntity.booking.bookType == 2 {
+        myAttrStringSv.append(NSMutableAttributedString(string: "Xét nghiệm tại nhà", attributes: fontBold))
+        imgAvatar.image = UIImage(named: "XNTaiNha.png")
+    }else {
+        myAttrStringSv.append(NSMutableAttributedString(string: "Khám tại viện E", attributes: fontBold))
+        imgAvatar.image = UIImage(named: "KhamTaiVien.png")
+    }
+    
     lbServiceType.attributedText = myAttrStringSv
-    imgAvatar.image = UIImage(named: "KhamTaiVien.png")
-    
-    
+
     if userEntity.booking.status == 2 || userEntity.booking.status == 3 {
         viewShowDetail.isHidden = true
         marginBottomViewDetail.constant = 0
         btnCancel.isHidden = true
-    }else if stringCurentDate == stringBookingDate {
+    }else if stringCurentDate == stringBookingDate && userEntity.booking.bookType != 2{
         viewShowDetail.isHidden = false
         marginBottomViewDetail.constant = 90
         btnCancel.isHidden = true
@@ -113,6 +129,8 @@ class ExamScheduleCell: UITableViewCell {
     
         contentView.layoutIfNeeded()
     }
+    
+
     
     @IBAction func btnCancelExam(_ sender: Any) {
             delegate?.deleteBooking(index: indexPath)
