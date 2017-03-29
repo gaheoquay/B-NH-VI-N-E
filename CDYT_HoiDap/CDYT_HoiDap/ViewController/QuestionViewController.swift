@@ -436,6 +436,27 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
         
         
         let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+          if picker == self.pickerViewCate {
+            if self.idCate != listCate[self.indexPickerViewCate].id {
+              self.idCate = listCate[self.indexPickerViewCate].id
+              self.nameCate = listCate[self.indexPickerViewCate].name
+              if self.isNotAssignedYet {
+                self.listNotAssignedYet[self.indexPathOfCell.row].cateGory.id = self.idCate
+                self.listNotAssignedYet[self.indexPathOfCell.row].cateGory.name = self.nameCate
+                self.idDoc = ""
+                self.nameDoc = ""
+                self.listNotAssignedYet[self.indexPathOfCell.row].assigneeEntity.id = self.idDoc
+                self.listNotAssignedYet[self.indexPathOfCell.row].assigneeEntity.fullname = self.nameDoc
+              }else if self.isAssigned {
+                self.listAssigned[self.indexPathOfCell.row].cateGory.id = self.idCate
+                self.listAssigned[self.indexPathOfCell.row].cateGory.name = self.nameCate
+                self.listAssigned[self.indexPathOfCell.row].assigneeEntity.id = self.idDoc
+                self.listAssigned[self.indexPathOfCell.row].assigneeEntity.fullname = self.nameDoc
+
+                self.listAssigned[self.indexPathOfCell.row].postEntity.isClassified = false
+              }
+            }
+          }
             self.tbQuestion.beginUpdates()
             self.tbQuestion.reloadRows(at: [self.indexPathOfCell], with: .automatic)
             self.tbQuestion.endUpdates()
@@ -468,16 +489,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == pickerViewCate {
-            idCate = listCate[row].id
-            nameCate = listCate[row].name
-            if isNotAssignedYet {
-                listNotAssignedYet[indexPathOfCell.row].cateGory.id = idCate
-                listNotAssignedYet[indexPathOfCell.row].cateGory.name = nameCate
-            }else if isAssigned {
-                listAssigned[indexPathOfCell.row].cateGory.id = idCate
-                listAssigned[indexPathOfCell.row].cateGory.name = nameCate
-                listAssigned[indexPathOfCell.row].postEntity.isClassified = false
-            }
+          indexPickerViewCate = row
         }
         
     }
@@ -554,7 +566,9 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     var pageNotAssignedYet = 1
     
     let pickerViewDoctor = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
+  var indexPickerViewDoctor = 0
     let pickerViewCate = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
+  var indexPickerViewCate = 0
     var indexPathOfCell = IndexPath()
     var idCate = ""
     var idDoc = ""

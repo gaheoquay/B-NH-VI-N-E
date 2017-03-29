@@ -160,7 +160,7 @@ class UpdateInfoViewController: BaseViewController {
       addressTxt.isUserInteractionEnabled = false
       phoneTxt.isUserInteractionEnabled = false
       fullnameTxt.isUserInteractionEnabled = false
-      
+      emailTxt.isUserInteractionEnabled = false
       updateBtn.isHidden = true
       if userToShow.role == 1 && userToShow.isVerified == true {
         verifyLb.text = "đã được xác minh"
@@ -451,7 +451,7 @@ class UpdateInfoViewController: BaseViewController {
               reaml.add(entity, update: true)
               
               let alert = UIAlertController.init(title: "Thông báo", message: "Cập nhật thông tin tài khoản thành công", preferredStyle: UIAlertControllerStyle.alert)
-              let actionOk = UIAlertAction.init(title: "Đóng", style: UIAlertActionStyle.destructive, handler: { (UIAlertAction) in
+              let actionOk = UIAlertAction.init(title: "Đóng", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
                 //                                _ = self.navigationController?.popViewController(animated: true)
               })
               
