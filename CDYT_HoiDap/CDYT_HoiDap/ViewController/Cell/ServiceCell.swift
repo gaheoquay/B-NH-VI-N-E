@@ -69,6 +69,13 @@ class ServiceCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
     func setData(){
         
         if !isPackage {
+            if !serVice.isCheckSelect {
+                btnSelect.setImage(UIImage.init(named: "Check0-2.png"), for: .normal)
+            }else {
+                btnSelect.setImage(UIImage
+                    .init(named: "Check1-2.png"), for: .normal)
+            }
+            
             lbCombo.text = serVice.name
             lbPrice.text = String().replaceNSnumber(doublePrice: serVice.priceService)
             marginLineBottom.constant = 0
@@ -77,6 +84,13 @@ class ServiceCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
             viewShowDetail.isHidden = false
             lbCombo.text = pacKage.pack.name
             lbPrice.text = String().replaceNSnumber(doublePrice: pacKage.pack.pricePackage)
+            
+            if !pacKage.pack.isCheckSelect {
+                btnSelect.setImage(UIImage.init(named: "Check0-2.png"), for: .normal)
+            }else {
+                btnSelect.setImage(UIImage.init(named: "Check1-2.png"), for: .normal)
+            }
+            
             if !pacKage.pack.isCheckShowDetail {
                 lbShowDetail.text = "Chi tiết"
                 imgShowDetail.image = UIImage(named: "DetailEdit.png")
