@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -6511,27 +6511,24 @@ CÁC THÀNH TÍCH ĐÃ ĐẠT ĐƯỢC
                                 </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xtz-GB-1oC">
-                                <rect key="frame" x="0.0" y="118" width="320" height="384"/>
+                                <rect key="frame" x="0.0" y="118" width="320" height="400"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="384" id="olQ-Nu-Rco"/>
-                                </constraints>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0iM-KI-ude">
-                                <rect key="frame" x="0.0" y="502" width="320" height="66"/>
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqr-vb-jdN">
-                                        <rect key="frame" x="40" y="24.5" width="35.5" height="17"/>
+                                        <rect key="frame" x="40" y="16.5" width="35.5" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MX4-La-CA8">
-                                        <rect key="frame" x="254" y="0.0" width="66" height="66"/>
+                                        <rect key="frame" x="270" y="0.0" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="MX4-La-CA8" secondAttribute="height" multiplier="1:1" id="uds-E6-YNN"/>
                                         </constraints>
-                                        <inset key="imageEdgeInsets" minX="19" minY="19" maxX="19" maxY="19"/>
+                                        <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                                         <state key="normal" title=" " image="Delete2.png"/>
                                         <connections>
                                             <action selector="btnDeleteAllService:" destination="CcV-LY-jq7" eventType="touchUpInside" id="kBp-KC-ehb"/>
@@ -6542,6 +6539,7 @@ CÁC THÀNH TÍCH ĐÃ ĐẠT ĐƯỢC
                                 <constraints>
                                     <constraint firstItem="gqr-vb-jdN" firstAttribute="leading" secondItem="0iM-KI-ude" secondAttribute="leading" constant="40" id="CwF-na-wpm"/>
                                     <constraint firstItem="MX4-La-CA8" firstAttribute="top" secondItem="0iM-KI-ude" secondAttribute="top" id="HMr-K1-PeY"/>
+                                    <constraint firstAttribute="height" constant="50" id="PEx-Ed-2eE"/>
                                     <constraint firstItem="gqr-vb-jdN" firstAttribute="centerY" secondItem="0iM-KI-ude" secondAttribute="centerY" id="Zmf-5g-jed"/>
                                     <constraint firstAttribute="bottom" secondItem="MX4-La-CA8" secondAttribute="bottom" id="dZp-Zv-uNm"/>
                                     <constraint firstAttribute="trailing" secondItem="MX4-La-CA8" secondAttribute="trailing" id="kkw-lY-QZA"/>
@@ -6569,7 +6567,7 @@ CÁC THÀNH TÍCH ĐÃ ĐẠT ĐƯỢC
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="heigtTableService" destination="olQ-Nu-Rco" id="g0C-f3-TW2"/>
+                        <outlet property="layoutHeightViewBottom" destination="PEx-Ed-2eE" id="lfF-v9-c2I"/>
                         <outlet property="lbTotalPrice" destination="gqr-vb-jdN" id="2gn-KQ-dF9"/>
                         <outlet property="tbListServiceAddNew" destination="xtz-GB-1oC" id="JhW-LJ-DUl"/>
                         <outlet property="viewAddNewService" destination="MRO-aR-M23" id="XvA-wn-Ht0"/>

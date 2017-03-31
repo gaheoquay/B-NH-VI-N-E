@@ -13,14 +13,17 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
     
     @IBOutlet weak var tbListServiceAddNew: UITableView!
     @IBOutlet weak var lbTotalPrice: UILabel!
-    @IBOutlet weak var heigtTableService: NSLayoutConstraint!
+//    @IBOutlet weak var heigtTableService: NSLayoutConstraint!
     @IBOutlet weak var viewAddNewService: UIView!
     @IBOutlet weak var viewBottom: UIView!
+  @IBOutlet weak var layoutHeightViewBottom: NSLayoutConstraint!
     
     var listService = [ServicesEntity]()
     var listPacKage = [PackagesEntity]()
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+      initTable()
         setupUI()
         // Do any additional setup after loading the view.
     }
@@ -29,22 +32,45 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+  func initTable(){
+    tbListServiceAddNew.delegate = self
+    tbListServiceAddNew.dataSource = self
+    tbListServiceAddNew.register(UINib.init(nibName: "FileCell", bundle: nil), forCellReuseIdentifier: "FileCell")
+    tbListServiceAddNew.estimatedRowHeight = 999
+    tbListServiceAddNew.rowHeight = UITableViewAutomaticDimension
+  }
+  func setUpViewBottom(){
+    if listService.count == 0 && listPacKage.count == 0 {
+      layoutHeightViewBottom.constant = 0
+      viewBottom.isHidden = true
+    }else{
+      var SumPrice: Double = 0
+      var priceSer : Double = 0
+      
+      let fontRegular = [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
+      let fontRegularWithColor = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor.green]
+      for item in listPacKage {
+        SumPrice = SumPrice + item.pack.pricePackage
+      }
+      for item in listService {
+        priceSer = priceSer + item.priceService
+      }
+      let myAttrString = NSMutableAttributedString(string: " \(listPacKage.count) dịch vụ được chọn\n Tổng tiền tạm tính : ", attributes: fontRegular)
+      myAttrString.append(NSMutableAttributedString(string: "\(String().replaceNSnumber(doublePrice: SumPrice + priceSer))", attributes: fontRegularWithColor))
+      lbTotalPrice.attributedText = myAttrString
+      tbListServiceAddNew.reloadData()
+      layoutHeightViewBottom.constant = 60
+      viewBottom.isHidden = false
+    }
+    self.view.layoutIfNeeded()
+  }
     func setupUI(){
-        tbListServiceAddNew.delegate = self
-        tbListServiceAddNew.dataSource = self
-        tbListServiceAddNew.register(UINib.init(nibName: "FileCell", bundle: nil), forCellReuseIdentifier: "FileCell")
-        tbListServiceAddNew.estimatedRowHeight = 999
-        tbListServiceAddNew.rowHeight = UITableViewAutomaticDimension
-        heigtTableService.constant = UIScreen.main.bounds.size.height - 184
         viewAddNewService.layer.borderWidth = 0.5
         viewAddNewService.layer.cornerRadius = 3
         viewAddNewService.layer.borderColor = UIColor.gray.cgColor
         viewBottom.layer.borderColor = UIColor.gray.cgColor
         viewBottom.layer.borderWidth = 0.5
-        
-        
-        
+      setUpViewBottom()
     }
     
     
@@ -88,23 +114,8 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
             packagesEntity.pack.isCheckSelect == true
         }
         self.listPacKage = listAddPackage
-        
-        var SumPrice: Double = 0
-        var priceSer : Double = 0
-        
-        let fontRegular = [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
-        let fontRegularWithColor = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor.green]
-        for item in listPacKage {
-            SumPrice = SumPrice + item.pack.pricePackage
-        }
-        for item in listService {
-            priceSer = priceSer + item.priceService
-        }
-        let myAttrString = NSMutableAttributedString(string: " \(listPacKage.count) dịch vụ được chọn\n Tổng tiền tạm tính : ", attributes: fontRegular)
-        myAttrString.append(NSMutableAttributedString(string: "\(String().replaceNSnumber(doublePrice: SumPrice + priceSer))", attributes: fontRegularWithColor))
-        lbTotalPrice.attributedText = myAttrString
-        tbListServiceAddNew.reloadData()
-    }
+      setUpViewBottom()
+  }
    
     @IBAction func btnSuccess(_ sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: GET_LIST_SERIVCE_IN_HOME), object: self.listService)
@@ -119,6 +130,7 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
             listService.remove(at: indexPath.row)
         }
         tbListServiceAddNew.reloadData()
+      setUpViewBottom()
     }
     
     func gotoDetailHistory(index: IndexPath) {
@@ -131,6 +143,7 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
     @IBAction func btnDeleteAllService(_ sender: Any) {
         listPacKage.removeAll()
         tbListServiceAddNew.reloadData()
+      setUpViewBottom()
     }
     
     @IBAction func btnBack(_ sender: Any) {
