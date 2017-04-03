@@ -12,6 +12,7 @@ class PackagesEntity: NSObject {
     
     var pack = PackEntity()
     var service = [ServicesEntity]()
+    var textSerive = ""
     
     override init() {
         super.init()
@@ -24,6 +25,7 @@ class PackagesEntity: NSObject {
         if let value = dictionary["Services"] as? [NSDictionary] {
             for item in value {
                 let entity = ServicesEntity.init(dictionary: item)
+                textSerive += entity.name
                 service.append(entity)
             }
         }

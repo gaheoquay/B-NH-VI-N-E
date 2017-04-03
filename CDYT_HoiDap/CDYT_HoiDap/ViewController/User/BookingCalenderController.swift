@@ -223,7 +223,37 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
                 }
             }
         }else {
-            isvalidCheck()
+            let calendar = Calendar.current
+            let tomorrow = calendar.date(byAdding: .day, value: +1, to: Date())
+            let stringTomorrow = String().convertDatetoString(date: tomorrow!, dateFormat: "dd/MM/YYYY")
+            let bookingDate = String().convertTimeStampWithDateFormat(timeStamp: dateBook, dateFormat: "dd/MM/YYYY")
+            if bookingDate > stringTomorrow {
+                 UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chỉ có thể đặt lịch trong khoảng 7h đến 20h hôm nay và ngày mai. Vui lòng chọn lại!", cancelBtnTitle: "Đóng")
+            }else {
+                let twenty_today = currentDate.dateAt(hours: 20, minutes: 0, days : 0)
+                let seven_today = currentDate.dateAt(hours: 07, minutes: 0, days: 0)
+                let twenty_tomorrow = tomorrow?.dateAt(hours: 20, minutes: 0, days: 0)
+                let sevent_tomorrow = tomorrow?.dateAt(hours: 07, minutes: 0, days: 0)
+                let t_t = String().convertDatetoString(date: twenty_today, dateFormat: "dd HH:mm")
+                let s_t = String().convertDatetoString(date: seven_today, dateFormat: "dd HH:mm")
+                let t_tr = String().convertDatetoString(date: twenty_tomorrow!, dateFormat: "dd HH:mm")
+                let s_tr = String().convertDatetoString(date: sevent_tomorrow!, dateFormat: "dd HH:mm")
+                let bk = String().convertTimeStampWithDateFormat(timeStamp: dateBook, dateFormat: "dd HH:mm")
+                
+                if bookingDate == stringTomorrow {
+                    if bk > t_tr || bk < s_tr {
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chỉ có thể đặt lịch trong khoảng 7h đến 20h hôm nay và ngày mai. Vui lòng chọn lại!", cancelBtnTitle: "Đóng")
+                    }else {
+                        isvalidCheck()
+                    }
+                }else {
+                    if bk > t_t || bk < s_t {
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chỉ có thể đặt lịch trong khoảng 7h đến 20h hôm nay và ngày mai. Vui lòng chọn lại!", cancelBtnTitle: "Đóng")
+                    }else {
+                        isvalidCheck()
+                    }
+                }
+            }
         }
     }
     
@@ -353,13 +383,13 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
     func requestExamInHome(){
         var listPackId = [[String: Any]]()
         for item in listPack {
-            let id = ["Id": item.pack.id]
+            let id = ["Id": item.pack.id,"Name": item.pack.name]
             listPackId.append(id)
         }
         
         var listServiceId = [[String: Any]]()
         for item in listService {
-            let id = ["Id": item.id]
+            let id = ["Id": item.id,"Name": item.name]
             listServiceId.append(id)
         }
         
@@ -484,7 +514,7 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
                 }else {
                     if sumService + sumPack < checkPrice {
                         let alert = UIAlertController.init(title: "Thông báo", message: "Chúng tôi sẽ phụ thu thêm\n 100.000đ do các dịch vụ cuả\n bạn có giá dưới 200.000đ", preferredStyle: UIAlertControllerStyle.alert)
-                        let actionCancel = UIAlertAction.init(title: "Bỏ qua", style: .cancel, handler: { (UIAlertAction) in
+                        let actionCancel = UIAlertAction.init(title: "Chọn lại", style: .cancel, handler: { (UIAlertAction) in
                             
                         })
                         let actionOk = UIAlertAction.init(title: "Đồng ý", style: UIAlertActionStyle.destructive, handler: { (UIAlertAction) in

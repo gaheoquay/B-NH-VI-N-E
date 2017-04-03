@@ -67,6 +67,22 @@ class ServiceCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
         delegate?.reloadDataCell(indexPatch: indexPatch)
     }
     
+    func setDataPac(entity: PackEntity){
+        viewShowDetail.isHidden = true
+        btnSelect.isHidden = true
+        lbCombo.text = entity.name
+        lbPrice.text = String().replaceNSnumber(doublePrice: entity.pricePackage)
+        marginLineBottom.constant = 0
+    }
+    
+    func setDataSer(entity: ServicesEntity){
+        viewShowDetail.isHidden = true
+        btnSelect.isHidden = true
+        lbPrice.text = String().replaceNSnumber(doublePrice: entity.priceService)
+        lbCombo.text = entity.name
+        marginLineBottom.constant = 0
+    }
+    
     func setData(){
         
         if !isPackage {

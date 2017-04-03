@@ -24,7 +24,9 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     
     var delegate : SearchFileViewControllerDelegate?
     var listFileUser = [BookingUserEntity]()
+    var listSearchs = [BookingUserEntity]()
     var isCheckResult = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,24 +45,50 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listFileUser.count
+        let searchString = txtSearch.text?.trimmingCharacters(in: .whitespaces)
+
+        if searchString != "" {
+            return listSearchs.count
+        }else {
+            return listFileUser.count
+
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let searchString = txtSearch.text?.trimmingCharacters(in: .whitespaces)
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell") as! FileCell
-        cell.listBooking = listFileUser[indexPath.row]
+        if searchString != "" {
+            cell.listBooking = listSearchs[indexPath.row]
+        }else {
+            cell.listBooking = listFileUser[indexPath.row]
+        }
         cell.setListUser()
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isCheckResult == false {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: GET_LIST_FILE_USER), object: self.listFileUser[indexPath.row])
+            if txtSearch.text == "" {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: GET_LIST_FILE_USER), object: self.listFileUser[indexPath.row])
+            }else {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: GET_LIST_FILE_USER), object: self.listSearchs[indexPath.row])
+            }
         }else {
             delegate?.gotoHistory(indexPath: indexPath)
         }
         _ = self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func btnSearch(_ sender: Any) {
+        
+        let listSearch = listFileUser.filter { (bookingUserEntity) -> Bool in
+            return self.removeUTF8(frString: bookingUserEntity.profile.patientName.lowercased()).contains(self.removeUTF8(frString: txtSearch.text!.lowercased()))
+        }
+        self.listSearchs = listSearch
+        self.tbListFile.reloadData()
+    }
+    
     
     func requestUSer(){
         Until.showLoading()
@@ -139,4 +167,10 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     listFileUser.removeAll()
     requestUSer()
   }
+}
+
+extension SearchFileViewController {
+    func removeUTF8(frString: String) -> String {
+        return frString.folding(options: .diacriticInsensitive, locale: .current)
+    }
 }

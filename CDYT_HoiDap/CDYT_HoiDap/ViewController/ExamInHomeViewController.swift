@@ -32,21 +32,46 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     func setupUI(){
+        
+        addNewListService()
+        
+        if listPacKage.count == 0 && listService.count == 0 || (service.listPack.count == 0 && service.listSer.count == 0) {
+            heigtTableService.constant = UIScreen.main.bounds.size.height
+            viewBottom.isHidden = true
+        }else {
+            heigtTableService.constant = UIScreen.main.bounds.size.height - 184
+            viewBottom.isHidden = false
+        }
+        
         tbListServiceAddNew.delegate = self
         tbListServiceAddNew.dataSource = self
         tbListServiceAddNew.register(UINib.init(nibName: "FileCell", bundle: nil), forCellReuseIdentifier: "FileCell")
         tbListServiceAddNew.estimatedRowHeight = 999
         tbListServiceAddNew.rowHeight = UITableViewAutomaticDimension
-        heigtTableService.constant = UIScreen.main.bounds.size.height - 184
         viewAddNewService.layer.borderWidth = 0.5
         viewAddNewService.layer.cornerRadius = 3
         viewAddNewService.layer.borderColor = UIColor.gray.cgColor
         viewBottom.layer.borderColor = UIColor.gray.cgColor
         viewBottom.layer.borderWidth = 0.5
-        
         setSumPrice()
         
         
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            if listPacKage[indexPath.row].pack.isCheckSelect == false {
+                return 0
+            }else {
+                return UITableViewAutomaticDimension
+            }
+        }else {
+            if listService[indexPath.row].isCheckSelect == false {
+                return 0
+            }else {
+                return UITableViewAutomaticDimension
+            }
+        }
     }
     
     
@@ -64,9 +89,20 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell") as! FileCell
         cell.delegate = self
         if indexPath.section == 0 {
+            if listPacKage[indexPath.row].pack.isCheckSelect == false {
+            cell.isHidden = true
+            }else {
+            cell.isHidden = false
+            }
             cell.setDataPackage(entity: listPacKage[indexPath.row])
             cell.indexPath = indexPath
         }else {
+            
+            if listService[indexPath.row].isCheckSelect == false {
+            cell.isHidden = true
+            }else {
+            cell.isHidden = false
+            }
             cell.setDataService(entity: listService[indexPath.row])
             cell.indexPath = indexPath
         }
@@ -82,10 +118,16 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     func getListService(services: PackServiceEntity) {
-        let listAddNewSerVice = services.listSer.filter { (serviceEntity) -> Bool in
+        self.service = services
+        setSumPrice()
+        setupUI()
+    }
+    
+    func addNewListService(){
+        let listAddNewSerVice = service.listSer.filter { (serviceEntity) -> Bool in
             serviceEntity.isCheckSelect == true
         }
-        let listAddPackage = services.listPack.filter { (packagesEntity) -> Bool in
+        let listAddPackage = service.listPack.filter { (packagesEntity) -> Bool in
             packagesEntity.pack.isCheckSelect == true
         }
         
@@ -97,9 +139,7 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
         for pac in listAddPackage {
             self.listPacKage.append(pac)
         }
-        
-        self.service = services
-        setSumPrice()
+
     }
     
     func setSumPrice(){
@@ -129,14 +169,13 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
     
     func deleteFileUser(indexPath: IndexPath) {
         if indexPath.section == 0 {
-            listPacKage.remove(at: indexPath.row)
+            listPacKage[indexPath.row].pack.isCheckSelect = false
             service.listPack[indexPath.row].pack.isCheckSelect = false
         }else {
-            listService.remove(at: indexPath.row)
+            listService[indexPath.row].isCheckSelect = false
             service.listSer[indexPath.row].isCheckSelect = false
         }
-        
-        setSumPrice()
+        setupUI()
     }
     
     func gotoDetailHistory(index: IndexPath) {
@@ -153,9 +192,6 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
         setSumPrice()
     }
     
-    @IBAction func btnBack(_ sender: Any) {
-//        _ = self.navigationController?.popViewController(animated: true)
-    }
     
     func requestListService(){
         let param : [String : Any] = [

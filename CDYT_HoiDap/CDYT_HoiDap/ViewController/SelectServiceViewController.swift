@@ -22,9 +22,11 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
     
     var isPackage = true
     var isSearch = false
+    var indexPatch = IndexPath()
 
     var service = PackServiceEntity()
     var listSearch = [PackagesEntity]()
+    var listSerInPacSearch = [PackagesEntity]()
     var listSearchService = [ServicesEntity]()
     var delegate : SelectServiceViewControllerDelegate?
     
@@ -50,19 +52,33 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
         viewSearch.clipsToBounds = true
         tbListService.delegate = self
         tbListService.dataSource = self
-        tbListService.rowHeight = UITableViewAutomaticDimension
         tbListService.estimatedRowHeight = 999
         tbListService.register(UINib.init(nibName: "ServiceCell", bundle: nil), forCellReuseIdentifier: "ServiceCell")
+        tbListService.register(UINib.init(nibName: "FileCell", bundle: nil), forCellReuseIdentifier: "FileCell")
+
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        if isPackage {
+            if txtSearch.text != "" {
+            return 2
+            }else {
+            return 1
+            }
+        }else {
+            return 1
+        }
+        
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let txtSerchString = txtSearch.text?.trimmingCharacters(in: .whitespaces)
         if txtSerchString != "" {
-            if section == 0 {
-                return listSearch.count
+            if isPackage {
+                if section == 0 {
+                    return listSearch.count
+                }else {
+                    return listSerInPacSearch.count
+                }
             }else {
                 return listSearchService.count
             }
@@ -95,9 +111,13 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
         }else {
             self.isSearch = true
             cell.isPackage = false
-            if indexPath.section == 0 {
-                cell.pacKage = listSearch[indexPath.row]
+            if isPackage {
                 cell.isPackage = true
+                if indexPath.section == 0 {
+                    cell.pacKage = listSearch[indexPath.row]
+                }else {
+                    cell.pacKage = listSerInPacSearch[indexPath.row]
+                }
                 cell.setData()
             }else {
                 cell.serVice = listSearchService[indexPath.row]
@@ -107,6 +127,14 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if isPackage {
+            return UITableViewAutomaticDimension
+        }else {
+            return 60
+        }
     }
     
     @IBAction func btnPackage(_ sender: Any) {
@@ -132,6 +160,12 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
         let serviceSearch = service.listSer.filter { (serviceEntity) -> Bool in
             return (self.removeUTF8(frString: serviceEntity.name.lowercased())).contains(self.removeUTF8(frString: txtSearch.text!.lowercased()))
         }
+        
+        let serInPack = service.listPack.filter { (serInPack) -> Bool in
+            return (self.removeUTF8(frString: serInPack.textSerive.lowercased())).contains(self.removeUTF8(frString: txtSearch.text!.lowercased()))
+        }
+        
+        self.listSerInPacSearch = serInPack
         self.listSearchService = serviceSearch
         self.listSearch = packSearch
         self.tbListService.reloadData()
@@ -162,9 +196,8 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
     }
     
     func checkSelect(indexPatch: IndexPath) {
-        
         if isSearch {
-            if indexPatch.section == 0 {
+            if isPackage {
                 if listSearch[indexPatch.row].pack.isCheckSelect == false {
                     isCheckPac(indexPatch: indexPatch, listPacks: listSearch)
                 }

@@ -12,6 +12,8 @@ class AllUserEntity: NSObject {
     
     var profile = FileUserEntity()
     var booking = BookingEntity()
+    var listPac = [PackEntity]()
+    var listSer = [ServicesEntity]()
     var isCheckSelect = false
     
     override init() {
@@ -23,8 +25,20 @@ class AllUserEntity: NSObject {
             profile = FileUserEntity.init(dictionary: value)
         }
         if let value = dictionary["BookingRecord"] as? NSDictionary {
-            
             booking = BookingEntity.init(dictionary: value)
         }
+        if let value = dictionary["ListPackages"] as? [NSDictionary] {
+            for item in value {
+                let entity = PackEntity.init(dictionary: item)
+                listPac.append(entity)
+            }
+        }
+        if let value = dictionary["ListServices"] as? [NSDictionary] {
+            for item in value {
+                let entity = ServicesEntity.init(dictionary: item)
+                listSer.append(entity)
+            }
+        }
+
     }
 }

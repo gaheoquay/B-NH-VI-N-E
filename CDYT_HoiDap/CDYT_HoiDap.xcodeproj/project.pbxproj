@@ -70,7 +70,6 @@
 		0FABDC331E61C2EC004DD98D /* CreateCvViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FABDC321E61C2EC004DD98D /* CreateCvViewController.swift */; };
 		0FC0CBA01E8760E0009DA53C /* KhamTaiNha.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC0CB9E1E8760E0009DA53C /* KhamTaiNha.png */; };
 		0FC0CBA11E8760E0009DA53C /* KhamTaiVien.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC0CB9F1E8760E0009DA53C /* KhamTaiVien.png */; };
-		0FC0CBA51E876315009DA53C /* DetailHistoryAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC0CBA41E876315009DA53C /* DetailHistoryAnalysisViewController.swift */; };
 		0FC0CBA71E876C21009DA53C /* DetaiAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC0CBA61E876C21009DA53C /* DetaiAnalysisViewController.swift */; };
 		0FC431701E65185B003F7F31 /* DetailsFileUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC4316F1E65185B003F7F31 /* DetailsFileUsersViewController.swift */; };
 		0FC431721E65283D003F7F31 /* ChuaCoLichKham.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC431711E65283D003F7F31 /* ChuaCoLichKham.png */; };
@@ -361,7 +360,6 @@
 		0FABDC321E61C2EC004DD98D /* CreateCvViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCvViewController.swift; sourceTree = "<group>"; };
 		0FC0CB9E1E8760E0009DA53C /* KhamTaiNha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KhamTaiNha.png; sourceTree = "<group>"; };
 		0FC0CB9F1E8760E0009DA53C /* KhamTaiVien.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KhamTaiVien.png; sourceTree = "<group>"; };
-		0FC0CBA41E876315009DA53C /* DetailHistoryAnalysisViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailHistoryAnalysisViewController.swift; sourceTree = "<group>"; };
 		0FC0CBA61E876C21009DA53C /* DetaiAnalysisViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetaiAnalysisViewController.swift; sourceTree = "<group>"; };
 		0FC4316F1E65185B003F7F31 /* DetailsFileUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsFileUsersViewController.swift; sourceTree = "<group>"; };
 		0FC431711E65283D003F7F31 /* ChuaCoLichKham.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChuaCoLichKham.png; sourceTree = "<group>"; };
@@ -969,7 +967,6 @@
 				0F9323E41E783DD300B56F39 /* ChoiceDoctorViewController.swift */,
 				0FE460701E8509260045DB84 /* ServiceViewController.swift */,
 				0FF632701E861D400044597F /* ExamInHomeViewController.swift */,
-				0FC0CBA41E876315009DA53C /* DetailHistoryAnalysisViewController.swift */,
 				0FC0CBA61E876C21009DA53C /* DetaiAnalysisViewController.swift */,
 				0F94FEE81E877F0A001884AD /* DetailAnalysisFormViewController.swift */,
 				0F09CEF41E88B1DC003FD8B1 /* SelectServiceViewController.swift */,
@@ -1488,7 +1485,6 @@
 				8B87CD2C1E1365A400DA8A33 /* AuthorEntity.swift in Sources */,
 				8B3A13701E10F454005DBC6E /* DataEncryption.m in Sources */,
 				8BD49F6D1E482D1100C98E74 /* ParticipantListTableViewCell.swift in Sources */,
-				0FC0CBA51E876315009DA53C /* DetailHistoryAnalysisViewController.swift in Sources */,
 				A62F58601E2CA78100459408 /* EditCommentViewController.swift in Sources */,
 				0FCFD9A61E5EEDB700EE2F89 /* BookingCalenderController.swift in Sources */,
 				0F9AD59C1E63CE0F00981D7B /* SearchFileViewController.swift in Sources */,

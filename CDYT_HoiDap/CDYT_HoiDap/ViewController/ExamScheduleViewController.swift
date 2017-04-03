@@ -85,6 +85,9 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
     func gotoDetailUser(index: IndexPath) {
         if listallUSer[index.row].booking.bookType == 2 {
             let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetaiAnalysisViewController") as! DetaiAnalysisViewController
+            viewcontroller.listServices = listallUSer[index.row].listSer
+            viewcontroller.listPack = listallUSer[index.row].listPac
+            viewcontroller.booKing = listallUSer[index.row].booking
             self.navigationController?.pushViewController(viewcontroller, animated: true)
         }else {
             let main = UIStoryboard(name: "Main", bundle: nil)

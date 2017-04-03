@@ -21,9 +21,9 @@ class ViewController: BaseViewController,KeyWordTableViewCellDelegate {
 
     setupUI()
     initTableView()
-    Until.showLoading()
-    getFeeds()
-    getHotTagFromServer()
+//    Until.showLoading()
+//    getFeeds()
+//    getHotTagFromServer()
     // Do any additional setup after loading the view, typically from a nib.
     
   }

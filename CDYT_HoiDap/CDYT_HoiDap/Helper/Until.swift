@@ -73,6 +73,7 @@ extension String {
         let date = Date(timeIntervalSince1970: timeStamp)
     
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT +7")
         dateFormatter.dateFormat = dateFormat
         
         return dateFormatter.string(from: date)
@@ -80,6 +81,7 @@ extension String {
     
     func convertDatetoString(date: Date, dateFormat: String) -> String{
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT +7")
         dateFormatter.dateFormat = dateFormat
         
         return dateFormatter.string(from: date)
