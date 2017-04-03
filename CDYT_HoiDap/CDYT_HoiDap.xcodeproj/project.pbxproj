@@ -12,6 +12,7 @@
 		0F09CEF51E88B1DC003FD8B1 /* SelectServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F09CEF41E88B1DC003FD8B1 /* SelectServiceViewController.swift */; };
 		0F0EFD311E62771C0036C860 /* HistoryUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0EFD301E62771C0036C860 /* HistoryUserViewController.swift */; };
 		0F0EFD331E627FFA0036C860 /* HoSoRong_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F0EFD321E627FFA0036C860 /* HoSoRong_1.png */; };
+		0F0FB8251E90BC4D0044468A /* tab1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F0FB8241E90BC4D0044468A /* tab1.png */; };
 		0F17AB151E51A682008BA308 /* CheckList.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F17AB141E51A682008BA308 /* CheckList.png */; };
 		0F17AB171E51ACFF008BA308 /* Private.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F17AB161E51ACFF008BA308 /* Private.png */; };
 		0F17AB191E51BAC2008BA308 /* CateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17AB181E51BAC2008BA308 /* CateEntity.swift */; };
@@ -302,6 +303,7 @@
 		0F09CEF41E88B1DC003FD8B1 /* SelectServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectServiceViewController.swift; sourceTree = "<group>"; };
 		0F0EFD301E62771C0036C860 /* HistoryUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryUserViewController.swift; sourceTree = "<group>"; };
 		0F0EFD321E627FFA0036C860 /* HoSoRong_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HoSoRong_1.png; sourceTree = "<group>"; };
+		0F0FB8241E90BC4D0044468A /* tab1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab1.png; sourceTree = "<group>"; };
 		0F17AB141E51A682008BA308 /* CheckList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckList.png; sourceTree = "<group>"; };
 		0F17AB161E51ACFF008BA308 /* Private.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Private.png; sourceTree = "<group>"; };
 		0F17AB181E51BAC2008BA308 /* CateEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CateEntity.swift; sourceTree = "<group>"; };
@@ -719,6 +721,7 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0F0FB8241E90BC4D0044468A /* tab1.png */,
 				0FA10C771E8B789400D1A11F /* XNTaiNha.png */,
 				0FC0CB9E1E8760E0009DA53C /* KhamTaiNha.png */,
 				0FC0CB9F1E8760E0009DA53C /* KhamTaiVien.png */,
@@ -1368,6 +1371,7 @@
 				0F9C463D1E603F4200DCFE46 /* LichSuGrey   .png in Resources */,
 				A68A95091E14ED1C0067736E /* CommentTableViewCell.xib in Resources */,
 				A663AB621E56B7C000A5AD4A /* Verified.png in Resources */,
+				0F0FB8251E90BC4D0044468A /* tab1.png in Resources */,
 				0FF7533E1E62F3A9001450B7 /* ExamScheduleCell.xib in Resources */,
 				8B3A13411E10F454005DBC6E /* AvaDefaut.png in Resources */,
 				A6CD32D01E4C2C9400FA2B21 /* GoogleService-Info.plist in Resources */,

@@ -70,13 +70,16 @@ class ExamScheduleCell: UITableViewCell {
     let fontRegularWithColor = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor.init(netHex: 0xa0b3bc)]
     
     let myAttrStringSv = NSMutableAttributedString(string: "Kiểu dịch vụ: ", attributes: fontRegular)
+    var creteDate = ""
     
     if userEntity.booking.bookType == 2 {
         myAttrStringSv.append(NSMutableAttributedString(string: "Xét nghiệm tại nhà", attributes: fontBold))
         imgAvatar.image = UIImage(named: "XNTaiNha.png")
+        creteDate = String().convertTimeStampWithDateFormat(timeStamp: userEntity.booking.bookingDate/1000, dateFormat: "dd/MM/YYYY     hh:mm a")
     }else {
         myAttrStringSv.append(NSMutableAttributedString(string: "Khám tại viện E", attributes: fontBold))
         imgAvatar.image = UIImage(named: "KhamTaiVien.png")
+        creteDate = String().convertTimeStampWithDateFormat(timeStamp: userEntity.booking.bookingDate/1000, dateFormat: "dd/MM/YYYY")
     }
     
     lbServiceType.attributedText = myAttrStringSv
@@ -99,7 +102,6 @@ class ExamScheduleCell: UITableViewCell {
    
       lbName.text = userEntity.profile.patientName
     
-        let creteDate = String().convertTimeStampWithDateFormat(timeStamp: userEntity.booking.bookingDate/1000, dateFormat: "dd/MM/YYYY")
     
 
         let myAttrString = NSMutableAttributedString(string: "Ngày khám: ", attributes: fontRegular)

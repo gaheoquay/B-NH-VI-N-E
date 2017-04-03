@@ -9,15 +9,19 @@
 import UIKit
 
 protocol SelectServiceViewControllerDelegate {
-    func getListService(listPackage : [PackagesEntity], listSer: [ServicesEntity] )
+    func getListService(services: PackServiceEntity)
 }
 
 class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var txtSearch: UITextField!
     @IBOutlet weak var tbListService: UITableView!
+    @IBOutlet weak var viewSearch: UIView!
+    @IBOutlet weak var imgTabPack: UIImageView!
+    @IBOutlet weak var imgTabService: UIImageView!
     
     var isPackage = true
+    var isSearch = false
 
     var service = PackServiceEntity()
     var listSearch = [PackagesEntity]()
@@ -26,7 +30,11 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if service.listPack.count > 0 && service.listSer.count > 0 {
+        
+        }else {
         requestListService()
+        }
         setupUI()
         // Do any additional setup after loading the view.
     }
@@ -37,6 +45,9 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
     }
     
     func setupUI(){
+        imgTabService.isHidden = true
+        viewSearch.layer.cornerRadius = 5
+        viewSearch.clipsToBounds = true
         tbListService.delegate = self
         tbListService.dataSource = self
         tbListService.rowHeight = UITableViewAutomaticDimension
@@ -48,7 +59,8 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
         return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if txtSearch.text != "" {
+        let txtSerchString = txtSearch.text?.trimmingCharacters(in: .whitespaces)
+        if txtSerchString != "" {
             if section == 0 {
                 return listSearch.count
             }else {
@@ -66,8 +78,11 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCell") as! ServiceCell
         cell.delegate = self
+        let txtSerchString = txtSearch.text?.trimmingCharacters(in: .whitespaces)
         cell.indexPatch = indexPath
-        if txtSearch.text == "" {
+
+        if txtSerchString == "" {
+            self.isSearch = false
             if isPackage {
                 cell.isPackage = true
                 cell.pacKage = service.listPack[indexPath.row]
@@ -78,6 +93,8 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
                 cell.setData()
             }
         }else {
+            self.isSearch = true
+            cell.isPackage = false
             if indexPath.section == 0 {
                 cell.pacKage = listSearch[indexPath.row]
                 cell.isPackage = true
@@ -95,11 +112,17 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
     @IBAction func btnPackage(_ sender: Any) {
         isPackage = true
         tbListService.reloadData()
+        imgTabPack.image = UIImage.init(named: "tab1.png")
+        imgTabService.isHidden = true
+        imgTabPack.isHidden = false
     }
     
     @IBAction func btnService(_ sender: Any) {
         isPackage = false
         tbListService.reloadData()
+        imgTabService.image = UIImage.init(named: "tab1.png")
+        imgTabService.isHidden = false
+        imgTabPack.isHidden = true
     }
 
     @IBAction func btnSearch(_ sender: Any) {
@@ -138,7 +161,81 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
 
     }
     
-       
+    func checkSelect(indexPatch: IndexPath) {
+        
+        if isSearch {
+            if indexPatch.section == 0 {
+                if listSearch[indexPatch.row].pack.isCheckSelect == false {
+                    isCheckPac(indexPatch: indexPatch, listPacks: listSearch)
+                }
+            }else {
+                if listSearchService[indexPatch.row].isCheckSelect == false {
+                    isCheckService(indexPatch: indexPatch, listSers: listSearchService)
+                }
+            }
+        
+        }else {
+            if isPackage {
+                if service.listPack[indexPatch.row].pack.isCheckSelect == false {
+                    isCheckPac(indexPatch: indexPatch, listPacks: service.listPack)
+                }
+            }else {
+                if service.listSer[indexPatch.row].isCheckSelect == false{
+                    isCheckService(indexPatch: indexPatch, listSers: service.listSer )
+                }
+            }
+        }
+        
+    }
+    
+    func isCheckPac(indexPatch: IndexPath, listPacks : [PackagesEntity]){
+            let listSer = service.listSer.filter({ (servicesEntity) -> Bool in
+                servicesEntity.isCheckSelect == true
+            })
+            for item in listSer {
+                for pac in listPacks[indexPatch.row].service {
+                    if item.name == pac.name {
+                        let alert = UIAlertController.init(title: "Thông báo", message: "Bạn đã chọn dịch vụ lẻ có trong gói này . Bạn có muốn bỏ dịch vụ lẻ đi không ?", preferredStyle: UIAlertControllerStyle.alert)
+                        let actionOk = UIAlertAction.init(title: "Đồng ý", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
+                            item.isCheckSelect = false
+                            self.tbListService.reloadData()
+                        })
+                        let actionCancel = UIAlertAction.init(title: "Huỷ", style: .default, handler: { (UIAlertAction) in
+                            listPacks[indexPatch.row].pack.isCheckSelect = false
+                            self.tbListService.reloadData()
+                        })
+                        alert.addAction(actionOk)
+                        alert.addAction(actionCancel)
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+    }
+    
+    func isCheckService(indexPatch: IndexPath, listSers: [ServicesEntity]){
+            let listPac = service.listPack.filter({ (packagesEntity) -> Bool in
+                packagesEntity.pack.isCheckSelect == true
+            })
+            for listSv in listPac {
+                for item in listSv.service {
+                    if item.name == listSers[indexPatch.row].name {
+                        let alert = UIAlertController.init(title: "Thông báo", message: "Bạn đã chọn gói có dịch vụ lẻ này , Bạn có muôn bỏ gói dịch vụ đi không ?", preferredStyle: UIAlertControllerStyle.alert)
+                        let actionOk = UIAlertAction.init(title: "Đồng ý", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
+                            listSv.pack.isCheckSelect = false
+                            self.tbListService.reloadData()
+                        })
+                        let actionCancel = UIAlertAction.init(title: "Huỷ", style: .default, handler: { (UIAlertAction) in
+                            listSers[indexPatch.row].isCheckSelect = false
+                            self.tbListService.reloadData()
+                        })
+                        alert.addAction(actionOk)
+                        alert.addAction(actionCancel)
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+    }
+    
     func reloadDataCell(indexPatch: IndexPath) {
         tbListService.reloadRows(at: [indexPatch], with: .automatic)
     }
@@ -146,7 +243,7 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
     
     
     @IBAction func btnClose(_ sender: Any) {
-        delegate?.getListService(listPackage: service.listPack, listSer: service.listSer)
+        delegate?.getListService(services: service)
         _ = self.navigationController?.popViewController(animated: true)
     }
     

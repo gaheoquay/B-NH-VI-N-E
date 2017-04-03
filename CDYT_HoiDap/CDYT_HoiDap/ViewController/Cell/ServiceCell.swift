@@ -9,6 +9,7 @@
 import UIKit
 protocol ServiceCellDelegate {
     func reloadDataCell(indexPatch: IndexPath)
+    func checkSelect(indexPatch: IndexPath)
 }
 
 class ServiceCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
@@ -108,6 +109,7 @@ class ServiceCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
     
     
     @IBAction func btnSelect(_ sender: Any) {
+        delegate?.checkSelect(indexPatch: indexPatch)
         if isPackage {
             pacKage.pack.isCheckSelect = !pacKage.pack.isCheckSelect
             if !pacKage.pack.isCheckSelect {

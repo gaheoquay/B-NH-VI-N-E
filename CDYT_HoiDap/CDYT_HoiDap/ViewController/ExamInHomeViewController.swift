@@ -19,12 +19,13 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
     
     var listService = [ServicesEntity]()
     var listPacKage = [PackagesEntity]()
+    var service = PackServiceEntity()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -43,6 +44,7 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
         viewBottom.layer.borderColor = UIColor.gray.cgColor
         viewBottom.layer.borderWidth = 0.5
         
+        setSumPrice()
         
         
     }
@@ -74,21 +76,33 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
     @IBAction func btnAddNewService(_ sender: Any) {
         let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "SelectServiceViewController") as! SelectServiceViewController
         viewcontroller.delegate = self
+        viewcontroller.service = self.service
         self.navigationController?.pushViewController(viewcontroller, animated: true)
         
     }
     
-    func getListService(listPackage: [PackagesEntity], listSer: [ServicesEntity]) {
-        let listAddNewSerVice = listSer.filter { (serviceEntity) -> Bool in
+    func getListService(services: PackServiceEntity) {
+        let listAddNewSerVice = services.listSer.filter { (serviceEntity) -> Bool in
             serviceEntity.isCheckSelect == true
         }
-        self.listService = listAddNewSerVice
-        
-        let listAddPackage = listPackage.filter { (packagesEntity) -> Bool in
+        let listAddPackage = services.listPack.filter { (packagesEntity) -> Bool in
             packagesEntity.pack.isCheckSelect == true
         }
-        self.listPacKage = listAddPackage
         
+        listService.removeAll()
+        for item in listAddNewSerVice {
+            self.listService.append(item)
+        }
+        listPacKage.removeAll()
+        for pac in listAddPackage {
+            self.listPacKage.append(pac)
+        }
+        
+        self.service = services
+        setSumPrice()
+    }
+    
+    func setSumPrice(){
         var SumPrice: Double = 0
         var priceSer : Double = 0
         
@@ -100,25 +114,29 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
         for item in listService {
             priceSer = priceSer + item.priceService
         }
-        let myAttrString = NSMutableAttributedString(string: " \(listPacKage.count) dịch vụ được chọn\n Tổng tiền tạm tính : ", attributes: fontRegular)
+        let myAttrString = NSMutableAttributedString(string: " \(listPacKage.count + listService.count) dịch vụ được chọn\n Tổng tiền tạm tính : ", attributes: fontRegular)
         myAttrString.append(NSMutableAttributedString(string: "\(String().replaceNSnumber(doublePrice: SumPrice + priceSer))", attributes: fontRegularWithColor))
         lbTotalPrice.attributedText = myAttrString
         tbListServiceAddNew.reloadData()
     }
-   
+    
     @IBAction func btnSuccess(_ sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: GET_LIST_SERIVCE_IN_HOME), object: self.listService)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: GET_LIST_PACKAGE_IN_HOME), object: self.listPacKage)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: GET_SERVICES), object: self.service)
         _ = self.navigationController?.popViewController(animated: true)
     }
     
     func deleteFileUser(indexPath: IndexPath) {
         if indexPath.section == 0 {
             listPacKage.remove(at: indexPath.row)
+            service.listPack[indexPath.row].pack.isCheckSelect = false
         }else {
             listService.remove(at: indexPath.row)
+            service.listSer[indexPath.row].isCheckSelect = false
         }
-        tbListServiceAddNew.reloadData()
+        
+        setSumPrice()
     }
     
     func gotoDetailHistory(index: IndexPath) {
@@ -130,11 +148,36 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
     
     @IBAction func btnDeleteAllService(_ sender: Any) {
         listPacKage.removeAll()
-        tbListServiceAddNew.reloadData()
+        listService.removeAll()
+        requestListService()
+        setSumPrice()
     }
     
     @IBAction func btnBack(_ sender: Any) {
-        _ = self.navigationController?.popViewController(animated: true)
+//        _ = self.navigationController?.popViewController(animated: true)
+    }
+    
+    func requestListService(){
+        let param : [String : Any] = [
+            "Auth": Until.getAuthKey()
+        ]
+        Until.showLoading()
+        Alamofire.request(GET_LIST_PACKAGE_SERVICE, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! NSDictionary
+                        let entity = PackServiceEntity.init(dictionary: jsonData)
+                        self.service = entity
+                    }
+                }else{
+                }
+            }else{
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            }
+            Until.hideLoading()
+        }
+        
     }
     
     

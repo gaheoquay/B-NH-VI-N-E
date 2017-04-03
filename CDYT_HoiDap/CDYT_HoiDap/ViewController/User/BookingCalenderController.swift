@@ -130,7 +130,7 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
                 if self.status == 0 {
                     self.btnBookingDate.setTitle("\(String().convertDatetoString(date: date as! Date, dateFormat: "EEEE, dd/MM/YYYY "))", for: .normal)
                 }else {
-                    self.btnBookingDate.setTitle("\(String().convertDatetoString(date: date as! Date, dateFormat: "EEEE, dd/MM/YYYY hh:mm" ))", for: .normal)
+                    self.btnBookingDate.setTitle("\(String().convertDatetoString(date: date as! Date, dateFormat: "EEEE, dd/MM/YYYY hh:mm a "))", for: .normal)
                 }
                 self.dateBook = (date?.timeIntervalSince1970)!
             }
@@ -246,6 +246,7 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
             let fileUser = notification.object as! BookingUserEntity
             userBooking = fileUser
             btnBrifUser.setTitle(fileUser.profile.patientName, for: .normal)
+            txtPhoneNumber.text = fileUser.profile.phoneNumber
         }
     }
     
@@ -261,7 +262,11 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
             if listPack.count > 0 {
                 btnService.setTitle(" \(listService.count + listPack.count) dịch vụ được chọn", for: .normal)
             }else {
-                btnService.setTitle(" \(listService.count) dịch vụ được chọn", for: .normal)
+                if listService.count > 0 {
+                    btnService.setTitle(" \(listService.count) dịch vụ được chọn", for: .normal)
+                }else {
+                    btnService.setTitle("Danh sách dịch vụ ", for: .normal)
+                }
             }
         }
     }
@@ -278,7 +283,11 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
             if listService.count > 0 {
                 btnService.setTitle(" \(listService.count + listPack.count) dịch vụ được chọn", for: .normal)
             }else {
-                btnService.setTitle(" \(listPack.count) dịch vụ được chọn", for: .normal)
+                if listPack.count > 0 {
+                    btnService.setTitle(" \(listPack.count) dịch vụ được chọn", for: .normal)
+                }else {
+                    btnService.setTitle("Danh sách dịch vụ ", for: .normal)
+                }
             }
 
         }
@@ -354,33 +363,35 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
             listServiceId.append(id)
         }
         
-        var param : [String: Any] = [:]
-        
-        param["Auth"] = Until.getAuthKey()
-        param["RequestedUserId"] =  Until.getCurrentId()
-        param["ProfileId"] = userBooking.profile.id
-        param["BookingDate"] = String(format:"%.0f",dateBook * 1000)
-        param["PhoneNumber"] = txtPhoneNumber.text!
-        param["DistristId"] = listDictric[indexPatch].id
-        param["Address"] = txtAdress.text!
-        param["Note"] = txtNode.text!
-        param["ListPackages"] = listPackId
-        param["ListServices"] = listServiceId
-        
-        Alamofire.request(BOOKING_IN_HOME, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    self.delegate?.gotoExamSchudelAtHome()
+        if listPackId.count > 0 || listServiceId.count > 0 {
+            var param : [String: Any] = [:]
+            
+            param["Auth"] = Until.getAuthKey()
+            param["RequestedUserId"] =  Until.getCurrentId()
+            param["ProfileId"] = userBooking.profile.id
+            param["BookingDate"] = String(format:"%.0f",dateBook * 1000)
+            param["PhoneNumber"] = txtPhoneNumber.text!
+            param["DistrictId"] = listDictric[indexPatch].id
+            param["Address"] = txtAdress.text!
+            param["Note"] = txtNode.text!
+            param["ListPackages"] = listPackId
+            param["ListServices"] = listServiceId
+            
+            Alamofire.request(BOOKING_IN_HOME, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        self.delegate?.gotoExamSchudelAtHome()
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    }
+                    Until.hideLoading()
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-                Until.hideLoading()
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
             }
+        }else {
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn dịch vụ", cancelBtnTitle: "Đóng")
         }
-        
-        
     }
     
     
