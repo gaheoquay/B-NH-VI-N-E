@@ -41,7 +41,7 @@ class HistoryCell: UITableViewCell {
         
         if entity.status == 0 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
-            myAttrString.append(NSMutableAttributedString(string: "Chờ xác nhận khám", attributes: fontRegularWithColor))
+            myAttrString.append(NSMutableAttributedString(string: "Chờ xác nhận ", attributes: fontRegularWithColor))
             lbStatus.attributedText = myAttrString
         }else if entity.status == 1 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
@@ -58,7 +58,7 @@ class HistoryCell: UITableViewCell {
             lbStatus.attributedText = myAttrString
         }else {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
-            myAttrString.append(NSMutableAttributedString(string: "Đã có kết quả khám", attributes: fontRegularWithColor))
+            myAttrString.append(NSMutableAttributedString(string: "Đã có kết quả", attributes: fontRegularWithColor))
             lbStatus.attributedText = myAttrString
         }
         

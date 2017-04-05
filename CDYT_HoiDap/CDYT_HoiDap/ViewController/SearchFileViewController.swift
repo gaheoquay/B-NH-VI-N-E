@@ -30,7 +30,7 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        txtSearch.becomeFirstResponder()
         requestUSer()
         setupBtn()
         // Do any additional setup after loading the view.
@@ -78,6 +78,12 @@ class SearchFileViewController: UIViewController,UITableViewDelegate,UITableView
             delegate?.gotoHistory(indexPath: indexPath)
         }
         _ = self.navigationController?.popViewController(animated: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if !tbListFile.isDecelerating {
+            view.endEditing(true)
+        }
     }
     
     @IBAction func btnSearch(_ sender: Any) {

@@ -101,7 +101,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         lbJob.text = infoUser.jobName
         lbJob.textColor = UIColor.black
         lbCountry.text = infoUser.countryName
-        lbCountry.textColor = UIColor.black
+        lbCountry.textColor = UIColor.init(netHex: 0x61abfa)
         lbProvince.text = infoUser.provinceName
         lbProvince.textColor = UIColor.black
         lbDistric.text = infoUser.dictrictName
@@ -145,6 +145,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     }else {
     lbTittle.text = "Tạo hồ sơ"
     lbCountry.text = "Việt Nam"
+    lbCountry.textColor = UIColor.init(netHex: 0x61abfa)
     timeStampDateOfBirt = Date().timeIntervalSince1970
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "dd/MM/yyyy"
@@ -263,9 +264,9 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn quốc tịch", cancelBtnTitle: "Đồng ý")
       return
     }
-    if listCurrentProvince.count == 0 {
-      return
-    }
+//    if listCurrentProvince.count == 0 {
+//      return
+//    }
     creatAlert(title: "Tỉnh/Thành phố", picker: pickerlistProvince)
   }
   
@@ -414,7 +415,6 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     requestListProvice()
     requestListDistrict()
   }
-
   func requestListJob(){
     Alamofire.request(BOOKING_GET_LIST_JOB, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
@@ -552,8 +552,13 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     }
     userEntity.passportId = txtCMT.text!
     userEntity.phoneNumber = txtPhoneNumber.text!
+    if selectedJob == nil {
+    userEntity.jobId = ""
+    userEntity.jobName = ""
+    }else {
     userEntity.jobId = String(format: "%.0f",selectedJob.jobId)
     userEntity.jobName = selectedJob.name
+    }
     userEntity.countryId = String(format: "%.0f",selectedCountry.countryId)
     userEntity.countryName = selectedCountry.name
     userEntity.provinceId = String(format: "%.0f",selectedProvince.provinceId)

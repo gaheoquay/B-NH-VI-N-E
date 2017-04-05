@@ -18,6 +18,8 @@ protocol BookingCalenderControllerDelegate {
 class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,ServiceViewControllerDelegate,UIPickerViewDataSource,UIPickerViewDelegate{
     
     
+    @IBOutlet weak var viewService: UIView!
+    @IBOutlet weak var heightViewService: NSLayoutConstraint!
     @IBOutlet weak var viewBookingHome: UIView!
     @IBOutlet weak var btnAlanysis: UIButton!
     @IBOutlet weak var btnSendBooking: UIButton!
@@ -57,6 +59,7 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadBooking), name: Notification.Name.init(RELOAD_BOOKING), object: nil)
         setupUi()
+        registerNotification()
         requestListDistrict()
     }
     
@@ -65,7 +68,14 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
         self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
         self.serviceEntity = ServiceEntity()
         self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
+        self.txtPhoneNumber.text = "Số điện thoại"
+        self.btnChoiceDistric.setTitle("Chọn Quận/Huyện ", for: .normal)
+        self.txtAdress.text = ""
+        self.txtAdress.placeholder = "Nhập địa chỉ sử dụng dịch vụ"
         self.userBooking = BookingUserEntity()
+        self.listService = [ServicesEntity]()
+        self.listPack = [PackagesEntity]()
+       
     }
     
     func setupUi(){
@@ -74,7 +84,6 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
         btnSendBooking.layer.cornerRadius = 5
         btnSendBooking.clipsToBounds = true
         btnBookingDate.setTitle("\(String().convertDatetoString(date: currentDate, dateFormat: "EEEE, dd/MM/YYYY "))", for: .normal)
-        registerNotification()
         if status == 0 {
             viewBookingHome.isHidden = true
             heightViewBookingHome.constant = 0
@@ -104,7 +113,13 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
         self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
         self.serviceEntity = ServiceEntity()
         self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
+        self.txtPhoneNumber.text = "Số điện thoại"
+        self.btnChoiceDistric.setTitle("Chọn Quận/Huyện ", for: .normal)
+        self.txtAdress.placeholder = "Nhập địa chỉ sử dụng dịch vụ"
+        self.txtAdress.text = ""
         self.userBooking = BookingUserEntity()
+        self.listService = [ServicesEntity]()
+        self.listPack = [PackagesEntity]()
     }
     @IBAction func tapService(_ sender: Any) {
         delegate?.gotoService(status: status)
@@ -281,6 +296,8 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
     }
     
     func setDataListSer(notification: Notification){
+        self.sumService = 0
+        print(sumService)
         if notification.object != nil {
             let listSer = notification.object as! [ServicesEntity]
             self.listService = listSer
@@ -302,6 +319,7 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
     }
     
     func setDataListPac(notification: Notification){
+        self.sumPack = 0
         if notification.object != nil {
             let listPacks = notification.object as! [PackagesEntity]
             self.listPack = listPacks
@@ -309,6 +327,7 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
                 for item in listPacks {
                     sumPack = sumPack + item.pack.pricePackage
                 }
+                print(sumPack)
             }
             if listService.count > 0 {
                 btnService.setTitle(" \(listService.count + listPack.count) dịch vụ được chọn", for: .normal)
@@ -410,6 +429,17 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
             Alamofire.request(BOOKING_IN_HOME, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
                 if let status = response.response?.statusCode {
                     if status == 200{
+                        self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
+                        self.serviceEntity = ServiceEntity()
+                        self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
+                        self.txtPhoneNumber.placeholder = "Số điện thoại"
+                        self.txtPhoneNumber.text = ""
+                        self.btnChoiceDistric.setTitle("Chọn Quận/Huyện ", for: .normal)
+                        self.txtAdress.placeholder = "Nhập địa chỉ sử dụng dịch vụ"
+                        self.txtAdress.text = ""
+                        self.userBooking = BookingUserEntity()
+                        self.listService = [ServicesEntity]()
+                        self.listPack = [PackagesEntity]()
                         self.delegate?.gotoExamSchudelAtHome()
                     }else{
                         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -494,32 +524,43 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
     
     func isvalidCheck(){
         if userBooking.profile.patientName  == "" {
-            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn hồ sơ", cancelBtnTitle: "Đóng")
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn hồ sơ", cancelBtnTitle: "Đóng")
         }else if dateBook == 0 {
-            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn ngày tháng", cancelBtnTitle: "Đóng")
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn ngày tháng", cancelBtnTitle: "Đóng")
         }else {
             if status == 0 {
                 if serviceEntity.name == ""  {
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn dịch vụ", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn dịch vụ", cancelBtnTitle: "Đóng")
                 }else{
                     requestBoking()
                 }
             }else {
                 if txtPhoneNumber.text == "" {
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa nhập số điện thoại", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nhập số điện thoại", cancelBtnTitle: "Đóng")
+                    txtPhoneNumber.becomeFirstResponder()
                 }else if listService.count == 0 && listPack.count == 0 {
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn dịch vụ", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn dịch vụ", cancelBtnTitle: "Đóng")
                 }else if txtAdress.text == "" {
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa nhập địa chỉ", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nhập địa chỉ", cancelBtnTitle: "Đóng")
+                    txtAdress.becomeFirstResponder()
                 }else {
                     if sumService + sumPack < checkPrice {
-                        let alert = UIAlertController.init(title: "Thông báo", message: "Chúng tôi sẽ phụ thu thêm\n 100.000đ do các dịch vụ cuả\n bạn có giá dưới 200.000đ", preferredStyle: UIAlertControllerStyle.alert)
+                        let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]
+                        let fontRegular = [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
+                        let myAttrString = NSMutableAttributedString(string: "Chúng tôi sẽ phụ thu thêm\n", attributes: fontRegular)
+                        myAttrString.append(NSMutableAttributedString(string: "100.000đ", attributes: fontBold))
+                        myAttrString.append(NSMutableAttributedString(string: " do các dịch vụ cuả\n bạn có giá dưới", attributes: fontRegular))
+                        myAttrString.append(NSMutableAttributedString(string: " 200.000đ", attributes: fontBold))
+
+
+                        let alert = UIAlertController.init(title: "Thông báo", message: "", preferredStyle: UIAlertControllerStyle.alert)
                         let actionCancel = UIAlertAction.init(title: "Chọn lại", style: .cancel, handler: { (UIAlertAction) in
                             
                         })
                         let actionOk = UIAlertAction.init(title: "Đồng ý", style: UIAlertActionStyle.destructive, handler: { (UIAlertAction) in
                             self.requestExamInHome()
                         })
+                        alert.setValue(myAttrString, forKey: "attributedMessage")
                         alert.addAction(actionOk)
                         alert.addAction(actionCancel)
                         self.present(alert, animated: true, completion: nil)

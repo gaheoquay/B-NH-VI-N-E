@@ -115,6 +115,7 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
         imgManager.image = UIImage.init(named: "tab1.png")
         imgBooking.isHidden = true
         imgManager.isHidden = false
+        view.endEditing(true)
     }
     
     func didMoveToPage(_ controller: UIViewController, index: Int) {
@@ -124,6 +125,7 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
         }else {
             imgBooking.isHidden = true
             imgManager.isHidden = false
+            view.endEditing(true)
         }
         self.view.layoutIfNeeded()
     }
@@ -211,7 +213,7 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
     }
     
     func gotoExamSchudelCheckin() {
-        let alert = UIAlertController(title: "Thông Báo", message: "Đăng ký khám thành công", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Thông Báo", message: "Gửi lịch đặt khám thành công", preferredStyle: .alert)
         let arletAction = UIAlertAction(title: "Xem", style: .cancel) { (UIAlertAction) in
             let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "ExamScheduleViewController") as! ExamScheduleViewController
             viewcontroller.listService = self.listService
@@ -222,7 +224,11 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
     }
     
     func gotoExamSchudelAtHome() {
-        let alert = UIAlertController(title: "Thông Báo", message: "Gửi lịch thành công \n Chúng tôi sẽ gọi lại cho bạn\n để xác nhận ", preferredStyle: .alert)
+        self.listServices.removeAll()
+        self.listPack.removeAll()
+        self.service.listPack.removeAll()
+        self.service.listSer.removeAll()
+        let alert = UIAlertController(title: "Thông Báo", message: "Gửi lịch đặt khám thành công \n Chúng tôi sẽ gọi lại cho bạn\n để xác nhận ", preferredStyle: .alert)
         let arletAction = UIAlertAction(title: "Xem", style: .cancel) { (UIAlertAction) in
             let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "ExamScheduleViewController") as! ExamScheduleViewController
             viewcontroller.listService = self.listService

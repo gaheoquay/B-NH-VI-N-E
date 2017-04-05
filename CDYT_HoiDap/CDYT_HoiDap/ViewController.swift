@@ -21,9 +21,9 @@ class ViewController: BaseViewController,KeyWordTableViewCellDelegate {
 
     setupUI()
     initTableView()
-//    Until.showLoading()
-//    getFeeds()
-//    getHotTagFromServer()
+    Until.showLoading()
+    getFeeds()
+    getHotTagFromServer()
     // Do any additional setup after loading the view, typically from a nib.
     
   }
@@ -190,7 +190,8 @@ class ViewController: BaseViewController,KeyWordTableViewCellDelegate {
 extension ViewController : QuestionTableViewCellDelegate {
   func showQuestionDetail(indexPath: IndexPath) {
     let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
-    vc.feedObj = listFedds[indexPath.row]
+//    vc.feedObj = listFedds[indexPath.row]
+    vc.questionID = listFedds[indexPath.row].postEntity.id
     self.navigationController?.pushViewController(vc, animated: true)
   }
   

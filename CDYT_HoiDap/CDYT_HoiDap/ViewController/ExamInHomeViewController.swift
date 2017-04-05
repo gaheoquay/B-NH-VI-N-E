@@ -35,7 +35,7 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
         
         addNewListService()
         
-        if listPacKage.count == 0 && listService.count == 0 || (service.listPack.count == 0 && service.listSer.count == 0) {
+        if (listPacKage.isEmpty && listService.isEmpty) || (service.listPack.isEmpty && service.listSer.isEmpty) {
             heigtTableService.constant = UIScreen.main.bounds.size.height
             viewBottom.isHidden = true
         }else {

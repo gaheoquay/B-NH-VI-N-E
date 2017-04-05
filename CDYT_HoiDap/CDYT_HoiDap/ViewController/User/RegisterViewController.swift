@@ -77,7 +77,7 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable,UIPi
         }else{
             txtFullName.isHidden = true
             txtDepartmen.isHidden = true
-            viewDepartmen.isHidden = true
+//            viewDepartmen.isHidden = true
             lbLineName.isHidden = true
             lbLineDepartmen.isHidden = true
             role = 0

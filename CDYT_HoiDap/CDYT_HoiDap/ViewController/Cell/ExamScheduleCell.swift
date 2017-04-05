@@ -120,7 +120,7 @@ class ExamScheduleCell: UITableViewCell {
             lbStatus.attributedText = myAttrString
         }else if userEntity.booking.status == 2 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
-            myAttrString.append(NSMutableAttributedString(string: "Đã có số ", attributes: fontRegularWithColor))
+            myAttrString.append(NSMutableAttributedString(string: "Đã có số khám", attributes: fontRegularWithColor))
             lbStatus.attributedText = myAttrString
         }
         else if userEntity.booking.status == 3 {

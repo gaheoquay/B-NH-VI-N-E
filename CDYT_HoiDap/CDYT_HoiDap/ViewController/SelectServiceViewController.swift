@@ -154,6 +154,8 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
     }
 
     @IBAction func btnSearch(_ sender: Any) {
+        
+        
         let packSearch = service.listPack.filter { (packagesEntity) -> Bool in
             return (self.removeUTF8(frString: packagesEntity.pack.name.lowercased())).contains(self.removeUTF8(frString: txtSearch.text!.lowercased()))
         }
@@ -165,10 +167,18 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
             return (self.removeUTF8(frString: serInPack.textSerive.lowercased())).contains(self.removeUTF8(frString: txtSearch.text!.lowercased()))
         }
         
+        
+        
         self.listSerInPacSearch = serInPack
         self.listSearchService = serviceSearch
         self.listSearch = packSearch
         self.tbListService.reloadData()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if !tbListService.isDecelerating {
+            view.endEditing(true)
+        }
     }
     
     func requestListService(){
@@ -198,9 +208,16 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
     func checkSelect(indexPatch: IndexPath) {
         if isSearch {
             if isPackage {
-                if listSearch[indexPatch.row].pack.isCheckSelect == false {
-                    isCheckPac(indexPatch: indexPatch, listPacks: listSearch)
+                if indexPatch.section == 0 {
+                    if listSearch[indexPatch.row].pack.isCheckSelect == false {
+                        isCheckPac(indexPatch: indexPatch, listPacks: listSearch)
+                    }
+                }else {
+                    if listSerInPacSearch[indexPatch.row].pack.isCheckSelect == false {
+                        isCheckPac(indexPatch: indexPatch, listPacks: listSerInPacSearch)
+                    }
                 }
+                
             }else {
                 if listSearchService[indexPatch.row].isCheckSelect == false {
                     isCheckService(indexPatch: indexPatch, listSers: listSearchService)
@@ -228,7 +245,7 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
             for item in listSer {
                 for pac in listPacks[indexPatch.row].service {
                     if item.name == pac.name {
-                        let alert = UIAlertController.init(title: "Thông báo", message: "Bạn đã chọn dịch vụ lẻ có trong gói này . Bạn có muốn bỏ dịch vụ lẻ đi không ?", preferredStyle: UIAlertControllerStyle.alert)
+                        let alert = UIAlertController.init(title: "Thông báo", message: "Bạn đã chọn dịch vụ lẻ có trong gói này. Bạn có muốn bỏ dịch vụ lẻ đi không?", preferredStyle: UIAlertControllerStyle.alert)
                         let actionOk = UIAlertAction.init(title: "Đồng ý", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
                             item.isCheckSelect = false
                             self.tbListService.reloadData()
@@ -252,7 +269,7 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
             for listSv in listPac {
                 for item in listSv.service {
                     if item.name == listSers[indexPatch.row].name {
-                        let alert = UIAlertController.init(title: "Thông báo", message: "Bạn đã chọn gói có dịch vụ lẻ này , Bạn có muôn bỏ gói dịch vụ đi không ?", preferredStyle: UIAlertControllerStyle.alert)
+                        let alert = UIAlertController.init(title: "Thông báo", message: "Bạn đã chọn gói có dịch vụ lẻ này. Bạn có muốn bỏ gói dịch vụ đi không?", preferredStyle: UIAlertControllerStyle.alert)
                         let actionOk = UIAlertAction.init(title: "Đồng ý", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
                             listSv.pack.isCheckSelect = false
                             self.tbListService.reloadData()
