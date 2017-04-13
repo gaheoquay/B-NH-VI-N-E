@@ -536,7 +536,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
             nameDoc = entity.assigneeEntity.fullname
             indexPathOfCell = indexPath
             if isAssigned {
-                let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có muốn duyệt lại không?", preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có muốn duyệt lại câu hỏi này  ?", preferredStyle: UIAlertControllerStyle.alert)
                 let actionOk = UIAlertAction.init(title: "Đồng ý", style: UIAlertActionStyle.default, handler: { (action) in
                     self.requestApproval()
                 })

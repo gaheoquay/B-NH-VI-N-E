@@ -76,10 +76,28 @@ class ExamScheduleCell: UITableViewCell {
         myAttrStringSv.append(NSMutableAttributedString(string: "Xét nghiệm tại nhà", attributes: fontBold))
         imgAvatar.image = UIImage(named: "XNTaiNha.png")
         creteDate = String().convertTimeStampWithDateFormat(timeStamp: userEntity.booking.bookingDate/1000, dateFormat: "dd/MM/YYYY     hh:mm a")
+        if userEntity.booking.status == 1 {
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
+            myAttrString.append(NSMutableAttributedString(string: "Đặt lịch thành công", attributes: fontRegularWithColor))
+            lbStatus.attributedText = myAttrString
+        }else if userEntity.booking.status == 2 {
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
+            myAttrString.append(NSMutableAttributedString(string: "Đã xác nhận", attributes: fontRegularWithColor))
+            lbStatus.attributedText = myAttrString
+        }
     }else {
         myAttrStringSv.append(NSMutableAttributedString(string: "Khám tại viện E", attributes: fontBold))
         imgAvatar.image = UIImage(named: "KhamTaiVien.png")
         creteDate = String().convertTimeStampWithDateFormat(timeStamp: userEntity.booking.bookingDate/1000, dateFormat: "dd/MM/YYYY")
+        if userEntity.booking.status == 1 {
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
+            myAttrString.append(NSMutableAttributedString(string: "Chờ xử lý", attributes: fontRegularWithColor))
+            lbStatus.attributedText = myAttrString
+        }else if userEntity.booking.status == 2 {
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
+            myAttrString.append(NSMutableAttributedString(string: "Đã có số khám", attributes: fontRegularWithColor))
+            lbStatus.attributedText = myAttrString
+        }
     }
     
     lbServiceType.attributedText = myAttrStringSv
@@ -114,16 +132,7 @@ class ExamScheduleCell: UITableViewCell {
         let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
             myAttrString.append(NSMutableAttributedString(string: "Chờ xác nhận ", attributes: fontRegularWithColor))
             lbStatus.attributedText = myAttrString
-        }else if userEntity.booking.status == 1 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
-            myAttrString.append(NSMutableAttributedString(string: "Chờ xử lý", attributes: fontRegularWithColor))
-            lbStatus.attributedText = myAttrString
-        }else if userEntity.booking.status == 2 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
-            myAttrString.append(NSMutableAttributedString(string: "Đã có số khám", attributes: fontRegularWithColor))
-            lbStatus.attributedText = myAttrString
-        }
-        else if userEntity.booking.status == 3 {
+        }else if userEntity.booking.status == 3 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
             myAttrString.append(NSMutableAttributedString(string: "Đã thanh toán", attributes: fontRegularWithColor))
             lbStatus.attributedText = myAttrString

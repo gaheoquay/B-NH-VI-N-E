@@ -31,6 +31,8 @@ class DetailsFileUsersViewController: UIViewController {
     @IBOutlet weak var heightViewHeader: NSLayoutConstraint!
     @IBOutlet weak var heightViewParam: NSLayoutConstraint!
     @IBOutlet weak var heightViewBill: NSLayoutConstraint!
+    @IBOutlet weak var lbHour: UILabel!
+    @IBOutlet weak var viewHour: UIView!
     
     
     

@@ -40,6 +40,7 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
     var delegate: BookingCalenderControllerDelegate?
     var status = 0 // 0: Benh vien , 1: TAI NHA , 2 : XN tai nha
     var indexPatch = 0
+
     
     //test
     var listService = [ServicesEntity]()       // Kham tai nha and xet nghiem
@@ -48,6 +49,7 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
     var sumService : Double = 0
     var checkPrice: Double = 200000
     var listDictric = [DistricHomeEntity]()
+    var isListDic = [DistricHomeEntity]()
     let pickerViewDistric = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
 
     //endtest
@@ -72,6 +74,8 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
         self.btnChoiceDistric.setTitle("Chọn Quận/Huyện ", for: .normal)
         self.txtAdress.text = ""
         self.txtAdress.placeholder = "Nhập địa chỉ sử dụng dịch vụ"
+        self.txtNode.placeholder = "Thêm các yêu cầu riêng"
+        self.txtNode.text = ""
         self.userBooking = BookingUserEntity()
         self.listService = [ServicesEntity]()
         self.listPack = [PackagesEntity]()
@@ -88,17 +92,23 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
             viewBookingHome.isHidden = true
             heightViewBookingHome.constant = 0
             btnAlanysis.setTitle("Khám tại viện E", for: .normal)
+            viewService.isHidden = false
+            heightViewService.constant = 65
         }else if status == 1{
             self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
             self.serviceEntity = ServiceEntity()
             viewBookingHome.isHidden = false
             heightViewBookingHome.constant = 370
+            viewService.isHidden = true
+            heightViewService.constant = 0
             btnAlanysis.setTitle("Khám tại nhà", for: .normal)
         }else {
             self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
             self.serviceEntity = ServiceEntity()
             viewBookingHome.isHidden = false
+            viewService.isHidden = false
             heightViewBookingHome.constant = 370
+            heightViewService.constant = 65
             btnAlanysis.setTitle("Xét nghiệm tại nhà", for: .normal)
         }
         
@@ -113,10 +123,13 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
         self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
         self.serviceEntity = ServiceEntity()
         self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
-        self.txtPhoneNumber.text = "Số điện thoại"
+        self.txtPhoneNumber.text = ""
+        self.txtPhoneNumber.placeholder = "Số điện thoại"
         self.btnChoiceDistric.setTitle("Chọn Quận/Huyện ", for: .normal)
         self.txtAdress.placeholder = "Nhập địa chỉ sử dụng dịch vụ"
         self.txtAdress.text = ""
+        self.txtNode.placeholder = "Thêm các yêu cầu riêng"
+        self.txtNode.text = ""
         self.userBooking = BookingUserEntity()
         self.listService = [ServicesEntity]()
         self.listPack = [PackagesEntity]()
@@ -137,9 +150,9 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
         else{
             date = UIDatePickerMode.dateAndTime
         }
+        let curDate = Date()
         
-        
-        DatePickerDialog().show(title: "Chọn ngày khám", doneButtonTitle: "Xong", cancelButtonTitle: "Hủy", minimumDate: currentDate as NSDate?, datePickerMode: date!) {
+        DatePickerDialog().show(title: "Chọn ngày khám", doneButtonTitle: "Xong", cancelButtonTitle: "Hủy", minimumDate: curDate as NSDate?, datePickerMode: date!) {
             (date) -> Void in
             if date != nil {
                 if self.status == 0 {
@@ -183,6 +196,7 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
     }
     
     @IBAction func btnChoiceDistric(_ sender: Any) {
+        self.isListDic = self.listDictric
         creatAlert(title: "Chọn quận huyện", picker: pickerViewDistric)
     }
     
@@ -291,6 +305,10 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
             let fileUser = notification.object as! BookingUserEntity
             userBooking = fileUser
             btnBrifUser.setTitle(fileUser.profile.patientName, for: .normal)
+            if fileUser.profile.phoneNumber == "" {
+                self.txtPhoneNumber.text = ""
+                self.txtPhoneNumber.placeholder = "Số điện thoại"
+            }
             txtPhoneNumber.text = fileUser.profile.phoneNumber
         }
     }
@@ -342,11 +360,6 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
         }
 
     }
-    
-    
-    //MARK: SetupDate
-    
-    
     //MARK: request Api
     func requestBoking(){
         let param : [String : Any] = [
@@ -369,7 +382,6 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
                     if currentDateString == dateBookingString {
                         self.requestCheckin()
                     }else{
-                        
                         let localNotification = UILocalNotification()
                         let dateFormat = DateFormatter()
                         dateFormat.dateFormat = "dd/MM/yyyy"
@@ -400,6 +412,15 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
     }
     
     func requestExamInHome(){
+        
+        var  priceService: Double = 100000
+        
+        if sumService + sumPack < checkPrice {
+            priceService = 100000
+        }else {
+            priceService = 0
+        }
+        
         var listPackId = [[String: Any]]()
         for item in listPack {
             let id = ["Id": item.pack.id,"Name": item.pack.name]
@@ -425,6 +446,7 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
             param["Note"] = txtNode.text!
             param["ListPackages"] = listPackId
             param["ListServices"] = listServiceId
+            param["PriceService"] = String(format: "%.0f", priceService)
             
             Alamofire.request(BOOKING_IN_HOME, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
                 if let status = response.response?.statusCode {
@@ -437,6 +459,8 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
                         self.btnChoiceDistric.setTitle("Chọn Quận/Huyện ", for: .normal)
                         self.txtAdress.placeholder = "Nhập địa chỉ sử dụng dịch vụ"
                         self.txtAdress.text = ""
+                        self.txtNode.placeholder = "Thêm các yêu cầu riêng"
+                        self.txtNode.text = ""
                         self.userBooking = BookingUserEntity()
                         self.listService = [ServicesEntity]()
                         self.listPack = [PackagesEntity]()
@@ -538,11 +562,16 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
                 if txtPhoneNumber.text == "" {
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nhập số điện thoại", cancelBtnTitle: "Đóng")
                     txtPhoneNumber.becomeFirstResponder()
+                }else if !Until.isValidPhone(phone: txtPhoneNumber.text!){
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Sai định dạng số điện thoại", cancelBtnTitle: "Đóng")
+                    txtPhoneNumber.becomeFirstResponder()
                 }else if listService.count == 0 && listPack.count == 0 {
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn dịch vụ", cancelBtnTitle: "Đóng")
                 }else if txtAdress.text == "" {
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nhập địa chỉ", cancelBtnTitle: "Đóng")
                     txtAdress.becomeFirstResponder()
+                }else if isListDic.isEmpty {
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nhập quận huyện", cancelBtnTitle: "Đóng")
                 }else {
                     if sumService + sumPack < checkPrice {
                         let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)]

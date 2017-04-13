@@ -264,9 +264,9 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
       UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn quốc tịch", cancelBtnTitle: "Đồng ý")
       return
     }
-//    if listCurrentProvince.count == 0 {
-//      return
-//    }
+    if listCurrentProvince.count == 0 {
+      return
+    }
     creatAlert(title: "Tỉnh/Thành phố", picker: pickerlistProvince)
   }
   
@@ -532,6 +532,14 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
             UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Ngày sinh không được lớn hơn ngày hiện tại", cancelBtnTitle: "Đóng")
           return
     }
+    
+    if txtPhoneNumber.text != "" {
+        if !Until.isValidPhone(phone: txtPhoneNumber.text!) {
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Sai định dạng số điện thoại", cancelBtnTitle: "Đóng")
+        }
+        return
+    }
+    
     let userEntity = FileUserEntity()
     userEntity.patientName = txtName.text!
     userEntity.gender = genderType

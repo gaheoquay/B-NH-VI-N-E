@@ -277,6 +277,16 @@ class Until{
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: email)
     }
+    
+    class func isValidPhone(phone: String) -> Bool {
+        
+        let PHONE_REGEX = "^0[0-9'@s]{9,10}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        let result =  phoneTest.evaluate(with: phone)
+        return result
+        
+    }
+    
   class func getSchedule(){
     let param : [String : Any] = [
       "Auth": Until.getAuthKey(),

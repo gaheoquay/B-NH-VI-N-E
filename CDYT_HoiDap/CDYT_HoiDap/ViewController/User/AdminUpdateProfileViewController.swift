@@ -60,6 +60,7 @@ class AdminUpdateProfileViewController: UIViewController,UIPickerViewDelegate,UI
     
     func setUpUI(){
         if admin.id == "" {
+            btnDepartmen.isEnabled = false
             lbFullName.text = author.nickname
             txtName.text = author.fullname
             txtPhoneNumber.text = author.phone
@@ -176,7 +177,7 @@ class AdminUpdateProfileViewController: UIViewController,UIPickerViewDelegate,UI
             "ReputationRate": 0,
             "ThumbnailAvatarUrl": thumbnailUrl,
             "IsVerified": true,
-            "DepartmentId" : departmenId,
+            "DepartmentId" : "",
             "JobTitle" : txtJobtitle.text!,
             "CreatedDate": 0,
             "UpdateDate": 0,

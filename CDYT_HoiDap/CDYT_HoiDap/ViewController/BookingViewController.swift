@@ -135,7 +135,7 @@ class BookingViewController: BaseViewController, CAPSPageMenuDelegate,BookingCal
             if popupViewController == nil {
                 let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let popoverVC = mainStoryboard.instantiateViewController(withIdentifier: "ListServiceViewController") as! ListServiceViewController
-                popoverVC.preferredContentSize = CGSize.init(width: UIScreen.main.bounds.size.width - 32, height: UIScreen.main.bounds.size.height - 120 )
+                popoverVC.preferredContentSize = CGSize.init(width: UIScreen.main.bounds.size.width - 32, height: UIScreen.main.bounds.size.height - 140 )
                 popoverVC.isModalInPopover = false
                 popoverVC.listService = self.listService
                 popoverVC.delegate = self

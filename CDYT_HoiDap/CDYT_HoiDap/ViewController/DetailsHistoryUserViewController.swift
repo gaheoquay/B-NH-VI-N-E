@@ -31,6 +31,15 @@ class DetailsHistoryUserViewController: UIViewController {
     @IBOutlet weak var marginBottomDiseaseDiagnostic: NSLayoutConstraint!
     @IBOutlet weak var marginBottomDianosisDiffereent: NSLayoutConstraint!
     @IBOutlet weak var marginBottomAdvice: NSLayoutConstraint!
+    @IBOutlet weak var tbPrescription: UITableView!
+    @IBOutlet weak var viewPrescription: UIView!
+    @IBOutlet weak var heightPrescription: NSLayoutConstraint!
+    @IBOutlet weak var withContent: NSLayoutConstraint!
+    @IBOutlet weak var viewStt: UIView!
+    @IBOutlet weak var viewName: UIView!
+    @IBOutlet weak var viewContent: UIView!
+    @IBOutlet weak var viewQuantity: UIView!
+    
     
     var listBooking = BookingEntity()
     var userResult = ResultUserEntity()
@@ -41,6 +50,12 @@ class DetailsHistoryUserViewController: UIViewController {
     var isCheckSeletc3 = false
     var isCheckSeletc4 = false
     var isCheckSeletc5 = false
+    var heigntTable: CGFloat = 0 // chieu cao table
+
+    //test
+    var array = ["the amount or number of a material or immaterial thing not usually estimated by spatial measurement", "immaterial thing not usually estimated by spatial measurement","asdasdsad","Good command of reading English (at least to fully understand this post ☺).• At least ","Passionate, high responsibility, high professional attitude."]
+    
+    //end test
 
 
     override func viewDidLoad() {
@@ -72,9 +87,26 @@ class DetailsHistoryUserViewController: UIViewController {
         contentDianosisDiffreent.isHidden = true
         contentAdvice.isHidden = true
         lbPatienHistory.text = String(listBooking.checkInResult.patientHistory)
+        tbPrescription.register(UINib.init(nibName: "PrescriptionCell", bundle: nil), forCellReuseIdentifier: "PrescriptionCell")
+        tbPrescription.delegate = self
+        tbPrescription.dataSource = self
+        tbPrescription.estimatedRowHeight = 999
+        tbPrescription.rowHeight = UITableViewAutomaticDimension
         
-
-
+        viewStt.layer.borderColor = UIColor.brown.cgColor
+        viewStt.layer.borderWidth = 0.5
+        viewName.layer.borderColor = UIColor.brown.cgColor
+        viewName.layer.borderWidth = 0.5
+        viewContent.layer.borderColor = UIColor.brown.cgColor
+        viewContent.layer.borderWidth = 0.5
+        viewQuantity.layer.borderColor = UIColor.brown.cgColor
+        viewQuantity.layer.borderWidth = 0.5
+        
+        for item in array {
+            let a = item.heightWithConstrainedWidth(width: (UIScreen.main.bounds.size.width / 2) - (UIScreen.main.bounds.size.width / 6 ), font: .systemFont(ofSize: 14)) + 16 // chieu cao cua cell
+            heigntTable = heigntTable + a
+        }
+        heightPrescription.constant = heigntTable + 47
     }
     
     //MARK: reuqest API
@@ -190,6 +222,45 @@ class DetailsHistoryUserViewController: UIViewController {
     @IBAction func btnBacks(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)
     }
-    
-
 }
+
+extension DetailsHistoryUserViewController : UITableViewDelegate , UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return array.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PrescriptionCell") as! PrescriptionCell
+        cell.lbContent.text = array[indexPath.row]
+        cell.setData()
+        return cell
+    }
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

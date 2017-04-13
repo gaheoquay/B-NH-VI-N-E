@@ -202,7 +202,6 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
             }
             Until.hideLoading()
         }
-
     }
     
     func checkSelect(indexPatch: IndexPath) {
@@ -226,8 +225,10 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
         
         }else {
             if isPackage {
-                if service.listPack[indexPatch.row].pack.isCheckSelect == false {
+                let entity = service.listPack[indexPatch.row]
+                if !entity.pack.isCheckSelect  {
                     isCheckPac(indexPatch: indexPatch, listPacks: service.listPack)
+                    
                 }
             }else {
                 if service.listSer[indexPatch.row].isCheckSelect == false{
@@ -247,7 +248,13 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
                     if item.name == pac.name {
                         let alert = UIAlertController.init(title: "Thông báo", message: "Bạn đã chọn dịch vụ lẻ có trong gói này. Bạn có muốn bỏ dịch vụ lẻ đi không?", preferredStyle: UIAlertControllerStyle.alert)
                         let actionOk = UIAlertAction.init(title: "Đồng ý", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
-                            item.isCheckSelect = false
+                            for item in listSer {
+                                for pac in listPacks[indexPatch.row].service {
+                                    if item.name == pac.name {
+                                        item.isCheckSelect = false
+                                    }
+                                }
+                            }
                             self.tbListService.reloadData()
                         })
                         let actionCancel = UIAlertAction.init(title: "Huỷ", style: .default, handler: { (UIAlertAction) in
@@ -257,6 +264,7 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
                         alert.addAction(actionOk)
                         alert.addAction(actionCancel)
                         self.present(alert, animated: true, completion: nil)
+                        break
                     }
                 }
             }
@@ -269,16 +277,11 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
             for listSv in listPac {
                 for item in listSv.service {
                     if item.name == listSers[indexPatch.row].name {
-                        let alert = UIAlertController.init(title: "Thông báo", message: "Bạn đã chọn gói có dịch vụ lẻ này. Bạn có muốn bỏ gói dịch vụ đi không?", preferredStyle: UIAlertControllerStyle.alert)
-                        let actionOk = UIAlertAction.init(title: "Đồng ý", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
-                            listSv.pack.isCheckSelect = false
-                            self.tbListService.reloadData()
-                        })
-                        let actionCancel = UIAlertAction.init(title: "Huỷ", style: .default, handler: { (UIAlertAction) in
+                        let alert = UIAlertController.init(title: "Thông báo", message: "Không thể chọn dịch vụ lẻ nằm trong gói bạn đã chọn", preferredStyle: UIAlertControllerStyle.alert)
+                        let actionCancel = UIAlertAction.init(title: "Đóng", style: .default, handler: { (UIAlertAction) in
                             listSers[indexPatch.row].isCheckSelect = false
                             self.tbListService.reloadData()
                         })
-                        alert.addAction(actionOk)
                         alert.addAction(actionCancel)
                         self.present(alert, animated: true, completion: nil)
                     }

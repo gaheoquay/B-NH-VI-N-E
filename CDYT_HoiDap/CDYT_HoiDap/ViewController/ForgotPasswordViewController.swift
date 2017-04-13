@@ -56,7 +56,7 @@ class ForgotPasswordViewController: BaseViewController {
                 if status == 200{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Mật khẩu mới của bạn đã được gửi về Email đăng ký . Xin hãy kiểm tra lại", cancelBtnTitle: "Đóng")
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Xin kiểm tra lại đường truyền", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Email không đúng!", cancelBtnTitle: "Đóng")
                 }
                 Until.hideLoading()
             }

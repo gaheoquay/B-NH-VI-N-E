@@ -698,6 +698,7 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
                     if let status = response.response?.statusCode {
                         if status == 200{
                             admin.isBlocked = false
+                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(admin.nickName) đã được mở khoá thành công", cancelBtnTitle: "Đóng")
                             self.questionTableView.reloadData()
                         }else{
 //                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -712,6 +713,7 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
                     if let status = response.response?.statusCode {
                         if status == 200{
                             admin.isBlocked = true
+                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(admin.nickName) đã được khoá thành công", cancelBtnTitle: "Đóng")
                             self.questionTableView.reloadData()
                         }else{
 //                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -729,6 +731,7 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
                     if let status = response.response?.statusCode {
                         if status == 200{
                             author.isBlocked = false
+                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(author.nickname) đã được mở khoá thành công", cancelBtnTitle: "Đóng")
                             self.questionTableView.reloadData()
                         }else{
 //                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -744,6 +747,7 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
                     if let status = response.response?.statusCode {
                         if status == 200{
                             author.isBlocked = true
+                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(author.nickname) đã được khoá thành công", cancelBtnTitle: "Đóng")
                             self.questionTableView.reloadData()
                         }else{
 //                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")

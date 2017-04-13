@@ -24,6 +24,8 @@
 		0F54E1551E8A1B10000AFE03 /* PackEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F54E1541E8A1B10000AFE03 /* PackEntity.swift */; };
 		0F54E1571E8A1B3D000AFE03 /* ServicesEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F54E1561E8A1B3D000AFE03 /* ServicesEntity.swift */; };
 		0F54E15A1E8A1B91000AFE03 /* PackServiceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F54E1591E8A1B91000AFE03 /* PackServiceEntity.swift */; };
+		0F6585271E95F01F002EEAC9 /* PrescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6585251E95F01F002EEAC9 /* PrescriptionCell.swift */; };
+		0F6585281E95F01F002EEAC9 /* PrescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6585261E95F01F002EEAC9 /* PrescriptionCell.xib */; };
 		0F765A3B1E644207001DF8ED /* FileUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F765A3A1E644207001DF8ED /* FileUserEntity.swift */; };
 		0F81E4AA1E66813B00A7C18F /* CheckInvoiceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4A91E66813B00A7C18F /* CheckInvoiceEntity.swift */; };
 		0F81E4AC1E672CE800A7C18F /* BookingUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4AB1E672CE800A7C18F /* BookingUserEntity.swift */; };
@@ -314,6 +316,8 @@
 		0F54E1541E8A1B10000AFE03 /* PackEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackEntity.swift; sourceTree = "<group>"; };
 		0F54E1561E8A1B3D000AFE03 /* ServicesEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesEntity.swift; sourceTree = "<group>"; };
 		0F54E1591E8A1B91000AFE03 /* PackServiceEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackServiceEntity.swift; sourceTree = "<group>"; };
+		0F6585251E95F01F002EEAC9 /* PrescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrescriptionCell.swift; sourceTree = "<group>"; };
+		0F6585261E95F01F002EEAC9 /* PrescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrescriptionCell.xib; sourceTree = "<group>"; };
 		0F765A3A1E644207001DF8ED /* FileUserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUserEntity.swift; sourceTree = "<group>"; };
 		0F81E4A91E66813B00A7C18F /* CheckInvoiceEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInvoiceEntity.swift; sourceTree = "<group>"; };
 		0F81E4AB1E672CE800A7C18F /* BookingUserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingUserEntity.swift; sourceTree = "<group>"; };
@@ -630,6 +634,8 @@
 				0F52D2881E634889006C57E2 /* FileCell.xib */,
 				0F09CEEE1E88AA33003FD8B1 /* ServiceCell.swift */,
 				0F09CEEF1E88AA33003FD8B1 /* ServiceCell.xib */,
+				0F6585251E95F01F002EEAC9 /* PrescriptionCell.swift */,
+				0F6585261E95F01F002EEAC9 /* PrescriptionCell.xib */,
 			);
 			name = "Service Cell";
 			sourceTree = "<group>";
@@ -1399,6 +1405,7 @@
 				0FC751EC1E8BA44200B82553 /* HistoryCell.xib in Resources */,
 				0F36980E1E54013C004B028D /* LogoMarker.png in Resources */,
 				8B813CB91E1519150043F7EF /* SearchGrey.png in Resources */,
+				0F6585281E95F01F002EEAC9 /* PrescriptionCell.xib in Resources */,
 				8BF149711E14BF9C00766F8F /* DangNhap_BG.png in Resources */,
 				8BD49F091E48215500C98E74 /* GroupChannelListTableViewCell.xib in Resources */,
 				8B3A13591E10F454005DBC6E /* Like1.png in Resources */,
@@ -1558,6 +1565,7 @@
 				0FF632711E861D400044597F /* ExamInHomeViewController.swift in Sources */,
 				0F81E4B01E6747DB00A7C18F /* ResultUserEntity.swift in Sources */,
 				A68A95131E1518E10067736E /* SubCommentEntity.swift in Sources */,
+				0F6585271E95F01F002EEAC9 /* PrescriptionCell.swift in Sources */,
 				8BD49F601E482D1100C98E74 /* CreateOpenChannelViewController.swift in Sources */,
 				A6417E221E13B68D00BD2D75 /* SettingTableViewCell.swift in Sources */,
 				8B7AB6BE1E1211E20015DFBE /* KeywordCollectionViewCell.swift in Sources */,
@@ -1823,7 +1831,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c2175186-a423-4768-b94a-514c4c22a53c";
+				PROVISIONING_PROFILE = "141cde44-16dc-4067-8cff-2ec8a67a240e";
 				PROVISIONING_PROFILE_SPECIFIER = "new development benh vien e";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
@@ -1844,8 +1852,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c0e9c34c-3b11-4553-bcee-e2dedae06cfd";
-				PROVISIONING_PROFILE_SPECIFIER = "new distribution benh vien e";
+				PROVISIONING_PROFILE = "fbfcfac7-ade3-4358-98ff-171e47d6a2b9";
+				PROVISIONING_PROFILE_SPECIFIER = "ad hoc distribuition bve";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};
