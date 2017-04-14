@@ -199,7 +199,7 @@ class AdminUpdateProfileViewController: UIViewController,UIPickerViewDelegate,UI
                 if status == 200{
                     if let result = response.result.value {
                         let jsonData = result as! NSDictionary
-                        if self.admin.id == "" {
+                        if !self.isAdmin {
                             let entity = AuthorEntity.init(dictionary: jsonData)
                             self.author = entity
                         }else {

@@ -19,17 +19,48 @@ class listMedicalTestsEntity: NSObject {
     var unit = ""
     var hisDepartMen = ""
     var departMentName = ""
+    
+    override init() {
+        super.init()
+    }
+    
+    init(dictionary: NSDictionary) {
+        if let value = dictionary["Id"] as? String {
+            self.id = value
+        }
+        if let value = dictionary["HISServiceMedicalTestID"] as? String {
+            self.id = value
+        }
+        if let value = dictionary["ServiceName"] as? String {
+            self.id = value
+        }
+        if let value = dictionary["IndicatorStr"] as? String {
+            self.id = value
+        }
+        if let value = dictionary["HisRoomId"] as? String {
+            self.id = value
+        }
+        if let value = dictionary["FemaleHighIndicator"] as? String {
+            self.id = value
+        }
+        if let value = dictionary["FemaleLowIndicator"] as? String {
+            self.id = value
+        }
+        if let value = dictionary["MaleHighIndicator"] as? String {
+            self.id = value
+        }
+        if let value = dictionary["MaleLowIndicator"] as? String {
+            self.id = value
+        }
+        if let value = dictionary["Unit"] as? String {
+            self.id = value
+        }
+        if let value = dictionary["HisDepartmentId"] as? String {
+            self.id = value
+        }
+        if let value = dictionary["DepartmentName"] as? String {
+            self.id = value
+        }
+    }
 }
 
-//"Id": "002519101426979762288-41d9e0b4a4594b66ae23c4fa3e6e4593",
-//"HISServiceMedicalTestID": "2468987",
-//"ServiceName": "Clo dịch(04)",
-//"IndicatorStr": "",
-//"HisRoomId": 0,
-//"FemaleHighIndicator": "",
-//"FemaleLowIndicator": "",
-//"MaleHighIndicator": "",
-//"MaleLowIndicator": "",
-//"Unit": "",
-//"HisDepartmentId": "",
-//"DepartmentName": ""

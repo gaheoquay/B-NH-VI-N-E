@@ -574,6 +574,7 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     let cellCreate = tableView.dequeueReusableCell(withIdentifier: "InsertAccountCell") as! InsertAccountCell
     self.sectionCate = indexPath.section
     cellSpAdmin.delegate = self
+    cellSpAdmin.indexPatch = indexPath
     cellCreate.indexPatchRow = indexPath.row
     cellCreate.indexPatchSection = indexPath
     cellCreate.delegate = self
