@@ -14,6 +14,10 @@ class AllUserEntity: NSObject {
     var booking = BookingEntity()
     var listPac = [PackEntity]()
     var listSer = [ServicesEntity]()
+    var patientHistory = ""
+    var distric = DistricHomeEntity()
+    var listMedicalGroups = [MediCalEntity]()
+    
     var isCheckSelect = false
     
     override init() {
@@ -39,6 +43,11 @@ class AllUserEntity: NSObject {
                 listSer.append(entity)
             }
         }
-
+        if let value = dictionary["ListMedicalGroups"] as? [NSDictionary] {
+            for item in value {
+                let entity = MediCalEntity.init(dictionary: item)
+                listMedicalGroups.append(entity)
+            }
+        }
     }
 }

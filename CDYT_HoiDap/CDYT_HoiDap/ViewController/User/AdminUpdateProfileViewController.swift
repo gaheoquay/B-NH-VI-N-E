@@ -38,6 +38,7 @@ class AdminUpdateProfileViewController: UIViewController,UIPickerViewDelegate,UI
     var indexPatchCate = 0
     var delegate : AdminUpdateProfileViewControllerDelegate?
     var departmenName = ""
+    var isAdmin = false
     
     @IBOutlet weak var btnDepartmen: UIButton!
     
@@ -59,7 +60,7 @@ class AdminUpdateProfileViewController: UIViewController,UIPickerViewDelegate,UI
     
     
     func setUpUI(){
-        if admin.id == "" {
+        if !isAdmin {
             btnDepartmen.isEnabled = false
             lbFullName.text = author.nickname
             txtName.text = author.fullname
@@ -145,18 +146,21 @@ class AdminUpdateProfileViewController: UIViewController,UIPickerViewDelegate,UI
     func updateUserInfoToServer(){
         var user : [String:Any] = [:]
         
+        var dpId = ""
         var id = ""
         var nickName = ""
-        if admin.id == "" {
+        if !isAdmin {
             role = author.role
             id = author.id
             nickName = author.nickname
             genderType = author.gender
+            dpId = self.departmenId
         }else {
             id = admin.id
             nickName = admin.nickName
             role = admin.role
             genderType = admin.gender
+            dpId = ""
         }
         
         user = [
@@ -177,7 +181,7 @@ class AdminUpdateProfileViewController: UIViewController,UIPickerViewDelegate,UI
             "ReputationRate": 0,
             "ThumbnailAvatarUrl": thumbnailUrl,
             "IsVerified": true,
-            "DepartmentId" : "",
+            "DepartmentId" : dpId,
             "JobTitle" : txtJobtitle.text!,
             "CreatedDate": 0,
             "UpdateDate": 0,

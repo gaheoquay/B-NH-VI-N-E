@@ -30,6 +30,9 @@
 		0F81E4AA1E66813B00A7C18F /* CheckInvoiceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4A91E66813B00A7C18F /* CheckInvoiceEntity.swift */; };
 		0F81E4AC1E672CE800A7C18F /* BookingUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4AB1E672CE800A7C18F /* BookingUserEntity.swift */; };
 		0F81E4B01E6747DB00A7C18F /* ResultUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F81E4AF1E6747DB00A7C18F /* ResultUserEntity.swift */; };
+		0F8960501EA0BF8E006A1C2D /* MediCalEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F89604F1EA0BF8E006A1C2D /* MediCalEntity.swift */; };
+		0F8960521EA0C156006A1C2D /* medicalTestGroupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8960511EA0C156006A1C2D /* medicalTestGroupEntity.swift */; };
+		0F8960541EA0C16A006A1C2D /* listMedicalTestsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8960531EA0C16A006A1C2D /* listMedicalTestsEntity.swift */; };
 		0F9323E51E783DD300B56F39 /* ChoiceDoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9323E41E783DD300B56F39 /* ChoiceDoctorViewController.swift */; };
 		0F9323E81E783DE300B56F39 /* DoctorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9323E61E783DE300B56F39 /* DoctorCell.swift */; };
 		0F9323E91E783DE300B56F39 /* DoctorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F9323E71E783DE300B56F39 /* DoctorCell.xib */; };
@@ -89,6 +92,7 @@
 		0FE4606E1E84F6D00045DB84 /* QuanHuyen.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE4606A1E84F6D00045DB84 /* QuanHuyen.png */; };
 		0FE4606F1E84F6D00045DB84 /* SDT.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE4606B1E84F6D00045DB84 /* SDT.png */; };
 		0FE460711E8509260045DB84 /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE460701E8509260045DB84 /* ServiceViewController.swift */; };
+		0FEB18621EA0B87B00C9D5C0 /* PatientHistoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEB18611EA0B87B00C9D5C0 /* PatientHistoryEntity.swift */; };
 		0FF632711E861D400044597F /* ExamInHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF632701E861D400044597F /* ExamInHomeViewController.swift */; };
 		0FF753391E62F267001450B7 /* ExamScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF753381E62F267001450B7 /* ExamScheduleViewController.swift */; };
 		0FF7533D1E62F3A9001450B7 /* ExamScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7533B1E62F3A9001450B7 /* ExamScheduleCell.swift */; };
@@ -322,6 +326,9 @@
 		0F81E4A91E66813B00A7C18F /* CheckInvoiceEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInvoiceEntity.swift; sourceTree = "<group>"; };
 		0F81E4AB1E672CE800A7C18F /* BookingUserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingUserEntity.swift; sourceTree = "<group>"; };
 		0F81E4AF1E6747DB00A7C18F /* ResultUserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultUserEntity.swift; sourceTree = "<group>"; };
+		0F89604F1EA0BF8E006A1C2D /* MediCalEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediCalEntity.swift; sourceTree = "<group>"; };
+		0F8960511EA0C156006A1C2D /* medicalTestGroupEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = medicalTestGroupEntity.swift; sourceTree = "<group>"; };
+		0F8960531EA0C16A006A1C2D /* listMedicalTestsEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listMedicalTestsEntity.swift; sourceTree = "<group>"; };
 		0F9323E41E783DD300B56F39 /* ChoiceDoctorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceDoctorViewController.swift; sourceTree = "<group>"; };
 		0F9323E61E783DE300B56F39 /* DoctorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorCell.swift; sourceTree = "<group>"; };
 		0F9323E71E783DE300B56F39 /* DoctorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoctorCell.xib; sourceTree = "<group>"; };
@@ -381,6 +388,7 @@
 		0FE4606A1E84F6D00045DB84 /* QuanHuyen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QuanHuyen.png; sourceTree = "<group>"; };
 		0FE4606B1E84F6D00045DB84 /* SDT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SDT.png; sourceTree = "<group>"; };
 		0FE460701E8509260045DB84 /* ServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
+		0FEB18611EA0B87B00C9D5C0 /* PatientHistoryEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientHistoryEntity.swift; sourceTree = "<group>"; };
 		0FF632701E861D400044597F /* ExamInHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamInHomeViewController.swift; sourceTree = "<group>"; };
 		0FF753381E62F267001450B7 /* ExamScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamScheduleViewController.swift; sourceTree = "<group>"; };
 		0FF7533B1E62F3A9001450B7 /* ExamScheduleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamScheduleCell.swift; sourceTree = "<group>"; };
@@ -678,6 +686,10 @@
 				0F81E4A91E66813B00A7C18F /* CheckInvoiceEntity.swift */,
 				0F81E4AB1E672CE800A7C18F /* BookingUserEntity.swift */,
 				0F81E4AF1E6747DB00A7C18F /* ResultUserEntity.swift */,
+				0FEB18611EA0B87B00C9D5C0 /* PatientHistoryEntity.swift */,
+				0F89604F1EA0BF8E006A1C2D /* MediCalEntity.swift */,
+				0F8960511EA0C156006A1C2D /* medicalTestGroupEntity.swift */,
+				0F8960531EA0C16A006A1C2D /* listMedicalTestsEntity.swift */,
 			);
 			path = BookingEntity;
 			sourceTree = "<group>";
@@ -1496,6 +1508,7 @@
 				0FCFD9A61E5EEDB700EE2F89 /* BookingCalenderController.swift in Sources */,
 				0F9AD59C1E63CE0F00981D7B /* SearchFileViewController.swift in Sources */,
 				8B3A13751E10F454005DBC6E /* TPKeyboardAvoidingTableView.m in Sources */,
+				0F8960521EA0C156006A1C2D /* medicalTestGroupEntity.swift in Sources */,
 				8B79D0E21E5A91F30010C5C0 /* DescriptionViewController.swift in Sources */,
 				A68A95081E14ED1C0067736E /* CommentTableViewCell.swift in Sources */,
 				8B79D0E51E5A9B350010C5C0 /* DoctorTableViewCell.swift in Sources */,
@@ -1504,6 +1517,7 @@
 				A632043C1E49BB0A00B9152A /* PolicyAndRuleViewController.swift in Sources */,
 				8B3A12E11E10F399005DBC6E /* ViewController.swift in Sources */,
 				8BC2C3101E2337C700B68F72 /* NotificationEntity.swift in Sources */,
+				0F8960541EA0C16A006A1C2D /* listMedicalTestsEntity.swift in Sources */,
 				A60430FB1E233431000216FB /* SSRadioButtonsController.swift in Sources */,
 				A6D083C91E127F9F007EA4D9 /* TagEntity.swift in Sources */,
 				A6C463DA1E25DB910046A367 /* RecentFeedTableViewCell.swift in Sources */,
@@ -1579,6 +1593,7 @@
 				8B1AD45B1E1B828500D55543 /* SearchViewController.swift in Sources */,
 				0FC0CBA71E876C21009DA53C /* DetaiAnalysisViewController.swift in Sources */,
 				8B3A13761E10F454005DBC6E /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
+				0F8960501EA0BF8E006A1C2D /* MediCalEntity.swift in Sources */,
 				0F54E1531E8A1AF6000AFE03 /* PackagesEntity.swift in Sources */,
 				8B3A13791E10F454005DBC6E /* RAMFumeAnimation.swift in Sources */,
 				8BD49F341E482C1600C98E74 /* OutgoingImageFileMessageTableViewCell.swift in Sources */,
@@ -1591,6 +1606,7 @@
 				0F9323E81E783DE300B56F39 /* DoctorCell.swift in Sources */,
 				8B2AFF121E642B5000415554 /* ZoneEntity.swift in Sources */,
 				0F17AB191E51BAC2008BA308 /* CateEntity.swift in Sources */,
+				0FEB18621EA0B87B00C9D5C0 /* PatientHistoryEntity.swift in Sources */,
 				8B0D35F51E56EB2D002CF784 /* BookingViewController.swift in Sources */,
 				0FA5806A1E65D5D4001B4E3C /* CheckInResultEntity.swift in Sources */,
 				8BD49F651E482D1100C98E74 /* OpenChannelChattingViewController.swift in Sources */,

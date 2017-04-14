@@ -9,5 +9,18 @@
 import UIKit
 
 class medicalTestGroupEntity: NSObject {
-
+    var id = ""
+    var hisServiceMedicTestGroupID = ""
+    
+    override init() {
+        super.init()
+    }
+    init(dictionary: NSDictionary) {
+        if let value = dictionary["Id"] as? String {
+            self.id = value
+        }
+        if let value = dictionary["HISServiceMedicTestGroupID"] as? String {
+            self.hisServiceMedicTestGroupID = value
+        }
+    }
 }

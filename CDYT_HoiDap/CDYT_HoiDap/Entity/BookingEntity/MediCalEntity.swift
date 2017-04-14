@@ -9,5 +9,14 @@
 import UIKit
 
 class MediCalEntity: NSObject {
-
+    var medicalTestGroup = ""
+    var listMedicalTests = ""
+    
+    override init() {
+        super.init()
+    }
+    
+    init(dictionary: NSDictionary) {
+        
+    }
 }

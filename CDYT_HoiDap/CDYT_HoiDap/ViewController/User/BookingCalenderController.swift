@@ -40,6 +40,7 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
     var delegate: BookingCalenderControllerDelegate?
     var status = 0 // 0: Benh vien , 1: TAI NHA , 2 : XN tai nha
     var indexPatch = 0
+    var statusTime = 0
 
     
     //test
@@ -143,6 +144,7 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
     
     @IBAction func btnSelectDateBooking(_ sender: Any) {
         self.view.endEditing(true)
+        self.statusTime = 1
         let date : UIDatePickerMode?
         if status == 0{
             date = UIDatePickerMode.date
@@ -414,6 +416,16 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
     func requestExamInHome(){
         
         var  priceService: Double = 100000
+        let calendar = Calendar.current
+        let hourToDay = calendar.date(byAdding: .hour, value: +1, to: Date())
+        let timeStampToDay = hourToDay?.timeIntervalSince1970
+        var nowDateBook: Double = 0
+        if statusTime == 0 {
+            nowDateBook = timeStampToDay!
+        }else {
+            nowDateBook = dateBook
+        }
+        
         
         if sumService + sumPack < checkPrice {
             priceService = 100000
@@ -439,7 +451,7 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
             param["Auth"] = Until.getAuthKey()
             param["RequestedUserId"] =  Until.getCurrentId()
             param["ProfileId"] = userBooking.profile.id
-            param["BookingDate"] = String(format:"%.0f",dateBook * 1000)
+            param["BookingDate"] = String(format:"%.0f",nowDateBook * 1000)
             param["PhoneNumber"] = txtPhoneNumber.text!
             param["DistrictId"] = listDictric[indexPatch].id
             param["Address"] = txtAdress.text!

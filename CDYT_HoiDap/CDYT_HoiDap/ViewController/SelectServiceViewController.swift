@@ -32,7 +32,7 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if service.listPack.count > 0 && service.listSer.count > 0 {
+        if service.listPack.count > 0 || service.listSer.count > 0 {
         
         }else {
         requestListService()

@@ -9,5 +9,21 @@
 import UIKit
 
 class PatientHistoryEntity: NSObject {
+    
+    var id = ""
+    var hisPatientHistoryID = ""
+    
+    override init() {
+        super.init()
+    }
+    
+    init(dictionary: NSDictionary) {
+        if let value = dictionary["Id"] as? String {
+            self.id = value
+        }
+        if let value = dictionary["HISPatientHistoryID"] as? String {
+            self.hisPatientHistoryID = value
+        }
+    }
 
 }

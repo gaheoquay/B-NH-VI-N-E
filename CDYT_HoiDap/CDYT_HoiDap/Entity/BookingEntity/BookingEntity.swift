@@ -10,6 +10,7 @@ import UIKit
 
 class BookingEntity: NSObject {
     
+    
     var id = ""
     var serviceId = ""
     var bookingDate: Double = 0
@@ -20,7 +21,15 @@ class BookingEntity: NSObject {
     var checkInResult = CheckInResultEntity()
     var paymentResult = CheckInvoiceEntity()
     var checkupResult = ResultUserEntity()
+    var phoneNumber = 0
+    var districId = ""
+    var adress = ""
+    var note = ""
+    var startTime: Double = 0
+    var endTime: Double = 0
+    var money: Double = 0
     var jsonStringPaymentResult = ""
+    
     override init() {
         super.init()
     }
@@ -46,6 +55,27 @@ class BookingEntity: NSObject {
         if let value = dictionary["Status"] as? Int {
             status = value
         }
+        if let value = dictionary["PhoneNumber"] as? Int {
+            phoneNumber = value
+        }
+        if let value = dictionary["DistrictId"] as? String {
+            districId = value
+        }
+        if let value = dictionary["Address"] as? String {
+            adress = value
+        }
+        if let value = dictionary["Note"] as? String {
+            note = value
+        }
+        if let value = dictionary["StartTime"] as? Double {
+            startTime = value
+        }
+        if let value = dictionary["EndTime"] as? Double {
+            endTime = value
+        }
+        if let value = dictionary["MoneyExtra"] as? Double {
+            money = value
+        }
         if let value = dictionary["CheckInResult"] as? String {
           if !value.isEmpty {
             let dic = value.convertStringToDictionary()
@@ -67,5 +97,4 @@ class BookingEntity: NSObject {
         }
 
     }
-
 }

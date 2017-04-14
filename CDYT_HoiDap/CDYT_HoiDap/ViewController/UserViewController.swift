@@ -56,8 +56,9 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     }
     
   }
-    
+   
     override func viewDidAppear(_ animated: Bool) {
+        
         Until.sendAndSetTracer(value: MY_PAGE)
     }
   
@@ -65,6 +66,16 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     super.viewWillAppear(animated)
     let realm = try! Realm()
     let users = realm.objects(UserEntity.self)
+    if users.first?.role == 3 {
+        questionTableView.estimatedRowHeight = 80
+        questionTableView.rowHeight = 80
+        questionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+    }else {
+        questionTableView.estimatedRowHeight = 500
+        questionTableView.rowHeight = UITableViewAutomaticDimension
+        questionTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+    }
+
     if users.count > 0 {
       viewUnLogin.isHidden = true
     }else{
@@ -86,7 +97,6 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
         NotificationCenter.default.addObserver(self, selector: #selector(self.setupUserInfo), name: NSNotification.Name(rawValue: UPDATE_USERINFO), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateMessageCountLabel), name: Notification.Name.init(UPDATE_BADGE), object: nil)
-
     }
     
     
@@ -94,8 +104,8 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     initTable()
     setUpUI()
     setupUserInfo()
-    isMyFeed = true
-    isFollowing = false
+    isMyFeed = false
+    isFollowing = true
     isWaiting = false
     pageMyFeed = 1
     pageFollowing = 1
@@ -106,6 +116,7 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     getMyFeeds()
     getWaitingFeed()
     getFollowingFeed()
+    getListAdmin()
   }
   func setUpUI(){
     avaImg.layer.cornerRadius = 10
@@ -177,8 +188,7 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     }
   }
   func initTable(){
-    let realm = try! Realm()
-    let users = realm.objects(UserEntity.self)
+    
 
     questionTableView.delegate = self
     questionTableView.dataSource = self
@@ -186,15 +196,6 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     questionTableView.register(UINib.init(nibName: "RecentFeedTableViewCell", bundle: nil), forCellReuseIdentifier: "RecentFeedTableViewCell")
     questionTableView.register(UINib.init(nibName: "DoctorTableViewCell", bundle: nil), forCellReuseIdentifier: "DoctorTableViewCell")
     questionTableView.register(UINib.init(nibName: "InsertAccountCell", bundle: nil), forCellReuseIdentifier: "InsertAccountCell")
-    if users.first?.role == 3 {
-        questionTableView.estimatedRowHeight = 80
-        questionTableView.rowHeight = 80
-        questionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-    }else {
-        questionTableView.estimatedRowHeight = 500
-        questionTableView.rowHeight = UITableViewAutomaticDimension
-        questionTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-    }
     questionTableView.addPullToRefreshHandler {
       DispatchQueue.main.async {
         self.reloadData()
@@ -586,8 +587,7 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
             if isFollowing {
                 cellSpAdmin.author = listAllDoctor[indexPath.section].doctors[indexPath.row - 1].doctorEntity
                 cellSpAdmin.setData()
-            }
-            if isMyFeed {
+            }else if isMyFeed {
                 cellSpAdmin.admin = listAdmin[indexPath.row - 1]
                 cellSpAdmin.setDataAdmin()
             }
@@ -657,13 +657,12 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
         questionTableView.reloadData()
     }
     
-    
-    
     func gotoUpdateProfile(author: AuthorEntity, admin: ListAdminEntity, indexPatchAdmin: IndexPath) {
         let main = UIStoryboard(name: "User", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "AdminUpdateProfileViewController") as! AdminUpdateProfileViewController
         viewcontroller.admin = admin
         viewcontroller.author = author
+        viewcontroller.isAdmin = self.isMyFeed
         viewcontroller.departmenName = listAllDoctor[sectionCate].category.name
         viewcontroller.departmenId = listAllDoctor[sectionCate].category.id
         viewcontroller.delegate = self
