@@ -153,13 +153,11 @@ class AdminUpdateProfileViewController: UIViewController,UIPickerViewDelegate,UI
             role = author.role
             id = author.id
             nickName = author.nickname
-            genderType = author.gender
             dpId = self.departmenId
         }else {
             id = admin.id
             nickName = admin.nickName
             role = admin.role
-            genderType = admin.gender
             dpId = ""
         }
         
