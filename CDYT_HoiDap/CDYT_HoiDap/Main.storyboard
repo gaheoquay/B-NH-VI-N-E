@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -6367,10 +6367,20 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbD-CS-coX">
-                                        <rect key="frame" x="8" y="16" width="304" height="89.5"/>
+                                        <rect key="frame" x="8" y="16" width="304" height="134"/>
                                         <attributedString key="attributedText">
+                                            <fragment content="BỘ Y TẾ">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="16" name="HelveticaNeue-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="432" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                        <tabStops/>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
                                             <fragment>
-                                                <string key="content">BỘ Y TẾ
+                                                <string key="content" base64-UTF8="YES">
+Cg
 </string>
                                                 <attributes>
                                                     <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -6380,8 +6390,18 @@
                                                     </paragraphStyle>
                                                 </attributes>
                                             </fragment>
+                                            <fragment content="BỆNH VIỆN E">
+                                                <attributes>
+                                                    <color key="NSColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="16" name="HelveticaNeue-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="432" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                        <tabStops/>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
                                             <fragment>
-                                                <string key="content">BỆNH VIỆN E
+                                                <string key="content" base64-UTF8="YES">
+Cg
 </string>
                                                 <attributes>
                                                     <color key="NSColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -6393,7 +6413,17 @@
                                             </fragment>
                                             <fragment>
                                                 <string key="content">87-89 Trần Cung, Cầu Giấy, Hà Nội
-Tel: 04. 37543650  Hotline: 086 889 1318 -  Fax: 04. 37561351
+Tel: 04. 37543650  Hotline: 086 889 1318 -  Fax: 04. 37561351</string>
+                                                <attributes>
+                                                    <font key="NSFont" size="16" name="HelveticaNeue-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="432" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                        <tabStops/>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content" base64-UTF8="YES">
+Cg
 </string>
                                                 <attributes>
                                                     <font key="NSFont" size="16" name="TimesNewRomanPS-BoldMT"/>
@@ -6410,7 +6440,23 @@ Tel: 04. 37543650  Hotline: 086 889 1318 -  Fax: 04. 37561351
                                                     </paragraphStyle>
                                                 </attributes>
                                             </fragment>
-                                            <fragment content=": GS.TS.TTND. Lê Ngọc Thành ">
+                                            <fragment content=": ">
+                                                <attributes>
+                                                    <font key="NSFont" size="16" name="TimesNewRomanPS-BoldMT"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="432" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                        <tabStops/>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="GS.TS.TTND. Lê Ngọc Thành">
+                                                <attributes>
+                                                    <font key="NSFont" size="16" name="HelveticaNeue-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="432" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                        <tabStops/>
+                                                    </paragraphStyle>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" ">
                                                 <attributes>
                                                     <font key="NSFont" size="16" name="TimesNewRomanPS-BoldMT"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="432" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
@@ -6422,7 +6468,7 @@ Tel: 04. 37543650  Hotline: 086 889 1318 -  Fax: 04. 37561351
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19m-RQ-F54">
-                                        <rect key="frame" x="12" y="113.5" width="296" height="1352.5"/>
+                                        <rect key="frame" x="12" y="158" width="296" height="1403"/>
                                         <string key="text">Bệnh viện E là bệnh viện đa khoa trung ương hạng I trực thuộc Bộ Y tế, được thành lập từ năm 1967. Đến nay, bệnh viện đã phát triển với quy mô hơn 900 giường bệnh (gồm 4 trung tâm, 37 khoa lâm sàng và cận lâm sàng, 11 phòng chức năng) trên diện tích 41.000 m2 với khuôn viên rộng rãi, thoáng mát, xanh, sạch đẹp. Với truyền thống 50 năm thành lập - phát triển, bệnh viện E có đội ngũ cán bộ giàu kinh nghiệm, các bác sĩ có có trình độ sau đại học chiếm 70% gồm các Giáo sư, Phó giáo sư, Tiến sĩ, Thạc sĩ... Phương châm hành động của đội ngũ thầy thuốc Bệnh viện E là: “Chăm sóc người bệnh toàn diện bằng những phương pháp khoa học kỹ thuật tiên tiến và hiệu quả nhất với tấm lòng thầy thuốc như mẹ hiền”.
 PHẠM VI HOẠT ĐỘNG VÀ CÁC DỊCH VỤ
 •	Khám chữa bệnh đa khoa (nội, ngoại, sản, nhi, ung bướu, y học cổ truyền, phục hồi chức năng) chuyên khoa (tai mũi họng, răng hàm mặt, mắt) cho người bệnh BHYT và khám theo yêu cầu. Đặc biệt tiếp nhận bệnh nhân BHYT tuyến cuối từ khắp cả nước.
@@ -6452,29 +6498,29 @@ CÁC THÀNH TÍCH ĐÃ ĐẠT ĐƯỢC
 •	Huân chương Độc lập hạng Nhất, Nhì, Ba
 •	Huân chương Lao động hạng Nhất.
 •	Huân chương Kháng chiến hạng Nhì.</string>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="about1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VjJ-Sa-Nx0">
-                                        <rect key="frame" x="8" y="1474" width="304" height="228"/>
+                                        <rect key="frame" x="8" y="1569" width="304" height="228"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="VjJ-Sa-Nx0" secondAttribute="height" multiplier="400:300" id="zfI-0Y-3Tc"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="about2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zG8-H7-Cl1">
-                                        <rect key="frame" x="8" y="1742" width="304" height="203"/>
+                                        <rect key="frame" x="8" y="1837" width="304" height="203"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="zG8-H7-Cl1" secondAttribute="height" multiplier="400:267" id="BSX-mc-0DT"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trung tâm tim mạch - Bệnh viện E" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skS-WP-HA1">
-                                        <rect key="frame" x="8" y="1710" width="304" height="16"/>
+                                        <rect key="frame" x="8" y="1805" width="304" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Khai trương phòng khám Nhi - Bệnh viện E" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6f-Og-arG">
-                                        <rect key="frame" x="8" y="1953" width="304" height="16"/>
+                                        <rect key="frame" x="8" y="2048" width="304" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
