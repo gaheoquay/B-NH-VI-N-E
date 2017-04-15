@@ -9,14 +9,22 @@
 import UIKit
 
 class MediCalEntity: NSObject {
-    var medicalTestGroup = ""
-    var listMedicalTests = ""
+    var medicalTestGroup = medicalTestGroupEntity()
+    var listMedicalTests = [listMedicalTestsEntity]()
     
     override init() {
         super.init()
     }
     
     init(dictionary: NSDictionary) {
-        
+        if let value = dictionary["MedicalTestGroup"] as? NSDictionary {
+            self.medicalTestGroup = medicalTestGroupEntity.init(dictionary: value)
+        }
+        if let value = dictionary["ListMedicalTests"] as? [NSDictionary] {
+            for item in value {
+                let entity = listMedicalTestsEntity.init(dictionary: item)
+                listMedicalTests.append(entity)
+            }
+        }
     }
 }

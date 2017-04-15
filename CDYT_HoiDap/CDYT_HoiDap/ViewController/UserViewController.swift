@@ -574,7 +574,6 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     let cellCreate = tableView.dequeueReusableCell(withIdentifier: "InsertAccountCell") as! InsertAccountCell
     self.sectionCate = indexPath.section
     cellSpAdmin.delegate = self
-    cellSpAdmin.indexPatch = indexPath
     cellCreate.indexPatchRow = indexPath.row
     cellCreate.indexPatchSection = indexPath
     cellCreate.delegate = self
@@ -588,7 +587,8 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
             if isFollowing {
                 cellSpAdmin.author = listAllDoctor[indexPath.section].doctors[indexPath.row - 1].doctorEntity
                 cellSpAdmin.setData()
-            }else if isMyFeed {
+            }
+            if isMyFeed {
                 cellSpAdmin.admin = listAdmin[indexPath.row - 1]
                 cellSpAdmin.setDataAdmin()
             }
@@ -671,9 +671,12 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     
-    func reloadDataUpdateProfile(author: AuthorEntity, admin: ListAdminEntity) {
-        listAdmin[indexPatchDoctor.row - 1] = admin
-        listAllDoctor[sectionCate].doctors[indexPatchDoctor.row - 1].doctorEntity = author
+    func reloadDataUpdateProfile(author: AuthorEntity, admin: ListAdminEntity, isAdmin: Bool) {
+        if !isAdmin {
+            listAllDoctor[sectionCate].doctors[indexPatchDoctor.row - 1].doctorEntity = author
+        }else {
+            listAdmin[indexPatchDoctor.row - 1] = admin
+        }
         questionTableView.reloadData()
     }
     

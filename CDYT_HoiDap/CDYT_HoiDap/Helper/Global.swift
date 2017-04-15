@@ -27,6 +27,7 @@ let FINISH_CHECKUP = BASE_URL + "/Booking/FinishCheckup"
 let DELETE_BOOKING = BASE_URL + "/Booking/RemoveBooking"
 let BOOKING_IN_HOME = BASE_URL + "/Booking/AddBookingAtHome"
 
+let GET_BOOKING_RECORD = BASE_URL + "/booking/GetBookingRecordDetail"
 let GET_LIST_DISTRIC = BASE_URL + "/booking/GetListBookingDistricts"
 let UPDATE_BY_ADMIN = BASE_URL + "/User/UpdateProfileByAdmin"
 let GET_QUESTION_FOLLOW_BY_USER = BASE_URL + "/Post/GetQuestionFollowedByUserId"

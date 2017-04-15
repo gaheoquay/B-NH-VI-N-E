@@ -16,6 +16,8 @@ class listMedicalTestsEntity: NSObject {
     var hisroomId = 0
     var femaleHightIndicator = ""
     var femaleLowIn = ""
+    var maleHight = ""
+    var maleLow = ""
     var unit = ""
     var hisDepartMen = ""
     var departMentName = ""
@@ -29,37 +31,37 @@ class listMedicalTestsEntity: NSObject {
             self.id = value
         }
         if let value = dictionary["HISServiceMedicalTestID"] as? String {
-            self.id = value
+            self.hisServiceMedicalTestID = value
         }
         if let value = dictionary["ServiceName"] as? String {
-            self.id = value
+            self.serviceName = value
         }
         if let value = dictionary["IndicatorStr"] as? String {
-            self.id = value
+            self.indicator = value
         }
-        if let value = dictionary["HisRoomId"] as? String {
-            self.id = value
+        if let value = dictionary["HisRoomId"] as? Int {
+            self.hisroomId = value
         }
         if let value = dictionary["FemaleHighIndicator"] as? String {
-            self.id = value
+            self.femaleHightIndicator = value
         }
         if let value = dictionary["FemaleLowIndicator"] as? String {
-            self.id = value
+            self.femaleLowIn = value
         }
         if let value = dictionary["MaleHighIndicator"] as? String {
-            self.id = value
+            self.maleHight = value
         }
         if let value = dictionary["MaleLowIndicator"] as? String {
-            self.id = value
+            self.maleLow = value
         }
         if let value = dictionary["Unit"] as? String {
-            self.id = value
+            self.unit = value
         }
         if let value = dictionary["HisDepartmentId"] as? String {
-            self.id = value
+            self.hisDepartMen = value
         }
         if let value = dictionary["DepartmentName"] as? String {
-            self.id = value
+            self.departMentName = value
         }
     }
 }

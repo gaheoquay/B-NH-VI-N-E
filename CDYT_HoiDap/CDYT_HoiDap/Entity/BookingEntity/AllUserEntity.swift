@@ -14,9 +14,10 @@ class AllUserEntity: NSObject {
     var booking = BookingEntity()
     var listPac = [PackEntity]()
     var listSer = [ServicesEntity]()
-    var patientHistory = ""
+    var patientHistory = PatientHistoryEntity()
     var distric = DistricHomeEntity()
     var listMedicalGroups = [MediCalEntity]()
+    var totalMoney: Double = 0
     
     var isCheckSelect = false
     
@@ -28,8 +29,17 @@ class AllUserEntity: NSObject {
         if let value = dictionary["Profile"] as? NSDictionary {
             profile = FileUserEntity.init(dictionary: value)
         }
+        if let value = dictionary["District"] as? NSDictionary {
+            distric = DistricHomeEntity.init(dictionary: value)
+        }
+        if let value = dictionary["TotalMoney"] as? Double {
+            totalMoney = value
+        }
         if let value = dictionary["BookingRecord"] as? NSDictionary {
             booking = BookingEntity.init(dictionary: value)
+        }
+        if let value = dictionary["PatientHistory"] as? NSDictionary {
+            patientHistory = PatientHistoryEntity.init(dictionary: value)
         }
         if let value = dictionary["ListPackages"] as? [NSDictionary] {
             for item in value {

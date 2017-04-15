@@ -93,6 +93,10 @@
 		0FE4606F1E84F6D00045DB84 /* SDT.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE4606B1E84F6D00045DB84 /* SDT.png */; };
 		0FE460711E8509260045DB84 /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE460701E8509260045DB84 /* ServiceViewController.swift */; };
 		0FEB18621EA0B87B00C9D5C0 /* PatientHistoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEB18611EA0B87B00C9D5C0 /* PatientHistoryEntity.swift */; };
+		0FEDD6BB1EA1F5D000E3D42E /* CodeFormAnalysisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEDD6B91EA1F5D000E3D42E /* CodeFormAnalysisCell.swift */; };
+		0FEDD6BC1EA1F5D000E3D42E /* CodeFormAnalysisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FEDD6BA1EA1F5D000E3D42E /* CodeFormAnalysisCell.xib */; };
+		0FEDD6C31EA1FB1700E3D42E /* MedicalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEDD6C11EA1FB1700E3D42E /* MedicalCell.swift */; };
+		0FEDD6C41EA1FB1700E3D42E /* MedicalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FEDD6C21EA1FB1700E3D42E /* MedicalCell.xib */; };
 		0FF632711E861D400044597F /* ExamInHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF632701E861D400044597F /* ExamInHomeViewController.swift */; };
 		0FF753391E62F267001450B7 /* ExamScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF753381E62F267001450B7 /* ExamScheduleViewController.swift */; };
 		0FF7533D1E62F3A9001450B7 /* ExamScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7533B1E62F3A9001450B7 /* ExamScheduleCell.swift */; };
@@ -389,6 +393,10 @@
 		0FE4606B1E84F6D00045DB84 /* SDT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SDT.png; sourceTree = "<group>"; };
 		0FE460701E8509260045DB84 /* ServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
 		0FEB18611EA0B87B00C9D5C0 /* PatientHistoryEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientHistoryEntity.swift; sourceTree = "<group>"; };
+		0FEDD6B91EA1F5D000E3D42E /* CodeFormAnalysisCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeFormAnalysisCell.swift; sourceTree = "<group>"; };
+		0FEDD6BA1EA1F5D000E3D42E /* CodeFormAnalysisCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeFormAnalysisCell.xib; sourceTree = "<group>"; };
+		0FEDD6C11EA1FB1700E3D42E /* MedicalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalCell.swift; sourceTree = "<group>"; };
+		0FEDD6C21EA1FB1700E3D42E /* MedicalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MedicalCell.xib; sourceTree = "<group>"; };
 		0FF632701E861D400044597F /* ExamInHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamInHomeViewController.swift; sourceTree = "<group>"; };
 		0FF753381E62F267001450B7 /* ExamScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamScheduleViewController.swift; sourceTree = "<group>"; };
 		0FF7533B1E62F3A9001450B7 /* ExamScheduleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamScheduleCell.swift; sourceTree = "<group>"; };
@@ -657,6 +665,10 @@
 				0F94FEEB1E878DDD001884AD /* FormAnalysisCell.xib */,
 				0FC751E91E8BA44200B82553 /* HistoryCell.swift */,
 				0FC751EA1E8BA44200B82553 /* HistoryCell.xib */,
+				0FEDD6B91EA1F5D000E3D42E /* CodeFormAnalysisCell.swift */,
+				0FEDD6BA1EA1F5D000E3D42E /* CodeFormAnalysisCell.xib */,
+				0FEDD6C11EA1FB1700E3D42E /* MedicalCell.swift */,
+				0FEDD6C21EA1FB1700E3D42E /* MedicalCell.xib */,
 			);
 			name = ScheduleCell;
 			sourceTree = "<group>";
@@ -1412,6 +1424,7 @@
 				8BD49F351E482C1600C98E74 /* OutgoingImageFileMessageTableViewCell.xib in Resources */,
 				0F9C46241E60084A00DCFE46 /* DatKham0.png in Resources */,
 				A6E4C2FA1E1102BA00C2C871 /* User.storyboard in Resources */,
+				0FEDD6C41EA1FB1700E3D42E /* MedicalCell.xib in Resources */,
 				8BD49F261E482C1500C98E74 /* ChattingView.xib in Resources */,
 				8B813CB51E15052E0043F7EF /* Tag.png in Resources */,
 				0FC751EC1E8BA44200B82553 /* HistoryCell.xib in Resources */,
@@ -1435,6 +1448,7 @@
 				A63C38DF1E120A7E00DAB016 /* DangKi3.png in Resources */,
 				8BD49F2E1E482C1500C98E74 /* IncomingUserMessageTableViewCell.xib in Resources */,
 				8B3A12E61E10F399005DBC6E /* Assets.xcassets in Resources */,
+				0FEDD6BC1EA1F5D000E3D42E /* CodeFormAnalysisCell.xib in Resources */,
 				8BD49F311E482C1500C98E74 /* NeutralMessageTableViewCell.xib in Resources */,
 				A68A94FE1E14CA480067736E /* DangKi_Left.png in Resources */,
 				A68A950F1E150CF80067736E /* Clover1.png in Resources */,
@@ -1597,6 +1611,7 @@
 				0F54E1531E8A1AF6000AFE03 /* PackagesEntity.swift in Sources */,
 				8B3A13791E10F454005DBC6E /* RAMFumeAnimation.swift in Sources */,
 				8BD49F341E482C1600C98E74 /* OutgoingImageFileMessageTableViewCell.swift in Sources */,
+				0FEDD6C31EA1FB1700E3D42E /* MedicalCell.swift in Sources */,
 				8B79D0E01E5A91C80010C5C0 /* ListDoctorViewController.swift in Sources */,
 				0FC431701E65185B003F7F31 /* DetailsFileUsersViewController.swift in Sources */,
 				0F9C46171E5FE24500DCFE46 /* ChoiceServiceViewController.swift in Sources */,
@@ -1610,6 +1625,7 @@
 				8B0D35F51E56EB2D002CF784 /* BookingViewController.swift in Sources */,
 				0FA5806A1E65D5D4001B4E3C /* CheckInResultEntity.swift in Sources */,
 				8BD49F651E482D1100C98E74 /* OpenChannelChattingViewController.swift in Sources */,
+				0FEDD6BB1EA1F5D000E3D42E /* CodeFormAnalysisCell.swift in Sources */,
 				0F54E1571E8A1B3D000AFE03 /* ServicesEntity.swift in Sources */,
 				8BD49F3C1E482C9900C98E74 /* Utils.swift in Sources */,
 				0FF753391E62F267001450B7 /* ExamScheduleViewController.swift in Sources */,

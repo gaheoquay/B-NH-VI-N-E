@@ -11,7 +11,7 @@ import UIKit
 class PatientHistoryEntity: NSObject {
     
     var id = ""
-    var hisPatientHistoryID = ""
+    var hisPatientHistoryID = 0
     
     override init() {
         super.init()
@@ -21,7 +21,7 @@ class PatientHistoryEntity: NSObject {
         if let value = dictionary["Id"] as? String {
             self.id = value
         }
-        if let value = dictionary["HISPatientHistoryID"] as? String {
+        if let value = dictionary["HISPatientHistoryID"] as? Int {
             self.hisPatientHistoryID = value
         }
     }

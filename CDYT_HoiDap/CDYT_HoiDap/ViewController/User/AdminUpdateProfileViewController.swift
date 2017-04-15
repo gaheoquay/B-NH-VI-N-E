@@ -8,7 +8,7 @@
 
 import UIKit
 protocol AdminUpdateProfileViewControllerDelegate {
-    func reloadDataUpdateProfile(author: AuthorEntity, admin: ListAdminEntity)
+    func reloadDataUpdateProfile(author: AuthorEntity, admin: ListAdminEntity, isAdmin: Bool)
 }
 
 class AdminUpdateProfileViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
@@ -209,7 +209,7 @@ class AdminUpdateProfileViewController: UIViewController,UIPickerViewDelegate,UI
                     }
                     let alert = UIAlertController.init(title: "Thông báo", message: "Cập nhật thông tin tài khoản thành công", preferredStyle: UIAlertControllerStyle.alert)
                     let actionOk = UIAlertAction.init(title: "Đóng", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
-                        self.delegate?.reloadDataUpdateProfile(author: self.author, admin: self.admin)
+                        self.delegate?.reloadDataUpdateProfile(author: self.author, admin: self.admin, isAdmin: self.isAdmin)
                         _ = self.navigationController?.popViewController(animated: true)
                     })
                     alert.addAction(actionOk)
