@@ -43,12 +43,20 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell") as! HistoryCell
         if listBooking.count > 0 {
             cell.setDataHistory(entity: listBooking[indexPath.row])
-            if listBooking[indexPath.row].checkInResult.patientHistory == 0 || listBooking[indexPath.row].paymentResult.amount == 0 {
-                cell.isHidden = true
+            if listBooking[indexPath.row].bookType == 2 {
+                if listBooking[indexPath.row].status == 6 || listBooking[indexPath.row].status == 7 {
+                    cell.isHidden = false
+                }else {
+                    cell.isHidden = true
+                }
             }else {
-                cell.isHidden = false
+                if listBooking[indexPath.row].checkInResult.patientHistory == 0 || listBooking[indexPath.row].paymentResult.amount == 0 {
+                    cell.isHidden = true
+                }else {
+                    cell.isHidden = false
+                }
             }
-        }
+                   }
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

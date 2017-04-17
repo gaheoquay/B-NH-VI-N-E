@@ -13,7 +13,9 @@ class MedicalCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
     @IBOutlet weak var tbListMedical: UITableView!
     @IBOutlet weak var heightTbList: NSLayoutConstraint!
     
-    var listMedical = [listMedicalTestsEntity]()
+    var indexPatchs = IndexPath()
+    var listMedical = [MediCalEntity]()
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,14 +29,17 @@ class MedicalCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return listMedical.count
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return listMedical[indexPatchs.row].medicalTestGroup.hisServiceMedicTestGroupID
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listMedical.count
+        return listMedical[indexPatchs.row].listMedicalTests.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CodeFormAnalysisCell") as! CodeFormAnalysisCell
-        cell.setData(entity: listMedical[indexPath.row])
+        cell.setData(entity: listMedical[indexPatchs.row].listMedicalTests[indexPath.row])
         return cell
     }
 

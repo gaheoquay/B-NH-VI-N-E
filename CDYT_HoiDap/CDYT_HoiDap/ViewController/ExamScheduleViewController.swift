@@ -52,9 +52,16 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
       cell.delegate = self
       if listallUSer.count > 0 {
         cell.userEntity = listallUSer[indexPath.row]
-        if listallUSer[indexPath.row].booking.status == 4 {
-            cell.isHidden = true
+        if listallUSer[indexPath.row].booking.bookType == 2 {
+            if listallUSer[indexPath.row].booking.status == 7 ||  listallUSer[indexPath.row].booking.status == 6 {
+                cell.isHidden = true
+            }
+        }else {
+            if listallUSer[indexPath.row].booking.status == 4 {
+                cell.isHidden = true
+            }
         }
+        
       }
         cell.setData()
         return cell
@@ -84,6 +91,9 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         if listallUSer[index.row].booking.bookType == 2 {
             let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetaiAnalysisViewController") as! DetaiAnalysisViewController
             viewcontroller.booKing = listallUSer[index.row].booking
+            viewcontroller.listServices = listallUSer[index.row].listSer
+            viewcontroller.listPack = listallUSer[index.row].listPac
+            viewcontroller.adress = listallUSer[index.row].booking.adress
             self.navigationController?.pushViewController(viewcontroller, animated: true)
         }else {
             let main = UIStoryboard(name: "Main", bundle: nil)

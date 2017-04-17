@@ -134,6 +134,7 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
         self.userBooking = BookingUserEntity()
         self.listService = [ServicesEntity]()
         self.listPack = [PackagesEntity]()
+        self.statusTime = 0
     }
     @IBAction func tapService(_ sender: Any) {
         delegate?.gotoService(status: status)
@@ -401,7 +402,7 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
                     self.serviceEntity = ServiceEntity()
                     self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
                     self.userBooking = BookingUserEntity()
-                    
+                    self.statusTime = 0
                     
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -477,6 +478,7 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
                         self.listService = [ServicesEntity]()
                         self.listPack = [PackagesEntity]()
                         self.delegate?.gotoExamSchudelAtHome()
+                        self.statusTime = 0
                     }else{
                         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }

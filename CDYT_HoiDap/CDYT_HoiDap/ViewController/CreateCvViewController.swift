@@ -537,7 +537,6 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         if !Until.isValidPhone(phone: txtPhoneNumber.text!) {
             UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Sai định dạng số điện thoại", cancelBtnTitle: "Đóng")
         }
-        return
     }
     
     let userEntity = FileUserEntity()

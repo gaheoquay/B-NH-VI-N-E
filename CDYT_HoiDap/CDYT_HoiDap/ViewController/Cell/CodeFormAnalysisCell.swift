@@ -10,9 +10,7 @@ import UIKit
 
 class CodeFormAnalysisCell: UITableViewCell {
     
-    @IBOutlet weak var lbId: UILabel!
     @IBOutlet weak var lbName: UILabel!
-    @IBOutlet weak var marginBottomLbId: NSLayoutConstraint! // 34,5
     
 
     override func awakeFromNib() {
@@ -21,7 +19,6 @@ class CodeFormAnalysisCell: UITableViewCell {
     }
     
     func setData(entity: listMedicalTestsEntity){
-        lbId.text = entity.hisServiceMedicalTestID
         lbName.text = entity.serviceName
     }
 

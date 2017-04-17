@@ -84,6 +84,10 @@ class ExamScheduleCell: UITableViewCell {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
             myAttrString.append(NSMutableAttributedString(string: "Đã xác nhận", attributes: fontRegularWithColor))
             lbStatus.attributedText = myAttrString
+        }else if userEntity.booking.status == 6 {
+            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
+            myAttrString.append(NSMutableAttributedString(string: "Đã có kết quả", attributes: fontRegularWithColor))
+            lbStatus.attributedText = myAttrString
         }
     }else {
         myAttrStringSv.append(NSMutableAttributedString(string: "Khám tại viện E", attributes: fontBold))
@@ -132,7 +136,7 @@ class ExamScheduleCell: UITableViewCell {
         let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
             myAttrString.append(NSMutableAttributedString(string: "Chờ xác nhận ", attributes: fontRegularWithColor))
             lbStatus.attributedText = myAttrString
-        }else if userEntity.booking.status == 3 {
+        }else if userEntity.booking.status == 3 || userEntity.booking.status == 5 || userEntity.booking.status == 4 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
             myAttrString.append(NSMutableAttributedString(string: "Đã thanh toán", attributes: fontRegularWithColor))
             lbStatus.attributedText = myAttrString

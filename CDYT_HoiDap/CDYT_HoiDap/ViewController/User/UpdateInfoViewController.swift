@@ -95,8 +95,6 @@ class UpdateInfoViewController: BaseViewController {
       "Auth": Until.getAuthKey(),
       "RequestedUserId": otherUserId
     ]
-    
-    
     Until.showLoading()
     Alamofire.request(GET_USER_BY_ID, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
@@ -208,7 +206,7 @@ class UpdateInfoViewController: BaseViewController {
       }
       
     }else{
-      departmentLbl.text = ""
+      departmentLbl.text = userToShow.departmentId
       departmentTittle.text = ""
       jobTitle.text = ""
       jobLb.text = ""

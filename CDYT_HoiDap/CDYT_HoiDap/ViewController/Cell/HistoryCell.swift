@@ -34,9 +34,23 @@ class HistoryCell: UITableViewCell {
         if entity.bookType == 2 {
             myAttrStringSv.append(NSMutableAttributedString(string: "Xét nghiệm tại nhà", attributes: fontBold))
             imgAvatar.image = UIImage(named: "XNTaiNha.png")
+            if entity.status == 6 {
+                let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
+                myAttrString.append(NSMutableAttributedString(string: "Đã có kết quả", attributes: fontRegularWithColor))
+                lbStatus.attributedText = myAttrString
+            }else if entity.status == 7 {
+                let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
+                myAttrString.append(NSMutableAttributedString(string: "Đã trả kết quả", attributes: fontRegularWithColor))
+                lbStatus.attributedText = myAttrString
+            }
         }else {
             myAttrStringSv.append(NSMutableAttributedString(string: "Khám tại viện E", attributes: fontBold))
             imgAvatar.image = UIImage(named: "KhamTaiVien.png")
+            if entity.status == 4 {
+                let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
+                myAttrString.append(NSMutableAttributedString(string: "Đã có kết quả", attributes: fontRegularWithColor))
+                lbStatus.attributedText = myAttrString
+            }
         }
         
         if entity.status == 0 {
@@ -55,10 +69,6 @@ class HistoryCell: UITableViewCell {
         else if entity.status == 3 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
             myAttrString.append(NSMutableAttributedString(string: "Đã thanh toán", attributes: fontRegularWithColor))
-            lbStatus.attributedText = myAttrString
-        }else {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
-            myAttrString.append(NSMutableAttributedString(string: "Đã có kết quả", attributes: fontRegularWithColor))
             lbStatus.attributedText = myAttrString
         }
         

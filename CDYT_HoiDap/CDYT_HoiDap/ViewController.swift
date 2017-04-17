@@ -277,7 +277,7 @@ extension ViewController {
                               title: "BỆNH VIỆN E",
                               message: alert,
                               duration: 2,
-                              iconSize: CGSize(width: 22, height: 22), // Optional setup
+//                              iconSize: CGSize(width: 22, height: 22), // Optional setup
         onTap: {
           self.navigationNotificaton(dicData: dicData)
       })

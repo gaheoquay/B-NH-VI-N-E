@@ -99,7 +99,6 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
         NotificationCenter.default.addObserver(self, selector: #selector(updateMessageCountLabel), name: Notification.Name.init(UPDATE_BADGE), object: nil)
     }
     
-    
   func reloadView(){
     initTable()
     setUpUI()

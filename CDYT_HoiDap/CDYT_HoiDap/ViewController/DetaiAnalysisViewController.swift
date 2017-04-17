@@ -23,31 +23,54 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
     @IBOutlet weak var heightTbAnalysis: NSLayoutConstraint!
     @IBOutlet weak var heightViewTop: NSLayoutConstraint!
     @IBOutlet weak var viewTop: UIView!
+    @IBOutlet weak var marginBottomTbAnalysis: NSLayoutConstraint!
+    @IBOutlet weak var viewBill: UIView!
     
     var booKing = BookingEntity()
     var listDetailBooKing = AllUserEntity()
+    var adress = ""
     var heigtForRow = 0
+    var listServices = [ServicesEntity]()       // Kham tai nha and xet nghiem
+    var listPack = [PackEntity]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        requestBookingDetail()
-        setupUI()
-        
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        requestBookingDetail()
+    }
+    
     func setupUI(){
+        if booKing.status == 2 {
+            viewTop.isHidden = false
+            heightViewTop.constant = 265 + CGFloat(60 * (listServices.count + listPack.count) - 2)
+            viewBill.isHidden = true
+            lbTotalPrice.isHidden = true
+            lbSurCharge.isHidden = true
+            marginBottomTbAnalysis.constant = 0
+        }else if booKing.status == 3 || booKing.status == 4 || booKing.status == 5{
+            viewTop.isHidden = false
+            heightViewTop.constant = 265 + CGFloat(60 * (listServices.count + listPack.count) - 2)
+            viewBill.isHidden = false
+            lbTotalPrice.isHidden = false
+            lbSurCharge.isHidden = false
+            marginBottomTbAnalysis.constant = 96
+        }else {
+            viewTop.isHidden = true
+            heightViewTop.constant = 0
+        }
+        
         tbListService.register(UINib.init(nibName: "ServiceCell", bundle: nil), forCellReuseIdentifier: "ServiceCell")
         tbListAnalysisCode.register(UINib.init(nibName: "MedicalCell", bundle: nil), forCellReuseIdentifier: "MedicalCell")
         tbListService.delegate = self
         tbListService.dataSource = self
         tbListAnalysisCode.delegate = self
         tbListAnalysisCode.dataSource = self
-        heightTbService.constant = CGFloat(60 * (listDetailBooKing.listPac.count + listDetailBooKing.listSer.count) - 2)
+        heightTbService.constant = CGFloat(60 * (listServices.count + listPack.count) - 2)
         lbDate.text = String().convertTimeStampWithDateFormat(timeStamp: booKing.bookingDate / 1000, dateFormat: "dd/MM/YYYY")
         lbHour.text = String().convertTimeStampWithDateFormat(timeStamp: booKing.bookingDate / 1000, dateFormat: "hh:mm a")
-        viewTop.isHidden = false
-        heightViewTop.constant = 478
         lbPantentHistory.text = String(listDetailBooKing.patientHistory.hisPatientHistoryID)
         let image = Until.generateBarcode(from: "\(listDetailBooKing.patientHistory.hisPatientHistoryID)")
         imgBarcode.image = image
@@ -56,16 +79,17 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
             heigtForRow = heigtForRow + a
         }
         heightTbAnalysis.constant = CGFloat(heigtForRow)
-        lbAdress.text = listDetailBooKing.distric.name
+        lbAdress.text = adress
         
         let fontWithColor = [ NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor.init(netHex: 0x7ED321)]
-        let myAttrString = NSMutableAttributedString(string: "Tổng thu:")
-        myAttrString.append(NSAttributedString(string: "\(String().replaceNSnumber(doublePrice: listDetailBooKing.totalMoney))", attributes: fontWithColor))
+        let myAttrString = NSMutableAttributedString(string: "Tổng thu: ")
+        myAttrString.append(NSAttributedString(string: "\(String().replaceNSnumber(doublePrice: listDetailBooKing.totalMoney))đ", attributes: fontWithColor))
         lbTotalPrice.attributedText = myAttrString
         
         let myAttrStringSur = NSMutableAttributedString(string: "Đã bao gồm phụ thu:")
-        myAttrStringSur.append(NSAttributedString(string: "\(String().replaceNSnumber(doublePrice: listDetailBooKing.booking.money))", attributes: fontWithColor))
+        myAttrStringSur.append(NSAttributedString(string: "\(String().replaceNSnumber(doublePrice: listDetailBooKing.booking.money))đ", attributes: fontWithColor))
         lbSurCharge.attributedText = myAttrStringSur
+        view.layoutIfNeeded()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -80,9 +104,9 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
         
         if tableView == self.tbListService {
             if section == 0 {
-                return listDetailBooKing.listPac.count
+                return listPack.count
             }else {
-                return listDetailBooKing.listSer.count
+                return listServices.count
             }
         }else{
             return listDetailBooKing.listMedicalGroups.count
@@ -90,23 +114,22 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
         if tableView == self.tbListService {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCell") as! ServiceCell
             if indexPath.section == 0 {
-                if listDetailBooKing.listPac.count > 0 {
-                    cell.setDataPac(entity: listDetailBooKing.listPac[indexPath.row])
+                if listPack.count > 0 {
+                    cell.setDataPac(entity: listPack[indexPath.row])
                 }
             }else {
-                if listDetailBooKing.listSer.count > 0 {
-                    cell.setDataSer(entity: listDetailBooKing.listSer[indexPath.row])
+                if listServices.count > 0 {
+                    cell.setDataSer(entity: listServices[indexPath.row])
                 }
             }
             return cell
         }else {
             let cellMedical = tableView.dequeueReusableCell(withIdentifier: "MedicalCell") as! MedicalCell
-            cellMedical.listMedical = self.listDetailBooKing.listMedicalGroups[indexPath.row].listMedicalTests
+            cellMedical.indexPatchs = indexPath
+            cellMedical.listMedical = self.listDetailBooKing.listMedicalGroups
             return cellMedical
         }
     }
@@ -122,7 +145,7 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
     func requestBookingDetail(){
         let Param : [String : Any] = [
             "Auth": Until.getAuthKey(),
-            "BookingRecordId" : "002519101427500004619-62df5adc80074094a1dc55ea6900dd15"
+            "BookingRecordId" : booKing.id
         ]
         print(Param)
         Until.showLoading()
@@ -132,18 +155,18 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
                     if let result = response.result.value {
                         let jsonData = result as! NSDictionary
                         self.listDetailBooKing = AllUserEntity.init(dictionary: jsonData)
-                        self.setupUI()
                     }
                     self.tbListService.reloadData()
                     self.tbListAnalysisCode.reloadData()
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-                Until.hideLoading()
             }
             else{
                 UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
             }
+            self.setupUI()
+            Until.hideLoading()
+
         }
     }
     
