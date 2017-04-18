@@ -64,8 +64,21 @@ class DetailAnalysisFormViewController: UIViewController,UITableViewDelegate,UIT
         return 44
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return medicalGroups.medicalTestGroup.hisServiceMedicTestGroupID
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let viewHeader = UIView()
+        viewHeader.backgroundColor = UIColor.gray
+        
+        let labelTitle = UILabel.init()
+        
+        labelTitle.font = UIFont.systemFont(ofSize: 14)
+        labelTitle.textColor = UIColor.black
+        labelTitle.text = "\(medicalGroups.medicalTestGroup.hisServiceMedicTestGroupID)"
+        labelTitle.frame = CGRect.init(x: 8, y: 15, width: labelTitle.frame.size.width, height: labelTitle.frame.size.height)
+        labelTitle.sizeToFit()
+        
+        viewHeader.addSubview(labelTitle)
+        return viewHeader
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

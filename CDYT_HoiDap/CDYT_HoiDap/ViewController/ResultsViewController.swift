@@ -27,8 +27,6 @@ class ResultsViewController: UIViewController {
     func setupUi(){
         tbListGroupId.delegate = self
         tbListGroupId.dataSource = self
-        tbListGroupId.estimatedRowHeight = 999
-        tbListGroupId.rowHeight = UITableViewAutomaticDimension
         tbListGroupId.register(UINib.init(nibName: "CodeFormAnalysisCell", bundle: nil), forCellReuseIdentifier: "CodeFormAnalysisCell")
         lbPantienHistory.text = String(listDetailBooKing.patientHistory.hisPatientHistoryID)
     }
@@ -86,6 +84,9 @@ extension ResultsViewController : UITableViewDelegate , UITableViewDataSource {
         let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailAnalysisFormViewController") as! DetailAnalysisFormViewController
         viewcontroller.medicalGroups = listDetailBooKing.listMedicalGroups[indexPath.row]
         self.navigationController?.pushViewController(viewcontroller, animated: true)
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
     }
     
 }

@@ -19,11 +19,11 @@ class ViewController: BaseViewController,KeyWordTableViewCellDelegate {
     NotificationCenter.default.addObserver(self, selector: #selector(setUpBadge), name: Notification.Name.init(UPDATE_BADGE), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(gotoSchedule), name: Notification.Name.init(GO_TO_SCHEDULE), object: nil)
 
-    setupUI()
-    initTableView()
-    Until.showLoading()
-    getFeeds()
-    getHotTagFromServer()
+//    setupUI()
+//    initTableView()
+//    Until.showLoading()
+//    getFeeds()
+//    getHotTagFromServer()
     // Do any additional setup after loading the view, typically from a nib.
     
   }

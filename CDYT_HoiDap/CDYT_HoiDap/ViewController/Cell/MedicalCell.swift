@@ -22,9 +22,8 @@ class MedicalCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
         tbListMedical.delegate = self
         tbListMedical.dataSource = self
         tbListMedical.register(UINib.init(nibName: "CodeFormAnalysisCell", bundle: nil), forCellReuseIdentifier: "CodeFormAnalysisCell")
-        tbListMedical.estimatedRowHeight = 999
-        tbListMedical.rowHeight = UITableViewAutomaticDimension
-        heightTbList.constant = CGFloat(listMedical.count * 55)
+//        heightTbList.constant = CGFloat(listMedical.count * 55)
+        
         // Initialization code
     }
     
@@ -32,15 +31,19 @@ class MedicalCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
         return listMedical.count
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return listMedical[indexPatchs.row].medicalTestGroup.hisServiceMedicTestGroupID
+        return listMedical[section].medicalTestGroup.hisServiceMedicTestGroupID
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listMedical[indexPatchs.row].listMedicalTests.count
+        return listMedical[section].listMedicalTests.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CodeFormAnalysisCell") as! CodeFormAnalysisCell
-        cell.setData(entity: listMedical[indexPatchs.row].listMedicalTests[indexPath.row])
+        cell.setData(entity: listMedical[indexPath.section].listMedicalTests[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

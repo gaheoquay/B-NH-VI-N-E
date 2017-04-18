@@ -63,7 +63,7 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
         }
         
         tbListService.register(UINib.init(nibName: "ServiceCell", bundle: nil), forCellReuseIdentifier: "ServiceCell")
-        tbListAnalysisCode.register(UINib.init(nibName: "MedicalCell", bundle: nil), forCellReuseIdentifier: "MedicalCell")
+        tbListAnalysisCode.register(UINib.init(nibName: "CodeFormAnalysisCell", bundle: nil), forCellReuseIdentifier: "CodeFormAnalysisCell")
         tbListService.delegate = self
         tbListService.dataSource = self
         tbListAnalysisCode.delegate = self
@@ -75,10 +75,10 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
         let image = Until.generateBarcode(from: "\(listDetailBooKing.patientHistory.hisPatientHistoryID)")
         imgBarcode.image = image
         for item in listDetailBooKing.listMedicalGroups {
-            let a = item.listMedicalTests.count * 55  // chieu cao cua 1 cell
+            let a = item.listMedicalTests.count * 30  // chieu cao cua 1 cell
             heigtForRow = heigtForRow + a
         }
-        heightTbAnalysis.constant = CGFloat(heigtForRow)
+        heightTbAnalysis.constant = CGFloat(heigtForRow) - CGFloat(listDetailBooKing.listMedicalGroups.count * 30)
         lbAdress.text = adress
         
         let fontWithColor = [ NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor.init(netHex: 0x7ED321)]
@@ -96,7 +96,15 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
         if tableView == self.tbListService {
             return 2
         }else {
-            return 1
+            return listDetailBooKing.listMedicalGroups.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if tableView == self.tbListAnalysisCode {
+            return listDetailBooKing.listMedicalGroups[section].medicalTestGroup.hisServiceMedicTestGroupID
+        }else {
+            return ""
         }
     }
     
@@ -109,7 +117,7 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
                 return listServices.count
             }
         }else{
-            return listDetailBooKing.listMedicalGroups.count
+            return listDetailBooKing.listMedicalGroups[section].listMedicalTests.count
         }
     }
     
@@ -127,9 +135,8 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
             }
             return cell
         }else {
-            let cellMedical = tableView.dequeueReusableCell(withIdentifier: "MedicalCell") as! MedicalCell
-            cellMedical.indexPatchs = indexPath
-            cellMedical.listMedical = self.listDetailBooKing.listMedicalGroups
+            let cellMedical = tableView.dequeueReusableCell(withIdentifier: "CodeFormAnalysisCell") as! CodeFormAnalysisCell
+            cellMedical.setData(entity: listDetailBooKing.listMedicalGroups[indexPath.section].listMedicalTests[indexPath.row])
             return cellMedical
         }
     }
@@ -138,7 +145,7 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
         if tableView == self.tbListService {
             return 60
         }else {
-            return CGFloat(listDetailBooKing.listMedicalGroups[indexPath.row].listMedicalTests.count * 60)
+            return UITableViewAutomaticDimension
         }
     }
     

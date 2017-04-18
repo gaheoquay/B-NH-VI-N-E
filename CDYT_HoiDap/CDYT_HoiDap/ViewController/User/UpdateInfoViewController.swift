@@ -101,7 +101,7 @@ class UpdateInfoViewController: BaseViewController {
         if status == 200{
           if let result = response.result.value {
             let jsonData = result as! NSDictionary
-            
+            print(jsonData)
             let entity = UserEntity.initWithDictionary(dictionary: jsonData)
             
             self.userToShow = entity
@@ -206,7 +206,7 @@ class UpdateInfoViewController: BaseViewController {
       }
       
     }else{
-      departmentLbl.text = userToShow.departmentId
+      departmentLbl.text = ""
       departmentTittle.text = ""
       jobTitle.text = ""
       jobLb.text = ""

@@ -71,14 +71,14 @@ class ServiceCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
         viewShowDetail.isHidden = true
         btnSelect.isHidden = true
         lbCombo.text = entity.name
-        lbPrice.text = String().replaceNSnumber(doublePrice: entity.pricePackage)
+        lbPrice.text = "\(String().replaceNSnumber(doublePrice: entity.pricePackage))đ"
         marginLineBottom.constant = 0
     }
     
     func setDataSer(entity: ServicesEntity){
         viewShowDetail.isHidden = true
         btnSelect.isHidden = true
-        lbPrice.text = String().replaceNSnumber(doublePrice: entity.priceService)
+        lbPrice.text = "\(String().replaceNSnumber(doublePrice: entity.priceService))đ"
         lbCombo.text = entity.name
         marginLineBottom.constant = 0
     }
