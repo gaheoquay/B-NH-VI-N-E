@@ -20,7 +20,8 @@ class DetailAnalysisFormViewController: UIViewController,UITableViewDelegate,UIT
     @IBOutlet weak var viewValue: UIView!
     @IBOutlet weak var viewUnit: UIView!
     
-    
+    var medicalGroups = MediCalEntity()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -48,6 +49,8 @@ class DetailAnalysisFormViewController: UIViewController,UITableViewDelegate,UIT
         tbListResult.layer.borderColor = UIColor.gray.cgColor
         lbAnalysis.text = " TÊN XÉT \n NGHIỆM"
         lbValueNormal.text = " GIÁ TRỊ \n BÌNH \n THƯỜNG"
+        let image = Until.generateBarcode(from: "\(medicalGroups.medicalTestGroup.hisServiceMedicTestGroupID)")
+        imgBarCode.image = image
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -61,32 +64,21 @@ class DetailAnalysisFormViewController: UIViewController,UITableViewDelegate,UIT
         return 44
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let viewHeader = UIView()
-        viewHeader.backgroundColor = UIColor.gray
-
-        let labelTitle = UILabel.init()
-        
-        labelTitle.font = UIFont.systemFont(ofSize: 14)
-        labelTitle.textColor = UIColor.red
-        labelTitle.text = "Sinh hoá"
-        labelTitle.frame = CGRect.init(x: 8, y: 15, width: labelTitle.frame.size.width, height: labelTitle.frame.size.height)
-        labelTitle.sizeToFit()
-        
-        viewHeader.addSubview(labelTitle)
-        return viewHeader
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return medicalGroups.medicalTestGroup.hisServiceMedicTestGroupID
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return medicalGroups.listMedicalTests.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FormAnalysisCell") as! FormAnalysisCell
+        cell.setData(entity: medicalGroups.listMedicalTests[indexPath.row])
         return cell
     }
     
     @IBAction func btnBack(_ sender: Any) {
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
 }

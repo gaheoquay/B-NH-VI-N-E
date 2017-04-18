@@ -50,10 +50,10 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
                     cell.isHidden = true
                 }
             }else {
-                if listBooking[indexPath.row].checkInResult.patientHistory == 0 || listBooking[indexPath.row].paymentResult.amount == 0 {
-                    cell.isHidden = true
-                }else {
+                if listBooking[indexPath.row].status == 4 {
                     cell.isHidden = false
+                }else {
+                    cell.isHidden = true
                 }
             }
                    }
@@ -61,7 +61,8 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if listBooking[indexPath.row].bookType == 2 {
-            let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailAnalysisFormViewController") as! DetailAnalysisFormViewController
+            let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
+            viewcontroller.booKing = listBooking[indexPath.row]
             self.navigationController?.pushViewController(viewcontroller, animated: true)
         }else {
             let viewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "DetailsHistoryUserViewController") as! DetailsHistoryUserViewController
@@ -71,11 +72,20 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if listBooking[indexPath.row].checkInResult.patientHistory == 0 || listBooking[indexPath.row].paymentResult.amount == 0 {
-            return 0
-        }else {
-            return UITableViewAutomaticDimension
+        if listBooking[indexPath.row].bookType == 2 {
+            if listBooking[indexPath.row].status == 6 || listBooking[indexPath.row].status == 7 {
+                return UITableViewAutomaticDimension
+            }else {
+                return 0
             }
+        }else {
+            if listBooking[indexPath.row].status == 4 {
+                return UITableViewAutomaticDimension
+            }else {
+                return 0
+            }
+        }
+        
     }
     
     

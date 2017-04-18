@@ -11,6 +11,7 @@ import UIKit
 class CodeFormAnalysisCell: UITableViewCell {
     
     @IBOutlet weak var lbName: UILabel!
+    @IBOutlet weak var imgEditUp: UIImageView!
     
 
     override func awakeFromNib() {
@@ -20,6 +21,12 @@ class CodeFormAnalysisCell: UITableViewCell {
     
     func setData(entity: listMedicalTestsEntity){
         lbName.text = entity.serviceName
+        imgEditUp.isHidden = true
+    }
+    
+    func setDataResult(entity: MediCalEntity){
+        imgEditUp.isHidden = false
+        lbName.text = entity.medicalTestGroup.hisServiceMedicTestGroupID
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

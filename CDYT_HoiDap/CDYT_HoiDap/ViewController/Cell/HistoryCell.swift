@@ -53,24 +53,24 @@ class HistoryCell: UITableViewCell {
             }
         }
         
-        if entity.status == 0 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
-            myAttrString.append(NSMutableAttributedString(string: "Chờ xác nhận ", attributes: fontRegularWithColor))
-            lbStatus.attributedText = myAttrString
-        }else if entity.status == 1 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
-            myAttrString.append(NSMutableAttributedString(string: "Chờ xử lý", attributes: fontRegularWithColor))
-            lbStatus.attributedText = myAttrString
-        }else if entity.status == 2 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
-            myAttrString.append(NSMutableAttributedString(string: "Đã có số khám", attributes: fontRegularWithColor))
-            lbStatus.attributedText = myAttrString
-        }
-        else if entity.status == 3 {
-            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
-            myAttrString.append(NSMutableAttributedString(string: "Đã thanh toán", attributes: fontRegularWithColor))
-            lbStatus.attributedText = myAttrString
-        }
+//        if entity.status == 0 {
+//            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
+//            myAttrString.append(NSMutableAttributedString(string: "Chờ xác nhận ", attributes: fontRegularWithColor))
+//            lbStatus.attributedText = myAttrString
+//        }else if entity.status == 1 {
+//            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
+//            myAttrString.append(NSMutableAttributedString(string: "Chờ xử lý", attributes: fontRegularWithColor))
+//            lbStatus.attributedText = myAttrString
+//        }else if entity.status == 2 {
+//            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
+//            myAttrString.append(NSMutableAttributedString(string: "Đã có số khám", attributes: fontRegularWithColor))
+//            lbStatus.attributedText = myAttrString
+//        }
+//        else if entity.status == 3 {
+//            let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
+//            myAttrString.append(NSMutableAttributedString(string: "Đã thanh toán", attributes: fontRegularWithColor))
+//            lbStatus.attributedText = myAttrString
+//        }
         
         lbType.attributedText = myAttrStringSv
         lbCreateDate.text = String().convertTimeStampWithDateFormat(timeStamp: entity.bookingDate / 1000, dateFormat: "dd/MM/YYYY")

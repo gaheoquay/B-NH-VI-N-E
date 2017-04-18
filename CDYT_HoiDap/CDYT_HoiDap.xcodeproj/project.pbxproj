@@ -249,6 +249,7 @@
 		8BF1497D1E14BF9C00766F8F /* Thongbao.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1496A1E14BF9C00766F8F /* Thongbao.png */; };
 		8BF1497E1E14BF9C00766F8F /* TinNhan.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1496B1E14BF9C00766F8F /* TinNhan.png */; };
 		8BFE666C1E5D423700E1138B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFE666B1E5D423700E1138B /* BaseViewController.swift */; };
+		98942FF41EA5284B004C3349 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98942FF31EA5284B004C3349 /* ResultsViewController.swift */; };
 		A6005BCF1E13722B00095FB7 /* NotifyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6005BCD1E13722B00095FB7 /* NotifyTableViewCell.swift */; };
 		A6005BD01E13722B00095FB7 /* NotifyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6005BCE1E13722B00095FB7 /* NotifyTableViewCell.xib */; };
 		A60430F61E232D49000216FB /* Change_Ava.png in Resources */ = {isa = PBXBuildFile; fileRef = A60430F51E232D49000216FB /* Change_Ava.png */; };
@@ -560,6 +561,7 @@
 		8BF1496A1E14BF9C00766F8F /* Thongbao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thongbao.png; sourceTree = "<group>"; };
 		8BF1496B1E14BF9C00766F8F /* TinNhan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TinNhan.png; sourceTree = "<group>"; };
 		8BFE666B1E5D423700E1138B /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		98942FF31EA5284B004C3349 /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		A6005BCD1E13722B00095FB7 /* NotifyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyTableViewCell.swift; sourceTree = "<group>"; };
 		A6005BCE1E13722B00095FB7 /* NotifyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotifyTableViewCell.xib; sourceTree = "<group>"; };
 		A60430F51E232D49000216FB /* Change_Ava.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Change_Ava.png; sourceTree = "<group>"; };
@@ -1000,6 +1002,7 @@
 				0FC0CBA61E876C21009DA53C /* DetaiAnalysisViewController.swift */,
 				0F94FEE81E877F0A001884AD /* DetailAnalysisFormViewController.swift */,
 				0F09CEF41E88B1DC003FD8B1 /* SelectServiceViewController.swift */,
+				98942FF31EA5284B004C3349 /* ResultsViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1489,7 +1492,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9359421395374DDFA61FDFD1 /* [CP] Copy Pods Resources */ = {
@@ -1537,6 +1540,7 @@
 				A6C463DA1E25DB910046A367 /* RecentFeedTableViewCell.swift in Sources */,
 				0FC431781E658680003F7F31 /* BookingEntity.swift in Sources */,
 				A625AD2D1E24CC5700953B0B /* CommentViewController.swift in Sources */,
+				98942FF41EA5284B004C3349 /* ResultsViewController.swift in Sources */,
 				0FF7533D1E62F3A9001450B7 /* ExamScheduleCell.swift in Sources */,
 				0F9C46191E5FF22A00DCFE46 /* ListServiceViewController.swift in Sources */,
 				8B2AFF141E642C4A00415554 /* ServiceEntity.swift in Sources */,

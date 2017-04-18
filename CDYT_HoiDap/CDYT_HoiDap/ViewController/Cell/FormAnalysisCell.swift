@@ -35,6 +35,17 @@ class FormAnalysisCell: UITableViewCell {
         viewValue.layer.borderColor = UIColor.gray.cgColor
         viewValue.layer.borderWidth = 0.5
     }
+    
+    func setData(entity: listMedicalTestsEntity){
+        lbNameAnalysis.text = entity.serviceName
+        lbResult.text = entity.indicator
+        lbUnit.text = entity.unit
+        if entity.femaleHightIndicator != "" {
+            lbValue.text = "\(entity.femaleLowIn)-\(entity.femaleHightIndicator)"
+        }else {
+            lbValue.text = "\(entity.maleLow)-\(entity.maleHight)"
+        }
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

@@ -86,7 +86,7 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
         myAttrString.append(NSAttributedString(string: "\(String().replaceNSnumber(doublePrice: listDetailBooKing.totalMoney))đ", attributes: fontWithColor))
         lbTotalPrice.attributedText = myAttrString
         
-        let myAttrStringSur = NSMutableAttributedString(string: "Đã bao gồm phụ thu:")
+        let myAttrStringSur = NSMutableAttributedString(string: "Đã bao gồm phụ thu: ")
         myAttrStringSur.append(NSAttributedString(string: "\(String().replaceNSnumber(doublePrice: listDetailBooKing.booking.money))đ", attributes: fontWithColor))
         lbSurCharge.attributedText = myAttrStringSur
         view.layoutIfNeeded()
