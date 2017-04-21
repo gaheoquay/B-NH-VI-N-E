@@ -20,7 +20,7 @@ class CodeFormAnalysisCell: UITableViewCell {
     }
     
     func setData(entity: listMedicalTestsEntity){
-        lbName.text = entity.serviceName
+        lbName.text = entity.medicalTest.serviceName
         imgEditUp.isHidden = true
     }
     

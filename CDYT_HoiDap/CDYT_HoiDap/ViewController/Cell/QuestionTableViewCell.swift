@@ -87,7 +87,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
         let users = realm.objects(UserEntity.self).first
         
         
-        if users == nil || users?.role == 0 || users?.role == 1  {
+        if users == nil || users?.role == 0 || users?.role == 1 || users?.role == 3 {
             viewCate.isHidden = true
             viewDoctor.isHidden = true
             imgApproval.isHidden = true
@@ -179,7 +179,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
             lbTimeAnswerDoctor.text = ""
             lbNameDoctor.isHidden = true
             lbTimeAnswerDoctor.isHidden = true
-            if users?.role == 2 || users?.role == 3 {
+            if users?.role == 2 {
                 if feedEntity.firstCommentedDoctor.id  != "" {
                     layoutBottomCreateDate.constant = 60
                     lbCreateDate.isHidden = false

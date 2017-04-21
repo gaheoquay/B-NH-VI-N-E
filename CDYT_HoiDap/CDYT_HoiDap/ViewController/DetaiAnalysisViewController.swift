@@ -32,7 +32,8 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
     var heigtForRow = 0
     var listServices = [ServicesEntity]()       // Kham tai nha and xet nghiem
     var listPack = [PackEntity]()
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -43,16 +44,33 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
     }
     
     func setupUI(){
+        var b: CGFloat = 0
         if booKing.status == 2 {
+            for item in listDetailBooKing.listMedicalGroups {
+                let a = item.listMedicalTests.count * 40  // chieu cao cua 1 cell
+                heigtForRow = heigtForRow + a
+            }
+            b = CGFloat(heigtForRow)
+            let c = listDetailBooKing.listMedicalGroups.count * 30 // chieu cao section
+            let d = b + CGFloat(c)
+            heightTbAnalysis.constant = d + 16
             viewTop.isHidden = false
-            heightViewTop.constant = 265 + CGFloat(60 * (listServices.count + listPack.count) - 2)
+            heightViewTop.constant = 169 + heightTbAnalysis.constant
             viewBill.isHidden = true
             lbTotalPrice.isHidden = true
             lbSurCharge.isHidden = true
             marginBottomTbAnalysis.constant = 0
         }else if booKing.status == 3 || booKing.status == 4 || booKing.status == 5{
+            for item in listDetailBooKing.listMedicalGroups {
+                let a = item.listMedicalTests.count * 40  // chieu cao cua 1 cell
+                heigtForRow = heigtForRow + a
+            }
+            b = CGFloat(heigtForRow)
+            let c = listDetailBooKing.listMedicalGroups.count * 30 // chieu cao section
+            let d = b + CGFloat(c)
+            heightTbAnalysis.constant = d + 16
             viewTop.isHidden = false
-            heightViewTop.constant = 265 + CGFloat(60 * (listServices.count + listPack.count) - 2)
+            heightViewTop.constant = 169 + 96 + heightTbAnalysis.constant
             viewBill.isHidden = false
             lbTotalPrice.isHidden = false
             lbSurCharge.isHidden = false
@@ -64,21 +82,22 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
         
         tbListService.register(UINib.init(nibName: "ServiceCell", bundle: nil), forCellReuseIdentifier: "ServiceCell")
         tbListAnalysisCode.register(UINib.init(nibName: "CodeFormAnalysisCell", bundle: nil), forCellReuseIdentifier: "CodeFormAnalysisCell")
+        tbListService.register(UINib.init(nibName: "TotalPriceCell", bundle: nil), forCellReuseIdentifier: "TotalPriceCell")
         tbListService.delegate = self
         tbListService.dataSource = self
         tbListAnalysisCode.delegate = self
         tbListAnalysisCode.dataSource = self
-        heightTbService.constant = CGFloat(60 * (listServices.count + listPack.count) - 2)
+        if booKing.status == 3 || booKing.status == 4 || booKing.status == 5 {
+            heightTbService.constant = CGFloat(60 * (listServices.count + listPack.count) - 2)
+        }else {
+            heightTbService.constant = CGFloat(60 * (listServices.count + listPack.count) - 2) + 90
+        }
         lbDate.text = String().convertTimeStampWithDateFormat(timeStamp: booKing.bookingDate / 1000, dateFormat: "dd/MM/YYYY")
         lbHour.text = String().convertTimeStampWithDateFormat(timeStamp: booKing.bookingDate / 1000, dateFormat: "hh:mm a")
         lbPantentHistory.text = String(listDetailBooKing.patientHistory.hisPatientHistoryID)
         let image = Until.generateBarcode(from: "\(listDetailBooKing.patientHistory.hisPatientHistoryID)")
         imgBarcode.image = image
-        for item in listDetailBooKing.listMedicalGroups {
-            let a = item.listMedicalTests.count * 30  // chieu cao cua 1 cell
-            heigtForRow = heigtForRow + a
-        }
-        heightTbAnalysis.constant = CGFloat(heigtForRow) - CGFloat(listDetailBooKing.listMedicalGroups.count * 30)
+        
         lbAdress.text = adress
         
         let fontWithColor = [ NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor.init(netHex: 0x7ED321)]
@@ -94,9 +113,21 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if tableView == self.tbListService {
-            return 2
+            return 3
         }else {
             return listDetailBooKing.listMedicalGroups.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if tableView == tbListService {
+            if section == 2 {
+                return 30
+            }else {
+                return 0
+            }
+        }else {
+            return 40
         }
     }
     
@@ -104,7 +135,11 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
         if tableView == self.tbListAnalysisCode {
             return listDetailBooKing.listMedicalGroups[section].medicalTestGroup.hisServiceMedicTestGroupID
         }else {
-            return ""
+            if section == 2 {
+                return "Tổng giá dịch vụ tạm tính"
+            }else {
+                return ""
+            }
         }
     }
     
@@ -113,13 +148,16 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
         if tableView == self.tbListService {
             if section == 0 {
                 return listPack.count
-            }else {
+            }else if section == 1 {
                 return listServices.count
+            }else {
+                return 1
             }
         }else{
             return listDetailBooKing.listMedicalGroups[section].listMedicalTests.count
         }
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tbListService {
@@ -128,10 +166,33 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
                 if listPack.count > 0 {
                     cell.setDataPac(entity: listPack[indexPath.row])
                 }
-            }else {
+            }else if indexPath.section == 1 {
                 if listServices.count > 0 {
                     cell.setDataSer(entity: listServices[indexPath.row])
                 }
+            }else {
+                var pricePack: Double = 0
+                var priceSer : Double = 0
+                var surChange: Double  = 0
+                for item in listPack {
+                    let a = item.pricePackage
+                    pricePack = pricePack + a
+                }
+                for item in listServices {
+                    let a = item.priceService
+                    priceSer = priceSer + a
+                }
+                
+                if pricePack + priceSer < 200000.0 {
+                    surChange = 100000.0
+                }else {
+                    surChange = 0
+                }
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TotalPriceCell") as! TotalPriceCell
+                cell.lbTotalPrice.text = "Tổng thu: \(String().replaceNSnumber(doublePrice: (pricePack + priceSer)))"
+                cell.lbSurChange.text = "Phụ thu: \(String().replaceNSnumber(doublePrice: surChange))"
+                return cell
             }
             return cell
         }else {
@@ -143,9 +204,13 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == self.tbListService {
-            return 60
+            if indexPath.section == 2 {
+                return 60
+            }else {
+                return 60
+            }
         }else {
-            return UITableViewAutomaticDimension
+            return 40
         }
     }
     
@@ -173,11 +238,11 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
             }
             self.setupUI()
             Until.hideLoading()
-
+            
         }
     }
     
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -186,7 +251,7 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
     @IBAction func btnBack(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)
     }
-
     
-
+    
+    
 }

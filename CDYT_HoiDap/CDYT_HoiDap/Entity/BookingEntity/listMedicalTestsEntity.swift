@@ -9,59 +9,22 @@
 import UIKit
 
 class listMedicalTestsEntity: NSObject {
-    var id = ""
-    var hisServiceMedicalTestID = ""
-    var serviceName = ""
-    var indicator = ""
-    var hisroomId = 0
-    var femaleHightIndicator = ""
-    var femaleLowIn = ""
-    var maleHight = ""
-    var maleLow = ""
-    var unit = ""
-    var hisDepartMen = ""
-    var departMentName = ""
+    
+    var medicalTest = MedicalTestEntity()
+    var medicalTestLines = [MedicalTestLinesEntity]()
     
     override init() {
         super.init()
     }
-    
     init(dictionary: NSDictionary) {
-        if let value = dictionary["Id"] as? String {
-            self.id = value
+        if let value = dictionary["MedicalTest"] as? NSDictionary {
+            self.medicalTest = MedicalTestEntity.init(dictionary: value)
         }
-        if let value = dictionary["HISServiceMedicalTestID"] as? String {
-            self.hisServiceMedicalTestID = value
-        }
-        if let value = dictionary["ServiceName"] as? String {
-            self.serviceName = value
-        }
-        if let value = dictionary["IndicatorStr"] as? String {
-            self.indicator = value
-        }
-        if let value = dictionary["HisRoomId"] as? Int {
-            self.hisroomId = value
-        }
-        if let value = dictionary["FemaleHighIndicator"] as? String {
-            self.femaleHightIndicator = value
-        }
-        if let value = dictionary["FemaleLowIndicator"] as? String {
-            self.femaleLowIn = value
-        }
-        if let value = dictionary["MaleHighIndicator"] as? String {
-            self.maleHight = value
-        }
-        if let value = dictionary["MaleLowIndicator"] as? String {
-            self.maleLow = value
-        }
-        if let value = dictionary["Unit"] as? String {
-            self.unit = value
-        }
-        if let value = dictionary["HisDepartmentId"] as? String {
-            self.hisDepartMen = value
-        }
-        if let value = dictionary["DepartmentName"] as? String {
-            self.departMentName = value
+        if let value = dictionary["MedicalTestLines"] as? [NSDictionary] {
+            for item in value {
+                let entity = MedicalTestLinesEntity.init(dictionary: item)
+                self.medicalTestLines.append(entity)
+            }
         }
     }
 }

@@ -249,7 +249,13 @@
 		8BF1497D1E14BF9C00766F8F /* Thongbao.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1496A1E14BF9C00766F8F /* Thongbao.png */; };
 		8BF1497E1E14BF9C00766F8F /* TinNhan.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1496B1E14BF9C00766F8F /* TinNhan.png */; };
 		8BFE666C1E5D423700E1138B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFE666B1E5D423700E1138B /* BaseViewController.swift */; };
+		981CC9151EA66A8F00E35EB0 /* TotalPriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981CC9131EA66A8F00E35EB0 /* TotalPriceCell.swift */; };
+		981CC9161EA66A8F00E35EB0 /* TotalPriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981CC9141EA66A8F00E35EB0 /* TotalPriceCell.xib */; };
 		98942FF41EA5284B004C3349 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98942FF31EA5284B004C3349 /* ResultsViewController.swift */; };
+		98EC9B731EA9A3CA00095FFB /* PeopleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EC9B721EA9A3CA00095FFB /* PeopleEntity.swift */; };
+		98EC9B751EA9A43C00095FFB /* DepartmentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EC9B741EA9A43C00095FFB /* DepartmentEntity.swift */; };
+		98EC9B771EA9BC8C00095FFB /* MedicalTestEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EC9B761EA9BC8C00095FFB /* MedicalTestEntity.swift */; };
+		98EC9B791EA9BEC600095FFB /* MedicalTestLinesEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EC9B781EA9BEC600095FFB /* MedicalTestLinesEntity.swift */; };
 		A6005BCF1E13722B00095FB7 /* NotifyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6005BCD1E13722B00095FB7 /* NotifyTableViewCell.swift */; };
 		A6005BD01E13722B00095FB7 /* NotifyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6005BCE1E13722B00095FB7 /* NotifyTableViewCell.xib */; };
 		A60430F61E232D49000216FB /* Change_Ava.png in Resources */ = {isa = PBXBuildFile; fileRef = A60430F51E232D49000216FB /* Change_Ava.png */; };
@@ -561,7 +567,13 @@
 		8BF1496A1E14BF9C00766F8F /* Thongbao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thongbao.png; sourceTree = "<group>"; };
 		8BF1496B1E14BF9C00766F8F /* TinNhan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TinNhan.png; sourceTree = "<group>"; };
 		8BFE666B1E5D423700E1138B /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		981CC9131EA66A8F00E35EB0 /* TotalPriceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalPriceCell.swift; sourceTree = "<group>"; };
+		981CC9141EA66A8F00E35EB0 /* TotalPriceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TotalPriceCell.xib; sourceTree = "<group>"; };
 		98942FF31EA5284B004C3349 /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		98EC9B721EA9A3CA00095FFB /* PeopleEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleEntity.swift; sourceTree = "<group>"; };
+		98EC9B741EA9A43C00095FFB /* DepartmentEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepartmentEntity.swift; sourceTree = "<group>"; };
+		98EC9B761EA9BC8C00095FFB /* MedicalTestEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalTestEntity.swift; sourceTree = "<group>"; };
+		98EC9B781EA9BEC600095FFB /* MedicalTestLinesEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalTestLinesEntity.swift; sourceTree = "<group>"; };
 		A6005BCD1E13722B00095FB7 /* NotifyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyTableViewCell.swift; sourceTree = "<group>"; };
 		A6005BCE1E13722B00095FB7 /* NotifyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotifyTableViewCell.xib; sourceTree = "<group>"; };
 		A60430F51E232D49000216FB /* Change_Ava.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Change_Ava.png; sourceTree = "<group>"; };
@@ -671,6 +683,8 @@
 				0FEDD6BA1EA1F5D000E3D42E /* CodeFormAnalysisCell.xib */,
 				0FEDD6C11EA1FB1700E3D42E /* MedicalCell.swift */,
 				0FEDD6C21EA1FB1700E3D42E /* MedicalCell.xib */,
+				981CC9131EA66A8F00E35EB0 /* TotalPriceCell.swift */,
+				981CC9141EA66A8F00E35EB0 /* TotalPriceCell.xib */,
 			);
 			name = ScheduleCell;
 			sourceTree = "<group>";
@@ -704,6 +718,8 @@
 				0F89604F1EA0BF8E006A1C2D /* MediCalEntity.swift */,
 				0F8960511EA0C156006A1C2D /* medicalTestGroupEntity.swift */,
 				0F8960531EA0C16A006A1C2D /* listMedicalTestsEntity.swift */,
+				98EC9B761EA9BC8C00095FFB /* MedicalTestEntity.swift */,
+				98EC9B781EA9BEC600095FFB /* MedicalTestLinesEntity.swift */,
 			);
 			path = BookingEntity;
 			sourceTree = "<group>";
@@ -1214,6 +1230,8 @@
 				0F17AB181E51BAC2008BA308 /* CateEntity.swift */,
 				8BC3806E1E58510E00DF154A /* ListDoctorEntity.swift */,
 				0FA535AE1E8221560004D329 /* ListAdminEntity.swift */,
+				98EC9B721EA9A3CA00095FFB /* PeopleEntity.swift */,
+				98EC9B741EA9A43C00095FFB /* DepartmentEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1380,6 +1398,7 @@
 				A6417E231E13B68D00BD2D75 /* SettingTableViewCell.xib in Resources */,
 				A6C463DB1E25DB910046A367 /* RecentFeedTableViewCell.xib in Resources */,
 				8BC380691E583D8D00DF154A /* DatKham.png in Resources */,
+				981CC9161EA66A8F00E35EB0 /* TotalPriceCell.xib in Resources */,
 				A60430F61E232D49000216FB /* Change_Ava.png in Resources */,
 				8B79D0E81E5AA7D20010C5C0 /* DetailEdit.png in Resources */,
 				0F9ED83B1E5BEB38001F2FC2 /* Duyet_1.png in Resources */,
@@ -1547,6 +1566,7 @@
 				8BD49F2F1E482C1500C98E74 /* MessageDelegate.swift in Sources */,
 				A6E4C2F81E1102A500C2C871 /* RegisterViewController.swift in Sources */,
 				0F09CEF51E88B1DC003FD8B1 /* SelectServiceViewController.swift in Sources */,
+				98EC9B771EA9BC8C00095FFB /* MedicalTestEntity.swift in Sources */,
 				8B3A13881E10FD2A005DBC6E /* UserViewController.swift in Sources */,
 				8BD49F0A1E48215500C98E74 /* MemberListTableViewCell.swift in Sources */,
 				0FA535AF1E8221560004D329 /* ListAdminEntity.swift in Sources */,
@@ -1560,6 +1580,7 @@
 				8B3A13771E10F454005DBC6E /* RAMBounceAnimation.swift in Sources */,
 				A6C463D11E25D2DA0046A367 /* OtherUserViewController.swift in Sources */,
 				0F09CEF01E88AA33003FD8B1 /* ServiceCell.swift in Sources */,
+				98EC9B731EA9A3CA00095FFB /* PeopleEntity.swift in Sources */,
 				0F94FEEC1E878DDD001884AD /* FormAnalysisCell.swift in Sources */,
 				8B87CD291E135C7A00DA8A33 /* QuestionTableViewCell.swift in Sources */,
 				8BD49EFE1E48215500C98E74 /* GroupChannelListViewController.swift in Sources */,
@@ -1600,6 +1621,7 @@
 				0F6585271E95F01F002EEAC9 /* PrescriptionCell.swift in Sources */,
 				8BD49F601E482D1100C98E74 /* CreateOpenChannelViewController.swift in Sources */,
 				A6417E221E13B68D00BD2D75 /* SettingTableViewCell.swift in Sources */,
+				981CC9151EA66A8F00E35EB0 /* TotalPriceCell.swift in Sources */,
 				8B7AB6BE1E1211E20015DFBE /* KeywordCollectionViewCell.swift in Sources */,
 				8BD49F031E48215500C98E74 /* MemberListViewController.swift in Sources */,
 				A6417E251E13C78D00BD2D75 /* AddQuestionViewController.swift in Sources */,
@@ -1636,6 +1658,7 @@
 				8B3A13861E10FD1B005DBC6E /* TagListViewController.swift in Sources */,
 				0F52D2891E634889006C57E2 /* FileCell.swift in Sources */,
 				0FC431761E657E51003F7F31 /* AllUserEntity.swift in Sources */,
+				98EC9B791EA9BEC600095FFB /* MedicalTestLinesEntity.swift in Sources */,
 				8B3A13721E10F454005DBC6E /* NSString+URLEncode.m in Sources */,
 				A68A95041E14ECFB0067736E /* DetailQuestionTableViewCell.swift in Sources */,
 				8BD49F271E482C1500C98E74 /* ChattingView.swift in Sources */,
@@ -1671,6 +1694,7 @@
 				8B3A137E1E10F454005DBC6E /* RAMItemAnimationProtocol.swift in Sources */,
 				A67311D41E164FC400BCE308 /* MoreCommentTableViewCell.swift in Sources */,
 				8B2AFF0E1E6425C100415554 /* ProvinceEntity.swift in Sources */,
+				98EC9B751EA9A43C00095FFB /* DepartmentEntity.swift in Sources */,
 				8BD49EFA1E48215500C98E74 /* CreateGroupChannelSelectOptionViewController.swift in Sources */,
 				0F9323E51E783DD300B56F39 /* ChoiceDoctorViewController.swift in Sources */,
 			);
@@ -1867,8 +1891,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ba634cb8-676d-4178-8598-4e840610810a";
-				PROVISIONING_PROFILE_SPECIFIER = "dev bve 1";
+				PROVISIONING_PROFILE = "5447e0a3-8c80-400d-9efc-b38556cfb642";
+				PROVISIONING_PROFILE_SPECIFIER = "new develop bvee";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1881,15 +1905,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CDYT_HoiDap/CDYT_HoiDap.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anh Ta (R24Y486KUK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = BY2N2SG836;
 				INFOPLIST_FILE = CDYT_HoiDap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "9a9369d4-5336-4b8e-93aa-431e510cf8dd";
+				PROVISIONING_PROFILE_SPECIFIER = "new distribuition bve";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};

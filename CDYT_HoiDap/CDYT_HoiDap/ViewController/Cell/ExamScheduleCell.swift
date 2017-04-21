@@ -106,7 +106,7 @@ class ExamScheduleCell: UITableViewCell {
     
     lbServiceType.attributedText = myAttrStringSv
 
-    if userEntity.booking.status == 2 || userEntity.booking.status == 3 {
+    if userEntity.booking.status == 2 || userEntity.booking.status == 3 || userEntity.booking.status == 4 || userEntity.booking.status == 5 {
         viewShowDetail.isHidden = true
         marginBottomViewDetail.constant = 0
         btnCancel.isHidden = true

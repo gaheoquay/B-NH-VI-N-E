@@ -86,19 +86,23 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     
     func reloadDataAssigned(){
         getQuestionsUncommentedByAnyDoctorAndAssigned()
+        requestListDoctor()
     }
     func loadMoreAssigned(){
         pageAssigned += 1
         getQuestionsUncommentedByAnyDoctorAndAssigned()
+        requestListDoctor()
     }
     func reloadDataNotAssignedYet(){
         pageNotAssignedYet = 1
         listNotAssignedYet.removeAll()
         getQuestionsUncommentedByAnyDoctorAndNotAssignedYet()
+        requestListDoctor()
     }
     func loadMoreNotAssignedYet(){
         pageNotAssignedYet += 1
         getQuestionsUncommentedByAnyDoctorAndNotAssignedYet()
+        requestListDoctor()
     }
     //MARK: init table view
     func initTableView(){
@@ -291,6 +295,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
                     if self.isNotAssignedYet {
                         self.listNotAssignedYet.remove(at: self.indexPathOfCell.row)
                     }
+                    self.requestListDoctor()
                     self.tbQuestion.reloadData()
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -391,31 +396,33 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
         if !entity.cateGory.id.isEmpty {
             idCate = entity.cateGory.id
             nameCate = entity.cateGory.name
-            let listDocWithCate = listAllDoctor.filter({ (doctorEntity) -> Bool in
+            let listDocWithCate = listAllDoctors.filter({ (doctorEntity) -> Bool in
                 doctorEntity.category.id == idCate
             })
             listDoctorInCate = listDocWithCate[0].doctors
-        }
-        if listDoctorInCate.count > 0 {
-            indexPathOfCell = indexPath
-            //      creatAlert(title: "Chọn bác sỹ",picker: pickerViewDoctor)
-            if popupViewController == nil {
-                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let popoverVC = mainStoryboard.instantiateViewController(withIdentifier: "ChoiceDoctorViewController") as! ChoiceDoctorViewController
-                popoverVC.preferredContentSize = CGSize.init(width: UIScreen.main.bounds.size.width - 32, height: UIScreen.main.bounds.size.height - 120 )
-                popoverVC.isModalInPopover = false
-                popoverVC.listDoctors = self.listDoctorInCate
-                popoverVC.delegate = self
-                self.popupViewController = WYPopoverController(contentViewController: popoverVC)
-                self.popupViewController.delegate = self
-                self.popupViewController.wantsDefaultContentAppearance = false;
-                self.popupViewController.presentPopover(from: CGRect.init(x: 0, y: 0, width: 0, height: 0), in: self.view, permittedArrowDirections: WYPopoverArrowDirection.none, animated: true, options: WYPopoverAnimationOptions.fadeWithScale, completion: nil)
+            
+            if listDoctorInCate.count > 0 {
+                indexPathOfCell = indexPath
+                //      creatAlert(title: "Chọn bác sỹ",picker: pickerViewDoctor)
+                if popupViewController == nil {
+                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let popoverVC = mainStoryboard.instantiateViewController(withIdentifier: "ChoiceDoctorViewController") as! ChoiceDoctorViewController
+                    popoverVC.preferredContentSize = CGSize.init(width: UIScreen.main.bounds.size.width - 32, height: UIScreen.main.bounds.size.height - 120 )
+                    popoverVC.isModalInPopover = false
+                    popoverVC.listDoctors = self.listDoctorInCate
+                    popoverVC.delegate = self
+                    self.popupViewController = WYPopoverController(contentViewController: popoverVC)
+                    self.popupViewController.delegate = self
+                    self.popupViewController.wantsDefaultContentAppearance = false;
+                    self.popupViewController.presentPopover(from: CGRect.init(x: 0, y: 0, width: 0, height: 0), in: self.view, permittedArrowDirections: WYPopoverArrowDirection.none, animated: true, options: WYPopoverAnimationOptions.fadeWithScale, completion: nil)
+                }
+                
+            }else {
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn khoa trước", cancelBtnTitle: "Đóng")
+                
             }
-            
-        }else {
-            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn khoa trước", cancelBtnTitle: "Đóng")
-            
         }
+        
         
     }
     
@@ -436,27 +443,24 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
         
         
         let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-          if picker == self.pickerViewCate {
-            if self.idCate != listCate[self.indexPickerViewCate].id {
-              self.idCate = listCate[self.indexPickerViewCate].id
-              self.nameCate = listCate[self.indexPickerViewCate].name
-              if self.isNotAssignedYet {
-                self.listNotAssignedYet[self.indexPathOfCell.row].cateGory.id = self.idCate
-                self.listNotAssignedYet[self.indexPathOfCell.row].cateGory.name = self.nameCate
-                self.idDoc = ""
-                self.nameDoc = ""
-                self.listNotAssignedYet[self.indexPathOfCell.row].assigneeEntity.id = self.idDoc
-                self.listNotAssignedYet[self.indexPathOfCell.row].assigneeEntity.fullname = self.nameDoc
-              }else if self.isAssigned {
-                self.listAssigned[self.indexPathOfCell.row].cateGory.id = self.idCate
-                self.listAssigned[self.indexPathOfCell.row].cateGory.name = self.nameCate
-                self.listAssigned[self.indexPathOfCell.row].assigneeEntity.id = self.idDoc
-                self.listAssigned[self.indexPathOfCell.row].assigneeEntity.fullname = self.nameDoc
-
-                self.listAssigned[self.indexPathOfCell.row].postEntity.isClassified = false
-              }
+            if picker == self.pickerViewCate {
+                if self.idCate != listCate[self.indexPickerViewCate].id {
+                    self.idCate = listCate[self.indexPickerViewCate].id
+                    self.nameCate = listCate[self.indexPickerViewCate].name
+                    if self.isNotAssignedYet {
+                        self.listNotAssignedYet[self.indexPathOfCell.row].cateGory.id = self.idCate
+                        self.listNotAssignedYet[self.indexPathOfCell.row].cateGory.name = self.nameCate
+                        self.listNotAssignedYet[self.indexPathOfCell.row].assigneeEntity.id = self.idDoc
+                        self.listNotAssignedYet[self.indexPathOfCell.row].assigneeEntity.fullname = self.nameDoc
+                    }else if self.isAssigned {
+                        self.listAssigned[self.indexPathOfCell.row].cateGory.id = self.idCate
+                        self.listAssigned[self.indexPathOfCell.row].cateGory.name = self.nameCate
+                        self.listAssigned[self.indexPathOfCell.row].assigneeEntity.id = self.idDoc
+                        self.listAssigned[self.indexPathOfCell.row].assigneeEntity.fullname = self.nameDoc
+                        self.listAssigned[self.indexPathOfCell.row].postEntity.isClassified = false
+                    }
+                }
             }
-          }
             self.tbQuestion.beginUpdates()
             self.tbQuestion.reloadRows(at: [self.indexPathOfCell], with: .automatic)
             self.tbQuestion.endUpdates()
@@ -489,7 +493,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == pickerViewCate {
-          indexPickerViewCate = row
+            indexPickerViewCate = row
         }
         
     }
@@ -536,7 +540,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
             nameDoc = entity.assigneeEntity.fullname
             indexPathOfCell = indexPath
             if isAssigned {
-                let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có muốn duyệt lại câu hỏi này  ?", preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có muốn duyệt lại câu hỏi này?", preferredStyle: UIAlertControllerStyle.alert)
                 let actionOk = UIAlertAction.init(title: "Đồng ý", style: UIAlertActionStyle.default, handler: { (action) in
                     self.requestApproval()
                 })
@@ -552,6 +556,29 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
         }
     }
     
+    func requestListDoctor(){
+        listAllDoctors.removeAll()
+        let hotParam : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            ]
+        Alamofire.request(GET_LIST_DOCTOR, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! [NSDictionary]
+                        
+                        for item in jsonData {
+                            let entity = ListDoctorEntity.init(dictionary: item)
+                            self.listAllDoctors.append(entity)
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+
+    
     //  MARK: Outlet
     @IBOutlet weak var tbQuestion: UITableView!
     var isFeeds = false
@@ -560,15 +587,16 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     var listFedds = [FeedsEntity]()
     var listAssigned = [FeedsEntity]()
     var listNotAssignedYet = [FeedsEntity]()
+    var listAllDoctors = [ListDoctorEntity]()
     
     var pageFeed = 1
     var pageAssigned = 1
     var pageNotAssignedYet = 1
     
     let pickerViewDoctor = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
-  var indexPickerViewDoctor = 0
+    var indexPickerViewDoctor = 0
     let pickerViewCate = UIPickerView(frame: CGRect(x: 0, y: 50, width: 270, height: 150))
-  var indexPickerViewCate = 0
+    var indexPickerViewCate = 0
     var indexPathOfCell = IndexPath()
     var idCate = ""
     var idDoc = ""

@@ -36,8 +36,19 @@ class FormAnalysisCell: UITableViewCell {
         viewValue.layer.borderWidth = 0.5
     }
     
-    func setData(entity: listMedicalTestsEntity){
+    func setDataMedical(entity: MedicalTestEntity){
         lbNameAnalysis.text = entity.serviceName
+        lbResult.text = entity.indicator
+        lbUnit.text = entity.unit
+        if entity.femaleHightIndicator != "" {
+            lbValue.text = "\(entity.femaleLowIn)-\(entity.femaleHightIndicator)"
+        }else {
+            lbValue.text = "\(entity.maleLow)-\(entity.maleHight)"
+        }
+    }
+    
+    func setData(entity: MedicalTestLinesEntity){
+        lbNameAnalysis.text = entity.nameLine
         lbResult.text = entity.indicator
         lbUnit.text = entity.unit
         if entity.femaleHightIndicator != "" {

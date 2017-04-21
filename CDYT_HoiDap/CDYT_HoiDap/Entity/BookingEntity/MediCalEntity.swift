@@ -11,6 +11,7 @@ import UIKit
 class MediCalEntity: NSObject {
     var medicalTestGroup = medicalTestGroupEntity()
     var listMedicalTests = [listMedicalTestsEntity]()
+    var moneyExtra:Double = 0
     
     override init() {
         super.init()
@@ -25,6 +26,9 @@ class MediCalEntity: NSObject {
                 let entity = listMedicalTestsEntity.init(dictionary: item)
                 listMedicalTests.append(entity)
             }
+        }
+        if let value = dictionary["MoneyExtra"] as? Double {
+            self.moneyExtra = value
         }
     }
 }

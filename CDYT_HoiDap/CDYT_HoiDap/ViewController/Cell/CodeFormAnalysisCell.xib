@@ -20,14 +20,15 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWe-fX-dDO">
-                        <rect key="frame" x="16" y="8" width="267.5" height="20.5"/>
+                        <rect key="frame" x="16" y="8" width="268" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DetailEditUp.png" translatesAutoresizingMaskIntoConstraints="NO" id="MRH-tq-MbC">
-                        <rect key="frame" x="291.5" y="8" width="20.5" height="20.5"/>
+                        <rect key="frame" x="292" y="8" width="20" height="20"/>
                         <constraints>
+                            <constraint firstAttribute="width" constant="20" id="3Bl-Ft-HbO"/>
                             <constraint firstAttribute="width" secondItem="MRH-tq-MbC" secondAttribute="height" multiplier="1:1" id="DbH-Gt-ijX"/>
                         </constraints>
                     </imageView>
@@ -35,11 +36,11 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="MRH-tq-MbC" secondAttribute="trailing" constant="8" id="IPK-vc-6uo"/>
                     <constraint firstItem="XWe-fX-dDO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Jat-4O-hj4"/>
-                    <constraint firstAttribute="bottom" secondItem="MRH-tq-MbC" secondAttribute="bottom" constant="8" id="Jw0-Wr-KS3"/>
                     <constraint firstItem="MRH-tq-MbC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Ltg-5A-Mt0"/>
                     <constraint firstItem="XWe-fX-dDO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Me9-uf-NKN"/>
                     <constraint firstItem="MRH-tq-MbC" firstAttribute="leading" secondItem="XWe-fX-dDO" secondAttribute="trailing" constant="8" id="faR-KG-Paj"/>
                     <constraint firstAttribute="bottom" secondItem="XWe-fX-dDO" secondAttribute="bottom" constant="8" id="pmy-YH-Cp8"/>
+                    <constraint firstAttribute="bottom" secondItem="MRH-tq-MbC" secondAttribute="bottom" constant="8.5" id="sEJ-fs-V2e"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

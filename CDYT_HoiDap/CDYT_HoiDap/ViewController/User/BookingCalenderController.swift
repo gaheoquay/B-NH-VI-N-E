@@ -15,7 +15,7 @@ protocol BookingCalenderControllerDelegate {
     func gotoExamSchudelAtHome()
 }
 
-class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,ServiceViewControllerDelegate,UIPickerViewDataSource,UIPickerViewDelegate{
+class BookingCalenderController: UIViewController,WYPopoverControllerDelegate ,ServiceViewControllerDelegate,UIPickerViewDataSource,UIPickerViewDelegate{
     
     
     @IBOutlet weak var viewService: UIView!
@@ -421,7 +421,7 @@ class BookingCalenderController: UIViewController ,WYPopoverControllerDelegate,S
         let hourToDay = calendar.date(byAdding: .hour, value: +1, to: Date())
         let timeStampToDay = hourToDay?.timeIntervalSince1970
         var nowDateBook: Double = 0
-        if statusTime == 0 {
+        if statusTime == 0 || dateBook < timeStampToDay! {
             nowDateBook = timeStampToDay!
         }else {
             nowDateBook = dateBook

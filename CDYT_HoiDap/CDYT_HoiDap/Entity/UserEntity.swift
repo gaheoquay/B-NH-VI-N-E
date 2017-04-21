@@ -31,7 +31,6 @@ class UserEntity: Object {
     dynamic var jobTitle = ""
     dynamic var updatedDate : Double = 0
     dynamic var createdDate : Double = 0
-//    dynamic var department = DistrictEntity()
 
     override static func primaryKey() -> String? {
         return "id"
@@ -102,9 +101,7 @@ class UserEntity: Object {
         if let value = dictionary["CreatedDate"] as? Double {
             this.createdDate = value
         }
-//        if let value = dictionary["Department"] as? NSDictionary {
-//            this.department = DistrictEntity.init(dictionary: value)
-//        }
+
 
         
         return this

@@ -111,7 +111,7 @@ class LoginViewController: UIViewController {
                 }else if status == 400 {
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Email/Tên đăng nhập và mật khẩu không đúng, vui lòng thử lại.", cancelBtnTitle: "Đóng")
                 }else if status == 409{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản này đã bị khoá . Hãy liên hệ với quản trị viên để biết thông tin chi tiết !", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản này đã bị khoá. Hãy liên hệ với quản trị viên để biết thông tin chi tiết!", cancelBtnTitle: "Đóng")
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }

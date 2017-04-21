@@ -616,6 +616,23 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     return cell
   }
   
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let main = UIStoryboard(name: "User", bundle: nil)
+        let viewcontroller = main.instantiateViewController(withIdentifier: "AdminUpdateProfileViewController") as! AdminUpdateProfileViewController
+        if isFollowing {
+            viewcontroller.author = listAllDoctor[indexPath.section].doctors[indexPath.row - 1].doctorEntity
+        }
+        if isMyFeed {
+            viewcontroller.admin = listAdmin[indexPath.row - 1]
+        }
+        viewcontroller.isAdmin = self.isMyFeed
+        viewcontroller.departmenName = listAllDoctor[sectionCate].category.name
+        viewcontroller.departmenId = listAllDoctor[sectionCate].category.id
+        viewcontroller.delegate = self
+        self.indexPatchDoctor = indexPath
+        self.navigationController?.pushViewController(viewcontroller, animated: true)
+    }
+    
   @IBAction func notificationTapAction(_ sender: Any) {
     let storyboard = UIStoryboard.init(name: "User", bundle: nil)
     let vc = storyboard.instantiateViewController(withIdentifier: "NotificationViewController") as! NotificationViewController

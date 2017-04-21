@@ -14,7 +14,7 @@ protocol CommentViewControllerDelegate {
 
 }
 
-class CommentViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CommentTableViewCellDelegate, EditCommentViewControllerDelegate, WYPopoverControllerDelegate {
+class CommentViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CommentTableViewCellDelegate, EditCommentViewControllerDelegate, WYPopoverControllerDelegate, AddImageCollectionViewCellDelegate {
 
     @IBOutlet weak var commentTbl: UITableView!
     @IBOutlet weak var keyboardViewHeight: NSLayoutConstraint!
@@ -355,6 +355,7 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddImageCollectionViewCell", for: indexPath) as! AddImageCollectionViewCell
+        cell.delegate = self
         let asset = imageAssets[indexPath.row]
         asset.fetchOriginalImage(true) { (image, info) in
             cell.imageView.image = image
@@ -363,8 +364,14 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
         return cell
     }
     
+    
+    func deleteImageAction(indexPath: IndexPath) {
+        imageAssets.removeAll()
+        imgClv.reloadData()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: 60, height: 60)
+        return CGSize.init(width: 110, height: 110)
     }
     
     func uploadImage(){

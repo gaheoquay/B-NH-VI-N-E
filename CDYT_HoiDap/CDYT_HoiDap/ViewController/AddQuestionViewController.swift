@@ -208,7 +208,7 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
             return "Vui lòng nhập tiêu đề câu hỏi"
         }else if contentString == "" {
             contentTxt.becomeFirstResponder()
-            return "Vui lòng nhập nội dung câu hỏi."
+            return "Vui lòng nhập nội dung câu hỏi"
         }else{
             return ""
         }

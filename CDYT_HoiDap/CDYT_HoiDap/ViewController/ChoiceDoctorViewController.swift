@@ -19,10 +19,12 @@ class ChoiceDoctorViewController: UIViewController,UITableViewDataSource,UITable
     var delegate : ChoiceDoctorViewControllerDelegate?
     
     override func viewDidLoad() {
-        setupUI()
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        setupUI()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +39,7 @@ class ChoiceDoctorViewController: UIViewController,UITableViewDataSource,UITable
         tbListDoctor.register(UINib.init(nibName: "DoctorCell", bundle: nil), forCellReuseIdentifier: "DoctorCell")
         tbListDoctor.estimatedRowHeight = 9999
         tbListDoctor.rowHeight = UITableViewAutomaticDimension
+        tbListDoctor.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

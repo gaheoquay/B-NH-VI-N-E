@@ -218,7 +218,10 @@ class CommentTableViewCell: UITableViewCell {
       seperatorHeight.constant = 1
     }
     
-    if Until.getCurrentId() == mainComment.author.id {
+    let realm = try! Realm()
+    let users = realm.objects(UserEntity.self).first
+    
+    if Until.getCurrentId() == mainComment.author.id || users?.role == 2 {
       moreActionBtn.isHidden = false
     }else{
       moreActionBtn.isHidden = true
@@ -268,7 +271,10 @@ class CommentTableViewCell: UITableViewCell {
     
     likeCountLbl.text = "\(subComment.likeCount)"
     
-    if Until.getCurrentId() == subComment.author.id {
+    let realm = try! Realm()
+    let users = realm.objects(UserEntity.self).first
+    
+    if Until.getCurrentId() == subComment.author.id || users?.role == 2 {
       moreActionBtn.isHidden = false
     }else{
       moreActionBtn.isHidden = true

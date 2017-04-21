@@ -19,6 +19,7 @@ class DoctorTableViewCell: UITableViewCell {
     @IBOutlet weak var imgBlock: UIImageView!
     @IBOutlet weak var marginLeftLbName: NSLayoutConstraint!
     @IBOutlet weak var imgVerified: UIImageView!
+    @IBOutlet weak var btnBlock: UIButton!
    
     var delegate: DoctorTableViewCellDelegate?
     var author = AuthorEntity()
@@ -28,12 +29,12 @@ class DoctorTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(self.blockUser))
-        let tapUpdate = UITapGestureRecognizer.init(target: self, action: #selector(self.gotoUpdate))
-        tapUpdate.numberOfTapsRequired = 1
-        tap.numberOfTapsRequired = 1
-        lbJob.addGestureRecognizer(tap)
-        lbName.addGestureRecognizer(tapUpdate)
+//        let tap = UITapGestureRecognizer.init(target: self, action: #selector(self.blockUser))
+//        let tapUpdate = UITapGestureRecognizer.init(target: self, action: #selector(self.gotoUpdate))
+//        tapUpdate.numberOfTapsRequired = 1
+//        tap.numberOfTapsRequired = 1
+//        lbJob.addGestureRecognizer(tap)
+//        lbName.addGestureRecognizer(tapUpdate)
         // Initialization code
     }
 
@@ -43,13 +44,18 @@ class DoctorTableViewCell: UITableViewCell {
                 // Configure the view for the selected state
     }
     
-    func blockUser(){
+//    func blockUser(){
+//        delegate?.blockUser(author: author, admin: admin)
+//    }
+    
+//    func gotoUpdate(){
+//        delegate?.gotoUpdateProfile(author: author, admin: admin, indexPatchAdmin: indexPatch)
+//    }
+    
+    @IBAction func btnBlock(_ sender: Any) {
         delegate?.blockUser(author: author, admin: admin)
     }
     
-    func gotoUpdate(){
-        delegate?.gotoUpdateProfile(author: author, admin: admin, indexPatchAdmin: indexPatch)
-    }
     
   func setData(){
     imgProfile.sd_setImage(with: URL.init(string: author.avatarUrl), placeholderImage: #imageLiteral(resourceName: "AvaDefaut.png"))
@@ -60,17 +66,23 @@ class DoctorTableViewCell: UITableViewCell {
         marginLeftLbName.constant = 8
         imgBlock.isHidden = true
         imgVerified.isHidden = false
+        btnBlock.isHidden = true
     }else {
         imgBlock.isHidden = false
+        btnBlock.isHidden = false
         marginLeftLbName.constant = 30
         imgVerified.isHidden = true
         lbJob.isUserInteractionEnabled = true
         if !author.isBlocked {
-            lbJob.text = "Khoá tài khoản"
-            imgBlock.image = UIImage(named: "Khoa.png")
-        }else {
-            lbJob.text = "Mở khoá tài khoản"
+            lbJob.text = "Đang mở"
             imgBlock.image = UIImage(named: "MoKhoa.png")
+            btnBlock.setTitle("Khoá", for: .normal)
+            btnBlock.setTitleColor(UIColor.init(netHex: 0xd6d6d6), for: .normal)
+        }else {
+            lbJob.text = "Đang khoá"
+            imgBlock.image = UIImage(named: "Khoa.png")
+            btnBlock.setTitle("Mở", for: .normal)
+            btnBlock.setTitleColor(UIColor.init(netHex: 0x77d851), for: .normal)
         }
        
     }
@@ -85,11 +97,16 @@ class DoctorTableViewCell: UITableViewCell {
         lbName.text = admin.nickName
         imgProfile.sd_setImage(with: URL.init(string: admin.avatar), placeholderImage: #imageLiteral(resourceName: "AvaDefaut.png"))
         if !admin.isBlocked {
-            lbJob.text = "Khoá tài khoản"
-            imgBlock.image = UIImage(named: "Khoa.png")
-        }else {
-            lbJob.text = "Mở khoá tài khoản"
+            lbJob.text = "Đang mở"
             imgBlock.image = UIImage(named: "MoKhoa.png")
+            btnBlock.setTitle("Khoá", for: .normal)
+            btnBlock.setTitleColor(UIColor.init(netHex: 0xd6d6d6), for: .normal)
+        }else {
+            lbJob.text = "Đang khoá"
+            imgBlock.image = UIImage(named: "Khoa.png")
+            btnBlock.setTitle("Mở", for: .normal)
+            btnBlock.setTitleColor(UIColor.init(netHex: 0x77d851), for: .normal)
+
         }
         
 
