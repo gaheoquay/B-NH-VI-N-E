@@ -54,7 +54,7 @@ class ForgotPasswordViewController: BaseViewController {
         Alamofire.request(FOR_GOT_PASSWORD, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
                 if status == 200{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Mật khẩu mới của bạn đã được gửi về Email đăng ký . Xin hãy kiểm tra lại", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Mật khẩu mới của bạn đã được gửi về Email đăng ký. Xin hãy kiểm tra lại", cancelBtnTitle: "Đóng")
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Email không đúng!", cancelBtnTitle: "Đóng")
                 }

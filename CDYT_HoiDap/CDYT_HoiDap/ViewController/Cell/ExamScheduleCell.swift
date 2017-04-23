@@ -75,7 +75,7 @@ class ExamScheduleCell: UITableViewCell {
     if userEntity.booking.bookType == 2 {
         myAttrStringSv.append(NSMutableAttributedString(string: "Xét nghiệm tại nhà", attributes: fontBold))
         imgAvatar.image = UIImage(named: "XNTaiNha.png")
-        creteDate = String().convertTimeStampWithDateFormat(timeStamp: userEntity.booking.bookingDate/1000, dateFormat: "dd/MM/YYYY     hh:mm a")
+        creteDate = String().convertTimeStampWithDateFormat(timeStamp: userEntity.booking.bookingDate/1000, dateFormat: "dd/MM/YYYY   HH:mm")
         if userEntity.booking.status == 1 {
             let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
             myAttrString.append(NSMutableAttributedString(string: "Đặt lịch thành công", attributes: fontRegularWithColor))

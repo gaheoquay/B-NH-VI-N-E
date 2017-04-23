@@ -53,7 +53,7 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
             b = CGFloat(heigtForRow)
             let c = listDetailBooKing.listMedicalGroups.count * 30 // chieu cao section
             let d = b + CGFloat(c)
-            heightTbAnalysis.constant = d + 16
+            heightTbAnalysis.constant = d
             viewTop.isHidden = false
             heightViewTop.constant = 169 + heightTbAnalysis.constant
             viewBill.isHidden = true
@@ -68,7 +68,7 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
             b = CGFloat(heigtForRow)
             let c = listDetailBooKing.listMedicalGroups.count * 30 // chieu cao section
             let d = b + CGFloat(c)
-            heightTbAnalysis.constant = d + 16
+            heightTbAnalysis.constant = d
             viewTop.isHidden = false
             heightViewTop.constant = 169 + 96 + heightTbAnalysis.constant
             viewBill.isHidden = false
@@ -93,7 +93,7 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
             heightTbService.constant = CGFloat(60 * (listServices.count + listPack.count) - 2) + 90
         }
         lbDate.text = String().convertTimeStampWithDateFormat(timeStamp: booKing.bookingDate / 1000, dateFormat: "dd/MM/YYYY")
-        lbHour.text = String().convertTimeStampWithDateFormat(timeStamp: booKing.bookingDate / 1000, dateFormat: "hh:mm a")
+        lbHour.text = String().convertTimeStampWithDateFormat(timeStamp: booKing.bookingDate / 1000, dateFormat: "HH:mz ")
         lbPantentHistory.text = String(listDetailBooKing.patientHistory.hisPatientHistoryID)
         let image = Until.generateBarcode(from: "\(listDetailBooKing.patientHistory.hisPatientHistoryID)")
         imgBarcode.image = image
@@ -190,14 +190,14 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
                 }
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TotalPriceCell") as! TotalPriceCell
-                cell.lbTotalPrice.text = "Tổng thu: \(String().replaceNSnumber(doublePrice: (pricePack + priceSer)))"
-                cell.lbSurChange.text = "Phụ thu: \(String().replaceNSnumber(doublePrice: surChange))"
+                cell.lbTotalPrice.text = "Tổng thu: \(String().replaceNSnumber(doublePrice: (pricePack + priceSer)))đ"
+                cell.lbSurChange.text = "Phụ thu: \(String().replaceNSnumber(doublePrice: surChange))đ"
                 return cell
             }
             return cell
         }else {
             let cellMedical = tableView.dequeueReusableCell(withIdentifier: "CodeFormAnalysisCell") as! CodeFormAnalysisCell
-            cellMedical.setData(entity: listDetailBooKing.listMedicalGroups[indexPath.section].listMedicalTests[indexPath.row])
+            cellMedical.setDataExam(entity: listDetailBooKing.listMedicalGroups[indexPath.section].listMedicalTests[indexPath.row])
             return cellMedical
         }
     }
@@ -210,7 +210,7 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
                 return 60
             }
         }else {
-            return 40
+            return UITableViewAutomaticDimension
         }
     }
     

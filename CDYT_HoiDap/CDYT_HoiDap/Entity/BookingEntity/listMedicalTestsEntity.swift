@@ -12,6 +12,7 @@ class listMedicalTestsEntity: NSObject {
     
     var medicalTest = MedicalTestEntity()
     var medicalTestLines = [MedicalTestLinesEntity]()
+    var isShowDetail = false
     
     override init() {
         super.init()

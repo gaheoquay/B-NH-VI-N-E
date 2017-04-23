@@ -13,6 +13,7 @@ class ResultsViewController: UIViewController {
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var tbListGroupId: UITableView!
     @IBOutlet weak var lbPantienHistory: UILabel!
+    @IBOutlet weak var heightTb: NSLayoutConstraint!
     
     
     var booKing = BookingEntity()
@@ -31,8 +32,8 @@ class ResultsViewController: UIViewController {
         tbListGroupId.register(UINib.init(nibName: "CodeFormAnalysisCell", bundle: nil), forCellReuseIdentifier: "CodeFormAnalysisCell")
         lbPantienHistory.text = String(listDetailBooKing.patientHistory.hisPatientHistoryID)
         lbTitle.text = String().convertTimeStampWithDateFormat(timeStamp: booKing.createDate, dateFormat: "dd/MM/YYYY")
-        tbListGroupId.estimatedRowHeight = 999
-        tbListGroupId.rowHeight = UITableViewAutomaticDimension
+        heightTb.constant = CGFloat(35 * listDetailBooKing.listMedicalGroups.count)
+        view.layoutIfNeeded()
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,6 +90,8 @@ extension ResultsViewController : UITableViewDelegate , UITableViewDataSource {
         viewcontroller.medicalGroups = listDetailBooKing.listMedicalGroups[indexPath.row]
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 35
+    }
     
 }

@@ -418,7 +418,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
                 }
                 
             }else {
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn khoa trước", cancelBtnTitle: "Đóng")
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn chuyên khoa", cancelBtnTitle: "Đóng")
                 
             }
         }
@@ -552,7 +552,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
                 requestApproval()
             }
         }else{
-            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn khoa và bác sĩ", cancelBtnTitle: "Đóng")
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn bác sĩ", cancelBtnTitle: "Đóng")
         }
     }
     
