@@ -18,6 +18,7 @@ class AllUserEntity: NSObject {
     var distric = DistricHomeEntity()
     var listMedicalGroups = [MediCalEntity]()
     var totalMoney: Double = 0
+    var money: Double = 0
     
     var isCheckSelect = false
     
@@ -28,6 +29,9 @@ class AllUserEntity: NSObject {
     init(dictionary: NSDictionary) {
         if let value = dictionary["Profile"] as? NSDictionary {
             profile = FileUserEntity.init(dictionary: value)
+        }
+        if let value = dictionary["MoneyExtra"] as? Double {
+            money = value
         }
         if let value = dictionary["District"] as? NSDictionary {
             distric = DistricHomeEntity.init(dictionary: value)

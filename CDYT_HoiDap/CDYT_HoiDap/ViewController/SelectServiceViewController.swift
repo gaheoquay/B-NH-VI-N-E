@@ -133,7 +133,7 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
         if isPackage {
             return UITableViewAutomaticDimension
         }else {
-            return 60
+            return UITableViewAutomaticDimension
         }
     }
     
@@ -154,8 +154,6 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
     }
 
     @IBAction func btnSearch(_ sender: Any) {
-        
-        
         let packSearch = service.listPack.filter { (packagesEntity) -> Bool in
             return (self.removeUTF8(frString: packagesEntity.pack.name.lowercased())).contains(self.removeUTF8(frString: txtSearch.text!.lowercased()))
         }
@@ -166,9 +164,6 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
         let serInPack = service.listPack.filter { (serInPack) -> Bool in
             return (self.removeUTF8(frString: serInPack.textSerive.lowercased())).contains(self.removeUTF8(frString: txtSearch.text!.lowercased()))
         }
-        
-        
-        
         self.listSerInPacSearch = serInPack
         self.listSearchService = serviceSearch
         self.listSearch = packSearch
@@ -208,17 +203,17 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
         if isSearch {
             if isPackage {
                 if indexPatch.section == 0 {
-                    if listSearch[indexPatch.row].pack.isCheckSelect == false {
+                    if !listSearch[indexPatch.row].pack.isCheckSelect {
                         isCheckPac(indexPatch: indexPatch, listPacks: listSearch)
                     }
                 }else {
-                    if listSerInPacSearch[indexPatch.row].pack.isCheckSelect == false {
+                    if !listSerInPacSearch[indexPatch.row].pack.isCheckSelect {
                         isCheckPac(indexPatch: indexPatch, listPacks: listSerInPacSearch)
                     }
                 }
                 
             }else {
-                if listSearchService[indexPatch.row].isCheckSelect == false {
+                if !listSearchService[indexPatch.row].isCheckSelect {
                     isCheckService(indexPatch: indexPatch, listSers: listSearchService)
                 }
             }
@@ -264,7 +259,7 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
                         alert.addAction(actionOk)
                         alert.addAction(actionCancel)
                         self.present(alert, animated: true, completion: nil)
-                        break
+//                        break
                     }
                 }
             }

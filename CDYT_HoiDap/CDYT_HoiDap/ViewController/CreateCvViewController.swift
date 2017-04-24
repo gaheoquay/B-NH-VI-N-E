@@ -303,6 +303,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
   
   @IBAction func btnBack(_ sender: Any) {
     self.view.endEditing(true)
+    self.selectedCountry = self.listCountry[0]
     _ = self.navigationController?.popViewController(animated: true)
     
   }

@@ -32,9 +32,7 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     func setupUI(){
-        
         addNewListService()
-        
         if (listPacKage.isEmpty && listService.isEmpty) || (service.listPack.isEmpty && service.listSer.isEmpty) {
             heigtTableService.constant = UIScreen.main.bounds.size.height
             viewBottom.isHidden = true

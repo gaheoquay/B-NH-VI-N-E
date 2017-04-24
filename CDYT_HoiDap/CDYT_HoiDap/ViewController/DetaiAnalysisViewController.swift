@@ -32,6 +32,8 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
     var heigtForRow = 0
     var listServices = [ServicesEntity]()       // Kham tai nha and xet nghiem
     var listPack = [PackEntity]()
+    var heightSer: CGFloat = 0
+    var heightPac: CGFloat = 0
     
     
     override func viewDidLoad() {
@@ -45,15 +47,27 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
     
     func setupUI(){
         var b: CGFloat = 0
+        var heightTb: CGFloat = 0
+        tbListService.register(UINib.init(nibName: "PackCell", bundle: nil), forCellReuseIdentifier: "PackCell")
+        tbListAnalysisCode.register(UINib.init(nibName: "AnalysisCell", bundle: nil), forCellReuseIdentifier: "AnalysisCell")
+        tbListService.register(UINib.init(nibName: "TotalPriceCell", bundle: nil), forCellReuseIdentifier: "TotalPriceCell")
+        tbListService.delegate = self
+        tbListService.dataSource = self
+        tbListAnalysisCode.delegate = self
+        tbListAnalysisCode.dataSource = self
+        tbListService.estimatedRowHeight = 999
+        tbListService.rowHeight = UITableViewAutomaticDimension
+        tbListAnalysisCode.estimatedRowHeight = 999
+        tbListAnalysisCode.rowHeight = UITableViewAutomaticDimension
         if booKing.status == 2 {
             for item in listDetailBooKing.listMedicalGroups {
-                let a = item.listMedicalTests.count * 40  // chieu cao cua 1 cell
-                heigtForRow = heigtForRow + a
+                for a in item.listMedicalTests {
+                    let hightlb = a.medicalTest.serviceName.heightWithConstrainedWidth(width: UIScreen.main.bounds.size.width - 32, font: .systemFont(ofSize: 11)) + 17
+                    b = b + hightlb
+                }
+                heightTb = b
             }
-            b = CGFloat(heigtForRow)
-            let c = listDetailBooKing.listMedicalGroups.count * 30 // chieu cao section
-            let d = b + CGFloat(c)
-            heightTbAnalysis.constant = d
+            heightTbAnalysis.constant = heightTb + CGFloat(listDetailBooKing.listMedicalGroups.count * 30)
             viewTop.isHidden = false
             heightViewTop.constant = 169 + heightTbAnalysis.constant
             viewBill.isHidden = true
@@ -62,13 +76,13 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
             marginBottomTbAnalysis.constant = 0
         }else if booKing.status == 3 || booKing.status == 4 || booKing.status == 5{
             for item in listDetailBooKing.listMedicalGroups {
-                let a = item.listMedicalTests.count * 40  // chieu cao cua 1 cell
-                heigtForRow = heigtForRow + a
+                for a in item.listMedicalTests {
+                    let hightlb = a.medicalTest.serviceName.heightWithConstrainedWidth(width: UIScreen.main.bounds.size.width - 32, font: .systemFont(ofSize: 11)) + 17
+                    b = b + hightlb
+                }
+                heightTb = b
             }
-            b = CGFloat(heigtForRow)
-            let c = listDetailBooKing.listMedicalGroups.count * 30 // chieu cao section
-            let d = b + CGFloat(c)
-            heightTbAnalysis.constant = d
+            heightTbAnalysis.constant = heightTb + CGFloat(listDetailBooKing.listMedicalGroups.count * 30)
             viewTop.isHidden = false
             heightViewTop.constant = 169 + 96 + heightTbAnalysis.constant
             viewBill.isHidden = false
@@ -80,20 +94,31 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
             heightViewTop.constant = 0
         }
         
-        tbListService.register(UINib.init(nibName: "ServiceCell", bundle: nil), forCellReuseIdentifier: "ServiceCell")
-        tbListAnalysisCode.register(UINib.init(nibName: "CodeFormAnalysisCell", bundle: nil), forCellReuseIdentifier: "CodeFormAnalysisCell")
-        tbListService.register(UINib.init(nibName: "TotalPriceCell", bundle: nil), forCellReuseIdentifier: "TotalPriceCell")
-        tbListService.delegate = self
-        tbListService.dataSource = self
-        tbListAnalysisCode.delegate = self
-        tbListAnalysisCode.dataSource = self
+        
         if booKing.status == 3 || booKing.status == 4 || booKing.status == 5 {
-            heightTbService.constant = CGFloat(60 * (listServices.count + listPack.count) - 2)
+            for item in listServices {
+                let heightCell = item.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.size.width - 32, font: .boldSystemFont(ofSize: 11)) + 34
+                heightSer = heightSer + heightCell
+            }
+            for item in listPack {
+                let heightCell = item.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.size.width - 32, font: .boldSystemFont(ofSize: 11)) + 34
+                heightPac = heightPac + heightCell
+            }
+            heightTbService.constant = heightPac + heightSer
         }else {
-            heightTbService.constant = CGFloat(60 * (listServices.count + listPack.count) - 2) + 90
+            for item in listServices {
+                let heightCell = item.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.size.width - 32, font: .boldSystemFont(ofSize: 11)) + 34
+                heightSer = heightSer + heightCell
+            }
+            for item in listPack {
+                let heightCell = item.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.size.width - 32, font: .boldSystemFont(ofSize: 11)) + 34
+                heightPac = heightPac + heightCell
+            }
+            heightTbService.constant = heightPac + heightSer + 90
+
         }
         lbDate.text = String().convertTimeStampWithDateFormat(timeStamp: booKing.bookingDate / 1000, dateFormat: "dd/MM/YYYY")
-        lbHour.text = String().convertTimeStampWithDateFormat(timeStamp: booKing.bookingDate / 1000, dateFormat: "HH:mz ")
+        lbHour.text = String().convertTimeStampWithDateFormat(timeStamp: booKing.bookingDate / 1000, dateFormat: "HH:mm ")
         lbPantentHistory.text = String(listDetailBooKing.patientHistory.hisPatientHistoryID)
         let image = Until.generateBarcode(from: "\(listDetailBooKing.patientHistory.hisPatientHistoryID)")
         imgBarcode.image = image
@@ -105,8 +130,8 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
         myAttrString.append(NSAttributedString(string: "\(String().replaceNSnumber(doublePrice: listDetailBooKing.totalMoney))đ", attributes: fontWithColor))
         lbTotalPrice.attributedText = myAttrString
         
-        let myAttrStringSur = NSMutableAttributedString(string: "Đã bao gồm phụ thu: ")
-        myAttrStringSur.append(NSAttributedString(string: "\(String().replaceNSnumber(doublePrice: listDetailBooKing.booking.money))đ", attributes: fontWithColor))
+        let myAttrStringSur = NSMutableAttributedString(string: "Đã bao gồm phụ thu")
+        myAttrStringSur.append(NSAttributedString(string: "\(String().replaceNSnumber(doublePrice: listDetailBooKing.money))đ", attributes: fontWithColor))
         lbSurCharge.attributedText = myAttrStringSur
         view.layoutIfNeeded()
     }
@@ -127,7 +152,7 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
                 return 0
             }
         }else {
-            return 40
+            return 30
         }
     }
     
@@ -157,11 +182,17 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
             return listDetailBooKing.listMedicalGroups[section].listMedicalTests.count
         }
     }
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 13)
+        header.textLabel?.frame = header.frame
+        header.textLabel?.textAlignment = .left
+    }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tbListService {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCell") as! ServiceCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PackCell") as! PackCell
             if indexPath.section == 0 {
                 if listPack.count > 0 {
                     cell.setDataPac(entity: listPack[indexPath.row])
@@ -190,14 +221,14 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
                 }
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TotalPriceCell") as! TotalPriceCell
-                cell.lbTotalPrice.text = "Tổng thu: \(String().replaceNSnumber(doublePrice: (pricePack + priceSer)))đ"
-                cell.lbSurChange.text = "Phụ thu: \(String().replaceNSnumber(doublePrice: surChange))đ"
+                cell.lbTotalPrice.text = "Tổng thu: \(String().replaceNSnumber(doublePrice: (pricePack + priceSer + surChange)))đ"
+                cell.lbSurChange.text = "Đã bao gồm phụ thu"
                 return cell
             }
             return cell
         }else {
-            let cellMedical = tableView.dequeueReusableCell(withIdentifier: "CodeFormAnalysisCell") as! CodeFormAnalysisCell
-            cellMedical.setDataExam(entity: listDetailBooKing.listMedicalGroups[indexPath.section].listMedicalTests[indexPath.row])
+            let cellMedical = tableView.dequeueReusableCell(withIdentifier: "AnalysisCell") as! AnalysisCell
+            cellMedical.setData(entity: listDetailBooKing.listMedicalGroups[indexPath.section].listMedicalTests[indexPath.row])
             return cellMedical
         }
     }
@@ -207,7 +238,7 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
             if indexPath.section == 2 {
                 return 60
             }else {
-                return 60
+                return UITableViewAutomaticDimension
             }
         }else {
             return UITableViewAutomaticDimension

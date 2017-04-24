@@ -444,9 +444,9 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
         
         let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
             if picker == self.pickerViewCate {
-                if self.idCate != listCate[self.indexPickerViewCate].id {
-                    self.idCate = listCate[self.indexPickerViewCate].id
-                    self.nameCate = listCate[self.indexPickerViewCate].name
+                if self.idCate != self.listAllDoctors[self.indexPickerViewCate].category.id {
+                    self.idCate = self.listAllDoctors[self.indexPickerViewCate].category.id
+                    self.nameCate = self.listAllDoctors[self.indexPickerViewCate].category.name
                     if self.isNotAssignedYet {
                         self.listNotAssignedYet[self.indexPathOfCell.row].cateGory.id = self.idCate
                         self.listNotAssignedYet[self.indexPathOfCell.row].cateGory.name = self.nameCate
@@ -476,7 +476,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == pickerViewCate {
-            return listCate.count
+            return listAllDoctors.count
         }else {
             return listDoctorInCate.count
         }
@@ -484,7 +484,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == pickerViewCate {
-            return listCate[row].name
+            return listAllDoctors[row].category.name
         }else {
             return listDoctorInCate[row].doctorEntity.fullname
         }
@@ -566,7 +566,6 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
                 if status == 200{
                     if let result = response.result.value {
                         let jsonData = result as! [NSDictionary]
-                        
                         for item in jsonData {
                             let entity = ListDoctorEntity.init(dictionary: item)
                             self.listAllDoctors.append(entity)

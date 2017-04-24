@@ -23,6 +23,7 @@ class ServiceCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
     @IBOutlet weak var lbShowDetail: UILabel!
     @IBOutlet weak var marginLineBottom: NSLayoutConstraint!
     @IBOutlet weak var heightTable: NSLayoutConstraint!
+    @IBOutlet weak var heightShowDetail: NSLayoutConstraint!
     
     var pacKage = PackagesEntity()
     var serVice = ServicesEntity()
@@ -84,7 +85,6 @@ class ServiceCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
     }
     
     func setData(){
-        
         if !isPackage {
             if !serVice.isCheckSelect {
                 btnSelect.setImage(UIImage.init(named: "Check0-2.png"), for: .normal)
@@ -97,11 +97,12 @@ class ServiceCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
             lbPrice.text = String().replaceNSnumber(doublePrice: serVice.priceService)
             marginLineBottom.constant = 0
             viewShowDetail.isHidden = true
+            heightShowDetail.constant = 0
         }else {
             viewShowDetail.isHidden = false
             lbCombo.text = pacKage.pack.name
             lbPrice.text = String().replaceNSnumber(doublePrice: pacKage.pack.pricePackage)
-            
+            heightShowDetail.constant = 25
             if !pacKage.pack.isCheckSelect {
                 btnSelect.setImage(UIImage.init(named: "Check0-2.png"), for: .normal)
             }else {

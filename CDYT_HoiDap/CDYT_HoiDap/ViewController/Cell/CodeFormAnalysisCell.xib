@@ -104,8 +104,8 @@
                         <rect key="frame" x="0.0" y="78" width="320" height="156.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tableView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wK6-n0-Kjm">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="33"/>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wK6-n0-Kjm">
+                        <rect key="frame" x="300" y="0.0" width="320" height="33"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="33" id="AJq-ny-ZaG"/>
                         </constraints>

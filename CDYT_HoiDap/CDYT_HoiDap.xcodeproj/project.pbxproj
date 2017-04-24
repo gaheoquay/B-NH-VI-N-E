@@ -43,7 +43,6 @@
 		0F94FEED1E878DDD001884AD /* FormAnalysisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F94FEEB1E878DDD001884AD /* FormAnalysisCell.xib */; };
 		0F9AD59C1E63CE0F00981D7B /* SearchFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9AD59B1E63CE0F00981D7B /* SearchFileViewController.swift */; };
 		0F9AD5A01E63F34700981D7B /* BackWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9AD59D1E63F34700981D7B /* BackWhite.png */; };
-		0F9C46171E5FE24500DCFE46 /* ChoiceServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C46161E5FE24500DCFE46 /* ChoiceServiceViewController.swift */; };
 		0F9C46191E5FF22A00DCFE46 /* ListServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C46181E5FF22A00DCFE46 /* ListServiceViewController.swift */; };
 		0F9C46231E60084A00DCFE46 /* Check0-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C461F1E60084A00DCFE46 /* Check0-2.png */; };
 		0F9C46241E60084A00DCFE46 /* DatKham0.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9C46201E60084A00DCFE46 /* DatKham0.png */; };
@@ -249,6 +248,10 @@
 		8BF1497D1E14BF9C00766F8F /* Thongbao.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1496A1E14BF9C00766F8F /* Thongbao.png */; };
 		8BF1497E1E14BF9C00766F8F /* TinNhan.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF1496B1E14BF9C00766F8F /* TinNhan.png */; };
 		8BFE666C1E5D423700E1138B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFE666B1E5D423700E1138B /* BaseViewController.swift */; };
+		9804129B1EAD9764006FECE5 /* AnalysisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980412991EAD9764006FECE5 /* AnalysisCell.swift */; };
+		9804129C1EAD9764006FECE5 /* AnalysisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9804129A1EAD9764006FECE5 /* AnalysisCell.xib */; };
+		980412A01EADE06E006FECE5 /* PackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9804129E1EADE06E006FECE5 /* PackCell.swift */; };
+		980412A11EADE06E006FECE5 /* PackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9804129F1EADE06E006FECE5 /* PackCell.xib */; };
 		980AF9C11EAB0DF20049A06D /* PackCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980AF9BF1EAB0DF20049A06D /* PackCellTableViewCell.swift */; };
 		980AF9C21EAB0DF20049A06D /* PackCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 980AF9C01EAB0DF20049A06D /* PackCellTableViewCell.xib */; };
 		981CC9151EA66A8F00E35EB0 /* TotalPriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981CC9131EA66A8F00E35EB0 /* TotalPriceCell.swift */; };
@@ -352,7 +355,6 @@
 		0F94FEEB1E878DDD001884AD /* FormAnalysisCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormAnalysisCell.xib; sourceTree = "<group>"; };
 		0F9AD59B1E63CE0F00981D7B /* SearchFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFileViewController.swift; sourceTree = "<group>"; };
 		0F9AD59D1E63F34700981D7B /* BackWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackWhite.png; sourceTree = "<group>"; };
-		0F9C46161E5FE24500DCFE46 /* ChoiceServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceServiceViewController.swift; sourceTree = "<group>"; };
 		0F9C46181E5FF22A00DCFE46 /* ListServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListServiceViewController.swift; sourceTree = "<group>"; };
 		0F9C461F1E60084A00DCFE46 /* Check0-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Check0-2.png"; sourceTree = "<group>"; };
 		0F9C46201E60084A00DCFE46 /* DatKham0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DatKham0.png; sourceTree = "<group>"; };
@@ -569,6 +571,10 @@
 		8BF1496A1E14BF9C00766F8F /* Thongbao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thongbao.png; sourceTree = "<group>"; };
 		8BF1496B1E14BF9C00766F8F /* TinNhan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TinNhan.png; sourceTree = "<group>"; };
 		8BFE666B1E5D423700E1138B /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		980412991EAD9764006FECE5 /* AnalysisCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisCell.swift; sourceTree = "<group>"; };
+		9804129A1EAD9764006FECE5 /* AnalysisCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalysisCell.xib; sourceTree = "<group>"; };
+		9804129E1EADE06E006FECE5 /* PackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackCell.swift; sourceTree = "<group>"; };
+		9804129F1EADE06E006FECE5 /* PackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PackCell.xib; sourceTree = "<group>"; };
 		980AF9BF1EAB0DF20049A06D /* PackCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackCellTableViewCell.swift; sourceTree = "<group>"; };
 		980AF9C01EAB0DF20049A06D /* PackCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PackCellTableViewCell.xib; sourceTree = "<group>"; };
 		981CC9131EA66A8F00E35EB0 /* TotalPriceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalPriceCell.swift; sourceTree = "<group>"; };
@@ -670,6 +676,8 @@
 				0F09CEEF1E88AA33003FD8B1 /* ServiceCell.xib */,
 				0F6585251E95F01F002EEAC9 /* PrescriptionCell.swift */,
 				0F6585261E95F01F002EEAC9 /* PrescriptionCell.xib */,
+				9804129E1EADE06E006FECE5 /* PackCell.swift */,
+				9804129F1EADE06E006FECE5 /* PackCell.xib */,
 			);
 			name = "Service Cell";
 			sourceTree = "<group>";
@@ -691,6 +699,8 @@
 				981CC9141EA66A8F00E35EB0 /* TotalPriceCell.xib */,
 				980AF9BF1EAB0DF20049A06D /* PackCellTableViewCell.swift */,
 				980AF9C01EAB0DF20049A06D /* PackCellTableViewCell.xib */,
+				980412991EAD9764006FECE5 /* AnalysisCell.swift */,
+				9804129A1EAD9764006FECE5 /* AnalysisCell.xib */,
 			);
 			name = ScheduleCell;
 			sourceTree = "<group>";
@@ -1009,7 +1019,6 @@
 				8B79D0E11E5A91F30010C5C0 /* DescriptionViewController.swift */,
 				8BFE666B1E5D423700E1138B /* BaseViewController.swift */,
 				0FCFD9A71E5EEDDD00EE2F89 /* ManagerViewController.swift */,
-				0F9C46161E5FE24500DCFE46 /* ChoiceServiceViewController.swift */,
 				0F9C46181E5FF22A00DCFE46 /* ListServiceViewController.swift */,
 				0F9C463F1E60462700DCFE46 /* FileViewController.swift */,
 				0FABDC321E61C2EC004DD98D /* CreateCvViewController.swift */,
@@ -1350,6 +1359,7 @@
 				8BD49F0D1E48215500C98E74 /* SelectedUserListCollectionViewCell.xib in Resources */,
 				8B3A13911E112129005DBC6E /* KeyWordTableViewCell.xib in Resources */,
 				8B3A134A1E10F454005DBC6E /* copyright.png in Resources */,
+				980412A11EADE06E006FECE5 /* PackCell.xib in Resources */,
 				8BF1496F1E14BF9C00766F8F /* CaiDat.png in Resources */,
 				8BB92DD81E24884E007C5516 /* MoreDetail.png in Resources */,
 				8BD49F6E1E482D1100C98E74 /* ParticipantListTableViewCell.xib in Resources */,
@@ -1475,6 +1485,7 @@
 				8B1AD45F1E1B97F000D55543 /* SearchTableViewCell.xib in Resources */,
 				0FA8B1F11E80E261000FF76B /* Them.png in Resources */,
 				A63C38DF1E120A7E00DAB016 /* DangKi3.png in Resources */,
+				9804129C1EAD9764006FECE5 /* AnalysisCell.xib in Resources */,
 				8BD49F2E1E482C1500C98E74 /* IncomingUserMessageTableViewCell.xib in Resources */,
 				8B3A12E61E10F399005DBC6E /* Assets.xcassets in Resources */,
 				0FEDD6BC1EA1F5D000E3D42E /* CodeFormAnalysisCell.xib in Resources */,
@@ -1634,6 +1645,7 @@
 				A6417E251E13C78D00BD2D75 /* AddQuestionViewController.swift in Sources */,
 				8B3A137C1E10F454005DBC6E /* RAMAnimatedTabBarController.swift in Sources */,
 				0F765A3B1E644207001DF8ED /* FileUserEntity.swift in Sources */,
+				9804129B1EAD9764006FECE5 /* AnalysisCell.swift in Sources */,
 				A6E9D88F1E1110CF00E31886 /* LoginViewController.swift in Sources */,
 				0FA8B1EA1E80E059000FF76B /* InsertAccountCell.swift in Sources */,
 				8BD49EFC1E48215500C98E74 /* GroupChannelChattingViewController.swift in Sources */,
@@ -1647,7 +1659,6 @@
 				0FEDD6C31EA1FB1700E3D42E /* MedicalCell.swift in Sources */,
 				8B79D0E01E5A91C80010C5C0 /* ListDoctorViewController.swift in Sources */,
 				0FC431701E65185B003F7F31 /* DetailsFileUsersViewController.swift in Sources */,
-				0F9C46171E5FE24500DCFE46 /* ChoiceServiceViewController.swift in Sources */,
 				0FABDC331E61C2EC004DD98D /* CreateCvViewController.swift in Sources */,
 				0F81E4AC1E672CE800A7C18F /* BookingUserEntity.swift in Sources */,
 				8B2AFF0A1E64223A00415554 /* JobEntity.swift in Sources */,
@@ -1698,6 +1709,7 @@
 				8BD49EFB1E48215500C98E74 /* CreateGroupChannelUserListViewController.swift in Sources */,
 				0FC751EE1E8BC20B00B82553 /* DistricHomeEntity.swift in Sources */,
 				8B87CD2E1E13665500DA8A33 /* PostEntity.swift in Sources */,
+				980412A01EADE06E006FECE5 /* PackCell.swift in Sources */,
 				0F54E1551E8A1B10000AFE03 /* PackEntity.swift in Sources */,
 				8B3A137E1E10F454005DBC6E /* RAMItemAnimationProtocol.swift in Sources */,
 				A67311D41E164FC400BCE308 /* MoreCommentTableViewCell.swift in Sources */,
