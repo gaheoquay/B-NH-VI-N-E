@@ -29,12 +29,6 @@ class DoctorTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        let tap = UITapGestureRecognizer.init(target: self, action: #selector(self.blockUser))
-//        let tapUpdate = UITapGestureRecognizer.init(target: self, action: #selector(self.gotoUpdate))
-//        tapUpdate.numberOfTapsRequired = 1
-//        tap.numberOfTapsRequired = 1
-//        lbJob.addGestureRecognizer(tap)
-//        lbName.addGestureRecognizer(tapUpdate)
         // Initialization code
     }
 
@@ -43,14 +37,6 @@ class DoctorTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
                 // Configure the view for the selected state
     }
-    
-//    func blockUser(){
-//        delegate?.blockUser(author: author, admin: admin)
-//    }
-    
-//    func gotoUpdate(){
-//        delegate?.gotoUpdateProfile(author: author, admin: admin, indexPatchAdmin: indexPatch)
-//    }
     
     @IBAction func btnBlock(_ sender: Any) {
         delegate?.blockUser(author: author, admin: admin)

@@ -8,16 +8,16 @@
 
 import UIKit
 protocol ServiceViewControllerDelegate {
-    func setIndexService(status : Int)
+    func setIndexService(status : Int )
 }
 
 class ServiceViewController: UIViewController {
     
     var delegate: ServiceViewControllerDelegate?
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 

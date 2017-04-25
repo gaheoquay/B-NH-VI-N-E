@@ -159,9 +159,9 @@ class BookingCalenderController: UIViewController,WYPopoverControllerDelegate ,S
             (date) -> Void in
             if date != nil {
                 if self.status == 0 {
-                    self.btnBookingDate.setTitle("\(String().convertDatetoString(date: date as! Date, dateFormat: "EEEE, dd/MM/YYYY "))", for: .normal)
+                    self.btnBookingDate.setTitle("\(String().convertDatetoString(date: date! as Date, dateFormat: "EEEE, dd/MM/YYYY "))", for: .normal)
                 }else {
-                    self.btnBookingDate.setTitle("\(String().convertDatetoString(date: date as! Date, dateFormat: "EEEE, dd/MM/YYYY  HH:mm"))", for: .normal)
+                    self.btnBookingDate.setTitle("\(String().convertDatetoString(date: date! as Date, dateFormat: "EEEE, dd/MM/YYYY  HH:mm"))", for: .normal)
                 }
                 self.dateBook = (date?.timeIntervalSince1970)!
             }
@@ -195,7 +195,9 @@ class BookingCalenderController: UIViewController,WYPopoverControllerDelegate ,S
         popupViewController.delegate = nil
         popupViewController = nil
         self.status = status
-        reloadBooking()
+        if status == 0 || status == 3 {
+            reloadBooking()
+        }
         setupUi()
     }
     
