@@ -12,21 +12,21 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="ServiceCell" selectionStyle="none" indentationWidth="10" rowHeight="268" id="KGk-i7-Jjw" customClass="ServiceCell" customModule="CDYT_HoiDap" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="268"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="ServiceCell" selectionStyle="none" indentationWidth="10" rowHeight="294" id="KGk-i7-Jjw" customClass="ServiceCell" customModule="CDYT_HoiDap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="294"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="267.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="293.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWn-TM-t8c">
-                        <rect key="frame" x="8" y="16" width="254" height="14.5"/>
+                        <rect key="frame" x="8" y="16" width="254" height="16"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rth-BC-hfa">
-                        <rect key="frame" x="8" y="38.5" width="254" height="14.5"/>
+                        <rect key="frame" x="8" y="40" width="254" height="14.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14.5" id="0Pk-eB-Mma"/>
                         </constraints>
@@ -47,7 +47,7 @@
                         </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAh-Fn-KOE">
-                        <rect key="frame" x="8" y="58" width="304" height="25"/>
+                        <rect key="frame" x="8" y="84" width="304" height="25"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chi tiết" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="trg-X3-ahX">
                                 <rect key="frame" x="0.0" y="5" width="50" height="15"/>
@@ -76,7 +76,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YBA-Jt-qcB">
-                        <rect key="frame" x="8" y="83" width="304" height="1"/>
+                        <rect key="frame" x="8" y="109" width="304" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="1Jm-up-qgN"/>
                         </constraints>
@@ -85,12 +85,22 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4JU-C2-dRP">
-                        <rect key="frame" x="16" y="84" width="296" height="184"/>
+                        <rect key="frame" x="16" y="110" width="296" height="183.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tableView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Nằm trong gói đã chọn)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Klj-Wp-3Eu">
+                        <rect key="frame" x="8" y="62.5" width="254" height="13.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="13.5" id="YU0-9P-c2q"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                        <color key="textColor" red="0.70196078429999997" green="0.70196078429999997" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="tg9-co-63s" firstAttribute="leading" secondItem="cWn-TM-t8c" secondAttribute="trailing" id="04u-GZ-9os"/>
+                    <constraint firstItem="Klj-Wp-3Eu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="2t4-ld-zgW"/>
                     <constraint firstItem="cWn-TM-t8c" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="5Wz-HQ-chP"/>
                     <constraint firstItem="YBA-Jt-qcB" firstAttribute="trailing" secondItem="dAh-Fn-KOE" secondAttribute="trailing" id="8pA-TY-vLv"/>
                     <constraint firstAttribute="bottom" secondItem="YBA-Jt-qcB" secondAttribute="bottom" constant="183.5" id="AGe-n1-h9s"/>
@@ -98,21 +108,24 @@
                     <constraint firstItem="Rth-BC-hfa" firstAttribute="leading" secondItem="cWn-TM-t8c" secondAttribute="leading" id="DTM-Vt-07o"/>
                     <constraint firstItem="YBA-Jt-qcB" firstAttribute="leading" secondItem="dAh-Fn-KOE" secondAttribute="leading" id="FKe-L5-JFf"/>
                     <constraint firstItem="4JU-C2-dRP" firstAttribute="top" secondItem="YBA-Jt-qcB" secondAttribute="bottom" id="GqG-Hw-7d1"/>
-                    <constraint firstItem="dAh-Fn-KOE" firstAttribute="top" secondItem="Rth-BC-hfa" secondAttribute="bottom" constant="5" id="JUx-MT-La1"/>
                     <constraint firstItem="tg9-co-63s" firstAttribute="leading" secondItem="Rth-BC-hfa" secondAttribute="trailing" id="JpQ-d6-S86"/>
                     <constraint firstItem="dAh-Fn-KOE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="LPS-PE-rqD"/>
+                    <constraint firstItem="Klj-Wp-3Eu" firstAttribute="trailing" secondItem="Rth-BC-hfa" secondAttribute="trailing" id="MfQ-P4-7LX"/>
+                    <constraint firstItem="dAh-Fn-KOE" firstAttribute="top" secondItem="Klj-Wp-3Eu" secondAttribute="bottom" constant="8" id="O0J-EJ-SjW"/>
                     <constraint firstItem="tg9-co-63s" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="deG-HS-4qm"/>
                     <constraint firstItem="cWn-TM-t8c" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="eTY-df-lLR"/>
                     <constraint firstAttribute="trailing" secondItem="tg9-co-63s" secondAttribute="trailing" constant="8" id="h1B-zi-PIq"/>
                     <constraint firstItem="4JU-C2-dRP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="mU9-yz-E4x"/>
                     <constraint firstItem="Rth-BC-hfa" firstAttribute="top" secondItem="cWn-TM-t8c" secondAttribute="bottom" constant="8" id="rQg-YB-3WU"/>
                     <constraint firstAttribute="bottom" secondItem="4JU-C2-dRP" secondAttribute="bottom" id="taZ-lm-kp1"/>
+                    <constraint firstItem="Klj-Wp-3Eu" firstAttribute="top" secondItem="Rth-BC-hfa" secondAttribute="bottom" constant="8" id="xR4-4d-LPf"/>
                     <constraint firstItem="YBA-Jt-qcB" firstAttribute="top" secondItem="dAh-Fn-KOE" secondAttribute="bottom" id="xjt-YO-Cf5"/>
                     <constraint firstAttribute="trailing" secondItem="4JU-C2-dRP" secondAttribute="trailing" constant="8" id="xt9-rU-Axd"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="btnSelect" destination="tg9-co-63s" id="zr9-tY-R01"/>
+                <outlet property="heightLbReadOnly" destination="YU0-9P-c2q" id="kfM-Ct-9qg"/>
                 <outlet property="heightShowDetail" destination="koC-Sh-KkG" id="UVv-mo-6Bl"/>
                 <outlet property="imgShowDetail" destination="suc-Pm-kqr" id="K2C-PG-JHE"/>
                 <outlet property="lbCombo" destination="cWn-TM-t8c" id="vgn-Wh-7Eh"/>
@@ -122,7 +135,7 @@
                 <outlet property="tbListServiceDetail" destination="4JU-C2-dRP" id="Mc9-36-1EV"/>
                 <outlet property="viewShowDetail" destination="dAh-Fn-KOE" id="WBP-MB-w2y"/>
             </connections>
-            <point key="canvasLocation" x="56" y="86"/>
+            <point key="canvasLocation" x="56" y="99"/>
         </tableViewCell>
     </objects>
     <resources>

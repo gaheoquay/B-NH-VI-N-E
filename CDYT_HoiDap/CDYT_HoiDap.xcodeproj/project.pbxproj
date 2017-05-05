@@ -261,6 +261,7 @@
 		98EC9B751EA9A43C00095FFB /* DepartmentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EC9B741EA9A43C00095FFB /* DepartmentEntity.swift */; };
 		98EC9B771EA9BC8C00095FFB /* MedicalTestEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EC9B761EA9BC8C00095FFB /* MedicalTestEntity.swift */; };
 		98EC9B791EA9BEC600095FFB /* MedicalTestLinesEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EC9B781EA9BEC600095FFB /* MedicalTestLinesEntity.swift */; };
+		98F991131EBACA3000B5842C /* NotificationNewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F991121EBACA3000B5842C /* NotificationNewEntity.swift */; };
 		A6005BCF1E13722B00095FB7 /* NotifyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6005BCD1E13722B00095FB7 /* NotifyTableViewCell.swift */; };
 		A6005BD01E13722B00095FB7 /* NotifyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6005BCE1E13722B00095FB7 /* NotifyTableViewCell.xib */; };
 		A60430F61E232D49000216FB /* Change_Ava.png in Resources */ = {isa = PBXBuildFile; fileRef = A60430F51E232D49000216FB /* Change_Ava.png */; };
@@ -584,6 +585,7 @@
 		98EC9B741EA9A43C00095FFB /* DepartmentEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepartmentEntity.swift; sourceTree = "<group>"; };
 		98EC9B761EA9BC8C00095FFB /* MedicalTestEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalTestEntity.swift; sourceTree = "<group>"; };
 		98EC9B781EA9BEC600095FFB /* MedicalTestLinesEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalTestLinesEntity.swift; sourceTree = "<group>"; };
+		98F991121EBACA3000B5842C /* NotificationNewEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationNewEntity.swift; sourceTree = "<group>"; };
 		A6005BCD1E13722B00095FB7 /* NotifyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyTableViewCell.swift; sourceTree = "<group>"; };
 		A6005BCE1E13722B00095FB7 /* NotifyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotifyTableViewCell.xib; sourceTree = "<group>"; };
 		A60430F51E232D49000216FB /* Change_Ava.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Change_Ava.png; sourceTree = "<group>"; };
@@ -1275,6 +1277,7 @@
 				8BC2C30D1E23379300B68F72 /* ListNotificationEntity.swift */,
 				A6D083C21E121A2E007EA4D9 /* UserEntity.swift */,
 				A6F9809F1E48607E0007CD63 /* LinkedUser.swift */,
+				98F991121EBACA3000B5842C /* NotificationNewEntity.swift */,
 			);
 			path = "Realm Object";
 			sourceTree = "<group>";
@@ -1315,7 +1318,7 @@
 					8B3A12DA1E10F399005DBC6E = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = BY2N2SG836;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1578,6 +1581,7 @@
 				0FC431781E658680003F7F31 /* BookingEntity.swift in Sources */,
 				A625AD2D1E24CC5700953B0B /* CommentViewController.swift in Sources */,
 				98942FF41EA5284B004C3349 /* ResultsViewController.swift in Sources */,
+				98F991131EBACA3000B5842C /* NotificationNewEntity.swift in Sources */,
 				0FF7533D1E62F3A9001450B7 /* ExamScheduleCell.swift in Sources */,
 				0F9C46191E5FF22A00DCFE46 /* ListServiceViewController.swift in Sources */,
 				8B2AFF141E642C4A00415554 /* ServiceEntity.swift in Sources */,
@@ -1911,8 +1915,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5447e0a3-8c80-400d-9efc-b38556cfb642";
-				PROVISIONING_PROFILE_SPECIFIER = "new develop bvee";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1925,15 +1929,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CDYT_HoiDap/CDYT_HoiDap.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anh Ta (R24Y486KUK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = BY2N2SG836;
 				INFOPLIST_FILE = CDYT_HoiDap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9a9369d4-5336-4b8e-93aa-431e510cf8dd";
-				PROVISIONING_PROFILE_SPECIFIER = "new distribuition bve";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};

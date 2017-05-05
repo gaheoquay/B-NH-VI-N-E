@@ -10,8 +10,10 @@ import UIKit
 
 class NotificationViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, QuestionDetailViewControllerDelegate ,CommentViewControllerDelegate {
   
+
   @IBOutlet weak var notifyTableView: UITableView!
     var page = 1
+    var listNoti = [NotificationNewEntity]()
   override func viewDidLoad() {
     super.viewDidLoad()
     setupTableView()
@@ -23,6 +25,7 @@ class NotificationViewController: BaseViewController, UITableViewDelegate, UITab
   }
   //MARK: Set up table
   func setupTableView(){
+    getListNotification()
     notifyTableView.dataSource = self
     notifyTableView.delegate = self
     notifyTableView.estimatedRowHeight = 200
@@ -64,15 +67,18 @@ class NotificationViewController: BaseViewController, UITableViewDelegate, UITab
       "Size": 20,
       "RequestedUserId" : Until.getCurrentId()
     ]
-    Alamofire.request(GET_LIST_NOTIFICATION, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+    print(hotParam)
+    Alamofire.request(GET_LIST_NOTIFICATIONNEW, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
       if let status = response.response?.statusCode {
         if status == 200{
           if let result = response.result.value {
             let jsonData = result as! [NSDictionary]
             
             for item in jsonData {
-                let entity = ListNotificationEntity.initWithDict(dictionary: item)
-                listNotification.append(entity)
+//                let entity = ListNotificationEntity.initWithDict(dictionary: item)
+//                listNotification.append(entity)
+                let entity = NotificationNewEntity.init(dictionary: item)
+                self.listNoti.append(entity)
             }
           }
           self.notifyTableView.reloadData()
@@ -91,35 +97,54 @@ class NotificationViewController: BaseViewController, UITableViewDelegate, UITab
 
   //MARK: UITableViewDelegate, UITableViewDataSource
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return listNotification.count
+    return listNoti.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "NotifyTableViewCell") as! NotifyTableViewCell
-    if listNotification.count > 0 {
-        cell.setData(entity: listNotification[indexPath.row])
+    if listNoti.count > 0 {
+        cell.setData(entity: listNoti[indexPath.row])
     }
     return cell
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
-    let entity = listNotification[indexPath.row]
-    if entity.notificaiton?.type == 1 || entity.notificaiton?.type == 3 || entity.notificaiton?.type == 6 {
-      let viewController = storyBoard.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
-      viewController.questionID = (entity.notificaiton?.parentId)!
-      viewController.notification = entity
-      viewController.delegate = self
-      self.navigationController?.pushViewController(viewController, animated: true)
-    }else{
-      let viewController = storyBoard.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController
-      if entity.notificaiton?.type == 0 || entity.notificaiton?.type == 4 || entity.notificaiton?.type == 5{
-        viewController.commentId = (entity.notificaiton?.detailId)!
-      }else if entity.notificaiton?.type == 2{
-        viewController.commentId = (entity.notificaiton?.parentId)!
-      }
-      viewController.notification = entity
-      viewController.delegate = self
-      self.navigationController?.pushViewController(viewController, animated: true)
+//    let entity = listNotification[indexPath.row]
+//    if entity.notificaiton?.type == 1 || entity.notificaiton?.type == 3 || entity.notificaiton?.type == 6 {
+//      let viewController = storyBoard.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
+//      viewController.questionID = (entity.notificaiton?.parentId)!
+//      viewController.notification = entity
+//      viewController.delegate = self
+//      self.navigationController?.pushViewController(viewController, animated: true)
+//    }else{
+//      let viewController = storyBoard.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController
+//      if entity.notificaiton?.type == 0 || entity.notificaiton?.type == 4 || entity.notificaiton?.type == 5{
+//        viewController.commentId = (entity.notificaiton?.detailId)!
+//      }else if entity.notificaiton?.type == 2{
+//        viewController.commentId = (entity.notificaiton?.parentId)!
+//      }
+//      viewController.notification = entity
+//      viewController.delegate = self
+//      self.navigationController?.pushViewController(viewController, animated: true)
+//    }
+    
+    let entity = listNoti[indexPath.row]
+        if entity.type == 1 || entity.type == 3 || entity.type == 6 {
+          let viewController = storyBoard.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
+          viewController.questionID = (entity.parenId)
+          viewController.notification = entity
+          viewController.delegate = self
+          self.navigationController?.pushViewController(viewController, animated: true)
+        }else{
+          let viewController = storyBoard.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController
+          if entity.type == 0 || entity.type == 4 || entity.type == 5{
+            viewController.commentId = (entity.detailId)
+          }else if entity.type == 2{
+            viewController.commentId = (entity.parenId)
+          }
+          viewController.notification = entity
+          viewController.delegate = self
+          self.navigationController?.pushViewController(viewController, animated: true)
     }
   }
   

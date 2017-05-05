@@ -24,6 +24,7 @@ class ServiceCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
     @IBOutlet weak var marginLineBottom: NSLayoutConstraint!
     @IBOutlet weak var heightTable: NSLayoutConstraint!
     @IBOutlet weak var heightShowDetail: NSLayoutConstraint!
+    @IBOutlet weak var heightLbReadOnly: NSLayoutConstraint!
     
     var pacKage = PackagesEntity()
     var serVice = ServicesEntity()
@@ -85,12 +86,29 @@ class ServiceCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
     }
     
     func setData(){
+        lbCombo.textColor = UIColor.black
+        lbPrice.textColor = UIColor.init(netHex: 0x77d851)
         if !isPackage {
             if !serVice.isCheckSelect {
-                btnSelect.setImage(UIImage.init(named: "Check0-2.png"), for: .normal)
+                if !serVice.isSet {
+                    btnSelect.setImage(UIImage.init(named: "Check0-2.png"), for: .normal)
+                    btnSelect.isEnabled = true
+                    heightLbReadOnly.constant = 0
+                    lbCombo.textColor = UIColor.black
+                    lbPrice.textColor = UIColor.init(netHex: 0x77d851)
+                }else {
+                    btnSelect.setImage(UIImage.init(named: "Check1-2.png"), for: .normal)
+                    btnSelect.isEnabled = false
+                    heightLbReadOnly.constant = 14
+                    lbCombo.textColor = UIColor.init(netHex: 0xd6d6d6)
+                    lbPrice.textColor = UIColor.init(netHex: 0xd6d6d6)
+                }
             }else {
-                btnSelect.setImage(UIImage
-                    .init(named: "Check1-2.png"), for: .normal)
+                btnSelect.setImage(UIImage.init(named: "Check1-2.png"), for: .normal)
+                heightLbReadOnly.constant = 0
+                lbCombo.textColor = UIColor.black
+                lbPrice.textColor = UIColor.init(netHex: 0x77d851)
+                btnSelect.isEnabled = true
             }
             
             lbCombo.text = serVice.name
@@ -99,6 +117,8 @@ class ServiceCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
             viewShowDetail.isHidden = true
             heightShowDetail.constant = 0
         }else {
+            heightLbReadOnly.constant = 0
+            btnSelect.isEnabled = true
             viewShowDetail.isHidden = false
             lbCombo.text = pacKage.pack.name
             lbPrice.text = String().replaceNSnumber(doublePrice: pacKage.pack.pricePackage)
@@ -126,7 +146,6 @@ class ServiceCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
     
     
     @IBAction func btnSelect(_ sender: Any) {
-        delegate?.checkSelect(indexPatch: indexPatch)
         if isPackage {
             pacKage.pack.isCheckSelect = !pacKage.pack.isCheckSelect
             if !pacKage.pack.isCheckSelect {
@@ -142,7 +161,6 @@ class ServiceCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
                 btnSelect.setImage(UIImage.init(named: "Check1-2.png"), for: .normal)
             }
         }
+        delegate?.checkSelect(indexPatch: indexPatch)
     }
-    
-    
 }

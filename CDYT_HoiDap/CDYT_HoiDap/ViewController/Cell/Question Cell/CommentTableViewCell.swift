@@ -172,6 +172,7 @@ class CommentTableViewCell: UITableViewCell {
       
       moreActionBtn.isHidden = true
     }else{
+        
       self.contentView.backgroundColor = UIColor.white
       
       solutionLbl.isHidden = true

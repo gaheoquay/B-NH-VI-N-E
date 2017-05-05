@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,10 +20,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="omd-Et-5L0">
-                        <rect key="frame" x="0.0" y="0.0" width="80" height="43.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="106.5" height="43.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="srm-SE-kIT">
-                                <rect key="frame" x="8" y="8" width="64" height="27.5"/>
+                                <rect key="frame" x="8" y="8" width="90.5" height="27.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -37,10 +38,10 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="moV-C0-sO2">
-                        <rect key="frame" x="80" y="0.0" width="80" height="43.5"/>
+                        <rect key="frame" x="106.5" y="0.0" width="53.5" height="43.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6M5-sI-0rc">
-                                <rect key="frame" x="8" y="8" width="64" height="27.5"/>
+                                <rect key="frame" x="8" y="8" width="37.5" height="27.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -55,10 +56,10 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Au-e7-nzK">
-                        <rect key="frame" x="160" y="0.0" width="80" height="43.5"/>
+                        <rect key="frame" x="160" y="0.0" width="53.5" height="43.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wn5-Sr-8CB">
-                                <rect key="frame" x="8" y="8" width="64" height="27.5"/>
+                                <rect key="frame" x="8" y="8" width="37.5" height="27.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -73,10 +74,10 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kkh-OR-Vk7">
-                        <rect key="frame" x="240" y="0.0" width="80" height="43.5"/>
+                        <rect key="frame" x="213.5" y="0.0" width="106.5" height="43.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VBB-Ja-8iB">
-                                <rect key="frame" x="8" y="8" width="64" height="27.5"/>
+                                <rect key="frame" x="8" y="8" width="90.5" height="27.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -92,7 +93,8 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="moV-C0-sO2" firstAttribute="width" secondItem="omd-Et-5L0" secondAttribute="width" id="5l2-aF-DS7"/>
+                    <constraint firstItem="kkh-OR-Vk7" firstAttribute="width" secondItem="omd-Et-5L0" secondAttribute="width" id="4ph-96-vLj"/>
+                    <constraint firstItem="moV-C0-sO2" firstAttribute="width" secondItem="omd-Et-5L0" secondAttribute="width" multiplier="0.5" id="5l2-aF-DS7"/>
                     <constraint firstItem="3Au-e7-nzK" firstAttribute="leading" secondItem="moV-C0-sO2" secondAttribute="trailing" id="90T-8r-Sng"/>
                     <constraint firstItem="kkh-OR-Vk7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="A7I-zM-t2r"/>
                     <constraint firstItem="3Au-e7-nzK" firstAttribute="width" secondItem="moV-C0-sO2" secondAttribute="width" id="Chx-0V-3Eq"/>
@@ -101,7 +103,6 @@
                     <constraint firstAttribute="bottom" secondItem="omd-Et-5L0" secondAttribute="bottom" id="Kjj-B0-O41"/>
                     <constraint firstItem="moV-C0-sO2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="LcW-Mu-5mg"/>
                     <constraint firstItem="omd-Et-5L0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Q46-Zv-kNF"/>
-                    <constraint firstItem="kkh-OR-Vk7" firstAttribute="width" secondItem="3Au-e7-nzK" secondAttribute="width" id="SKU-aP-JE4"/>
                     <constraint firstAttribute="trailing" secondItem="kkh-OR-Vk7" secondAttribute="trailing" id="Vds-IZ-Thg"/>
                     <constraint firstAttribute="bottom" secondItem="moV-C0-sO2" secondAttribute="bottom" id="gif-ot-uT6"/>
                     <constraint firstAttribute="bottom" secondItem="kkh-OR-Vk7" secondAttribute="bottom" id="hUD-TL-XFn"/>

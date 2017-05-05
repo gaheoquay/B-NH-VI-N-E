@@ -300,7 +300,8 @@ class AdminUpdateProfileViewController: UIViewController,UIPickerViewDelegate,UI
     }
     
     @IBAction func btnDob(_ sender: Any) {
-        DatePickerDialog().show(title: "Ngày sinh", doneButtonTitle: "Xong", cancelButtonTitle: "Hủy", datePickerMode: .date) {
+        let curDate = Date()
+        DatePickerDialog().show(title: "Chọn ngày khám", doneButtonTitle: "Xong", cancelButtonTitle: "Hủy", maximumDate: curDate as NSDate?, datePickerMode: .date) {
             (date) -> Void in
             if date != nil {
                 let dateFormatter = DateFormatter()

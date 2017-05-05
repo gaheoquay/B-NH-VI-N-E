@@ -21,17 +21,21 @@ class CodeFormAnalysisCell: UITableViewCell,UITableViewDelegate,UITableViewDataS
     @IBOutlet weak var viewKQ: UIView!
     @IBOutlet weak var viewDV: UIView!
     @IBOutlet weak var viewGBT: UIView!
-    @IBOutlet weak var heightLine: NSLayoutConstraint!
     @IBOutlet weak var btnShowDetail: UIButton!
     @IBOutlet weak var heightTXN: NSLayoutConstraint!
     @IBOutlet weak var heightKQ: NSLayoutConstraint!
     @IBOutlet weak var heightDV: NSLayoutConstraint!
     @IBOutlet weak var heightGTBT: NSLayoutConstraint!
+    @IBOutlet weak var lbXN: UILabel!
+    @IBOutlet weak var lbKQ: UILabel!
+    @IBOutlet weak var lbDV: UILabel!
+    @IBOutlet weak var lbGTBT: UILabel!
     
     var mediCal = listMedicalTestsEntity()
     var indexPatch = IndexPath()
     var delegate: CodeFormAnalysisCellDelegate?
     var heightCell: CGFloat = 0
+    var heightLine : CGFloat = 0
     var isLine = false
 
     override func awakeFromNib() {
@@ -49,6 +53,10 @@ class CodeFormAnalysisCell: UITableViewCell,UITableViewDelegate,UITableViewDataS
         viewXN.layer.borderColor = UIColor.black.cgColor
         viewGBT.layer.borderWidth = 0.5
         viewGBT.layer.borderColor = UIColor.black.cgColor
+        lbXN.text = " Tên xét nghiệm"
+        lbKQ.text = " Kết\n quả"
+        lbDV.text = " Đơn\n vị"
+        lbGTBT.text = " Giá trị bình\n thường"
         // Initialization code
     }
     
@@ -85,7 +93,6 @@ class CodeFormAnalysisCell: UITableViewCell,UITableViewDelegate,UITableViewDataS
         heightKQ.constant = 0
         heightTXN.constant = 0
         heightGTBT.constant = 0
-        heightLine.constant = 0
         imgEditUp.isHidden = true
     }
     
@@ -93,7 +100,7 @@ class CodeFormAnalysisCell: UITableViewCell,UITableViewDelegate,UITableViewDataS
         lbName.text = mediCal.medicalTest.serviceName
         if isLine {
             if !mediCal.isShowDetail {
-                marginBottomLine.constant = 0
+                marginBottomLine.constant = 8
                 heightDV.constant = 0
                 heightKQ.constant = 0
                 heightTXN.constant = 0
@@ -111,7 +118,7 @@ class CodeFormAnalysisCell: UITableViewCell,UITableViewDelegate,UITableViewDataS
             }
         }else {
             if !mediCal.isShowDetail {
-                marginBottomLine.constant = 0
+                marginBottomLine.constant = 8
                 heightDV.constant = 0
                 heightKQ.constant = 0
                 heightTXN.constant = 0
@@ -121,7 +128,7 @@ class CodeFormAnalysisCell: UITableViewCell,UITableViewDelegate,UITableViewDataS
                 heightKQ.constant = 44
                 heightTXN.constant = 44
                 heightGTBT.constant = 44
-                marginBottomLine.constant = mediCal.medicalTest.serviceName.heightWithConstrainedWidth(width: UIScreen.main.bounds.size.width / 4 - 16 , font: .systemFont(ofSize: 11)) + 16 + 44
+                marginBottomLine.constant = mediCal.medicalTest.serviceName.heightWithConstrainedWidth(width: UIScreen.main.bounds.size.width / 3 - 16, font: .systemFont(ofSize: 11)) + 80
             }
         }
         contentView.layoutIfNeeded()
@@ -134,7 +141,6 @@ class CodeFormAnalysisCell: UITableViewCell,UITableViewDelegate,UITableViewDataS
         viewKQ.isHidden = true
         viewXN.isHidden = true
         viewGBT.isHidden = true
-        heightLine.constant = 0
         btnShowDetail.isHidden = true
         contentView.layoutIfNeeded()
     }

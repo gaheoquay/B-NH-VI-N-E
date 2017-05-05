@@ -18,6 +18,7 @@ class PackEntity: NSObject {
     var arrService = ""
     var isCheckShowDetail = false
     var isCheckSelect = false
+    var isSetPack = false
     
     override init() {
         super.init()

@@ -161,7 +161,7 @@ class FileViewController: UIViewController,UITableViewDataSource,UITableViewDele
     }
     
     func deleteFileUser(indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Thông báo", message: "Bạn có muốn xoá hồ sơ?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Thông báo", message: "Bạn có muốn xoá hồ sơ \(listFileUser[indexPath.row].patientName)?", preferredStyle: .alert)
         let alertActionOk = UIAlertAction(title: "Đồng Ý", style: .default) { (UIAlertAction) in
             self.requestDeleteProfile(index: indexPath.row)
         }

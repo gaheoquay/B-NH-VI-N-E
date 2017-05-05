@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -74,7 +74,6 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="apL-kT-hhH" firstAttribute="leading" secondItem="tsI-vj-5im" secondAttribute="trailing" constant="8" id="54q-qS-Njd"/>
                     <constraint firstItem="fAr-7Q-qfG" firstAttribute="top" secondItem="apL-kT-hhH" secondAttribute="bottom" constant="5" id="DRm-up-H3T"/>
                     <constraint firstItem="dNq-n6-NHZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="GUF-yK-HTR"/>
                     <constraint firstItem="LV8-d7-yBZ" firstAttribute="centerY" secondItem="apL-kT-hhH" secondAttribute="centerY" id="IBW-ag-OZl"/>
@@ -89,8 +88,9 @@
                     <constraint firstItem="dNq-n6-NHZ" firstAttribute="leading" secondItem="kYb-DO-PXk" secondAttribute="trailing" constant="8" id="cpO-lG-3c1"/>
                     <constraint firstItem="EF9-1e-VeZ" firstAttribute="leading" secondItem="tsI-vj-5im" secondAttribute="trailing" constant="8" id="csz-SL-a4w"/>
                     <constraint firstAttribute="trailing" secondItem="dNq-n6-NHZ" secondAttribute="trailing" id="e9d-1B-3w5"/>
-                    <constraint firstItem="tsI-vj-5im" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gMC-km-hwy"/>
+                    <constraint firstItem="tsI-vj-5im" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15.5" id="fBo-Kl-PWk"/>
                     <constraint firstAttribute="bottom" secondItem="dNq-n6-NHZ" secondAttribute="bottom" id="ibM-06-XhJ"/>
+                    <constraint firstItem="apL-kT-hhH" firstAttribute="leading" secondItem="EF9-1e-VeZ" secondAttribute="leading" id="t4x-cF-oWl"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LV8-d7-yBZ" secondAttribute="trailing" constant="8" id="zgw-4G-2EB"/>
                 </constraints>
             </tableViewCellContentView>

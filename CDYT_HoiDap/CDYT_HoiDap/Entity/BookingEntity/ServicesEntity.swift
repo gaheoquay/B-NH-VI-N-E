@@ -15,6 +15,7 @@ class ServicesEntity: NSObject {
     var name = ""
     var priceService : Double = 0
     var isCheckSelect = false
+    var isSet = false
 
     override init() {
         super.init()

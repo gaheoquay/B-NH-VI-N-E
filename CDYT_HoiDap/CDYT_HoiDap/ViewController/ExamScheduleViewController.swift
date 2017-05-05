@@ -54,11 +54,11 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         cell.userEntity = listallUSer[indexPath.row]
         if listallUSer[indexPath.row].booking.bookType == 2 {
             if listallUSer[indexPath.row].booking.status == 7 ||  listallUSer[indexPath.row].booking.status == 6 {
-                cell.isHidden = true
+                cell.isHidden = false
             }
         }else {
             if listallUSer[indexPath.row].booking.status == 4 {
-                cell.isHidden = true
+                cell.isHidden = false
             }
         }
         

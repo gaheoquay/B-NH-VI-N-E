@@ -223,7 +223,7 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
         
         self.age = (calendar.date(from: dateComponent)?.age)!
         
-        if self.age < 6 {
+        if self.age < 5 {
             self.viewCmtGuardian.isHidden = false
             self.viewNameGuardian.isHidden = false
             self.viewPhoneGuardian.isHidden = false

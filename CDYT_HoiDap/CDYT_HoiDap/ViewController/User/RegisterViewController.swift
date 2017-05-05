@@ -13,7 +13,7 @@ protocol RegisterViewControllerDelegate {
     func reloadDataAdmin(admin: ListAdminEntity)
 }
 
-class RegisterViewController: UIViewController, NVActivityIndicatorViewable,UIPickerViewDelegate,UIPickerViewDataSource {
+class RegisterViewController: UIViewController, NVActivityIndicatorViewable,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var avatarImg: UIImageView!
     @IBOutlet weak var nicknameTxt: UITextField!
@@ -45,8 +45,6 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable,UIPi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        initDkImagePicker()
         setupUI()
     }
     
@@ -85,38 +83,56 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable,UIPi
     }
     
     @IBAction func chooseAvatarAction(_ sender: Any) {
-        self.present(pickerImageController, animated: true, completion: nil)
-    }
-    
-    func initDkImagePicker(){
-        pickerImageController.assetType = DKImagePickerControllerAssetType.allPhotos
-        pickerImageController.maxSelectableCount = 1
-        pickerImageController.didSelectAssets = { [unowned self] ( assets: [DKAsset]) in
-            self.imageAssets = assets
-            if assets.count > 0 {
-                let asset = assets[0]
-                asset.fetchOriginalImage(true, completeBlock: {(image, info) -> Void in
-                    self.avatarImg.image = image!
-                })
-                
-            }else{
-                self.avatarImg.image = UIImage.init(named: "AvaDefaut.png")
-            }
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        pickerController.allowsEditing = true
+        
+        let alert = UIAlertController(title: "Thêm ảnh", message: "Chọn ảnh", preferredStyle: .actionSheet)
+        
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (UIAlertAction) in
+            pickerController.sourceType = .camera
+            self.present(pickerController, animated: true, completion: nil)
         }
         
+        let libraryAction = UIAlertAction(title: "Thư viện", style: .default) { (UIAlertAction) in
+            pickerController.sourceType = .photoLibrary
+            self.present(pickerController, animated: true, completion: nil)
+        }
+        
+        let saveAction = UIAlertAction(title: "Album", style: .default) { (UIAlertAction) in
+            pickerController.sourceType = .savedPhotosAlbum
+            self.present(pickerController, animated: true, completion: nil)
+        }
+        
+        let canAction = UIAlertAction(title: "Huỷ", style: .cancel, handler: nil)
+        
+        alert.addAction(canAction)
+        alert.addAction(cameraAction)
+        alert.addAction(libraryAction)
+        alert.addAction(saveAction)
+        
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let choiceImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        self.avatarImg.image = choiceImage
+        dismiss(animated:true, completion: nil)
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.avatarImg.image = UIImage.init(named: "AvaDefaut.png")
+        dismiss(animated: true, completion: nil)
     }
     
     func uploadImage(){
 
         Until.showLoading()
         
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
-            let asset = self.imageAssets[0]
-            asset.fetchOriginalImage(true, completeBlock: {(image, info) -> Void in
-                if let imageData = UIImageJPEGRepresentation(image!, 0.5) {
-                    multipartFormData.append(imageData, withName: "Image", fileName: "file.png", mimeType: "image/png")
-                }
-            })
+        Alamofire.upload(multipartFormData: { (MultipartFormData) in
+            if let imgUp = self.avatarImg.image!.jpegRepresentationData {
+                MultipartFormData.append(imgUp as Data, withName: "Image", fileName: "file.png", mimeType: "image/png")
+            }
         }, to: UPLOAD_IMAGE, encodingCompletion: { encodingResult in
             switch encodingResult {
             case .success(let upload, _, _):
@@ -135,7 +151,6 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable,UIPi
 
                 }
                 Until.hideLoading()
-                
             case .failure(let encodingError):
                 print(encodingError)
                 Until.hideLoading()
@@ -143,11 +158,12 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable,UIPi
         })
     }
     
+    
     @IBAction func registerBtnAction(_ sender: Any) {
         if validateData() == "" {
             errLbl.isHidden = true
             
-            if imageAssets.count > 0 {
+            if self.avatarImg != nil {
                 uploadImage()
             }else{
                 registerUserToServer()
@@ -223,14 +239,23 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable,UIPi
                             if self.isAdmin {
                                 let entity = ListAdminEntity.init(dictionary: jsonData)
                                 self.delegate?.reloadDataAdmin(admin: entity)
-                                _ = self.navigationController?.popViewController(animated: true)
+                                let alert = UIAlertController(title: "Thông báo", message: "Tạo tài khoản thành công", preferredStyle: .alert)
+                                let alertAction = UIAlertAction(title: "Đóng", style: .default, handler: { (UIAlertAction) in
+                                    _ = self.navigationController?.popViewController(animated: true)
+                                })
+                                alert.addAction(alertAction)
+                                self.present(alert, animated: true, completion: nil)
                             }else {
                                 let entity = AuthorEntity.init(dictionary: jsonData)
                                 let doctor = DoctorEntity()
                                 doctor.doctorEntity = entity
                                 self.delegate?.reloadDataDoctor(indexPatch: self.indexDoctor, doctor: doctor)
-                                _ = self.navigationController?.popViewController(animated: true)
-
+                                let alert = UIAlertController(title: "Thông báo", message: "Tạo tài khoản thành công", preferredStyle: .alert)
+                                let alertAction = UIAlertAction(title: "Đóng", style: .default, handler: { (UIAlertAction) in
+                                    _ = self.navigationController?.popViewController(animated: true)
+                                })
+                                alert.addAction(alertAction)
+                                self.present(alert, animated: true, completion: nil)
                             }
                             }else {
                             try! reaml.write {
@@ -308,7 +333,6 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable,UIPi
         picker.delegate = self
         picker.dataSource = self
         
-        
         let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
             self.lbJob.text = listCate[self.indexPathOfCell].name
         })
@@ -339,3 +363,12 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable,UIPi
         // Dispose of any resources that can be recreated.
     }
 }
+extension UIImage {
+    var jpegRepresentationData: NSData! {
+        return UIImageJPEGRepresentation(self, 0.5)! as NSData   // QUALITY min = 0 / max = 1
+    }
+    var pngRepresentationData: NSData! {
+        return UIImagePNGRepresentation(self)! as NSData
+    }
+}
+

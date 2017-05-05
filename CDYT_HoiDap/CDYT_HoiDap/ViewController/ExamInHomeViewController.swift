@@ -41,6 +41,10 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
             viewBottom.isHidden = false
         }
         
+        if listPacKage.isEmpty && listService.isEmpty {
+            requestListService()
+        }
+        
         tbListServiceAddNew.delegate = self
         tbListServiceAddNew.dataSource = self
         tbListServiceAddNew.register(UINib.init(nibName: "FileCell", bundle: nil), forCellReuseIdentifier: "FileCell")
@@ -184,14 +188,15 @@ class ExamInHomeViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     @IBAction func btnDeleteAllService(_ sender: Any) {
-        listPacKage.removeAll()
-        listService.removeAll()
         requestListService()
         setSumPrice()
     }
     
     
     func requestListService(){
+        listPacKage.removeAll()
+        listService.removeAll()
+        
         let param : [String : Any] = [
             "Auth": Until.getAuthKey()
         ]

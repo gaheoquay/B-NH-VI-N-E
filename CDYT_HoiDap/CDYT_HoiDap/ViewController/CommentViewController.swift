@@ -36,7 +36,7 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
     var currentUserId = ""
     var feedEntity = FeedsEntity()
     var commentId = ""
-  var notification : ListNotificationEntity!
+  var notification : NotificationNewEntity!
   var notificationId = ""
   var delegate:CommentViewControllerDelegate?
 
@@ -55,7 +55,7 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
         if commentId != "" {
             getCommentFromNotification()
         }
-      if (notification != nil && !(notification.notificaiton?.isRead)!) || !notificationId.isEmpty {
+      if (notification != nil && !(notification.isRead)) || !notificationId.isEmpty {
         setReadNotification()
       }
 
@@ -235,7 +235,7 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
   func setReadNotification(){
     Until.showLoading()
     if notificationId == ""{
-      notificationId = notification!.notificaiton!.id
+      notificationId = notification.id
     }
     let getPostParam : [String : Any] = [
       "Auth": Until.getAuthKey(),
@@ -252,7 +252,7 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 let realm = try! Realm()
                 try! realm.write {
                   if self.notification != nil {
-                    self.notification.notificaiton?.isRead = true
+                    self.notification.isRead = true
                   }
                     self.delegate?.reloadTable()
                 }
@@ -415,7 +415,7 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
     //MARK: Post comment tap action
     func postCommentAction(){
         if Until.getCurrentId() != "" {
-            let stringComent = textInputBar.text!
+            let stringComent = textInputBar.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             if stringComent == "" {
                 let alert = UIAlertController(title: "Thông Báo", message: "Bình luận không được để trống", preferredStyle: .alert)
                 let OkeAction: UIAlertAction = UIAlertAction(title: "Đóng", style: .cancel) { action -> Void in

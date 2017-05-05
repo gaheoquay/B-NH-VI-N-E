@@ -27,32 +27,50 @@ class NotifyTableViewCell: UITableViewCell {
     
     // Configure the view for the selected state
   }
-  func setData(entity:ListNotificationEntity){
-    if (entity.notificaiton?.isRead)! {
-      viewBound.backgroundColor = UIColor.white
+  func setData(entity:NotificationNewEntity){
+//    if (entity.notificaiton?.isRead)! {
+//      viewBound.backgroundColor = UIColor.white
+//    }else{
+//      viewBound.backgroundColor = UIColor.init(netHex: 0xc7eca1)
+//    }
+//    let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor().hexStringToUIColor(hex: "4A4A4A")]
+//    let fontRegular = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor().hexStringToUIColor(hex: "4A4A4A")]
+//    let fontTitle = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor().hexStringToUIColor(hex: "01a7fa")]
+//    var myAttrString = NSMutableAttributedString()
+//    if entity.content == "đã chọn giải pháp cho câu hỏi" {
+//      if entity.isPrivatePost {
+//        myAttrString = NSMutableAttributedString(string: "Ẩn danh", attributes: fontBold)
+//        avaImg.image = #imageLiteral(resourceName: "AvaDefaut.png")
+//      }else{
+//        myAttrString = NSMutableAttributedString(string: (entity.linkedUser?.nickname)!, attributes: fontBold)
+//        avaImg.sd_setImage(with: URL.init(string: (entity.linkedUser?.avatarUrl)!), placeholderImage: #imageLiteral(resourceName: "AvaDefaut.png"))
+//      }
+//    }else{
+//      myAttrString = NSMutableAttributedString(string: (entity.linkedUser?.nickname)!, attributes: fontBold)
+//      avaImg.sd_setImage(with: URL.init(string: (entity.linkedUser?.avatarUrl)!), placeholderImage: #imageLiteral(resourceName: "AvaDefaut.png"))
+//    }
+//    myAttrString.append(NSAttributedString(string: " \(entity.content) ", attributes: fontRegular))
+//    myAttrString.append(NSAttributedString.init(string: entity.postTitle, attributes: fontTitle))
+//    titleLbl.attributedText = myAttrString
+//    timeLbl.text = String().convertTimeStampWithDateFormat(timeStamp: (entity.notificaiton?.createdDate)!, dateFormat: "dd/MM/yyyy HH:mm")
+    
+    if (entity.isRead) {
+        viewBound.backgroundColor = UIColor.white
     }else{
-      viewBound.backgroundColor = UIColor.init(netHex: 0xc7eca1)
+        viewBound.backgroundColor = UIColor.init(netHex: 0xc7eca1)
     }
     let fontBold = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor().hexStringToUIColor(hex: "4A4A4A")]
     let fontRegular = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor().hexStringToUIColor(hex: "4A4A4A")]
-    let fontTitle = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor().hexStringToUIColor(hex: "01a7fa")]
     var myAttrString = NSMutableAttributedString()
-    if entity.content == "đã chọn giải pháp cho câu hỏi" {
-      if entity.isPrivatePost {
-        myAttrString = NSMutableAttributedString(string: "Ẩn danh", attributes: fontBold)
-        avaImg.image = #imageLiteral(resourceName: "AvaDefaut.png")
-      }else{
-        myAttrString = NSMutableAttributedString(string: (entity.linkedUser?.nickname)!, attributes: fontBold)
-        avaImg.sd_setImage(with: URL.init(string: (entity.linkedUser?.avatarUrl)!), placeholderImage: #imageLiteral(resourceName: "AvaDefaut.png"))
-      }
-    }else{
-      myAttrString = NSMutableAttributedString(string: (entity.linkedUser?.nickname)!, attributes: fontBold)
-      avaImg.sd_setImage(with: URL.init(string: (entity.linkedUser?.avatarUrl)!), placeholderImage: #imageLiteral(resourceName: "AvaDefaut.png"))
+    
+    if entity.displayType == 0 {
+        myAttrString = NSMutableAttributedString(string: "\(entity.userDisPlay) ", attributes: fontBold)
+        myAttrString.append(NSAttributedString.init(string: entity.conTent, attributes: fontRegular))
+    }else {
+        myAttrString = NSMutableAttributedString(string: (entity.conTent), attributes: fontBold)
     }
-    myAttrString.append(NSAttributedString(string: " \(entity.content) ", attributes: fontRegular))
-    myAttrString.append(NSAttributedString.init(string: entity.postTitle, attributes: fontTitle))
     titleLbl.attributedText = myAttrString
-    timeLbl.text = String().convertTimeStampWithDateFormat(timeStamp: (entity.notificaiton?.createdDate)!, dateFormat: "dd/MM/yyyy HH:mm")
+    timeLbl.text = String().convertTimeStampWithDateFormat(timeStamp: (entity.createDate), dateFormat: "dd/MM/yyyy HH:mm")
     
   }
 }

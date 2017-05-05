@@ -138,19 +138,23 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
     }
     
     @IBAction func btnPackage(_ sender: Any) {
-        isPackage = true
-        tbListService.reloadData()
-        imgTabPack.image = UIImage.init(named: "tab1.png")
-        imgTabService.isHidden = true
-        imgTabPack.isHidden = false
+        if !isPackage {
+            isPackage = true
+            tbListService.reloadData()
+            imgTabPack.image = UIImage.init(named: "tab1.png")
+            imgTabService.isHidden = true
+            imgTabPack.isHidden = false
+        }
     }
     
     @IBAction func btnService(_ sender: Any) {
-        isPackage = false
-        tbListService.reloadData()
-        imgTabService.image = UIImage.init(named: "tab1.png")
-        imgTabService.isHidden = false
-        imgTabPack.isHidden = true
+        if isPackage {
+            isPackage = false
+            tbListService.reloadData()
+            imgTabService.image = UIImage.init(named: "tab1.png")
+            imgTabService.isHidden = false
+            imgTabPack.isHidden = true
+        }
     }
 
     @IBAction func btnSearch(_ sender: Any) {
@@ -219,19 +223,21 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
             }
         
         }else {
+            
             if isPackage {
                 let entity = service.listPack[indexPatch.row]
                 if !entity.pack.isCheckSelect  {
+                    setIsNotSelect()
+                }else {
                     isCheckPac(indexPatch: indexPatch, listPacks: service.listPack)
-                    
+                    setIsSelectService()
                 }
             }else {
-                if service.listSer[indexPatch.row].isCheckSelect == false{
+                if service.listSer[indexPatch.row].isCheckSelect == false || service.listSer[indexPatch.row].isSet == true{
                     isCheckService(indexPatch: indexPatch, listSers: service.listSer )
                 }
             }
         }
-        
     }
     
     func isCheckPac(indexPatch: IndexPath, listPacks : [PackagesEntity]){
@@ -254,12 +260,12 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
                         })
                         let actionCancel = UIAlertAction.init(title: "Huỷ", style: .default, handler: { (UIAlertAction) in
                             listPacks[indexPatch.row].pack.isCheckSelect = false
+                            self.setIsNotSelect()
                             self.tbListService.reloadData()
                         })
                         alert.addAction(actionOk)
                         alert.addAction(actionCancel)
                         self.present(alert, animated: true, completion: nil)
-//                        break
                     }
                 }
             }
@@ -274,7 +280,7 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
                     if item.name == listSers[indexPatch.row].name {
                         let alert = UIAlertController.init(title: "Thông báo", message: "Không thể chọn dịch vụ lẻ nằm trong gói bạn đã chọn", preferredStyle: UIAlertControllerStyle.alert)
                         let actionCancel = UIAlertAction.init(title: "Đóng", style: .default, handler: { (UIAlertAction) in
-                            listSers[indexPatch.row].isCheckSelect = false
+                            listSers[indexPatch.row].isCheckSelect = true
                             self.tbListService.reloadData()
                         })
                         alert.addAction(actionCancel)
@@ -282,6 +288,49 @@ class SelectServiceViewController: UIViewController,ServiceCellDelegate,UITableV
                     }
                 }
             }
+    }
+    
+    func setIsSelectService(){
+        let listPac = service.listPack.filter({ (packagesEntity) -> Bool in
+            packagesEntity.pack.isCheckSelect == true
+        })
+        
+        
+        for service in service.listSer {
+            for listSv in listPac {
+                for item in listSv.service {
+                    if service.name == item.name {
+                        service.isSet = true
+                    }
+                }
+            }
+            tbListService.reloadData()
+
+        }
+        
+        
+    }
+    
+    func setIsNotSelect(){
+        let listSer = service.listSer.filter({ (servicesEntity) -> Bool in
+            servicesEntity.isSet == true
+        })
+        
+        let listPacs = service.listPack.filter({ (packagesEntity) -> Bool in
+            packagesEntity.pack.isCheckSelect == false
+        })
+        
+        for item in listSer {
+            for a in listPacs {
+                for b in a.service {
+                    if item.name == b.name {
+                        item.isSet = false
+                    }
+                }
+            }
+            tbListService.reloadData()
+        }
+    
     }
     
     func reloadDataCell(indexPatch: IndexPath) {

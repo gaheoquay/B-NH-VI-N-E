@@ -12,6 +12,8 @@ class TotalPriceCell: UITableViewCell {
 
     @IBOutlet weak var lbTotalPrice: UILabel!
     @IBOutlet weak var lbSurChange: UILabel!
+    @IBOutlet weak var lbPrice: UILabel!
+    @IBOutlet weak var lbSurChanges: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

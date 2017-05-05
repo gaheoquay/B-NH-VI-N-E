@@ -170,10 +170,10 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
       }
       
         if feed.isFollowed {
-            followBtn.setTitleColor(UIColor().hexStringToUIColor(hex: "3A3A3A"), for: UIControlState.normal)
+            followBtn.setTitleColor(UIColor().hexStringToUIColor(hex: "89D924"), for: UIControlState.normal)
             followBtn.setTitle("Bỏ theo dõi", for: UIControlState.normal)
         }else{
-            followBtn.setTitleColor(UIColor().hexStringToUIColor(hex: "89D924"), for: UIControlState.normal)
+            followBtn.setTitleColor(UIColor().hexStringToUIColor(hex: "3A3A3A"), for: UIControlState.normal)
             followBtn.setTitle("Theo dõi", for: UIControlState.normal)
         }
     }

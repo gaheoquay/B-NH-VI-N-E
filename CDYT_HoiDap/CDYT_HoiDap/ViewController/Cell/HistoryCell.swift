@@ -50,6 +50,10 @@ class HistoryCell: UITableViewCell {
                 let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
                 myAttrString.append(NSMutableAttributedString(string: "Đã có kết quả", attributes: fontRegularWithColor))
                 lbStatus.attributedText = myAttrString
+            }else if entity.status == 3 {
+                let myAttrString  = NSMutableAttributedString(string: "Trạng thái: ", attributes: fontRegular)
+                myAttrString.append(NSMutableAttributedString(string: "Đã thanh toán", attributes: fontRegularWithColor))
+                lbStatus.attributedText = myAttrString
             }
         }
         

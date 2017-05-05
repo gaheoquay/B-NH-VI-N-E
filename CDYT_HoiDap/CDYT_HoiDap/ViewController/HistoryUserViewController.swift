@@ -44,13 +44,13 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
         if listBooking.count > 0 {
             cell.setDataHistory(entity: listBooking[indexPath.row])
             if listBooking[indexPath.row].bookType == 2 {
-                if listBooking[indexPath.row].status == 6 || listBooking[indexPath.row].status == 7 {
+                if listBooking[indexPath.row].status == 6 || listBooking[indexPath.row].status == 7  {
                     cell.isHidden = false
                 }else {
                     cell.isHidden = true
                 }
             }else {
-                if listBooking[indexPath.row].status == 4 {
+                if listBooking[indexPath.row].status == 4 || listBooking[indexPath.row].status == 3{
                     cell.isHidden = false
                 }else {
                     cell.isHidden = true
@@ -79,7 +79,7 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
                 return 0
             }
         }else {
-            if listBooking[indexPath.row].status == 4 {
+            if listBooking[indexPath.row].status == 4 || listBooking[indexPath.row].status == 3 {
                 return UITableViewAutomaticDimension
             }else {
                 return 0

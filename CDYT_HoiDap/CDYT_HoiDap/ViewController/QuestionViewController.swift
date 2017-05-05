@@ -443,23 +443,30 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
         
         
         let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            if picker == self.pickerViewCate {
                 if self.idCate != self.listAllDoctors[self.indexPickerViewCate].category.id {
                     self.idCate = self.listAllDoctors[self.indexPickerViewCate].category.id
                     self.nameCate = self.listAllDoctors[self.indexPickerViewCate].category.name
                     if self.isNotAssignedYet {
                         self.listNotAssignedYet[self.indexPathOfCell.row].cateGory.id = self.idCate
                         self.listNotAssignedYet[self.indexPathOfCell.row].cateGory.name = self.nameCate
-                        self.listNotAssignedYet[self.indexPathOfCell.row].assigneeEntity.id = self.idDoc
-                        self.listNotAssignedYet[self.indexPathOfCell.row].assigneeEntity.fullname = self.nameDoc
+                        self.nameCate = ""
+                        self.idCate = ""
                     }else if self.isAssigned {
                         self.listAssigned[self.indexPathOfCell.row].cateGory.id = self.idCate
                         self.listAssigned[self.indexPathOfCell.row].cateGory.name = self.nameCate
-                        self.listAssigned[self.indexPathOfCell.row].assigneeEntity.id = self.idDoc
-                        self.listAssigned[self.indexPathOfCell.row].assigneeEntity.fullname = self.nameDoc
                         self.listAssigned[self.indexPathOfCell.row].postEntity.isClassified = false
                     }
-                }
+                }else {
+                    if self.isNotAssignedYet {
+                        self.listNotAssignedYet[self.indexPathOfCell.row].cateGory.id = self.idCate
+                        self.listNotAssignedYet[self.indexPathOfCell.row].cateGory.name = self.nameCate
+                        self.nameCate = ""
+                        self.idCate = ""
+                    }else if self.isAssigned {
+                        self.listAssigned[self.indexPathOfCell.row].cateGory.id = self.idCate
+                        self.listAssigned[self.indexPathOfCell.row].cateGory.name = self.nameCate
+                        self.listAssigned[self.indexPathOfCell.row].postEntity.isClassified = false
+                    }
             }
             self.tbQuestion.beginUpdates()
             self.tbQuestion.reloadRows(at: [self.indexPathOfCell], with: .automatic)

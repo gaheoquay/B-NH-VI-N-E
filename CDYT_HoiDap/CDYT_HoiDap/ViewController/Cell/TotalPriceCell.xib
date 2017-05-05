@@ -19,30 +19,56 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbz-53-6Fb">
-                        <rect key="frame" x="8" y="8" width="304" height="13.5"/>
+                        <rect key="frame" x="8" y="8" width="192" height="13.5"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1A-8x-h83">
-                        <rect key="frame" x="8" y="29.5" width="304" height="13.5"/>
+                        <rect key="frame" x="8" y="29.5" width="192" height="13.5"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                         <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10.000.000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2XW-pQ-v7J">
+                        <rect key="frame" x="208" y="8" width="104" height="13.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="104" id="ShY-eI-1a4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                        <color key="textColor" red="0.4941176471" green="0.82745098039999998" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10.000.000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDe-Yw-IWL">
+                        <rect key="frame" x="208" y="29" width="104" height="13.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="104" id="Uju-AE-sLi"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                        <color key="textColor" red="0.4941176471" green="0.82745098039999998" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="m1A-8x-h83" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="0My-pL-hao"/>
-                    <constraint firstAttribute="trailing" secondItem="m1A-8x-h83" secondAttribute="trailing" constant="8" id="8OC-sn-93U"/>
+                    <constraint firstItem="2XW-pQ-v7J" firstAttribute="top" secondItem="sbz-53-6Fb" secondAttribute="top" id="1yi-4T-eKw"/>
+                    <constraint firstItem="sDe-Yw-IWL" firstAttribute="top" secondItem="2XW-pQ-v7J" secondAttribute="bottom" constant="8" id="2CW-JP-dCd"/>
+                    <constraint firstItem="2XW-pQ-v7J" firstAttribute="leading" secondItem="sbz-53-6Fb" secondAttribute="trailing" constant="8" id="FJI-qS-McD"/>
+                    <constraint firstItem="sDe-Yw-IWL" firstAttribute="trailing" secondItem="2XW-pQ-v7J" secondAttribute="trailing" id="GBX-sa-Dbz"/>
                     <constraint firstAttribute="bottom" secondItem="m1A-8x-h83" secondAttribute="bottom" constant="8" id="J6j-LF-ejy"/>
+                    <constraint firstAttribute="trailing" secondItem="2XW-pQ-v7J" secondAttribute="trailing" constant="8" id="JNV-P5-Nyg"/>
+                    <constraint firstItem="sDe-Yw-IWL" firstAttribute="leading" secondItem="2XW-pQ-v7J" secondAttribute="leading" id="Tft-P1-COx"/>
                     <constraint firstItem="m1A-8x-h83" firstAttribute="top" secondItem="sbz-53-6Fb" secondAttribute="bottom" constant="8" id="VLJ-gq-D4d"/>
+                    <constraint firstItem="sDe-Yw-IWL" firstAttribute="bottom" secondItem="m1A-8x-h83" secondAttribute="bottom" id="bT2-Kq-4q4"/>
+                    <constraint firstItem="m1A-8x-h83" firstAttribute="trailing" secondItem="sbz-53-6Fb" secondAttribute="trailing" id="eHW-t8-mYz"/>
                     <constraint firstItem="sbz-53-6Fb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="g2E-ch-j2j"/>
                     <constraint firstItem="sbz-53-6Fb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="hAH-BU-Oyi"/>
-                    <constraint firstAttribute="trailing" secondItem="sbz-53-6Fb" secondAttribute="trailing" constant="8" id="zuz-VQ-QxG"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="lbPrice" destination="2XW-pQ-v7J" id="Ww3-TB-Pfq"/>
                 <outlet property="lbSurChange" destination="m1A-8x-h83" id="89g-9A-3z7"/>
+                <outlet property="lbSurChanges" destination="sDe-Yw-IWL" id="xsF-qg-ENZ"/>
                 <outlet property="lbTotalPrice" destination="sbz-53-6Fb" id="Fef-MW-FmQ"/>
             </connections>
             <point key="canvasLocation" x="34" y="58"/>

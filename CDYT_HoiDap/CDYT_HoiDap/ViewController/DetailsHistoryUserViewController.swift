@@ -42,7 +42,7 @@ class DetailsHistoryUserViewController: UIViewController {
     
     
     var listBooking = BookingEntity()
-    var userResult = ResultUserEntity()
+    var userResult : ResultUserEntity?
     var date = ""
     var isCheckSelect = false
     var isCheckSeletc1 = false
@@ -123,12 +123,21 @@ class DetailsHistoryUserViewController: UIViewController {
                         let jsonData = result as! NSDictionary
                         self.userResult = ResultUserEntity.init(dictionary: jsonData as! [String : Any])
                     }
-                    self.contentDiseaseDiagnostic.text = self.userResult.diseaseDiagnostic_ID
-                    self.contentDianostic.text = self.userResult.firt_diagnostic
-                    self.contentMount.text = self.userResult.prognosis
-                    self.contentDeaseProgress.text = self.userResult.diseaseProgress
-                    self.contentDianosisDiffreent.text = self.userResult.other_DiseaseDiagnostic_ID
-                    self.contentAdvice.text = self.userResult.doctorAdvice_ID
+                    if self.userResult == nil {
+                        let alert = UIAlertController(title: "Thông báo", message: "Chưa có kết quả", preferredStyle: .alert)
+                        let actionCancel = UIAlertAction(title: "Đóng", style: .default, handler: { (UIAlertAction) in
+                            self.navigationController?.popViewController(animated: true)
+                        })
+                        alert.addAction(actionCancel)
+                        self.present(alert, animated: true, completion: nil)
+                    }else {
+                        self.contentDiseaseDiagnostic.text = self.userResult?.diseaseDiagnostic_ID
+                        self.contentDianostic.text = self.userResult?.firt_diagnostic
+                        self.contentMount.text = self.userResult?.prognosis
+                        self.contentDeaseProgress.text = self.userResult?.diseaseProgress
+                        self.contentDianosisDiffreent.text = self.userResult?.other_DiseaseDiagnostic_ID
+                        self.contentAdvice.text = self.userResult?.doctorAdvice_ID
+                    }
                 }
                 else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")

@@ -97,21 +97,21 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
         
         if booKing.status == 3 || booKing.status == 4 || booKing.status == 5 {
             for item in listServices {
-                let heightCell = item.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.size.width - 32, font: .boldSystemFont(ofSize: 11)) + 34
+                let heightCell = item.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.size.width - 132, font: .boldSystemFont(ofSize: 11)) + 16
                 heightSer = heightSer + heightCell
             }
             for item in listPack {
-                let heightCell = item.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.size.width - 32, font: .boldSystemFont(ofSize: 11)) + 34
+                let heightCell = item.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.size.width - 132, font: .boldSystemFont(ofSize: 11)) + 16
                 heightPac = heightPac + heightCell
             }
             heightTbService.constant = heightPac + heightSer
         }else {
             for item in listServices {
-                let heightCell = item.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.size.width - 32, font: .boldSystemFont(ofSize: 11)) + 34
+                let heightCell = item.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.size.width - 132, font: .boldSystemFont(ofSize: 11)) + 16
                 heightSer = heightSer + heightCell
             }
             for item in listPack {
-                let heightCell = item.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.size.width - 32, font: .boldSystemFont(ofSize: 11)) + 34
+                let heightCell = item.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.size.width - 132, font: .boldSystemFont(ofSize: 11)) + 16
                 heightPac = heightPac + heightCell
             }
             heightTbService.constant = heightPac + heightSer + 90
@@ -130,7 +130,7 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
         myAttrString.append(NSAttributedString(string: "\(String().replaceNSnumber(doublePrice: listDetailBooKing.totalMoney))đ", attributes: fontWithColor))
         lbTotalPrice.attributedText = myAttrString
         
-        let myAttrStringSur = NSMutableAttributedString(string: "Đã bao gồm phụ thu")
+        let myAttrStringSur = NSMutableAttributedString(string: "Đã bao gồm phụ thu: ")
         myAttrStringSur.append(NSAttributedString(string: "\(String().replaceNSnumber(doublePrice: listDetailBooKing.money))đ", attributes: fontWithColor))
         lbSurCharge.attributedText = myAttrStringSur
         view.layoutIfNeeded()
@@ -221,8 +221,10 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
                 }
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TotalPriceCell") as! TotalPriceCell
-                cell.lbTotalPrice.text = "Tổng thu: \(String().replaceNSnumber(doublePrice: (pricePack + priceSer + surChange)))đ"
-                cell.lbSurChange.text = "Đã bao gồm phụ thu"
+                cell.lbTotalPrice.text = "Tổng thu: "
+                cell.lbPrice.text = "\(String().replaceNSnumber(doublePrice: (pricePack + priceSer + surChange)))đ"
+                cell.lbSurChange.text = "Đã bao gồm phụ thu:"
+                cell.lbSurChanges.text = "100.000đ"
                 return cell
             }
             return cell

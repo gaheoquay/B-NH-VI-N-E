@@ -38,7 +38,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     var questionID = ""
     var commentEntity = CommentEntity()
     
-  var notification : ListNotificationEntity!
+  var notification : NotificationNewEntity!
   var delegate:QuestionDetailViewControllerDelegate?
   var notificationId = ""
     override func viewDidLoad() {
@@ -52,7 +52,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
             setupMarkerForQuestion()
             getListCommentByPostID(postId: feedObj.postEntity.id)
         }
-        if (notification != nil && !(notification.notificaiton?.isRead)!) || !notificationId.isEmpty {
+        if (notification != nil && !(notification.isRead)) || !notificationId.isEmpty {
             setReadNotification()
         }
         configInputBar()
@@ -213,7 +213,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
   func setReadNotification(){
     Until.showLoading()
     if notificationId == "" {
-      notificationId = notification!.notificaiton!.id
+      notificationId = notification.id
     }
     let getPostParam : [String : Any] = [
       "Auth": Until.getAuthKey(),
@@ -230,7 +230,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
                 let realm = try! Realm()
                 try! realm.write {
                   if self.notification != nil {
-                    self.notification.notificaiton?.isRead = true
+                    self.notification.isRead = true
                   }
                     self.delegate?.reloadTable()
                 }
@@ -836,7 +836,19 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
       alert.addAction(actionCancel)
       self.present(alert, animated: true, completion: nil)
     }else{
-      requestMarkOrUnMarkSolution(mainComment: mainComment)
+        if mainComment.comment.isSolution == true {
+            let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có muốn bỏ chọn câu trả lời này làm giải pháp?", preferredStyle: UIAlertControllerStyle.alert)
+            let actionOK = UIAlertAction.init(title: "Đồng ý", style: UIAlertActionStyle.default, handler: { (alert) in
+                solution?.comment.isSolution = false
+                self.requestMarkOrUnMarkSolution(mainComment: mainComment)
+            })
+            let actionCancel = UIAlertAction.init(title: "Hủy", style: UIAlertActionStyle.cancel, handler: nil)
+            alert.addAction(actionOK)
+            alert.addAction(actionCancel)
+            self.present(alert, animated: true, completion: nil)
+        }else {
+            requestMarkOrUnMarkSolution(mainComment: mainComment)
+        }
     }
   }
   func requestMarkOrUnMarkSolution(mainComment: MainCommentEntity){

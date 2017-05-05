@@ -39,7 +39,7 @@ class ForgotPasswordViewController: BaseViewController {
             UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Email không được để trống", cancelBtnTitle: "Đóng")
         }else if !Until.isValidEmail(email: emailString!){
             txtEmail.becomeFirstResponder()
-            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Sai định dạng Email", cancelBtnTitle: "Đóng")
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không tìm thấy tài khoản với email bạn nhập!", cancelBtnTitle: "Đóng")
         }else {
             requestForgotPassword()
         }
@@ -56,7 +56,7 @@ class ForgotPasswordViewController: BaseViewController {
                 if status == 200{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Mật khẩu mới của bạn đã được gửi về email đăng ký. Vui lòng kiểm tra lại", cancelBtnTitle: "Đóng")
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Email không đúng!", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không tìm thấy tài khoản với email bạn nhập!", cancelBtnTitle: "Đóng")
                 }
                 Until.hideLoading()
             }
