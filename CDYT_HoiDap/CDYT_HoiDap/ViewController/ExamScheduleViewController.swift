@@ -54,7 +54,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         cell.userEntity = listallUSer[indexPath.row]
         if listallUSer[indexPath.row].booking.bookType == 2 {
             if listallUSer[indexPath.row].booking.status == 7 ||  listallUSer[indexPath.row].booking.status == 6 {
-                cell.isHidden = false
+                cell.isHidden = true
             }
         }else {
             if listallUSer[indexPath.row].booking.status == 4 {
@@ -72,7 +72,7 @@ class ExamScheduleViewController: UIViewController,UITableViewDataSource,UITable
         let stringCurentDate = String().convertDatetoString(date: curentDate, dateFormat: "dd/MM/YYYY")
         if listallUSer.count > 0 {
         let stringBookingDate = String().convertTimeStampWithDateFormat(timeStamp: listallUSer[indexPath.row].booking.bookingDate / 1000, dateFormat: "dd/MM/YYYY")
-        if (listallUSer[indexPath.row].booking.status == 3 || listallUSer[indexPath.row].booking.status == 2 || (listallUSer[indexPath.row].booking.status == 0) && ((stringBookingDate > stringCurentDate)) || (stringBookingDate < stringCurentDate) || listallUSer[indexPath.row].booking.bookType == 2) {
+        if (listallUSer[indexPath.row].booking.status == 3 || listallUSer[indexPath.row].booking.status == 4 || listallUSer[indexPath.row].booking.status == 2 || (listallUSer[indexPath.row].booking.status == 0) && ((stringBookingDate > stringCurentDate)) || (stringBookingDate < stringCurentDate) || listallUSer[indexPath.row].booking.bookType == 2) {
             return 152
         }else {
             return 242

@@ -67,9 +67,9 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
                 }
                 heightTb = b
             }
-            heightTbAnalysis.constant = heightTb + CGFloat(listDetailBooKing.listMedicalGroups.count * 30)
+            heightTbAnalysis.constant = heightTb + CGFloat(listDetailBooKing.listMedicalGroups.count * 30) + 10
             viewTop.isHidden = false
-            heightViewTop.constant = 169 + heightTbAnalysis.constant
+            heightViewTop.constant = 169 + heightTbAnalysis.constant + 10
             viewBill.isHidden = true
             lbTotalPrice.isHidden = true
             lbSurCharge.isHidden = true
@@ -82,9 +82,9 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
                 }
                 heightTb = b
             }
-            heightTbAnalysis.constant = heightTb + CGFloat(listDetailBooKing.listMedicalGroups.count * 30)
+            heightTbAnalysis.constant = heightTb + CGFloat(listDetailBooKing.listMedicalGroups.count * 30) + 10
             viewTop.isHidden = false
-            heightViewTop.constant = 169 + 96 + heightTbAnalysis.constant
+            heightViewTop.constant = 169 + 96 + heightTbAnalysis.constant + 10
             viewBill.isHidden = false
             lbTotalPrice.isHidden = false
             lbSurCharge.isHidden = false
@@ -224,7 +224,7 @@ class DetaiAnalysisViewController: UIViewController,UITableViewDelegate,UITableV
                 cell.lbTotalPrice.text = "Tổng thu: "
                 cell.lbPrice.text = "\(String().replaceNSnumber(doublePrice: (pricePack + priceSer + surChange)))đ"
                 cell.lbSurChange.text = "Đã bao gồm phụ thu:"
-                cell.lbSurChanges.text = "100.000đ"
+                cell.lbSurChanges.text = "\(String().replaceNSnumber(doublePrice: surChange))đ"
                 return cell
             }
             return cell
