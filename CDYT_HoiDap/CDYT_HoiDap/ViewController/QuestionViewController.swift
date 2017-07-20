@@ -163,146 +163,180 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     //  MARK: request data
     //  danh sách câu hỏi chưa được BS trả lời và đã được assign
     func getQuestionsUncommentedByAnyDoctorAndAssigned(){
-        let hotParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "Page": pageFeed,
-            "Size": 10,
-            "RequestedUserId" : Until.getCurrentId()
-        ]
-        Alamofire.request(GET_QUESTIONS_UNCOMMENTED_BY_ANY_DOCTOR_AND_ASSIGNED, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! [NSDictionary]
-                        self.listAssigned.removeAll()
-                        for item in jsonData {
-                            let entity = FeedsEntity.init(dictionary: item)
-                            self.listAssigned.append(entity)
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let hotParam : [String : Any] = [
+                "Page": pageFeed,
+                "Size": 10,
+                "RequestedUserId" : Until.getCurrentId()
+            ]
+            Alamofire.request(GET_QUESTIONS_UNCOMMENTED_BY_ANY_DOCTOR_AND_ASSIGNED, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! [NSDictionary]
+                            self.listAssigned.removeAll()
+                            for item in jsonData {
+                                let entity = FeedsEntity.init(dictionary: item)
+                                self.listAssigned.append(entity)
+                            }
                         }
+                        self.tbQuestion.reloadData()
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
-                    self.tbQuestion.reloadData()
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                Until.hideLoading()
+                self.tbQuestion.pullToRefreshView?.stopAnimating()
+                self.tbQuestion.infiniteScrollingView?.stopAnimating()
             }
-            Until.hideLoading()
-            self.tbQuestion.pullToRefreshView?.stopAnimating()
-            self.tbQuestion.infiniteScrollingView?.stopAnimating()
+        } catch let error as NSError {
+            print(error)
         }
-        
     }
     //  danh sách câu hỏi chưa được BS trả lời và chưa được assign
     func getQuestionsUncommentedByAnyDoctorAndNotAssignedYet(){
-        let hotParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "Page": pageFeed,
-            "Size": 10,
-            "RequestedUserId" : Until.getCurrentId()
-        ]
-        Until.showLoading()
-        Alamofire.request(GET_QUESTIONS_UNCOMMENTED_BY_ANY_DOCTOR_AND_NOT_ASSIGNED_YET, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! [NSDictionary]
-                        
-                        for item in jsonData {
-                            let entity = FeedsEntity.init(dictionary: item)
-                            self.listNotAssignedYet.append(entity)
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let hotParam : [String : Any] = [
+                "Page": pageFeed,
+                "Size": 10,
+                "RequestedUserId" : Until.getCurrentId()
+            ]
+            Until.showLoading()
+            Alamofire.request(GET_QUESTIONS_UNCOMMENTED_BY_ANY_DOCTOR_AND_NOT_ASSIGNED_YET, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! [NSDictionary]
+                            
+                            for item in jsonData {
+                                let entity = FeedsEntity.init(dictionary: item)
+                                self.listNotAssignedYet.append(entity)
+                            }
                         }
+                        self.tbQuestion.reloadData()
+                        Until.hideLoading()
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
-                    self.tbQuestion.reloadData()
-                    Until.hideLoading()
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                Until.hideLoading()
+                self.tbQuestion.pullToRefreshView?.stopAnimating()
+                self.tbQuestion.infiniteScrollingView?.stopAnimating()
             }
-            Until.hideLoading()
-            self.tbQuestion.pullToRefreshView?.stopAnimating()
-            self.tbQuestion.infiniteScrollingView?.stopAnimating()
+        } catch let error as NSError {
+            print(error)
         }
-        
     }
     func getFeeds_UnAnswerForUser(){
-        let hotParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "Page": pageFeed,
-            "Size": 10,
-            "RequestedUserId" : Until.getCurrentId()
-        ]
-        Alamofire.request(GET_UNANSWER, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! [NSDictionary]
-                        
-                        for item in jsonData {
-                            let entity = FeedsEntity.init(dictionary: item)
-                            self.listFedds.append(entity)
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let hotParam : [String : Any] = [
+                "Page": pageFeed,
+                "Size": 10,
+                "RequestedUserId" : Until.getCurrentId()
+            ]
+            Alamofire.request(GET_UNANSWER, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! [NSDictionary]
+                            
+                            for item in jsonData {
+                                let entity = FeedsEntity.init(dictionary: item)
+                                self.listFedds.append(entity)
+                            }
                         }
+                        self.tbQuestion.reloadData()
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
-                    self.tbQuestion.reloadData()
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                Until.hideLoading()
+                self.tbQuestion.pullToRefreshView?.stopAnimating()
+                self.tbQuestion.infiniteScrollingView?.stopAnimating()
             }
-            Until.hideLoading()
-            self.tbQuestion.pullToRefreshView?.stopAnimating()
-            self.tbQuestion.infiniteScrollingView?.stopAnimating()
+
+        } catch let error as NSError {
+            print(error)
         }
         
     }
     func requestApproval(){
-        var entity : FeedsEntity!
-        if isNotAssignedYet {
-            entity = listNotAssignedYet[indexPathOfCell.row]
-        }else{
-            entity = listAssigned[indexPathOfCell.row]
-        }
-        
-        let post : [String : Any] = [
-            "Id" : entity.postEntity.id,
-            "Title" : entity.postEntity.title,
-            "Content" : entity.postEntity.content,
-            "ImageUrls" : entity.postEntity.imageUrls,
-            "ThumbnailImageUrls" : entity.postEntity.thumbnailImageUrls,
-            "Status" : 0,
-            "Rating" : 0,
-            "UpdatedDate" : 0,
-            "CategoryId": idCate,
-            "IsPrivate": entity.postEntity.isPrivate,
-            "IsClassified": false,
-            "CreatedDate" : 0
-        ]
-        
-        let questionParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "RequestedUserId": Until.getCurrentId(),
-            "Post": post,
-            "AssignToUserId": idDoc
-        ]
-        Alamofire.request(GET_LASTED_POST, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    //          let entity = self.listNotAssignedYet[self.indexPathOfCell.row]
-                    entity.postEntity.isClassified = true
-                    if self.isNotAssignedYet {
-                        self.listNotAssignedYet.remove(at: self.indexPathOfCell.row)
-                    }
-                    self.requestListDoctor()
-                    self.tbQuestion.reloadData()
-                }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-                }
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            var entity : FeedsEntity!
+            if isNotAssignedYet {
+                entity = listNotAssignedYet[indexPathOfCell.row]
             }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                entity = listAssigned[indexPathOfCell.row]
             }
+            
+            let post : [String : Any] = [
+                "Id" : entity.postEntity.id,
+                "Title" : entity.postEntity.title,
+                "Content" : entity.postEntity.content,
+                "ImageUrls" : entity.postEntity.imageUrls,
+                "ThumbnailImageUrls" : entity.postEntity.thumbnailImageUrls,
+                "Status" : 0,
+                "Rating" : 0,
+                "UpdatedDate" : 0,
+                "CategoryId": idCate,
+                "IsPrivate": entity.postEntity.isPrivate,
+                "IsClassified": false,
+                "CreatedDate" : 0
+            ]
+            
+            let questionParam : [String : Any] = [
+                "RequestedUserId": Until.getCurrentId(),
+                "Post": post,
+                "AssignToUserId": idDoc
+            ]
+            Alamofire.request(GET_LASTED_POST, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        entity.postEntity.isClassified = true
+                        if self.isNotAssignedYet {
+                            self.listNotAssignedYet.remove(at: self.indexPathOfCell.row)
+                        }
+                        self.requestListDoctor()
+                        self.tbQuestion.reloadData()
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }
+        } catch let error as NSError {
+            print(error)
         }
     }
     
@@ -355,20 +389,17 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    func gotoListQuestionByTag(hotTagId: String) {
+    func gotoListQuestionByTag(hotTag: TagEntity) {
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
-        viewController.hotTagId = hotTagId
+        viewController.hotTag = hotTag
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
-        //    if user.id == Until.getCurrentId() {
-        //    }else{
         let storyboard = UIStoryboard.init(name: "User", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController
         viewController.user = user
         self.navigationController?.pushViewController(viewController, animated: true)
-        //    }
     }
     
     func gotoUserProfileFromQuestionDoctor(doctor: AuthorEntity) {
@@ -564,23 +595,30 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     }
     
     func requestListDoctor(){
-        listAllDoctors.removeAll()
-        let hotParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
             ]
-        Alamofire.request(GET_LIST_DOCTOR, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! [NSDictionary]
-                        for item in jsonData {
-                            let entity = ListDoctorEntity.init(dictionary: item)
-                            self.listAllDoctors.append(entity)
+            listAllDoctors.removeAll()
+            Alamofire.request(GET_LIST_DOCTOR, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! [NSDictionary]
+                            for item in jsonData {
+                                let entity = ListDoctorEntity.init(dictionary: item)
+                                self.listAllDoctors.append(entity)
+                            }
+                            
                         }
-                        
                     }
                 }
             }
+        } catch let error as NSError {
+            print(error)
         }
     }
 

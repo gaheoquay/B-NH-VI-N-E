@@ -9,89 +9,89 @@
 import UIKit
 
 class UserViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, QuestionTableViewCellDelegate, InsertAccountCellDelegate, DoctorTableViewCellDelegate,RegisterViewControllerDelegate,AdminUpdateProfileViewControllerDelegate {
-  
-  @IBOutlet weak var viewFollowingQuestion: UIView!
-  @IBOutlet weak var layoutWidthViewFollowingQuestion: NSLayoutConstraint!
-  
-  @IBOutlet weak var viewQuestionWaitingToAnwser: UIView!
-  @IBOutlet weak var viewCreatedQuestion: UIView!
+    
+    @IBOutlet weak var viewFollowingQuestion: UIView!
+    @IBOutlet weak var layoutWidthViewFollowingQuestion: NSLayoutConstraint!
+    
+    @IBOutlet weak var viewQuestionWaitingToAnwser: UIView!
+    @IBOutlet weak var viewCreatedQuestion: UIView!
     @IBOutlet weak var notiCountLb: UILabel!
-  @IBOutlet weak var viewUnLogin: UIView!
-  @IBOutlet weak var avaImg: UIImageView!
-  @IBOutlet weak var nicknameLbl: UILabel!
-  @IBOutlet weak var questionTableView: UITableView!
+    @IBOutlet weak var viewUnLogin: UIView!
+    @IBOutlet weak var avaImg: UIImageView!
+    @IBOutlet weak var nicknameLbl: UILabel!
+    @IBOutlet weak var questionTableView: UITableView!
     @IBOutlet weak var messageCountLb: UILabel!
     @IBOutlet weak var lbPage1: UILabel!
     @IBOutlet weak var lbPage2: UILabel!
     
     
-  var pageMyFeed = 1
-  var listMyFeed = [FeedsEntity]()
-  var isMyFeed = false
-  var pageFollowing = 1
-  var listQuestionFollowing = [FeedsEntity]()
-  var isFollowing = true
-  var pageWaiting = 1
-  var listQuestionWaitingToAnwser = [FeedsEntity]()
-  var isWaiting = false
-  var groupChannelListViewController: GroupChannelListViewController?
-  var sectionCate = 0
-  var indexPatchDoctor = IndexPath()
-  var listAdmin = [ListAdminEntity]()
+    var pageMyFeed = 1
+    var listMyFeed = [FeedsEntity]()
+    var isMyFeed = false
+    var pageFollowing = 1
+    var listQuestionFollowing = [FeedsEntity]()
+    var isFollowing = true
+    var pageWaiting = 1
+    var listQuestionWaitingToAnwser = [FeedsEntity]()
+    var isWaiting = false
+    var groupChannelListViewController: GroupChannelListViewController?
+    var sectionCate = 0
+    var indexPatchDoctor = IndexPath()
+    var listAdmin = [ListAdminEntity]()
     
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    getListAdmin()
-    registerNotification()
-    initTable()
-    setUpUI()
-    setupUserInfo()
-    Until.showLoading()
-    getMyFeeds()
-    getFollowingFeed()
-    getWaitingFeed()
-    if Until.getCurrentId() != "" {
-        getListNotification()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        getListAdmin()
+        registerNotification()
+        initTable()
+        setUpUI()
+        setupUserInfo()
+        Until.showLoading()
+        getMyFeeds()
+        getFollowingFeed()
+        getWaitingFeed()
+        if Until.getCurrentId() != "" {
+            getListNotification()
+        }
+        
     }
     
-  }
-   
     override func viewDidAppear(_ animated: Bool) {
         
         Until.sendAndSetTracer(value: MY_PAGE)
     }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    let realm = try! Realm()
-    let users = realm.objects(UserEntity.self)
-    if users.first?.role == 3 {
-        questionTableView.estimatedRowHeight = 80
-        questionTableView.rowHeight = 80
-        questionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-    }else {
-        questionTableView.estimatedRowHeight = 500
-        questionTableView.rowHeight = UITableViewAutomaticDimension
-        questionTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let realm = try! Realm()
+        let users = realm.objects(UserEntity.self)
+        if users.first?.role == 3 {
+            questionTableView.estimatedRowHeight = 80
+            questionTableView.rowHeight = 80
+            questionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+        }else {
+            questionTableView.estimatedRowHeight = 500
+            questionTableView.rowHeight = UITableViewAutomaticDimension
+            questionTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        }
+        
+        if users.count > 0 {
+            viewUnLogin.isHidden = true
+        }else{
+            viewUnLogin.isHidden = false
+        }
+        notiCountLb.isHidden = true
+        messageCountLb.isHidden = true
+        Until.getBagValue()
+        
+        getNotificationCount()
     }
-
-    if users.count > 0 {
-      viewUnLogin.isHidden = true
-    }else{
-      viewUnLogin.isHidden = false
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
-    notiCountLb.isHidden = true
-    messageCountLb.isHidden = true
-    Until.getBagValue()
-
-    getNotificationCount()
-  }
-  
-  deinit {
-    NotificationCenter.default.removeObserver(self)
-  }
-  
+    
     func registerNotification(){
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadView), name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.setupUserInfo), name: NSNotification.Name(rawValue: UPDATE_USERINFO), object: nil)
@@ -99,141 +99,141 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
         NotificationCenter.default.addObserver(self, selector: #selector(updateMessageCountLabel), name: Notification.Name.init(UPDATE_BADGE), object: nil)
     }
     
-  func reloadView(){
-    initTable()
-    setUpUI()
-    setupUserInfo()
-    isMyFeed = false
-    isFollowing = true
-    isWaiting = false
-    pageMyFeed = 1
-    pageFollowing = 1
-    pageWaiting = 1
-    listMyFeed.removeAll()
-    listQuestionWaitingToAnwser.removeAll()
-    listQuestionFollowing.removeAll()
-    getMyFeeds()
-    getWaitingFeed()
-    getFollowingFeed()
-    getListAdmin()
-  }
-  func setUpUI(){
-    avaImg.layer.cornerRadius = 10
-    self.navigationController?.isNavigationBarHidden = true
-    notiCountLb.layer.cornerRadius = 5
-    notiCountLb.layer.masksToBounds = true
-    setBackgroundView(view: viewFollowingQuestion, check: isFollowing)
-    setBackgroundView(view: viewCreatedQuestion, check: isMyFeed)
-    setBackgroundView(view: viewQuestionWaitingToAnwser, check: isWaiting)
-    questionTableView.reloadData()
-    
-    messageCountLb.layer.cornerRadius = 5
-    messageCountLb.layer.masksToBounds = true
-
-  }
-    
-  func setBackgroundView(view:UIView,check:Bool){
-    if check {
-      view.backgroundColor = UIColor.init(netHex: 0xECEDEF)
-    }else{
-      view.backgroundColor = UIColor.white
+    func reloadView(){
+        initTable()
+        setUpUI()
+        setupUserInfo()
+        isMyFeed = false
+        isFollowing = true
+        isWaiting = false
+        pageMyFeed = 1
+        pageFollowing = 1
+        pageWaiting = 1
+        listMyFeed.removeAll()
+        listQuestionWaitingToAnwser.removeAll()
+        listQuestionFollowing.removeAll()
+        getMyFeeds()
+        getWaitingFeed()
+        getFollowingFeed()
+        getListAdmin()
     }
-  }
-  @IBAction func selectFollowingQuestion(_ sender: Any) {
-    isFollowing = true
-    isMyFeed = false
-    isWaiting = false
-    setUpUI()
-    
-  }
-  @IBAction func selectMyFeed(_ sender: Any) {
-    isFollowing = false
-    isMyFeed = true
-    isWaiting = false
-    setUpUI()
-  }
-  @IBAction func selectWaitingQuestion(_ sender: Any) {
-    isFollowing = false
-    isMyFeed = false
-    isWaiting = true
-    setUpUI()
-  }
-  
-  func setupUserInfo(){
-    let realm = try! Realm()
-    let users = realm.objects(UserEntity.self)
-    var userEntity : UserEntity!
-    if users.count > 0 {
-      userEntity = users.first!
+    func setUpUI(){
+        avaImg.layer.cornerRadius = 10
+        self.navigationController?.isNavigationBarHidden = true
+        notiCountLb.layer.cornerRadius = 5
+        notiCountLb.layer.masksToBounds = true
+        setBackgroundView(view: viewFollowingQuestion, check: isFollowing)
+        setBackgroundView(view: viewCreatedQuestion, check: isMyFeed)
+        setBackgroundView(view: viewQuestionWaitingToAnwser, check: isWaiting)
+        questionTableView.reloadData()
+        
+        messageCountLb.layer.cornerRadius = 5
+        messageCountLb.layer.masksToBounds = true
+        
     }
-    if userEntity != nil {
-      avaImg.sd_setImage(with: URL.init(string: userEntity.avatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut"))
-      nicknameLbl.text = userEntity.nickname
-      if userEntity.role == 1 {
-        lbPage1.text = "Câu hỏi đang theo dõi"
-        lbPage2.text = "Câu hỏi đã tạo"
-        layoutWidthViewFollowingQuestion.constant = UIScreen.main.bounds.width/3
-      }else{
-        layoutWidthViewFollowingQuestion.constant = UIScreen.main.bounds.width/2
-        if userEntity.role == 3 {
-            lbPage1.text = "Bác sĩ"
-            lbPage2.text = "Admin"
-        }else {
-            lbPage1.text = "Câu hỏi đang theo dõi"
-            lbPage2.text = "Câu hỏi đã tạo"
+    
+    func setBackgroundView(view:UIView,check:Bool){
+        if check {
+            view.backgroundColor = UIColor.init(netHex: 0xECEDEF)
+        }else{
+            view.backgroundColor = UIColor.white
         }
-      }
-      self.view.layoutIfNeeded()
     }
-  }
-  func initTable(){
+    @IBAction func selectFollowingQuestion(_ sender: Any) {
+        isFollowing = true
+        isMyFeed = false
+        isWaiting = false
+        setUpUI()
+        
+    }
+    @IBAction func selectMyFeed(_ sender: Any) {
+        isFollowing = false
+        isMyFeed = true
+        isWaiting = false
+        setUpUI()
+    }
+    @IBAction func selectWaitingQuestion(_ sender: Any) {
+        isFollowing = false
+        isMyFeed = false
+        isWaiting = true
+        setUpUI()
+    }
     
-
-    questionTableView.delegate = self
-    questionTableView.dataSource = self
-    questionTableView.register(UINib.init(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
-    questionTableView.register(UINib.init(nibName: "RecentFeedTableViewCell", bundle: nil), forCellReuseIdentifier: "RecentFeedTableViewCell")
-    questionTableView.register(UINib.init(nibName: "DoctorTableViewCell", bundle: nil), forCellReuseIdentifier: "DoctorTableViewCell")
-    questionTableView.register(UINib.init(nibName: "InsertAccountCell", bundle: nil), forCellReuseIdentifier: "InsertAccountCell")
-    questionTableView.addPullToRefreshHandler {
-      DispatchQueue.main.async {
-        self.reloadData()
-      }
+    func setupUserInfo(){
+        let realm = try! Realm()
+        let users = realm.objects(UserEntity.self)
+        var userEntity : UserEntity!
+        if users.count > 0 {
+            userEntity = users.first!
+        }
+        if userEntity != nil {
+            avaImg.sd_setImage(with: URL.init(string: userEntity.avatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut"))
+            nicknameLbl.text = userEntity.nickname
+            if userEntity.role == 1 {
+                lbPage1.text = "Câu hỏi đang theo dõi"
+                lbPage2.text = "Câu hỏi đã tạo"
+                layoutWidthViewFollowingQuestion.constant = UIScreen.main.bounds.width/3
+            }else{
+                layoutWidthViewFollowingQuestion.constant = UIScreen.main.bounds.width/2
+                if userEntity.role == 3 {
+                    lbPage1.text = "Bác sĩ"
+                    lbPage2.text = "Admin"
+                }else {
+                    lbPage1.text = "Câu hỏi đang theo dõi"
+                    lbPage2.text = "Câu hỏi đã tạo"
+                }
+            }
+            self.view.layoutIfNeeded()
+        }
     }
-    questionTableView.addInfiniteScrollingWithHandler {
-      DispatchQueue.main.async {
-        self.loadMore()
-      }
+    func initTable(){
+        
+        
+        questionTableView.delegate = self
+        questionTableView.dataSource = self
+        questionTableView.register(UINib.init(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
+        questionTableView.register(UINib.init(nibName: "RecentFeedTableViewCell", bundle: nil), forCellReuseIdentifier: "RecentFeedTableViewCell")
+        questionTableView.register(UINib.init(nibName: "DoctorTableViewCell", bundle: nil), forCellReuseIdentifier: "DoctorTableViewCell")
+        questionTableView.register(UINib.init(nibName: "InsertAccountCell", bundle: nil), forCellReuseIdentifier: "InsertAccountCell")
+        questionTableView.addPullToRefreshHandler {
+            DispatchQueue.main.async {
+                self.reloadData()
+            }
+        }
+        questionTableView.addInfiniteScrollingWithHandler {
+            DispatchQueue.main.async {
+                self.loadMore()
+            }
+        }
     }
-  }
-  
-  func reloadData(){
-    if isMyFeed {
-      pageMyFeed = 1
-      listMyFeed.removeAll()
-      getMyFeeds()
-    }else if isFollowing{
-      pageFollowing = 1
-      listQuestionFollowing.removeAll()
-      getFollowingFeed()
-    }else{
-      pageWaiting = 1
-      listQuestionWaitingToAnwser.removeAll()
-      getWaitingFeed()
+    
+    func reloadData(){
+        if isMyFeed {
+            pageMyFeed = 1
+            listMyFeed.removeAll()
+            getMyFeeds()
+        }else if isFollowing{
+            pageFollowing = 1
+            listQuestionFollowing.removeAll()
+            getFollowingFeed()
+        }else{
+            pageWaiting = 1
+            listQuestionWaitingToAnwser.removeAll()
+            getWaitingFeed()
+        }
     }
-  }
-  func loadMore(){
-    if isMyFeed {
-      pageMyFeed += 1
-      getMyFeeds()
-    }else if isFollowing{
-      pageFollowing += 1
-      getFollowingFeed()
-    }else{
-      pageWaiting += 1
-      getWaitingFeed()
+    func loadMore(){
+        if isMyFeed {
+            pageMyFeed += 1
+            getMyFeeds()
+        }else if isFollowing{
+            pageFollowing += 1
+            getFollowingFeed()
+        }else{
+            pageWaiting += 1
+            getWaitingFeed()
+        }
     }
-  }
     
     func updateMessageCountLabel(){
         if unreadMessageCount != 0 {
@@ -246,202 +246,243 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     }
     
     func getListNotification(){
-        
-        let hotParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "Page": 1,
-            "Size": 20,
-            "RequestedUserId" : Until.getCurrentId()
-        ]
-      
-        Alamofire.request(GET_LIST_NOTIFICATION, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! [NSDictionary]
-                        listNotification.removeAll()
-                        for item in jsonData {
-                            let entity = ListNotificationEntity.initWithDict(dictionary: item)
-                            listNotification.append(entity)
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let hotParam : [String : Any] = [
+                "Page": 1,
+                "Size": 20,
+                "RequestedUserId" : Until.getCurrentId()
+            ]
+            
+            Alamofire.request(GET_LIST_NOTIFICATION, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! [NSDictionary]
+                            listNotification.removeAll()
+                            for item in jsonData {
+                                let entity = ListNotificationEntity.initWithDict(dictionary: item)
+                                listNotification.append(entity)
+                            }
                         }
                     }
                 }
             }
+
+        } catch let error as NSError {
+            print(error)
         }
     }
     
     
     func getNotificationCount(){
-        let param : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "RequestedUserId": Until.getCurrentId()
-        ]
-        
-        Alamofire.request(GET_UNREAD_NOTIFICATION, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! NSDictionary
-                        notificationCount = jsonData["Count"] as! Int
-                        if notificationCount != 0 {
-                            self.notiCountLb.text = " \(notificationCount) "
-                            self.notiCountLb.isHidden = false
-                        }else{
-                            self.notiCountLb.text = ""
-                            self.notiCountLb.isHidden = true
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let param : [String : Any] = [
+                "RequestedUserId": Until.getCurrentId()
+            ]
+            
+            Alamofire.request(GET_UNREAD_NOTIFICATION, method: .post, parameters: param, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! NSDictionary
+                            notificationCount = jsonData["Count"] as! Int
+                            if notificationCount != 0 {
+                                self.notiCountLb.text = " \(notificationCount) "
+                                self.notiCountLb.isHidden = false
+                            }else{
+                                self.notiCountLb.text = ""
+                                self.notiCountLb.isHidden = true
+                            }
+                            
                         }
-                        
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không thể lấy được số lượng thông báo. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không thể lấy được số lượng thông báo. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
             }
+        } catch let error as NSError {
+            print(error)
         }
     }
     
     
-  func getMyFeeds(){
-    
-    let hotParam : [String : Any] = [
-      "Auth": Until.getAuthKey(),
-      "Page": pageMyFeed,
-      "Size": 10,
-      "UserId": Until.getCurrentId(),
-      "RequestedUserId" : Until.getCurrentId()
-    ]
-    
-    //    Until.showLoading()
-    Alamofire.request(GET_QUESTION_BY_ID, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-      if let status = response.response?.statusCode {
-        if status == 200{
-          if let result = response.result.value {
-            let jsonData = result as! [NSDictionary]
+    func getMyFeeds(){
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let hotParam : [String : Any] = [
+                "Auth": Until.getAuthKey(),
+                "Page": pageMyFeed,
+                "Size": 10,
+                "UserId": Until.getCurrentId(),
+                "RequestedUserId" : Until.getCurrentId()
+            ]
             
-            for item in jsonData {
-              let entity = FeedsEntity.init(dictionary: item)
-              self.listMyFeed.append(entity)
+            Alamofire.request(GET_QUESTION_BY_ID, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! [NSDictionary]
+                            
+                            for item in jsonData {
+                                let entity = FeedsEntity.init(dictionary: item)
+                                self.listMyFeed.append(entity)
+                            }
+                            self.questionTableView.reloadData()
+                        }
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+                Until.hideLoading()
+                self.questionTableView.pullToRefreshView?.stopAnimating()
+                self.questionTableView.infiniteScrollingView?.stopAnimating()
             }
-            
-            self.questionTableView.reloadData()
-            
-          }
-        }else{
-//          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        } catch let error as NSError {
+            print(error)
         }
-      }else{
-        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-      }
-      Until.hideLoading()
-      self.questionTableView.pullToRefreshView?.stopAnimating()
-      self.questionTableView.infiniteScrollingView?.stopAnimating()
     }
     
-  }
-    
-  func getFollowingFeed(){
-    
-    let hotParam : [String : Any] = [
-      "Auth": Until.getAuthKey(),
-      "Page": pageFollowing,
-      "Size": 10,
-      "UserId": Until.getCurrentId(),
-      "RequestedUserId" : Until.getCurrentId()
-    ]
-    
-    //    Until.showLoading()
-    Alamofire.request(GET_QUESTION_FOLLOW_BY_USER, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-      if let status = response.response?.statusCode {
-        if status == 200{
-          if let result = response.result.value {
-            let jsonData = result as! [NSDictionary]
+    func getFollowingFeed(){
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let hotParam : [String : Any] = [
+                "Page": pageFollowing,
+                "Size": 10,
+                "UserId": Until.getCurrentId(),
+                "RequestedUserId" : Until.getCurrentId()
+            ]
             
-            for item in jsonData {
-              let entity = FeedsEntity.init(dictionary: item)
-              self.listQuestionFollowing.append(entity)
+            Alamofire.request(GET_QUESTION_FOLLOW_BY_USER, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! [NSDictionary]
+                            
+                            for item in jsonData {
+                                let entity = FeedsEntity.init(dictionary: item)
+                                self.listQuestionFollowing.append(entity)
+                            }
+                            
+                            self.questionTableView.reloadData()
+                            
+                        }
+                    }else{
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+                Until.hideLoading()
+                self.questionTableView.pullToRefreshView?.stopAnimating()
+                self.questionTableView.infiniteScrollingView?.stopAnimating()
             }
-            
-            self.questionTableView.reloadData()
-            
-          }
-        }else{
-//          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        } catch let error as NSError {
+            print(error)
         }
-      }else{
-        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-      }
-      Until.hideLoading()
-      self.questionTableView.pullToRefreshView?.stopAnimating()
-      self.questionTableView.infiniteScrollingView?.stopAnimating()
     }
-  }
-  func getWaitingFeed(){
-    
-    let hotParam : [String : Any] = [
-      "Auth": Until.getAuthKey(),
-      "Page": pageWaiting,
-      "Size": 10,
-      "UserId": Until.getCurrentId(),
-      "RequestedUserId" : Until.getCurrentId()
-    ]
-    
-    //    Until.showLoading()
-    Alamofire.request(GET_QUESTION_ASSIGN, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-      if let status = response.response?.statusCode {
-        if status == 200{
-          if let result = response.result.value {
-            let jsonData = result as! [NSDictionary]
-            
-            for item in jsonData {
-              let entity = FeedsEntity.init(dictionary: item)
-              self.listQuestionWaitingToAnwser.append(entity)
+    func getWaitingFeed(){
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let hotParam : [String : Any] = [
+                "Page": pageWaiting,
+                "Size": 10,
+                "UserId": Until.getCurrentId(),
+                "RequestedUserId" : Until.getCurrentId()
+            ]
+            Alamofire.request(GET_QUESTION_ASSIGN, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! [NSDictionary]
+                            
+                            for item in jsonData {
+                                let entity = FeedsEntity.init(dictionary: item)
+                                self.listQuestionWaitingToAnwser.append(entity)
+                            }
+                            
+                            self.questionTableView.reloadData()
+                            
+                        }
+                    }else{
+                        //          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+                Until.hideLoading()
+                self.questionTableView.pullToRefreshView?.stopAnimating()
+                self.questionTableView.infiniteScrollingView?.stopAnimating()
             }
-            
-            self.questionTableView.reloadData()
-            
-          }
-        }else{
-//          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        } catch let error as NSError {
+            print(error)
         }
-      }else{
-        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-      }
-      Until.hideLoading()
-      self.questionTableView.pullToRefreshView?.stopAnimating()
-      self.questionTableView.infiniteScrollingView?.stopAnimating()
     }
     
-  }
-       
     func getListAdmin(){
-        let param : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "RequestedUserId" : Until.getCurrentId()
-        ]
-        
-        Alamofire.request(GET_LIST_ADMIN, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! [NSDictionary]
-                        
-                        for item in jsonData {
-                            let entity = ListAdminEntity.init(dictionary: item)
-                            self.listAdmin.append(entity)
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let param : [String : Any] = [
+                "RequestedUserId" : Until.getCurrentId()
+            ]
+            
+            Alamofire.request(GET_LIST_ADMIN, method: .post, parameters: param, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! [NSDictionary]
+                            
+                            for item in jsonData {
+                                let entity = ListAdminEntity.init(dictionary: item)
+                                self.listAdmin.append(entity)
+                            }
                         }
+                    }else{
+                        //                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
                 }else{
-//                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                Until.hideLoading()
+                self.questionTableView.pullToRefreshView?.stopAnimating()
+                self.questionTableView.infiniteScrollingView?.stopAnimating()
             }
-            Until.hideLoading()
-            self.questionTableView.pullToRefreshView?.stopAnimating()
-            self.questionTableView.infiniteScrollingView?.stopAnimating()
-        }
 
+        } catch let error as NSError {
+            print(error)
+        }
     }
     
     
@@ -522,7 +563,7 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
             }
             return nil
         }else {
-        return nil
+            return nil
         }
         
     }
@@ -535,87 +576,87 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
         questionTableView.reloadSections(IndexSet.init(integer: button.tag), with: UITableViewRowAnimation.automatic)
         questionTableView.endUpdates()
     }
-
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    let realm = try! Realm()
-    let users = realm.objects(UserEntity.self)
-    if users.first?.role == 3 {
-        
-        if isFollowing {
-            let entity = listAllDoctor[section]
-            if !entity.isExpand {
-                return 0
-            }
-            return entity.doctors.count + 1
-        }
-        if isMyFeed {
-            return listAdmin.count + 1
-        }
-    }else {
-        if isMyFeed {
-            return listMyFeed.count
-        }
-        if isFollowing {
-            return listQuestionFollowing.count
-        }
-        if  isWaiting {
-            return listQuestionWaitingToAnwser.count
-        }
-    }
-      return 0
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let realm = try! Realm()
-    let users = realm.objects(UserEntity.self)
-    let cellSpAdmin = tableView.dequeueReusableCell(withIdentifier: "DoctorTableViewCell") as! DoctorTableViewCell
-    let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
-    let cellCreate = tableView.dequeueReusableCell(withIdentifier: "InsertAccountCell") as! InsertAccountCell
-    self.sectionCate = indexPath.section
-    cellSpAdmin.delegate = self
-    cellCreate.indexPatchRow = indexPath.row
-    cellCreate.indexPatchSection = indexPath
-    cellCreate.delegate = self
-    cell.indexPath = indexPath
-    cell.delegate = self
-    if users.first?.role == 3 {
-        cellSpAdmin.isBlock = false
-        if indexPath.row == 0 {
-         return cellCreate
-        }else {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let realm = try! Realm()
+        let users = realm.objects(UserEntity.self)
+        if users.first?.role == 3 {
+            
             if isFollowing {
-                cellSpAdmin.author = listAllDoctor[indexPath.section].doctors[indexPath.row - 1].doctorEntity
-                cellSpAdmin.setData()
+                let entity = listAllDoctor[section]
+                if !entity.isExpand {
+                    return 0
+                }
+                return entity.doctors.count + 1
             }
             if isMyFeed {
-                cellSpAdmin.admin = listAdmin[indexPath.row - 1]
-                cellSpAdmin.setDataAdmin()
+                return listAdmin.count + 1
             }
-            cellSpAdmin.indexPatch = indexPath
-            return cellSpAdmin
-
-        }
-    }else {
-        if isMyFeed {
-            if listMyFeed.count > 0 {
-                cell.feedEntity = listMyFeed[indexPath.row]
-                cell.setData(isHiddenCateAndDoctor: false)
+        }else {
+            if isMyFeed {
+                return listMyFeed.count
             }
-        }else if isFollowing {
-            if listQuestionFollowing.count > 0 {
-                cell.feedEntity = listQuestionFollowing[indexPath.row]
-                cell.setData(isHiddenCateAndDoctor: false)
+            if isFollowing {
+                return listQuestionFollowing.count
             }
-        }else{
-            if listQuestionWaitingToAnwser.count > 0 {
-                cell.feedEntity = listQuestionWaitingToAnwser[indexPath.row]
-                cell.setData(isHiddenCateAndDoctor: false)
+            if  isWaiting {
+                return listQuestionWaitingToAnwser.count
             }
         }
+        return 0
     }
-    return cell
-  }
-  
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let realm = try! Realm()
+        let users = realm.objects(UserEntity.self)
+        let cellSpAdmin = tableView.dequeueReusableCell(withIdentifier: "DoctorTableViewCell") as! DoctorTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell") as! QuestionTableViewCell
+        let cellCreate = tableView.dequeueReusableCell(withIdentifier: "InsertAccountCell") as! InsertAccountCell
+        self.sectionCate = indexPath.section
+        cellSpAdmin.delegate = self
+        cellCreate.indexPatchRow = indexPath.row
+        cellCreate.indexPatchSection = indexPath
+        cellCreate.delegate = self
+        cell.indexPath = indexPath
+        cell.delegate = self
+        if users.first?.role == 3 {
+            cellSpAdmin.isBlock = false
+            if indexPath.row == 0 {
+                return cellCreate
+            }else {
+                if isFollowing {
+                    cellSpAdmin.author = listAllDoctor[indexPath.section].doctors[indexPath.row - 1].doctorEntity
+                    cellSpAdmin.setData()
+                }
+                if isMyFeed {
+                    cellSpAdmin.admin = listAdmin[indexPath.row - 1]
+                    cellSpAdmin.setDataAdmin()
+                }
+                cellSpAdmin.indexPatch = indexPath
+                return cellSpAdmin
+                
+            }
+        }else {
+            if isMyFeed {
+                if listMyFeed.count > 0 {
+                    cell.feedEntity = listMyFeed[indexPath.row]
+                    cell.setData(isHiddenCateAndDoctor: false)
+                }
+            }else if isFollowing {
+                if listQuestionFollowing.count > 0 {
+                    cell.feedEntity = listQuestionFollowing[indexPath.row]
+                    cell.setData(isHiddenCateAndDoctor: false)
+                }
+            }else{
+                if listQuestionWaitingToAnwser.count > 0 {
+                    cell.feedEntity = listQuestionWaitingToAnwser[indexPath.row]
+                    cell.setData(isHiddenCateAndDoctor: false)
+                }
+            }
+        }
+        return cell
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let main = UIStoryboard(name: "User", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "AdminUpdateProfileViewController") as! AdminUpdateProfileViewController
@@ -633,21 +674,21 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     
-  @IBAction func notificationTapAction(_ sender: Any) {
-    let storyboard = UIStoryboard.init(name: "User", bundle: nil)
-    let vc = storyboard.instantiateViewController(withIdentifier: "NotificationViewController") as! NotificationViewController
-    self.navigationController?.pushViewController(vc, animated: true)
-  }
-  
-  @IBAction func messageTapAction(_ sender: Any) {
-    let realm = try! Realm()
-    let currentUser = realm.objects(UserEntity.self).first
-    if currentUser?.role == 0 {
-      UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nâng cấp để sử dụng chức năng này", cancelBtnTitle: "Đồng ý")
-      return
+    @IBAction func notificationTapAction(_ sender: Any) {
+        let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NotificationViewController") as! NotificationViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
-    self.gotoInbox()
-  }
+    
+    @IBAction func messageTapAction(_ sender: Any) {
+        let realm = try! Realm()
+        let currentUser = realm.objects(UserEntity.self).first
+        if currentUser?.role == 0 {
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nâng cấp để sử dụng chức năng này", cancelBtnTitle: "Đồng ý")
+            return
+        }
+        self.gotoInbox()
+    }
     
     func createAccountDoctor(indexPatchSection: IndexPath, indexPatchRow: Int) {
         let main = UIStoryboard(name: "User", bundle: nil)
@@ -657,15 +698,15 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
         viewcontroller.indexDoctor = indexPatchSection
         viewcontroller.idCate = listAllDoctor[sectionCate].category.id
         if isMyFeed {
-        viewcontroller.isAdmin = true
+            viewcontroller.isAdmin = true
         }else if isFollowing {
-        viewcontroller.isAdmin = false
+            viewcontroller.isAdmin = false
         }
         self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
     
     func reloadDataDoctor(indexPatch: IndexPath, doctor: DoctorEntity) {
-       listAllDoctor[indexPatch.section].doctors.append(doctor)
+        listAllDoctor[indexPatch.section].doctors.append(doctor)
         questionTableView.reloadData()
     }
     
@@ -699,142 +740,151 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     
     
     func blockUser(author: AuthorEntity, admin: ListAdminEntity) {
-        let userParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "UserId": author.id,
-            "RequestedUserId" : Until.getCurrentId()
-        ]
-        
-        let adminParam : [String: Any] = [
-            "Auth": Until.getAuthKey(),
-            "UserId": admin.id,
-            "RequestedUserId" : Until.getCurrentId()
-        ]
-        
-        if isMyFeed {
-            if admin.isBlocked {
-                Alamofire.request(UN_BLOCK_USER, method: .post, parameters: adminParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-                    if let status = response.response?.statusCode {
-                        if status == 200{
-                            admin.isBlocked = false
-                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(admin.nickName) đã được mở khoá thành công", cancelBtnTitle: "Đóng")
-                            self.questionTableView.reloadData()
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let userParam : [String : Any] = [
+                "Auth": Until.getAuthKey(),
+                "UserId": author.id,
+                "RequestedUserId" : Until.getCurrentId()
+            ]
+            
+            let adminParam : [String: Any] = [
+                "Auth": Until.getAuthKey(),
+                "UserId": admin.id,
+                "RequestedUserId" : Until.getCurrentId()
+            ]
+            
+            if isMyFeed {
+                if admin.isBlocked {
+                    Alamofire.request(UN_BLOCK_USER, method: .post, parameters: adminParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                        if let status = response.response?.statusCode {
+                            if status == 200{
+                                admin.isBlocked = false
+                                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(admin.nickName) đã được mở khoá thành công", cancelBtnTitle: "Đóng")
+                                self.questionTableView.reloadData()
+                            }else{
+                            }
                         }else{
-//                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                         }
-                    }else{
-                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                        
+                    }
+                }else {
+                    Alamofire.request(BLOCK_USER, method: .post, parameters: adminParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                        if let status = response.response?.statusCode {
+                            if status == 200{
+                                admin.isBlocked = true
+                                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(admin.nickName) đã được khoá thành công", cancelBtnTitle: "Đóng")
+                                self.questionTableView.reloadData()
+                            }else{
+                                //                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                            }
+                        }else{
+                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                        }
+                        
                     }
                     
                 }
-            }else {
-                Alamofire.request(BLOCK_USER, method: .post, parameters: adminParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-                    if let status = response.response?.statusCode {
-                        if status == 200{
-                            admin.isBlocked = true
-                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(admin.nickName) đã được khoá thành công", cancelBtnTitle: "Đóng")
-                            self.questionTableView.reloadData()
+            }else if isFollowing {
+                if author.isBlocked {
+                    Alamofire.request(UN_BLOCK_USER, method: .post, parameters: userParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                        if let status = response.response?.statusCode {
+                            if status == 200{
+                                author.isBlocked = false
+                                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(author.nickname) đã được mở khoá thành công", cancelBtnTitle: "Đóng")
+                                self.questionTableView.reloadData()
+                            }else{
+                                //                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                            }
                         }else{
-//                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                         }
-                    }else{
-                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                        
                     }
                     
+                }else {
+                    Alamofire.request(BLOCK_USER, method: .post, parameters: userParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                        if let status = response.response?.statusCode {
+                            if status == 200{
+                                author.isBlocked = true
+                                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(author.nickname) đã được khoá thành công", cancelBtnTitle: "Đóng")
+                                self.questionTableView.reloadData()
+                            }else{
+                                //                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                            }
+                        }else{
+                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                        }
+                        
+                    }
                 }
-                
             }
-        }else if isFollowing {
-            if author.isBlocked {
-                Alamofire.request(UN_BLOCK_USER, method: .post, parameters: userParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-                    if let status = response.response?.statusCode {
-                        if status == 200{
-                            author.isBlocked = false
-                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(author.nickname) đã được mở khoá thành công", cancelBtnTitle: "Đóng")
-                            self.questionTableView.reloadData()
-                        }else{
-//                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-                        }
-                    }else{
-                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-                    }
-                    
-                }
-                
-            }else {
-                Alamofire.request(BLOCK_USER, method: .post, parameters: userParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-                    if let status = response.response?.statusCode {
-                        if status == 200{
-                            author.isBlocked = true
-                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(author.nickname) đã được khoá thành công", cancelBtnTitle: "Đóng")
-                            self.questionTableView.reloadData()
-                        }else{
-//                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-                        }
-                    }else{
-                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-                    }
-                    
-                }
-            }
+        } catch let error as NSError {
+            print(error)
         }
         
     }
     
     
-  func gotoInbox(){
+    func gotoInbox(){
+        
+        if self.groupChannelListViewController == nil {
+            self.groupChannelListViewController = GroupChannelListViewController()
+            self.groupChannelListViewController?.addDelegates()
+        }
+        self.groupChannelListViewController?.view.frame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        self.navigationController?.pushViewController(self.groupChannelListViewController!, animated: true)
+    }
     
-    if self.groupChannelListViewController == nil {
-      self.groupChannelListViewController = GroupChannelListViewController()
-      self.groupChannelListViewController?.addDelegates()
+    @IBAction func accountTapAction(_ sender: Any) {
+        let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "UpdateInfoViewController") as! UpdateInfoViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
-    self.groupChannelListViewController?.view.frame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y, width: self.view.frame.size.width, height: self.view.frame.size.height)
-    self.navigationController?.pushViewController(self.groupChannelListViewController!, animated: true)
-  }
-  
-  @IBAction func accountTapAction(_ sender: Any) {
-    let storyboard = UIStoryboard.init(name: "User", bundle: nil)
-    let vc = storyboard.instantiateViewController(withIdentifier: "UpdateInfoViewController") as! UpdateInfoViewController
-    self.navigationController?.pushViewController(vc, animated: true)
-  }
-  
-  @IBAction func settingTapAction(_ sender: Any) {
-    let storyboard = UIStoryboard.init(name: "User", bundle: nil)
-    let vc = storyboard.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
-    self.navigationController?.pushViewController(vc, animated: true)
-  }
-  @IBAction func actionSetting(_ sender: Any) {
-    let storyboard = UIStoryboard.init(name: "User", bundle: nil)
-    let vc = storyboard.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
-    self.navigationController?.pushViewController(vc, animated: true)
-  }
-  
-  @IBAction func actionLogin(_ sender: Any) {
-    Until.gotoLogin(_self: self, cannotBack: false)
-  }
-  
-  //MARK: QuestionTableViewCellDelegate
-  func showQuestionDetail(indexPath: IndexPath) {
-    let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
-    if isMyFeed {
-      vc.feedObj = listMyFeed[indexPath.row]
-    }else if isFollowing{
-      vc.feedObj = listQuestionFollowing[indexPath.row]
-    }else{
-      vc.feedObj = listQuestionWaitingToAnwser[indexPath.row]
+    
+    @IBAction func settingTapAction(_ sender: Any) {
+        let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
-    self.navigationController?.pushViewController(vc, animated: true)
-  }
-  func gotoListQuestionByTag(hotTagId: String) {
-    let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
-    viewController.hotTagId = hotTagId
-    self.navigationController?.pushViewController(viewController, animated: true)
-  }
-  
-  //MARK: receive notifiy when mark an comment is solution
-  func reloadDataFromServer(notification : Notification){
-    reloadData()
-  }
+    @IBAction func actionSetting(_ sender: Any) {
+        let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func actionLogin(_ sender: Any) {
+        Until.gotoLogin(_self: self, cannotBack: false)
+    }
+    
+    //MARK: QuestionTableViewCellDelegate
+    func showQuestionDetail(indexPath: IndexPath) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
+        if isMyFeed {
+            vc.feedObj = listMyFeed[indexPath.row]
+        }else if isFollowing{
+            vc.feedObj = listQuestionFollowing[indexPath.row]
+        }else{
+            vc.feedObj = listQuestionWaitingToAnwser[indexPath.row]
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    func gotoListQuestionByTag(hotTag: TagEntity) {
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
+        viewController.hotTag = hotTag
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    //MARK: receive notifiy when mark an comment is solution
+    func reloadDataFromServer(notification : Notification){
+        reloadData()
+    }
     func selectDoctor(indexPath: IndexPath) {
         
     }
@@ -843,19 +893,19 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
         
     }
     
-  func approVal(indexPath:IndexPath) {
+    func approVal(indexPath:IndexPath) {
         
     }
     
     func gotoUserProfileFromQuestionDoctor(doctor: AuthorEntity) {
         
     }
-  
-  func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
-    //khong can phai thuc hien ham nay vi dang trong trang profile cua chinh minh
-  }
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
+    
+    func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
+        //khong can phai thuc hien ham nay vi dang trong trang profile cua chinh minh
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 }

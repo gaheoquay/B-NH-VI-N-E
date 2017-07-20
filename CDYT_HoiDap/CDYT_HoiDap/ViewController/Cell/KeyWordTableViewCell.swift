@@ -9,7 +9,7 @@
 import UIKit
 
 protocol KeyWordTableViewCellDelegate {
-  func gotoListQuestionByTag(hotTagId : String)
+  func gotoListQuestionByTag(hotTag : TagEntity)
 }
 
 class KeyWordTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollectionViewDelegateLeftAlignedLayout,UICollectionViewDelegate {
@@ -34,17 +34,17 @@ class KeyWordTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollect
   }
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "KeywordCollectionViewCell", for: indexPath) as! KeywordCollectionViewCell
-    cell.setData(tagName: listTag[indexPath.row].tag.id)
+    cell.setData(tagName: listTag[indexPath.row].tag.tagName)
     return cell
   }
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    delegate?.gotoListQuestionByTag(hotTagId: listTag[indexPath.row].tag.id)
+    delegate?.gotoListQuestionByTag(hotTag: listTag[indexPath.row].tag)
   }
 // MARK: UICollectionViewDelegateLeftAlignedLayout
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     if listTag.count > 0 {
     let entity = listTag[indexPath.row]
-      let tagName = "  " + entity.tag.id + "  "
+      let tagName = "  " + entity.tag.tagName + "  "
       let width = tagName.widthWithConstrainedHeight(height: 24, font: UIFont.systemFont(ofSize: 14))
       return CGSize.init(width: width, height: 24)
     }

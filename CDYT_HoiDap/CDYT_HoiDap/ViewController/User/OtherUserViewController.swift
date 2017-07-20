@@ -9,41 +9,40 @@
 import UIKit
 
 class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, QuestionTableViewCellDelegate {
-
+    
     @IBOutlet weak var avaImg: UIImageView!
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var feedTbl: UITableView!
-  var selectedUser: [SBDUser] = []
+    var selectedUser: [SBDUser] = []
     
     var user = AuthorEntity()
     var page = 1
     var listFeeds = [FeedsEntity]()
-  private var users: [SBDUser] = []
-  private var userListQuery: SBDUserListQuery?
-
+    private var users: [SBDUser] = []
+    private var userListQuery: SBDUserListQuery?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configTableView()
         Until.showLoading()
         getFeeds()
         setupUserData()
-//      initSendBird()
-      self.loadUserList(initial: true)
-
+        self.loadUserList(initial: true)
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         Until.sendAndSetTracer(value: USER_PAGE)
     }
-
+    
     func setupUserData() {
         avaImg.layer.cornerRadius = 8
         avaImg.clipsToBounds = true
         avaImg.sd_setImage(with: URL.init(string: user.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
         
         if user.role == 1 {
-        nameLbl.text = user.fullname
+            nameLbl.text = user.fullname
         }else {
-        nameLbl.text = user.nickname
+            nameLbl.text = user.nickname
         }
     }
     
@@ -79,42 +78,50 @@ class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableV
         page += 1
         getFeeds()
     }
-
+    
     func getFeeds(){
-        let param : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "Page": page,
-            "Size": 10,
-            "UserId": user.id,
-            "RequestedUserId" : Until.getCurrentId()
-
-        ]
-        
-        Alamofire.request(GET_QUESTION_FOLLOW_BY_USER, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! [NSDictionary]
-                        
-                        for item in jsonData {
-                            let entity = FeedsEntity.init(dictionary: item)
-                            self.listFeeds.append(entity)
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let param : [String : Any] = [
+                "Page": page,
+                "Size": 10,
+                "UserId": user.id,
+                "RequestedUserId" : Until.getCurrentId()
+                
+            ]
+            
+            Alamofire.request(GET_QUESTION_FOLLOW_BY_USER, method: .post, parameters: param, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! [NSDictionary]
+                            
+                            for item in jsonData {
+                                let entity = FeedsEntity.init(dictionary: item)
+                                self.listFeeds.append(entity)
+                            }
+                            
+                            self.feedTbl.reloadData()
+                            
                         }
-                        
-                        self.feedTbl.reloadData()
-                        
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                Until.hideLoading()
+                self.feedTbl.pullToRefreshView!.stopAnimating()
+                self.feedTbl.infiniteScrollingView!.stopAnimating()
             }
-            Until.hideLoading()
-            self.feedTbl.pullToRefreshView!.stopAnimating()
-            self.feedTbl.infiniteScrollingView!.stopAnimating()
+        } catch let error as NSError {
+            print(error)
         }
-        
     }
     
     //MARK: Table view delegate
@@ -144,7 +151,7 @@ class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableV
     @IBAction func backTapAction(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)
     }
-
+    
     @IBAction func accountTapAction(_ sender: Any) {
         let storyboard = UIStoryboard.init(name: "User", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "UpdateInfoViewController") as! UpdateInfoViewController
@@ -153,75 +160,75 @@ class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableV
     }
     
     @IBAction func messageTapAction(_ sender: Any) {
-      let realm = try! Realm()
-      let currentUser = realm.objects(UserEntity.self)
-      if currentUser.count == 0 {
-        Until.gotoLogin(_self: self, cannotBack: false)
-      }else{
-        if currentUser.first?.role == 0 {
-          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nâng cấp để sử dụng chức năng này", cancelBtnTitle: "Đồng ý")
-          return
-        }else if currentUser.first?.role == 1 || currentUser.first?.role == 2 {
-            if user.role == 0 {
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn không thể chat với người này", cancelBtnTitle: "Đồng ý")
+        let realm = try! Realm()
+        let currentUser = realm.objects(UserEntity.self)
+        if currentUser.count == 0 {
+            Until.gotoLogin(_self: self, cannotBack: false)
+        }else{
+            if currentUser.first?.role == 0 {
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nâng cấp để sử dụng chức năng này", cancelBtnTitle: "Đồng ý")
+                return
+            }else if currentUser.first?.role == 1 || currentUser.first?.role == 2 {
+                if user.role == 0 {
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn không thể chat với người này", cancelBtnTitle: "Đồng ý")
+                    return
+                }
+            }
+            SBDGroupChannel.createChannel(with: self.selectedUser, isDistinct: true) { (channel, error) in
+                if error != nil {
+                    let vc = UIAlertController(title: "Lỗi", message: error?.domain, preferredStyle: UIAlertControllerStyle.alert)
+                    let closeAction = UIAlertAction(title: "Đóng", style: UIAlertActionStyle.cancel, handler: { (action) in
+                        
+                    })
+                    vc.addAction(closeAction)
+                    DispatchQueue.main.async {
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                    return
+                }
+                DispatchQueue.main.async {
+                    let vc = GroupChannelChattingViewController()
+                    vc.groupChannel = channel
+                    self.present(vc, animated: false, completion: nil)
+                }
+            }
+        }
+    }
+    //MARK: Load list user to chat
+    @objc private func loadUserList(initial: Bool) {
+        if initial == true {
+            self.users.removeAll()
+            self.selectedUser.removeAll()
+            
+            
+            self.userListQuery = nil;
+        }
+        if self.userListQuery == nil {
+            self.userListQuery = SBDMain.createAllUserListQuery()
+            self.userListQuery = SBDMain.createUserListQuery(withUserIds: [user.id])
+            self.userListQuery?.limit = 25
+        }
+        if self.userListQuery?.hasNext == false {
+            return
+        }
+        
+        self.userListQuery?.loadNextPage(completionHandler: { (users, error) in
+            if error != nil {
+                let vc = UIAlertController(title: "Lỗi", message: error?.domain, preferredStyle: UIAlertControllerStyle.alert)
+                let closeAction = UIAlertAction(title: "Đóng", style: UIAlertActionStyle.cancel, handler:nil)
+                vc.addAction(closeAction)
+                DispatchQueue.main.async {
+                    self.present(vc, animated: true, completion: nil)
+                }
                 return
             }
-        }
-        SBDGroupChannel.createChannel(with: self.selectedUser, isDistinct: true) { (channel, error) in
-          if error != nil {
-            let vc = UIAlertController(title: "Lỗi", message: error?.domain, preferredStyle: UIAlertControllerStyle.alert)
-            let closeAction = UIAlertAction(title: "Đóng", style: UIAlertActionStyle.cancel, handler: { (action) in
-              
-            })
-            vc.addAction(closeAction)
-            DispatchQueue.main.async {
-              self.present(vc, animated: true, completion: nil)
+            
+            for user in users! as [SBDUser] {
+                self.selectedUser.append(user)
             }
-            return
-          }
-          DispatchQueue.main.async {
-            let vc = GroupChannelChattingViewController()
-            vc.groupChannel = channel
-            self.present(vc, animated: false, completion: nil)
-          }
-        }
-      }
-    }
-  //MARK: Load list user to chat
-  @objc private func loadUserList(initial: Bool) {
-    if initial == true {
-      self.users.removeAll()
-      self.selectedUser.removeAll()
-      
-      
-      self.userListQuery = nil;
-    }
-    if self.userListQuery == nil {
-      self.userListQuery = SBDMain.createAllUserListQuery()
-      self.userListQuery = SBDMain.createUserListQuery(withUserIds: [user.id])
-      self.userListQuery?.limit = 25
-    }
-    if self.userListQuery?.hasNext == false {
-      return
+        })
     }
     
-    self.userListQuery?.loadNextPage(completionHandler: { (users, error) in
-      if error != nil {
-        let vc = UIAlertController(title: "Lỗi", message: error?.domain, preferredStyle: UIAlertControllerStyle.alert)
-        let closeAction = UIAlertAction(title: "Đóng", style: UIAlertActionStyle.cancel, handler:nil)
-        vc.addAction(closeAction)
-        DispatchQueue.main.async {
-          self.present(vc, animated: true, completion: nil)
-        }
-        return
-      }
-      
-      for user in users! as [SBDUser] {
-        self.selectedUser.append(user)
-      }
-    })
-  }
-
     //MARK: QuestionTableViewCellDelegate
     func showQuestionDetail(indexPath: IndexPath) {
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
@@ -230,10 +237,10 @@ class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableV
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func gotoListQuestionByTag(hotTagId: String) {
+    func gotoListQuestionByTag(hotTag: TagEntity) {
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
-        viewController.hotTagId = hotTagId
+        viewController.hotTag = hotTag
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     

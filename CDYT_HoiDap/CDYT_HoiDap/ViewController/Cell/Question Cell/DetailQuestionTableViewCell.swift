@@ -12,7 +12,7 @@ protocol DetailQuestionTableViewCellDelegate {
     func gotoUserProfileFromDetailQuestion(user : AuthorEntity)
     func showMoreActionFromDetailQuestion()
     func showImageFromDetailPost(skBrowser : SKPhotoBrowser )
-    func gotoQuestionTagListFromDetailPost(tagId : String)
+    func gotoQuestionTagListFromDetailPost(hotTag : TagEntity)
 }
 
 class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -191,7 +191,7 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
         if collectionView == tagCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "KeywordCollectionViewCell", for: indexPath) as! KeywordCollectionViewCell
             if feed.tags.count > 0 {
-                cell.setData(tagName: feed.tags[indexPath.row].id)
+                cell.setData(tagName: feed.tags[indexPath.row].tagName)
             }
             return cell
         }else{
@@ -207,7 +207,7 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == tagCollectionView {
             let entity = feed.tags[indexPath.row]
-            let tagName = "  " + entity.id + "  "
+            let tagName = "  " + entity.tagName + "  "
             let width = tagName.widthWithConstrainedHeight(height: 24, font: UIFont.systemFont(ofSize: 14))
             return CGSize.init(width: width, height: 24)
         }else{
@@ -229,7 +229,7 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
             
             delegate?.showImageFromDetailPost(skBrowser: browser)
         }else{
-           delegate?.gotoQuestionTagListFromDetailPost(tagId: feed.tags[indexPath.row].id)
+           delegate?.gotoQuestionTagListFromDetailPost(hotTag: feed.tags[indexPath.row])
         }
     }
 

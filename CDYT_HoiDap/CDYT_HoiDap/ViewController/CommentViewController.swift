@@ -233,84 +233,97 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
   //MARk: set read notification
   func setReadNotification(){
-    Until.showLoading()
-    if notificationId == ""{
-      notificationId = notification.id
-    }
-    let getPostParam : [String : Any] = [
-      "Auth": Until.getAuthKey(),
-      "RequestedUserId" : Until.getCurrentId(),
-      "NotificationId": notificationId
-    ]
-    
-    
-    Alamofire.request(SET_READ_NOTIFICATION, method: .post, parameters: getPostParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-      if let status = response.response?.statusCode {
-        if status == 200{
-          if let result = response.result.value {
-            if result is NSDictionary {
-                let realm = try! Realm()
-                try! realm.write {
-                  if self.notification != nil {
-                    self.notification.isRead = true
-                  }
-                    self.delegate?.reloadTable()
+    do {
+        let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+        let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+        let auth = code.replacingOccurrences(of: "\n", with: "")
+        let header = [
+            "Auth": auth
+        ]
+        Until.showLoading()
+        if notificationId == ""{
+            notificationId = notification.id
+        }
+        let getPostParam : [String : Any] = [
+            "RequestedUserId" : Until.getCurrentId(),
+            "NotificationId": notificationId
+        ]
+        Alamofire.request(SET_READ_NOTIFICATION, method: .post, parameters: getPostParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        if result is NSDictionary {
+                            let realm = try! Realm()
+                            try! realm.write {
+                                if self.notification != nil {
+                                    self.notification.isRead = true
+                                }
+                                self.delegate?.reloadTable()
+                            }
+                        }
+                    }
                 }
             }
-          }
+            Until.hideLoading()
         }
-      }
-      
-      Until.hideLoading()
+    } catch let error as NSError {
+        print(error)
     }
-    
   }
 
     //MARK: get comment from notification
     func getCommentFromNotification(){
-        self.view.endEditing(true)
-        
-        let commentParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "RequestedUserId": currentUserId,
-            "CommentId": commentId,
-            "Page": pageIndex,
-            "Size": "10"
-        ]
-        
-        Until.showLoading()
-        
-        Alamofire.request(GET_LIST_SUBCOMMENT, method: .post, parameters: commentParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! NSDictionary 
-                        let entity = MainCommentEntity.init(dict: jsonData)
-                      if self.pageIndex == 1{
-                        self.mainComment = entity
-                      }else{
-                        self.mainComment.subComment += entity.subComment
-                      }
-                      
-                        self.setupUIForComment(mainComment: self.mainComment)
-                        self.commentTbl.reloadData()
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            self.view.endEditing(true)
+            let commentParam : [String : Any] = [
+                "RequestedUserId": currentUserId,
+                "CommentId": commentId,
+                "Page": pageIndex,
+                "Size": "10"
+            ]
+            
+            Until.showLoading()
+            
+            Alamofire.request(GET_LIST_SUBCOMMENT, method: .post, parameters: commentParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! NSDictionary
+                            let entity = MainCommentEntity.init(dict: jsonData)
+                            if self.pageIndex == 1{
+                                self.mainComment = entity
+                            }else{
+                                self.mainComment.subComment += entity.subComment
+                            }
+                            
+                            self.setupUIForComment(mainComment: self.mainComment)
+                            self.commentTbl.reloadData()
+                            
+                        }
+                    }else{
+                        let alert = UIAlertController.init(title: "Thông báo", message: "Có lỗi không thể lấy được dữ liệu bình luận", preferredStyle: UIAlertControllerStyle.alert)
+                        let actionOk = UIAlertAction.init(title: "Đóng", style: UIAlertActionStyle.default, handler: { (action) in
+                            _ = self.navigationController?.popViewController(animated: true)
+                        })
+                        alert.addAction(actionOk)
+                        self.present(alert, animated: true, completion: nil)
                         
                     }
                 }else{
-                    let alert = UIAlertController.init(title: "Thông báo", message: "Có lỗi không thể lấy được dữ liệu bình luận", preferredStyle: UIAlertControllerStyle.alert)
-                    let actionOk = UIAlertAction.init(title: "Đóng", style: UIAlertActionStyle.default, handler: { (action) in
-                        _ = self.navigationController?.popViewController(animated: true)
-                    })
-                    alert.addAction(actionOk)
-                    self.present(alert, animated: true, completion: nil)
-
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                Until.hideLoading()
+                self.commentTbl.pullToRefreshView?.stopAnimating()
+                self.commentTbl.infiniteScrollingView?.stopAnimating()
             }
-            Until.hideLoading()
-          self.commentTbl.pullToRefreshView?.stopAnimating()
-          self.commentTbl.infiniteScrollingView?.stopAnimating()
+        } catch let error as NSError {
+            print(error)
         }
     }
     
@@ -375,41 +388,51 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     func uploadImage(){
-        Until.showLoading()
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
-            for (index, element) in self.imageAssets.enumerated(){
-                element.fetchOriginalImage(true, completeBlock: {(image, info) -> Void in
-                    if let imageData = UIImageJPEGRepresentation(image!, 0.5) {
-                        multipartFormData.append(imageData, withName: "Image", fileName: "file\(index).png", mimeType: "image/png")
-                    }
-                })
-            }
-        }, to: UPLOAD_IMAGE, encodingCompletion: { encodingResult in
-            switch encodingResult {
-            case .success(let upload, _, _):
-                upload.responseJSON { response in
-                    let status = response.response?.statusCode
-                    if status == 200{
-                        if let result = response.result.value {
-                            let json = result as! [NSDictionary]
-                            for dic in json {
-                                let imageUrl = dic["ImageUrl"] as! String
-                                self.imgCommentDic.append(imageUrl)
-                                
-                                let imageThumb = dic["ThumbnailUrl"] as! String
-                                self.thumImgCommentDic.append(imageThumb)
-                            }
-                            self.sendCommentOnComment()
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            Until.showLoading()
+            Alamofire.upload(multipartFormData: { (multipartFormData) in
+                for (index, element) in self.imageAssets.enumerated(){
+                    element.fetchOriginalImage(true, completeBlock: {(image, info) -> Void in
+                        if let imageData = UIImageJPEGRepresentation(image!, 0.5) {
+                            multipartFormData.append(imageData, withName: "Image", fileName: "file\(index).png", mimeType: "image/png")
                         }
+                    })
+                }
+            }, to: UPLOAD_IMAGE, headers: header, encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        let status = response.response?.statusCode
+                        if status == 200{
+                            if let result = response.result.value {
+                                let json = result as! [NSDictionary]
+                                for dic in json {
+                                    let imageUrl = dic["ImageUrl"] as! String
+                                    self.imgCommentDic.append(imageUrl)
+                                    
+                                    let imageThumb = dic["ThumbnailUrl"] as! String
+                                    self.thumImgCommentDic.append(imageThumb)
+                                }
+                                self.sendCommentOnComment()
+                            }
+                        }
+                        Until.hideLoading()
                     }
+                    
+                case .failure(let encodingError):
+                    print(encodingError)
                     Until.hideLoading()
                 }
-                
-            case .failure(let encodingError):
-                print(encodingError)
-                Until.hideLoading()
-            }
-        })
+            })
+        } catch let error as NSError {
+            print(error)
+        }
     }
     
     //MARK: Post comment tap action
@@ -436,51 +459,61 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     func sendCommentOnComment(){
-        self.view.endEditing(true)
-        
-        let commentEntity = CommentEntity()
-        commentEntity.content = textInputBar.text
-        commentEntity.imageUrls = imgCommentDic
-        commentEntity.thumbnailImageUrls = thumImgCommentDic
-        
-        let commentParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "RequestedUserId": Until.getCurrentId(),
-            "Comment": CommentEntity().toDictionary(entity: commentEntity),
-            "CommentId": mainComment.comment.id
-        ]
-        
-        Until.showLoading()
-        
-        Alamofire.request(POST_COMMENT_ON_COMMENT, method: .post, parameters: commentParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! NSDictionary
-                        let entity = SubCommentEntity.init(dict: jsonData)
-                        
-                        self.mainComment.subComment.insert(entity, at: 0)
-                        self.commentTbl.reloadData()
-                        
-                        self.textInputBar.textView.text = ""
-                        self.imgCommentDic = []
-                        self.thumImgCommentDic = []
-                        
-                        self.imgClvHeight.constant = 0
-                        self.imageAssets.removeAll()
-                        self.imgClv.reloadData()
-                        self.view.layoutIfNeeded()
-                        
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: COMMENT_ON_COMMENT_SUCCESS), object: nil)
-
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            self.view.endEditing(true)
+            
+            let commentEntity = CommentEntity()
+            commentEntity.content = textInputBar.text
+            commentEntity.imageUrls = imgCommentDic
+            commentEntity.thumbnailImageUrls = thumImgCommentDic
+            
+            let commentParam : [String : Any] = [
+                "Auth": Until.getAuthKey(),
+                "RequestedUserId": Until.getCurrentId(),
+                "Comment": CommentEntity().toDictionary(entity: commentEntity),
+                "CommentId": mainComment.comment.id
+            ]
+            
+            Until.showLoading()
+            
+            Alamofire.request(POST_COMMENT_ON_COMMENT, method: .post, parameters: commentParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! NSDictionary
+                            let entity = SubCommentEntity.init(dict: jsonData)
+                            
+                            self.mainComment.subComment.insert(entity, at: 0)
+                            self.commentTbl.reloadData()
+                            
+                            self.textInputBar.textView.text = ""
+                            self.imgCommentDic = []
+                            self.thumImgCommentDic = []
+                            
+                            self.imgClvHeight.constant = 0
+                            self.imageAssets.removeAll()
+                            self.imgClv.reloadData()
+                            self.view.layoutIfNeeded()
+                            
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: COMMENT_ON_COMMENT_SUCCESS), object: nil)
+                            
+                        }
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể lấy được dữ liệu Bình luận. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể lấy được dữ liệu Bình luận. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                Until.hideLoading()
             }
-            Until.hideLoading()
+        } catch let error as NSError {
+            print(error)
         }
     }
     
@@ -498,49 +531,56 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     //MARK: Delete comment
     func deleteComment(objID : String, isSubcomment : Bool, indexPath: IndexPath, subComment: SubCommentEntity){
-        Until.showLoading()
-        let param : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "RequestedUserId": currentUserId,
-            "DeletedObjectId": objID
-        ]
-        
-        
-        Alamofire.request(DELETE_ALL, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! NSDictionary
-                        let isDelete = jsonData["IsDeleted"] as! Bool
-                        if isDelete {
-
-                            if isSubcomment {
-                                for (index, item) in self.mainComment.subComment.enumerated() {
-                                    if item.comment.id == objID {
-                                        self.mainComment.subComment.remove(at: index)
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            Until.showLoading()
+            let param : [String : Any] = [
+                "RequestedUserId": currentUserId,
+                "DeletedObjectId": objID
+            ]
+            Alamofire.request(DELETE_ALL, method: .post, parameters: param, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! NSDictionary
+                            let isDelete = jsonData["IsDeleted"] as! Bool
+                            if isDelete {
+                                
+                                if isSubcomment {
+                                    for (index, item) in self.mainComment.subComment.enumerated() {
+                                        if item.comment.id == objID {
+                                            self.mainComment.subComment.remove(at: index)
+                                        }
                                     }
+                                    self.commentTbl.reloadData()
+                                    self.delegate?.removeSubCommentFromCommentView(subComment: subComment)
+                                }else{
+                                    self.delegate?.removeMainCommentFromCommentView(mainComment: self.mainComment)
+                                    _ = self.navigationController?.popViewController(animated: true)
+                                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: nil)
                                 }
-                                self.commentTbl.reloadData()
-                                self.delegate?.removeSubCommentFromCommentView(subComment: subComment)
+                                
+                                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Xoá bình luận thành công", cancelBtnTitle: "Đóng")
+                                
                             }else{
-                                self.delegate?.removeMainCommentFromCommentView(mainComment: self.mainComment)
-                                _ = self.navigationController?.popViewController(animated: true)
-                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: nil)
+                                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không thế xoá bình luận, vui lòng thử lại sau.", cancelBtnTitle: "Đóng")
                             }
-                            
-                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Xoá bình luận thành công", cancelBtnTitle: "Đóng")
-                            
-                        }else{
-                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không thế xoá bình luận, vui lòng thử lại sau.", cancelBtnTitle: "Đóng")
                         }
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể xoá bài viết. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể xoá bài viết. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                Until.hideLoading()
             }
-            Until.hideLoading()
+        } catch let error as NSError {
+            print(error)
         }
     }
     

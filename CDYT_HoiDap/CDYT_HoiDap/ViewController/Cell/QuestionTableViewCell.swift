@@ -9,7 +9,7 @@
 import UIKit
 protocol QuestionTableViewCellDelegate {
     func showQuestionDetail(indexPath : IndexPath)
-    func gotoListQuestionByTag(hotTagId: String)
+    func gotoListQuestionByTag(hotTag: TagEntity)
     func gotoUserProfileFromQuestionCell(user : AuthorEntity)
     func gotoUserProfileFromQuestionDoctor(doctor: AuthorEntity)
     func selectSpecialist(indexPath : IndexPath)
@@ -82,11 +82,8 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
     func setData(isHiddenCateAndDoctor :Bool){
         let colorbtnApproval = UIColor().hexStringToUIColor(hex: "61abfa")
         let colorbtnUnapproval = UIColor().hexStringToUIColor(hex: "6d6d6d")
-        
         let realm = try! Realm()
         let users = realm.objects(UserEntity.self).first
-        
-        
         if users == nil || users?.role == 0 || users?.role == 1 || users?.role == 3 {
             viewCate.isHidden = true
             viewDoctor.isHidden = true
@@ -97,8 +94,6 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
             layoutBottomCreateDate.constant = 40
         }else {
             if isHiddenCateAndDoctor {
-//                            layoutBottomViewCate.constant = 8
-
                 viewCate.isHidden = false
                 viewDoctor.isHidden = false
                 imgApproval.isHidden = false
@@ -219,7 +214,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "KeywordCollectionViewCell", for: indexPath) as! KeywordCollectionViewCell
         if feedEntity.tags.count > 0 {
-            cell.setData(tagName: feedEntity.tags[indexPath.row].id)
+            cell.setData(tagName: feedEntity.tags[indexPath.row].tagName)
         }
         return cell
     }
@@ -228,7 +223,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if feedEntity.tags.count > 0 {
             let entity = feedEntity.tags[indexPath.row]
-            let tagName = "  " + entity.id + "  "
+            let tagName = "  " + entity.tagName + "  "
             let width = tagName.widthWithConstrainedHeight(height: 24, font: UIFont.systemFont(ofSize: 14))
             return CGSize.init(width: width, height: 24)
         }
@@ -242,7 +237,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.gotoListQuestionByTag(hotTagId: feedEntity.tags[indexPath.row].id)
+        delegate?.gotoListQuestionByTag(hotTag: feedEntity.tags[indexPath.row])
     }
     
     @IBAction func btnSpecicalList(_ sender: Any) {

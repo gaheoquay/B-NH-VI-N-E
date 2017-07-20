@@ -92,29 +92,38 @@ class UpdateInfoViewController: BaseViewController {
     }
     
     func getUserById(){
-        let param : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "RequestedUserId": otherUserId
-        ]
-        Until.showLoading()
-        Alamofire.request(GET_USER_BY_ID, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! NSDictionary
-                        let entity = PeopleEntity.init(dictionary: jsonData)
-                        self.peopleInfo = entity
-                        self.setDataForView()
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let param : [String : Any] = [
+                "RequestedUserId": otherUserId
+            ]
+            Until.showLoading()
+            Alamofire.request(GET_USER_BY_ID, method: .post, parameters: param, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! NSDictionary
+                            let entity = PeopleEntity.init(dictionary: jsonData)
+                            self.peopleInfo = entity
+                            self.setDataForView()
+                        }
+                    }else if status == 400 {
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Email hoặc tên đăng nhập đã tồn tại, vui lòng thử lại.", cancelBtnTitle: "Đóng")
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
-                }else if status == 400 {
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Email hoặc tên đăng nhập đã tồn tại, vui lòng thử lại.", cancelBtnTitle: "Đóng")
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                Until.hideLoading()
             }
-            Until.hideLoading()
+        } catch let error as NSError {
+            print(error)
         }
     }
     
@@ -304,50 +313,58 @@ class UpdateInfoViewController: BaseViewController {
     }
     
     func requestLogOut(){
-        
-        let realm = try! Realm()
-        let user = realm.objects(UserEntity.self)
-        let uuid = NSUUID().uuidString
-        var token = ""
-        if let value = UserDefaults.standard.object(forKey: NOTIFICATION_TOKEN) as? String {
-            token = value
-        }
-        let device : [String : Any] = [
-            "OS": 0,
-            "DeviceId": uuid,
-            "Token": token
-        ]
-        
-        let logoutParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "NicknameOrEmail": user[0].nickname,
-            "Device": device
-        ]
-        Until.showLoading()
-        Alamofire.request(LOG_OUT, method: .post, parameters: logoutParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    Until.hideLoading()
-                    try! realm.write {
-                        realm.delete(user)
-                        let tabbar = self.tabBarController as? RAMAnimatedTabBarController
-                        unreadMessageCount = 0
-                        notificationCount = 0
-                        tabbar?.tabBar.items![4].badgeValue = nil
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue:RELOAD_BOOKING), object: nil)
-                        
-                        _ = self.navigationController?.popViewController(animated: true)
-                    }
-                    listNotification.removeAll()
-                }else if status == 400 {
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Sai du", cancelBtnTitle: "Đóng")
-                }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-                }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let realm = try! Realm()
+            let user = realm.objects(UserEntity.self)
+            let uuid = NSUUID().uuidString
+            var token = ""
+            if let value = UserDefaults.standard.object(forKey: NOTIFICATION_TOKEN) as? String {
+                token = value
             }
-            Until.hideLoading()
+            let device : [String : Any] = [
+                "OS": 0,
+                "DeviceId": uuid,
+                "Token": token
+            ]
+            
+            let logoutParam : [String : Any] = [
+                "NicknameOrEmail": user[0].nickname,
+                "Device": device
+            ]
+            Until.showLoading()
+            Alamofire.request(LOG_OUT, method: .post, parameters: logoutParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        Until.hideLoading()
+                        try! realm.write {
+                            realm.delete(user)
+                            let tabbar = self.tabBarController as? RAMAnimatedTabBarController
+                            unreadMessageCount = 0
+                            notificationCount = 0
+                            tabbar?.tabBar.items![4].badgeValue = nil
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue:RELOAD_BOOKING), object: nil)
+                            
+                            _ = self.navigationController?.popViewController(animated: true)
+                        }
+                        listNotification.removeAll()
+                    }else if status == 400 {
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Sai du", cancelBtnTitle: "Đóng")
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+                Until.hideLoading()
+            }
+        } catch let error as NSError {
+            print(error)
         }
         
         
@@ -369,40 +386,49 @@ class UpdateInfoViewController: BaseViewController {
     }
     
     func uploadImage(){
-        
-        Until.showLoading()
-        
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
-            let asset = self.imageAssets[0]
-            asset.fetchOriginalImage(true, completeBlock: {(image, info) -> Void in
-                if let imageData = UIImageJPEGRepresentation(image!, 0.5) {
-                    multipartFormData.append(imageData, withName: "Image", fileName: "file.png", mimeType: "image/png")
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            Until.showLoading()
+            
+            Alamofire.upload(multipartFormData: { (multipartFormData) in
+                let asset = self.imageAssets[0]
+                asset.fetchOriginalImage(true, completeBlock: {(image, info) -> Void in
+                    if let imageData = UIImageJPEGRepresentation(image!, 0.5) {
+                        multipartFormData.append(imageData, withName: "Image", fileName: "file.png", mimeType: "image/png")
+                    }
+                })
+            }, to: UPLOAD_IMAGE, headers:header, encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        let status = response.response?.statusCode
+                        if status == 200{
+                            if let result = response.result.value {
+                                let json = result as! [NSDictionary]
+                                print(json)
+                                self.imageUrl = json[0]["ImageUrl"] as! String
+                                self.thumbnailUrl = json[0]["ThumbnailUrl"] as! String
+                                
+                                self.updateUserInfoToServer()
+                            }
+                        }
+                        
+                    }
+                    Until.hideLoading()
+                    
+                case .failure(let encodingError):
+                    print(encodingError)
+                    Until.hideLoading()
                 }
             })
-        }, to: UPLOAD_IMAGE, encodingCompletion: { encodingResult in
-            switch encodingResult {
-            case .success(let upload, _, _):
-                upload.responseJSON { response in
-                    let status = response.response?.statusCode
-                    if status == 200{
-                        if let result = response.result.value {
-                            let json = result as! [NSDictionary]
-                            print(json)
-                            self.imageUrl = json[0]["ImageUrl"] as! String
-                            self.thumbnailUrl = json[0]["ThumbnailUrl"] as! String
-                            
-                            self.updateUserInfoToServer()
-                        }
-                    }
-                    
-                }
-                Until.hideLoading()
-                
-            case .failure(let encodingError):
-                print(encodingError)
-                Until.hideLoading()
-            }
-        })
+        } catch let error as NSError {
+            print(error)
+        }
     }
     
     @IBAction func changePassTapAction(_ sender: Any) {
@@ -416,67 +442,70 @@ class UpdateInfoViewController: BaseViewController {
     }
     
     @IBAction func doneBtnAction(_ sender: Any) {
-        //        if validateDataUpdate() == "" {
         errLbl.isHidden = true
         if imageAssets.count > 0 {
             uploadImage()
         }else{
             updateUserInfoToServer()
         }
-        //        }else{
-        //            errLbl.isHidden = false
-        //            errLbl.text = validateDataUpdate()
-        //        }
     }
     
     func updateUserInfoToServer(){
-        
-        let updateParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "RequestedUserId": userToShow.id,
-            "AvatarUrl": imageUrl,
-            "ThumbnailAvatarUrl": thumbnailUrl,
-            "FullName": fullnameTxt.text!,
-            "Job" : "",
-            "Address" : addressTxt.text!,
-            "Company" : "",
-            "Gender" : genderType,
-            "DOB" : dobDate,
-            "Phone": phoneTxt.text!,
-            "Email" : emailTxt.text!
-        ]
-        
-        Until.showLoading()
-        Alamofire.request(UPDATE_PROFILE, method: .post, parameters: updateParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! NSDictionary
-                        let reaml = try! Realm()
-                        let entity = UserEntity.initWithDictionary(dictionary: jsonData)
-                        
-                        try! reaml.write {
-                            reaml.add(entity, update: true)
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let updateParam : [String : Any] = [
+                "RequestedUserId": userToShow.id,
+                "AvatarUrl": imageUrl,
+                "ThumbnailAvatarUrl": thumbnailUrl,
+                "FullName": fullnameTxt.text!,
+                "Job" : "",
+                "Address" : addressTxt.text!,
+                "Company" : "",
+                "Gender" : genderType,
+                "DOB" : dobDate,
+                "Phone": phoneTxt.text!,
+                "Email" : emailTxt.text!
+            ]
+            
+            Until.showLoading()
+            Alamofire.request(UPDATE_PROFILE, method: .post, parameters: updateParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! NSDictionary
+                            let reaml = try! Realm()
+                            let entity = UserEntity.initWithDictionary(dictionary: jsonData)
                             
-                            let alert = UIAlertController.init(title: "Thông báo", message: "Cập nhật thông tin tài khoản thành công", preferredStyle: UIAlertControllerStyle.alert)
-                            let actionOk = UIAlertAction.init(title: "Đóng", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
-                                //                                _ = self.navigationController?.popViewController(animated: true)
-                            })
+                            try! reaml.write {
+                                reaml.add(entity, update: true)
+                                
+                                let alert = UIAlertController.init(title: "Thông báo", message: "Cập nhật thông tin tài khoản thành công", preferredStyle: UIAlertControllerStyle.alert)
+                                let actionOk = UIAlertAction.init(title: "Đóng", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
+                                    //                                _ = self.navigationController?.popViewController(animated: true)
+                                })
+                                
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: UPDATE_USERINFO), object: nil)
+                                
+                                alert.addAction(actionOk)
+                                self.present(alert, animated: true, completion: nil)
+                            }
                             
-                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: UPDATE_USERINFO), object: nil)
-                            
-                            alert.addAction(actionOk)
-                            self.present(alert, animated: true, completion: nil)
                         }
-                        
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                Until.hideLoading()
             }
-            Until.hideLoading()
+        } catch let error as NSError {
+            print(error)
         }
     }
     

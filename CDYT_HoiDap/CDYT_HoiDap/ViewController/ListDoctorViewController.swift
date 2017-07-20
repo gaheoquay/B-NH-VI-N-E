@@ -74,8 +74,6 @@ class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableVi
     lbCateName.sizeToFit()
     lbCateName.frame = CGRect.init(x: 8, y: 25 - lbCateName.frame.size.height/2 , width: lbCateName.frame.size.width, height: lbCateName.frame.size.height)
     vw.addSubview(lbCateName)
-    
-    
     let lbNumberOfDoctor = UILabel.init()
     lbNumberOfDoctor.font = UIFont.systemFont(ofSize: 13)
     lbNumberOfDoctor.text = "  " + String(entity.count) + " bác sĩ  "
@@ -104,5 +102,4 @@ class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableVi
     tbDoctor.reloadSections(IndexSet.init(integer: button.tag), with: UITableViewRowAnimation.automatic)
     tbDoctor.endUpdates()
   }
-
 }

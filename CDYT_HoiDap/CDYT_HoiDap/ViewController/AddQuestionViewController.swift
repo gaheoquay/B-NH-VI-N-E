@@ -10,9 +10,9 @@ import UIKit
 
 class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,UIPickerViewDelegate,UIPickerViewDataSource, AddImageCollectionViewCellDelegate {
 
+    @IBOutlet weak var tagView: KSTokenView!
     @IBOutlet weak var titleTxt: UITextField!
     @IBOutlet weak var contentTxt: UITextView!
-    @IBOutlet weak var tagTxt: UITextView!
     @IBOutlet weak var imgClv: UICollectionView!
     @IBOutlet weak var imgClvheight: NSLayoutConstraint!
     @IBOutlet weak var titleTxtBorderView: UIView!
@@ -24,8 +24,11 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
     @IBOutlet weak var viewCategory: UIView!
     @IBOutlet weak var btnSwitch: UISwitch!
     @IBOutlet weak var lbCate: UILabel!
-    
-    
+    var tagNames = Array<String>()
+    var tagIds = Array<String>()
+    var listTag = [TagEntity]()
+    let myGroup = DispatchGroup()
+
     let pickerImageController = DKImagePickerController()
     var imageAssets = [DKAsset]()
     var id = ""
@@ -44,27 +47,40 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        requestTag()
         requestCate()
         registerNotification()
         configImageCollectionView()
         keyboardViewHeight.constant = 0
         configUI()
-
         setupImagePicker()
-        
+        initTokenView()
         if searchText != "" {
             titleTxt.text = searchText
         }
-        
-        viewCategory.layer.borderWidth = 1
-        viewCategory.layer.cornerRadius = 4
-        viewCategory.layer.borderColor = UIColor.lightGray.cgColor
+        myGroup.notify(queue: .main) {
+            self.setupDataForUpdateQuestion()
+        }
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         Until.sendAndSetTracer(value: POST_QUESTION)
     }
-
+    
+    func initTokenView() {
+        tagView.delegate = self
+        tagView.promptText = "Từ khóa: "
+        tagView.placeholder = "Nhập và chọn từ khóa liên quan.."
+        tagView.descriptionText = "Từ khóa"
+        tagView.font = UIFont.systemFont(ofSize: 14)
+        tagView.maxTokenLimit = -1
+        tagView.searchResultHeight = 100
+        tagView.minimumCharactersToSearch = 0 // Show all results without without typing anything
+        tagView.style = .squared
+        tagView.returnKeyType(type: .done)
+    }
+    
     func registerNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -103,10 +119,13 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
         contentTxt.layer.borderWidth = 1
         contentTxt.layer.borderColor = UIColor().hexStringToUIColor(hex: "D8D8D8").cgColor
         
-        tagTxt.layer.cornerRadius = 2
-        tagTxt.layer.borderWidth = 1
-        tagTxt.layer.borderColor = UIColor().hexStringToUIColor(hex: "D8D8D8").cgColor
-        
+        tagView.layer.cornerRadius = 2
+        tagView.layer.borderWidth = 1
+        tagView.layer.borderColor = UIColor().hexStringToUIColor(hex: "D8D8D8").cgColor
+        viewCategory.layer.borderWidth = 1
+        viewCategory.layer.cornerRadius = 4
+        viewCategory.layer.borderColor = UIColor.lightGray.cgColor
+
         if isEditPost {
             postBtn.setTitle("Cập nhật", for: .normal)
             titleNaviBarLbl.text = "Sửa câu hỏi"
@@ -138,12 +157,10 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
                 }
         }
         
-        var listTag = [String]()
         for item in feedObj.tags {
-            listTag.append(item.id)
+            let token: KSToken = KSToken(title: item.tagName)
+            tagView.addToken(token)
         }
-        let listTagString = listTag.joined(separator: ",")
-        tagTxt.text = listTagString
         
         if feedObj.postEntity.isPrivate == false {
             btnSwitch.setOn(false, animated: true)
@@ -260,139 +277,157 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
     }
     
     func uploadImage(){
-        Until.showLoading()
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
-            for (index, element) in self.imageAssets.enumerated(){
-                element.fetchOriginalImage(true, completeBlock: {(image, info) -> Void in
-                    if let imageData = UIImageJPEGRepresentation(image!, 0.5) {
-                        multipartFormData.append(imageData, withName: "Image", fileName: "file\(index).png", mimeType: "image/png")
-                    }
-                })
-            }
-        }, to: UPLOAD_IMAGE, encodingCompletion: { encodingResult in
-            switch encodingResult {
-            case .success(let upload, _, _):
-                upload.responseJSON { response in
-                    let status = response.response?.statusCode
-                    if status == 200{
-                        if let result = response.result.value {
-                            let json = result as! [NSDictionary]
-                            for dic in json {
-                                let imageUrl = dic["ImageUrl"] as! String
-                                let imageThumb = dic["ThumbnailUrl"] as! String
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            Until.showLoading()
+            Alamofire.upload(multipartFormData: { (multipartFormData) in
+                for (index, element) in self.imageAssets.enumerated(){
+                    element.fetchOriginalImage(true, completeBlock: {(image, info) -> Void in
+                        if let imageData = UIImageJPEGRepresentation(image!, 0.5) {
+                            multipartFormData.append(imageData, withName: "Image", fileName: "file\(index).png", mimeType: "image/png")
+                        }
+                    })
+                }
+            }, to: UPLOAD_IMAGE, headers:header, encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        let status = response.response?.statusCode
+                        if status == 200{
+                            if let result = response.result.value {
+                                let json = result as! [NSDictionary]
+                                for dic in json {
+                                    let imageUrl = dic["ImageUrl"] as! String
+                                    let imageThumb = dic["ThumbnailUrl"] as! String
+                                    if self.isEditPost {
+                                        self.feedObj.postEntity.imageUrls.append(imageUrl)
+                                        self.feedObj.postEntity.thumbnailImageUrls.append(imageThumb)
+                                    }else{
+                                        self.imageDic.append(imageUrl)
+                                        self.thumImgDic.append(imageThumb)
+                                    }
+                                }
+                                
                                 if self.isEditPost {
-                                    self.feedObj.postEntity.imageUrls.append(imageUrl)
-                                    self.feedObj.postEntity.thumbnailImageUrls.append(imageThumb)
+                                    self.updateQuestionToServer()
                                 }else{
-                                    self.imageDic.append(imageUrl)
-                                    self.thumImgDic.append(imageThumb)
+                                    self.sendNewQuestionToServer()
                                 }
                             }
-                            
-                            if self.isEditPost {
-                                self.updateQuestionToServer()
-                            }else{
-                                self.sendNewQuestionToServer()
-                            }
                         }
+                        Until.hideLoading()
                     }
+                    
+                case .failure(let encodingError):
+                    print(encodingError)
                     Until.hideLoading()
                 }
-                
-            case .failure(let encodingError):
-                print(encodingError)
-                Until.hideLoading()
-            }
-        })
+            })
+        } catch let error as NSError {
+            print(error)
+        }
     }
     
     
     //MARK: Update current question
     func updateQuestionToServer(){
-        self.view.endEditing(true)
-        
-        let titleString = titleTxt.text
-        let contentString = contentTxt.text
-        let tagString = tagTxt.text.trimmingCharacters(in: .whitespaces)
-        
-        let post : [String : Any] = [
-            "Id" : feedObj.postEntity.id,
-            "Title" : titleString!,
-            "Content" : contentString!,
-            "ImageUrls" : feedObj.postEntity.imageUrls,
-            "ThumbnailImageUrls" : feedObj.postEntity.thumbnailImageUrls,
-            "Status" : feedObj.postEntity.status,
-            "Rating" : feedObj.postEntity.rating,
-            "UpdatedDate" : 0,
-            "CategoryId": id,
-            "IsPrivate": ischeck,
-            "IsClassified": false,
-            "CreatedDate" : feedObj.postEntity.createdDate
-        ]
-        
-        let questionParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "RequestedUserId": Until.getCurrentId(),
-            "Post": post,
-            "Tags": tagString
-        ]
-        
-        
-        Until.showLoading()
-        Alamofire.request(UPDATE_POST, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! NSDictionary
-                        let isUpdated = jsonData["IsUpdated"] as! Bool
-                        self.feedObj.postEntity.content = contentString!
-                        self.feedObj.postEntity.categoryId = self.id
-                        self.feedObj.postEntity.isPrivate = self.ischeck
-                        let tags = tagString.components(separatedBy: ",")
-                        var tagArr = [TagEntity]()
-                        for item in tags {
-                            let tag = TagEntity.init()
-                            tag.id = item
-                            tagArr.append(tag)
-                        }
-                        
-                        if tagString == "" {
-                            tagArr.removeAll()
-                        }
-
-                        self.feedObj.tags = tagArr
-                        
-                        if isUpdated {
-                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_QUESTION_DETAIL), object: self.feedObj)
-                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: nil)
-
-                            _ = self.navigationController?.popViewController(animated: true)
-                        }else{
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            self.view.endEditing(true)
+            
+            let titleString = titleTxt.text
+            let contentString = contentTxt.text
+            
+            let post : [String : Any] = [
+                "Id" : feedObj.postEntity.id,
+                "Title" : titleString!,
+                "Content" : contentString!,
+                "ImageUrls" : feedObj.postEntity.imageUrls,
+                "ThumbnailImageUrls" : feedObj.postEntity.thumbnailImageUrls,
+                "Status" : feedObj.postEntity.status,
+                "Rating" : feedObj.postEntity.rating,
+                "UpdatedDate" : 0,
+                "CategoryId": id,
+                "IsPrivate": ischeck,
+                "IsClassified": false,
+                "CreatedDate" : feedObj.postEntity.createdDate
+            ]
+            
+            let questionParam : [String : Any] = [
+                "Auth": Until.getAuthKey(),
+                "RequestedUserId": Until.getCurrentId(),
+                "Post": post,
+                "Tags": tagIds
+            ]
+            
+            
+            Until.showLoading()
+            Alamofire.request(UPDATE_POST, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! NSDictionary
+                            let isUpdated = jsonData["IsUpdated"] as! Bool
+                            self.feedObj.postEntity.content = contentString!
+                            self.feedObj.postEntity.categoryId = self.id
+                            self.feedObj.postEntity.isPrivate = self.ischeck
+                            let tags = jsonData["Tags"] as! [NSDictionary]
+                            var tagArr = [TagEntity]()
+                            for item in tags {
+                                let entity = TagEntity.init(dictionary: item)
+                                tagArr.append(entity)
+                            }
+                            self.feedObj.tags = tagArr
                             
+                            if isUpdated {
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_QUESTION_DETAIL), object: self.feedObj)
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: nil)
+                                
+                                _ = self.navigationController?.popViewController(animated: true)
+                            }else{
+                                
+                            }
                         }
+                        
+                        
+                        
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
-                    
-                  
-                    
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                Until.hideLoading()
             }
-            Until.hideLoading()
+        } catch let error as NSError {
+            print(error)
         }
     }
     
     //MARK: Request create new question
     func sendNewQuestionToServer(){
-        self.view.endEditing(true)
-        
-        let titleString = titleTxt.text
-        let contentString = contentTxt.text
-        let tagTrimmed = tagTxt.text!.replacingOccurrences(of: "\n", with: "", options: .regularExpression)
-        
-        let post : [String : Any] = [
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            self.view.endEditing(true)
+            let titleString = titleTxt.text
+            let contentString = contentTxt.text
+            
+            let post : [String : Any] = [
                 "Id" : "",
                 "Title" : titleString!,
                 "Content" : contentString!,
@@ -405,30 +440,32 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
                 "IsPrivate": ischeck,
                 "IsClassified": false,
                 "CreatedDate" : 0
-        ]
-        
-        let questionParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "RequestedUserId": Until.getCurrentId(),
-            "Post": post,
-            "Tags": tagTrimmed
-        ]
-        
-        
-        Until.showLoading()
-        Alamofire.request(POST_QUESTION, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: nil)
-
-                    _ = self.navigationController?.popViewController(animated: true)
+            ]
+            
+            let questionParam : [String : Any] = [
+                "RequestedUserId": Until.getCurrentId(),
+                "Post": post,
+                "Tags": self.tagIds
+            ]
+            
+            
+            Until.showLoading()
+            Alamofire.request(POST_QUESTION, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: nil)
+                        
+                        _ = self.navigationController?.popViewController(animated: true)
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    }
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                Until.hideLoading()
             }
-            Until.hideLoading()
+        } catch let error as NSError {
+            print(error)
         }
     }
     
@@ -495,30 +532,73 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
     }
     
     func requestCate() {
-        let cateParam : [String : Any] = [
-            "Auth": Until.getAuthKey()
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
             ]
-        Alamofire.request(GET_CATE, method: .post, parameters: cateParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let json = result as! [NSDictionary]
-                        listCate.removeAll()
-                        for element in json {
-                            let entity = CateEntity.init(dictionary: element)
-                            listCate.append(entity)
+            self.myGroup.enter()
+            Alamofire.request(GET_CATE, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let json = result as! [NSDictionary]
+                            listCate.removeAll()
+                            for element in json {
+                                let entity = CateEntity.init(dictionary: element)
+                                listCate.append(entity)
+                            }
                         }
+                        self.myGroup.leave()
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể lấy danh sách chuyên khoa. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
-                    self.setupDataForUpdateQuestion()
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể lấy danh sách chuyên khoa. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
             }
+        } catch let error as NSError {
+            print(error)
         }
     }
     
+    func requestTag() {
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            myGroup.enter()
+            Alamofire.request(GET_ALL_TAG, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let json = result as! NSDictionary
+                            let tags = json["Tags"] as! [NSDictionary]
+                            for element in tags {
+                                let entity = TagEntity.init(dictionary: element)
+                                self.listTag.append(entity)
+                                self.tagNames.append(entity.tagName)
+                            }
+                        }
+                        self.myGroup.leave()
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể lấy danh sách chuyên khoa. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+                
+            }
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+
     @IBAction func actionSwitch(_ sender: Any) {
         if btnSwitch.isOn {
             ischeck = true
@@ -526,6 +606,39 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
             ischeck = false
         }
     }
+}
+extension AddQuestionViewController: KSTokenViewDelegate {
+    func tokenView(_ tokenView: KSTokenView, performSearchWithString string: String, completion: ((_ results: Array<AnyObject>) -> Void)?) {
+        if (string.characters.isEmpty){
+            completion!(tagNames as Array<AnyObject>)
+            return
+        }
+        
+        var data: Array<String> = []
+        for value: String in tagNames {
+            if value.lowercased().range(of: string.lowercased()) != nil {
+                data.append(value)
+            }
+        }
+        completion!(data as Array<AnyObject>)
+    }
     
+    func tokenView(_ tokenView: KSTokenView, displayTitleForObject object: AnyObject) -> String {
+        return object as! String
+    }
     
+    func tokenView(_ tokenView: KSTokenView, shouldAddToken token: KSToken) -> Bool {
+        return true
+    }
+    func tokenView(_ tokenView: KSTokenView, didAddToken token: KSToken) {
+        let index = tagNames.index(of: token.title)
+        let entity = listTag[index!]
+        tagIds.append(entity.id)
+    }
+    func tokenView(_ tokenView: KSTokenView, didDeleteToken token: KSToken) {
+        let index = tagNames.index(of: token.title)
+        let entity = listTag[index!]
+        let indexTagId = tagIds.index(of: entity.id)
+        tagIds.remove(at: indexTagId!)
+    }
 }

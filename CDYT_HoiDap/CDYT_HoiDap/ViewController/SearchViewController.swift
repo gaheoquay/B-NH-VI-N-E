@@ -42,35 +42,44 @@ class SearchViewController: BaseViewController,UITableViewDelegate,UITableViewDa
   }
 //  MARK: request data
   func requestData(){
-    let param : [String : Any] = [
-      "Auth": Until.getAuthKey(),
-      "Page": 1,
-      "Size": 5,
-      "SearchString" : txtSearch.text!
-    ]
-    Until.showLoading()
-    Alamofire.request(SEARCH, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-      if let status = response.response?.statusCode {
-        
-        if status == 200{
-          if let result = response.result.value {
-            let jsonData = result as! [NSDictionary]
-            
-            for item in jsonData {
-              let entity = PostEntity.init(dictionary: item)
-              self.listSearch.append(entity)
+    do {
+        let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+        let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+        let auth = code.replacingOccurrences(of: "\n", with: "")
+        let header = [
+            "Auth": auth
+        ]
+        let param : [String : Any] = [
+            "Page": 1,
+            "Size": 5,
+            "SearchString" : txtSearch.text!
+        ]
+        Until.showLoading()
+        Alamofire.request(SEARCH, method: .post, parameters: param, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! [NSDictionary]
+                        
+                        for item in jsonData {
+                            let entity = PostEntity.init(dictionary: item)
+                            self.listSearch.append(entity)
+                        }
+                        //            self.tbResult.reloadData()
+                    }
+                }else{
+                    //          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+            }else{
+                //        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
             }
-//            self.tbResult.reloadData()
-          }
-        }else{
-//          UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+            self.tbResult.reloadData()
+            
+            Until.hideLoading()
         }
-      }else{
-//        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-      }
-      self.tbResult.reloadData()
-
-      Until.hideLoading()
+    } catch let error as NSError {
+        print(error)
     }
   }
   

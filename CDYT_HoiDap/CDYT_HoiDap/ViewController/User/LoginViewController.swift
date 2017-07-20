@@ -11,18 +11,18 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-
+    
     @IBOutlet weak var emailNickTxt: UITextField!
     @IBOutlet weak var passTxt: UITextField!
     @IBOutlet weak var errLb: UILabel!
     
-  @IBOutlet weak var btnBack: UIButton!
+    @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var registerBtn: UIButton!
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
     }
     
@@ -58,68 +58,77 @@ class LoginViewController: UIViewController {
             errLb.isHidden = true
             requestLogin()
             
-
+            
         }else{
             errLb.isHidden = false
             errLb.text = validateDataLogin()
         }
     }
-
+    
     func requestLogin(){
         
-        let passString = passTxt.text
-        
-        let uuid = NSUUID().uuidString
-      var token = ""
-      if let value = UserDefaults.standard.object(forKey: NOTIFICATION_TOKEN) as? String {
-        token = value
-      }
-        let device : [String : Any] = [
-            "OS": 0,
-            "DeviceId": uuid,
-            "Token": token
-        ]
-        
-        let loginParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "NicknameOrEmail": emailNickTxt.text!,
-            "Password": DataEncryption.getMD5(from: passString),
-            "Device": device
-        ]
-        
-        
-      
-        Until.showLoading()
-        Alamofire.request(LOGIN_EMAIL_NICKNAME, method: .post, parameters: loginParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! NSDictionary
-                        let reaml = try! Realm()
-                        let entity = UserEntity.initWithDictionary(dictionary: jsonData)
-                        
-                        try! reaml.write {
-                            reaml.add(entity, update: true)
-                          Until.initSendBird()
-                          Until.getSchedule()
-                          NotificationCenter.default.post(name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
-                          _ = self.navigationController?.popToRootViewController(animated: true)
-                        }
-                        
-                        self.getListNotification()
-                    }
-                }else if status == 400 {
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Email/Tên đăng nhập và mật khẩu không đúng, vui lòng thử lại.", cancelBtnTitle: "Đóng")
-                }else if status == 409{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản này đã bị khoá. Hãy liên hệ với quản trị viên để biết thông tin chi tiết!", cancelBtnTitle: "Đóng")
-                }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-                }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let passString = passTxt.text
+            let uuid = NSUUID().uuidString
+            var token = ""
+            if let value = UserDefaults.standard.object(forKey: NOTIFICATION_TOKEN) as? String {
+                token = value
             }
-            Until.hideLoading()
+            let device : [String : Any] = [
+                "OS": 0,
+                "DeviceId": uuid,
+                "Token": token
+            ]
+            
+            let loginParam : [String : Any] = [
+                "Auth": Until.getAuthKey(),
+                "NicknameOrEmail": emailNickTxt.text!,
+                "Password": DataEncryption.getMD5(from: passString),
+                "Device": device
+            ]
+            
+            Until.showLoading()
+            Alamofire.request(LOGIN_EMAIL_NICKNAME, method: .post, parameters: loginParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! NSDictionary
+                            let reaml = try! Realm()
+                            let entity = UserEntity.initWithDictionary(dictionary: jsonData)
+                            
+                            try! reaml.write {
+                                reaml.add(entity, update: true)
+                                Until.initSendBird()
+                                Until.getSchedule()
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
+                                _ = self.navigationController?.popToRootViewController(animated: true)
+                            }
+                            
+                            self.getListNotification()
+                        }
+                    }else if status == 400 {
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Email/Tên đăng nhập và mật khẩu không đúng, vui lòng thử lại.", cancelBtnTitle: "Đóng")
+                    }else if status == 409{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản này đã bị khoá. Hãy liên hệ với quản trị viên để biết thông tin chi tiết!", cancelBtnTitle: "Đóng")
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+                Until.hideLoading()
+            }
+            
+        } catch let error as NSError {
+            print(error)
         }
+
     }
     
     
@@ -148,19 +157,19 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func forgotPassBtnAction(_ sender: Any) {        
+    @IBAction func forgotPassBtnAction(_ sender: Any) {
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as! ForgotPasswordViewController
         self.navigationController?.pushViewController(viewController, animated: true)
     }
-
+    
     @IBAction func registerBtnAction(_ sender: Any) {
-      let viewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterViewController") as! RegisterViewController
-      self.navigationController?.pushViewController(viewController, animated: true)
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "RegisterViewController") as! RegisterViewController
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
-  @IBAction func actionBack(_ sender: Any) {
-    _ = self.navigationController?.popViewController(animated: true)
-  }
-  
+    @IBAction func actionBack(_ sender: Any) {
+        _ = self.navigationController?.popViewController(animated: true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

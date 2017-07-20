@@ -101,6 +101,12 @@
 		0FF7533D1E62F3A9001450B7 /* ExamScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7533B1E62F3A9001450B7 /* ExamScheduleCell.swift */; };
 		0FF7533E1E62F3A9001450B7 /* ExamScheduleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FF7533C1E62F3A9001450B7 /* ExamScheduleCell.xib */; };
 		0FF753401E62F52C001450B7 /* Profile2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF7533F1E62F52C001450B7 /* Profile2.png */; };
+		5020249A1F1F3A6800D5989B /* KSToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502024961F1F3A6800D5989B /* KSToken.swift */; };
+		5020249B1F1F3A6800D5989B /* KSTokenField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502024971F1F3A6800D5989B /* KSTokenField.swift */; };
+		5020249C1F1F3A6800D5989B /* KSTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502024981F1F3A6800D5989B /* KSTokenView.swift */; };
+		5020249D1F1F3A6800D5989B /* KSUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502024991F1F3A6800D5989B /* KSUtils.swift */; };
+		508887DD1F1DBC150065A691 /* ApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508887DC1F1DBC150065A691 /* ApiHelper.swift */; };
+		508887DF1F1DBC820065A691 /* ApiDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508887DE1F1DBC820065A691 /* ApiDefine.swift */; };
 		792444BAFCB405C2DBAC9872 /* Pods_CDYT_HoiDap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */; };
 		8B0D35F51E56EB2D002CF784 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0D35F41E56EB2D002CF784 /* BookingViewController.swift */; };
 		8B1AD45B1E1B828500D55543 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AD45A1E1B828500D55543 /* SearchViewController.swift */; };
@@ -415,6 +421,12 @@
 		0FF7533C1E62F3A9001450B7 /* ExamScheduleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExamScheduleCell.xib; sourceTree = "<group>"; };
 		0FF7533F1E62F52C001450B7 /* Profile2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Profile2.png; sourceTree = "<group>"; };
 		4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CDYT_HoiDap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		502024961F1F3A6800D5989B /* KSToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSToken.swift; sourceTree = "<group>"; };
+		502024971F1F3A6800D5989B /* KSTokenField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSTokenField.swift; sourceTree = "<group>"; };
+		502024981F1F3A6800D5989B /* KSTokenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSTokenView.swift; sourceTree = "<group>"; };
+		502024991F1F3A6800D5989B /* KSUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSUtils.swift; sourceTree = "<group>"; };
+		508887DC1F1DBC150065A691 /* ApiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiHelper.swift; sourceTree = "<group>"; };
+		508887DE1F1DBC820065A691 /* ApiDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiDefine.swift; sourceTree = "<group>"; };
 		54350AF3B96C58CE38450098 /* Pods-CDYT_HoiDap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYT_HoiDap.release.xcconfig"; path = "Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap.release.xcconfig"; sourceTree = "<group>"; };
 		8B0D35F41E56EB2D002CF784 /* BookingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
 		8B1AD45A1E1B828500D55543 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -715,6 +727,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		502024951F1F3A6800D5989B /* KSTokenView */ = {
+			isa = PBXGroup;
+			children = (
+				502024961F1F3A6800D5989B /* KSToken.swift */,
+				502024971F1F3A6800D5989B /* KSTokenField.swift */,
+				502024981F1F3A6800D5989B /* KSTokenView.swift */,
+				502024991F1F3A6800D5989B /* KSUtils.swift */,
+			);
+			path = KSTokenView;
+			sourceTree = "<group>";
+		};
 		8B2AFF081E64222C00415554 /* BookingEntity */ = {
 			isa = PBXGroup;
 			children = (
@@ -878,6 +901,7 @@
 		8B3A131E1E10F454005DBC6E /* Libaries */ = {
 			isa = PBXGroup;
 			children = (
+				502024951F1F3A6800D5989B /* KSTokenView */,
 				A60430F71E233431000216FB /* SSRadioButtonController */,
 				8B3A131F1E10F454005DBC6E /* CAPSPageMenu.swift */,
 				8B3A13201E10F454005DBC6E /* DatePickerDialog.swift */,
@@ -994,6 +1018,8 @@
 				8BD49F0E1E4824EA00C98E74 /* Constants.swift */,
 				A6E9D8921E111F3100E31886 /* Until.swift */,
 				8B3A13801E10F46B005DBC6E /* Global.swift */,
+				508887DC1F1DBC150065A691 /* ApiHelper.swift */,
+				508887DE1F1DBC820065A691 /* ApiDefine.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1317,8 +1343,8 @@
 				TargetAttributes = {
 					8B3A12DA1E10F399005DBC6E = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = BY2N2SG836;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = 99B27LPQS8;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1589,6 +1615,7 @@
 				A6E4C2F81E1102A500C2C871 /* RegisterViewController.swift in Sources */,
 				0F09CEF51E88B1DC003FD8B1 /* SelectServiceViewController.swift in Sources */,
 				98EC9B771EA9BC8C00095FFB /* MedicalTestEntity.swift in Sources */,
+				5020249B1F1F3A6800D5989B /* KSTokenField.swift in Sources */,
 				8B3A13881E10FD2A005DBC6E /* UserViewController.swift in Sources */,
 				8BD49F0A1E48215500C98E74 /* MemberListTableViewCell.swift in Sources */,
 				0FA535AF1E8221560004D329 /* ListAdminEntity.swift in Sources */,
@@ -1640,10 +1667,12 @@
 				0FF632711E861D400044597F /* ExamInHomeViewController.swift in Sources */,
 				0F81E4B01E6747DB00A7C18F /* ResultUserEntity.swift in Sources */,
 				A68A95131E1518E10067736E /* SubCommentEntity.swift in Sources */,
+				508887DF1F1DBC820065A691 /* ApiDefine.swift in Sources */,
 				0F6585271E95F01F002EEAC9 /* PrescriptionCell.swift in Sources */,
 				8BD49F601E482D1100C98E74 /* CreateOpenChannelViewController.swift in Sources */,
 				A6417E221E13B68D00BD2D75 /* SettingTableViewCell.swift in Sources */,
 				981CC9151EA66A8F00E35EB0 /* TotalPriceCell.swift in Sources */,
+				5020249D1F1F3A6800D5989B /* KSUtils.swift in Sources */,
 				8B7AB6BE1E1211E20015DFBE /* KeywordCollectionViewCell.swift in Sources */,
 				8BD49F031E48215500C98E74 /* MemberListViewController.swift in Sources */,
 				A6417E251E13C78D00BD2D75 /* AddQuestionViewController.swift in Sources */,
@@ -1652,6 +1681,7 @@
 				9804129B1EAD9764006FECE5 /* AnalysisCell.swift in Sources */,
 				A6E9D88F1E1110CF00E31886 /* LoginViewController.swift in Sources */,
 				0FA8B1EA1E80E059000FF76B /* InsertAccountCell.swift in Sources */,
+				5020249C1F1F3A6800D5989B /* KSTokenView.swift in Sources */,
 				8BD49EFC1E48215500C98E74 /* GroupChannelChattingViewController.swift in Sources */,
 				8B1AD45B1E1B828500D55543 /* SearchViewController.swift in Sources */,
 				0FC0CBA71E876C21009DA53C /* DetaiAnalysisViewController.swift in Sources */,
@@ -1671,6 +1701,7 @@
 				0F17AB191E51BAC2008BA308 /* CateEntity.swift in Sources */,
 				0FEB18621EA0B87B00C9D5C0 /* PatientHistoryEntity.swift in Sources */,
 				8B0D35F51E56EB2D002CF784 /* BookingViewController.swift in Sources */,
+				508887DD1F1DBC150065A691 /* ApiHelper.swift in Sources */,
 				0FA5806A1E65D5D4001B4E3C /* CheckInResultEntity.swift in Sources */,
 				8BD49F651E482D1100C98E74 /* OpenChannelChattingViewController.swift in Sources */,
 				0FEDD6BB1EA1F5D000E3D42E /* CodeFormAnalysisCell.swift in Sources */,
@@ -1686,6 +1717,7 @@
 				8BD49F271E482C1500C98E74 /* ChattingView.swift in Sources */,
 				8B3A12DF1E10F399005DBC6E /* AppDelegate.swift in Sources */,
 				A60430FA1E233431000216FB /* SSRadioButton.swift in Sources */,
+				5020249A1F1F3A6800D5989B /* KSToken.swift in Sources */,
 				0FA535B11E82393A0004D329 /* AdminUpdateProfileViewController.swift in Sources */,
 				0FC751EB1E8BA44200B82553 /* HistoryCell.swift in Sources */,
 				8B3A137B1E10F454005DBC6E /* RAMTransitionItemAnimations.swift in Sources */,
@@ -1909,14 +1941,14 @@
 				CODE_SIGN_ENTITLEMENTS = CDYT_HoiDap/CDYT_HoiDap.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anh Ta (R24Y486KUK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = BY2N2SG836;
+				DEVELOPMENT_TEAM = 99B27LPQS8;
 				INFOPLIST_FILE = CDYT_HoiDap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.benhviene.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "8f41fdf3-4bec-4677-b96a-27bc42a62a3f";
+				PROVISIONING_PROFILE_SPECIFIER = "benh vien e development";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1929,15 +1961,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CDYT_HoiDap/CDYT_HoiDap.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anh Ta (R24Y486KUK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = BY2N2SG836;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 99B27LPQS8;
 				INFOPLIST_FILE = CDYT_HoiDap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.isorasoft.bve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.benhviene.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "a74c97fa-df8c-4c92-a012-b074897f3eae";
+				PROVISIONING_PROFILE_SPECIFIER = "benh vien e distribution";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};

@@ -318,12 +318,21 @@ class Until{
     }
   }
     class func getAuthKey() -> NSDictionary{
-        let keyString = String(format: "%.0f", NSDate().timeIntervalSince1970)
+        var keyString = ""
+        var loginToken = ""
+        let realm = try! Realm()
+        if let userEntity = realm.objects(UserEntity.self).first {
+            keyString = userEntity.id
+            loginToken = userEntity.loginToken
+        }else{
+            keyString = String(format: "%.0f", NSDate().timeIntervalSince1970)
+        }
         let tokenString = DataEncryption.getMD5(from: "\(keyString)\(KEY_AUTH_DEFAULT)")
         
         let auth = [
             "Key" : keyString,
-            "Token" : tokenString
+            "Token" : tokenString ?? "",
+            "LoginToken": loginToken
         ]
         
         return auth as NSDictionary

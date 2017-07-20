@@ -46,20 +46,29 @@ class ForgotPasswordViewController: BaseViewController {
     }
     
     func requestForgotPassword(){
-        let hotParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "Email": txtEmail.text!
-        ]
-        Until.showLoading()
-        Alamofire.request(FOR_GOT_PASSWORD, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Mật khẩu mới của bạn đã được gửi về email đăng ký. Vui lòng kiểm tra lại", cancelBtnTitle: "Đóng")
-                }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không tìm thấy tài khoản với email bạn nhập!", cancelBtnTitle: "Đóng")
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let hotParam : [String : Any] = [
+                "Email": txtEmail.text!
+            ]
+            Until.showLoading()
+            Alamofire.request(FOR_GOT_PASSWORD, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Mật khẩu mới của bạn đã được gửi về email đăng ký. Vui lòng kiểm tra lại", cancelBtnTitle: "Đóng")
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không tìm thấy tài khoản với email bạn nhập!", cancelBtnTitle: "Đóng")
+                    }
+                    Until.hideLoading()
                 }
-                Until.hideLoading()
             }
+        } catch let error as NSError {
+            print(error)
         }
     }
     

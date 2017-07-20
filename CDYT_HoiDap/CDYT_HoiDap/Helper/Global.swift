@@ -82,6 +82,7 @@ let BLOCK_USER = BASE_URL + "/User/BlockUser"
 let UN_BLOCK_USER = BASE_URL + "/User/UnblockUser"
 let GET_LIST_ADMIN = BASE_URL + "/User/GetListAdmin"
 let GET_LIST_PACKAGE_SERVICE = BASE_URL + "/Service/GetListPackServices"
+let GET_ALL_TAG = BASE_URL + "/Tag/GetAll"
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
 let NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"

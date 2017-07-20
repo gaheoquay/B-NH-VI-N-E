@@ -75,48 +75,55 @@ class TagListViewController: BaseViewController, UITableViewDataSource, UITableV
     let entity = listHotTag[indexPath.row]
     
     let tracker = GAI.sharedInstance().defaultTracker
-    tracker?.send(GAIDictionaryBuilder.createEvent(withCategory: "Tag", action: "ClickTagInPage", label: "\(entity.tag.id)", value: nil).build() as [NSObject : AnyObject])
+    tracker?.send(GAIDictionaryBuilder.createEvent(withCategory: "Tag", action: "ClickTagInPage", label: "\(entity.tag.tagName)", value: nil).build() as [NSObject : AnyObject])
 
     let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
-    viewController.hotTagId = entity.tag.id
+    viewController.hotTag = entity.tag
     self.navigationController?.pushViewController(viewController, animated: true)
     
   }
   
     func getHotTagFromServer(){
-        let hotParam : [String : Any] = [
-            "Auth": Until.getAuthKey(),
-            "Page": page,
-            "Size": 10,
-            "RequestedUserId" : Until.getCurrentId()
-        ]
-        
-        
-        Until.showLoading()
-        Alamofire.request(HOTEST_TAG, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! [NSDictionary]
-                        
-                        for item in jsonData {
-                            let hotTag = HotTagEntity.init(dictionary: item)
-                            self.listHotTag.append(hotTag)
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let hotParam : [String : Any] = [
+                "Page": page,
+                "Size": 10,
+                "RequestedUserId" : Until.getCurrentId()
+            ]
+            Until.showLoading()
+            Alamofire.request(HOTEST_TAG, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! [NSDictionary]
+                            
+                            for item in jsonData {
+                                let hotTag = HotTagEntity.init(dictionary: item)
+                                self.listHotTag.append(hotTag)
+                            }
+                            
+                            self.tagTableView.reloadData()
+                            
                         }
-                        
-                        self.tagTableView.reloadData()
-                        
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                Until.hideLoading()
+                self.tagTableView.pullToRefreshView?.stopAnimating()
+                self.tagTableView.infiniteScrollingView?.stopAnimating()
+                
             }
-            Until.hideLoading()
-          self.tagTableView.pullToRefreshView?.stopAnimating()
-          self.tagTableView.infiniteScrollingView?.stopAnimating()
-
+        } catch let error as NSError {
+            print(error)
         }
     }
     override func didReceiveMemoryWarning() {
