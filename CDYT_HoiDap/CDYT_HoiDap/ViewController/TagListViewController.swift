@@ -8,81 +8,65 @@
 
 import UIKit
 
-class TagListViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, QuestionTagTableViewCellDelegate {
-
+class TagListViewController: BaseViewController {
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tagTableView: UITableView!
     var listHotTag = [HotTagEntity]()
     var page = 1
+    var time = Timer()
     override func viewDidLoad() {
         super.viewDidLoad()
-      initTaleView()
+        searchBar.delegate = self
+        initTaleView()
         getHotTagFromServer()
     }
-  
+    
     override func viewDidAppear(_ animated: Bool) {
         Until.sendAndSetTracer(value: SLECT_TAG)
-
+        
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listHotTag.count
     }
-  
-  func initTaleView(){
-    tagTableView.delegate = self
-    tagTableView.dataSource = self
-    tagTableView.estimatedRowHeight = 200
-    tagTableView.rowHeight = UITableViewAutomaticDimension
-    tagTableView.register(UINib.init(nibName: "QuestionTagTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTagTableViewCell")
-    tagTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-    tagTableView.addPullToRefreshHandler {
-      DispatchQueue.main.async {
-        self.reloadData()
-      }
-    }
-    tagTableView.addInfiniteScrollingWithHandler {
-      DispatchQueue.main.async {
-        self.loadMore()
-      }
-    }
-  }
-  func reloadData(){
-    page = 1
-    listHotTag.removeAll()
-    getHotTagFromServer()
-  }
-  func loadMore(){
-    page += 1
-    getHotTagFromServer()
-  }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTagTableViewCell") as! QuestionTagTableViewCell
-        cell.delegate = self
-        if listHotTag.count > 0 {
-            cell.hotTag = listHotTag[indexPath.row]
-            cell.setData()
+    
+    func initTaleView(){
+        tagTableView.delegate = self
+        tagTableView.dataSource = self
+        tagTableView.estimatedRowHeight = 200
+        tagTableView.rowHeight = UITableViewAutomaticDimension
+        tagTableView.register(UINib.init(nibName: "QuestionTagTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTagTableViewCell")
+        tagTableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        tagTableView.addPullToRefreshHandler {
+            DispatchQueue.main.async {
+                self.reloadData()
+            }
         }
-        return cell
+        tagTableView.addInfiniteScrollingWithHandler {
+            DispatchQueue.main.async {
+                self.loadMore()
+            }
+        }
+    }
+    func reloadData(){
+        page = 1
+        listHotTag.removeAll()
+        if searchBar.text?.characters.count == 0 {
+            getHotTagFromServer()
+        }else{
+            searchTag()
+        }
+        
+    }
+    func loadMore(){
+        page += 1
+        if searchBar.text?.characters.count == 0 {
+            getHotTagFromServer()
+        }else{
+            searchTag()
+        }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-    let entity = listHotTag[indexPath.row]
-    
-    let tracker = GAI.sharedInstance().defaultTracker
-    tracker?.send(GAIDictionaryBuilder.createEvent(withCategory: "Tag", action: "ClickTagInPage", label: "\(entity.tag.tagName)", value: nil).build() as [NSObject : AnyObject])
-
-    let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
-    viewController.hotTag = entity.tag
-    self.navigationController?.pushViewController(viewController, animated: true)
-    
-  }
-  
     func getHotTagFromServer(){
         do {
             let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
@@ -96,7 +80,6 @@ class TagListViewController: BaseViewController, UITableViewDataSource, UITableV
                 "Size": 10,
                 "RequestedUserId" : Until.getCurrentId()
             ]
-            Until.showLoading()
             Alamofire.request(HOTEST_TAG, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
                 if let status = response.response?.statusCode {
                     if status == 200{
@@ -109,7 +92,6 @@ class TagListViewController: BaseViewController, UITableViewDataSource, UITableV
                             }
                             
                             self.tagTableView.reloadData()
-                            
                         }
                     }else{
                         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -117,24 +99,105 @@ class TagListViewController: BaseViewController, UITableViewDataSource, UITableV
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-                Until.hideLoading()
                 self.tagTableView.pullToRefreshView?.stopAnimating()
                 self.tagTableView.infiniteScrollingView?.stopAnimating()
-                
             }
         } catch let error as NSError {
             print(error)
         }
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func searchTag(){
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let requestUrl = SEARCH_TAG + "?page=\(page)&size=10&userId=\(Until.getCurrentId())&query=\(searchBar.text ?? "")"
+            Alamofire.request(requestUrl, method: .get, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = (result as! NSDictionary)["Tags"] as! [NSDictionary]
+                            
+                            for item in jsonData {
+                                let hotTag = HotTagEntity.init(dictionary: item)
+                                self.listHotTag.append(hotTag)
+                            }
+                            
+                            self.tagTableView.reloadData()
+                        }
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+                self.tagTableView.pullToRefreshView?.stopAnimating()
+                self.tagTableView.infiniteScrollingView?.stopAnimating()
+            }
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+}
+
+//  MARK: UITableViewDataSource, UITableViewDelegate
+extension TagListViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTagTableViewCell") as! QuestionTagTableViewCell
+        cell.delegate = self
+        if listHotTag.count > 0 {
+            cell.hotTag = listHotTag[indexPath.row]
+            cell.setData()
+        }
+        return cell
     }
     
-
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let entity = listHotTag[indexPath.row]
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker?.send(GAIDictionaryBuilder.createEvent(withCategory: "Tag", action: "ClickTagInPage", label: "\(entity.tag.tagName)", value: nil).build() as [NSObject : AnyObject])
+        
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
+        viewController.hotTag = entity.tag
+        self.navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+}
 //  MARK: QuestionTagTableViewCellDelegate
-  func checkLogin() {
-    Until.gotoLogin(_self: self, cannotBack: false)
-  }
+extension TagListViewController: UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
+    }
+}
+//  MARK: QuestionTagTableViewCellDelegate
+extension TagListViewController: QuestionTagTableViewCellDelegate {
+    func checkLogin() {
+        Until.gotoLogin(_self: self, cannotBack: false)
+    }
+}
 
+//  MARK: UISearchBarDelegate
+extension TagListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        time.invalidate()
+        if #available(iOS 10.0, *) {
+            time = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { (_) in
+                self.page = 1
+                self.listHotTag.removeAll()
+                self.searchTag()
+            })
+        } else {
+            time = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.searchTag), userInfo: nil, repeats: false)
+        }
+    }
 }

@@ -42,7 +42,7 @@ class NotificationEntity: NSObject {
       this.isRead = value
     }
     if let value = dictionary["CreatedDate"] as? Double {
-      this.createdDate = value
+      this.createdDate = value/1000
     }
     
     return this

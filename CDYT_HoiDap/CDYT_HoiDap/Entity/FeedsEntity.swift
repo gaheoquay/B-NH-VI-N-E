@@ -20,10 +20,13 @@ class FeedsEntity: NSObject {
     var assigneeEntity = AuthorEntity()
     var firstCommentedDoctor = AuthorEntity()
     var firstCommentTime : Double = 0
+    var isAssigneeAnswered = false
+    var assigneeFirstCommentTime: Double = 0
     
     override init(){
         super.init()
     }
+    
     init(dictionary:NSDictionary) {
         if let value = dictionary["Author"] as? NSDictionary {
             authorEntity = AuthorEntity.init(dictionary: value)
@@ -59,9 +62,14 @@ class FeedsEntity: NSObject {
             firstCommentedDoctor = AuthorEntity.init(dictionary: value)
         }
         if let value = dictionary["FirstCommentTime"] as? Double {
-            firstCommentTime = value
+            firstCommentTime = value/1000
         }
-        
+        if let value = dictionary["AssigneeFirstCommentTime"] as? Double {
+            assigneeFirstCommentTime = value/1000
+        }
+        if let value = dictionary["IsAssigneeAnswered"] as? Bool {
+            isAssigneeAnswered = value
+        }
         
     }
 }

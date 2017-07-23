@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hM3-bO-IgQ">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -5254,7 +5254,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Fn-tS-CcD">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="108" width="320" height="411"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jjk-Hr-JRk">
@@ -5264,17 +5264,25 @@
                                     <constraint firstAttribute="height" constant="20" id="Y6M-ts-c4x"/>
                                 </constraints>
                             </view>
+                            <searchBar contentMode="redraw" placeholder="Nhập từ khóa cần tìm" translatesAutoresizingMaskIntoConstraints="NO" id="mRn-BB-gJ6">
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="3Fn-tS-CcD" firstAttribute="top" secondItem="7kN-wK-4LY" secondAttribute="bottom" id="H6v-og-CwA"/>
+                            <constraint firstItem="3Fn-tS-CcD" firstAttribute="top" secondItem="mRn-BB-gJ6" secondAttribute="bottom" id="2fI-tR-G6A"/>
                             <constraint firstAttribute="trailing" secondItem="3Fn-tS-CcD" secondAttribute="trailing" id="NoI-0f-4QO"/>
+                            <constraint firstItem="mRn-BB-gJ6" firstAttribute="top" secondItem="7kN-wK-4LY" secondAttribute="bottom" id="RfU-yc-2dB"/>
+                            <constraint firstAttribute="trailing" secondItem="mRn-BB-gJ6" secondAttribute="trailing" id="Uua-Q8-4Ho"/>
                             <constraint firstAttribute="trailing" secondItem="Jjk-Hr-JRk" secondAttribute="trailing" id="bYD-mv-N2K"/>
                             <constraint firstAttribute="trailing" secondItem="7kN-wK-4LY" secondAttribute="trailing" id="fVF-55-fgP"/>
                             <constraint firstItem="3Fn-tS-CcD" firstAttribute="leading" secondItem="neB-OD-Hdo" secondAttribute="leading" id="gdG-TK-qci"/>
                             <constraint firstItem="7kN-wK-4LY" firstAttribute="leading" secondItem="neB-OD-Hdo" secondAttribute="leading" id="jHp-ei-Thl"/>
                             <constraint firstItem="Jjk-Hr-JRk" firstAttribute="top" secondItem="neB-OD-Hdo" secondAttribute="top" id="nPr-ha-ts2"/>
                             <constraint firstItem="Jjk-Hr-JRk" firstAttribute="leading" secondItem="neB-OD-Hdo" secondAttribute="leading" id="nwV-Ar-YXS"/>
+                            <constraint firstItem="mRn-BB-gJ6" firstAttribute="leading" secondItem="neB-OD-Hdo" secondAttribute="leading" id="qCQ-Pk-U9t"/>
                             <constraint firstItem="95N-f0-PMN" firstAttribute="top" secondItem="3Fn-tS-CcD" secondAttribute="bottom" id="uK2-1T-VaX"/>
                             <constraint firstItem="7kN-wK-4LY" firstAttribute="top" secondItem="624-GY-UJi" secondAttribute="bottom" id="wPg-r4-I9q"/>
                         </constraints>
@@ -5291,6 +5299,7 @@
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="KOM-W4-cPL"/>
                     <connections>
+                        <outlet property="searchBar" destination="mRn-BB-gJ6" id="aw6-uJ-D8n"/>
                         <outlet property="tagTableView" destination="3Fn-tS-CcD" id="RtL-7O-KZI"/>
                     </connections>
                 </viewController>
@@ -5303,7 +5312,7 @@
                 </customObject>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vqk-vX-Ufq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="278" y="1447"/>
+            <point key="canvasLocation" x="277.5" y="1446.1267605633802"/>
         </scene>
         <!--Tài khoản-->
         <scene sceneID="2rC-Mx-dOP">

@@ -47,6 +47,7 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleTxt.delegate = self
         requestTag()
         requestCate()
         registerNotification()
@@ -213,6 +214,7 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
         }
         
         let browser = SKPhotoBrowser(photos: images)
+        browser.initializePageIndex(indexPath.row)
         self.present(browser, animated: true, completion: nil)
     }
     
@@ -236,6 +238,7 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
             imageAssets.remove(at: indexPath.row - feedObj.postEntity.imageUrls.count)
         }else{
             feedObj.postEntity.imageUrls.remove(at: indexPath.row)
+            feedObj.postEntity.thumbnailImageUrls.remove(at: indexPath.row)
         }
         imgClv.reloadData()
     }
@@ -398,9 +401,6 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
                                 
                             }
                         }
-                        
-                        
-                        
                     }else{
                         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
@@ -640,5 +640,18 @@ extension AddQuestionViewController: KSTokenViewDelegate {
         let entity = listTag[index!]
         let indexTagId = tagIds.index(of: entity.id)
         tagIds.remove(at: indexTagId!)
+    }
+}
+extension AddQuestionViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == self.titleTxt {
+            let currentCharacterCount = textField.text?.characters.count ?? 0
+            if (range.length + range.location > currentCharacterCount){
+                return false
+            }
+            let newLength = currentCharacterCount + string.characters.count - range.length
+            return newLength <= 200
+        }
+        return true
     }
 }

@@ -168,7 +168,7 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
         }
         if userEntity != nil {
             avaImg.sd_setImage(with: URL.init(string: userEntity.avatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut"))
-            nicknameLbl.text = userEntity.nickname
+            nicknameLbl.text = userEntity.fullname
             if userEntity.role == 1 {
                 lbPage1.text = "Câu hỏi đang theo dõi"
                 lbPage2.text = "Câu hỏi đã tạo"
@@ -658,6 +658,12 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let realm = try! Realm()
+        let currentUser = realm.objects(UserEntity.self).first
+        if currentUser?.role != 3 {
+            return
+        }
+
         let main = UIStoryboard(name: "User", bundle: nil)
         let viewcontroller = main.instantiateViewController(withIdentifier: "AdminUpdateProfileViewController") as! AdminUpdateProfileViewController
         if isFollowing {
@@ -765,7 +771,7 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
                         if let status = response.response?.statusCode {
                             if status == 200{
                                 admin.isBlocked = false
-                                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(admin.nickName) đã được mở khoá thành công", cancelBtnTitle: "Đóng")
+                                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(admin.fullName) đã được mở khoá thành công", cancelBtnTitle: "Đóng")
                                 self.questionTableView.reloadData()
                             }else{
                             }
@@ -779,7 +785,7 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
                         if let status = response.response?.statusCode {
                             if status == 200{
                                 admin.isBlocked = true
-                                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(admin.nickName) đã được khoá thành công", cancelBtnTitle: "Đóng")
+                                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(admin.fullName) đã được khoá thành công", cancelBtnTitle: "Đóng")
                                 self.questionTableView.reloadData()
                             }else{
                                 //                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -797,7 +803,7 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
                         if let status = response.response?.statusCode {
                             if status == 200{
                                 author.isBlocked = false
-                                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(author.nickname) đã được mở khoá thành công", cancelBtnTitle: "Đóng")
+                                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(author.fullname) đã được mở khoá thành công", cancelBtnTitle: "Đóng")
                                 self.questionTableView.reloadData()
                             }else{
                                 //                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -813,7 +819,7 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
                         if let status = response.response?.statusCode {
                             if status == 200{
                                 author.isBlocked = true
-                                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(author.nickname) đã được khoá thành công", cancelBtnTitle: "Đóng")
+                                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản \(author.fullname) đã được khoá thành công", cancelBtnTitle: "Đóng")
                                 self.questionTableView.reloadData()
                             }else{
                                 //                            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")

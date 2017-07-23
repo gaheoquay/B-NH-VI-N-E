@@ -271,9 +271,7 @@ class Until{
     _self.navigationController?.pushViewController(viewController, animated: true)
   }
     class func isValidEmail(email:String) -> Bool {
-        // println("validate calendar: \(testStr)")
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-        
+        let emailRegEx = "[A-Z0-9a-z._]{4,50}+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: email)
     }

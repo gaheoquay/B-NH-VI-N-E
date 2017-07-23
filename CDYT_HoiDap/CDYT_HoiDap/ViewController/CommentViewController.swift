@@ -340,6 +340,7 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
+            cell.feed = feedEntity
             if currentUserId == feedEntity.authorEntity.id {
                 cell.isMyPost = true
             }else{
@@ -352,6 +353,7 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
+            cell.feed = feedEntity
             cell.mainComment = mainComment
             cell.subComment = mainComment.subComment[indexPath.row - 1]
             cell.delegate = self

@@ -64,7 +64,7 @@ class ListAdminEntity: NSObject {
             isBlocked = value
         }
         if let value = dictionary["DOB"] as? Double {
-            dob = value
+            dob = value/1000
         }
         if let value = dictionary["Phone"] as? String {
             phone = value

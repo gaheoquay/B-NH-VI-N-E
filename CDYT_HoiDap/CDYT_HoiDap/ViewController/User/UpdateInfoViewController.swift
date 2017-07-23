@@ -160,7 +160,7 @@ class UpdateInfoViewController: BaseViewController {
             avaImg2.sd_setImage(with: URL.init(string: peopleInfo.user.avatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
             
             nameLbl2.isHidden = false
-            nameLbl2.text = peopleInfo.user.nickname
+            nameLbl2.text = peopleInfo.user.fullname
             
             changePassViewHeight.constant = 0
             changePassView.isHidden = true
@@ -219,7 +219,7 @@ class UpdateInfoViewController: BaseViewController {
             avaImg1Height.constant = 55
             avaImg1.sd_setImage(with: URL.init(string: userToShow.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
             
-            nameLbl1.text = userToShow.nickname
+            nameLbl1.text = userToShow.fullname
             
             logoutBtn.isHidden = false
             logoutBtnHeight.constant = 25
@@ -334,7 +334,7 @@ class UpdateInfoViewController: BaseViewController {
             ]
             
             let logoutParam : [String : Any] = [
-                "NicknameOrEmail": user[0].nickname,
+                "NicknameOrEmail": user[0].fullname,
                 "Device": device
             ]
             Until.showLoading()

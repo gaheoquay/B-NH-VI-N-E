@@ -70,7 +70,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
     }
     
     func showDoctorProfile(){
-        delegate?.gotoUserProfileFromQuestionDoctor(doctor: feedEntity.firstCommentedDoctor)
+        delegate?.gotoUserProfileFromQuestionDoctor(doctor: feedEntity.isAssigneeAnswered ? feedEntity.assigneeEntity : feedEntity.firstCommentedDoctor)
     }
     
     @IBAction func showDetail(_ sender: Any) {
@@ -155,17 +155,17 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
         let fontWithColor = [ NSFontAttributeName: UIFont.systemFont(ofSize: 12),NSForegroundColorAttributeName: UIColor.init(netHex: 0x87baef)]
         let myAttrString = NSMutableAttributedString(string: "Hỏi bởi :     ", attributes: fontRegular)
         if feedEntity.postEntity.isPrivate != true || users?.id == feedEntity.authorEntity.id {
-            myAttrString.append(NSAttributedString(string: feedEntity.authorEntity.nickname, attributes: fontWithColor))
+            myAttrString.append(NSAttributedString(string: feedEntity.authorEntity.fullname, attributes: fontWithColor))
             
         }else{
             myAttrString.append(NSAttributedString(string: "Ẩn danh", attributes: fontWithColor))
         }
         
-        if feedEntity.firstCommentedDoctor.id != "" {
+        if feedEntity.isAssigneeAnswered || feedEntity.firstCommentedDoctor.id != "" {
             let myAttrStringDoctor = NSMutableAttributedString(string: "Trả lời bởi : ", attributes: fontRegular)
-            myAttrStringDoctor.append(NSAttributedString(string: feedEntity.firstCommentedDoctor.fullname, attributes: fontWithColor))
+            myAttrStringDoctor.append(NSAttributedString(string: feedEntity.isAssigneeAnswered ? feedEntity.assigneeEntity.fullname : feedEntity.firstCommentedDoctor.fullname, attributes: fontWithColor))
             lbNameDoctor.attributedText = myAttrStringDoctor
-            lbTimeAnswerDoctor.text = String().convertTimeStampWithDateFormat(timeStamp: feedEntity.firstCommentTime, dateFormat: "dd/MM/yy HH:mm")
+            lbTimeAnswerDoctor.text = String().convertTimeStampWithDateFormat(timeStamp: feedEntity.isAssigneeAnswered ? feedEntity.assigneeFirstCommentTime : feedEntity.firstCommentTime, dateFormat: "dd/MM/yy HH:mm")
             layoutBottomCreateDate.constant = 60
             lbNameDoctor.isHidden = false
             lbTimeAnswerDoctor.isHidden = false
@@ -175,13 +175,13 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
             lbNameDoctor.isHidden = true
             lbTimeAnswerDoctor.isHidden = true
             if users?.role == 2 {
-                if feedEntity.firstCommentedDoctor.id  != "" {
+                if feedEntity.isAssigneeAnswered || feedEntity.firstCommentedDoctor.id  != "" {
                     layoutBottomCreateDate.constant = 60
-                    lbCreateDate.isHidden = false
+                    lbTimeAnswerDoctor.isHidden = false
                     lbNameDoctor.isHidden = false
                 }else {
                     layoutBottomCreateDate.constant = 30
-                    lbCreateDate.isHidden = true
+                    lbTimeAnswerDoctor.isHidden = true
                     lbNameDoctor.isHidden = true
                 }
             }else {

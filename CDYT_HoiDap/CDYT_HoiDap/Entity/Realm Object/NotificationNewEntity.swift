@@ -42,7 +42,7 @@ class NotificationNewEntity: NSObject {
             self.isRead = value
         }
         if let value = dictionary["CreatedDate"] as? Double {
-            self.createDate = value
+            self.createDate = value/1000
         }
         if let value = dictionary["DisplayType"] as? Int {
             self.displayType = value

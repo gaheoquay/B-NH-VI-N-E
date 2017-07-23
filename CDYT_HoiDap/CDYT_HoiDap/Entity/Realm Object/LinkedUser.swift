@@ -55,7 +55,7 @@ class LinkedUser: NSObject {
             this.company = value
         }
         if let value = dictionary["DOB"] as? Double {
-            this.dob = value
+            this.dob = value/1000
         }
         if let value = dictionary["Address"] as? String {
             this.address = value
@@ -88,10 +88,10 @@ class LinkedUser: NSObject {
             this.isVerified = value
         }
         if let value = dictionary["UpdatedDate"] as? Double {
-            this.updatedDate = value
+            this.updatedDate = value/1000
         }
         if let value = dictionary["CreatedDate"] as? Double {
-            this.createdDate = value
+            this.createdDate = value/1000
         }
         
         return this

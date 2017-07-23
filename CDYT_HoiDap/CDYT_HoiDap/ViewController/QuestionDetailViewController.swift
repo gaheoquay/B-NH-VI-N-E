@@ -622,13 +622,8 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
             if entity.isShowMore {
                 if indexPath.row == 0{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
-                    if currentUserId == feedObj.authorEntity.id {
-                        cell.isMyPost = true
-                       
-                    }else{
-                        cell.isMyPost = false
-                    }
-                    
+                    cell.isMyPost = currentUserId == feedObj.authorEntity.id
+                    cell.feed = self.feedObj
                     cell.mainComment = listComment[indexPath.section - 1]
                     cell.setDataForMainComment()
                     cell.indexPath = indexPath
@@ -636,6 +631,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
                     return cell
                 }else{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
+                    cell.feed = self.feedObj
                     cell.mainComment = listComment[indexPath.section - 1]
                     cell.subComment = listComment[indexPath.section - 1].subComment[indexPath.row - 1]
                     cell.setDataForSubComment()
@@ -646,11 +642,8 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
             }else{
                 if indexPath.row == 0{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
-                    if currentUserId == feedObj.authorEntity.id {
-                        cell.isMyPost = true
-                    }else{
-                        cell.isMyPost = false
-                    }
+                    cell.feed = self.feedObj
+                    cell.isMyPost = currentUserId == feedObj.authorEntity.id
                     cell.mainComment = listComment[indexPath.section - 1]
                     cell.setDataForMainComment()
                     cell.indexPath = indexPath
@@ -665,6 +658,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
                         return cell
                     }else{
                         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell") as! CommentTableViewCell
+                        cell.feed = self.feedObj
                         cell.mainComment = listComment[indexPath.section - 1]
                         cell.subComment = listComment[indexPath.section - 1].subComment[indexPath.row - 1]
                         cell.setDataForSubComment()

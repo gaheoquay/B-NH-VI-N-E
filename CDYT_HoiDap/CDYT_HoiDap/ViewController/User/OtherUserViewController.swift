@@ -38,12 +38,7 @@ class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableV
         avaImg.layer.cornerRadius = 8
         avaImg.clipsToBounds = true
         avaImg.sd_setImage(with: URL.init(string: user.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
-        
-        if user.role == 1 {
-            nameLbl.text = user.fullname
-        }else {
-            nameLbl.text = user.nickname
-        }
+        nameLbl.text = user.fullname
     }
     
     func configTableView(){

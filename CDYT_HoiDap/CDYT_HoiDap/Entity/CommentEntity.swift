@@ -49,10 +49,10 @@ class CommentEntity: NSObject {
             isSolution = value
         }
         if let value = dictionary["UpdatedDate"] as? Double {
-            updatedDate = value
+            updatedDate = value/1000
         }
         if let value = dictionary["CreatedDate"] as? Double {
-            createdDate = value
+            createdDate = value/1000
         }
     }
     

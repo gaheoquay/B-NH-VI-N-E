@@ -32,7 +32,7 @@ class MoreCommentTableViewCell: UITableViewCell {
         let fontCount = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor().hexStringToUIColor(hex: "61abfa")]
       var myAttrString = NSMutableAttributedString()
       if commentEntity.subComment[0].author.role != 1 {
-        myAttrString = NSMutableAttributedString(string: commentEntity.subComment[0].author.nickname, attributes: fontName)
+        myAttrString = NSMutableAttributedString(string: commentEntity.subComment[0].author.fullname, attributes: fontName)
       }else{
         myAttrString = NSMutableAttributedString(string: commentEntity.subComment[0].author.fullname, attributes: fontName)
       }

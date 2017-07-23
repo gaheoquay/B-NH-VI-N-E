@@ -80,7 +80,7 @@ class DoctorTableViewCell: UITableViewCell {
         marginLeftLbName.constant = 30
         imgVerified.isHidden = true
         lbJob.isUserInteractionEnabled = true
-        lbName.text = admin.nickName
+        lbName.text = admin.fullName
         imgProfile.sd_setImage(with: URL.init(string: admin.avatar), placeholderImage: #imageLiteral(resourceName: "AvaDefaut.png"))
         if !admin.isBlocked {
             lbJob.text = "Đang mở"

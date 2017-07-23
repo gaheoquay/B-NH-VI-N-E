@@ -59,7 +59,7 @@ class UserEntity: Object {
                 this.company = value
             }
             if let value = account["DOB"] as? Double {
-                this.dob = value
+                this.dob = value/1000
             }
             if let value = account["Address"] as? String {
                 this.address = value
@@ -98,10 +98,10 @@ class UserEntity: Object {
                 this.isVerified = value
             }
             if let value = account["UpdatedDate"] as? Double {
-                this.updatedDate = value
+                this.updatedDate = value/1000
             }
             if let value = account["CreatedDate"] as? Double {
-                this.createdDate = value
+                this.createdDate = value/1000
             }
             if let value = account["LoginToken"] as? String {
                 this.loginToken = value

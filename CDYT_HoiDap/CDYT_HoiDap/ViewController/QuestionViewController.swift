@@ -13,9 +13,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
-        initTableView()
-        Until.showLoading()
-        
+        initTableView()        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,6 +83,8 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     }
     
     func reloadDataAssigned(){
+        pageAssigned = 1
+        self.listAssigned.removeAll()
         getQuestionsUncommentedByAnyDoctorAndAssigned()
         requestListDoctor()
     }
@@ -171,7 +171,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
                 "Auth": auth
             ]
             let hotParam : [String : Any] = [
-                "Page": pageFeed,
+                "Page": pageAssigned,
                 "Size": 10,
                 "RequestedUserId" : Until.getCurrentId()
             ]
@@ -180,7 +180,6 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
                     if status == 200{
                         if let result = response.result.value {
                             let jsonData = result as! [NSDictionary]
-                            self.listAssigned.removeAll()
                             for item in jsonData {
                                 let entity = FeedsEntity.init(dictionary: item)
                                 self.listAssigned.append(entity)
@@ -193,7 +192,6 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-                Until.hideLoading()
                 self.tbQuestion.pullToRefreshView?.stopAnimating()
                 self.tbQuestion.infiniteScrollingView?.stopAnimating()
             }
@@ -211,31 +209,27 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
                 "Auth": auth
             ]
             let hotParam : [String : Any] = [
-                "Page": pageFeed,
+                "Page": pageNotAssignedYet,
                 "Size": 10,
                 "RequestedUserId" : Until.getCurrentId()
             ]
-            Until.showLoading()
             Alamofire.request(GET_QUESTIONS_UNCOMMENTED_BY_ANY_DOCTOR_AND_NOT_ASSIGNED_YET, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
                 if let status = response.response?.statusCode {
                     if status == 200{
                         if let result = response.result.value {
                             let jsonData = result as! [NSDictionary]
-                            
                             for item in jsonData {
                                 let entity = FeedsEntity.init(dictionary: item)
                                 self.listNotAssignedYet.append(entity)
                             }
                         }
                         self.tbQuestion.reloadData()
-                        Until.hideLoading()
                     }else{
                         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-                Until.hideLoading()
                 self.tbQuestion.pullToRefreshView?.stopAnimating()
                 self.tbQuestion.infiniteScrollingView?.stopAnimating()
             }
@@ -274,7 +268,6 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-                Until.hideLoading()
                 self.tbQuestion.pullToRefreshView?.stopAnimating()
                 self.tbQuestion.infiniteScrollingView?.stopAnimating()
             }
