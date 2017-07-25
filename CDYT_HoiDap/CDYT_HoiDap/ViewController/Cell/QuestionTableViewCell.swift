@@ -180,7 +180,7 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
                     lbTimeAnswerDoctor.isHidden = false
                     lbNameDoctor.isHidden = false
                 }else {
-                    layoutBottomCreateDate.constant = 30
+                    layoutBottomCreateDate.constant = 40
                     lbTimeAnswerDoctor.isHidden = true
                     lbNameDoctor.isHidden = true
                 }

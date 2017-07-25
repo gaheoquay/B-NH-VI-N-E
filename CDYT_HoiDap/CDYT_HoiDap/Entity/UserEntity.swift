@@ -31,7 +31,9 @@ class UserEntity: Object {
     dynamic var jobTitle = ""
     dynamic var updatedDate : Double = 0
     dynamic var createdDate : Double = 0
+    dynamic var index = 0
     dynamic var loginToken = ""
+    dynamic var department : UserDepartmentEntity?
     
     override static func primaryKey() -> String? {
         return "id"
@@ -106,6 +108,9 @@ class UserEntity: Object {
             if let value = account["LoginToken"] as? String {
                 this.loginToken = value
             }
+        }
+        if let department = dictionary["Department"] as? NSDictionary {
+            this.department = UserDepartmentEntity.initWithDictionary(dictionary: department)
         }
         return this
     }

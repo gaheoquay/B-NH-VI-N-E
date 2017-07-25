@@ -442,7 +442,7 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
                 }
                 
             }else {
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn chuyên khoa", cancelBtnTitle: "Đóng")
+                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn chuyên khoa trước", cancelBtnTitle: "Đóng")
                 
             }
         }
@@ -464,8 +464,6 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
         
         picker.delegate = self
         picker.dataSource = self
-        
-        
         let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
                 if self.idCate != self.listAllDoctors[self.indexPickerViewCate].category.id {
                     self.idCate = self.listAllDoctors[self.indexPickerViewCate].category.id
@@ -564,6 +562,14 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
         }else{
             entity = listAssigned[indexPath.row]
         }
+        if entity.cateGory.id.isEmpty {
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn chuyên khoa trước", cancelBtnTitle: "Đóng")
+            return
+        }
+        if entity.assigneeEntity.id.isEmpty {
+            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn bác sĩ cần duyệt", cancelBtnTitle: "Đóng")
+            return
+        }
         if !entity.cateGory.id.isEmpty && !entity.assigneeEntity.id.isEmpty {
             idCate = entity.cateGory.id
             nameCate = entity.cateGory.name
@@ -582,8 +588,6 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
             }else{
                 requestApproval()
             }
-        }else{
-            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn chưa chọn bác sĩ", cancelBtnTitle: "Đóng")
         }
     }
     

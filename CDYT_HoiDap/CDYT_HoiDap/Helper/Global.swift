@@ -49,8 +49,7 @@ let LIKE_POST = BASE_URL + "/Post/LikePost"
 let LIKE_COMMENT = BASE_URL + "/Post/LikeComment"
 let LIKE_COMMENT_ON_COMMENT = BASE_URL + "/Post/LikeCommentLevel2"
 let MARK_AS_SOLUTION = BASE_URL + "/Post/AcceptAsSolution"
-let GET_LIST_NOTIFICATION = BASE_URL + "/Notification/GetNotificationsByUserId"
-let GET_LIST_NOTIFICATIONNEW = BASE_URL + "/Notification/GetNotificationsByUserIdNew"
+let GET_LIST_NOTIFICATION_BY_PAGING = BASE_URL + "/Notification/GetNotificationsByUserIdWithPaging"
 let GET_POST_BY_ID = BASE_URL + "/Post/GetPostById"
 let GET_USER_BY_ID = BASE_URL + "/User/GetUserAndCategoryByUserId"
 let CHANGE_PASSWORD = BASE_URL + "/User/ChangePassword"
@@ -84,11 +83,13 @@ let UN_BLOCK_USER = BASE_URL + "/User/UnblockUser"
 let GET_LIST_ADMIN = BASE_URL + "/User/GetListAdmin"
 let GET_LIST_PACKAGE_SERVICE = BASE_URL + "/Service/GetListPackServices"
 let GET_ALL_TAG = BASE_URL + "/Tag/GetAll"
+let LOGIN_WITH_SOCIAL = BASE_URL + "/User/LoginSocialNetwork"
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
 let NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"
 let RELOAD_ALL_DATA = "RELOAD_ALL_DATA"
 let LOGIN_SUCCESS = "LOGIN_SUCCESS"
+let LOGIN_GMAIL_SUCCESS = "LOGIN_GMAIL_SUCCESS"
 let UPDATE_USERINFO = "UPDATE_USERINFO"
 let COMMENT_ON_COMMENT_SUCCESS = "COMMENT_ON_COMMENT_SUCCESS"
 let RELOAD_QUESTION_DETAIL = "RELOAD_QUESTION_DETAIL"
@@ -132,7 +133,7 @@ let DETAIL_COMMENT = "ScreenDetailComment"
 let CREATE_QUESTION = "ScreenCreateQuestion"
 let SEARCHS = "ScreenSearch"
 
-var listNotification = [ListNotificationEntity]()
+var listNotification = [NotificationNewEntity]()
 var listCate = [CateEntity]()
 var listAllDoctor = [ListDoctorEntity]()
 

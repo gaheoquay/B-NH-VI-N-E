@@ -2,25 +2,41 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>TRACKING_ID</key>
-	<string>UA-84650910-10</string>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>869672878249-fa3pugud248u6cilg1gtvubtgdrnju06.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.869672878249-fa3pugud248u6cilg1gtvubtgdrnju06</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCPQMCFq4tW1yOVcu7Th8G8LFePHDPclYM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>869672878249</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.isorasoft.bve</string>
+	<string>com.benhviene.bve</string>
+	<key>TRACKING_ID</key>
+	<string>UA-84650910-10</string>
 	<key>PROJECT_ID</key>
 	<string>benh-vien-e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>benh-vien-e.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
-	<key>IS_ANALYTICS_ENABLED</key>
 	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
 	<false/>
 	<key>IS_GCM_ENABLED</key>
-	<false/>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<false/>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:869672878249:ios:11ef4fd24df905fe</string>
+	<string>1:869672878249:ios:7f4691bf78745def</string>
+	<key>DATABASE_URL</key>
+	<string>https://benh-vien-e.firebaseio.com</string>
 </dict>
 </plist>

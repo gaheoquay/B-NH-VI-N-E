@@ -28,4 +28,5 @@
 #import <Google/Analytics.h>
 @import RNNotificationView;
 @import FSCalendar;
+#import <Google/SignIn.h>
 #endif /* HoiDap_Header_h */

@@ -159,11 +159,24 @@ class CommentTableViewCell: UITableViewCell {
     func setDataForMainComment() {
         isSubcomment = false
         
-        if feed.postEntity.isPrivate != true || feed.authorEntity.id == Until.getCurrentId() {
+        if feed.postEntity.isPrivate && feed.authorEntity.id == mainComment.author.id && feed.authorEntity.id != Until.getCurrentId() {
+            nameLbl.text = "Ẩn Danh"
+            departmantLb.text = ""
+            verifyIconHeight.constant = 0
+            avaImg.image = UIImage(named: "AvaDefaut.png")
+        }else{
             avaImg.sd_setImage(with: URL.init(string: feed.authorEntity.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
             if mainComment.author.role == 1 {
                 nameLbl.text = mainComment.author.fullname
-                departmantLb.text = mainComment.author.jobTitle + " - Bệnh viện E"
+                var jobTitle = ""
+                if mainComment.author.index == 0 {
+                    jobTitle = "Trưởng khoa"
+                }else if mainComment.author.index == 1 {
+                    jobTitle = "Phó khoa"
+                } else if mainComment.author.index == 2 {
+                    jobTitle = "BS."
+                }
+                departmantLb.text = jobTitle + " " + mainComment.department.name + " - Bệnh viện E"
                 verifyIconHeight.constant = 20
                 nameLbl.textColor = UIColor().hexStringToUIColor(hex: "01A7FA")
                 nameLbl.text = mainComment.author.fullname
@@ -172,11 +185,6 @@ class CommentTableViewCell: UITableViewCell {
                 verifyIconHeight.constant = 0
                 nameLbl.text = mainComment.author.fullname
             }
-        }else {
-            nameLbl.text = "Ẩn Danh"
-            departmantLb.text = ""
-            verifyIconHeight.constant = 0
-            avaImg.image = UIImage(named: "AvaDefaut.png")
         }
 
         if mainComment.comment.isSolution {
@@ -261,12 +269,24 @@ class CommentTableViewCell: UITableViewCell {
         
         solutionLbl.isHidden = true
         solutionLbl.text = ""
-        if feed.postEntity.isPrivate != true || feed.authorEntity.id == Until.getCurrentId() {
+        if feed.postEntity.isPrivate && feed.authorEntity.id != Until.getCurrentId() && feed.authorEntity.id == subComment.author.id {
+            nameLbl.text = "Ẩn Danh"
+            departmantLb.text = ""
+            verifyIconHeight.constant = 0
+            avaImg.image = UIImage(named: "AvaDefaut.png")
+        }else{
             avaImg.sd_setImage(with: URL.init(string: feed.authorEntity.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
             if subComment.author.role == 1 {
                 nameLbl.text = subComment.author.fullname
-                
-                departmantLb.text = mainComment.author.jobTitle + " - Bệnh viện E"
+                var jobTitle = ""
+                if subComment.author.index == 0 {
+                    jobTitle = "Trưởng khoa"
+                }else if subComment.author.index == 1 {
+                    jobTitle = "Phó khoa"
+                } else if subComment.author.index == 2 {
+                    jobTitle = "BS."
+                }
+                departmantLb.text = jobTitle + " " + subComment.department.name + " - Bệnh viện E"
                 verifyIconHeight.constant = 20
                 nameLbl.textColor = UIColor().hexStringToUIColor(hex: "01A7FA")
                 nameLbl.text = subComment.author.fullname
@@ -275,11 +295,6 @@ class CommentTableViewCell: UITableViewCell {
                 verifyIconHeight.constant = 0
                 nameLbl.text = subComment.author.fullname
             }
-        }else {
-            nameLbl.text = "Ẩn Danh"
-            departmantLb.text = ""
-            verifyIconHeight.constant = 0
-            avaImg.image = UIImage(named: "AvaDefaut.png")
         }
 
         timeLbl.text = String().convertTimeStampWithDateFormat(timeStamp: subComment.comment.createdDate, dateFormat: "dd/MM/yy HH:mm")

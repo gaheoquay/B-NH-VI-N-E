@@ -18,7 +18,7 @@ class TagListViewController: BaseViewController {
         super.viewDidLoad()
         searchBar.delegate = self
         initTaleView()
-        getHotTagFromServer()
+        searchTag()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -51,60 +51,12 @@ class TagListViewController: BaseViewController {
     func reloadData(){
         page = 1
         listHotTag.removeAll()
-        if searchBar.text?.characters.count == 0 {
-            getHotTagFromServer()
-        }else{
-            searchTag()
-        }
+        searchTag()
         
     }
     func loadMore(){
         page += 1
-        if searchBar.text?.characters.count == 0 {
-            getHotTagFromServer()
-        }else{
-            searchTag()
-        }
-    }
-    
-    func getHotTagFromServer(){
-        do {
-            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
-            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
-            let auth = code.replacingOccurrences(of: "\n", with: "")
-            let header = [
-                "Auth": auth
-            ]
-            let hotParam : [String : Any] = [
-                "Page": page,
-                "Size": 10,
-                "RequestedUserId" : Until.getCurrentId()
-            ]
-            Alamofire.request(HOTEST_TAG, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
-                if let status = response.response?.statusCode {
-                    if status == 200{
-                        if let result = response.result.value {
-                            let jsonData = result as! [NSDictionary]
-                            
-                            for item in jsonData {
-                                let hotTag = HotTagEntity.init(dictionary: item)
-                                self.listHotTag.append(hotTag)
-                            }
-                            
-                            self.tagTableView.reloadData()
-                        }
-                    }else{
-                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-                    }
-                }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
-                }
-                self.tagTableView.pullToRefreshView?.stopAnimating()
-                self.tagTableView.infiniteScrollingView?.stopAnimating()
-            }
-        } catch let error as NSError {
-            print(error)
-        }
+        searchTag()
     }
     
     func searchTag(){
@@ -115,7 +67,8 @@ class TagListViewController: BaseViewController {
             let header = [
                 "Auth": auth
             ]
-            let requestUrl = SEARCH_TAG + "?page=\(page)&size=10&userId=\(Until.getCurrentId())&query=\(searchBar.text ?? "")"
+            let searchText = searchBar.text?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+            let requestUrl = SEARCH_TAG + "?page=\(page)&size=10&userId=\(Until.getCurrentId())&query=\(searchText ?? "")"
             Alamofire.request(requestUrl, method: .get, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
                 if let status = response.response?.statusCode {
                     if status == 200{
@@ -198,6 +151,9 @@ extension TagListViewController: UISearchBarDelegate {
             })
         } else {
             time = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.searchTag), userInfo: nil, repeats: false)
+            self.page = 1
+            self.listHotTag.removeAll()
+            self.searchTag()
         }
     }
 }

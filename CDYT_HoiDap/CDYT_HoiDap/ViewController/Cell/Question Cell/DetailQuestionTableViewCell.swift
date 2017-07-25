@@ -167,7 +167,7 @@ class DetailQuestionTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
       
       
       if let users = realm.objects(UserEntity.self).first {
-        if users.id == feed.authorEntity.id || users.role == 2 {
+        if (users.id == feed.authorEntity.id || users.role == 2) && (feed.firstCommentedDoctor.id == "" && !feed.isAssigneeAnswered) {
           moreActionBtn.isHidden = false
         }else{
           moreActionBtn.isHidden = true

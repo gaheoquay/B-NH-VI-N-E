@@ -162,13 +162,14 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
             let token: KSToken = KSToken(title: item.tagName)
             tagView.addToken(token)
         }
-        
-        if feedObj.postEntity.isPrivate == false {
-            btnSwitch.setOn(false, animated: true)
-        }else {
-            btnSwitch.setOn(true, animated: true)
+        if isEditPost {
+            let realm = try! Realm()
+            if let user = realm.objects(UserEntity.self).first {
+                btnSwitch.isEnabled = !(user.role == 2 && user.id != feedObj.authorEntity.id)
+            }
         }
-        
+        ischeck = feedObj.postEntity.isPrivate
+        btnSwitch.setOn(ischeck, animated: true)
         imgClv.reloadData()
     }
     

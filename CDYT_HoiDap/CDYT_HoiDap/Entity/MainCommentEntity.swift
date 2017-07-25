@@ -12,6 +12,7 @@ class MainCommentEntity: NSObject {
     var post = PostEntity()
     var author = AuthorEntity()
     var comment = CommentEntity()
+    var department = DepartmentEntity()
     var isLike = false
     var likeCount = 0
     var subComment = [SubCommentEntity]()
@@ -37,11 +38,15 @@ class MainCommentEntity: NSObject {
         if let value = dict["LikeCount"] as? Int {
             likeCount = value
         }
+        if let value = dict["Department"] as? NSDictionary {
+            department = DepartmentEntity.init(dictionary: value)
+        }
         if let value = dict["SubComment"] as? [NSDictionary] {
             for item in value {
                 let entity = SubCommentEntity.init(dict: item)
                 subComment.append(entity)
             }
         }
+        
     }
 }

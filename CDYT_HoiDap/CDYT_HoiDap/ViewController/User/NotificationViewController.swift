@@ -11,7 +11,6 @@ import UIKit
 class NotificationViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, QuestionDetailViewControllerDelegate ,CommentViewControllerDelegate {
     @IBOutlet weak var notifyTableView: UITableView!
     var page = 1
-    var listNoti = [NotificationNewEntity]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +23,6 @@ class NotificationViewController: BaseViewController, UITableViewDelegate, UITab
     }
     //MARK: Set up table
     func setupTableView(){
-        getListNotification()
         notifyTableView.dataSource = self
         notifyTableView.delegate = self
         notifyTableView.estimatedRowHeight = 200
@@ -65,21 +63,17 @@ class NotificationViewController: BaseViewController, UITableViewDelegate, UITab
             let header = [
                 "Auth": auth
             ]
-            let hotParam : [String : Any] = [
-                "Page": page,
-                "Size": 20,
-                "RequestedUserId" : Until.getCurrentId()
-            ]
-            print(hotParam)
-            Alamofire.request(GET_LIST_NOTIFICATIONNEW, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+
+            let requestUrl = GET_LIST_NOTIFICATION_BY_PAGING + "?page=\(page)&size=\(10)"
+            Alamofire.request(requestUrl, method: .get, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
                 if let status = response.response?.statusCode {
                     if status == 200{
                         if let result = response.result.value {
-                            let jsonData = result as! [NSDictionary]
-                            
-                            for item in jsonData {
+                            let jsonData = result as! NSDictionary
+                            let data = jsonData["Data"] as! [NSDictionary]
+                            for item in data {
                                 let entity = NotificationNewEntity.init(dictionary: item)
-                                self.listNoti.append(entity)
+                                listNotification.append(entity)
                             }
                         }
                         self.notifyTableView.reloadData()
@@ -89,10 +83,8 @@ class NotificationViewController: BaseViewController, UITableViewDelegate, UITab
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-                
                 self.notifyTableView.pullToRefreshView?.stopAnimating()
                 self.notifyTableView.infiniteScrollingView?.stopAnimating()
-                
             }
         } catch let error as NSError {
             print(error)
@@ -101,20 +93,20 @@ class NotificationViewController: BaseViewController, UITableViewDelegate, UITab
     
     //MARK: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listNoti.count
+        return listNotification.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NotifyTableViewCell") as! NotifyTableViewCell
-        if listNoti.count > 0 {
-            cell.setData(entity: listNoti[indexPath.row])
+        if listNotification.count > 0 {
+            cell.setData(entity: listNotification[indexPath.row])
         }
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
-        let entity = listNoti[indexPath.row]
-        if entity.type == 1 || entity.type == 3 || entity.type == 6 {
+        let entity = listNotification[indexPath.row]
+        if entity.type == 1 || entity.type == 3 || entity.type == 6 || entity.type == 8 {
             let viewController = storyBoard.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
             viewController.questionID = (entity.parenId)
             viewController.notification = entity
@@ -142,10 +134,6 @@ class NotificationViewController: BaseViewController, UITableViewDelegate, UITab
     
     func removeMainCommentFromCommentView(mainComment: MainCommentEntity) {}
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     //MARK: Action
     @IBAction func backTapAction(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)

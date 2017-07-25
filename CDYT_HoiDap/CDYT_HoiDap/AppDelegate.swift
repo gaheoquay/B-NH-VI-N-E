@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -35,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         }
         application.scheduledLocalNotifications?.removeAll()
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         Until.getSchedule()
         SBDMain.initWithApplicationId(SENDBIRD_APPKEY)
         initSendBird()
@@ -52,7 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
-        
+        GIDSignIn.sharedInstance().delegate = self
+
         // Optional: configure GAI options.
         guard let gai = GAI.sharedInstance() else {
             assert(false, "Google Analytics not configured correctly")
@@ -195,6 +198,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        FBSDKAppEvents.activateApp()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
@@ -286,6 +290,75 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         }
     }
-    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        let facebookDidHandled = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        let googleDidHandle = GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
+        
+        return facebookDidHandled || googleDidHandle
+    }
+
 }
 
+extension AppDelegate: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        Until.showLoading()
+        if (error == nil) {
+            // Perform any operations on signed in user here.
+            do {
+                let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+                let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+                let auth = code.replacingOccurrences(of: "\n", with: "")
+                let header = [
+                    "Auth": auth
+                ]
+                let uuid = NSUUID().uuidString
+                let token = UserDefaults.standard.object(forKey: NOTIFICATION_TOKEN) as? String ?? ""
+                let device : [String : Any] = [
+                    "OS": 0,
+                    "DeviceId": uuid,
+                    "Token": token
+                ]
+                
+                let loginParam : [String : Any] = [
+                    "SocialType": 2,
+                    "SocialId": user.userID,
+                    "FullName": user.profile.name,
+                    "Email": user.profile.email,
+                    "Device": device
+                ]
+                Alamofire.request(LOGIN_WITH_SOCIAL, method: .post, parameters: loginParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                    if let status = response.response?.statusCode {
+                        if status == 200{
+                            if let result = response.result.value {
+                                let jsonData = result as! NSDictionary
+                                let reaml = try! Realm()
+                                let entity = UserEntity.initWithDictionary(dictionary: jsonData)
+                                
+                                try! reaml.write {
+                                    reaml.add(entity, update: true)
+                                    Until.initSendBird()
+                                    Until.getSchedule()
+                                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
+                                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: LOGIN_GMAIL_SUCCESS), object: nil)
+                                }
+                            }
+                        }
+                    }
+                    Until.hideLoading()
+                }
+                
+            } catch let error as NSError {
+                print(error)
+            }
+
+        } else {
+            print("\(error.localizedDescription)")
+            Until.hideLoading()
+        }
+        
+    }
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        
+    }
+    
+}

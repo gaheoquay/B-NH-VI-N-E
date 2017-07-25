@@ -8,11 +8,11 @@
 
 import UIKit
 protocol QuestionDetailViewControllerDelegate {
-  func reloadTable()
+    func reloadTable()
 }
 
 class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, MoreCommentTableViewCellDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CommentTableViewCellDelegate, DetailQuestionTableViewCellDelegate, WYPopoverControllerDelegate,EditCommentViewControllerDelegate, CommentViewControllerDelegate {
-
+    
     @IBOutlet weak var detailTbl: UITableView!
     @IBOutlet weak var imgCollectionView: UICollectionView!
     @IBOutlet weak var imgCollectionViewHeight: NSLayoutConstraint!
@@ -23,13 +23,13 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     var feedObj = FeedsEntity()
     var listComment = [MainCommentEntity]()
     var popupViewController:WYPopoverController!
-
+    
     let textInputBar = ALTextInputBar()
     let keyboardObserver = ALKeyboardObservingView()
     
     let pickerController = DKImagePickerController()
     var imageAssets = [DKAsset]()
-
+    
     var imgCommentDic = [String]()
     var thumImgCommentDic = [String]()
     
@@ -38,9 +38,9 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     var questionID = ""
     var commentEntity = CommentEntity()
     
-  var notification : NotificationNewEntity!
-  var delegate:QuestionDetailViewControllerDelegate?
-  var notificationId = ""
+    var notification : NotificationNewEntity!
+    var delegate:QuestionDetailViewControllerDelegate?
+    var notificationId = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         registerNotification()
@@ -81,7 +81,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
         NotificationCenter.default.addObserver(self, selector: #selector(reloadQuestionAfterUpdated(notification:)), name: Notification.Name.init(RELOAD_QUESTION_DETAIL), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadMainCommentAfterUpdated(notification:)), name: Notification.Name.init(RELOAD_COMMENT_DETAIL), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSubCommentAfterUpdated(notification:)), name: Notification.Name.init(RELOAD_SUBCOMMENT_DETAIL), object: nil)
-
+        
     }
     
     func configTable(){
@@ -130,7 +130,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
         }
     }
     
-    //MARK: Show marker for question 
+    //MARK: Show marker for question
     func setupMarkerForQuestion() {
         if feedObj.postEntity.status == 0 {
             markImg.image = UIImage.init(named: "GiaiPhap_Mark_hide.png")
@@ -178,7 +178,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
         }
     }
     
-    //MARK: Receive notify when have new comment 
+    //MARK: Receive notify when have new comment
     func reloadCommentData() {
         reloadData()
     }
@@ -209,49 +209,49 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
         view.addSubview(textInputBar)
         
     }
-  //MARk: set read notification
-  func setReadNotification(){
-    do {
-        let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
-        let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
-        let auth = code.replacingOccurrences(of: "\n", with: "")
-        let header = [
-            "Auth": auth
-        ]
-        Until.showLoading()
-        if notificationId == "" {
-            notificationId = notification.id
-        }
-        let getPostParam : [String : Any] = [
-            "RequestedUserId" : Until.getCurrentId(),
-            "NotificationId": notificationId
-        ]
-        Alamofire.request(SET_READ_NOTIFICATION, method: .post, parameters: getPostParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        if result is NSDictionary {
-                            let realm = try! Realm()
-                            try! realm.write {
-                                if self.notification != nil {
-                                    self.notification.isRead = true
+    //MARk: set read notification
+    func setReadNotification(){
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            Until.showLoading()
+            if notificationId == "" {
+                notificationId = notification.id
+            }
+            let getPostParam : [String : Any] = [
+                "RequestedUserId" : Until.getCurrentId(),
+                "NotificationId": notificationId
+            ]
+            Alamofire.request(SET_READ_NOTIFICATION, method: .post, parameters: getPostParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            if result is NSDictionary {
+                                let realm = try! Realm()
+                                try! realm.write {
+                                    if self.notification != nil {
+                                        self.notification.isRead = true
+                                    }
+                                    self.delegate?.reloadTable()
                                 }
-                                self.delegate?.reloadTable()
                             }
                         }
                     }
                 }
+                
+                Until.hideLoading()
             }
-            
-            Until.hideLoading()
+        } catch let error as NSError {
+            print(error)
         }
-    } catch let error as NSError {
-        print(error)
+        
     }
-
-  }
-
-  
+    
+    
     //  MARK: Keyboard showing
     func keyboardWillShow(notification:NSNotification){
         if let userInfo = notification.userInfo {
@@ -278,7 +278,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
                 }
             }
             self.keyboardViewHeight.constant = 0
-
+            
         }
     }
     
@@ -349,7 +349,6 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-                
                 Until.hideLoading()
             }
         } catch let error as NSError {
@@ -376,14 +375,12 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
                     if status == 200{
                         if let result = response.result.value {
                             let jsonData = result as! [NSDictionary]
-                            
                             for item in jsonData {
                                 let entity = MainCommentEntity.init(dict: item)
                                 self.listComment.append(entity)
                             }
                             self.feedObj.commentCount = self.listComment.count
                             self.detailTbl.reloadData()
-                            
                         }
                     }else{
                         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi không thể lấy được dữ liệu Bình luận. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
@@ -398,7 +395,6 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
             print(error)
         }
     }
-    
     
     //MARK: Post comment tap action
     func postCommentAction(){
@@ -419,7 +415,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
                 }
             }
         }else{
-          Until.gotoLogin(_self: self, cannotBack: false)
+            Until.gotoLogin(_self: self, cannotBack: false)
         }
     }
     
@@ -665,7 +661,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
                         cell.indexPath = indexPath
                         cell.delegate = self
                         return cell
-
+                        
                     }
                 }
             }
@@ -802,7 +798,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     
     //MARK: DetailQuestionTableViewCellDelegate
     func gotoLoginFromDetailQuestionVC() {
-      Until.gotoLogin(_self: self, cannotBack: false)
+        Until.gotoLogin(_self: self, cannotBack: false)
     }
     
     func gotoUserProfileFromDetailQuestion(user: AuthorEntity) {
@@ -826,7 +822,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
             vc.feedObj = self.feedObj
             vc.isEditPost = true
             self.navigationController?.pushViewController(vc, animated: true)
-
+            
         })
         
         let deleteTap = UIAlertAction(title: "Xoá", style: .destructive, handler: {
@@ -871,23 +867,12 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     //MARK: CommentTableViewCellDelegate
-  func markOrUnmarkSolution(mainComment: MainCommentEntity) {
-    let solution = listComment.first { (entity) -> Bool in
-      entity.comment.isSolution == true
-    }
-    if solution != nil && solution?.comment.id != mainComment.comment.id {
-      let alert = UIAlertController.init(title: "Thông báo", message: "Bạn chỉ được chọn duy nhất một giải pháp. Bạn có muốn chọn lại không?", preferredStyle: UIAlertControllerStyle.alert)
-      let actionOK = UIAlertAction.init(title: "Đồng ý", style: UIAlertActionStyle.default, handler: { (alert) in
-        solution?.comment.isSolution = false
-        self.requestMarkOrUnMarkSolution(mainComment: mainComment)
-      })
-      let actionCancel = UIAlertAction.init(title: "Hủy", style: UIAlertActionStyle.cancel, handler: nil)
-      alert.addAction(actionOK)
-      alert.addAction(actionCancel)
-      self.present(alert, animated: true, completion: nil)
-    }else{
-        if mainComment.comment.isSolution == true {
-            let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có muốn bỏ chọn câu trả lời này làm giải pháp?", preferredStyle: UIAlertControllerStyle.alert)
+    func markOrUnmarkSolution(mainComment: MainCommentEntity) {
+        let solution = listComment.first { (entity) -> Bool in
+            entity.comment.isSolution == true
+        }
+        if solution != nil && solution?.comment.id != mainComment.comment.id {
+            let alert = UIAlertController.init(title: "Thông báo", message: "Bạn chỉ được chọn duy nhất một giải pháp. Bạn có muốn chọn lại không?", preferredStyle: UIAlertControllerStyle.alert)
             let actionOK = UIAlertAction.init(title: "Đồng ý", style: UIAlertActionStyle.default, handler: { (alert) in
                 solution?.comment.isSolution = false
                 self.requestMarkOrUnMarkSolution(mainComment: mainComment)
@@ -896,44 +881,55 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
             alert.addAction(actionOK)
             alert.addAction(actionCancel)
             self.present(alert, animated: true, completion: nil)
-        }else {
-            requestMarkOrUnMarkSolution(mainComment: mainComment)
+        }else{
+            if mainComment.comment.isSolution == true {
+                let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có muốn bỏ chọn câu trả lời này làm giải pháp?", preferredStyle: UIAlertControllerStyle.alert)
+                let actionOK = UIAlertAction.init(title: "Đồng ý", style: UIAlertActionStyle.default, handler: { (alert) in
+                    solution?.comment.isSolution = false
+                    self.requestMarkOrUnMarkSolution(mainComment: mainComment)
+                })
+                let actionCancel = UIAlertAction.init(title: "Hủy", style: UIAlertActionStyle.cancel, handler: nil)
+                alert.addAction(actionOK)
+                alert.addAction(actionCancel)
+                self.present(alert, animated: true, completion: nil)
+            }else {
+                requestMarkOrUnMarkSolution(mainComment: mainComment)
+            }
         }
     }
-  }
-  func requestMarkOrUnMarkSolution(mainComment: MainCommentEntity){
-    do {
-        let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
-        let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
-        let auth = code.replacingOccurrences(of: "\n", with: "")
-        let header = [
-            "Auth": auth
-        ]
-        let markParam : [String : Any] = [
-            "RequestedUserId": Until.getCurrentId(),
-            "CommentId": mainComment.comment.id
-        ]
-        Until.showLoading()
-        Alamofire.request(MARK_AS_SOLUTION, method: .post, parameters: markParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    if let result = response.result.value {
-                        let jsonData = result as! NSDictionary
-                        let comment = CommentEntity.init(dictionary: jsonData)
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: comment)
+    func requestMarkOrUnMarkSolution(mainComment: MainCommentEntity){
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let markParam : [String : Any] = [
+                "RequestedUserId": Until.getCurrentId(),
+                "CommentId": mainComment.comment.id
+            ]
+            Until.showLoading()
+            Alamofire.request(MARK_AS_SOLUTION, method: .post, parameters: markParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let jsonData = result as! NSDictionary
+                            let comment = CommentEntity.init(dictionary: jsonData)
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: comment)
+                        }
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra, vui lòng thử lai sau", cancelBtnTitle: "Đóng")
                     }
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra, vui lòng thử lai sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lai sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lai sau", cancelBtnTitle: "Đóng")
+                Until.hideLoading()
             }
-            Until.hideLoading()
+        } catch let error as NSError {
+            print(error)
         }
-    } catch let error as NSError {
-        print(error)
     }
-  }
     func replyCommentAction(mainComment: MainCommentEntity) {
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "CommentViewController") as! CommentViewController
@@ -944,7 +940,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     func gotoLoginFromCommentTableCell() {
-      Until.gotoLogin(_self: self, cannotBack: false)
+        Until.gotoLogin(_self: self, cannotBack: false)
     }
     
     func gotoUserProfileFromCommentCell(user: AuthorEntity) {
@@ -1014,54 +1010,54 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
             UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Bạn không thể xoá được bình luận này", cancelBtnTitle: "Đóng")
             
         }else {
-        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let editTap = UIAlertAction(title: "Chỉnh sửa", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            if self.popupViewController == nil {
-                
-                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let popoverVC = mainStoryboard.instantiateViewController(withIdentifier: "EditCommentViewController") as! EditCommentViewController
-                popoverVC.isSubComment = isSubcomment
-                popoverVC.subComment = subComment
-                popoverVC.mainComment = mainComment
-                popoverVC.delegate = self
-                popoverVC.preferredContentSize = CGSize.init(width: 320, height: 250)
-                popoverVC.isModalInPopover = false
-                self.popupViewController = WYPopoverController(contentViewController: popoverVC)
-                self.popupViewController.delegate = self
-                self.popupViewController.wantsDefaultContentAppearance = false;
-                self.popupViewController.presentPopover(from: CGRect.init(x: 0, y: 0, width: 0, height: 0), in: self.view, permittedArrowDirections: WYPopoverArrowDirection.none, animated: true, options: WYPopoverAnimationOptions.fade, completion: nil)
-                
-            }
-        })
-        
-        let deleteTap = UIAlertAction(title: "Xoá", style: .destructive, handler: {
-            (alert: UIAlertAction!) -> Void in
-            
-            let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có chắc chắn xoá bình luận này?", preferredStyle: UIAlertControllerStyle.alert)
-            let noAction = UIAlertAction.init(title: "Huỷ", style: UIAlertActionStyle.cancel, handler: nil)
-            let yesAction = UIAlertAction.init(title: "Xoá", style: UIAlertActionStyle.destructive, handler: { (UIAlertAction) in
-                if isSubcomment {
-                    self.deleteComment(objID: subComment.comment.id, isSubcomment: isSubcomment, indexPath: indexPath)
-                }else{
-                    self.deleteComment(objID: mainComment.comment.id, isSubcomment: isSubcomment, indexPath: indexPath)
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let editTap = UIAlertAction(title: "Chỉnh sửa", style: .default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                if self.popupViewController == nil {
+                    
+                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let popoverVC = mainStoryboard.instantiateViewController(withIdentifier: "EditCommentViewController") as! EditCommentViewController
+                    popoverVC.isSubComment = isSubcomment
+                    popoverVC.subComment = subComment
+                    popoverVC.mainComment = mainComment
+                    popoverVC.delegate = self
+                    popoverVC.preferredContentSize = CGSize.init(width: 320, height: 250)
+                    popoverVC.isModalInPopover = false
+                    self.popupViewController = WYPopoverController(contentViewController: popoverVC)
+                    self.popupViewController.delegate = self
+                    self.popupViewController.wantsDefaultContentAppearance = false;
+                    self.popupViewController.presentPopover(from: CGRect.init(x: 0, y: 0, width: 0, height: 0), in: self.view, permittedArrowDirections: WYPopoverArrowDirection.none, animated: true, options: WYPopoverAnimationOptions.fade, completion: nil)
+                    
                 }
             })
             
-            alert.addAction(noAction)
-            alert.addAction(yesAction)
-            self.present(alert, animated: true, completion: nil)
-        })
-        
-        let cancelTap = UIAlertAction(title: "Huỷ bỏ", style: .cancel, handler: {
-            (alert: UIAlertAction!) -> Void in
-        })
-        
-        optionMenu.addAction(editTap)
-        optionMenu.addAction(deleteTap)
-        optionMenu.addAction(cancelTap)
-        
-        self.present(optionMenu, animated: true, completion: nil)
+            let deleteTap = UIAlertAction(title: "Xoá", style: .destructive, handler: {
+                (alert: UIAlertAction!) -> Void in
+                
+                let alert = UIAlertController.init(title: "Thông báo", message: "Bạn có chắc chắn xoá bình luận này?", preferredStyle: UIAlertControllerStyle.alert)
+                let noAction = UIAlertAction.init(title: "Huỷ", style: UIAlertActionStyle.cancel, handler: nil)
+                let yesAction = UIAlertAction.init(title: "Xoá", style: UIAlertActionStyle.destructive, handler: { (UIAlertAction) in
+                    if isSubcomment {
+                        self.deleteComment(objID: subComment.comment.id, isSubcomment: isSubcomment, indexPath: indexPath)
+                    }else{
+                        self.deleteComment(objID: mainComment.comment.id, isSubcomment: isSubcomment, indexPath: indexPath)
+                    }
+                })
+                
+                alert.addAction(noAction)
+                alert.addAction(yesAction)
+                self.present(alert, animated: true, completion: nil)
+            })
+            
+            let cancelTap = UIAlertAction(title: "Huỷ bỏ", style: .cancel, handler: {
+                (alert: UIAlertAction!) -> Void in
+            })
+            
+            optionMenu.addAction(editTap)
+            optionMenu.addAction(deleteTap)
+            optionMenu.addAction(cancelTap)
+            
+            self.present(optionMenu, animated: true, completion: nil)
         }
     }
     
@@ -1070,7 +1066,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
         if popupViewController != nil {
             popupViewController.delegate = nil
             popupViewController = nil
-        } 
+        }
     }
     
     //MARK: EditCommentViewControllerDelegate
@@ -1078,11 +1074,11 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
         popupViewController.dismissPopover(animated: true)
         popupViewController.delegate = nil
         popupViewController = nil
-
+        
     }
     
     //MARK: CommentViewControllerDelegate
-  func reloadTable() {}
+    func reloadTable() {}
     func removeMainCommentFromCommentView(mainComment: MainCommentEntity) {
         if listComment.count > 0 {
             for (index,item) in listComment.enumerated() {

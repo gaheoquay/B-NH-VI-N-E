@@ -132,14 +132,6 @@ class UpdateInfoViewController: BaseViewController {
             if peopleInfo.user.role == 1 || peopleInfo.user.role == 2 {
                 viewForUser.isHidden = false
             }else{
-//                let realm = try! Realm()
-//                if let users = realm.objects(UserEntity.self).first {
-//                    if users.role == 0 {
-//                        viewForUser.isHidden = false
-//                    }else{
-//                        viewForUser.isHidden = true
-//                    }
-//                }
                 viewForUser.isHidden = true
                 addressTxt.text = peopleInfo.user.address == "" ? "chưa cập nhật" : peopleInfo.user.address
                 phoneTxt.text = peopleInfo.user.phone == "" ? "chưa cập nhật" : peopleInfo.user.phone

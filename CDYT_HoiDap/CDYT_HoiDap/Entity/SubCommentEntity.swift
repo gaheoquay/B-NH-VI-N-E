@@ -11,6 +11,8 @@ import UIKit
 class SubCommentEntity: NSObject {
     var author = AuthorEntity()
     var comment = CommentEntity()
+    var department = DepartmentEntity()
+
     var isLike = false
     var likeCount = 0
     
@@ -31,6 +33,8 @@ class SubCommentEntity: NSObject {
         if let value = dict["LikeCount"] as? Int {
             likeCount = value
         }
-
+        if let value = dict["Department"] as? NSDictionary {
+            department = DepartmentEntity.init(dictionary: value)
+        }
     }
 }

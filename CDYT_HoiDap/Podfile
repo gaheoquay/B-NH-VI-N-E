@@ -20,4 +20,6 @@ pod 'MGSwipeTableCell'
 pod 'Google/Analytics'
 pod 'RNNotificationView'
 pod 'FSCalendar'
+pod 'FacebookLogin'
+pod 'Google/SignIn'
 end

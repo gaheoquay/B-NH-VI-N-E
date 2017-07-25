@@ -12,6 +12,7 @@ class DepartmentEntity: NSObject {
     
     var id = ""
     var name = ""
+    var isPublic = true
     
     override init() {
         super.init()
@@ -23,6 +24,9 @@ class DepartmentEntity: NSObject {
         }
         if let value = dictionary["Name"] as? String {
             self.name = value
+        }
+        if let value = dictionary["IsPublic"] as? Bool {
+            self.isPublic = value
         }
     }
 }

@@ -187,8 +187,6 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
         }
     }
     func initTable(){
-        
-        
         questionTableView.delegate = self
         questionTableView.dataSource = self
         questionTableView.register(UINib.init(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
@@ -253,20 +251,16 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
             let header = [
                 "Auth": auth
             ]
-            let hotParam : [String : Any] = [
-                "Page": 1,
-                "Size": 20,
-                "RequestedUserId" : Until.getCurrentId()
-            ]
-            
-            Alamofire.request(GET_LIST_NOTIFICATION, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+            let requestUrl = GET_LIST_NOTIFICATION_BY_PAGING + "?page=\(1)&size=\(20)"
+            Alamofire.request(requestUrl, method: .get, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
                 if let status = response.response?.statusCode {
                     if status == 200{
                         if let result = response.result.value {
-                            let jsonData = result as! [NSDictionary]
+                            let jsonData = result as! NSDictionary
+                            let data = jsonData["Data"] as! [NSDictionary]
                             listNotification.removeAll()
-                            for item in jsonData {
-                                let entity = ListNotificationEntity.initWithDict(dictionary: item)
+                            for item in data {
+                                let entity = NotificationNewEntity.init(dictionary: item)
                                 listNotification.append(entity)
                             }
                         }

@@ -32,6 +32,8 @@ class AuthorEntity: NSObject {
     var createdDate : Double = 0
     var isBlocked = false
     var isBlock = false
+    var index = 0
+    
     override init(){
         super.init()
     }
@@ -101,6 +103,9 @@ class AuthorEntity: NSObject {
         }
         if let value = dictionary["JobTitle"] as? String {
             jobTitle = value
+        }
+        if let value = dictionary["Index"] as? Int {
+            index = value
         }
     }
 }

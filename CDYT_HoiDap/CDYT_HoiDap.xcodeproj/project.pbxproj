@@ -107,6 +107,10 @@
 		5020249D1F1F3A6800D5989B /* KSUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502024991F1F3A6800D5989B /* KSUtils.swift */; };
 		508887DD1F1DBC150065A691 /* ApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508887DC1F1DBC150065A691 /* ApiHelper.swift */; };
 		508887DF1F1DBC820065A691 /* ApiDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508887DE1F1DBC820065A691 /* ApiDefine.swift */; };
+		50B4B8621F259B9500B7C305 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50B4B8611F259B9500B7C305 /* GoogleService-Info.plist */; };
+		50B4B8651F25B2A300B7C305 /* Facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 50B4B8631F25B2A300B7C305 /* Facebook.png */; };
+		50B4B8661F25B2A300B7C305 /* Gmail.png in Resources */ = {isa = PBXBuildFile; fileRef = 50B4B8641F25B2A300B7C305 /* Gmail.png */; };
+		50B4B8681F25D2CD00B7C305 /* UserDepartmentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B4B8671F25D2CD00B7C305 /* UserDepartmentEntity.swift */; };
 		792444BAFCB405C2DBAC9872 /* Pods_CDYT_HoiDap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */; };
 		8B0D35F51E56EB2D002CF784 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0D35F41E56EB2D002CF784 /* BookingViewController.swift */; };
 		8B1AD45B1E1B828500D55543 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AD45A1E1B828500D55543 /* SearchViewController.swift */; };
@@ -307,7 +311,6 @@
 		A6C463DA1E25DB910046A367 /* RecentFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C463D81E25DB910046A367 /* RecentFeedTableViewCell.swift */; };
 		A6C463DB1E25DB910046A367 /* RecentFeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C463D91E25DB910046A367 /* RecentFeedTableViewCell.xib */; };
 		A6C463DD1E26493A0046A367 /* Edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A6C463DC1E26493A0046A367 /* Edit.png */; };
-		A6CD32D01E4C2C9400FA2B21 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A6CD32CF1E4C2C9400FA2B21 /* GoogleService-Info.plist */; };
 		A6D083C31E121A2E007EA4D9 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D083C21E121A2E007EA4D9 /* UserEntity.swift */; };
 		A6D083C61E12747D007EA4D9 /* QuestionTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D083C41E12747D007EA4D9 /* QuestionTagTableViewCell.swift */; };
 		A6D083C71E12747D007EA4D9 /* QuestionTagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6D083C51E12747D007EA4D9 /* QuestionTagTableViewCell.xib */; };
@@ -427,6 +430,10 @@
 		502024991F1F3A6800D5989B /* KSUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSUtils.swift; sourceTree = "<group>"; };
 		508887DC1F1DBC150065A691 /* ApiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiHelper.swift; sourceTree = "<group>"; };
 		508887DE1F1DBC820065A691 /* ApiDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiDefine.swift; sourceTree = "<group>"; };
+		50B4B8611F259B9500B7C305 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		50B4B8631F25B2A300B7C305 /* Facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Facebook.png; sourceTree = "<group>"; };
+		50B4B8641F25B2A300B7C305 /* Gmail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gmail.png; sourceTree = "<group>"; };
+		50B4B8671F25D2CD00B7C305 /* UserDepartmentEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDepartmentEntity.swift; sourceTree = "<group>"; };
 		54350AF3B96C58CE38450098 /* Pods-CDYT_HoiDap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYT_HoiDap.release.xcconfig"; path = "Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap.release.xcconfig"; sourceTree = "<group>"; };
 		8B0D35F41E56EB2D002CF784 /* BookingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
 		8B1AD45A1E1B828500D55543 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -637,7 +644,6 @@
 		A6C463D81E25DB910046A367 /* RecentFeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentFeedTableViewCell.swift; sourceTree = "<group>"; };
 		A6C463D91E25DB910046A367 /* RecentFeedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecentFeedTableViewCell.xib; sourceTree = "<group>"; };
 		A6C463DC1E26493A0046A367 /* Edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Edit.png; sourceTree = "<group>"; };
-		A6CD32CF1E4C2C9400FA2B21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A6D083C21E121A2E007EA4D9 /* UserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserEntity.swift; path = ../UserEntity.swift; sourceTree = "<group>"; };
 		A6D083C41E12747D007EA4D9 /* QuestionTagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTagTableViewCell.swift; sourceTree = "<group>"; };
 		A6D083C51E12747D007EA4D9 /* QuestionTagTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionTagTableViewCell.xib; sourceTree = "<group>"; };
@@ -789,7 +795,7 @@
 			isa = PBXGroup;
 			children = (
 				8B296BAC1E5557BA00170879 /* CDYT_HoiDap.entitlements */,
-				A6CD32CF1E4C2C9400FA2B21 /* GoogleService-Info.plist */,
+				50B4B8611F259B9500B7C305 /* GoogleService-Info.plist */,
 				A6D083C11E121A1C007EA4D9 /* Entity */,
 				8B3A13841E10FCB6005DBC6E /* ViewController */,
 				8B3A137F1E10F46B005DBC6E /* Helper */,
@@ -808,6 +814,8 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				50B4B8631F25B2A300B7C305 /* Facebook.png */,
+				50B4B8641F25B2A300B7C305 /* Gmail.png */,
 				0F0FB8241E90BC4D0044468A /* tab1.png */,
 				0FA10C771E8B789400D1A11F /* XNTaiNha.png */,
 				0FC0CB9E1E8760E0009DA53C /* KhamTaiNha.png */,
@@ -1304,6 +1312,7 @@
 				A6D083C21E121A2E007EA4D9 /* UserEntity.swift */,
 				A6F9809F1E48607E0007CD63 /* LinkedUser.swift */,
 				98F991121EBACA3000B5842C /* NotificationNewEntity.swift */,
+				50B4B8671F25D2CD00B7C305 /* UserDepartmentEntity.swift */,
 			);
 			path = "Realm Object";
 			sourceTree = "<group>";
@@ -1423,6 +1432,7 @@
 				8BD49F661E482D1100C98E74 /* OpenChannelChattingViewController.xib in Resources */,
 				8BD49F331E482C1600C98E74 /* OutgoingFileMessageTableViewCell.xib in Resources */,
 				0F09CEF11E88AA33003FD8B1 /* ServiceCell.xib in Resources */,
+				50B4B8661F25B2A300B7C305 /* Gmail.png in Resources */,
 				8B3A13561E10F454005DBC6E /* Like0.png in Resources */,
 				0FC0CBA01E8760E0009DA53C /* KhamTaiNha.png in Resources */,
 				0FC431741E6534FD003F7F31 /* Ketqua.png in Resources */,
@@ -1442,6 +1452,7 @@
 				A60430FD1E2344DA000216FB /* dropdownicon.png in Resources */,
 				A6417E231E13B68D00BD2D75 /* SettingTableViewCell.xib in Resources */,
 				A6C463DB1E25DB910046A367 /* RecentFeedTableViewCell.xib in Resources */,
+				50B4B8621F259B9500B7C305 /* GoogleService-Info.plist in Resources */,
 				8BC380691E583D8D00DF154A /* DatKham.png in Resources */,
 				981CC9161EA66A8F00E35EB0 /* TotalPriceCell.xib in Resources */,
 				A60430F61E232D49000216FB /* Change_Ava.png in Resources */,
@@ -1454,6 +1465,7 @@
 				0F9471441E5F5E3C00EE7C2A /* Main.storyboard in Resources */,
 				EF38340F1E66ABAD0042C2E7 /* about1.jpg in Resources */,
 				8BD49F5B1E482D1100C98E74 /* BlockedUserListViewController.xib in Resources */,
+				50B4B8651F25B2A300B7C305 /* Facebook.png in Resources */,
 				8B3A13441E10F454005DBC6E /* Back.png in Resources */,
 				8BD49F371E482C1600C98E74 /* OutgoingUserMessageTableViewCell.xib in Resources */,
 				0F9C462B1E600D6100DCFE46 /* Add.png in Resources */,
@@ -1468,7 +1480,6 @@
 				0F0FB8251E90BC4D0044468A /* tab1.png in Resources */,
 				0FF7533E1E62F3A9001450B7 /* ExamScheduleCell.xib in Resources */,
 				8B3A13411E10F454005DBC6E /* AvaDefaut.png in Resources */,
-				A6CD32D01E4C2C9400FA2B21 /* GoogleService-Info.plist in Resources */,
 				8BC3806D1E58481600DF154A /* SplashLogo.png in Resources */,
 				8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */,
 				8B6E19971E5EC9080078558D /* Logo.png in Resources */,
@@ -1624,6 +1635,7 @@
 				A676E7C31E2731F500DD57B2 /* ChangPassViewController.swift in Sources */,
 				8BD49F061E48215500C98E74 /* GroupChannelListEditableTableViewCell.swift in Sources */,
 				8BD49F041E48215500C98E74 /* CreateGroupChannelUserListTableViewCell.swift in Sources */,
+				50B4B8681F25D2CD00B7C305 /* UserDepartmentEntity.swift in Sources */,
 				A6D083C61E12747D007EA4D9 /* QuestionTagTableViewCell.swift in Sources */,
 				8BD49F6B1E482D1100C98E74 /* OpenChannelListTableViewCell.swift in Sources */,
 				8B3A13771E10F454005DBC6E /* RAMBounceAnimation.swift in Sources */,
