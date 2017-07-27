@@ -266,7 +266,17 @@
 		980AF9C21EAB0DF20049A06D /* PackCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 980AF9C01EAB0DF20049A06D /* PackCellTableViewCell.xib */; };
 		981CC9151EA66A8F00E35EB0 /* TotalPriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981CC9131EA66A8F00E35EB0 /* TotalPriceCell.swift */; };
 		981CC9161EA66A8F00E35EB0 /* TotalPriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 981CC9141EA66A8F00E35EB0 /* TotalPriceCell.xib */; };
+		9863D8341F25109400BFADC8 /* CustomTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863D8331F25109400BFADC8 /* CustomTopView.xib */; };
+		9863D8361F2510A100BFADC8 /* CustomTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863D8351F2510A100BFADC8 /* CustomTopView.swift */; };
+		9863D8381F2511D200BFADC8 /* BookingOnline.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9863D8371F2511D200BFADC8 /* BookingOnline.storyboard */; };
+		9863D83A1F2511EE00BFADC8 /* HomeBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863D8391F2511EE00BFADC8 /* HomeBookingViewController.swift */; };
+		9863D83D1F25145200BFADC8 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863D83B1F25145200BFADC8 /* HomeCell.swift */; };
+		9863D8421F25190E00BFADC8 /* CustomizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863D8411F25190E00BFADC8 /* CustomizeButton.swift */; };
 		98942FF41EA5284B004C3349 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98942FF31EA5284B004C3349 /* ResultsViewController.swift */; };
+		98AB4C2E1F2796ED0081824E /* SettingBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AB4C2D1F2796ED0081824E /* SettingBookingViewController.swift */; };
+		98AB4C351F279E860081824E /* CellTableInfomation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AB4C331F279E860081824E /* CellTableInfomation.swift */; };
+		98AB4C361F279E860081824E /* CellTableInfomation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AB4C341F279E860081824E /* CellTableInfomation.xib */; };
+		98AB4C381F27B0C50081824E /* HomeAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AB4C371F27B0C50081824E /* HomeAnalysisViewController.swift */; };
 		98EC9B731EA9A3CA00095FFB /* PeopleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EC9B721EA9A3CA00095FFB /* PeopleEntity.swift */; };
 		98EC9B751EA9A43C00095FFB /* DepartmentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EC9B741EA9A43C00095FFB /* DepartmentEntity.swift */; };
 		98EC9B771EA9BC8C00095FFB /* MedicalTestEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EC9B761EA9BC8C00095FFB /* MedicalTestEntity.swift */; };
@@ -599,7 +609,17 @@
 		980AF9C01EAB0DF20049A06D /* PackCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PackCellTableViewCell.xib; sourceTree = "<group>"; };
 		981CC9131EA66A8F00E35EB0 /* TotalPriceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalPriceCell.swift; sourceTree = "<group>"; };
 		981CC9141EA66A8F00E35EB0 /* TotalPriceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TotalPriceCell.xib; sourceTree = "<group>"; };
+		9863D8331F25109400BFADC8 /* CustomTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTopView.xib; sourceTree = "<group>"; };
+		9863D8351F2510A100BFADC8 /* CustomTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTopView.swift; sourceTree = "<group>"; };
+		9863D8371F2511D200BFADC8 /* BookingOnline.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BookingOnline.storyboard; sourceTree = "<group>"; };
+		9863D8391F2511EE00BFADC8 /* HomeBookingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeBookingViewController.swift; sourceTree = "<group>"; };
+		9863D83B1F25145200BFADC8 /* HomeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
+		9863D8411F25190E00BFADC8 /* CustomizeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizeButton.swift; sourceTree = "<group>"; };
 		98942FF31EA5284B004C3349 /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		98AB4C2D1F2796ED0081824E /* SettingBookingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingBookingViewController.swift; sourceTree = "<group>"; };
+		98AB4C331F279E860081824E /* CellTableInfomation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellTableInfomation.swift; sourceTree = "<group>"; };
+		98AB4C341F279E860081824E /* CellTableInfomation.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellTableInfomation.xib; sourceTree = "<group>"; };
+		98AB4C371F27B0C50081824E /* HomeAnalysisViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAnalysisViewController.swift; sourceTree = "<group>"; };
 		98EC9B721EA9A3CA00095FFB /* PeopleEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleEntity.swift; sourceTree = "<group>"; };
 		98EC9B741EA9A43C00095FFB /* DepartmentEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepartmentEntity.swift; sourceTree = "<group>"; };
 		98EC9B761EA9BC8C00095FFB /* MedicalTestEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalTestEntity.swift; sourceTree = "<group>"; };
@@ -794,6 +814,7 @@
 		8B3A12DD1E10F399005DBC6E /* CDYT_HoiDap */ = {
 			isa = PBXGroup;
 			children = (
+				9863D82F1F25105700BFADC8 /* BookingOnline */,
 				8B296BAC1E5557BA00170879 /* CDYT_HoiDap.entitlements */,
 				50B4B8611F259B9500B7C305 /* GoogleService-Info.plist */,
 				A6D083C11E121A1C007EA4D9 /* Entity */,
@@ -1227,6 +1248,47 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		9863D82F1F25105700BFADC8 /* BookingOnline */ = {
+			isa = PBXGroup;
+			children = (
+				9863D8311F25108400BFADC8 /* BookingViewController */,
+				9863D8321F25108400BFADC8 /* CustomViewTop */,
+				9863D8301F25105700BFADC8 /* CellTable */,
+				9863D8371F2511D200BFADC8 /* BookingOnline.storyboard */,
+			);
+			path = BookingOnline;
+			sourceTree = "<group>";
+		};
+		9863D8301F25105700BFADC8 /* CellTable */ = {
+			isa = PBXGroup;
+			children = (
+				9863D83B1F25145200BFADC8 /* HomeCell.swift */,
+				98AB4C331F279E860081824E /* CellTableInfomation.swift */,
+				98AB4C341F279E860081824E /* CellTableInfomation.xib */,
+			);
+			path = CellTable;
+			sourceTree = "<group>";
+		};
+		9863D8311F25108400BFADC8 /* BookingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9863D8391F2511EE00BFADC8 /* HomeBookingViewController.swift */,
+				98AB4C2D1F2796ED0081824E /* SettingBookingViewController.swift */,
+				98AB4C371F27B0C50081824E /* HomeAnalysisViewController.swift */,
+			);
+			path = BookingViewController;
+			sourceTree = "<group>";
+		};
+		9863D8321F25108400BFADC8 /* CustomViewTop */ = {
+			isa = PBXGroup;
+			children = (
+				9863D8411F25190E00BFADC8 /* CustomizeButton.swift */,
+				9863D8331F25109400BFADC8 /* CustomTopView.xib */,
+				9863D8351F2510A100BFADC8 /* CustomTopView.swift */,
+			);
+			path = CustomViewTop;
+			sourceTree = "<group>";
+		};
 		A6005BCC1E13721200095FB7 /* User Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1393,6 +1455,7 @@
 				8B79D0E61E5A9B350010C5C0 /* DoctorTableViewCell.xib in Resources */,
 				8BD49F2A1E482C1500C98E74 /* IncomingFileMessageTableViewCell.xib in Resources */,
 				A68A95051E14ECFB0067736E /* DetailQuestionTableViewCell.xib in Resources */,
+				98AB4C361F279E860081824E /* CellTableInfomation.xib in Resources */,
 				8BF149701E14BF9C00766F8F /* Camera.png in Resources */,
 				8BD49F0D1E48215500C98E74 /* SelectedUserListCollectionViewCell.xib in Resources */,
 				8B3A13911E112129005DBC6E /* KeyWordTableViewCell.xib in Resources */,
@@ -1412,6 +1475,7 @@
 				8BD49F5E1E482D1100C98E74 /* ParticipantListViewController.xib in Resources */,
 				0F9C46281E6008A200DCFE46 /* ChonNgay.png in Resources */,
 				8B3A134D1E10F454005DBC6E /* DaHoi_Button0.png in Resources */,
+				9863D8381F2511D200BFADC8 /* BookingOnline.storyboard in Resources */,
 				0F36980D1E54013C004B028D /* Ask copy.png in Resources */,
 				8BF149781E14BF9C00766F8F /* Search_Inbox.png in Resources */,
 				8BD49EF91E48215500C98E74 /* MemberListViewController.xib in Resources */,
@@ -1488,6 +1552,7 @@
 				0FE4606D1E84F6D00045DB84 /* GhiChu.png in Resources */,
 				0F17AB151E51A682008BA308 /* CheckList.png in Resources */,
 				0F9C463E1E603F4200DCFE46 /* Profile_1.png in Resources */,
+				9863D8341F25109400BFADC8 /* CustomTopView.xib in Resources */,
 				8BF149791E14BF9C00766F8F /* Tab.png in Resources */,
 				A6C463D71E25DB7D0046A367 /* Recent.png in Resources */,
 				8B813CB31E15052E0043F7EF /* Home.png in Resources */,
@@ -1599,6 +1664,7 @@
 				8B3A13701E10F454005DBC6E /* DataEncryption.m in Sources */,
 				8BD49F6D1E482D1100C98E74 /* ParticipantListTableViewCell.swift in Sources */,
 				A62F58601E2CA78100459408 /* EditCommentViewController.swift in Sources */,
+				9863D8421F25190E00BFADC8 /* CustomizeButton.swift in Sources */,
 				0FCFD9A61E5EEDB700EE2F89 /* BookingCalenderController.swift in Sources */,
 				0F9AD59C1E63CE0F00981D7B /* SearchFileViewController.swift in Sources */,
 				8B3A13751E10F454005DBC6E /* TPKeyboardAvoidingTableView.m in Sources */,
@@ -1607,6 +1673,7 @@
 				A68A95081E14ED1C0067736E /* CommentTableViewCell.swift in Sources */,
 				8B79D0E51E5A9B350010C5C0 /* DoctorTableViewCell.swift in Sources */,
 				8B87CD301E13681200DA8A33 /* FeedsEntity.swift in Sources */,
+				9863D83D1F25145200BFADC8 /* HomeCell.swift in Sources */,
 				8BC2C30E1E23379300B68F72 /* ListNotificationEntity.swift in Sources */,
 				A632043C1E49BB0A00B9152A /* PolicyAndRuleViewController.swift in Sources */,
 				8B3A12E11E10F399005DBC6E /* ViewController.swift in Sources */,
@@ -1657,6 +1724,7 @@
 				8B3A138A1E10FD58005DBC6E /* QuestionViewController.swift in Sources */,
 				8BD49F291E482C1500C98E74 /* IncomingFileMessageTableViewCell.swift in Sources */,
 				8BD49F671E482D1100C98E74 /* OpenChannelListViewController.swift in Sources */,
+				98AB4C351F279E860081824E /* CellTableInfomation.swift in Sources */,
 				8B3A13731E10F454005DBC6E /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				A6D083C31E121A2E007EA4D9 /* UserEntity.swift in Sources */,
 				8BD49F0F1E4824EA00C98E74 /* Constants.swift in Sources */,
@@ -1666,6 +1734,7 @@
 				0F94FEE91E877F0A001884AD /* DetailAnalysisFormViewController.swift in Sources */,
 				A68A95151E151B490067736E /* MainCommentEntity.swift in Sources */,
 				A6F980A01E48607E0007CD63 /* LinkedUser.swift in Sources */,
+				9863D83A1F2511EE00BFADC8 /* HomeBookingViewController.swift in Sources */,
 				8BD49F691E482D1100C98E74 /* BlockedUserListTableViewCell.swift in Sources */,
 				8BD49F321E482C1500C98E74 /* OutgoingFileMessageTableViewCell.swift in Sources */,
 				8BD49F361E482C1600C98E74 /* OutgoingUserMessageTableViewCell.swift in Sources */,
@@ -1699,6 +1768,7 @@
 				0FC0CBA71E876C21009DA53C /* DetaiAnalysisViewController.swift in Sources */,
 				8B3A13761E10F454005DBC6E /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				0F8960501EA0BF8E006A1C2D /* MediCalEntity.swift in Sources */,
+				98AB4C2E1F2796ED0081824E /* SettingBookingViewController.swift in Sources */,
 				0F54E1531E8A1AF6000AFE03 /* PackagesEntity.swift in Sources */,
 				8B3A13791E10F454005DBC6E /* RAMFumeAnimation.swift in Sources */,
 				8BD49F341E482C1600C98E74 /* OutgoingImageFileMessageTableViewCell.swift in Sources */,
@@ -1730,6 +1800,7 @@
 				8B3A12DF1E10F399005DBC6E /* AppDelegate.swift in Sources */,
 				A60430FA1E233431000216FB /* SSRadioButton.swift in Sources */,
 				5020249A1F1F3A6800D5989B /* KSToken.swift in Sources */,
+				98AB4C381F27B0C50081824E /* HomeAnalysisViewController.swift in Sources */,
 				0FA535B11E82393A0004D329 /* AdminUpdateProfileViewController.swift in Sources */,
 				0FC751EB1E8BA44200B82553 /* HistoryCell.swift in Sources */,
 				8B3A137B1E10F454005DBC6E /* RAMTransitionItemAnimations.swift in Sources */,
@@ -1739,6 +1810,7 @@
 				8B1AD45E1E1B97F000D55543 /* SearchTableViewCell.swift in Sources */,
 				8B3A136E1E10F454005DBC6E /* CAPSPageMenu.swift in Sources */,
 				980AF9C11EAB0DF20049A06D /* PackCellTableViewCell.swift in Sources */,
+				9863D8361F2510A100BFADC8 /* CustomTopView.swift in Sources */,
 				8BFE666C1E5D423700E1138B /* BaseViewController.swift in Sources */,
 				0FCFD9A81E5EEDDD00EE2F89 /* ManagerViewController.swift in Sources */,
 				8B813CB71E1510500043F7EF /* QuestionByTagViewController.swift in Sources */,
