@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomTopView" customModule="CDYT_HoiDap" customModuleProvider="target">
+            <connections>
+                <outlet property="btnDone" destination="M4i-8d-Z0T" id="TDn-UX-HOv"/>
+                <outlet property="btnPopView" destination="WLU-9Z-dhA" id="LOa-NJ-8Cw"/>
+                <outlet property="lbTitTopView" destination="Mqv-V1-Iaz" id="OYL-zS-aRz"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WLU-9Z-dhA">
+                    <rect key="frame" x="0.0" y="22" width="44" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="WLU-9Z-dhA" secondAttribute="height" multiplier="1:1" id="htz-5q-LbK"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                    <state key="normal" image="BackWhite.png"/>
+                    <connections>
+                        <action selector="btnPopView:" destination="-1" eventType="touchUpInside" id="Utu-1g-pJY"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mqv-V1-Iaz">
+                    <rect key="frame" x="52" y="34.5" width="271" height="19.5"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4i-8d-Z0T">
+                    <rect key="frame" x="331" y="22" width="44" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="M4i-8d-Z0T" secondAttribute="height" multiplier="1:1" id="Tbd-Ke-amt"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="Xong">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnDone:" destination="-1" eventType="touchUpInside" id="ms6-0S-CQp"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.0039215686269999999" green="0.65490196079999996" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="WLU-9Z-dhA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="22" id="1Dh-dv-w04"/>
+                <constraint firstItem="Mqv-V1-Iaz" firstAttribute="centerY" secondItem="WLU-9Z-dhA" secondAttribute="centerY" id="9hG-8Y-o9T"/>
+                <constraint firstItem="M4i-8d-Z0T" firstAttribute="top" secondItem="WLU-9Z-dhA" secondAttribute="top" id="P4w-wh-kal"/>
+                <constraint firstItem="WLU-9Z-dhA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QGn-q2-auu"/>
+                <constraint firstItem="M4i-8d-Z0T" firstAttribute="leading" secondItem="Mqv-V1-Iaz" secondAttribute="trailing" constant="8" id="aZK-Zh-0Ce"/>
+                <constraint firstItem="Mqv-V1-Iaz" firstAttribute="leading" secondItem="WLU-9Z-dhA" secondAttribute="trailing" constant="8" id="iCS-ka-mHQ"/>
+                <constraint firstAttribute="bottom" secondItem="M4i-8d-Z0T" secondAttribute="bottom" id="j9J-xm-kMy"/>
+                <constraint firstAttribute="trailing" secondItem="M4i-8d-Z0T" secondAttribute="trailing" id="tex-ca-15z"/>
+                <constraint firstAttribute="bottom" secondItem="WLU-9Z-dhA" secondAttribute="bottom" id="uvE-NT-WKb"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="BackWhite.png" width="100" height="101"/>
+    </resources>
+</document>
