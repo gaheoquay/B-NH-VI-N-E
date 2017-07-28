@@ -32,6 +32,8 @@ class ChangPassViewController: BaseViewController {
         
         if curPassString == "" || newpassString == "" || confNewPassString == "" {
             return "Vui lòng nhập đầy đủ thông tin"
+        }else if !isValidInput(input: newpassString!){
+            return "Tên đăng nhập từ 6 đến 30 ký tự và không chứa ký tự đặc biệt."
         }else if newpassString != confNewPassString {
             return "Mật khẩu mới và xác nhận mật khẩu phải trùng nhau"
         }else{
@@ -39,6 +41,12 @@ class ChangPassViewController: BaseViewController {
         }
     }
     
+    func isValidInput(input:String) -> Bool {
+        let regEx = "[A-Z0-9a-z]{6,30}"
+        let test = NSPredicate(format:"SELF MATCHES %@", regEx)
+        return test.evaluate(with: input)
+    }
+
     @IBAction func updateBtnTapAction(_ sender: Any) {
         if validateData() == "" {
             errLbl.isHidden = true
@@ -66,26 +74,35 @@ class ChangPassViewController: BaseViewController {
             "NewPassWord": DataEncryption.getMD5(from: newPass.text)
         ]
         
-        
-        Alamofire.request(CHANGE_PASSWORD, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            if let status = response.response?.statusCode {
-                if status == 200{
-                    let alert = UIAlertController(title: "Thông báo", message: "Cập nhật mật khẩu thành công.", preferredStyle: .alert)
-                    let OkeAction: UIAlertAction = UIAlertAction(title: "Đóng", style: .cancel) { action -> Void in
-                        _ = self.navigationController?.popViewController(animated: true)
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            Alamofire.request(CHANGE_PASSWORD, method: .post, parameters: param, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        let alert = UIAlertController(title: "Thông báo", message: "Cập nhật mật khẩu thành công.", preferredStyle: .alert)
+                        let OkeAction: UIAlertAction = UIAlertAction(title: "Đóng", style: .cancel) { action -> Void in
+                            _ = self.navigationController?.popViewController(animated: true)
+                        }
+                        alert.addAction(OkeAction)
+                        self.present(alert, animated: true, completion: nil)
+                        
+                    }else if status == 404 {
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Mật khẩu cũ không đúng, vui lòng thử lại.", cancelBtnTitle: "Đóng")
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
-                    alert.addAction(OkeAction)
-                    self.present(alert, animated: true, completion: nil)
-                    
-                }else if status == 404 {
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Mật khẩu cũ không đúng, vui lòng thử lại.", cancelBtnTitle: "Đóng")
                 }else{
-                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-            }else{
-                UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                Until.hideLoading()
             }
-            Until.hideLoading()
+        } catch let error as NSError {
+            print(error)
         }
     }
     

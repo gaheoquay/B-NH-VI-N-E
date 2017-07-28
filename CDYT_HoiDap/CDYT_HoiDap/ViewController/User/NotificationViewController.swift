@@ -119,6 +119,7 @@ class NotificationViewController: BaseViewController, UITableViewDelegate, UITab
             }else if entity.type == 2{
                 viewController.commentId = (entity.parenId)
             }
+            
             viewController.notification = entity
             viewController.delegate = self
             self.navigationController?.pushViewController(viewController, animated: true)

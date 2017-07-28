@@ -28,7 +28,6 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
     var tagIds = Array<String>()
     var listTag = [TagEntity]()
     let myGroup = DispatchGroup()
-
     let pickerImageController = DKImagePickerController()
     var imageAssets = [DKAsset]()
     var id = ""
@@ -44,10 +43,14 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
     var ischeck = false
     
     var pickerFrame = CGRect(x: 0, y: 50, width: 270, height: 150)
-   
+    var listDepartment = [DepartmentEntity]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         titleTxt.delegate = self
+        listDepartment = listCate.filter({ (entity) -> Bool in
+            entity.isPublic == true
+        })
         requestTag()
         requestCate()
         registerNotification()
@@ -151,7 +154,7 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
         }
         contentTxt.text = feedObj.postEntity.content
         
-            for item in listCate {
+            for item in listDepartment {
                 if item.id == feedObj.postEntity.categoryId {
                     lbCate.text = item.name
                   id = item.id
@@ -490,24 +493,26 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
         let alertView = UIAlertController(title: "Chuyên khoa", message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         
         let pickerView = UIPickerView(frame: pickerFrame)
-        
-        
-        
         alertView.view.addSubview(pickerView)
         
         pickerView.delegate = self
         pickerView.dataSource = self
         
-        
+        for (index, _) in listDepartment.enumerated() {
+            if self.id == listDepartment[index].id {
+                self.indexPathCate = index
+                break
+            }
+        }
+        pickerView.selectRow(self.indexPathCate, inComponent: 0, animated: false)
         let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
             if self.name == "" {
-                self.lbCate.text = listCate[self.indexPathCate].name
-                self.id = listCate[self.indexPathCate].id
+                self.lbCate.text = self.listDepartment[self.indexPathCate].name
+                self.id = self.listDepartment[self.indexPathCate].id
             }else {
                 self.lbCate.text = self.name
             }
         })
-        
         alertView.addAction(action)
         present(alertView, animated: true, completion: nil)
     }
@@ -516,15 +521,15 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
         return 1
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return listCate.count
+        return listDepartment.count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return listCate[row].name
+        return listDepartment[row].name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        id = listCate[row].id
-        name = listCate[row].name
+        id = listDepartment[row].id
+        name = listDepartment[row].name
     }
 
     override func didReceiveMemoryWarning() {
@@ -547,9 +552,13 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
                         if let result = response.result.value {
                             let json = result as! [NSDictionary]
                             listCate.removeAll()
+                            self.listDepartment.removeAll()
                             for element in json {
-                                let entity = CateEntity.init(dictionary: element)
+                                let entity = DepartmentEntity.init(dictionary: element)
                                 listCate.append(entity)
+                                if entity.isPublic {
+                                    self.listDepartment.append(entity)
+                                }
                             }
                         }
                         self.myGroup.leave()

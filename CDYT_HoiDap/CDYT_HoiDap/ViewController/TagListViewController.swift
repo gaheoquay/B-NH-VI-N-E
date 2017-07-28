@@ -13,10 +13,17 @@ class TagListViewController: BaseViewController {
     @IBOutlet weak var tagTableView: UITableView!
     var listHotTag = [HotTagEntity]()
     var page = 1
-    var time = Timer()
+    var time: Timer?
+    var isSearching = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
+        searchBar.backgroundImage = UIImage()
+        let textField = searchBar.value(forKey: "_searchField") as? UITextField
+        textField?.layer.borderColor = UIColor.lightGray.cgColor
+        textField?.layer.borderWidth = 1
+        textField?.layer.cornerRadius = 15
         initTaleView()
         searchTag()
     }
@@ -50,12 +57,14 @@ class TagListViewController: BaseViewController {
     }
     func reloadData(){
         page = 1
+        isSearching = false
         listHotTag.removeAll()
         searchTag()
         
     }
     func loadMore(){
         page += 1
+        isSearching = false
         searchTag()
     }
     
@@ -73,13 +82,14 @@ class TagListViewController: BaseViewController {
                 if let status = response.response?.statusCode {
                     if status == 200{
                         if let result = response.result.value {
-                            let jsonData = (result as! NSDictionary)["Tags"] as! [NSDictionary]
-                            
-                            for item in jsonData {
-                                let hotTag = HotTagEntity.init(dictionary: item)
-                                self.listHotTag.append(hotTag)
+                            if self.isSearching {
+                                self.listHotTag.removeAll()
                             }
-                            
+                            let jsonData = (result as! NSDictionary)["Tags"] as! [NSDictionary]
+                                for item in jsonData {
+                                    let hotTag = HotTagEntity.init(dictionary: item)
+                                    self.listHotTag.append(hotTag)
+                                }
                             self.tagTableView.reloadData()
                         }
                     }else{
@@ -142,7 +152,8 @@ extension TagListViewController: QuestionTagTableViewCellDelegate {
 //  MARK: UISearchBarDelegate
 extension TagListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        time.invalidate()
+        time?.invalidate()
+        isSearching = true
         if #available(iOS 10.0, *) {
             time = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { (_) in
                 self.page = 1

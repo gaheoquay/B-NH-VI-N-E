@@ -17,7 +17,7 @@ class MainCommentEntity: NSObject {
     var likeCount = 0
     var subComment = [SubCommentEntity]()
     var isShowMore = false
-    
+    var postAuthor = AuthorEntity()
     override init (){
         super.init()
     }
@@ -47,6 +47,8 @@ class MainCommentEntity: NSObject {
                 subComment.append(entity)
             }
         }
-        
+        if let value = dict["PostAuthor"] as? NSDictionary {
+            postAuthor = AuthorEntity.init(dictionary: value)
+        }
     }
 }

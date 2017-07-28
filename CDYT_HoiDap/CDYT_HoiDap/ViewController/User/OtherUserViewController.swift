@@ -257,9 +257,4 @@ class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableV
     func gotoUserProfileFromQuestionDoctor(doctor: AuthorEntity) {
         
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 }

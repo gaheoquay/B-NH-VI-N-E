@@ -165,7 +165,7 @@ class CommentTableViewCell: UITableViewCell {
             verifyIconHeight.constant = 0
             avaImg.image = UIImage(named: "AvaDefaut.png")
         }else{
-            avaImg.sd_setImage(with: URL.init(string: feed.authorEntity.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
+            avaImg.sd_setImage(with: URL.init(string: mainComment.author.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
             if mainComment.author.role == 1 {
                 nameLbl.text = mainComment.author.fullname
                 var jobTitle = ""
@@ -204,7 +204,6 @@ class CommentTableViewCell: UITableViewCell {
             markToResolveBtn.setImage(UIImage.init(named: "GiaiPhap_Mark.png"), for: UIControlState.normal)
             markToResolveBtn.isHidden = false
             
-            moreActionBtn.isHidden = true
         }else{
             
             self.contentView.backgroundColor = UIColor.white
@@ -219,7 +218,6 @@ class CommentTableViewCell: UITableViewCell {
             }
             
             markToResolveBtn.setImage(UIImage.init(named: "GiaiPhap_Mark_hide.png"), for: UIControlState.normal)
-            moreActionBtn.isHidden = false
         }
         
         timeLbl.text = String().convertTimeStampWithDateFormat(timeStamp: mainComment.comment.createdDate, dateFormat: "dd/MM/yy HH:mm")
@@ -255,7 +253,7 @@ class CommentTableViewCell: UITableViewCell {
         let realm = try! Realm()
         let users = realm.objects(UserEntity.self).first
         
-        if Until.getCurrentId() == mainComment.author.id || users?.role == 2 {
+        if (Until.getCurrentId() == mainComment.author.id || users?.role == 2) && !mainComment.comment.isSolution {
             moreActionBtn.isHidden = false
         }else{
             moreActionBtn.isHidden = true
@@ -275,7 +273,7 @@ class CommentTableViewCell: UITableViewCell {
             verifyIconHeight.constant = 0
             avaImg.image = UIImage(named: "AvaDefaut.png")
         }else{
-            avaImg.sd_setImage(with: URL.init(string: feed.authorEntity.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
+            avaImg.sd_setImage(with: URL.init(string: mainComment.author.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
             if subComment.author.role == 1 {
                 nameLbl.text = subComment.author.fullname
                 var jobTitle = ""

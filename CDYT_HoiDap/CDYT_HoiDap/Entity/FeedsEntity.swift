@@ -16,7 +16,7 @@ class FeedsEntity: NSObject {
     var isLiked = false
     var isFollowed = false
     var tags = [TagEntity]()
-    var cateGory = CateEntity()
+    var cateGory = DepartmentEntity()
     var assigneeEntity = AuthorEntity()
     var firstCommentedDoctor = AuthorEntity()
     var firstCommentTime : Double = 0
@@ -53,7 +53,7 @@ class FeedsEntity: NSObject {
             }
         }
         if let value = dictionary["Category"] as? NSDictionary {
-            cateGory = CateEntity.init(dictionary: value)
+            cateGory = DepartmentEntity.init(dictionary: value)
         }
         if let value = dictionary["Assignee"] as? NSDictionary {
             assigneeEntity = AuthorEntity.init(dictionary: value)

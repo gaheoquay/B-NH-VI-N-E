@@ -31,8 +31,8 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
             }
             
             isFeeds = false
-            isAssigned = true
-            isNotAssignedYet = false
+            isAssigned = false
+            isNotAssignedYet = true
         }else{
             if !isFeeds || !isAssigned || !isNotAssignedYet {
                 reloadDataForUser()

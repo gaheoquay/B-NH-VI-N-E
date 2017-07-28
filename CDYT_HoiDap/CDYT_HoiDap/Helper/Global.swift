@@ -60,7 +60,7 @@ let SET_READ_NOTIFICATION = BASE_URL + "/Notification/SetRead"
 let UPDATE_COMMENT = BASE_URL + "/Post/UpdateComment"
 let UPDATE_SUBCOMMENT = BASE_URL + "/Post/UpdateSubComment"
 let FOLLOW_POST = BASE_URL + "/Post/FollowPost"
-let POLICY_RULE = BASE_URL + "/PolicyAndCondition"
+let POLICY_RULE = BASE_URL + "/Term/PolicyAndCondition"
 let GET_UNREAD_NOTIFICATION = BASE_URL + "/Notification/GetUnreadNotificationCount"
 let GET_QUESTION_ASSIGN = BASE_URL + "/Post/GetQuestionAssignToUser"
 let GET_LIST_DOCTOR = BASE_URL + "/category/GetListDoctorsPerCategory"
@@ -84,6 +84,7 @@ let GET_LIST_ADMIN = BASE_URL + "/User/GetListAdmin"
 let GET_LIST_PACKAGE_SERVICE = BASE_URL + "/Service/GetListPackServices"
 let GET_ALL_TAG = BASE_URL + "/Tag/GetAll"
 let LOGIN_WITH_SOCIAL = BASE_URL + "/User/LoginSocialNetwork"
+let UPDATE_EMAIL = BASE_URL + "/User/UpdateEmail"
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
 let NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"
@@ -134,7 +135,7 @@ let CREATE_QUESTION = "ScreenCreateQuestion"
 let SEARCHS = "ScreenSearch"
 
 var listNotification = [NotificationNewEntity]()
-var listCate = [CateEntity]()
+var listCate = [DepartmentEntity]()
 var listAllDoctor = [ListDoctorEntity]()
 
 

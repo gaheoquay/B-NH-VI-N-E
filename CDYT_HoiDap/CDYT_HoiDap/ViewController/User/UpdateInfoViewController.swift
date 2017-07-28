@@ -14,7 +14,7 @@ class UpdateInfoViewController: BaseViewController {
     @IBOutlet weak var avaImg2: UIImageView!
     @IBOutlet weak var nameLbl1: UILabel!
     @IBOutlet weak var nameLbl2: UILabel!
-    @IBOutlet weak var logoutBtn: UIButton!
+    @IBOutlet weak var lbNickName: UILabel!
     @IBOutlet weak var fullnameTxt: UITextField!
     @IBOutlet weak var genderBtn: UIButton!
     @IBOutlet weak var dobBtn: UIButton!
@@ -23,9 +23,11 @@ class UpdateInfoViewController: BaseViewController {
     @IBOutlet weak var errLbl: UILabel!
     @IBOutlet weak var avaImg1Height: NSLayoutConstraint!
     @IBOutlet weak var avaImg2Height: NSLayoutConstraint!
-    @IBOutlet weak var logoutBtnHeight: NSLayoutConstraint!
     @IBOutlet weak var changePassViewHeight: NSLayoutConstraint!
     @IBOutlet weak var changePassView: UIView!
+    @IBOutlet weak var changeEmailView: UIView!
+    @IBOutlet weak var changeEmailViewHeigh: NSLayoutConstraint!
+    
     @IBOutlet weak var updateBtn: UIButton!
     @IBOutlet weak var emailTxt: UITextField!
     
@@ -69,6 +71,7 @@ class UpdateInfoViewController: BaseViewController {
             if users.count > 0 {
                 userToShow = users.first!
             }
+            getUserById(userId: userToShow.id)
             setDataForView()
         }else{
             getUserById()
@@ -86,12 +89,9 @@ class UpdateInfoViewController: BaseViewController {
         
         avaImg2.layer.cornerRadius = 10
         avaImg2.clipsToBounds = true
-        
-        logoutBtn.layer.cornerRadius = 8
-        logoutBtn.clipsToBounds = true
     }
     
-    func getUserById(){
+    func getUserById(userId: String? = nil){
         do {
             let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
             let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
@@ -100,17 +100,26 @@ class UpdateInfoViewController: BaseViewController {
                 "Auth": auth
             ]
             let param : [String : Any] = [
-                "RequestedUserId": otherUserId
+                "RequestedUserId": userId == nil ? otherUserId : userId ?? ""
             ]
-            Until.showLoading()
             Alamofire.request(GET_USER_BY_ID, method: .post, parameters: param, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
                 if let status = response.response?.statusCode {
                     if status == 200{
                         if let result = response.result.value {
                             let jsonData = result as! NSDictionary
-                            let entity = PeopleEntity.init(dictionary: jsonData)
-                            self.peopleInfo = entity
-                            self.setDataForView()
+                            if self.otherUserId == "" {
+                                let reaml = try! Realm()
+                                let entity = UserEntity.initWithDictionary(dictionary: jsonData)
+                                self.userToShow = entity
+                                self.setDataForView()
+                                try! reaml.write {
+                                    reaml.add(entity, update: true)
+                                }
+                            }else{
+                                let entity = PeopleEntity.init(dictionary: jsonData)
+                                self.peopleInfo = entity
+                                self.setDataForView()
+                            }
                         }
                     }else if status == 400 {
                         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Email hoặc tên đăng nhập đã tồn tại, vui lòng thử lại.", cancelBtnTitle: "Đóng")
@@ -120,7 +129,6 @@ class UpdateInfoViewController: BaseViewController {
                 }else{
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
-                Until.hideLoading()
             }
         } catch let error as NSError {
             print(error)
@@ -144,8 +152,7 @@ class UpdateInfoViewController: BaseViewController {
             nameLbl1.text = ""
             fullnameTxt.text = peopleInfo.user.fullname == "" ? "chưa cập nhật" : peopleInfo.user.fullname
             
-            logoutBtn.isHidden = true
-            logoutBtnHeight.constant = 0
+            lbNickName.text = ""
             
             avaImg2.isHidden = false
             avaImg2Height.constant = 90
@@ -156,6 +163,8 @@ class UpdateInfoViewController: BaseViewController {
             
             changePassViewHeight.constant = 0
             changePassView.isHidden = true
+            changeEmailViewHeigh.constant = 0
+            changeEmailView.isHidden = true
             
             genderBtn.isUserInteractionEnabled = false
             dobBtn.isUserInteractionEnabled = false
@@ -173,8 +182,17 @@ class UpdateInfoViewController: BaseViewController {
             }
             
             if peopleInfo.user.role == 1 || peopleInfo.user.role == 2 {
-                jobLb.text = peopleInfo.user.jobTitle == "" ? "chưa cập nhật" : peopleInfo.user.jobTitle
                 departmentLbl.text = peopleInfo.department.name == "" ? "chưa cập nhật" : peopleInfo.department.name
+                var jobTitle = ""
+                if peopleInfo.user.index == 0 {
+                    jobTitle = "Trưởng khoa"
+                }else if peopleInfo.user.index == 1 {
+                    jobTitle = "Phó khoa"
+                } else if peopleInfo.user.index == 2 {
+                    jobTitle = "BS."
+                }
+                jobLb.text = jobTitle + " " + peopleInfo.department.name + " - Bệnh viện E"
+
             }else{
                 departmentLbl.text = ""
                 departmentTittle.text = ""
@@ -213,8 +231,7 @@ class UpdateInfoViewController: BaseViewController {
             
             nameLbl1.text = userToShow.fullname
             
-            logoutBtn.isHidden = false
-            logoutBtnHeight.constant = 25
+            lbNickName.text = userToShow.socialType == 0 ? userToShow.nickname : ""
             
             avaImg2.isHidden = true
             avaImg2Height.constant = 0
@@ -222,8 +239,10 @@ class UpdateInfoViewController: BaseViewController {
             nameLbl2.isHidden = true
             nameLbl2.text = ""
             
-            changePassViewHeight.constant = 35
-            changePassView.isHidden = false
+            changePassViewHeight.constant = userToShow.socialType == 0 ? 35 : 0
+            changePassView.isHidden = userToShow.socialType != 0
+            changeEmailViewHeigh.constant = userToShow.socialType == 0 ? 35 : 0
+            changeEmailView.isHidden = userToShow.socialType != 0
             updateBtn.isHidden = false
             
             verifyLb.text = ""
@@ -247,7 +266,6 @@ class UpdateInfoViewController: BaseViewController {
             addressTxt.text = userToShow.address
             phoneTxt.text = userToShow.phone
             fullnameTxt.text = userToShow.fullname
-            
             imageUrl = userToShow.avatarUrl
             thumbnailUrl = userToShow.thumbnailAvatarUrl
             emailTxt.text = userToShow.email
@@ -339,7 +357,7 @@ class UpdateInfoViewController: BaseViewController {
                             let tabbar = self.tabBarController as? RAMAnimatedTabBarController
                             unreadMessageCount = 0
                             notificationCount = 0
-                            tabbar?.tabBar.items![4].badgeValue = nil
+                            tabbar?.tabBar.items![3].badgeValue = nil
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue:RELOAD_BOOKING), object: nil)
                             
                             _ = self.navigationController?.popViewController(animated: true)
@@ -365,6 +383,7 @@ class UpdateInfoViewController: BaseViewController {
     func initDkImagePicker(){
         pickerImageController.assetType = DKImagePickerControllerAssetType.allPhotos
         pickerImageController.maxSelectableCount = 1
+        
         pickerImageController.didSelectAssets = { [unowned self] ( assets: [DKAsset]) in
             self.imageAssets = assets
             if assets.count > 0 {
@@ -423,6 +442,11 @@ class UpdateInfoViewController: BaseViewController {
         }
     }
     
+    @IBAction func changeEmailTapAction(_ sender: Any) {
+        let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ChangeEmailViewController") as! ChangeEmailViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     @IBAction func changePassTapAction(_ sender: Any) {
         let storyboard = UIStoryboard.init(name: "User", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ChangPassViewController") as! ChangPassViewController
@@ -459,7 +483,7 @@ class UpdateInfoViewController: BaseViewController {
                 "Address" : addressTxt.text!,
                 "Company" : "",
                 "Gender" : genderType,
-                "DOB" : dobDate,
+                "DOB" : dobDate*1000,
                 "Phone": phoneTxt.text!,
                 "Email" : emailTxt.text!
             ]
@@ -479,9 +503,9 @@ class UpdateInfoViewController: BaseViewController {
                                 let alert = UIAlertController.init(title: "Thông báo", message: "Cập nhật thông tin tài khoản thành công", preferredStyle: UIAlertControllerStyle.alert)
                                 let actionOk = UIAlertAction.init(title: "Đóng", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
                                     //                                _ = self.navigationController?.popViewController(animated: true)
+                                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: UPDATE_USERINFO), object: nil)
                                 })
                                 
-                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: UPDATE_USERINFO), object: nil)
                                 
                                 alert.addAction(actionOk)
                                 self.present(alert, animated: true, completion: nil)
