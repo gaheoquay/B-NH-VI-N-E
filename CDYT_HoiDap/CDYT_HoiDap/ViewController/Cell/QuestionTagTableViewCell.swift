@@ -9,23 +9,20 @@
 import UIKit
 
 protocol QuestionTagTableViewCellDelegate {
-  func checkLogin()
+    func checkLogin()
 }
 
 class QuestionTagTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var tagName: UILabel!
     @IBOutlet weak var followBtn: UIButton!
-    @IBOutlet weak var borderView: UIView!
-  var delegate : QuestionTagTableViewCellDelegate?
+    var delegate : QuestionTagTableViewCellDelegate?
     var hotTag = HotTagEntity()
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        borderView.layer.cornerRadius = 5
-        borderView.clipsToBounds = true
     }
-
+    
     func setData() {
         tagName.text = hotTag.tag.tagName
         if hotTag.isFollowed {
@@ -34,16 +31,16 @@ class QuestionTagTableViewCell: UITableViewCell {
         }else{
             followBtn.setTitle("Theo dõi", for: UIControlState.normal)
             followBtn.setTitleColor(UIColor().hexStringToUIColor(hex: "7ed321"), for: UIControlState.normal)
-
+            
         }
     }
     
     @IBAction func followBtnAction(_ sender: Any) {
-      if Until.getCurrentId() != "" {
-        followTag()
-      }else{
-        delegate?.checkLogin()
-      }
+        if Until.getCurrentId() != "" {
+            followTag()
+        }else{
+            delegate?.checkLogin()
+        }
     }
     
     func followTag(){
@@ -73,11 +70,7 @@ class QuestionTagTableViewCell: UITableViewCell {
                             self.setData()
                             
                         }
-                    }else{
-                        //                    UIAlertController().showAlertWith(title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
-                }else{
-                    //                UIAlertController().showAlertWith(title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
                 Until.hideLoading()
             }
@@ -88,7 +81,7 @@ class QuestionTagTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     

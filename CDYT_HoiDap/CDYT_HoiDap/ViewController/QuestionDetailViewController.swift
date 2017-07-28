@@ -75,7 +75,6 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(notification:)), name: NSNotification.Name(rawValue: ALKeyboardFrameDidChangeNotification), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(markACommentToSolution(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCommentData), name: Notification.Name.init(COMMENT_ON_COMMENT_SUCCESS), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadQuestionAfterUpdated(notification:)), name: Notification.Name.init(RELOAD_QUESTION_DETAIL), object: nil)

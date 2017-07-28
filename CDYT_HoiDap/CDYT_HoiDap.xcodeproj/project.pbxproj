@@ -15,7 +15,6 @@
 		0F0FB8251E90BC4D0044468A /* tab1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F0FB8241E90BC4D0044468A /* tab1.png */; };
 		0F17AB151E51A682008BA308 /* CheckList.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F17AB141E51A682008BA308 /* CheckList.png */; };
 		0F17AB171E51ACFF008BA308 /* Private.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F17AB161E51ACFF008BA308 /* Private.png */; };
-		0F17AB191E51BAC2008BA308 /* CateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17AB181E51BAC2008BA308 /* CateEntity.swift */; };
 		0F36980D1E54013C004B028D /* Ask copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F36980B1E54013C004B028D /* Ask copy.png */; };
 		0F36980E1E54013C004B028D /* LogoMarker.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F36980C1E54013C004B028D /* LogoMarker.png */; };
 		0F52D2891E634889006C57E2 /* FileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F52D2871E634889006C57E2 /* FileCell.swift */; };
@@ -111,6 +110,8 @@
 		50B4B8651F25B2A300B7C305 /* Facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 50B4B8631F25B2A300B7C305 /* Facebook.png */; };
 		50B4B8661F25B2A300B7C305 /* Gmail.png in Resources */ = {isa = PBXBuildFile; fileRef = 50B4B8641F25B2A300B7C305 /* Gmail.png */; };
 		50B4B8681F25D2CD00B7C305 /* UserDepartmentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B4B8671F25D2CD00B7C305 /* UserDepartmentEntity.swift */; };
+		50E2142D1F26FAA4005F160D /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E2142C1F26FAA4005F160D /* logout.png */; };
+		50E2142F1F272F7F005F160D /* ChangeEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E2142E1F272F7F005F160D /* ChangeEmailViewController.swift */; };
 		792444BAFCB405C2DBAC9872 /* Pods_CDYT_HoiDap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D86E9DE2E99A1F3DDE9BCDD /* Pods_CDYT_HoiDap.framework */; };
 		8B0D35F51E56EB2D002CF784 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0D35F41E56EB2D002CF784 /* BookingViewController.swift */; };
 		8B1AD45B1E1B828500D55543 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AD45A1E1B828500D55543 /* SearchViewController.swift */; };
@@ -337,7 +338,6 @@
 		0F0FB8241E90BC4D0044468A /* tab1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab1.png; sourceTree = "<group>"; };
 		0F17AB141E51A682008BA308 /* CheckList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckList.png; sourceTree = "<group>"; };
 		0F17AB161E51ACFF008BA308 /* Private.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Private.png; sourceTree = "<group>"; };
-		0F17AB181E51BAC2008BA308 /* CateEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CateEntity.swift; sourceTree = "<group>"; };
 		0F36980B1E54013C004B028D /* Ask copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ask copy.png"; sourceTree = "<group>"; };
 		0F36980C1E54013C004B028D /* LogoMarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoMarker.png; sourceTree = "<group>"; };
 		0F52D2871E634889006C57E2 /* FileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCell.swift; sourceTree = "<group>"; };
@@ -430,16 +430,18 @@
 		502024991F1F3A6800D5989B /* KSUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSUtils.swift; sourceTree = "<group>"; };
 		508887DC1F1DBC150065A691 /* ApiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiHelper.swift; sourceTree = "<group>"; };
 		508887DE1F1DBC820065A691 /* ApiDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiDefine.swift; sourceTree = "<group>"; };
+		50ACE8D61F28867200DB06FE /* CDYT_HoiDap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CDYT_HoiDap.entitlements; sourceTree = "<group>"; };
 		50B4B8611F259B9500B7C305 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		50B4B8631F25B2A300B7C305 /* Facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Facebook.png; sourceTree = "<group>"; };
 		50B4B8641F25B2A300B7C305 /* Gmail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gmail.png; sourceTree = "<group>"; };
 		50B4B8671F25D2CD00B7C305 /* UserDepartmentEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDepartmentEntity.swift; sourceTree = "<group>"; };
+		50E2142C1F26FAA4005F160D /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
+		50E2142E1F272F7F005F160D /* ChangeEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewController.swift; sourceTree = "<group>"; };
 		54350AF3B96C58CE38450098 /* Pods-CDYT_HoiDap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYT_HoiDap.release.xcconfig"; path = "Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap.release.xcconfig"; sourceTree = "<group>"; };
 		8B0D35F41E56EB2D002CF784 /* BookingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
 		8B1AD45A1E1B828500D55543 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8B1AD45C1E1B97F000D55543 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		8B1AD45D1E1B97F000D55543 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
-		8B296BAC1E5557BA00170879 /* CDYT_HoiDap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CDYT_HoiDap.entitlements; sourceTree = "<group>"; };
 		8B2AFF091E64223A00415554 /* JobEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobEntity.swift; sourceTree = "<group>"; };
 		8B2AFF0B1E64253200415554 /* CountryEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryEntity.swift; sourceTree = "<group>"; };
 		8B2AFF0D1E6425C100415554 /* ProvinceEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProvinceEntity.swift; sourceTree = "<group>"; };
@@ -794,7 +796,7 @@
 		8B3A12DD1E10F399005DBC6E /* CDYT_HoiDap */ = {
 			isa = PBXGroup;
 			children = (
-				8B296BAC1E5557BA00170879 /* CDYT_HoiDap.entitlements */,
+				50ACE8D61F28867200DB06FE /* CDYT_HoiDap.entitlements */,
 				50B4B8611F259B9500B7C305 /* GoogleService-Info.plist */,
 				A6D083C11E121A1C007EA4D9 /* Entity */,
 				8B3A13841E10FCB6005DBC6E /* ViewController */,
@@ -814,6 +816,7 @@
 		8B3A12F01E10F454005DBC6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				50E2142C1F26FAA4005F160D /* logout.png */,
 				50B4B8631F25B2A300B7C305 /* Facebook.png */,
 				50B4B8641F25B2A300B7C305 /* Gmail.png */,
 				0F0FB8241E90BC4D0044468A /* tab1.png */,
@@ -1278,7 +1281,6 @@
 				A68A95101E1517230067736E /* CommentEntity.swift */,
 				A68A95121E1518E10067736E /* SubCommentEntity.swift */,
 				A68A95141E151B490067736E /* MainCommentEntity.swift */,
-				0F17AB181E51BAC2008BA308 /* CateEntity.swift */,
 				8BC3806E1E58510E00DF154A /* ListDoctorEntity.swift */,
 				0FA535AE1E8221560004D329 /* ListAdminEntity.swift */,
 				98EC9B721EA9A3CA00095FFB /* PeopleEntity.swift */,
@@ -1300,6 +1302,7 @@
 				A6E4C2F91E1102BA00C2C871 /* User.storyboard */,
 				A632043B1E49BB0A00B9152A /* PolicyAndRuleViewController.swift */,
 				0FA535B01E82393A0004D329 /* AdminUpdateProfileViewController.swift */,
+				50E2142E1F272F7F005F160D /* ChangeEmailViewController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1358,8 +1361,11 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -1484,6 +1490,7 @@
 				8B7AB6BF1E1211E20015DFBE /* KeywordCollectionViewCell.xib in Resources */,
 				8B6E19971E5EC9080078558D /* Logo.png in Resources */,
 				0FA8B1EF1E80E261000FF76B /* Khoa.png in Resources */,
+				50E2142D1F26FAA4005F160D /* logout.png in Resources */,
 				8B3A13651E10F454005DBC6E /* tag_mark.png in Resources */,
 				0FE4606D1E84F6D00045DB84 /* GhiChu.png in Resources */,
 				0F17AB151E51A682008BA308 /* CheckList.png in Resources */,
@@ -1609,6 +1616,7 @@
 				8B87CD301E13681200DA8A33 /* FeedsEntity.swift in Sources */,
 				8BC2C30E1E23379300B68F72 /* ListNotificationEntity.swift in Sources */,
 				A632043C1E49BB0A00B9152A /* PolicyAndRuleViewController.swift in Sources */,
+				50E2142F1F272F7F005F160D /* ChangeEmailViewController.swift in Sources */,
 				8B3A12E11E10F399005DBC6E /* ViewController.swift in Sources */,
 				8BC2C3101E2337C700B68F72 /* NotificationEntity.swift in Sources */,
 				0F8960541EA0C16A006A1C2D /* listMedicalTestsEntity.swift in Sources */,
@@ -1710,7 +1718,6 @@
 				8B2AFF0A1E64223A00415554 /* JobEntity.swift in Sources */,
 				0F9323E81E783DE300B56F39 /* DoctorCell.swift in Sources */,
 				8B2AFF121E642B5000415554 /* ZoneEntity.swift in Sources */,
-				0F17AB191E51BAC2008BA308 /* CateEntity.swift in Sources */,
 				0FEB18621EA0B87B00C9D5C0 /* PatientHistoryEntity.swift in Sources */,
 				8B0D35F51E56EB2D002CF784 /* BookingViewController.swift in Sources */,
 				508887DD1F1DBC150065A691 /* ApiHelper.swift in Sources */,

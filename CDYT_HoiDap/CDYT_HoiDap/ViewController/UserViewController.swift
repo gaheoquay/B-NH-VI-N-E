@@ -30,10 +30,10 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     var isMyFeed = false
     var pageFollowing = 1
     var listQuestionFollowing = [FeedsEntity]()
-    var isFollowing = true
+    var isFollowing = false
     var pageWaiting = 1
     var listQuestionWaitingToAnwser = [FeedsEntity]()
-    var isWaiting = false
+    var isWaiting = true
     var groupChannelListViewController: GroupChannelListViewController?
     var sectionCate = 0
     var indexPatchDoctor = IndexPath()
@@ -41,7 +41,17 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let realm = try! Realm()
+        let users = realm.objects(UserEntity.self).first
+        if users?.role == 1 {
+            isMyFeed =  false
+            isFollowing = false
+            isWaiting = true
+        }else{
+            isMyFeed =  false
+            isFollowing = true
+            isWaiting = false
+        }
         getListAdmin()
         registerNotification()
         initTable()
@@ -64,6 +74,10 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        refreshView()
+    }
+    
+    func refreshView(){
         let realm = try! Realm()
         let users = realm.objects(UserEntity.self)
         if users.first?.role == 3 {
@@ -100,12 +114,22 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     }
     
     func reloadView(){
+        let tabbar = self.tabBarController as? RAMAnimatedTabBarController
+        tabbar?.setSelectIndex(from: 3, to: 0)
+        let realm = try! Realm()
+        let users = realm.objects(UserEntity.self).first
+        if users?.role == 1 {
+            isMyFeed =  false
+            isFollowing = false
+            isWaiting = true
+        }else{
+            isMyFeed =  false
+            isFollowing = true
+            isWaiting = false
+        }
         initTable()
         setUpUI()
         setupUserInfo()
-        isMyFeed = false
-        isFollowing = true
-        isWaiting = false
         pageMyFeed = 1
         pageFollowing = 1
         pageWaiting = 1
@@ -116,6 +140,7 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
         getWaitingFeed()
         getFollowingFeed()
         getListAdmin()
+        refreshView()
     }
     func setUpUI(){
         avaImg.layer.cornerRadius = 10
@@ -847,11 +872,67 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
         let vc = storyboard.instantiateViewController(withIdentifier: "UpdateInfoViewController") as! UpdateInfoViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
+    func requestLogOut(){
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = code.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let realm = try! Realm()
+            let user = realm.objects(UserEntity.self).first
+            let uuid = NSUUID().uuidString
+            var token = ""
+            if let value = UserDefaults.standard.object(forKey: NOTIFICATION_TOKEN) as? String {
+                token = value
+            }
+            let device : [String : Any] = [
+                "OS": 0,
+                "DeviceId": uuid,
+                "Token": token
+            ]
+            
+            let logoutParam : [String : Any] = [
+                "NicknameOrEmail": user!.nickname.isEmpty ? user?.socialId ?? "" : user?.nickname ?? "",
+                "Device": device
+            ]
+            Until.showLoading()
+            Alamofire.request(LOG_OUT, method: .post, parameters: logoutParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        Until.hideLoading()
+                        try! realm.write {
+                            realm.deleteAll()
+                            let tabbar = self.tabBarController as? RAMAnimatedTabBarController
+                            unreadMessageCount = 0
+                            notificationCount = 0
+                            tabbar?.tabBar.items![3].badgeValue = nil
+                            tabbar?.setSelectIndex(from: 3, to: 0)
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue:RELOAD_BOOKING), object: nil)
+                            GIDSignIn.sharedInstance().disconnect()
+                            self.refreshView()
+                        }
+                        listNotification.removeAll()
+                    }else if status == 400 {
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Sai du", cancelBtnTitle: "Đóng")
+                    }else{
+                        UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                    }
+                }else{
+                    UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
+                }
+                Until.hideLoading()
+            }
+        } catch let error as NSError {
+            print(error)
+        }
+        
+        
+    }
+
     @IBAction func settingTapAction(_ sender: Any) {
-        let storyboard = UIStoryboard.init(name: "User", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
-        self.navigationController?.pushViewController(vc, animated: true)
+        requestLogOut()
     }
     @IBAction func actionSetting(_ sender: Any) {
         let storyboard = UIStoryboard.init(name: "User", bundle: nil)

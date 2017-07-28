@@ -60,8 +60,6 @@ class LoginViewController: UIViewController {
         if validateDataLogin() == "" {
             errLb.isHidden = true
             requestLogin()
-            
-            
         }else{
             errLb.isHidden = false
             errLb.text = validateDataLogin()
@@ -159,11 +157,13 @@ class LoginViewController: UIViewController {
     }
     @IBAction func facebookLogin(_ sender: Any) {
         let loginManager = LoginManager()
+        loginManager.logOut()
         loginManager.loginBehavior = LoginBehavior.native
         loginManager.logIn([ .publicProfile, .email, .userFriends ], viewController: self) { loginResult in
             switch loginResult {
             case .failed(let error as NSError):
                 print(error.description)
+                UIAlertController().showAlertWith(vc: self, title: "", message: error.description, cancelBtnTitle: "Đồng ý")
             case .cancelled:
                 print("User cancelled login.")
             case .success( _, _, let accessToken):
@@ -174,6 +174,7 @@ class LoginViewController: UIViewController {
                     if ((error) != nil)
                     {
                         print("Error: \(String(describing: error))")
+                        UIAlertController().showAlertWith(vc: self, title: "", message: "Error: \(String(describing: error))", cancelBtnTitle: "Đồng ý")
                     }
                     else
                     {
@@ -209,11 +210,11 @@ class LoginViewController: UIViewController {
 // MARK: Facebook login
 extension LoginViewController {
     func loginWithFacebook(facebookData: [String: Any]) {
-        guard let email = facebookData["email"] as? String, let socialId = facebookData["id"] as? String, let fullName = facebookData["name"] as? String else {
-            UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Tài khoản của bạn phải có email.", cancelBtnTitle: "Đồng ý")
+        guard let socialId = facebookData["id"] as? String, let fullName = facebookData["name"] as? String else {
             return
         }
         do {
+            Until.showLoading()
             let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
             let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
             let auth = code.replacingOccurrences(of: "\n", with: "")
@@ -232,7 +233,7 @@ extension LoginViewController {
                 "SocialType": 1,
                 "SocialId": socialId,
                 "FullName": fullName,
-                "Email": email,
+                "Email": facebookData["email"] as? String ?? "",
                 "Device": device
             ]
             Alamofire.request(LOGIN_WITH_SOCIAL, method: .post, parameters: loginParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
@@ -247,6 +248,7 @@ extension LoginViewController {
                                 reaml.add(entity, update: true)
                                 Until.initSendBird()
                                 Until.getSchedule()
+                                
                                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
                                 _ = self.navigationController?.popToRootViewController(animated: true)
                             }

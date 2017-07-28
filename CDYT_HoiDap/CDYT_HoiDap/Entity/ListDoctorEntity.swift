@@ -9,7 +9,7 @@
 import UIKit
 
 class ListDoctorEntity: NSObject {
-  var category = CateEntity()
+  var category = DepartmentEntity()
   var count = 0
   var doctors = [DoctorEntity]()
   
@@ -20,7 +20,7 @@ class ListDoctorEntity: NSObject {
   }
   init(dictionary:NSDictionary) {
     if let value = dictionary["Category"] as? NSDictionary {
-      category = CateEntity.init(dictionary: value)
+      category = DepartmentEntity.init(dictionary: value)
     }
     if let value = dictionary["Count"] as? Int {
       count = value

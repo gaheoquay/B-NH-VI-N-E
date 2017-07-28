@@ -269,9 +269,9 @@ extension ViewController {
     func setUpBadge(){
         let tabbar = self.tabBarController as? RAMAnimatedTabBarController
         if unreadMessageCount + notificationCount != 0 {
-            tabbar?.tabBar.items![4].badgeValue = "\(unreadMessageCount + notificationCount)"
+            tabbar?.tabBar.items![3].badgeValue = "\(unreadMessageCount + notificationCount)"
         }else{
-            tabbar?.tabBar.items![4].badgeValue = nil
+            tabbar?.tabBar.items![3].badgeValue = nil
         }
     }
     

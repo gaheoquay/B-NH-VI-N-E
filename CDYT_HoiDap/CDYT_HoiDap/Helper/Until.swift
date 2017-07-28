@@ -49,29 +49,29 @@ extension UIColor {
 
 extension String {
     func convertStringToDictionary() -> [String:Any]? {
-      if let data = self.data(using: String.Encoding.utf8) {
-        return try! JSONSerialization.jsonObject(with: data, options: []) as? [String:AnyObject]
-      }
-      return nil
+        if let data = self.data(using: String.Encoding.utf8) {
+            return try! JSONSerialization.jsonObject(with: data, options: []) as? [String:AnyObject]
+        }
+        return nil
     }
-  func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
-    let constraintRect = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+    func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+        
+        let boundingBox = self.boundingRect(with: constraintRect, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        
+        return boundingBox.height
+    }
+    func widthWithConstrainedHeight(height: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: CGFloat.greatestFiniteMagnitude, height: height)
+        
+        let boundingBox = self.boundingRect(with: constraintRect, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        
+        return boundingBox.width
+    }
     
-    let boundingBox = self.boundingRect(with: constraintRect, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
-    
-    return boundingBox.height
-  }
-  func widthWithConstrainedHeight(height: CGFloat, font: UIFont) -> CGFloat {
-    let constraintRect = CGSize(width: CGFloat.greatestFiniteMagnitude, height: height)
-    
-    let boundingBox = self.boundingRect(with: constraintRect, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
-    
-    return boundingBox.width
-  }
-
     func convertTimeStampWithDateFormat(timeStamp: Double, dateFormat: String) -> String{
         let date = Date(timeIntervalSince1970: timeStamp)
-    
+        
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT +7")
         dateFormatter.dateFormat = dateFormat
@@ -126,9 +126,9 @@ extension String {
     
 }
 extension Date {
-  var age: Int {
-    return Calendar.current.dateComponents([.year], from: self, to: Date()).year!
-  }
+    var age: Int {
+        return Calendar.current.dateComponents([.year], from: self, to: Date()).year!
+    }
     
     func dateAt(hours: Int, minutes: Int, days: Int) -> Date
     {
@@ -198,78 +198,79 @@ class Until{
             return ""
         }
     }
-  class func initSendBird(){
-    let realm = try! Realm()
-    let userEntity = realm.objects(UserEntity.self).first
-    
-    if userEntity != nil {
-      SBDMain.connect(withUserId: userEntity!.id, completionHandler: { (user, error) in
-        if error != nil {
-          return
-        }
+    class func initSendBird(){
+        let realm = try! Realm()
+        let userEntity = realm.objects(UserEntity.self).first
         
-        if SBDMain.getPendingPushToken() != nil {
-          SBDMain.registerDevicePushToken(SBDMain.getPendingPushToken()!, unique: true, completionHandler: { (status, error) in
-            if error == nil {
-              if status == SBDPushTokenRegistrationStatus.pending {
-                print("Push registeration is pending.")
-              }
-              else {
-                print("APNS Token is registered.")
-              }
-            }
-            else {
-              print("APNS registration failed.")
-            }
-          })
-        }
-        
-        SBDMain.updateCurrentUserInfo(withNickname: userEntity!.nickname, profileUrl: userEntity!.avatarUrl, completionHandler: { (error) in
-          if error != nil {
-            SBDMain.disconnect(completionHandler: {
+        if userEntity != nil {
+            SBDMain.connect(withUserId: userEntity!.id, completionHandler: { (user, error) in
+                if error != nil {
+                    return
+                }
+                
+                if SBDMain.getPendingPushToken() != nil {
+                    SBDMain.registerDevicePushToken(SBDMain.getPendingPushToken()!, unique: true, completionHandler: { (status, error) in
+                        if error == nil {
+                            if status == SBDPushTokenRegistrationStatus.pending {
+                                print("Push registeration is pending.")
+                            }
+                            else {
+                                print("APNS Token is registered.")
+                            }
+                        }
+                        else {
+                            print("APNS registration failed.")
+                        }
+                    })
+                }
+                
+                SBDMain.updateCurrentUserInfo(withNickname: userEntity!.nickname, profileUrl: userEntity!.avatarUrl, completionHandler: { (error) in
+                    if error != nil {
+                        SBDMain.disconnect(completionHandler: {
+                        })
+                        
+                        return
+                    }
+                })
             })
-            
-            return
-          }
-        })
-      })
-    }
-  }
-  class func getBagValue(){
-    let param : [String : Any] = [
-      "Auth": Until.getAuthKey(),
-      "RequestedUserId": Until.getCurrentId()
-    ]
-    var count = 0
-    SBDGroupChannel.getTotalUnreadMessageCount { (number, error) in
-      unreadMessageCount = Int(number)
-      count += 1
-      if count == 2{
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: UPDATE_BADGE), object: nil)
-      }
-    }
-
-    Alamofire.request(GET_UNREAD_NOTIFICATION, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-      if let status = response.response?.statusCode {
-        if status == 200{
-          if let result = response.result.value {
-            let jsonData = result as! NSDictionary
-            notificationCount = jsonData["Count"] as! Int
-            
-          }
         }
-      }
-      count += 1
-      if count == 2{
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: UPDATE_BADGE), object: nil)
-      }
     }
-  }
-  class func gotoLogin(_self : UIViewController, cannotBack:Bool ){
-    let storyBoard = UIStoryboard.init(name: "User", bundle: nil)
-    let viewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-    _self.navigationController?.pushViewController(viewController, animated: true)
-  }
+    
+    class func getBagValue(){
+        let param : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId": Until.getCurrentId()
+        ]
+        var count = 0
+        SBDGroupChannel.getTotalUnreadMessageCount { (number, error) in
+            unreadMessageCount = Int(number)
+            count += 1
+            if count == 2{
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: UPDATE_BADGE), object: nil)
+            }
+        }
+        
+        Alamofire.request(GET_UNREAD_NOTIFICATION, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! NSDictionary
+                        notificationCount = jsonData["Count"] as! Int
+                        
+                    }
+                }
+            }
+            count += 1
+            if count == 2{
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: UPDATE_BADGE), object: nil)
+            }
+        }
+    }
+    class func gotoLogin(_self : UIViewController, cannotBack:Bool ){
+        let storyBoard = UIStoryboard.init(name: "User", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        _self.navigationController?.pushViewController(viewController, animated: true)
+    }
     class func isValidEmail(email:String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._]{4,50}+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
@@ -285,36 +286,36 @@ class Until{
         
     }
     
-  class func getSchedule(){
-    let param : [String : Any] = [
-      "Auth": Until.getAuthKey(),
-      "RequestedUserId": Until.getCurrentId()
-    ]
-    Alamofire.request(GET_SCHEDULE, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-      if let status = response.response?.statusCode {
-        if status == 200{
-          if let result = response.result.value {
-            let jsonData = result as! [NSDictionary]
-            for item in jsonData{
-              let entity = AllUserEntity.init(dictionary: item)
-              let localNotification = UILocalNotification()
-              let dateFormat = DateFormatter()
-              dateFormat.dateFormat = "dd/MM/yyyy"
-              let datePick = dateFormat.string(from: NSDate(timeIntervalSince1970: entity.booking.bookingDate) as Date)
-              let dateString = "06:00 " + datePick
-              dateFormat.dateFormat = "HH:mm dd/MM/yyyy"
-              localNotification.fireDate = dateFormat.date(from: dateString)
-              localNotification.alertBody = "Xác định đi khám cho lịch đã đặt"
-              localNotification.alertAction = ""
-              localNotification.timeZone = NSTimeZone.default
-//              localNotification.applicationIconBadgeNumber = 1
-              UIApplication.shared.scheduledLocalNotifications?.append(localNotification)
+    class func getSchedule(){
+        let param : [String : Any] = [
+            "Auth": Until.getAuthKey(),
+            "RequestedUserId": Until.getCurrentId()
+        ]
+        Alamofire.request(GET_SCHEDULE, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let status = response.response?.statusCode {
+                if status == 200{
+                    if let result = response.result.value {
+                        let jsonData = result as! [NSDictionary]
+                        for item in jsonData{
+                            let entity = AllUserEntity.init(dictionary: item)
+                            let localNotification = UILocalNotification()
+                            let dateFormat = DateFormatter()
+                            dateFormat.dateFormat = "dd/MM/yyyy"
+                            let datePick = dateFormat.string(from: NSDate(timeIntervalSince1970: entity.booking.bookingDate) as Date)
+                            let dateString = "06:00 " + datePick
+                            dateFormat.dateFormat = "HH:mm dd/MM/yyyy"
+                            localNotification.fireDate = dateFormat.date(from: dateString)
+                            localNotification.alertBody = "Xác định đi khám cho lịch đã đặt"
+                            localNotification.alertAction = ""
+                            localNotification.timeZone = NSTimeZone.default
+                            //              localNotification.applicationIconBadgeNumber = 1
+                            UIApplication.shared.scheduledLocalNotifications?.append(localNotification)
+                        }
+                    }
+                }
             }
-          }
         }
-      }
     }
-  }
     class func getAuthKey() -> NSDictionary{
         var keyString = ""
         var loginToken = ""
@@ -340,7 +341,7 @@ class Until{
         let activityData = ActivityData.init(size: CGSize(width: 40, height:40), message: "", messageFont: UIFont.systemFont(ofSize: 12), type: NVActivityIndicatorType.ballTrianglePath, color: UIColor.white, padding: 0, displayTimeThreshold: 0, minimumDisplayTime: 0)
         
         NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
-
+        
     }
     
     class func hideLoading(){
@@ -353,26 +354,26 @@ class Until{
         
         guard let builder = GAIDictionaryBuilder.createScreenView() else { return }
         tracker.send(builder.build() as [NSObject : AnyObject])
-
+        
     }
     class func sendEventTracker(category: String, action : String , label : String){
         let tracker = GAI.sharedInstance().defaultTracker
         tracker?.send(GAIDictionaryBuilder.createEvent(withCategory: category, action: action, label: label, value: nil).build() as [NSObject : AnyObject])
     }
     
-  class func generateBarcode(from string: String) -> UIImage? {
-    let data = string.data(using: String.Encoding.ascii)
-    
-    if let filter = CIFilter(name: "CICode128BarcodeGenerator") {
-      filter.setValue(data, forKey: "inputMessage")
-      let transform = CGAffineTransform(scaleX: 3, y: 3)
-      
-      if let output = filter.outputImage?.applying(transform) {
-        return UIImage(ciImage: output)
-      }
+    class func generateBarcode(from string: String) -> UIImage? {
+        let data = string.data(using: String.Encoding.ascii)
+        
+        if let filter = CIFilter(name: "CICode128BarcodeGenerator") {
+            filter.setValue(data, forKey: "inputMessage")
+            let transform = CGAffineTransform(scaleX: 3, y: 3)
+            
+            if let output = filter.outputImage?.applying(transform) {
+                return UIImage(ciImage: output)
+            }
+        }
+        
+        return nil
     }
     
-    return nil
-  }
-
 }

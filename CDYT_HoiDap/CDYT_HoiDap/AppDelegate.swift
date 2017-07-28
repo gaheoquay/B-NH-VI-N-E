@@ -43,13 +43,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         requestCate()
         requestListDoctor()
         Until.getBagValue()
-        if #available(iOS 10.0, *) {
-            Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { (timer) in
-                Until.getBagValue()
-            }
-        } else {
-            Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.reloadBadge), userInfo: nil, repeats: true)
-        }
+//        if #available(iOS 10.0, *) {
+//            Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { (timer) in
+//                Until.getBagValue()
+//            }
+//        } else {
+//            Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.reloadBadge), userInfo: nil, repeats: true)
+//        }
         // Configure tracker from GoogleService-Info.plist.
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
@@ -139,7 +139,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             let json = result as! [NSDictionary]
                             listCate.removeAll()
                             for element in json {
-                                let entity = CateEntity.init(dictionary: element)
+                                let entity = DepartmentEntity.init(dictionary: element)
                                 listCate.append(entity)
                             }
                         }

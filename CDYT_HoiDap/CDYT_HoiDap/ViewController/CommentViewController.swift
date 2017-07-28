@@ -301,7 +301,8 @@ class CommentViewController: BaseViewController, UITableViewDelegate, UITableVie
                             }else{
                                 self.mainComment.subComment += entity.subComment
                             }
-                            
+                            self.feedEntity.postEntity.isPrivate = self.mainComment.post.isPrivate
+                            self.feedEntity.authorEntity.id = self.mainComment.postAuthor.id
                             self.setupUIForComment(mainComment: self.mainComment)
                             self.commentTbl.reloadData()
                             

@@ -12,12 +12,16 @@ protocol EditCommentViewControllerDelegate {
 }
 class EditCommentViewController: BaseViewController {
 
+    @IBOutlet weak var commentImageTop: NSLayoutConstraint!
+    @IBOutlet weak var commentImageHeigh: NSLayoutConstraint!
+    @IBOutlet weak var commentImage: UIImageView!
     @IBOutlet weak var contentTxt: UITextView!
     var delegate : EditCommentViewControllerDelegate?
     
     var isSubComment = false
     var subComment = SubCommentEntity()
     var mainComment = MainCommentEntity()
+    var imageUrl = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +41,14 @@ class EditCommentViewController: BaseViewController {
             contentTxt.text = mainComment.comment.content
         }
     }
+    @IBAction func chooseCommentImage(_ sender: Any) {
+        
+    }
+    
+    @IBAction func removeImage(_ sender: Any) {
+        
+    }
+    
     
     @IBAction func updateTapAction(_ sender: Any) {
         if isSubComment {
