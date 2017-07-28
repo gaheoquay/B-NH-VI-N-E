@@ -49,7 +49,7 @@ extension HomeBookingViewController: UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell") as! HomeCell
-        cell.imgBackGround.image = UIImage(named: arrayImages[indexPath.row])
+        cell.imgBackGround.image = UIImage(named: arrayImages[indexPath.section])
         cell.btnGotoDetail = {
             switch (indexPath.section) {
             case 0:
@@ -64,7 +64,7 @@ extension HomeBookingViewController: UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let heightScreen = UIScreen.main.bounds.size.height
-        return (heightScreen - 82) / 3
+        return (heightScreen - 98) / 3
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 16
