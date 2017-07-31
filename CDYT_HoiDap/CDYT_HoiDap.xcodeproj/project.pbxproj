@@ -15,6 +15,8 @@
 		0F0CE3801F2F26C900C4E742 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0CE37F1F2F26C900C4E742 /* ResultViewController.swift */; };
 		0F0CE3821F2F26D300C4E742 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0CE3811F2F26D300C4E742 /* CalendarViewController.swift */; };
 		0F0CE3841F2F2D9400C4E742 /* DetailResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0CE3831F2F2D9400C4E742 /* DetailResultViewController.swift */; };
+		0F0CE3861F2F2F7300C4E742 /* SubDetailResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0CE3851F2F2F7300C4E742 /* SubDetailResultViewController.swift */; };
+		0F0CE3881F2F328300C4E742 /* ExamHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0CE3871F2F328300C4E742 /* ExamHomeViewController.swift */; };
 		0F0EFD311E62771C0036C860 /* HistoryUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0EFD301E62771C0036C860 /* HistoryUserViewController.swift */; };
 		0F0EFD331E627FFA0036C860 /* HoSoRong_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F0EFD321E627FFA0036C860 /* HoSoRong_1.png */; };
 		0F0FB8251E90BC4D0044468A /* tab1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F0FB8241E90BC4D0044468A /* tab1.png */; };
@@ -361,6 +363,8 @@
 		0F0CE37F1F2F26C900C4E742 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		0F0CE3811F2F26D300C4E742 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		0F0CE3831F2F2D9400C4E742 /* DetailResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailResultViewController.swift; sourceTree = "<group>"; };
+		0F0CE3851F2F2F7300C4E742 /* SubDetailResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubDetailResultViewController.swift; sourceTree = "<group>"; };
+		0F0CE3871F2F328300C4E742 /* ExamHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamHomeViewController.swift; sourceTree = "<group>"; };
 		0F0EFD301E62771C0036C860 /* HistoryUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryUserViewController.swift; sourceTree = "<group>"; };
 		0F0EFD321E627FFA0036C860 /* HoSoRong_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HoSoRong_1.png; sourceTree = "<group>"; };
 		0F0FB8241E90BC4D0044468A /* tab1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab1.png; sourceTree = "<group>"; };
@@ -1323,6 +1327,8 @@
 				0F0CE37F1F2F26C900C4E742 /* ResultViewController.swift */,
 				0F0CE3811F2F26D300C4E742 /* CalendarViewController.swift */,
 				0F0CE3831F2F2D9400C4E742 /* DetailResultViewController.swift */,
+				0F0CE3851F2F2F7300C4E742 /* SubDetailResultViewController.swift */,
+				0F0CE3871F2F328300C4E742 /* ExamHomeViewController.swift */,
 			);
 			path = BookingViewController;
 			sourceTree = "<group>";
@@ -1840,6 +1846,7 @@
 				0FABDC331E61C2EC004DD98D /* CreateCvViewController.swift in Sources */,
 				0F81E4AC1E672CE800A7C18F /* BookingUserEntity.swift in Sources */,
 				8B2AFF0A1E64223A00415554 /* JobEntity.swift in Sources */,
+				0F0CE3861F2F2F7300C4E742 /* SubDetailResultViewController.swift in Sources */,
 				0F9323E81E783DE300B56F39 /* DoctorCell.swift in Sources */,
 				0FDC49E11F2B2E3000C37717 /* ListUserCell.swift in Sources */,
 				8B2AFF121E642B5000415554 /* ZoneEntity.swift in Sources */,
@@ -1876,6 +1883,7 @@
 				980AF9C11EAB0DF20049A06D /* PackCellTableViewCell.swift in Sources */,
 				9863D8361F2510A100BFADC8 /* CustomTopView.swift in Sources */,
 				8BFE666C1E5D423700E1138B /* BaseViewController.swift in Sources */,
+				0F0CE3881F2F328300C4E742 /* ExamHomeViewController.swift in Sources */,
 				0FCFD9A81E5EEDDD00EE2F89 /* ManagerViewController.swift in Sources */,
 				8B813CB71E1510500043F7EF /* QuestionByTagViewController.swift in Sources */,
 				0F073F961F2F1DC000BE2524 /* DetailScheduleViewController.swift in Sources */,
