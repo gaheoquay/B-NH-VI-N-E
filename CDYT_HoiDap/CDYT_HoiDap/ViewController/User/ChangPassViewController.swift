@@ -29,11 +29,16 @@ class ChangPassViewController: BaseViewController {
         let curPassString = curentPass.text
         let newpassString = newPass.text
         let confNewPassString = confNewPassTxt.text
+        let currentPass = UserDefaults.standard.value(forKey: "PASSWORD") as? String
         
         if curPassString == "" || newpassString == "" || confNewPassString == "" {
             return "Vui lòng nhập đầy đủ thông tin"
+        }else if curPassString != currentPass{
+            return "Mật khẩu cũ không đúng"
         }else if !isValidInput(input: newpassString!){
-            return "Tên đăng nhập từ 6 đến 30 ký tự và không chứa ký tự đặc biệt."
+            return "Nhập mật khẩu từ 6-30 kí tự và không chứa kí tự đặc biệt."
+        }else if newpassString == currentPass {
+            return "Mật khẩu mới không được trùng với mật khẩu cũ"
         }else if newpassString != confNewPassString {
             return "Mật khẩu mới và xác nhận mật khẩu phải trùng nhau"
         }else{
@@ -108,10 +113,5 @@ class ChangPassViewController: BaseViewController {
     
     @IBAction func backTapAction(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

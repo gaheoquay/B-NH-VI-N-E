@@ -140,9 +140,9 @@ class QuestionByTagViewController: BaseViewController,UITableViewDelegate,UITabl
     
     func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
         if user.id == Until.getCurrentId() {
-            //            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-            //            let viewController = storyboard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
-            //            self.navigationController?.pushViewController(viewController, animated: true)
+            let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "UpdateInfoViewController") as! UpdateInfoViewController
+            self.navigationController?.pushViewController(vc, animated: true)
         }else{
             let storyboard = UIStoryboard.init(name: "User", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "OtherUserViewController") as! OtherUserViewController

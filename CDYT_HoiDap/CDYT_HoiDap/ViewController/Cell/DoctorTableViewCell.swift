@@ -55,7 +55,7 @@ class DoctorTableViewCell: UITableViewCell {
             }else if author.index == 1 {
                 jobTitle = "Phó khoa"
             } else if author.index == 2 {
-                jobTitle = "BS."
+                jobTitle = "Bác sĩ khoa"
             }
             lbJob.text = jobTitle + " " + department.name + " - Bệnh viện E"
             marginLeftLbName.constant = 8

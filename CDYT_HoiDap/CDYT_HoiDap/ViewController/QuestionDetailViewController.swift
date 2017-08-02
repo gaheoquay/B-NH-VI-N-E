@@ -556,7 +556,7 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     //MARK: receive notifiy when mark an comment is solution
     func markACommentToSolution(notification : Notification){
         if notification.object != nil {
-            let commentEntitys = notification.object as! CommentEntity
+            guard let commentEntitys = notification.object as? CommentEntity  else { return }
             self.commentEntity = commentEntitys
             
             if commentEntity.isSolution == true {

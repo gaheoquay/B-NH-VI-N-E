@@ -394,7 +394,11 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
         viewController.user = user
         self.navigationController?.pushViewController(viewController, animated: true)
     }
-    
+//    func gotoMyProfile() {
+//        let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: "UpdateInfoViewController") as! UpdateInfoViewController
+//        self.navigationController?.pushViewController(vc, animated: true)
+//    }
     func gotoUserProfileFromQuestionDoctor(doctor: AuthorEntity) {
         
     }

@@ -3,7 +3,7 @@ import UIKit
 
 public class DatePickerDialog: UIView {
     
-    public typealias DatePickerCallback = (_ date: NSDate?) -> Void
+    public typealias DatePickerCallback = (_ date: Date?) -> Void
     
     /* Consts */
     private let kDatePickerDialogDefaultButtonHeight:       CGFloat = 50
@@ -19,7 +19,7 @@ public class DatePickerDialog: UIView {
     private var doneButton:   UIButton!
     
     /* Vars */
-    private var defaultDate:    NSDate?
+    private var defaultDate:    Date?
     private var datePickerMode: UIDatePickerMode?
     private var callback:       DatePickerCallback?
     
@@ -64,7 +64,7 @@ public class DatePickerDialog: UIView {
     }
     
     /* Create the dialog view, and animate opening the dialog */
-    public func show(title: String, doneButtonTitle: String = "Done", cancelButtonTitle: String = "Cancel", defaultDate: NSDate = NSDate(), minimumDate: NSDate? = nil, maximumDate: NSDate? = nil, datePickerMode: UIDatePickerMode = .dateAndTime, callback: @escaping DatePickerCallback) {
+    public func show(title: String, doneButtonTitle: String = "Done", cancelButtonTitle: String = "Cancel", defaultDate: Date? = Date(), minimumDate: Date? = nil, maximumDate: Date? = nil, datePickerMode: UIDatePickerMode = .dateAndTime, callback: @escaping DatePickerCallback) {
         self.titleLabel.text = title
         self.doneButton.setTitle(doneButtonTitle, for: .normal)
         self.cancelButton.setTitle(cancelButtonTitle, for: .normal)
@@ -72,9 +72,9 @@ public class DatePickerDialog: UIView {
         self.callback = callback
         self.defaultDate = defaultDate
         self.datePicker.datePickerMode = self.datePickerMode ?? .date
-        self.datePicker.date = (self.defaultDate ?? NSDate()) as Date
-        self.datePicker.maximumDate = maximumDate as Date?
-        self.datePicker.minimumDate = minimumDate as Date?
+        self.datePicker.date = (self.defaultDate ?? Date())
+        self.datePicker.maximumDate = maximumDate
+        self.datePicker.minimumDate = minimumDate
         
         /* */
         UIApplication.shared.windows.first!.addSubview(self)
@@ -217,7 +217,7 @@ public class DatePickerDialog: UIView {
     
     func buttonTapped(sender: UIButton!) {
         if sender.tag == kDatePickerDialogDoneButtonTag {
-            self.callback?(self.datePicker.date as NSDate?)
+            self.callback?(self.datePicker.date as Date?)
         } else {
             self.callback?(nil)
         }

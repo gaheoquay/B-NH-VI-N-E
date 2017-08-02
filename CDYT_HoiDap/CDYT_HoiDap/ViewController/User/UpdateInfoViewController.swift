@@ -66,6 +66,7 @@ class UpdateInfoViewController: BaseViewController {
         initDkImagePicker()
         
         if otherUserId == "" {
+            fullnameTxt.becomeFirstResponder()
             let realm = try! Realm()
             let users = realm.objects(UserEntity.self)
             if users.count > 0 {
@@ -189,7 +190,7 @@ class UpdateInfoViewController: BaseViewController {
                 }else if peopleInfo.user.index == 1 {
                     jobTitle = "Phó khoa"
                 } else if peopleInfo.user.index == 2 {
-                    jobTitle = "BS."
+                    jobTitle = "Bác sĩ khoa"
                 }
                 jobLb.text = jobTitle + " " + peopleInfo.department.name + " - Bệnh viện E"
 
@@ -215,16 +216,24 @@ class UpdateInfoViewController: BaseViewController {
             }
             
         }else{
-            departmentLbl.text = ""
-            departmentTittle.text = ""
-            jobTitle.text = ""
-            jobLb.text = ""
-            departmentTopConstant.constant = 0
-            departmentBottomConstant.constant = 0
-            jobTitleConstant.constant = 0
-            jobTitleBottomConstant.constant = 0
-            departmentSeperator.isHidden = true
-            jobTitleSeperator.isHidden = true
+            departmentLbl.text = userToShow.role == 1 ? userToShow.department?.name : ""
+            departmentTittle.text = userToShow.role == 1 ? "Khoa" : ""
+            var job = ""
+            if userToShow.index == 0 {
+                job = "Trưởng khoa"
+            }else if userToShow.index == 1 {
+                job = "Phó khoa"
+            } else if userToShow.index == 2 {
+                job = "Bác sĩ khoa"
+            }
+            jobTitle.text = userToShow.role == 1 ? "Chức danh" : ""
+            jobLb.text = userToShow.role == 1 ? (job + " " + (userToShow.department?.name ?? "") + " - Bệnh viện E") : ""
+            departmentTopConstant.constant = userToShow.role == 1 ? 15 : 0
+            departmentBottomConstant.constant = userToShow.role == 1 ? 15 : 0
+            jobTitleConstant.constant = userToShow.role == 1 ? 15 : 0
+            jobTitleBottomConstant.constant = userToShow.role == 1 ? 15 : 0
+            departmentSeperator.isHidden = userToShow.role != 1
+            jobTitleSeperator.isHidden = userToShow.role != 1
             avaImg1.isHidden = false
             avaImg1Height.constant = 55
             avaImg1.sd_setImage(with: URL.init(string: userToShow.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
@@ -266,6 +275,8 @@ class UpdateInfoViewController: BaseViewController {
             addressTxt.text = userToShow.address
             phoneTxt.text = userToShow.phone
             fullnameTxt.text = userToShow.fullname
+            fullnameTxt.isEnabled = userToShow.role != 1
+            fullnameTxt.textColor = userToShow.role == 1 ? UIColor.black : UIColor.init(netHex: 0x61ABFA)
             imageUrl = userToShow.avatarUrl
             thumbnailUrl = userToShow.thumbnailAvatarUrl
             emailTxt.text = userToShow.email
@@ -302,14 +313,14 @@ class UpdateInfoViewController: BaseViewController {
     }
     
     @IBAction func dobBtnTapAction(_ sender: Any) {
-        DatePickerDialog().show(title: "Ngày sinh", doneButtonTitle: "Xong", cancelButtonTitle: "Hủy", datePickerMode: .date) {
+        let defaultDate = self.dobDate == 0 ? Date() : Date(timeIntervalSince1970: self.dobDate)
+        DatePickerDialog().show(title: "Ngày sinh", doneButtonTitle: "Xong", cancelButtonTitle: "Hủy", defaultDate: defaultDate, maximumDate: Date(), datePickerMode: .date) {
             (date) -> Void in
-            if date != nil {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd/MM/yyyy"
-                self.dobBtn.setTitle("\(dateFormatter.string(from: date! as Date))", for: UIControlState.normal)
-                self.dobDate = date!.timeIntervalSince1970
-            }
+            guard let dateOfBirth = date else { return }
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy"
+            self.dobBtn.setTitle("\(dateFormatter.string(from: dateOfBirth))", for: UIControlState.normal)
+            self.dobDate = dateOfBirth.timeIntervalSince1970
         }
     }
     

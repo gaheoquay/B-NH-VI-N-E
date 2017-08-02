@@ -50,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        } else {
 //            Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.reloadBadge), userInfo: nil, repeats: true)
 //        }
+        checkAppVersion()
         // Configure tracker from GoogleService-Info.plist.
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
@@ -64,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         gai.trackUncaughtExceptions = true  // report uncaught exceptions
         return true
     }
+    
     func callGotoChat(notificationDic:NSDictionary){
         NotificationCenter.default.post(name: NSNotification.Name(rawValue:GO_TO_CHAT), object: notificationDic)
     }
@@ -115,7 +117,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         SBDMain.disconnect(completionHandler: {
                             
                         })
-                        
                         return
                     }
                 })
@@ -123,6 +124,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
+    func checkAppVersion() {
+        do {
+            let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
+            let authJson = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+            let auth = authJson.replacingOccurrences(of: "\n", with: "")
+            let header = [
+                "Auth": auth
+            ]
+            let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+            Alamofire.request(GET_APP_VERSION, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON(completionHandler: { (response) in
+                if let status = response.response?.statusCode {
+                    if status == 200{
+                        if let result = response.result.value {
+                            let json = result as! NSDictionary
+                            guard let code = json["Code"] as? Int, code == 0 else { return }
+                            if let data = json["Data"] as? NSDictionary {
+                                let version = data["Version"] as? Double
+                                let forceUpdate = data["ForceUpdate"] as? Bool
+                                if Double(versionNumber) ?? 0 < version ?? 0 {
+                                    Until.haveNewVersion(forceUpdate: forceUpdate ?? false)
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+        } catch let error as NSError {
+            print(error)
+        }
+    }
     
     func requestCate() {
         do {
@@ -179,8 +210,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print(error)
         }
     }
-    
-    
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

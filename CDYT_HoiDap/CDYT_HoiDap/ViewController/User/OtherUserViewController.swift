@@ -241,6 +241,10 @@ class OtherUserViewController: BaseViewController, UITableViewDelegate, UITableV
     
     func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
         //ko can thiet thuc hien ham nay vi dang o trong trang profile cua nguoi dung nay roi
+        let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "UpdateInfoViewController") as! UpdateInfoViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+
     }
     
     func selectDoctor(indexPath: IndexPath) {

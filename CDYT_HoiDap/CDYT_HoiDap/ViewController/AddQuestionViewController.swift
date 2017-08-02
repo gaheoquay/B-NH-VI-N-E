@@ -131,8 +131,8 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
         viewCategory.layer.borderColor = UIColor.lightGray.cgColor
 
         if isEditPost {
-            postBtn.setTitle("Cập nhật", for: .normal)
-            titleNaviBarLbl.text = "Sửa câu hỏi"
+            postBtn.setTitle("Lưu", for: .normal)
+            titleNaviBarLbl.text = "Chỉnh sửa câu hỏi"
             titleTxt.isEnabled = false
         }else{
             postBtn.setTitle("Đăng", for: .normal)
@@ -398,7 +398,7 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
                             
                             if isUpdated {
                                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_QUESTION_DETAIL), object: self.feedObj)
-                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: nil)
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: true)
                                 
                                 _ = self.navigationController?.popViewController(animated: true)
                             }else{
@@ -457,8 +457,7 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
             Alamofire.request(POST_QUESTION, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
                 if let status = response.response?.statusCode {
                     if status == 200{
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: nil)
-                        
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: RELOAD_ALL_DATA), object: true)
                         _ = self.navigationController?.popViewController(animated: true)
                     }else{
                         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")

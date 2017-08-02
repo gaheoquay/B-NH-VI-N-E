@@ -174,7 +174,7 @@ class CommentTableViewCell: UITableViewCell {
                 }else if mainComment.author.index == 1 {
                     jobTitle = "Phó khoa"
                 } else if mainComment.author.index == 2 {
-                    jobTitle = "BS."
+                    jobTitle = "Bác sĩ khoa"
                 }
                 departmantLb.text = jobTitle + " " + mainComment.department.name + " - Bệnh viện E"
                 verifyIconHeight.constant = 20
@@ -273,7 +273,7 @@ class CommentTableViewCell: UITableViewCell {
             verifyIconHeight.constant = 0
             avaImg.image = UIImage(named: "AvaDefaut.png")
         }else{
-            avaImg.sd_setImage(with: URL.init(string: mainComment.author.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
+            avaImg.sd_setImage(with: URL.init(string: subComment.author.thumbnailAvatarUrl), placeholderImage: UIImage.init(named: "AvaDefaut.png"))
             if subComment.author.role == 1 {
                 nameLbl.text = subComment.author.fullname
                 var jobTitle = ""
@@ -282,7 +282,7 @@ class CommentTableViewCell: UITableViewCell {
                 }else if subComment.author.index == 1 {
                     jobTitle = "Phó khoa"
                 } else if subComment.author.index == 2 {
-                    jobTitle = "BS."
+                    jobTitle = "Bác sĩ khoa"
                 }
                 departmantLb.text = jobTitle + " " + subComment.department.name + " - Bệnh viện E"
                 verifyIconHeight.constant = 20

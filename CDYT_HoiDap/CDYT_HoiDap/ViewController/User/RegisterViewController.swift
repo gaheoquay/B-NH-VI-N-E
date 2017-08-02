@@ -271,6 +271,8 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable,UIPi
                             }else {
                                 try! reaml.write {
                                     reaml.add(entity, update: true)
+                                    UserDefaults.standard.setValue(passString, forKey: "PASSWORD")
+                                    UserDefaults.standard.synchronize()
                                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)
                                     _ = self.navigationController?.popToRootViewController(animated: true)
                                 }
@@ -306,7 +308,7 @@ class RegisterViewController: UIViewController, NVActivityIndicatorViewable,UIPi
             return "Vui lòng điền tên đăng nhập."
         }else if !isValidInput(input: nicknameTxt.text!) {
             nicknameTxt.becomeFirstResponder()
-            return "Tên đăng nhập từ 6 đến 30 ký tự và không chứa ký tự đặc biệt."
+            return "Nhập mật khẩu từ 6-30 kí tự và không chứa kí tự đặc biệt."
         }else if emailString == "" {
             emailTxt.becomeFirstResponder()
             return "Vui lòng điền email."

@@ -155,7 +155,7 @@ class BookingCalenderController: UIViewController,WYPopoverControllerDelegate ,S
         }
         let curDate = Date()
         
-        DatePickerDialog().show(title: "Chọn ngày khám", doneButtonTitle: "Xong", cancelButtonTitle: "Hủy", minimumDate: curDate as NSDate?, datePickerMode: date!) {
+        DatePickerDialog().show(title: "Chọn ngày khám", doneButtonTitle: "Xong", cancelButtonTitle: "Hủy", minimumDate: curDate, datePickerMode: date!) {
             (date) -> Void in
             if date != nil {
                 if self.status == 0 {

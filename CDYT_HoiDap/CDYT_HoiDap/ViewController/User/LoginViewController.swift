@@ -100,6 +100,8 @@ class LoginViewController: UIViewController {
                             
                             try! reaml.write {
                                 reaml.add(entity, update: true)
+                                UserDefaults.standard.setValue(passString, forKey: "PASSWORD")
+                                UserDefaults.standard.synchronize()
                                 Until.initSendBird()
                                 Until.getSchedule()
                                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: LOGIN_SUCCESS), object: nil)

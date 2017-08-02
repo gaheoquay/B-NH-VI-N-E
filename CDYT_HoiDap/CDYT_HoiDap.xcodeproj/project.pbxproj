@@ -440,13 +440,13 @@
 		502024991F1F3A6800D5989B /* KSUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSUtils.swift; sourceTree = "<group>"; };
 		508887DC1F1DBC150065A691 /* ApiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiHelper.swift; sourceTree = "<group>"; };
 		508887DE1F1DBC820065A691 /* ApiDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiDefine.swift; sourceTree = "<group>"; };
-		50ACE8D61F28867200DB06FE /* CDYT_HoiDap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CDYT_HoiDap.entitlements; sourceTree = "<group>"; };
 		50B4B8611F259B9500B7C305 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		50B4B8631F25B2A300B7C305 /* Facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Facebook.png; sourceTree = "<group>"; };
 		50B4B8641F25B2A300B7C305 /* Gmail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gmail.png; sourceTree = "<group>"; };
 		50B4B8671F25D2CD00B7C305 /* UserDepartmentEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDepartmentEntity.swift; sourceTree = "<group>"; };
 		50E2142C1F26FAA4005F160D /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
 		50E2142E1F272F7F005F160D /* ChangeEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewController.swift; sourceTree = "<group>"; };
+		50E9B3DD1F2B251400CF6B1B /* CDYT_HoiDap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CDYT_HoiDap.entitlements; sourceTree = "<group>"; };
 		54350AF3B96C58CE38450098 /* Pods-CDYT_HoiDap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDYT_HoiDap.release.xcconfig"; path = "Pods/Target Support Files/Pods-CDYT_HoiDap/Pods-CDYT_HoiDap.release.xcconfig"; sourceTree = "<group>"; };
 		8B0D35F41E56EB2D002CF784 /* BookingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
 		8B1AD45A1E1B828500D55543 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -816,8 +816,8 @@
 		8B3A12DD1E10F399005DBC6E /* CDYT_HoiDap */ = {
 			isa = PBXGroup;
 			children = (
+				50E9B3DD1F2B251400CF6B1B /* CDYT_HoiDap.entitlements */,
 				9863D82F1F25105700BFADC8 /* BookingOnline */,
-				8B296BAC1E5557BA00170879 /* CDYT_HoiDap.entitlements */,
 				50B4B8611F259B9500B7C305 /* GoogleService-Info.plist */,
 				A6D083C11E121A1C007EA4D9 /* Entity */,
 				8B3A13841E10FCB6005DBC6E /* ViewController */,

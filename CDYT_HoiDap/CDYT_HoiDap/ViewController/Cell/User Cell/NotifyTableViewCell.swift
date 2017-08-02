@@ -27,6 +27,7 @@ class NotifyTableViewCell: UITableViewCell {
     // Configure the view for the selected state
   }
   func setData(entity:NotificationNewEntity){
+    self.avaImg.sd_setImage(with: URL(string: entity.userAvatar), placeholderImage: #imageLiteral(resourceName: "AvaDefaut.png"))
     if (entity.isRead) {
         viewBound.backgroundColor = UIColor.white
     }else{

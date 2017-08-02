@@ -65,8 +65,6 @@ class QuestionTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollec
         if !feedEntity.postEntity.isPrivate || users?.id == feedEntity.authorEntity.id {
             delegate?.gotoUserProfileFromQuestionCell(user: feedEntity.authorEntity)
         }
-        
-        
     }
     
     func showDoctorProfile(){

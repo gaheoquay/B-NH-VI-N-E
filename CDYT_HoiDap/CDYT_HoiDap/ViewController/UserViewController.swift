@@ -964,6 +964,12 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     
     //MARK: receive notifiy when mark an comment is solution
     func reloadDataFromServer(notification : Notification){
+        let isReloadMyPost = notification.object as? Bool ?? false
+        if isReloadMyPost && !isMyFeed {
+            pageMyFeed = 1
+            listMyFeed.removeAll()
+            getMyFeeds()
+        }
         reloadData()
     }
     func selectDoctor(indexPath: IndexPath) {
@@ -984,6 +990,9 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     
     func gotoUserProfileFromQuestionCell(user: AuthorEntity) {
         //khong can phai thuc hien ham nay vi dang trong trang profile cua chinh minh
+        let storyboard = UIStoryboard.init(name: "User", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "UpdateInfoViewController") as! UpdateInfoViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -285,7 +285,24 @@ class Until{
         return result
         
     }
-    
+    class func haveNewVersion(forceUpdate: Bool) {
+        let alert = UIAlertController(title: "Thông báo",
+                                      message:"Ứng dụng đã có phiên bản mới. Trải nghiệm ngay!",
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Cập nhật", style: .default, handler: { (_) in
+            guard let url = URL(string: "itms-apps://itunes.apple.com/app/id1263531287") else { return }
+            UIApplication.shared.openURL(url)
+        }))
+        if !forceUpdate {
+            alert.addAction(UIAlertAction(title: "Bỏ qua", style: .cancel, handler: nil))
+        }
+        let alertWindow = UIWindow(frame: UIScreen.main.bounds)
+        alertWindow.rootViewController = UIViewController()
+        alertWindow.windowLevel = UIWindowLevelAlert + 1
+        alertWindow.makeKeyAndVisible()
+        alertWindow.rootViewController?.present(alert, animated: true, completion: nil)
+    }
     class func getSchedule(){
         let param : [String : Any] = [
             "Auth": Until.getAuthKey(),

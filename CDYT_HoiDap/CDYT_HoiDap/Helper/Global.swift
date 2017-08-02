@@ -85,6 +85,7 @@ let GET_LIST_PACKAGE_SERVICE = BASE_URL + "/Service/GetListPackServices"
 let GET_ALL_TAG = BASE_URL + "/Tag/GetAll"
 let LOGIN_WITH_SOCIAL = BASE_URL + "/User/LoginSocialNetwork"
 let UPDATE_EMAIL = BASE_URL + "/User/UpdateEmail"
+let GET_APP_VERSION = BASE_URL + "/App/GetAppVersion/0"
 
 let KEY_AUTH_DEFAULT = "123i@123sora"
 let NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"
