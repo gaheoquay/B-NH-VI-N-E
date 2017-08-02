@@ -29,9 +29,9 @@ class HomeAnalysisViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func gotoListUser(){
-        let viewcontroller = storyboard?.instantiateViewController(withIdentifier: "ListUserViewController") as! ListUserViewController
-        self.navigationController?.pushViewController(viewcontroller, animated: true)
+    func pushViewController(identifier: String){
+        let viewcontroller = storyboard?.instantiateViewController(withIdentifier: identifier)
+        self.navigationController?.pushViewController(viewcontroller!, animated: true)
     }
     
 }
@@ -64,7 +64,9 @@ extension HomeAnalysisViewController: UITableViewDelegate,UITableViewDataSource{
                     self.checkShow.isShow = !self.checkShow.isShow
                     self.tbAnlysis.reloadRows(at: [indexPath], with: .automatic)
                 }
-                cell.gotoListUser = self.gotoListUser
+                cell.gotoListUser = { (identifier) -> Void in
+                    self.pushViewController(identifier: identifier)
+                }
                 cell.setData(arrayProfile: array, checShow: checkShow)
                 return cell
             case 1:
@@ -74,6 +76,9 @@ extension HomeAnalysisViewController: UITableViewDelegate,UITableViewDataSource{
             }
         case 1:
             cell2.setData(plachoder: "Chọn dịch vụ xét nghiệm", isDate: true)
+            cell2.gotoSelectService = { (identifier) -> Void in
+                self.pushViewController(identifier: identifier)
+            }
         default:
             if indexPath.row == 0 {
                 return cell3
@@ -117,10 +122,4 @@ extension HomeAnalysisViewController: UITableViewDelegate,UITableViewDataSource{
     }
 }
 
-struct CheckShowName {
-    var isShow: Bool
-    init(isShow: Bool) {
-        self.isShow = isShow
-    }
-}
 

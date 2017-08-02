@@ -12,10 +12,10 @@ class HomeBookingViewController: UIViewController {
 
     @IBOutlet weak var tbListService: UITableView!
     @IBOutlet weak var customTopView: CustomTopView!
-    
-   
+    var pushView : ((_ indentifier: String) -> Void)?
     
     let arrayImages = ["khamtainha.png","khamtaivien.png","xntainha.png"]
+    let arrayTitle = ["Khám tại viện E","Khám tại nhà","Xét nghiệm tại nhà"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,16 +28,7 @@ class HomeBookingViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    
-    func popView(){
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    func gotoDetailService(indentfier: String){
-        let viewcontroller = storyboard?.instantiateViewController(withIdentifier: indentfier)
-        self.navigationController?.pushViewController(viewcontroller!, animated: true)
-    }
-    
+      
 }
 
 extension HomeBookingViewController: UITableViewDelegate,UITableViewDataSource {
@@ -50,21 +41,22 @@ extension HomeBookingViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell") as! HomeCell
         cell.imgBackGround.image = UIImage(named: arrayImages[indexPath.section])
+        cell.lbTitle.text = arrayTitle[indexPath.row]
         cell.btnGotoDetail = {
             switch (indexPath.section) {
             case 0:
-                self.gotoDetailService(indentfier: "HomeAnalysisViewController")
+                self.pushView!("")
             case 1:
-                self.gotoDetailService(indentfier: "")
+                self.pushView!("")
             default:
-                self.gotoDetailService(indentfier: "")
+                self.pushView!("HomeAnalysisViewController")
             }
         }
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let heightScreen = UIScreen.main.bounds.size.height
-        return (heightScreen - 98) / 3
+        let heightCell = ( ViewManager.screentHeight - (ViewManager.heightBar + ViewManager.heightTopView + ViewManager.marginTopAndBot*CGFloat(arrayImages.count + 1)) ) / CGFloat(arrayImages.count)
+        return heightCell
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 16

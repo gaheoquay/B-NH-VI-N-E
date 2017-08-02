@@ -19,7 +19,7 @@ class CellTableInfomation: UITableViewCell {
     @IBOutlet weak var btnShowDetailProfile: UIButton!
     
     var setHeightViewProfile : (() -> Void)?
-    var gotoListUser : (() -> Void)?
+    var gotoListUser : ((_ identifier: String) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -55,7 +55,7 @@ class CellTableInfomation: UITableViewCell {
         self.setHeightViewProfile?()
     }
     @IBAction func btnGotoListUser(_ sender: Any) {
-        self.gotoListUser?()
+        self.gotoListUser?("ListUserViewController")
     }
     
     

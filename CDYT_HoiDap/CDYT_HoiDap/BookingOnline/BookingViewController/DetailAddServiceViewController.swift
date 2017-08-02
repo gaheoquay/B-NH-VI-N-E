@@ -1,14 +1,14 @@
-ß//
-//  ServiceViewController.swift
+//
+//  DetailAddServiceViewController.swift
 //  CDYT_HoiDap
 //
-//  Created by Quang Anh on 7/31/17.
+//  Created by Quang Anh on 8/2/17.
 //  Copyright © 2017 CDYT. All rights reserved.
 //
 
 import UIKit
 
-class ServiceViewController: UIViewController {
+class DetailAddServiceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

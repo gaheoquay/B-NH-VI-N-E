@@ -12,7 +12,7 @@ class Cell2Infomation: UITableViewCell {
 
     @IBOutlet weak var txtInfomation: UITextField!
     @IBOutlet weak var btnSelect: UIButton!
-    
+    var gotoSelectService : ((_ identifier: String) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,5 +35,6 @@ class Cell2Infomation: UITableViewCell {
     }
 
     @IBAction func btnSelect(_ sender: Any) {
+        self.gotoSelectService!("ServiceNewViewController")
     }
 }

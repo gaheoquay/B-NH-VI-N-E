@@ -1,20 +1,21 @@
 //
-//  HomeCell.swift
+//  HeaderCellService.swift
 //  CDYT_HoiDap
 //
-//  Created by Quang anh Vu on 7/24/17.
+//  Created by Quang Anh on 8/2/17.
 //  Copyright © 2017 CDYT. All rights reserved.
 //
 
 import UIKit
 
-class HomeCell: UITableViewCell {
+class HeaderCellService: UITableViewCell {
 
-    @IBOutlet weak var lbTitle: UILabel!
-    @IBOutlet weak var imgBackGround: UIImageView!
-    var btnGotoDetail : (() -> Void)?
+    @IBOutlet weak var mainView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        mainView.layer.borderColor = UIColor.brown.cgColor
+        mainView.layer.borderWidth = 1
         // Initialization code
     }
 
@@ -23,8 +24,7 @@ class HomeCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    @IBAction func btnGotoDetail(_ sender: Any) {
-        self.btnGotoDetail?()
+
+    @IBAction func btnAddNewService(_ sender: Any) {
     }
 }
