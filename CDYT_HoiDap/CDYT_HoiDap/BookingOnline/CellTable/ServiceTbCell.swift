@@ -1,18 +1,18 @@
 //
-//  HomeCell.swift
+//  ServiceTbCell.swift
 //  CDYT_HoiDap
 //
-//  Created by Quang anh Vu on 7/24/17.
+//  Created by Quang Anh on 8/2/17.
 //  Copyright © 2017 CDYT. All rights reserved.
 //
 
 import UIKit
 
-class HomeCell: UITableViewCell {
+class ServiceTbCell: UITableViewCell {
 
-    @IBOutlet weak var lbTitle: UILabel!
-    @IBOutlet weak var imgBackGround: UIImageView!
-    var btnGotoDetail : (() -> Void)?
+    @IBOutlet weak var lbServiceName: UILabel!
+    @IBOutlet weak var lbPrice: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,8 +23,5 @@ class HomeCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    @IBAction func btnGotoDetail(_ sender: Any) {
-        self.btnGotoDetail?()
-    }
+
 }

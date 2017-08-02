@@ -50,4 +50,5 @@ extension SettingBookingViewController: UITableViewDataSource,UITableViewDelegat
             self.gotoDetailSetting(indentifier: "")
         }
     }
+    
 }

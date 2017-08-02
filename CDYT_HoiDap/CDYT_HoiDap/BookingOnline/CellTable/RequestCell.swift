@@ -1,21 +1,20 @@
 //
-//  HomeCell.swift
+//  RequestCell.swift
 //  CDYT_HoiDap
 //
-//  Created by Quang anh Vu on 7/24/17.
+//  Created by Quang Anh on 7/28/17.
 //  Copyright © 2017 CDYT. All rights reserved.
 //
 
 import UIKit
 
-class HomeCell: UITableViewCell {
+class RequestCell: UITableViewCell {
 
-    @IBOutlet weak var lbTitle: UILabel!
-    @IBOutlet weak var imgBackGround: UIImageView!
-    var btnGotoDetail : (() -> Void)?
+    @IBOutlet weak var btnRequest: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,7 +23,8 @@ class HomeCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func btnGotoDetail(_ sender: Any) {
-        self.btnGotoDetail?()
+    @IBAction func btnRequest(_ sender: Any) {
     }
+    
+
 }
