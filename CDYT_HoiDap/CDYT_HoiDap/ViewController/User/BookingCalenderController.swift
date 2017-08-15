@@ -16,8 +16,7 @@ protocol BookingCalenderControllerDelegate {
 }
 
 class BookingCalenderController: UIViewController,WYPopoverControllerDelegate ,ServiceViewControllerDelegate,UIPickerViewDataSource,UIPickerViewDelegate{
-    
-    
+  
     @IBOutlet weak var viewService: UIView!
     @IBOutlet weak var heightViewService: NSLayoutConstraint!
     @IBOutlet weak var viewBookingHome: UIView!
@@ -41,7 +40,6 @@ class BookingCalenderController: UIViewController,WYPopoverControllerDelegate ,S
     var status = 0 // 0: Benh vien , 1: TAI NHA , 2 : XN tai nha
     var indexPatch = 0
     var statusTime = 0
-
     
     //test
     var listService = [ServicesEntity]()       // Kham tai nha and xet nghiem
@@ -121,6 +119,7 @@ class BookingCalenderController: UIViewController,WYPopoverControllerDelegate ,S
         // Dispose of any resources that can be recreated.
     }
     func reloadBooking(){
+      
         self.btnService.setTitle("Danh sách dịch vụ", for: UIControlState.normal)
         self.serviceEntity = ServiceEntity()
         self.btnBrifUser.setTitle("Chọn hồ sơ người khám", for: UIControlState.normal)
@@ -135,6 +134,7 @@ class BookingCalenderController: UIViewController,WYPopoverControllerDelegate ,S
         self.listService = [ServicesEntity]()
         self.listPack = [PackagesEntity]()
         self.statusTime = 0
+      
     }
     @IBAction func tapService(_ sender: Any) {
         delegate?.gotoService(status: status)

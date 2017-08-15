@@ -16,6 +16,7 @@ class KeyWordTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollect
   
   override func awakeFromNib() {
     super.awakeFromNib()
+    
     // Initialization code
     clvKeyword.dataSource = self
     clvKeyword.delegate = self
@@ -25,21 +26,23 @@ class KeyWordTableViewCell: UITableViewCell,UICollectionViewDataSource,UICollect
   override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
     
-    // Configure the view for the selected state
   }
 
 //  MARK:UICollectionViewDataSource
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return listTag.count
   }
+  
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "KeywordCollectionViewCell", for: indexPath) as! KeywordCollectionViewCell
     cell.setData(tagName: listTag[indexPath.row].tag.tagName)
     return cell
   }
+  
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     delegate?.gotoListQuestionByTag(hotTag: listTag[indexPath.row].tag)
   }
+  
 // MARK: UICollectionViewDelegateLeftAlignedLayout
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     if listTag.count > 0 {

@@ -22,6 +22,7 @@ class ServicesEntity: NSObject {
     }
     
     init(dictionary: NSDictionary) {
+      
         if let value = dictionary["Id"] as? String {
             id = value
         }
@@ -34,6 +35,7 @@ class ServicesEntity: NSObject {
         if let value = dictionary["PriceService"] as? Double {
             priceService = value
         }
+      
     }
 }
 

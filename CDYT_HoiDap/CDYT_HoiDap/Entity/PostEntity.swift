@@ -9,6 +9,7 @@
 import UIKit
 
 class PostEntity: NSObject {
+  
     var id = ""
     var title = ""
     var content = ""
@@ -27,6 +28,7 @@ class PostEntity: NSObject {
     }
     
     init(dictionary:NSDictionary) {
+      
         if let value = dictionary["Id"] as? String{
             id = value
         }

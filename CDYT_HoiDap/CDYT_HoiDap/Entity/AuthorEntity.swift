@@ -9,6 +9,7 @@
 import UIKit
 
 class AuthorEntity: NSObject {
+  
     var id = ""
     var email = ""
     var nickname = ""

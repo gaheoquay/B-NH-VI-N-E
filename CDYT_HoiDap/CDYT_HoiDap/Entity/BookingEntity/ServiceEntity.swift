@@ -24,24 +24,31 @@ class ServiceEntity: NSObject {
   }
     
   init(dictionary:NSDictionary) {
+    
     if let value = dictionary["HIS_Service_ID"] as? Int {
       serviceId = value
     }
+    
     if let value = dictionary["PriceService"] as? Double {
       priceService = value
     }
+    
     if let value = dictionary["HIS_Room_ID"] as? Double {
       roomId = value
     }
+    
     if let value = dictionary["Name"] as? String {
       name = value
     }
+    
     if let value = dictionary["HIS_Room_Name"] as? String {
       roomName = value
     }
+    
     if let value = dictionary["Updated"] as? Double {
       updated = value
     }
+    
   }
 
 }

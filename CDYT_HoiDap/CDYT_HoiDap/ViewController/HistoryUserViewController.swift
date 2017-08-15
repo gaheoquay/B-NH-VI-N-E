@@ -104,6 +104,7 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
     func setupTable(){
         
         if listBooking.count > 0 {
+          
             tbListHistory.register(UINib.init(nibName: "HistoryCell", bundle: nil), forCellReuseIdentifier: "HistoryCell")
             heightTbListHistory.constant = UIScreen.main.bounds.size.height - 185
             tbListHistory.estimatedRowHeight = 9999
@@ -113,26 +114,32 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
             tbListHistory.isHidden = false
             lbCV.isHidden = true
             imgCV.isHidden = true
+          
         }else {
+          
             heightTbListHistory.constant = 0
             tbListHistory.estimatedRowHeight = 0
             tbListHistory.rowHeight = UITableViewAutomaticDimension
             tbListHistory.isHidden = true
             lbCV.isHidden = false
             imgCV.isHidden = false
+          
         }
         self.view.layoutIfNeeded()
         tbListHistory.reloadData()
     }
+  
     //MARK: RequestData
     
     func requestBookingUser(){
+      
         let Param : [String : Any] = [
             "Auth": Until.getAuthKey(),
             "RequestedUserId" : Until.getCurrentId()
         ]
         
-        print(Param)
+//        print(Param)
+      
         Until.showLoading()
         Alamofire.request(GET_BOOKING_BY_USERID, method: .post, parameters: Param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             if let status = response.response?.statusCode {
@@ -157,6 +164,7 @@ class HistoryUserViewController: UIViewController,UITableViewDelegate,UITableVie
             self.tbListHistory.pullToRefreshView?.stopAnimating()
             self.tbListHistory.infiniteScrollingView?.stopAnimating()
         }
+      
     }
     //MARK: Delegate
     func gotoHistory(indexPath: IndexPath) {

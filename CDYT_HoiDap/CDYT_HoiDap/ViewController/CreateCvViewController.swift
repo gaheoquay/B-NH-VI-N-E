@@ -370,39 +370,52 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
                 if self.selectedJob == nil{
                     self.selectedJob = self.listJob[0]
                 }
+              
                 self.lbJob.text = self.selectedJob.name
+              
                 self.lbJob.textColor = UIColor.init(netHex: 0x61abfa)
+              
             }else if picker == self.pickerlistCountry {
+              
                 if self.selectedCountry == nil {
                     self.selectedCountry = self.listCountry[0]
                 }
+              
                 self.lbCountry.text = self.selectedCountry.name
                 self.lbCountry.textColor = UIColor.init(netHex: 0x61abfa)
                 self.listCurrentProvince = self.listProvince.filter({ (entity) -> Bool in
                     entity.countryId == self.selectedCountry.countryId
                 })
+              
             }else if picker == self.pickerlistProvince {
+              
                 if self.selectedProvince == nil {
                     self.selectedProvince = self.listCurrentProvince[0]
                 }
+              
                 self.lbProvince.text = self.selectedProvince.name
                 self.lbProvince.textColor = UIColor.init(netHex: 0x61abfa)
                 self.listCurrentDistric = self.listDistric.filter({ (entity) -> Bool in
                     entity.provinceId == self.selectedProvince.provinceId
                 })
+              
             }else if picker == self.pickerlistDistric {
+              
                 if self.selectedDistrict == nil {
                     self.selectedDistrict = self.listCurrentDistric[0]
                 }
                 self.lbDistric.text = self.selectedDistrict.name
                 self.lbDistric.textColor = UIColor.init(netHex: 0x61abfa)
                 self.requestListZonesById(districtId: String(Int(self.selectedDistrict.districtId)))
+              
             }else if picker == self.pickerlistZone {
+              
                 if self.selectedZone == nil {
                     self.selectedZone = self.listZone[0]
                 }
                 self.lbZone.text = self.selectedZone.name
                 self.lbZone.textColor = UIColor.init(netHex: 0x61abfa)
+              
             }
         })
         
@@ -411,10 +424,12 @@ class CreateCvViewController: BaseViewController,UIPickerViewDelegate,UIPickerVi
     }
     //  MARK: request to server
     func requestData(){
+      
         requestListJob()
         requestListCountry()
         requestListProvice()
         requestListDistrict()
+      
     }
     func requestListJob(){
         Alamofire.request(BOOKING_GET_LIST_JOB, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in

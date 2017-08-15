@@ -41,8 +41,10 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
     var notification : NotificationNewEntity!
     var delegate:QuestionDetailViewControllerDelegate?
     var notificationId = ""
+  
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         registerNotification()
         configTable()
         
@@ -52,15 +54,18 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
             setupMarkerForQuestion()
             getListCommentByPostID(postId: feedObj.postEntity.id)
         }
+      
         if (notification != nil && !(notification.isRead)) || !notificationId.isEmpty {
             setReadNotification()
         }
+      
         configInputBar()
         setupImagePicker()
         
         imgCollectionViewHeight.constant = 0
         currentUserId = Until.getCurrentId()
         textInputBar.textView.becomeFirstResponder()
+      
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -1073,11 +1078,13 @@ class QuestionDetailViewController: BaseViewController, UITableViewDelegate, UIT
         popupViewController.dismissPopover(animated: true)
         popupViewController.delegate = nil
         popupViewController = nil
-        
     }
     
     //MARK: CommentViewControllerDelegate
-    func reloadTable() {}
+    func reloadTable() {
+      
+    }
+  
     func removeMainCommentFromCommentView(mainComment: MainCommentEntity) {
         if listComment.count > 0 {
             for (index,item) in listComment.enumerated() {

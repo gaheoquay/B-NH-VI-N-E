@@ -8,7 +8,8 @@
 
 import UIKit
 
-class UserViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, QuestionTableViewCellDelegate, InsertAccountCellDelegate, DoctorTableViewCellDelegate,RegisterViewControllerDelegate,AdminUpdateProfileViewControllerDelegate {
+class UserViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate,
+QuestionTableViewCellDelegate, InsertAccountCellDelegate, DoctorTableViewCellDelegate,RegisterViewControllerDelegate,AdminUpdateProfileViewControllerDelegate {
     
     @IBOutlet weak var viewFollowingQuestion: UIView!
     @IBOutlet weak var layoutWidthViewFollowingQuestion: NSLayoutConstraint!
@@ -23,8 +24,7 @@ class UserViewController: BaseViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var messageCountLb: UILabel!
     @IBOutlet weak var lbPage1: UILabel!
     @IBOutlet weak var lbPage2: UILabel!
-    
-    
+  
     var pageMyFeed = 1
     var listMyFeed = [FeedsEntity]()
     var isMyFeed = false

@@ -18,14 +18,18 @@ class TagListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         searchBar.delegate = self
         searchBar.backgroundImage = UIImage()
+      
         let textField = searchBar.value(forKey: "_searchField") as? UITextField
         textField?.layer.borderColor = UIColor.lightGray.cgColor
         textField?.layer.borderWidth = 1
         textField?.layer.cornerRadius = 15
+      
         initTaleView()
         searchTag()
+      
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,6 +42,7 @@ class TagListViewController: BaseViewController {
     }
     
     func initTaleView(){
+      
         tagTableView.delegate = self
         tagTableView.dataSource = self
         tagTableView.estimatedRowHeight = 200
@@ -124,7 +129,7 @@ extension TagListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+      
         let entity = listHotTag[indexPath.row]
         
         let tracker = GAI.sharedInstance().defaultTracker
@@ -133,20 +138,27 @@ extension TagListViewController: UITableViewDataSource, UITableViewDelegate {
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
         viewController.hotTag = entity.tag
         self.navigationController?.pushViewController(viewController, animated: true)
-        
+      
     }
+  
 }
+
 //  MARK: QuestionTagTableViewCellDelegate
 extension TagListViewController: UIScrollViewDelegate {
+  
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
     }
+  
 }
+
 //  MARK: QuestionTagTableViewCellDelegate
 extension TagListViewController: QuestionTagTableViewCellDelegate {
+  
     func checkLogin() {
         Until.gotoLogin(_self: self, cannotBack: false)
     }
+  
 }
 
 //  MARK: UISearchBarDelegate

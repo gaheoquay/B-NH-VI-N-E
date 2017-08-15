@@ -9,6 +9,7 @@
 import UIKit
 
 class MainCommentEntity: NSObject {
+  
     var post = PostEntity()
     var author = AuthorEntity()
     var comment = CommentEntity()
@@ -18,6 +19,7 @@ class MainCommentEntity: NSObject {
     var subComment = [SubCommentEntity]()
     var isShowMore = false
     var postAuthor = AuthorEntity()
+  
     override init (){
         super.init()
     }

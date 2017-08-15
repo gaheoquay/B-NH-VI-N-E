@@ -1,15 +1,10 @@
-//
-//  Global.swift
-//  HoiDap
-//
-//  Created by CDYT on 12/26/16.
-//  Copyright © 2016 ISORA. All rights reserved.
-//
-
 import UIKit
 
 //let BASE_URL = "http://ihealthlabs.vn:38192"    //RELEASE
-let BASE_URL = "http://123.24.206.9:38192"     //DEV
+
+//let BASE_URL = "https://service.benhviene.com"  //DEV
+
+let BASE_URL = "http://123.24.206.9:38192"
 
 let REGISTER_USER = BASE_URL + "/User/Register"
 let UPLOAD_IMAGE = BASE_URL + "/Image/UploadImage"

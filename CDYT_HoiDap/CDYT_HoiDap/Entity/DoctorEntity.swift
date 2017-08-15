@@ -19,6 +19,7 @@ class DoctorEntity: NSObject {
     }
     
     init(dictionary: NSDictionary) {
+      
         if let value = dictionary["Doctor"] as? NSDictionary {
             doctorEntity = AuthorEntity.init(dictionary: value)
         }
@@ -28,6 +29,7 @@ class DoctorEntity: NSObject {
         if let value = dictionary["UnansweredPostCount"] as? Int {
             unanswerPostCount = value
         }
+      
     }
 
 }

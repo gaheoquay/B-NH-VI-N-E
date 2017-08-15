@@ -34,8 +34,6 @@ class DetailsFileUsersViewController: UIViewController {
     @IBOutlet weak var lbHour: UILabel!
     @IBOutlet weak var viewHour: UIView!
     
-    
-    
     var listService = [ServiceEntity]()
     var checkInResult = CheckInResultEntity()
     var booKingRecord = BookingEntity() // BookingRecord

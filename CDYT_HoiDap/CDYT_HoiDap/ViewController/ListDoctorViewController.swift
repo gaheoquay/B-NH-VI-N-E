@@ -36,8 +36,10 @@ class ListDoctorViewController: UIViewController,UITableViewDataSource,UITableVi
     
     //  MARK: UITableViewDelegate + UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      
         let entity = listAllDoctor[indexPath.section]
         delegate?.gotoProfile(authorEntity: entity.doctors[indexPath.row].doctorEntity)
+      
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return listAllDoctor.count

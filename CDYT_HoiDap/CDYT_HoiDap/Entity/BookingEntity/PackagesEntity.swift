@@ -11,14 +11,19 @@ import UIKit
 class PackagesEntity: NSObject {
     
     var pack = PackEntity()
+  
     var service = [ServicesEntity]()
+  
     var textSerive = ""
     
     override init() {
+      
         super.init()
+      
     }
     
     init(dictionary: NSDictionary) {
+      
         if let value = dictionary["Pack"] as? NSDictionary {
             pack = PackEntity.init(dictionary: value)
         }

@@ -36,6 +36,7 @@ public class DatePickerDialog: UIView {
     }
     
     func setupView() {
+      
         self.dialogView = createContainerView()
         
         self.dialogView!.layer.shouldRasterize = true
@@ -50,6 +51,7 @@ public class DatePickerDialog: UIView {
         self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         
         self.addSubview(self.dialogView!)
+      
     }
     
     /* Handle device orientation changes */
@@ -227,10 +229,12 @@ public class DatePickerDialog: UIView {
     
     /* Helper function: count and return the screen's size */
     func countScreenSize() -> CGSize {
+      
         let screenWidth = UIScreen.main.applicationFrame.size.width
         let screenHeight = UIScreen.main.bounds.size.height
         
         return CGSize.init(width: screenWidth, height: screenHeight)
+      
     }
     
 }

@@ -17,22 +17,29 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     }
     
     override func viewWillAppear(_ animated: Bool) {
+      
         let realm = try! Realm()
         let user = realm.objects(UserEntity.self).first
+      
         if (user != nil) && user?.role == 2 {
+          
             if !isFeeds || !isAssigned || !isNotAssignedYet {
+              
                 reloadDataAssigned()
                 reloadDataNotAssignedYet()
+              
             }else{
                 if isFeeds {
                     reloadDataAssigned()
                     reloadDataNotAssignedYet()
+                  
                 }
             }
             
             isFeeds = false
             isAssigned = false
             isNotAssignedYet = true
+          
         }else{
             if !isFeeds || !isAssigned || !isNotAssignedYet {
                 reloadDataForUser()
@@ -75,29 +82,46 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     }
     
     func setupView(view:UIView,check:Bool){
+      
         if check {
+          
             view.backgroundColor = UIColor.init(netHex: 0xf0f1f2)
+          
         }else{
+          
             view.backgroundColor = UIColor.white
+          
         }
+      
     }
     
     func reloadDataAssigned(){
+      
         pageAssigned = 1
+      
         self.listAssigned.removeAll()
+      
         getQuestionsUncommentedByAnyDoctorAndAssigned()
+      
         requestListDoctor()
+      
     }
     func loadMoreAssigned(){
+      
         pageAssigned += 1
+      
         getQuestionsUncommentedByAnyDoctorAndAssigned()
+      
         requestListDoctor()
+      
     }
     func reloadDataNotAssignedYet(){
+      
         pageNotAssignedYet = 1
         listNotAssignedYet.removeAll()
         getQuestionsUncommentedByAnyDoctorAndNotAssignedYet()
         requestListDoctor()
+      
     }
     func loadMoreNotAssignedYet(){
         pageNotAssignedYet += 1
@@ -463,25 +487,31 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     
     
     func creatAlert(title: String, picker: UIPickerView){
+      
         let alertView = UIAlertController(title: title, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         alertView.view.addSubview(picker)
-        
         picker.delegate = self
         picker.dataSource = self
+      
         let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+          
                 if self.idCate != self.listAllDoctors[self.indexPickerViewCate].category.id {
+                  
                     self.idCate = self.listAllDoctors[self.indexPickerViewCate].category.id
                     self.nameCate = self.listAllDoctors[self.indexPickerViewCate].category.name
+                  
                     if self.isNotAssignedYet {
                         self.listNotAssignedYet[self.indexPathOfCell.row].cateGory.id = self.idCate
                         self.listNotAssignedYet[self.indexPathOfCell.row].cateGory.name = self.nameCate
                         self.nameCate = ""
                         self.idCate = ""
                     }else if self.isAssigned {
+                      
                         self.listAssigned[self.indexPathOfCell.row].cateGory.id = self.idCate
                         self.listAssigned[self.indexPathOfCell.row].cateGory.name = self.nameCate
                         self.listAssigned[self.indexPathOfCell.row].postEntity.isClassified = false
                     }
+                  
                 }else {
                     if self.isNotAssignedYet {
                         self.listNotAssignedYet[self.indexPathOfCell.row].cateGory.id = self.idCate
@@ -560,12 +590,15 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
     
     
     func approVal(indexPath : IndexPath) {
+      
         var entity : FeedsEntity!
+      
         if isNotAssignedYet {
             entity = listNotAssignedYet[indexPath.row]
         }else{
             entity = listAssigned[indexPath.row]
         }
+      
         if entity.cateGory.id.isEmpty {
             UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng chọn chuyên khoa trước", cancelBtnTitle: "Đóng")
             return
@@ -623,7 +656,6 @@ class QuestionViewController: BaseViewController,UITableViewDelegate,UITableView
         }
     }
 
-    
     //  MARK: Outlet
     @IBOutlet weak var tbQuestion: UITableView!
     var isFeeds = false

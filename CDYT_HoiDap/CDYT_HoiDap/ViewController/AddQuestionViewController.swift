@@ -24,6 +24,8 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
     @IBOutlet weak var viewCategory: UIView!
     @IBOutlet weak var btnSwitch: UISwitch!
     @IBOutlet weak var lbCate: UILabel!
+    @IBOutlet weak var viewBtnSwitch: UIView!
+  
     var tagNames = Array<String>()
     var tagIds = Array<String>()
     var listTag = [TagEntity]()
@@ -41,16 +43,31 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
     var feedObj = FeedsEntity()
     var searchText = ""
     var ischeck = false
+  
+    var role = 0
     
     var pickerFrame = CGRect(x: 0, y: 50, width: 270, height: 150)
     var listDepartment = [DepartmentEntity]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+      let realm = try! Realm()
+      if let user = realm.objects(UserEntity.self).first {
+            role = user.role
+      }
+      
+      if (role == 0){
+         viewBtnSwitch.isHidden = false
+      } else {
+         viewBtnSwitch.isHidden = true
+      }
+      
         titleTxt.delegate = self
         listDepartment = listCate.filter({ (entity) -> Bool in
             entity.isPublic == true
         })
+      
         requestTag()
         requestCate()
         registerNotification()
@@ -59,9 +76,11 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
         configUI()
         setupImagePicker()
         initTokenView()
+      
         if searchText != "" {
             titleTxt.text = searchText
         }
+      
         myGroup.notify(queue: .main) {
             self.setupDataForUpdateQuestion()
         }
@@ -101,20 +120,27 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
     }
     
     func setupImagePicker(){
+      
         pickerImageController.assetType = DKImagePickerControllerAssetType.allPhotos
         pickerImageController.didSelectAssets = { [unowned self] ( assets: [DKAsset]) in
+          
             self.imageAssets = assets
+          
             if assets.count == 0 && self.feedObj.postEntity.imageUrls.count == 0 {
                 self.imgClvheight.constant = 0
             }else{
                 self.imgClvheight.constant = 110
             }
+          
             self.view.layoutIfNeeded()
             self.imgClv.reloadData()
+          
         }
+      
     }
     
     func configUI(){
+      
         titleTxtBorderView.layer.cornerRadius = 2
         titleTxtBorderView.layer.borderWidth = 1
         titleTxtBorderView.layer.borderColor = UIColor().hexStringToUIColor(hex: "D8D8D8").cgColor
@@ -131,13 +157,37 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
         viewCategory.layer.borderColor = UIColor.lightGray.cgColor
 
         if isEditPost {
+          
             postBtn.setTitle("Lưu", for: .normal)
-            titleNaviBarLbl.text = "Chỉnh sửa câu hỏi"
+          
+            if self.role == 0 {
+              titleNaviBarLbl.text = "Chỉnh sửa câu hỏi"
+            } else {
+              titleNaviBarLbl.text = "Chỉnh sửa"
+            }
+          
             titleTxt.isEnabled = false
-        }else{
-            postBtn.setTitle("Đăng", for: .normal)
-            titleNaviBarLbl.text = "Đặt câu hỏi"
-            titleTxt.isEnabled = true
+          
+        } else {
+         
+            print("user.role: \(self.role)")
+            
+              if self.role == 0 {
+           
+                 postBtn.setTitle("Đăng", for: .normal)
+                 titleNaviBarLbl.text = "Đặt câu hỏi"
+                 titleTxt.isEnabled = true
+              
+              } else {
+                
+                postBtn.setTitle("Đăng", for: .normal)
+                titleNaviBarLbl.text = "Đăng bài viết"
+                titleTxt.isEnabled = true
+                
+              }
+            
+          
+          
         }
         
         if self.imageAssets.count == 0 && self.feedObj.postEntity.imageUrls.count == 0 {
@@ -145,6 +195,7 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
         }else{
             self.imgClvheight.constant = 110
         }
+      
     }
     
     //MARK: Setup UI for update question view
@@ -167,6 +218,7 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
         }
         if isEditPost {
             let realm = try! Realm()
+          
             if let user = realm.objects(UserEntity.self).first {
                 btnSwitch.isEnabled = !(user.role == 2 && user.id != feedObj.authorEntity.id)
             }
@@ -223,16 +275,22 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
     }
     
     func validateDataQuestion() -> String{
+      
         let titleString = titleTxt.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+      
         let contentString = contentTxt.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+      
+        print("imageDic: \(imageDic) - thumImgDic: \(thumImgDic)")
         
         if titleString == "" {
             titleTxt.becomeFirstResponder()
-            return "Vui lòng nhập tiêu đề câu hỏi"
+            return "Vui lòng nhập TIÊU ĐỀ"
         }else if contentString == "" {
             contentTxt.becomeFirstResponder()
-            return "Vui lòng nhập nội dung câu hỏi"
-        }else{
+            return "Vui lòng nhập NỘI DUNG"
+        }
+       
+        else {
             return ""
         }
     }
@@ -343,6 +401,7 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
     
     //MARK: Update current question
     func updateQuestionToServer(){
+      
         do {
             let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
             let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
@@ -350,10 +409,11 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
             let header = [
                 "Auth": auth
             ]
-            self.view.endEditing(true)
-            
+          
             let titleString = titleTxt.text
             let contentString = contentTxt.text
+          
+            self.view.endEditing(true)
             
             let post : [String : Any] = [
                 "Id" : feedObj.postEntity.id,
@@ -369,6 +429,9 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
                 "IsClassified": false,
                 "CreatedDate" : feedObj.postEntity.createdDate
             ]
+          
+            print("feedObj.postEntity.imageUrls: \(feedObj.postEntity.imageUrls)")
+            print("feedObj.postEntity.thumbnailImageUrls: \(feedObj.postEntity.thumbnailImageUrls)")
             
             let questionParam : [String : Any] = [
                 "Auth": Until.getAuthKey(),
@@ -377,12 +440,12 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
                 "Tags": tagIds
             ]
             
-            
             Until.showLoading()
             Alamofire.request(UPDATE_POST, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
                 if let status = response.response?.statusCode {
                     if status == 200{
                         if let result = response.result.value {
+                          
                             let jsonData = result as! NSDictionary
                             let isUpdated = jsonData["IsUpdated"] as! Bool
                             self.feedObj.postEntity.content = contentString!
@@ -390,10 +453,12 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
                             self.feedObj.postEntity.isPrivate = self.ischeck
                             let tags = jsonData["Tags"] as! [NSDictionary]
                             var tagArr = [TagEntity]()
+                          
                             for item in tags {
                                 let entity = TagEntity.init(dictionary: item)
                                 tagArr.append(entity)
                             }
+                          
                             self.feedObj.tags = tagArr
                             
                             if isUpdated {
@@ -416,10 +481,15 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
         } catch let error as NSError {
             print(error)
         }
+      
     }
     
     //MARK: Request create new question
     func sendNewQuestionToServer(){
+      
+      if role != 0 && imageDic == []{
+         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Vui lòng nhập ẢNH", cancelBtnTitle: "Đóng")
+      } else {
         do {
             let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
             let code = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
@@ -445,13 +515,14 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
                 "IsClassified": false,
                 "CreatedDate" : 0
             ]
+          
+          
             
             let questionParam : [String : Any] = [
                 "RequestedUserId": Until.getCurrentId(),
                 "Post": post,
                 "Tags": self.tagIds
             ]
-            
             
             Until.showLoading()
             Alamofire.request(POST_QUESTION, method: .post, parameters: questionParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
@@ -469,6 +540,7 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
             }
         } catch let error as NSError {
             print(error)
+        }
         }
     }
     
@@ -519,6 +591,7 @@ class AddQuestionViewController: BaseViewController, UICollectionViewDelegate, U
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
+  
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return listDepartment.count
     }
@@ -639,19 +712,23 @@ extension AddQuestionViewController: KSTokenViewDelegate {
     func tokenView(_ tokenView: KSTokenView, shouldAddToken token: KSToken) -> Bool {
         return true
     }
+  
     func tokenView(_ tokenView: KSTokenView, didAddToken token: KSToken) {
         let index = tagNames.index(of: token.title)
         let entity = listTag[index!]
         tagIds.append(entity.id)
     }
+  
     func tokenView(_ tokenView: KSTokenView, didDeleteToken token: KSToken) {
         let index = tagNames.index(of: token.title)
         let entity = listTag[index!]
         let indexTagId = tagIds.index(of: entity.id)
         tagIds.remove(at: indexTagId!)
     }
+  
 }
 extension AddQuestionViewController: UITextFieldDelegate {
+  
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == self.titleTxt {
             let currentCharacterCount = textField.text?.characters.count ?? 0
@@ -663,4 +740,5 @@ extension AddQuestionViewController: UITextFieldDelegate {
         }
         return true
     }
+  
 }

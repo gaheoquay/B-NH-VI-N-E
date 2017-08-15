@@ -21,18 +21,23 @@ class CheckInResultEntity: NSObject {
     }
     
   init(dictionary: [String:Any]) {
+    
         if let value = dictionary["HIS_Patient_ID"] as? Int {
             patinentId = value
         }
+    
         if let value = dictionary["HIS_CheckUp_ID"] as? Int {
             checkUpId = value
         }
+    
         if let value = dictionary["HIS_PatientHistory_ID"] as? Int {
             patientHistory = value
         }
+    
         if let value = dictionary["Value"] as? Int {
             values = value
         }
+    
         if let value = dictionary["SequenceNo"] as? String {
             sequence = value
         }

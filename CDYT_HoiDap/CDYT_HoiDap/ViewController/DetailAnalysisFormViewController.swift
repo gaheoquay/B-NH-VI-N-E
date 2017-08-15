@@ -32,6 +32,7 @@ class DetailAnalysisFormViewController: UIViewController,UITableViewDelegate,UIT
     }
     
     func setupUI(){
+      
         tbListResult.delegate = self
         tbListResult.dataSource = self
         tbListResult.register(UINib.init(nibName: "CodeFormAnalysisCell", bundle: nil), forCellReuseIdentifier: "CodeFormAnalysisCell")
@@ -41,6 +42,7 @@ class DetailAnalysisFormViewController: UIViewController,UITableViewDelegate,UIT
         imgBarCode.image = image
         lbFormCode.text = medicalGroups.medicalTestGroup.hisServiceMedicTestGroupID
         lbTitle.text = "Kết quả xét nghiệm"
+      
         for item in medicalGroups.listMedicalTests {
             if item.medicalTestLines.count > 0 {
                 for a in item.medicalTestLines {
@@ -53,8 +55,10 @@ class DetailAnalysisFormViewController: UIViewController,UITableViewDelegate,UIT
                 heightTb = heightTb + a
             }
         }
+      
         heightTbResult.constant = heightTb + CGFloat(81 * medicalGroups.listMedicalTests.count) + 11
         view.layoutIfNeeded()
+      
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

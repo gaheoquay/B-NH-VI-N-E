@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -206,6 +206,10 @@
 		8B87CD2E1E13665500DA8A33 /* PostEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87CD2D1E13665500DA8A33 /* PostEntity.swift */; };
 		8B87CD301E13681200DA8A33 /* FeedsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87CD2F1E13681200DA8A33 /* FeedsEntity.swift */; };
 		8BB92DD81E24884E007C5516 /* MoreDetail.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BB92DD71E24884E007C5516 /* MoreDetail.png */; };
+		8BBDE5801F3AF49F00B509BD /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BBDE57F1F3AF49F00B509BD /* Home.storyboard */; };
+		8BBDE5821F3AF50900B509BD /* Acount.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BBDE5811F3AF50900B509BD /* Acount.storyboard */; };
+		8BBDE5841F3AF54200B509BD /* NotYetAnswered.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BBDE5831F3AF54200B509BD /* NotYetAnswered.storyboard */; };
+		8BBDE5861F3AF56900B509BD /* Keyword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BBDE5851F3AF56900B509BD /* Keyword.storyboard */; };
 		8BC2C30C1E2333A800B68F72 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2C30B1E2333A800B68F72 /* ForgotPasswordViewController.swift */; };
 		8BC2C30E1E23379300B68F72 /* ListNotificationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2C30D1E23379300B68F72 /* ListNotificationEntity.swift */; };
 		8BC2C3101E2337C700B68F72 /* NotificationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2C30F1E2337C700B68F72 /* NotificationEntity.swift */; };
@@ -571,6 +575,10 @@
 		8B87CD2D1E13665500DA8A33 /* PostEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostEntity.swift; sourceTree = "<group>"; };
 		8B87CD2F1E13681200DA8A33 /* FeedsEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedsEntity.swift; sourceTree = "<group>"; };
 		8BB92DD71E24884E007C5516 /* MoreDetail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MoreDetail.png; sourceTree = "<group>"; };
+		8BBDE57F1F3AF49F00B509BD /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		8BBDE5811F3AF50900B509BD /* Acount.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Acount.storyboard; sourceTree = "<group>"; };
+		8BBDE5831F3AF54200B509BD /* NotYetAnswered.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NotYetAnswered.storyboard; sourceTree = "<group>"; };
+		8BBDE5851F3AF56900B509BD /* Keyword.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Keyword.storyboard; sourceTree = "<group>"; };
 		8BC2C30B1E2333A800B68F72 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		8BC2C30D1E23379300B68F72 /* ListNotificationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListNotificationEntity.swift; path = ../ListNotificationEntity.swift; sourceTree = "<group>"; };
 		8BC2C30F1E2337C700B68F72 /* NotificationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationEntity.swift; path = ../NotificationEntity.swift; sourceTree = "<group>"; };
@@ -878,6 +886,7 @@
 		8B3A12DD1E10F399005DBC6E /* CDYT_HoiDap */ = {
 			isa = PBXGroup;
 			children = (
+				8BBDE57E1F3AF41800B509BD /* StoryBoard */,
 				50E9B3DD1F2B251400CF6B1B /* CDYT_HoiDap.entitlements */,
 				9863D82F1F25105700BFADC8 /* BookingOnline */,
 				50B4B8611F259B9500B7C305 /* GoogleService-Info.plist */,
@@ -1186,6 +1195,17 @@
 				8B79D0E41E5A9B350010C5C0 /* DoctorTableViewCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		8BBDE57E1F3AF41800B509BD /* StoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				8BBDE57F1F3AF49F00B509BD /* Home.storyboard */,
+				8BBDE5811F3AF50900B509BD /* Acount.storyboard */,
+				8BBDE5831F3AF54200B509BD /* NotYetAnswered.storyboard */,
+				8BBDE5851F3AF56900B509BD /* Keyword.storyboard */,
+			);
+			name = StoryBoard;
 			sourceTree = "<group>";
 		};
 		8BD49ED31E48215500C98E74 /* Chat */ = {
@@ -1497,7 +1517,7 @@
 					8B3A12DA1E10F399005DBC6E = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 99B27LPQS8;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1513,7 +1533,7 @@
 				};
 			};
 			buildConfigurationList = 8B3A12D61E10F399005DBC6E /* Build configuration list for PBXProject "CDYT_HoiDap" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1551,6 +1571,7 @@
 				8BD49F6E1E482D1100C98E74 /* ParticipantListTableViewCell.xib in Resources */,
 				8BF149731E14BF9C00766F8F /* GiaiPhap_Mark.png in Resources */,
 				0F9C463A1E603F4200DCFE46 /* HoSoRong.png in Resources */,
+				8BBDE5801F3AF49F00B509BD /* Home.storyboard in Resources */,
 				0FA535AD1E8211890004D329 /* KieuKham.png in Resources */,
 				A6C463DD1E26493A0046A367 /* Edit.png in Resources */,
 				8BD49F6A1E482D1100C98E74 /* BlockedUserListTableViewCell.xib in Resources */,
@@ -1638,6 +1659,7 @@
 				0FE4606D1E84F6D00045DB84 /* GhiChu.png in Resources */,
 				0F17AB151E51A682008BA308 /* CheckList.png in Resources */,
 				0F9C463E1E603F4200DCFE46 /* Profile_1.png in Resources */,
+				8BBDE5861F3AF56900B509BD /* Keyword.storyboard in Resources */,
 				9863D8341F25109400BFADC8 /* CustomTopView.xib in Resources */,
 				8BF149791E14BF9C00766F8F /* Tab.png in Resources */,
 				A6C463D71E25DB7D0046A367 /* Recent.png in Resources */,
@@ -1645,6 +1667,7 @@
 				A6005BD01E13722B00095FB7 /* NotifyTableViewCell.xib in Resources */,
 				8BD49EF71E48215500C98E74 /* CreateGroupChannelUserListViewController.xib in Resources */,
 				8B3A13471E10F454005DBC6E /* caidat_button0.png in Resources */,
+				8BBDE5821F3AF50900B509BD /* Acount.storyboard in Resources */,
 				8BF1496C1E14BF9C00766F8F /* Answer0.png in Resources */,
 				8BD49F051E48215500C98E74 /* CreateGroupChannelUserListTableViewCell.xib in Resources */,
 				0F9ED83A1E5BEB38001F2FC2 /* DaDuyet_1.png in Resources */,
@@ -1657,6 +1680,7 @@
 				8BD49F261E482C1500C98E74 /* ChattingView.xib in Resources */,
 				8B813CB51E15052E0043F7EF /* Tag.png in Resources */,
 				0FC751EC1E8BA44200B82553 /* HistoryCell.xib in Resources */,
+				8BBDE5841F3AF54200B509BD /* NotYetAnswered.storyboard in Resources */,
 				0F36980E1E54013C004B028D /* LogoMarker.png in Resources */,
 				8B813CB91E1519150043F7EF /* SearchGrey.png in Resources */,
 				0F6585281E95F01F002EEAC9 /* PrescriptionCell.xib in Resources */,
@@ -2132,14 +2156,14 @@
 				CODE_SIGN_ENTITLEMENTS = CDYT_HoiDap/CDYT_HoiDap.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anh Ta (R24Y486KUK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 99B27LPQS8;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CDYT_HoiDap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.benhviene.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8f41fdf3-4bec-4677-b96a-27bc42a62a3f";
-				PROVISIONING_PROFILE_SPECIFIER = "benh vien e development";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};
@@ -2152,15 +2176,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CDYT_HoiDap/CDYT_HoiDap.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anh Ta (R24Y486KUK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 99B27LPQS8;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CDYT_HoiDap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.benhviene.bve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a74c97fa-df8c-4c92-a012-b074897f3eae";
-				PROVISIONING_PROFILE_SPECIFIER = "benh vien e distribution";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = HoiDap_Header.h;
 				SWIFT_VERSION = 3.0;
 			};

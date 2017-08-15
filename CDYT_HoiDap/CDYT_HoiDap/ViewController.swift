@@ -9,22 +9,41 @@
 import UIKit
 
 class ViewController: BaseViewController,KeyWordTableViewCellDelegate {
-    
+  
+  //MARK: Outlet
+  @IBOutlet weak var tbQuestion: UITableView!
+  @IBOutlet weak var searchView: UIView!
+  var listFedds = [FeedsEntity]()
+  var listHotTag = [HotTagEntity]()
+  var page = 1
+  var role = 0
+  
+  @IBOutlet weak var lbSetQuestion: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-//        NotificationCenter.default.addObserver(self, selector: #selector(reloadDataFromServer(notification:)), name: Notification.Name.init(RELOAD_ALL_DATA), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.gotoDetail(notification:)), name: NSNotification.Name.init(GO_TO_DETAIL_WHEN_TAP_NOTIFICATION), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.showNotification(notification:)), name: NSNotification.Name.init(SHOW_NOTIFICAION), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.gotoChat(notification:)), name: NSNotification.Name.init(GO_TO_CHAT), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(setUpBadge), name: Notification.Name.init(UPDATE_BADGE), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(gotoSchedule), name: Notification.Name.init(GO_TO_SCHEDULE), object: nil)
+      
+      let realm = try! Realm()
+      if let user = realm.objects(UserEntity.self).first {
+        role = user.role
+      }
+      
+      if (role == 0){
+        lbSetQuestion.text = "Đặt câu hỏi"
+      } else {
+        lbSetQuestion.text = "Tạo bài viết"
+      }
+      
+      NotificationCenter.default.addObserver(self, selector: #selector(self.gotoDetail(notification:)), name: NSNotification.Name.init(GO_TO_DETAIL_WHEN_TAP_NOTIFICATION), object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(self.showNotification(notification:)), name: NSNotification.Name.init(SHOW_NOTIFICAION), object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(self.gotoChat(notification:)), name: NSNotification.Name.init(GO_TO_CHAT), object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(setUpBadge), name: Notification.Name.init(UPDATE_BADGE), object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(gotoSchedule), name: Notification.Name.init(GO_TO_SCHEDULE), object: nil)
         
-        setupUI()
-        initTableView()
-        Until.showLoading()
-        getFeeds()
-        getHotTagFromServer()
-        // Do any additional setup after loading the view, typically from a nib.
+      setupUI()
+      initTableView()
+      Until.showLoading()
+      getFeeds()
+      getHotTagFromServer()
         
     }
     
@@ -50,23 +69,28 @@ class ViewController: BaseViewController,KeyWordTableViewCellDelegate {
     }
     
     //MARK: init table view
+  
     func initTableView(){
+      
         tbQuestion.dataSource = self
         tbQuestion.delegate = self
         tbQuestion.estimatedRowHeight = 999
         tbQuestion.rowHeight = UITableViewAutomaticDimension
         tbQuestion.register(UINib.init(nibName: "KeyWordTableViewCell", bundle: nil), forCellReuseIdentifier: "KeyWordTableViewCell")
         tbQuestion.register(UINib.init(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
+      
         tbQuestion.addPullToRefreshHandler {
             DispatchQueue.main.async {
                 self.reloadData()
             }
         }
+      
         tbQuestion.addInfiniteScrollingWithHandler {
             DispatchQueue.main.async {
                 self.loadMore()
             }
         }
+      
     }
     func reloadData(){
         page = 1
@@ -82,28 +106,36 @@ class ViewController: BaseViewController,KeyWordTableViewCellDelegate {
     
     //  MARK: KeyWordTableViewCellDelegate
     func gotoListQuestionByTag(hotTag: TagEntity) {
+      
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "QuestionByTagViewController") as! QuestionByTagViewController
         viewController.hotTag = hotTag
         self.navigationController?.pushViewController(viewController, animated: true)
+      
     }
     
     //  MARK: request server
     func getHotTagFromServer(){
+      
         do {
+          
             let data = try JSONSerialization.data(withJSONObject: Until.getAuthKey(), options: JSONSerialization.WritingOptions.prettyPrinted)
             let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
             let auth = jsonString.replacingOccurrences(of: "\n", with: "")
             let header = [
                 "Auth": auth
             ]
+          
             let hotParam : [String : Any] = [
                 "Page": 1,
                 "Size": 10,
                 "RequestedUserId" : Until.getCurrentId()
             ]
+          
             Alamofire.request(HOTEST_TAG, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
-                if let status = response.response?.statusCode {
-                    if status == 200{
+              
+              if let status = response.response?.statusCode {
+                
+                    if status == 200 {
                         if let result = response.result.value {
                             let jsonData = result as! [NSDictionary]
                             
@@ -116,10 +148,11 @@ class ViewController: BaseViewController,KeyWordTableViewCellDelegate {
                     }else{
                         UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Có lỗi xảy ra. Vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                     }
-                }else{
+                } else {
                     UIAlertController().showAlertWith(vc: self, title: "Thông báo", message: "Không có kết nối mạng, vui lòng thử lại sau", cancelBtnTitle: "Đóng")
                 }
             }
+          
         } catch let error as NSError {
             print(error)
         }
@@ -140,7 +173,9 @@ class ViewController: BaseViewController,KeyWordTableViewCellDelegate {
                 "RequestedUserId" : Until.getCurrentId()
             ]
             Alamofire.request(GET_FEEDS, method: .post, parameters: hotParam, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
-                if let status = response.response?.statusCode {
+              
+              if let status = response.response?.statusCode {
+                  
                     if status == 200{
                         if let result = response.result.value {
                             let jsonData = result as! [NSDictionary]
@@ -194,19 +229,14 @@ class ViewController: BaseViewController,KeyWordTableViewCellDelegate {
     func reloadDataFromServer(notification : Notification){
         reloadData()
     }
-    
-    
-    
-    //MARK: Outlet
-    @IBOutlet weak var tbQuestion: UITableView!
-    @IBOutlet weak var searchView: UIView!
-    var listFedds = [FeedsEntity]()
-    var listHotTag = [HotTagEntity]()
-    var page = 1
+  
+  
+  
 }
 
 //MARK: QuestionTableViewCellDelegate
 extension ViewController : QuestionTableViewCellDelegate {
+  
     func showQuestionDetail(indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuestionDetailViewController") as! QuestionDetailViewController
         vc.questionID = listFedds[indexPath.row].postEntity.id
@@ -315,6 +345,7 @@ extension ViewController {
     }
     
     func gotoChat(notification:Notification){
+      
         let dicData = notification.object as! NSDictionary
         var userListQuery = SBDMain.createAllUserListQuery()
         userListQuery = SBDMain.createUserListQuery(withUserIds: [dicData["id"] as! String])

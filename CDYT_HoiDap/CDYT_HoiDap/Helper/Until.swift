@@ -13,6 +13,7 @@ import UIKit
 
 
 extension UIColor {
+  
     convenience init(netHex:Int) {
         self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
     }
@@ -260,17 +261,22 @@ class Until{
                     }
                 }
             }
+          
             count += 1
+          
             if count == 2{
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: UPDATE_BADGE), object: nil)
             }
+          
         }
     }
+  
     class func gotoLogin(_self : UIViewController, cannotBack:Bool ){
         let storyBoard = UIStoryboard.init(name: "User", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         _self.navigationController?.pushViewController(viewController, animated: true)
     }
+  
     class func isValidEmail(email:String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._]{4,50}+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
@@ -355,6 +361,7 @@ class Until{
     }
     
     class func showLoading(){
+        
         let activityData = ActivityData.init(size: CGSize(width: 40, height:40), message: "", messageFont: UIFont.systemFont(ofSize: 12), type: NVActivityIndicatorType.ballTrianglePath, color: UIColor.white, padding: 0, displayTimeThreshold: 0, minimumDisplayTime: 0)
         
         NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
@@ -362,10 +369,13 @@ class Until{
     }
     
     class func hideLoading(){
+      
         NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+      
     }
     
     class func sendAndSetTracer(value: String){
+      
         guard let tracker = GAI.sharedInstance().defaultTracker else { return }
         tracker.set(kGAIScreenName, value: value)
         
@@ -379,6 +389,7 @@ class Until{
     }
     
     class func generateBarcode(from string: String) -> UIImage? {
+      
         let data = string.data(using: String.Encoding.ascii)
         
         if let filter = CIFilter(name: "CICode128BarcodeGenerator") {
@@ -391,6 +402,7 @@ class Until{
         }
         
         return nil
+ 
     }
     
 }

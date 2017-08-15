@@ -9,6 +9,7 @@
 import UIKit
 
 class FileUserEntity: NSObject {
+  
   var id = ""
   var patientName = ""
   var gender = 0
